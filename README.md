@@ -6,8 +6,6 @@ Target: parliamentary affairs from PDF to eCH-0295, extracted with Apertus by re
 - Challenge: Track 2A (OpenParlData) of the Hack Apertus online hack, "Extracting Parliamentary Affairs from PDFs into One Common Structure". Challenge page: https://hackapertus.notion.site/track-2a-openparldata
 - This repository is not the final submission. Its content can change until the submission on 16.10.2026, 12:00.
 
-Written in English to the STE rules (ASD-STE100, Issue 9). AI agents (Claude Opus 5.5) wrote this text from the records of the private project. The private project is the project folder of the author. It is not public. On 06.10.2026, two more AI agents (Claude Opus 5.5) compared the statements of fact with these records. One did this before and one after the assembly of this repository. An AI agent applied their corrections. No human examined this text. [pending: check of this text by the author]
-
 ## What ParlPDFeCH is
 
 ParlPDFeCH develops a converter for PDF documents of parliamentary affairs. The documents come from parliaments of the Swiss Confederation, the cantons, the municipalities and Liechtenstein, through OpenParlData. The converter must give data to the working draft eCH-0295. In the design of the converter, the language model Apertus-v1.5-8B makes the decisions by readout, and it writes no text. Docling, code rules and code do the other pipeline stages. Each value must have its evidence: the document, the page and the position in the text.
@@ -183,3 +181,10 @@ Copyright 2026 Jonathan Kovatsch. The file `NOTICE` gives the full table and the
 Text of the template:
 
 > All Hack Apertus projects are open-sourced. Please check our Terms & Conditions for specific licensing details (6. What you build is open source): https://hackapertus.ch/terms-and-conditions
+
+## About this text
+
+- Language: English, to the rules of ASD-STE100 (Issue 9).
+- Authoring: AI agents (Claude Opus 5.5) wrote this text for the author from the records of the private project. The private project is the project folder of the author. It is not public.
+- Check of the facts: on 06.10.2026, two more AI agents compared each statement of fact with these records, one before and one after the assembly of this repository.
+- Human check: no human examined this text yet. [pending: check of this text by the author]

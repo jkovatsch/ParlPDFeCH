@@ -2,8 +2,6 @@
 
 This folder is the project root for the judges of Hack Apertus. The front page of the repository is [../README.md](../README.md). The technical report is [technical_report.md](technical_report.md).
 
-Written in English to the STE rules (ASD-STE100, Issue 9). AI agents (Claude Opus 5.5) wrote this text from the records and the code of the private project. The private project is the project folder of the author. It is not public. On 06.10.2026, two more AI agents (Claude Opus 5.5) compared the statements of fact with these records and this code. One did this before and one after the assembly of this repository. An AI agent applied their corrections. No human examined this text. [pending: check of this text by the author]
-
 ## Run it
 
 `make run` is not ready. At this time, it does not run the converter. It stops with a message. The reasons:
@@ -263,3 +261,10 @@ The text below is the text of the file `track_2a/README.md` of the Hack Apertus 
 >
 > ## Contact
 > 💬 In case you have questions, join the conversation on Discord or send an email to “hello@hackapertus.ch”
+
+## About this text
+
+- Language: English, to the rules of ASD-STE100 (Issue 9).
+- Authoring: AI agents (Claude Opus 5.5) wrote this text for the author from the records and the code of the private project. The private project is the project folder of the author. It is not public.
+- Check of the facts: on 06.10.2026, two more AI agents compared each statement of fact with these records and the code. One did this before and one after the assembly of this repository.
+- Human check: no human examined this text yet. [pending: check of this text by the author]

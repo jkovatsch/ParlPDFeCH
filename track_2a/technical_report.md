@@ -1,6 +1,6 @@
 # Technical report — ParlPDFeCH
 
-Version of 06.10.2026. Written in English to the STE rules (ASD-STE100, Issue 9). AI agents (Claude Opus 5.5) wrote this report from the records and the code of the private project. On 06.10.2026, two more AI agents (Claude Opus 5.5) compared the statements of fact with these records and this code. One did this before and one after the assembly of the repository. An AI agent applied their corrections. No human examined this report. [pending: check of this report by the author]
+Version of 06.10.2026.
 
 Status: the converter is not complete. The isolation stage did not meet its gate. No value in this report is accuracy against a reference with human acceptance. The isolation values are agreement with AI references. No human finished the check of a document.
 
@@ -449,3 +449,10 @@ This license applies to this report. The code has the license Apache-2.0 (file `
 - Docling: https://github.com/docling-project/docling
 - Jev readout principle: https://openjev.com
 - ASD-STE100: https://asd-ste100.org
+
+## Appendix: about this report
+
+- Language: English, to the rules of ASD-STE100 (Issue 9).
+- Authoring: AI agents (Claude Opus 5.5) wrote this report for the author from the records and the code of the private project. The private project is the project folder of the author. It is not public.
+- Check of the facts: on 06.10.2026, two more AI agents compared each statement of fact with these records and the code. One did this before and one after the assembly of this repository.
+- Human check: no human examined this report yet. [pending: check of this report by the author]

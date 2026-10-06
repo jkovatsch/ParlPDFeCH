@@ -1,0 +1,62 @@
+ParlPDFeCH
+Copyright 2026 Jonathan Kovatsch
+
+Jonathan Kovatsch publishes this work as a private person.
+
+1 Licenses of the parts of this repository
+
+| Path | License |
+|---|---|
+| `track_2a/src/`, `track_2a/Makefile` | Apache-2.0 (`LICENSE`, `LICENSES/Apache-2.0.txt`) |
+| `README.md`, `track_2a/README.md`, `track_2a/technical_report.md`, `track_2a/docs/`, `NOTICE` | CC-BY-4.0 (`LICENSES/CC-BY-4.0.txt`) |
+| `.gitignore`, `track_2a/.gitignore`, `track_2a/.dockerignore`, `track_2a/.env.example` | Apache-2.0 |
+| `track_2a/data/` | Empty. It contains no data. |
+| `LICENSE`, `LICENSES/` | The license texts. Their own terms apply. |
+
+Each code file has a line `SPDX-License-Identifier: Apache-2.0`. The readout questions and the answer lists for Apertus are a part of the code files. Thus, Apache-2.0 applies to them. [pending: decision of the author about the license of the Apertus prompts]
+
+Hack Apertus terms, chapter 6 "What you build is open source": https://hackapertus.ch/terms-and-conditions
+
+2 Hack Apertus project template
+
+This repository started from the Hack Apertus project template:
+https://github.com/HackApertus/project-template, commit 7f23822, license Apache-2.0.
+
+- Not changed: `LICENSE`, the file names and the places of the folder `track_2a/`.
+- Changed: `README.md` (replaced), `.gitignore` (line `*.pdf` added), `track_2a/.gitignore`, `track_2a/Makefile`, `track_2a/README.md`, `track_2a/technical_report.md`.
+- Removed: `track_1a/`, `track_1b/`, `track_2b/`, `track_2a/src/.gitkeep`.
+- Added: `NOTICE`, `LICENSES/`, `track_2a/.dockerignore`, `track_2a/.env.example`, the files in `track_2a/src/`.
+
+`track_2a/README.md` quotes the text of the template file `track_2a/README.md`.
+
+3 OpenParlData
+
+Source: OpenParlData.ch
+License of the data: CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).
+The README files and the technical report use facts from the OpenParlData exports of 04.10.2026, 13:26 UTC. Examples are the numbers of parliaments, affairs and documents.
+Exports: https://files.openparldata.ch/exports/
+Changes: the project calculated numbers and shares from the exports. This repository contains no export, no PDF document and no text of a document.
+The scripts in `track_2a/src/` download the exports and the PDF documents from https://files.openparldata.ch/.
+
+4 eCH-0295
+
+ParlPDFeCH uses the working draft eCH-0295 (version I95) of the expert group "Politische Geschäfte" of the association eCH:
+https://github.com/swiss/political-affairs-ech-group, commit 3cab44d (30.09.2026). eCH-0295 is a working draft. It is not approved.
+ParlPDFeCH is an independent project. It is not a product of the association eCH.
+This repository contains no copy of eCH-0295 files. The code uses the names of fields and values of eCH-0295.
+
+| File | URL | SHA-256 |
+|---|---|---|
+| `ech-0295_affairs/input/schema.yaml` (I95) | https://raw.githubusercontent.com/swiss/political-affairs-ech-group/3cab44d6a07f60bd8211cccdcf948717ef8fba5c/ech-0295_affairs/input/schema.yaml | 7af4c7a712f16270b653a773179d08cbd1859de053b20fe0beac6b2c2ef30d20 |
+| `ech-0292_meta/input/schema_common.yaml` | https://raw.githubusercontent.com/swiss/political-affairs-ech-group/3cab44d6a07f60bd8211cccdcf948717ef8fba5c/ech-0292_meta/input/schema_common.yaml | ab6c097c41cd57c40ad175e9bb130d70f4d4d8eb85281d329bee8c53c8f08b11 |
+
+5 Apertus
+
+This repository contains no Apertus weights and no Apertus files. A container image of this project must contain none.
+Apertus-v1.5-8B: https://huggingface.co/swiss-ai/Apertus-v1.5-8B, license Apache-2.0.
+Apertus Acceptable Use Policy v1.5: https://github.com/swiss-ai/apertus-legal/blob/main/apertus_1.5/USAGE_POLICY.pdf
+Each user gets access to Apertus with an own account and must obey the license and the Acceptable Use Policy.
+
+6 Libraries
+
+The code uses libraries, for example Docling, PyTorch, transformers, peft and MLX. This repository contains no copy of them. Their own licenses apply.

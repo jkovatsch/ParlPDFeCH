@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+# Never in a container image: settings with values, model weights, PDF documents, pipeline data.
+.env*
+**/.env*
+*.safetensors
+**/*.safetensors
+*.pdf
+**/*.pdf
+data/
+**/data/

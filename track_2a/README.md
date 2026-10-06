@@ -267,4 +267,3 @@ The text below is the text of the file `track_2a/README.md` of the Hack Apertus 
 - Language: English, to the rules of ASD-STE100 (Issue 9).
 - Authoring: AI agents (Claude Opus 5.5) wrote this text for the author from the records and the code of the private project. The private project is the project folder of the author. It is not public.
 - Check of the facts: on 06.10.2026, two more AI agents compared each statement of fact with these records and the code. One did this before and one after the assembly of this repository.
-- Human check: no human examined this text yet. [pending: check of this text by the author]

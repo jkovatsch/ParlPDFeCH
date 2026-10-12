@@ -1,0 +1,119 @@
+{
+ "schema": "parlpdfech-stored-results/1",
+ "state_date": "12.10.2026",
+ "note": "Values copied from the records of the private project. make run prints them; it does not calculate them. The private records are not public; each part names its record and the SHA-256 of the record file.",
+ "parts": [
+  {
+   "title": "Path 1: rule stage at isolation level L9 (method nos4), gate 3a version 4",
+   "gate_status": "OPEN, no gate measurement",
+   "rows": [
+    {
+     "item": "Gate 3a on the full isolation task",
+     "value": "NOT MET (06.10.2026); this result does not change"
+    },
+    {
+     "item": "Test documents selected",
+     "value": "40 of 13 parliaments (German 21, French 17, Italian 2), selected by a script with a fixed seed"
+    },
+    {
+     "item": "Converter run on the test documents",
+     "value": "one run on 09.10.2026; answers sealed with SHA-256; claimed at L9: 26 of 40"
+    },
+    {
+     "item": "Human reference",
+     "value": "the author examined the 26 gold set records (proposals of AI coders) on 11.10.2026"
+    },
+    {
+     "item": "Gate measurement",
+     "value": "none: the blind repetition (G3a.16) and the acceptance of the reference (G3a.2) did not take place"
+    },
+    {
+     "item": "Scores after the freeze on the 26 review records (information)",
+     "value": "exact documents 19 of 26 (Jeffreys lower bound 0.574); a converter that gives only the role 17 of 26; documents with an author switch 2 of 7 exact; labelled boundary F1 0.308; block omission 0; atom intrusion rate 0.305; agreement of the two AI coder proposals 22 of 26. Gate functions without the gate command: no gate result. n = 26, one human reviewer, the claimed set of path 1 (technical report, chapter 5.5)"
+    },
+    {
+     "item": "Development values (information)",
+     "value": "dev: 124 of 183 documents claimed, 99 of 124 block exact; eval: 15 of 22 claimed, 15 of 15 block exact. Reference: AI references, not human. dev is in-sample (AI agents wrote the rules on dev); eval was measured several times before. Not accuracy."
+    }
+   ],
+   "source": "criteria of gate 3a version 4 (SHA-256 1db4b2c2a03ce78b4249c4dc8d3e5a399529bb1881a423dc8ea3fea4f9b2f61c); freeze manifest (440e4247bc701fd3ae0371edfea05673718b015324e53cebaabb7149f2c0064a); ladder results (7491c0ed79f657a13b5b554b07c4b9ff272f267540cab6d35e1c0e9531d3d8aa, level L9, method nos4); protocol entries of 09.10.2026 (14:08, 14:11), 11.10.2026 (17:05) and 12.10.2026 (14:34, 14:36, 14:43); path-1 values on the 26 review records (3078d95f9a77c1854805c8e482d62ff7bd208f4c90d0257870e2bac9e8edd223) and their independent check (5e87ecdb2b792b6e4417c0bf5e97b7bdfa8891d7ec78ca7ba44ced1065a89420)"
+  },
+  {
+   "title": "Path 2: Apertus-v1.5-8B with a trained head, task R2 (the document holds a response of the executive)",
+   "gate_status": "OPEN, final run sealed and not measured",
+   "rows": [
+    {
+     "item": "Method",
+     "value": "Apertus-v1.5-8B in bf16, all 32 decoder layers; head: softmax regression on the hidden state of decoder layer 16 at the last prompt token; decision yes if q(yes) >= 0.5"
+    },
+    {
+     "item": "Validation, 920 documents (balanced accuracy)",
+     "value": "head 0.919; zero-shot Apertus readout 0.899; best rule s1_answer 0.932"
+    },
+    {
+     "item": "Validation without K7 categories, 714 documents (balanced accuracy)",
+     "value": "head 0.980; zero-shot Apertus readout 0.953; best rule s1_answer 0.965"
+    },
+    {
+     "item": "K7 categories",
+     "value": "local document categories that give only the name of an affair type; the source label of R2 comes from the local category; 78 of the 93 wrong decisions on all 920 documents are no documents with such a category"
+    },
+    {
+     "item": "Final run on the test parliaments",
+     "value": "1,523 documents, sealed on 12.10.2026; not measured, because the blind check of the reference did not take place"
+    },
+    {
+     "item": "Scores after the freeze, 26 reviewed test documents (information)",
+     "value": "not a gate measurement; truth of the 26 review records: yes 15, no 11; a document without a value is wrong. Correct of 26: head H 24, head H7k 24, LoRA L3 24, LoRA L 24, zero-shot Apertus readout 23, rule s1_answer 20, rule heading 18. Balanced accuracy: H, H7k, L3 and L 0.933; zero-shot 0.888; s1_answer 0.800; heading 0.733"
+    },
+    {
+     "item": "Details of the scores after the freeze",
+     "value": "the 2 errors of H, H7k, L3 and L are the 2 documents with an empty export text (no value, truth yes); H, H7k, L3 and L give the same decision on each of the 26 documents; against s1_answer: 4 only H correct, 0 only the rule correct, exact McNemar p 0.125. n = 26, one human reviewer, the claimed set of path 1 (not a random sample), from 11 parliaments. Path 2 ran on these documents on the instruction of the author: a deviation from criteria v2, chapter 2.1, item 1"
+    },
+    {
+     "item": "Head H7k (information)",
+     "value": "the recipe of H with 7,000 instead of 800 dev training rows (hidden states from the H100). Balanced accuracy, H7k and H: partition P of dev 0.996250 and 0.996250; validation 0.917 and 0.919; validation without K7 0.979 and 0.980; different decisions: 0 of 800 rows of partition P, 5 of 920 validation documents"
+    },
+    {
+     "item": "Tried and not chosen (information)",
+     "value": "LoRA on all layers (H100 GPU), and a cascade of rules and head"
+    }
+   ],
+   "source": "report of path 2, iteration 2 (SHA-256 43d4491084d57d8c3d5897bbd46b6ca4dcd925372916b61f3cd08d18b5fde7a2), chapters 0 and 6.2; protocol entries of 12.10.2026 (04:55, 13:28, 14:22, 14:34); R2 score on the 26 review records (d92851113dcb9c6b19da82f08033d56754da6806da41627da0cc7d8cf733cb61), H7k report (50865daad2c1914c7d1af34b382c492900e85463b567b68f0116846cb7ede953), independent checks (5e87ecdb2b792b6e4417c0bf5e97b7bdfa8891d7ec78ca7ba44ced1065a89420, 0fe9443f5b84acb49981a8551986272e9072dc3f7c9b87f20a7d4476296e70b5); protocol entries of 12.10.2026 (14:36, 14:43)"
+  },
+  {
+   "title": "Path 2: task R1 (recommendation of the executive: for or against)",
+   "gate_status": "stopped, negative result",
+   "rows": [
+    {
+     "item": "Validation, 287 documents (correct decisions)",
+     "value": "head 250; best rule 186; zero-shot Apertus readout 196"
+    },
+    {
+     "item": "Date-linked validation set, 115 documents (correct decisions)",
+     "value": "head 98; best rule 104; zero-shot Apertus readout 94"
+    },
+    {
+     "item": "Causes",
+     "value": "the gain on all documents comes from submitted texts without a recommendation; the head follows the reasons of a letter more than its formula; without the option none, a head gives a confident value to a document without a recommendation"
+    }
+   ],
+   "source": "report of path 2, iteration 2 (SHA-256 43d4491084d57d8c3d5897bbd46b6ca4dcd925372916b61f3cd08d18b5fde7a2), chapters 0, 6.1 and 12.1"
+  },
+  {
+   "title": "Infrastructure",
+   "gate_status": "check PASS",
+   "rows": [
+    {
+     "item": "Apertus runs",
+     "value": "path 1: CSCS inference API (S1 role for the rule id R1 only); path 2: local on a Mac with MLX, and the final run on one H100 GPU in a VM of a Swiss provider (free capacity for Hack Apertus); bf16 on the Mac and in the VM. CSCS does not document its precision: a comparison with the local bf16 model on synthetic text (05.10.2026) found no difference above the bf16 noise (mean difference 0.032; bf16 noise 0.034; 8-bit 0.055)"
+    },
+    {
+     "item": "Equality check, VM against the Mac",
+     "value": "R2: 10 of 10 equal decisions, largest difference of q 0.011279 (limit 0.02); R1: 10 of 10, largest difference 0.000056"
+    }
+   ],
+   "source": "equality check (SHA-256 19d7eaf06038a158b491031b3b93550877728e223ae015ee5c4039aac71cdb14); protocol entry of 12.10.2026 (02:55); decision list of the private project, decision E15 (measurement of 05.10.2026, 16:29)"
+  }
+ ]
+}

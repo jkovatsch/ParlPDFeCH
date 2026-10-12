@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: Apache-2.0
+=== system ===
+Du liest ein Dokument aus einem Schweizer Parlament. Du entscheidest für jede Zeile, ob sie zum Wortlaut eines Textes des Geschäfts gehört oder nicht.
+=== question ===
+Aufgabe: Gib für jede Zeile (Atom) des Dokuments oben einen Buchstaben.
+
+T = Text: die Zeile gehört zum Titel des Geschäfts oder zum Wortlaut eines dieser Texte:
+- Text der Einreichenden: Vorstosstext, Fragen, Forderungen, Begründung;
+- Antwort der Exekutive (Regierungsrat, Stadtrat, Gemeinderat, Conseil d'État, Municipalité, Consiglio di Stato) und ihr formeller Antrag an das Parlament;
+- Antrag einer Kommission; Votum, Antrag oder Beschluss im Parlament; Zusammenfassung.
+Zum Text gehören auch: Überschriften und Stichwörter, die einen solchen Text einleiten (zum Beispiel «Begründung», «Antwort», «Frage 1»), Zitate und wiederholte Fragen im Text, Aufzählungen, Tabellen und Fussnoten im Text. Der Titel ist die gedruckte Betreffzeile des Geschäfts, mit einer Zeile direkt darüber oder darunter, die nur die Art des Geschäfts, die Art des Dokuments oder eine Nummer enthält.
+
+N = kein Text: alle anderen Zeilen. Zum Beispiel: Briefkopf, Logo, Adresse, Aktenzeichen und Nummern, Ort und Datum, Anrede, ein Satz, der nur die Einreichung meldet oder den Text ankündigt (zum Beispiel «Der Regierungsrat antwortet wie folgt:»), Gruss und Dank, Unterschriften, Namen und Funktionen, Liste der Mitunterzeichnenden, Versand- und Verteilerzeilen (Mitteilung an, Zustellung, transmise le), Formularfelder ausser dem Betreff, Beilagen und Anhänge, die Beschlussformel der Exekutive («beschliesst:», «arrête:»), Hinweise zu Kosten oder Verspätung, Seitenzahlen, Kopf- und Fusszeilen, Text in Bildern.
+Ein Dokument oder ein Teil, der kein solcher Text ist, hat nur N, ausser dem Titel des Geschäfts. Beispiele: ein Beschluss der Exekutive in eigener Zuständigkeit (nicht an das Parlament), ein Bericht ohne Antrag, Statuten, ein Handbuch, eine Präsentation, eine Beilage.
+
+=== format ===
+Gib für jede Zeile ihre ID, einen Doppelpunkt und den Buchstaben T oder N.
+=== format_ctx ===
+Gib für jede Zeile ihre ID, die ersten Wörter der Zeile, einen Doppelpunkt und den Buchstaben T oder N.
+=== prefix ===
+Zuordnung:

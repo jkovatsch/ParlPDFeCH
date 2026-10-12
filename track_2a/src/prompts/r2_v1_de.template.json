@@ -1,0 +1,19 @@
+{
+ "system": "Du liest ein Dokument aus einem Schweizer Parlament und beantwortest eine Frage dazu.",
+ "doc_head": "Dokument:\n",
+ "sep": "\n\n",
+ "spec": {
+  "question": "Frage: Enthält dieses Dokument eine Antwort oder Stellungnahme der Exekutive (Regierung, Regierungsrat, Stadtrat, Gemeinderat, Conseil d'État, Municipalité, Consiglio di Stato, Municipio) auf einen parlamentarischen Vorstoss (Motion, Postulat, Interpellation, Anfrage oder Frage)?\nA = ja: Das Dokument enthält die Antwort oder Stellungnahme der Exekutive. Es kann zusätzlich den Text des Vorstosses oder einzelne Fragen wiederholen.\nB = nein: Das Dokument enthält keine Antwort der Exekutive, zum Beispiel nur den eingereichten Vorstoss.\nAntworte nur mit dem Buchstaben.",
+  "prefix": "Antwort:",
+  "choices": [
+   " A",
+   " B"
+  ]
+ },
+ "lang_key": "*",
+ "shots": [],
+ "options": [
+  "yes",
+  "no"
+ ]
+}

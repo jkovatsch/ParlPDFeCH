@@ -1,0 +1,68 @@
+# SPDX-License-Identifier: Apache-2.0
+# Prompt of sub-task S5 (type inside an author family), m03_sub_s5_type.py, version s5-type-1, 08.10.2026.
+# Written in English to the STE rules (ASD-STE100, Issue 9); the prompt text to the model is German, as
+# in m03_sub_common.SYSTEM_ASK. Lines that start with "#" are comments and do not go to the model.
+# Sections: [system] = the system message; [SPONSOR vN], [EXECUTIVE vN], [PLENARY vN] = the question of
+# prompt version N for one paragraph of that family. "choices:" gives the allowed outputs (E19) as
+# "output=E20 answer"; the first tokens of the outputs are different, so one request gives all
+# probabilities. {span} = the atom ids of
+# the paragraph, {start} = its first 12 words. The whole document comes before the question (E18).
+# Designed on dev only; no eval or gold document was used for this text.
+# v1: a choice between the two types. On the dev sample, v1 gave "Begründung" for 88 of 105 submitted
+#     paragraphs and "Stellungnahme" for 30 of 47 recommendation paragraphs.
+# v2: a yes/no question that follows rule L more closely (is the paragraph in a section with a reasoning
+#     label; is it the formal proposal only). The version for eval and gold is chosen on dev
+#     (CHOSEN_PROMPT in m03_sub_s5_type.py).
+# Choice on dev (08.10.2026, before any eval or gold request): variant "apertus" uses v2 (dev sample:
+#     accuracy 0.924 against 0.813); variant "combined" uses v1 (all dev: type-split F1 0.934 against 0.670).
+
+[system]
+Du liest ein Dokument aus einem Schweizer Parlament. Jede Zeile des Dokuments beginnt mit ihrer ID (Block.Zeile), dann folgen Seite, Hinweise und der Text der Zeile. Du beantwortest eine Frage zu einem Absatz des Dokuments mit genau einer der erlaubten Antworten.
+
+[SPONSOR v1]
+choices: Begründung=reasoning | Vorstoss=submitted
+Frage: Der Absatz {span} (Anfang: «{start}») gehört zum Text, den die Urheberin oder der Urheber eingereicht hat (zum Beispiel Motion, Postulat, Interpellation, Anfrage, Petition oder eine Vorlage an das Parlament).
+Gehört dieser Absatz zur Begründung oder zum eigentlichen Vorstoss?
+- Begründung: der Teil, der mit einer Bezeichnung oder Überschrift wie «Begründung», «Erwägungen», «Développement», «Motivation» oder «Motivazione» beginnt, und diese Überschrift selbst. Die Begründung endet bei einer Bezeichnung des Vorstosses (zum Beispiel «Antrag», «Fragen», «Auftrag») oder bei dem Satz, mit dem die Urheber den Auftrag, die Bitte oder die Fragen an die Regierung richten.
+- Vorstoss: der Auftrag, der Antrag, die Fragen, die Bitte an die Regierung, und jeder Teil ohne eine Bezeichnung wie «Begründung» davor.
+Antworte nur mit «Begründung» oder «Vorstoss».
+
+[EXECUTIVE v1]
+choices: Antrag=recommendation | Stellungnahme=response
+Frage: Der Absatz {span} (Anfang: «{start}») gehört zum Text der Exekutive (Regierungsrat, Stadtrat, Gemeinderat, Conseil d'État, Conseil municipal, Consiglio di Stato, Municipio).
+Ist dieser Absatz der formelle Antrag der Exekutive oder ein Teil ihrer Stellungnahme?
+- Antrag: ein eigener Absatz oder Abschnitt nur mit dem formellen Antrag an das Parlament, zum Beispiel «Der Regierungsrat beantragt, die Motion abzulehnen.», «Dem Kantonsrat wird beantragt, …», «Le Conseil municipal préavise favorablement ce postulat.», und die Überschrift «Antrag» dieses Abschnitts.
+- Stellungnahme: alle anderen Absätze: Antworten, Erklärungen und Begründungen der Exekutive, Anträge einer Kommission oder der Urheber, und ein Absatz, der neben dem Antrag weitere Sätze mit Begründungen hat.
+Antworte nur mit «Antrag» oder «Stellungnahme».
+
+[PLENARY v1]
+choices: Rede=speech | Antrag=proposition | Beschluss=vote
+Frage: Der Absatz {span} (Anfang: «{start}») gehört zur Beratung im Parlament (Protokoll).
+Was ist dieser Absatz?
+- Rede: ein mündlicher Beitrag eines Mitglieds in der Debatte, auch die Überschrift oder der Name der sprechenden Person davor.
+- Antrag: ein formeller Antrag, den ein Mitglied während der Debatte stellt.
+- Beschluss: der Wortlaut, über den das Parlament abstimmt oder den es beschliesst, auch die Überschrift «Beschluss».
+Antworte nur mit «Rede», «Antrag» oder «Beschluss».
+
+[SPONSOR v2]
+choices: ja=reasoning | nein=submitted
+Frage: Steht der Absatz {span} (Anfang: «{start}») im Abschnitt «Begründung» des eingereichten Vorstosses?
+Ein solcher Abschnitt beginnt mit einer Überschrift oder Bezeichnung wie «Begründung», «Erwägungen», «Développement», «Motivation» oder «Motivazione». Er endet vor einer Bezeichnung des Vorstosses wie «Antrag», «Fragen» oder «Auftrag», oder vor dem Satz, mit dem die Urheber den Auftrag, die Bitte oder die Fragen an die Regierung richten.
+Hat der Vorstoss keine solche Überschrift oder Bezeichnung vor diesem Absatz, dann ist die Antwort «nein», auch wenn der Absatz Gründe nennt.
+Antworte nur mit «ja» oder «nein».
+
+[EXECUTIVE v2]
+choices: ja=recommendation | nein=response
+Frage: Ist der Absatz {span} (Anfang: «{start}») der formelle Antrag der Exekutive an das Parlament?
+Der formelle Antrag ist ein eigener Absatz oder Abschnitt nur mit dem Antrag, zum Beispiel «Der Regierungsrat beantragt, die Motion abzulehnen.», «Aus diesen Gründen beantragt der Stadtrat, das Postulat nicht erheblich zu erklären.», «Dem Kantonsrat wird beantragt: …» oder «Le Conseil municipal préavise favorablement ce postulat.». Dazu gehören die Überschrift «Antrag» dieses Abschnitts und die Punkte des beantragten Beschlusses darunter.
+Nicht der formelle Antrag sind: Antworten, Erklärungen und Begründungen der Exekutive, Anträge einer Kommission oder der Urheber, und ein Absatz mit weiteren Sätzen neben dem Antrag.
+Antworte nur mit «ja» oder «nein».
+
+[PLENARY v2]
+choices: Rede=speech | Antrag=proposition | Beschluss=vote
+Frage: Der Absatz {span} (Anfang: «{start}») gehört zur Beratung im Parlament (Protokoll).
+Was ist dieser Absatz?
+- Rede: ein mündlicher Beitrag eines Mitglieds in der Debatte, auch die Überschrift oder der Name der sprechenden Person davor.
+- Antrag: ein formeller Antrag, den ein einzelnes Mitglied während der Debatte stellt.
+- Beschluss: der Wortlaut des Beschlusses des Parlaments, mit der Einleitung («Der Einwohnerrat … beschliesst:», «Damit ist beschlossen:»), den nummerierten Punkten des Beschlusses und der Überschrift «Beschluss» oder «Kenntnisnahme».
+Antworte nur mit «Rede», «Antrag» oder «Beschluss».

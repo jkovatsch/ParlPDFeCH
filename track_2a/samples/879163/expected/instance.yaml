@@ -1,0 +1,23 @@
+# eCH-0295 instance (I95, root class Container), src/m06_converter.py (converter-ech-writer-1), document 879163
+# Isolation level L9 (E20 version 5.0, chapter 7). Side file: provenance/879163.yaml
+global_uri: https://data.parlpdfech.example/converter/l9/i95/affair-329535/doc-879163
+affairs:
+- global_uri: https://api.openparldata.ch/v1/affairs/329535
+  local_id: '1897055'
+  affair_number: P02
+  affair_type: postulate
+  title:
+  - text: Fonds d'aide au maintien des petits commerces et cafés dans les villages
+    text_language: fr
+    text_type: title
+  response_steps:
+  - global_uri: https://data.parlpdfech.example/converter/l9/affair-329535/step/response/doc-879163
+    responder:
+      global_uri: https://api.openparldata.ch/v1/groups/8339
+      name:
+      - text: Conseil municipal Val de Bagnes
+        text_language: fr
+    texts:
+    - text: <p>COMMUNE DE</p><p>VAL DE BAGNES</p><p>Autorités communales Conseil municipal</p><h2>PREAVIS DU CONSEIL MUNICIPAL SUR LE POSTULAT</h2><h2>de Mme Tristan et Mme Heinis du 30.03.2023</h2><p>intitulé « Fonds d'aide au maintien des petits commerces et cafés du villages»</p><p>En séance du 18 avril, le Conseil municipal a pris connaissance du postulat déposé auprès du bureau par Mme Tristan et Mme. Heinis concernant la constitution d'un fonds d'aide au maintien des petits commerces et cafés dans les villages.</p><p>Le Conseil a demandé à la commission « Finances et gestion » de préaviser le dossier pour s'assurer de la faisabilité juridique, financière et opérationnelle des démarches proposées. En amont de l'entrée en matière, le Conseil municipal porte à la connaissance des membres du Conseil général</p><h2>Commerces de proximité</h2><p>L'importance du maintien des commerces de proximité dans les villages de montagne ne relève d'aucune contestation. Les magasins sont des lieux d'échanges de produits et surtout d'échanges humains indéniables. Ils jouent ainsi un rôle social avéré.</p><h2>Bases légales</h2><p>Ces dernières années, la Commune a été approchée à quelques reprises pour des demandes de soutiens financiers. Malheureusement, sans bases légales, il n'est pas possible d'octroyer des aides qui les justifieraient. L'interrogation réside dans les limites du champ d'application de ces aides. Aussi, pourquoi tels secteurs privés devraient être soutenus par la Commune et pas d'autres ?</p><h2>Prochaines étapes</h2><p>La création d'un fonds nécessiterait donc un nouveau règlement. Avant d'en arriver là, et pour respecter la volonté des dépositaires du postulat - s'il est accepté par le Conseil général - l'Administration devrait mandater un bureau pour l'accompagner dans la réflexion avec l'appui du nouveau délégué à la promotion économique. L'étude qui résulterait du postulat permettrait de se doter d'un éventuel règlement.</p><p>Saluant la démarche proposée, le Conseil municipal préavise favorablement ce postulat et recommande aux membres du Conseil général de l'approuver.</p><p>Approuvé en séance du Conseil municipal du 20 juin 2023</p><p>Pour le Conseil municipal</p><p>Christophe Maret Président</p><p>Pierre-Martin Moulin Secrétaire général</p><p>Autorités communales - Conseil municipal Route de Clouchèvre 44, 1934 Le Châble VS Tel. 027 777 11 00 - etat-major@valdebagnes.ch</p><p><a href="http://www.valdebagnes.ch">www.valdebagnes.ch</a></p>
+      text_language: fr
+      document_url: https://files.openparldata.ch/doc/6037/cc7eb17fcc026efde7c970a1e762e7b70538e06787859cbe44f4fb2b3de11a19

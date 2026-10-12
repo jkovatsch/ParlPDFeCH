@@ -2,7 +2,7 @@
 """Isolation at the level of E20 version 4: answers only from eCH-0295 (I95), conversion and measurement.
 
 E20 is the definition of the isolation task in the private project. The technical report
-(track_2a/technical_report.md) gives version 4.1: the answers and the fixed answers in chapter 2.2,
+(version 1, commit eaacef9) gives version 4.1: the answers and the fixed answers in chapter 2.2,
 the measurement in chapter 5.1. Below, "fixed answers" is the procedure of `m03_iso_hilfe.py`.
 
 Version 4.1 of the measurement (05.10.2026): class-aware values after the code review of 05.10.2026

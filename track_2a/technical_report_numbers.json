@@ -1,0 +1,1984 @@
+{
+ "schema": "parlpdfech-report-numbers/1",
+ "report": "track_2a/technical_report.md",
+ "made": "12.10.2026 17:46 CEST",
+ "note": "Paths are files of the private project, except where the path names the public repository. The SHA-256 is the value of the whole source file at the time in 'made', except S7: its value is the version in the private commit of 'private_commit'. The values of chapter 5.5 are counts and rates on the records of 26 test documents, after the freeze; they are no gate measurement and give no value of a single document. No other score comes from a test document; the other values of test documents are counts (chapters 1, 4 and 5.4).",
+ "private_commit": "7efdc54d60cc1d89691f8e2a0dc0434c5c8909a4",
+ "sources": {
+  "S1": {
+   "path": "crisp-dm/02-data-understanding/abschnitte/korpus.md",
+   "sha256": "17a96f629e7b7cc7d348273cc80aba8cbd32b7947354139a4f5803930f92f9a1",
+   "in_private_commit_unchanged": true
+  },
+  "S2": {
+   "path": "crisp-dm/02-data-understanding/openparldata-connection-points-2026-10-08.md",
+   "sha256": "d72d40ef2d2ee989f465c858ede5b617e8aa993e59e83be54e9b7ef44c17396c",
+   "in_private_commit_unchanged": true
+  },
+  "S3": {
+   "path": "crisp-dm/03-data-preparation/isolation-decomposition-feasibility.md",
+   "sha256": "d32e8ef373839bf1dc14e3a7270c1651d453581391edb30f0a49c6842c3d9fd2",
+   "in_private_commit_unchanged": true
+  },
+  "S4": {
+   "path": "crisp-dm/03-data-preparation/isolation-complexity-ladder.md",
+   "sha256": "a419b15332042e158086350f85d28ad9d9c68ff89837ce525f0d091d77a62503",
+   "in_private_commit_unchanged": true
+  },
+  "S5": {
+   "path": "crisp-dm/03-data-preparation/gate-3a-criteria-v4.md",
+   "sha256": "1db4b2c2a03ce78b4249c4dc8d3e5a399529bb1881a423dc8ea3fea4f9b2f61c",
+   "in_private_commit_unchanged": true
+  },
+  "S6": {
+   "path": "crisp-dm/03-data-preparation/isolation-level-e20.md",
+   "sha256": "626a7ae64a78e6fd47cc82d0e50935b8ed2aa6febb11675a4568ea97f60282b5",
+   "in_private_commit_unchanged": true
+  },
+  "S7": {
+   "path": "crisp-dm/00-cross-cutting/protocol.md",
+   "sha256": "067da2852c6c858bf5687e570fc4efc5d5f3255fd3468c534bf7fbb61e940f22",
+   "in_private_commit_unchanged": true
+  },
+  "S8": {
+   "path": "crisp-dm/04-modeling/apertus-classification-r1-r2.md",
+   "sha256": "2634431786b700dc9f7df38bd1e7352698f9fefe77ee42715ca72b3e7ff6253f",
+   "in_private_commit_unchanged": true
+  },
+  "S9": {
+   "path": "crisp-dm/04-modeling/apertus-classification-iteration2.md",
+   "sha256": "43d4491084d57d8c3d5897bbd46b6ca4dcd925372916b61f3cd08d18b5fde7a2",
+   "in_private_commit_unchanged": true
+  },
+  "S10": {
+   "path": "crisp-dm/04-modeling/gate-apertus-classification-criteria-v2.md",
+   "sha256": "82891c653633f98ef5fde2d44bba442d9372d1d774fc13e2ec213246c3316ef0",
+   "in_private_commit_unchanged": true
+  },
+  "S11": {
+   "path": "daten/cls/it2_lora/validation_lora.md",
+   "sha256": "e4ad39a63c5f88275c818aea15ba4aef98fbb30927ad5467cfecf434fa194ce9",
+   "in_private_commit_unchanged": false
+  },
+  "S12": {
+   "path": "daten/cls/it2/vm_equality/equality.md",
+   "sha256": "19d7eaf06038a158b491031b3b93550877728e223ae015ee5c4039aac71cdb14",
+   "in_private_commit_unchanged": false
+  },
+  "S13": {
+   "path": "crisp-dm/00-cross-cutting/decisions.md",
+   "sha256": "23aa12cf22b6f298f21263dce0e9bc6f5b568d651115938ce221fc753abed066",
+   "in_private_commit_unchanged": true
+  },
+  "S14": {
+   "path": "public/track_2a/technical_report.md, version 1 (public repository, commit eaacef9)",
+   "sha256": "5c9cb7ea30189c277bb4640b26bf8a25d849eb2a780efd11c07d5495e76a6195",
+   "in_private_commit_unchanged": null
+  },
+  "S15": {
+   "path": "uv.lock",
+   "sha256": "09800a0c2910b4854d4796943c663f7ed99f85f0964f2d05adba208e2465a44d",
+   "in_private_commit_unchanged": true
+  },
+  "S16": {
+   "path": "command output: sysctl -n machdep.cpu.brand_string hw.memsize (12.10.2026)",
+   "sha256": "f0117d88c822072e415812c774d799c4bcb4eeccab8c85fa73ec88b9ebd9da1e",
+   "in_private_commit_unchanged": null
+  },
+  "S17": {
+   "path": "daten/score26/score26_report.md",
+   "sha256": "d92851113dcb9c6b19da82f08033d56754da6806da41627da0cc7d8cf733cb61",
+   "in_private_commit_unchanged": false
+  },
+  "S18": {
+   "path": "daten/score26/path1_info.md",
+   "sha256": "3078d95f9a77c1854805c8e482d62ff7bd208f4c90d0257870e2bac9e8edd223",
+   "in_private_commit_unchanged": false
+  },
+  "S19": {
+   "path": "daten/cls/h7k/h7k_report.md",
+   "sha256": "50865daad2c1914c7d1af34b382c492900e85463b567b68f0116846cb7ede953",
+   "in_private_commit_unchanged": false
+  },
+  "S20": {
+   "path": "daten/score26/verify.md",
+   "sha256": "5e87ecdb2b792b6e4417c0bf5e97b7bdfa8891d7ec78ca7ba44ced1065a89420",
+   "in_private_commit_unchanged": false
+  },
+  "S21": {
+   "path": "daten/cls/h7k/verify.md",
+   "sha256": "0fe9443f5b84acb49981a8551986272e9072dc3f7c9b87f20a7d4476296e70b5",
+   "in_private_commit_unchanged": false
+  }
+ },
+ "report_sha256": "50f5b12dca5dd3581978941d0aba42f71c9aaf462d19b0bae12d1c9e261f6b60",
+ "numbers": [
+  {
+   "id": "n001",
+   "chapter": "1",
+   "values": [
+    "325,599"
+   ],
+   "meaning": "affairs in the OpenParlData exports of 04.10.2026",
+   "source": "S1",
+   "path": "crisp-dm/02-data-understanding/abschnitte/korpus.md",
+   "sha256": "17a96f629e7b7cc7d348273cc80aba8cbd32b7947354139a4f5803930f92f9a1",
+   "evidence": [
+    "325'599"
+   ]
+  },
+  {
+   "id": "n002",
+   "chapter": "1",
+   "values": [
+    "89"
+   ],
+   "meaning": "parliaments in the exports",
+   "source": "S1",
+   "path": "crisp-dm/02-data-understanding/abschnitte/korpus.md",
+   "sha256": "17a96f629e7b7cc7d348273cc80aba8cbd32b7947354139a4f5803930f92f9a1",
+   "evidence": [
+    "Alle 89 Parlamente"
+   ]
+  },
+  {
+   "id": "n003",
+   "chapter": "1, 4",
+   "values": [
+    "04.10.2026"
+   ],
+   "meaning": "date of the OpenParlData exports",
+   "source": "S14",
+   "path": "public/track_2a/technical_report.md, version 1 (public repository, commit eaacef9)",
+   "sha256": "5c9cb7ea30189c277bb4640b26bf8a25d849eb2a780efd11c07d5495e76a6195",
+   "evidence": [
+    "The OpenParlData exports of 04.10.2026 contain the metadata of 325,599 parliamentary affairs from 89 parliaments."
+   ]
+  },
+  {
+   "id": "n004",
+   "chapter": "1",
+   "values": [
+    "5",
+    "65 %",
+    "23 %"
+   ],
+   "meaning": "pilot sample of 5 records of development documents: share of values from the export and from the PDF",
+   "source": "S2",
+   "path": "crisp-dm/02-data-understanding/openparldata-connection-points-2026-10-08.md",
+   "sha256": "d72d40ef2d2ee989f465c858ede5b617e8aa993e59e83be54e9b7ef44c17396c",
+   "evidence": [
+    "491 leaf values in the 5 gold set records",
+    "| export | 317 | 65 % |",
+    "| PDF needed | 111 | 23 % |"
+   ]
+  },
+  {
+   "id": "n005",
+   "chapter": "1, 5.2",
+   "values": [
+    "920",
+    "0.919",
+    "0.899",
+    "0.932",
+    "0.732"
+   ],
+   "meaning": "R2 validation: documents; balanced accuracy of the head, the zero-shot readout (iteration 1), `s1_answer`, `heading`",
+   "source": "S9",
+   "path": "crisp-dm/04-modeling/apertus-classification-iteration2.md",
+   "sha256": "43d4491084d57d8c3d5897bbd46b6ca4dcd925372916b61f3cd08d18b5fde7a2",
+   "evidence": [
+    "| All | 920 | 0.919 (827 correct) | 0.899 | 0.932 | 0.732 |"
+   ]
+  },
+  {
+   "id": "n006",
+   "chapter": "1, 5.2",
+   "values": [
+    "714",
+    "0.980",
+    "0.953",
+    "0.965",
+    "0.733"
+   ],
+   "meaning": "R2 validation without K7: documents; head, zero-shot, `s1_answer`, `heading`",
+   "source": "S9",
+   "path": "crisp-dm/04-modeling/apertus-classification-iteration2.md",
+   "sha256": "43d4491084d57d8c3d5897bbd46b6ca4dcd925372916b61f3cd08d18b5fde7a2",
+   "evidence": [
+    "| Without K7 categories | 714 | 0.980 | 0.953 | 0.965 | 0.733 |"
+   ]
+  },
+  {
+   "id": "n007",
+   "chapter": "1, 4, 5.4",
+   "values": [
+    "40",
+    "13",
+    "21",
+    "17",
+    "2",
+    "26"
+   ],
+   "meaning": "path 1: selected test documents, parliaments, German, French, Italian; claimed at L9",
+   "source": "S7",
+   "path": "crisp-dm/00-cross-cutting/protocol.md",
+   "sha256": "067da2852c6c858bf5687e570fc4efc5d5f3255fd3468c534bf7fbb61e940f22",
+   "evidence": [
+    "13 parliaments; de 21, fr 17, it 2",
+    "claimed L9 26"
+   ]
+  },
+  {
+   "id": "n008",
+   "chapter": "1, 4, 5.4, 5.5",
+   "values": [
+    "1,523",
+    "9,502",
+    "61",
+    "0",
+    "0",
+    "1,265",
+    "258"
+   ],
+   "meaning": "R2 final list: documents, population, documents of the lists of test documents left out, exact copies, near copies, source labels yes and no",
+   "source": "S7",
+   "path": "crisp-dm/00-cross-cutting/protocol.md",
+   "sha256": "067da2852c6c858bf5687e570fc4efc5d5f3255fd3468c534bf7fbb61e940f22",
+   "evidence": [
+    "R2 final list: 1,523 documents (population 9,502",
+    "61 documents of the lists of test documents left out before any text was read; exact copies 0; near copies 0",
+    "Labels: `yes` 1,265, `no` 258"
+   ]
+  },
+  {
+   "id": "n009",
+   "chapter": "5.4",
+   "values": [
+    "1,523 of 1,523"
+   ],
+   "meaning": "R2 final run: documents with an output; seal",
+   "source": "S7",
+   "path": "crisp-dm/00-cross-cutting/protocol.md",
+   "sha256": "067da2852c6c858bf5687e570fc4efc5d5f3255fd3468c534bf7fbb61e940f22",
+   "evidence": [
+    "1,523 of 1,523 documents with an output",
+    "Seal `312f27da"
+   ]
+  },
+  {
+   "id": "n010",
+   "chapter": "2, 3.1",
+   "values": [
+    "32"
+   ],
+   "meaning": "decoder layers of Apertus-v1.5-8B that run",
+   "source": "S9",
+   "path": "crisp-dm/04-modeling/apertus-classification-iteration2.md",
+   "sha256": "43d4491084d57d8c3d5897bbd46b6ca4dcd925372916b61f3cd08d18b5fde7a2",
+   "evidence": [
+    "all 32 decoder layers run"
+   ]
+  },
+  {
+   "id": "n011",
+   "chapter": "2",
+   "values": [
+    "2,048"
+   ],
+   "meaning": "prefill chunk size in tokens",
+   "source": "S9",
+   "path": "crisp-dm/04-modeling/apertus-classification-iteration2.md",
+   "sha256": "43d4491084d57d8c3d5897bbd46b6ca4dcd925372916b61f3cd08d18b5fde7a2",
+   "evidence": [
+    "prefill in chunks of 2,048 tokens"
+   ]
+  },
+  {
+   "id": "n012",
+   "chapter": "2, 3.1",
+   "values": [
+    "16",
+    "0.001"
+   ],
+   "meaning": "R2 head: decoder layer and regression penalty C",
+   "source": "S9",
+   "path": "crisp-dm/04-modeling/apertus-classification-iteration2.md",
+   "sha256": "43d4491084d57d8c3d5897bbd46b6ca4dcd925372916b61f3cd08d18b5fde7a2",
+   "evidence": [
+    "R2 choice: layer 16, regression with C = 0.001"
+   ]
+  },
+  {
+   "id": "n013",
+   "chapter": "2",
+   "values": [
+    "0.5",
+    "0.6"
+   ],
+   "meaning": "R2 decision threshold t and acceptance threshold a",
+   "source": "S9",
+   "path": "crisp-dm/04-modeling/apertus-classification-iteration2.md",
+   "sha256": "43d4491084d57d8c3d5897bbd46b6ca4dcd925372916b61f3cd08d18b5fde7a2",
+   "evidence": [
+    "layer 16, t = 0.5, a = 0.6"
+   ]
+  },
+  {
+   "id": "n014",
+   "chapter": "2",
+   "values": [
+    "32,768"
+   ],
+   "meaning": "length limit in text tokens",
+   "source": "S9",
+   "path": "crisp-dm/04-modeling/apertus-classification-iteration2.md",
+   "sha256": "43d4491084d57d8c3d5897bbd46b6ca4dcd925372916b61f3cd08d18b5fde7a2",
+   "evidence": [
+    "A document with more than 32,768 text tokens gets no state"
+   ]
+  },
+  {
+   "id": "n015",
+   "chapter": "2",
+   "values": [
+    "Five (S1 to S5)"
+   ],
+   "meaning": "sub-task rules of path 1",
+   "source": "S3",
+   "path": "crisp-dm/03-data-preparation/isolation-decomposition-feasibility.md",
+   "sha256": "d32e8ef373839bf1dc14e3a7270c1651d453581391edb30f0a49c6842c3d9fd2",
+   "evidence": [
+    "| S5 | labelled F1 of the type splits |"
+   ]
+  },
+  {
+   "id": "n016",
+   "chapter": "3.1",
+   "values": [
+    "48"
+   ],
+   "meaning": "R2 design variants on dev",
+   "source": "S9",
+   "path": "crisp-dm/04-modeling/apertus-classification-iteration2.md",
+   "sha256": "43d4491084d57d8c3d5897bbd46b6ca4dcd925372916b61f3cd08d18b5fde7a2",
+   "evidence": [
+    "R2: 48 variants"
+   ]
+  },
+  {
+   "id": "n017",
+   "chapter": "3.1",
+   "values": [
+    "800",
+    "13",
+    "400",
+    "400"
+   ],
+   "meaning": "R2 training rows of the frozen head: documents, parliaments, yes, no",
+   "source": "S9",
+   "path": "crisp-dm/04-modeling/apertus-classification-iteration2.md",
+   "sha256": "43d4491084d57d8c3d5897bbd46b6ca4dcd925372916b61f3cd08d18b5fde7a2",
+   "evidence": [
+    "800 rows of 13 parliaments: `yes` 400, `no` 400"
+   ]
+  },
+  {
+   "id": "n018",
+   "chapter": "3.1",
+   "values": [
+    "32",
+    "1.73"
+   ],
+   "meaning": "LoRA L: layers, GPU hours",
+   "source": "S7",
+   "path": "crisp-dm/00-cross-cutting/protocol.md",
+   "sha256": "067da2852c6c858bf5687e570fc4efc5d5f3255fd3468c534bf7fbb61e940f22",
+   "evidence": [
+    "candidate L, LoRA on all 32 layers on the Phoeniqs H100, bf16). GPU time 1.73 h"
+   ]
+  },
+  {
+   "id": "n019",
+   "chapter": "3.1",
+   "values": [
+    "0.979",
+    "0.996"
+   ],
+   "meaning": "partition P (dev, out of fold), R2: LoRA L and head H",
+   "source": "S9",
+   "path": "crisp-dm/04-modeling/apertus-classification-iteration2.md",
+   "sha256": "43d4491084d57d8c3d5897bbd46b6ca4dcd925372916b61f3cd08d18b5fde7a2",
+   "evidence": [
+    "| M_R2 (balanced accuracy, 800 rows) | 0.996 | 0.979 |"
+   ]
+  },
+  {
+   "id": "n020",
+   "chapter": "3.1",
+   "values": [
+    "0.99",
+    "0.985"
+   ],
+   "meaning": "cascade C: precision limit for sure rule answers; best R2 rule answer precision on dev",
+   "source": "S9",
+   "path": "crisp-dm/04-modeling/apertus-classification-iteration2.md",
+   "sha256": "43d4491084d57d8c3d5897bbd46b6ca4dcd925372916b61f3cd08d18b5fde7a2",
+   "evidence": [
+    "`s1_answer` `yes` has a precision of 0.985 (527 of 535)",
+    "No rule answer reaches 0.99"
+   ]
+  },
+  {
+   "id": "n021",
+   "chapter": "3.2",
+   "values": [
+    "M4",
+    "32 GB"
+   ],
+   "meaning": "local Mac: chip and memory (34359738368 bytes)",
+   "source": "S16",
+   "path": "command output: sysctl -n machdep.cpu.brand_string hw.memsize (12.10.2026)",
+   "sha256": "f0117d88c822072e415812c774d799c4bcb4eeccab8c85fa73ec88b9ebd9da1e",
+   "evidence": [
+    "Apple M4",
+    "34359738368"
+   ]
+  },
+  {
+   "id": "n022",
+   "chapter": "3.2",
+   "values": [
+    "0.32.3",
+    "0.32.0",
+    "2.133.0",
+    "1.0.1"
+   ],
+   "meaning": "package versions: mlx, mlx-lm, docling, ocrmac",
+   "source": "S15",
+   "path": "uv.lock",
+   "sha256": "09800a0c2910b4854d4796943c663f7ed99f85f0964f2d05adba208e2465a44d",
+   "evidence": [
+    "name = \"mlx\"\nversion = \"0.32.3\"",
+    "name = \"mlx-lm\"\nversion = \"0.32.0\"",
+    "name = \"docling\"\nversion = \"2.133.0\"",
+    "name = \"ocrmac\"\nversion = \"1.0.1\""
+   ]
+  },
+  {
+   "id": "n023",
+   "chapter": "3.2",
+   "values": [
+    "H100 SXM5 80 GB"
+   ],
+   "meaning": "Phoeniqs GPU",
+   "source": "S7",
+   "path": "crisp-dm/00-cross-cutting/protocol.md",
+   "sha256": "067da2852c6c858bf5687e570fc4efc5d5f3255fd3468c534bf7fbb61e940f22",
+   "evidence": [
+    "one H100 SXM5 GPU with 80 GB"
+   ]
+  },
+  {
+   "id": "n024",
+   "chapter": "3.2",
+   "values": [
+    "4 vCPU"
+   ],
+   "meaning": "Phoeniqs virtual machine CPU count",
+   "source": "S7",
+   "path": "crisp-dm/00-cross-cutting/protocol.md",
+   "sha256": "067da2852c6c858bf5687e570fc4efc5d5f3255fd3468c534bf7fbb61e940f22",
+   "evidence": [
+    "(4 vCPU, 6656 MiB"
+   ]
+  },
+  {
+   "id": "n025",
+   "chapter": "3.2",
+   "values": [
+    "CentOS Stream 9"
+   ],
+   "meaning": "operating system of the virtual machine",
+   "source": "S7",
+   "path": "crisp-dm/00-cross-cutting/protocol.md",
+   "sha256": "067da2852c6c858bf5687e570fc4efc5d5f3255fd3468c534bf7fbb61e940f22",
+   "evidence": [
+    "CentOS Stream 9"
+   ]
+  },
+  {
+   "id": "n026",
+   "chapter": "3.2",
+   "values": [
+    "2.11.0",
+    "12.8",
+    "5.19.0"
+   ],
+   "meaning": "virtual machine: PyTorch, CUDA of PyTorch, transformers",
+   "source": "S7",
+   "path": "crisp-dm/00-cross-cutting/protocol.md",
+   "sha256": "067da2852c6c858bf5687e570fc4efc5d5f3255fd3468c534bf7fbb61e940f22",
+   "evidence": [
+    "torch 2.11.0 with CUDA 12.8, transformers 5.19.0"
+   ]
+  },
+  {
+   "id": "n027",
+   "chapter": "3.2",
+   "values": [
+    "70B"
+   ],
+   "meaning": "Apertus-v1.5-70B on CSCS (development only)",
+   "source": "S13",
+   "path": "crisp-dm/00-cross-cutting/decisions.md",
+   "sha256": "23aa12cf22b6f298f21263dce0e9bc6f5b568d651115938ce221fc753abed066",
+   "evidence": [
+    "Apertus v1.5 8B and 70B"
+   ]
+  },
+  {
+   "id": "n028",
+   "chapter": "3.2",
+   "values": [
+    "10",
+    "10 of 10",
+    "0.000056",
+    "0.02"
+   ],
+   "meaning": "equality check R1: rows, same decisions, largest q difference, limit",
+   "source": "S12",
+   "path": "daten/cls/it2/vm_equality/equality.md",
+   "sha256": "19d7eaf06038a158b491031b3b93550877728e223ae015ee5c4039aac71cdb14",
+   "evidence": [
+    "| R1 | 10 | 10 of 10 | 0.000056 | 0.02 | PASS |"
+   ]
+  },
+  {
+   "id": "n029",
+   "chapter": "3.2",
+   "values": [
+    "10",
+    "10 of 10",
+    "0.011279",
+    "0.02"
+   ],
+   "meaning": "equality check R2: rows, same decisions, largest q difference, limit",
+   "source": "S12",
+   "path": "daten/cls/it2/vm_equality/equality.md",
+   "sha256": "19d7eaf06038a158b491031b3b93550877728e223ae015ee5c4039aac71cdb14",
+   "evidence": [
+    "| R2 | 10 | 10 of 10 | 0.011279 | 0.02 | PASS |"
+   ]
+  },
+  {
+   "id": "n030",
+   "chapter": "3.2",
+   "values": [
+    "10",
+    "7,793",
+    "17,249",
+    "10 of 10",
+    "0.01297"
+   ],
+   "meaning": "second run on 10 long R2 dev documents",
+   "source": "S7",
+   "path": "crisp-dm/00-cross-cutting/protocol.md",
+   "sha256": "067da2852c6c858bf5687e570fc4efc5d5f3255fd3468c534bf7fbb61e940f22",
+   "evidence": [
+    "10 R2 documents with 7,793 to 17,249 prompt tokens; 10 of 10 equal decisions, largest q difference 0.01297"
+   ]
+  },
+  {
+   "id": "n031",
+   "chapter": "3.2",
+   "values": [
+    "0.032",
+    "0.034"
+   ],
+   "meaning": "CSCS 8B against the local bf16 model: mean difference and bf16 noise",
+   "source": "S13",
+   "path": "crisp-dm/00-cross-cutting/decisions.md",
+   "sha256": "23aa12cf22b6f298f21263dce0e9bc6f5b568d651115938ce221fc753abed066",
+   "evidence": [
+    "mean difference 0.032 against a bf16 noise of 0.034"
+   ]
+  },
+  {
+   "id": "n032",
+   "chapter": "3.3",
+   "values": [
+    "2",
+    "1"
+   ],
+   "meaning": "AI coders and AI adjudicator for each record",
+   "source": "S5",
+   "path": "crisp-dm/03-data-preparation/gate-3a-criteria-v4.md",
+   "sha256": "1db4b2c2a03ce78b4249c4dc8d3e5a399529bb1881a423dc8ea3fea4f9b2f61c",
+   "evidence": [
+    "Two AI coders (stages `proposal_A` and `proposal_B`) and one AI adjudicator"
+   ]
+  },
+  {
+   "id": "n033",
+   "chapter": "3.3",
+   "values": [
+    "26"
+   ],
+   "meaning": "records of test documents in the second look (Claude Haiku 5.5)",
+   "source": "S7",
+   "path": "crisp-dm/00-cross-cutting/protocol.md",
+   "sha256": "067da2852c6c858bf5687e570fc4efc5d5f3255fd3468c534bf7fbb61e940f22",
+   "evidence": [
+    "14 AI agents (Claude Haiku 5.5)",
+    "second look at the text blocks of the 26 records of test documents"
+   ]
+  },
+  {
+   "id": "n034",
+   "chapter": "4",
+   "values": [
+    "20261009"
+   ],
+   "meaning": "seed of the path-1 selection (fixed seed)",
+   "source": "S5",
+   "path": "crisp-dm/03-data-preparation/gate-3a-criteria-v4.md",
+   "sha256": "1db4b2c2a03ce78b4249c4dc8d3e5a399529bb1881a423dc8ea3fea4f9b2f61c",
+   "evidence": [
+    "(seed 20261009)"
+   ]
+  },
+  {
+   "id": "n035",
+   "chapter": "4",
+   "values": [
+    "2",
+    "13"
+   ],
+   "meaning": "review batches T1 and T2 of 13 records each",
+   "source": "S7",
+   "path": "crisp-dm/00-cross-cutting/protocol.md",
+   "sha256": "067da2852c6c858bf5687e570fc4efc5d5f3255fd3468c534bf7fbb61e940f22",
+   "evidence": [
+    "batches T1 and T2 of 13 documents each"
+   ]
+  },
+  {
+   "id": "n036",
+   "chapter": "4",
+   "values": [
+    "81.2",
+    "18.1"
+   ],
+   "meaning": "active review time of the author in minutes (T1, T2)",
+   "source": "S7",
+   "path": "crisp-dm/00-cross-cutting/protocol.md",
+   "sha256": "067da2852c6c858bf5687e570fc4efc5d5f3255fd3468c534bf7fbb61e940f22",
+   "evidence": [
+    "T1 81.2 min, T2 18.1 min"
+   ]
+  },
+  {
+   "id": "n037",
+   "chapter": "4",
+   "values": [
+    "229",
+    "223",
+    "5",
+    "4",
+    "1"
+   ],
+   "meaning": "second look: findings examined, refuted, confirmed, records, not decided",
+   "source": "S7",
+   "path": "crisp-dm/00-cross-cutting/protocol.md",
+   "sha256": "067da2852c6c858bf5687e570fc4efc5d5f3255fd3468c534bf7fbb61e940f22",
+   "evidence": [
+    "229 findings examined, 223 refuted, 5 confirmed in 4 records",
+    "1 not decided"
+   ]
+  },
+  {
+   "id": "n038",
+   "chapter": "4",
+   "values": [
+    "6"
+   ],
+   "meaning": "notes decided by the author",
+   "source": "S7",
+   "path": "crisp-dm/00-cross-cutting/protocol.md",
+   "sha256": "067da2852c6c858bf5687e570fc4efc5d5f3255fd3468c534bf7fbb61e940f22",
+   "evidence": [
+    "6 of 6 notes decided"
+   ]
+  },
+  {
+   "id": "n039",
+   "chapter": "4",
+   "values": [
+    "800",
+    "920",
+    "2,328",
+    "287"
+   ],
+   "meaning": "path 2 sets: dev, validation sample of the population, R1 validation",
+   "source": "S8",
+   "path": "crisp-dm/04-modeling/apertus-classification-r1-r2.md",
+   "sha256": "2634431786b700dc9f7df38bd1e7352698f9fefe77ee42715ca72b3e7ff6253f",
+   "evidence": [
+    "920 of 2,328 (stratified sample)",
+    "287 (SO 94, NE 174, 247 19)"
+   ]
+  },
+  {
+   "id": "n040",
+   "chapter": "5.1",
+   "values": [
+    "22"
+   ],
+   "meaning": "eval documents of the feasibility check",
+   "source": "S3",
+   "path": "crisp-dm/03-data-preparation/isolation-decomposition-feasibility.md",
+   "sha256": "d32e8ef373839bf1dc14e3a7270c1651d453581391edb30f0a49c6842c3d9fd2",
+   "evidence": [
+    "0.773 (17/22)"
+   ]
+  },
+  {
+   "id": "n041",
+   "chapter": "5.1",
+   "values": [
+    "0.591",
+    "0.773"
+   ],
+   "meaning": "S1 role accuracy on eval: Apertus question, rule",
+   "source": "S3",
+   "path": "crisp-dm/03-data-preparation/isolation-decomposition-feasibility.md",
+   "sha256": "d32e8ef373839bf1dc14e3a7270c1651d453581391edb30f0a49c6842c3d9fd2",
+   "evidence": [
+    "| 0.773 (17/22) | 0.508 (93/183) | 0.591 (13/22) |"
+   ]
+  },
+  {
+   "id": "n042",
+   "chapter": "5.1",
+   "values": [
+    "0.658",
+    "0.845"
+   ],
+   "meaning": "S2 labelled F1 on eval: Apertus question, rule",
+   "source": "S3",
+   "path": "crisp-dm/03-data-preparation/isolation-decomposition-feasibility.md",
+   "sha256": "d32e8ef373839bf1dc14e3a7270c1651d453581391edb30f0a49c6842c3d9fd2",
+   "evidence": [
+    "| 0.845 | sample of 80: 0.678 | 0.658 |"
+   ]
+  },
+  {
+   "id": "n043",
+   "chapter": "5.1",
+   "values": [
+    "0.616",
+    "0.757"
+   ],
+   "meaning": "S3 accuracy on eval: Apertus question, rule",
+   "source": "S3",
+   "path": "crisp-dm/03-data-preparation/isolation-decomposition-feasibility.md",
+   "sha256": "d32e8ef373839bf1dc14e3a7270c1651d453581391edb30f0a49c6842c3d9fd2",
+   "evidence": [
+    "| 0.757 | sample of 36: 0.751 | 0.616 |"
+   ]
+  },
+  {
+   "id": "n044",
+   "chapter": "5.1",
+   "values": [
+    "4 of 22",
+    "8 of 22"
+   ],
+   "meaning": "S4 exact titles on eval: Apertus question, rule",
+   "source": "S3",
+   "path": "crisp-dm/03-data-preparation/isolation-decomposition-feasibility.md",
+   "sha256": "d32e8ef373839bf1dc14e3a7270c1651d453581391edb30f0a49c6842c3d9fd2",
+   "evidence": [
+    "| 8/22 (0.364) | sample of 60: 10/60 (0.167) | 4/22 (0.182) |"
+   ]
+  },
+  {
+   "id": "n045",
+   "chapter": "5.1",
+   "values": [
+    "0.194",
+    "0.875"
+   ],
+   "meaning": "S5 labelled F1 on eval: Apertus question, rule",
+   "source": "S3",
+   "path": "crisp-dm/03-data-preparation/isolation-decomposition-feasibility.md",
+   "sha256": "d32e8ef373839bf1dc14e3a7270c1651d453581391edb30f0a49c6842c3d9fd2",
+   "evidence": [
+    "| 0.875 (7 of 8) | sample of 24: 0.462 | 0.194 |"
+   ]
+  },
+  {
+   "id": "n046",
+   "chapter": "5.1",
+   "values": [
+    "99 of 124",
+    "15 of 15"
+   ],
+   "meaning": "L9 with nos4: exact claimed documents on dev (in sample) and eval",
+   "source": "S4",
+   "path": "crisp-dm/03-data-preparation/isolation-complexity-ladder.md",
+   "sha256": "a419b15332042e158086350f85d28ad9d9c68ff89837ce525f0d091d77a62503",
+   "evidence": [
+    "`dev` 99 of 124 exact",
+    "`eval` 15 of 15 (validation)"
+   ]
+  },
+  {
+   "id": "n047",
+   "chapter": "5.1",
+   "values": [
+    "80 of 86",
+    "19 of 30"
+   ],
+   "meaning": "L9 on dev: documents with one author block (role only gets the same), switch documents",
+   "source": "S4",
+   "path": "crisp-dm/03-data-preparation/isolation-complexity-ladder.md",
+   "sha256": "a419b15332042e158086350f85d28ad9d9c68ff89837ce525f0d091d77a62503",
+   "evidence": [
+    "the method at L9 gets 80 of 86 on `dev`. \"Role only\" also gets 80",
+    "the method at L9 gets 19 of 30 on `dev`"
+   ]
+  },
+  {
+   "id": "n048",
+   "chapter": "5.1",
+   "values": [
+    "3 of 124",
+    "1 of 15"
+   ],
+   "meaning": "claimed documents whose role came from Apertus (dev, eval)",
+   "source": "S5",
+   "path": "crisp-dm/03-data-preparation/gate-3a-criteria-v4.md",
+   "sha256": "1db4b2c2a03ce78b4249c4dc8d3e5a399529bb1881a423dc8ea3fea4f9b2f61c",
+   "evidence": [
+    "they are 3 of 124 and 1 of 15 claimed documents at L9"
+   ]
+  },
+  {
+   "id": "n049",
+   "chapter": "5.1",
+   "values": [
+    "12",
+    "06.10.2026",
+    "0.455",
+    "8",
+    "0.95"
+   ],
+   "meaning": "gate 3a on the full task: answers per atom, date of the result, labelled boundary F1 of the final model on the final group, documents, limit",
+   "source": "S14",
+   "path": "public/track_2a/technical_report.md, version 1 (public repository, commit eaacef9)",
+   "sha256": "5c9cb7ea30189c277bb4640b26bf8a25d849eb2a780efd11c07d5495e76a6195",
+   "evidence": [
+    "one of 12 answers",
+    "Version of 06.10.2026.",
+    "The isolation stage did not meet its gate.",
+    "| Ours: final model; final group (8 documents) | labelled boundary F1 | 0.455 |",
+    "The gate limit is 0.95"
+   ]
+  },
+  {
+   "id": "n050",
+   "chapter": "5.2",
+   "values": [
+    "800",
+    "0.718",
+    "0.845",
+    "0.986",
+    "0.996"
+   ],
+   "meaning": "R2 dev, one parliament held out: heading, s1_answer, zero-shot, head",
+   "source": "S9",
+   "path": "crisp-dm/04-modeling/apertus-classification-iteration2.md",
+   "sha256": "43d4491084d57d8c3d5897bbd46b6ca4dcd925372916b61f3cd08d18b5fde7a2",
+   "evidence": [
+    "### 5.2 R2 (800 rows; 400 `yes`, 400 `no`)",
+    "| `heading` | 574 | 0.718 |",
+    "| `s1_answer` | 676 | 0.845 |",
+    "| Zero-shot readout of iteration 1 | 789 | 0.986 |",
+    "| H (frozen) | 797 | 0.996 |"
+   ]
+  },
+  {
+   "id": "n051",
+   "chapter": "5.2, 5.4",
+   "values": [
+    "5 %",
+    "10,000",
+    "−0.012",
+    "−0.025",
+    "+0.015",
+    "0.015",
+    "+0.003"
+   ],
+   "meaning": "head minus the better rule with the 5 % paired bootstrap bound (all; without K7)",
+   "source": "S9",
+   "path": "crisp-dm/04-modeling/apertus-classification-iteration2.md",
+   "sha256": "43d4491084d57d8c3d5897bbd46b6ca4dcd925372916b61f3cd08d18b5fde7a2",
+   "evidence": [
+    "Paired bootstrap (10,000 resamples, seed 20261013)",
+    "| −0.012 (−0.025) |",
+    "| +0.015 (+0.003) |"
+   ]
+  },
+  {
+   "id": "n052",
+   "chapter": "5.2",
+   "values": [
+    "+0.021",
+    "+0.014"
+   ],
+   "meaning": "head minus zero-shot readout (5 % bound)",
+   "source": "S9",
+   "path": "crisp-dm/04-modeling/apertus-classification-iteration2.md",
+   "sha256": "43d4491084d57d8c3d5897bbd46b6ca4dcd925372916b61f3cd08d18b5fde7a2",
+   "evidence": [
+    "H minus iteration 1: +0.021 (5 % bound +0.014)"
+   ]
+  },
+  {
+   "id": "n053",
+   "chapter": "5.2",
+   "values": [
+    "0.923"
+   ],
+   "meaning": "LoRA L, R2 validation balanced accuracy",
+   "source": "S11",
+   "path": "daten/cls/it2_lora/validation_lora.md",
+   "sha256": "e4ad39a63c5f88275c818aea15ba4aef98fbb30927ad5467cfecf434fa194ce9",
+   "evidence": [
+    "R2: L has 829 of 920 correct, balanced accuracy 0.923"
+   ]
+  },
+  {
+   "id": "n054",
+   "chapter": "5.2",
+   "values": [
+    "78",
+    "93"
+   ],
+   "meaning": "wrong head decisions that are no documents of one parliament with a K7 category; all wrong decisions",
+   "source": "S9",
+   "path": "crisp-dm/04-modeling/apertus-classification-iteration2.md",
+   "sha256": "43d4491084d57d8c3d5897bbd46b6ca4dcd925372916b61f3cd08d18b5fde7a2",
+   "evidence": [
+    "78 of the 93 wrong decisions are `no` documents of 306 with a K7 category"
+   ]
+  },
+  {
+   "id": "n055",
+   "chapter": "5.2",
+   "values": [
+    "0.784"
+   ],
+   "meaning": "q(yes) of the head on a French text with no content",
+   "source": "S9",
+   "path": "crisp-dm/04-modeling/apertus-classification-iteration2.md",
+   "sha256": "43d4491084d57d8c3d5897bbd46b6ca4dcd925372916b61f3cd08d18b5fde7a2",
+   "evidence": [
+    "`yes`, q(`yes`) 0.784 (`certain`)"
+   ]
+  },
+  {
+   "id": "n056",
+   "chapter": "5.3",
+   "values": [
+    "287",
+    "250",
+    "196",
+    "186"
+   ],
+   "meaning": "R1 validation: documents, head, zero-shot (iteration 1), better rule",
+   "source": "S9",
+   "path": "crisp-dm/04-modeling/apertus-classification-iteration2.md",
+   "sha256": "43d4491084d57d8c3d5897bbd46b6ca4dcd925372916b61f3cd08d18b5fde7a2",
+   "evidence": [
+    "| All | 287 | 250 (0.871) | 146 (118) | 196 | 184 | 186 |"
+   ]
+  },
+  {
+   "id": "n057",
+   "chapter": "5.3",
+   "values": [
+    "110",
+    "174"
+   ],
+   "meaning": "guard: documents without a stated recommendation of one parliament",
+   "source": "S9",
+   "path": "crisp-dm/04-modeling/apertus-classification-iteration2.md",
+   "sha256": "43d4491084d57d8c3d5897bbd46b6ca4dcd925372916b61f3cd08d18b5fde7a2",
+   "evidence": [
+    "no stated recommendation in 110 of 174 NE documents"
+   ]
+  },
+  {
+   "id": "n058",
+   "chapter": "5.3",
+   "values": [
+    "146",
+    "287"
+   ],
+   "meaning": "method with the guard: correct decisions",
+   "source": "S9",
+   "path": "crisp-dm/04-modeling/apertus-classification-iteration2.md",
+   "sha256": "43d4491084d57d8c3d5897bbd46b6ca4dcd925372916b61f3cd08d18b5fde7a2",
+   "evidence": [
+    "`H_G`: 146 of 287"
+   ]
+  },
+  {
+   "id": "n059",
+   "chapter": "5.3",
+   "values": [
+    "98",
+    "104",
+    "115"
+   ],
+   "meaning": "date-linked documents: head, rules, documents",
+   "source": "S9",
+   "path": "crisp-dm/04-modeling/apertus-classification-iteration2.md",
+   "sha256": "43d4491084d57d8c3d5897bbd46b6ca4dcd925372916b61f3cd08d18b5fde7a2",
+   "evidence": [
+    "Date-linked without 247: H 98 of 115, rules 104"
+   ]
+  },
+  {
+   "id": "n060",
+   "chapter": "5.3",
+   "values": [
+    "79",
+    "94",
+    "94"
+   ],
+   "meaning": "letters of one parliament: head, rules, documents",
+   "source": "S9",
+   "path": "crisp-dm/04-modeling/apertus-classification-iteration2.md",
+   "sha256": "43d4491084d57d8c3d5897bbd46b6ca4dcd925372916b61f3cd08d18b5fde7a2",
+   "evidence": [
+    "SO: H 79 of 94, rules 94"
+   ]
+  },
+  {
+   "id": "n061",
+   "chapter": "5.3",
+   "values": [
+    "148",
+    "287"
+   ],
+   "meaning": "LoRA L, R1 validation",
+   "source": "S11",
+   "path": "daten/cls/it2_lora/validation_lora.md",
+   "sha256": "e4ad39a63c5f88275c818aea15ba4aef98fbb30927ad5467cfecf434fa194ce9",
+   "evidence": [
+    "L has 148 of 287 correct"
+   ]
+  },
+  {
+   "id": "n062",
+   "chapter": "5.3",
+   "values": [
+    "12.10.2026"
+   ],
+   "meaning": "R1 stopped (author, slot J1)",
+   "source": "S7",
+   "path": "crisp-dm/00-cross-cutting/protocol.md",
+   "sha256": "067da2852c6c858bf5687e570fc4efc5d5f3255fd3468c534bf7fbb61e940f22",
+   "evidence": [
+    "D2: R1 stops (option 3)"
+   ]
+  },
+  {
+   "id": "n063",
+   "chapter": "5.3",
+   "values": [
+    "4 causes (numbered list)"
+   ],
+   "meaning": "causes of the negative R1 result",
+   "source": "S9",
+   "path": "crisp-dm/04-modeling/apertus-classification-iteration2.md",
+   "sha256": "43d4491084d57d8c3d5897bbd46b6ca4dcd925372916b61f3cd08d18b5fde7a2",
+   "evidence": [
+    "Causes of the negative R1 result:"
+   ]
+  },
+  {
+   "id": "n064",
+   "chapter": "5.4",
+   "values": [
+    "09.10.2026"
+   ],
+   "meaning": "criteria of gate 3a version 4 fixed before the converter run",
+   "source": "S7",
+   "path": "crisp-dm/00-cross-cutting/protocol.md",
+   "sha256": "067da2852c6c858bf5687e570fc4efc5d5f3255fd3468c534bf7fbb61e940f22",
+   "evidence": [
+    "Written before any measurement on a test document: criteria gate-3a-criteria-v4.md"
+   ]
+  },
+  {
+   "id": "n065",
+   "chapter": "5.4",
+   "values": [
+    "12.10.2026"
+   ],
+   "meaning": "GC.1 accepted by the author, after the validation values",
+   "source": "S7",
+   "path": "crisp-dm/00-cross-cutting/protocol.md",
+   "sha256": "067da2852c6c858bf5687e570fc4efc5d5f3255fd3468c534bf7fbb61e940f22",
+   "evidence": [
+    "D1: GC.1 accepted",
+    "GC.1 came after the validation values"
+   ]
+  },
+  {
+   "id": "n066",
+   "chapter": "5.4",
+   "values": [
+    "26"
+   ],
+   "meaning": "R2 values drawn for the blind check",
+   "source": "S7",
+   "path": "crisp-dm/00-cross-cutting/protocol.md",
+   "sha256": "067da2852c6c858bf5687e570fc4efc5d5f3255fd3468c534bf7fbb61e940f22",
+   "evidence": [
+    "Blind check draw of tool B, size A, R2 only: 26 values"
+   ]
+  },
+  {
+   "id": "n067",
+   "chapter": "5.4",
+   "values": [
+    "4"
+   ],
+   "meaning": "records of the blind repetition (test_repeat)",
+   "source": "S7",
+   "path": "crisp-dm/00-cross-cutting/protocol.md",
+   "sha256": "067da2852c6c858bf5687e570fc4efc5d5f3255fd3468c534bf7fbb61e940f22",
+   "evidence": [
+    "`test_repeat` 4 documents of T1"
+   ]
+  },
+  {
+   "id": "n068",
+   "chapter": "5.4",
+   "values": [
+    "0.80 × n",
+    "0.50"
+   ],
+   "meaning": "gate 3a version 4: exact documents of n claimed; claimed share",
+   "source": "S5",
+   "path": "crisp-dm/03-data-preparation/gate-3a-criteria-v4.md",
+   "sha256": "1db4b2c2a03ce78b4249c4dc8d3e5a399529bb1881a423dc8ea3fea4f9b2f61c",
+   "evidence": [
+    "at least ⌈0.80 × n⌉, with n of 18 or more",
+    "| G3a.13 | measurement | Claimed documents of the selected documents (CC4). | 0.50 or more |"
+   ]
+  },
+  {
+   "id": "n069",
+   "chapter": "5.4",
+   "values": [
+    "min(0.80, A − 0.05)",
+    "0.05"
+   ],
+   "meaning": "R2 gate: effective recall limit; gain over the better rule",
+   "source": "S10",
+   "path": "crisp-dm/04-modeling/gate-apertus-classification-criteria-v2.md",
+   "sha256": "82891c653633f98ef5fde2d44bba442d9372d1d774fc13e2ec213246c3316ef0",
+   "evidence": [
+    "L_eff = min(L, A − 0.05)",
+    "L = 0.80: each recall L_eff or more",
+    "| 0.05 or more, and paired bootstrap bound more than 0 |"
+   ]
+  },
+  {
+   "id": "n070",
+   "chapter": "5.4",
+   "values": [
+    "12.10.2026",
+    "13.10.2026"
+   ],
+   "meaning": "decision to submit a minimum version on 13.10.2026",
+   "source": "S7",
+   "path": "crisp-dm/00-cross-cutting/protocol.md",
+   "sha256": "067da2852c6c858bf5687e570fc4efc5d5f3255fd3468c534bf7fbb61e940f22",
+   "evidence": [
+    "submission of a minimum viable product on 13.10.2026"
+   ]
+  },
+  {
+   "id": "n071",
+   "chapter": "5.4",
+   "values": [
+    "(a)",
+    "(b)"
+   ],
+   "meaning": "two deviations of path 2 (GC.23 records; GC.1 after the validation values)",
+   "source": "S7",
+   "path": "crisp-dm/00-cross-cutting/protocol.md",
+   "sha256": "067da2852c6c858bf5687e570fc4efc5d5f3255fd3468c534bf7fbb61e940f22",
+   "evidence": [
+    "the protocol did not record the SHA-256 of criteria v2",
+    "the report names both deviations"
+   ]
+  },
+  {
+   "id": "n072",
+   "chapter": "5.4",
+   "values": [
+    "(1)",
+    "(4)",
+    "(8)"
+   ],
+   "meaning": "statements 1, 4 and 8 of criteria v4, chapter 7",
+   "source": "S5",
+   "path": "crisp-dm/03-data-preparation/gate-3a-criteria-v4.md",
+   "sha256": "1db4b2c2a03ce78b4249c4dc8d3e5a399529bb1881a423dc8ea3fea4f9b2f61c",
+   "evidence": [
+    "Gate 3a on the full task (E20 version 4.2) is NOT MET. This result does not change.",
+    "At the block unit, the converter claims the author sequence and the switch points. It does not claim which lines are body text.",
+    "The converter does not isolate debate and committee texts, although eCH-0295 holds them."
+   ]
+  },
+  {
+   "id": "n073",
+   "chapter": "7",
+   "values": [
+    "20261013",
+    "10,000"
+   ],
+   "meaning": "bootstrap seed and resamples",
+   "source": "S9",
+   "path": "crisp-dm/04-modeling/apertus-classification-iteration2.md",
+   "sha256": "43d4491084d57d8c3d5897bbd46b6ca4dcd925372916b61f3cd08d18b5fde7a2",
+   "evidence": [
+    "Paired bootstrap (10,000 resamples, seed 20261013)"
+   ]
+  },
+  {
+   "id": "n074",
+   "chapter": "7",
+   "values": [
+    "cls-check-1"
+   ],
+   "meaning": "seed of the blind check draw",
+   "source": "S9",
+   "path": "crisp-dm/04-modeling/apertus-classification-iteration2.md",
+   "sha256": "43d4491084d57d8c3d5897bbd46b6ca4dcd925372916b61f3cd08d18b5fde7a2",
+   "evidence": [
+    "Seed `cls-check-1`"
+   ]
+  },
+  {
+   "id": "n075",
+   "chapter": "7",
+   "values": [
+    "cls-it2-eq|"
+   ],
+   "meaning": "order key of the equality check rows",
+   "source": "S12",
+   "path": "daten/cls/it2/vm_equality/equality.md",
+   "sha256": "19d7eaf06038a158b491031b3b93550877728e223ae015ee5c4039aac71cdb14",
+   "evidence": [
+    "the SHA-256 hex of the string `cls-it2-eq|` + doc_id"
+   ]
+  },
+  {
+   "id": "n076",
+   "chapter": "7",
+   "values": [
+    "440e4247",
+    "1ed2e987"
+   ],
+   "meaning": "path 1: freeze manifest and sealed answers (SHA-256 prefixes)",
+   "source": "S7",
+   "path": "crisp-dm/00-cross-cutting/protocol.md",
+   "sha256": "067da2852c6c858bf5687e570fc4efc5d5f3255fd3468c534bf7fbb61e940f22",
+   "evidence": [
+    "`daten/gold/final_v4/freeze_manifest.json` (440e4247",
+    "`answers.sha256` 1ed2e987"
+   ]
+  },
+  {
+   "id": "n077",
+   "chapter": "7",
+   "values": [
+    "d6a9667f",
+    "9517c31d"
+   ],
+   "meaning": "R2 head and freeze record (SHA-256 prefixes)",
+   "source": "S9",
+   "path": "crisp-dm/04-modeling/apertus-classification-iteration2.md",
+   "sha256": "43d4491084d57d8c3d5897bbd46b6ca4dcd925372916b61f3cd08d18b5fde7a2",
+   "evidence": [
+    "`d6a9667fe0074083b1507fb91c7ea23bac6884cdd1faf493323d1c87b9b27a84`",
+    "`9517c31d99327a99de3c259537ddefd42ca6140b5524d0668dd018d4be693ab5`"
+   ]
+  },
+  {
+   "id": "n078",
+   "chapter": "7",
+   "values": [
+    "312f27da"
+   ],
+   "meaning": "seal of the R2 final run (SHA-256 prefix)",
+   "source": "S7",
+   "path": "crisp-dm/00-cross-cutting/protocol.md",
+   "sha256": "067da2852c6c858bf5687e570fc4efc5d5f3255fd3468c534bf7fbb61e940f22",
+   "evidence": [
+    "Seal `312f27da"
+   ]
+  },
+  {
+   "id": "n079",
+   "chapter": "1, 5.5, 6",
+   "values": [
+    "26"
+   ],
+   "meaning": "scores after the freeze on the records of the 26 reviewed test documents; deviation from criteria v2; both gates stay OPEN",
+   "source": "S7",
+   "path": "crisp-dm/00-cross-cutting/protocol.md",
+   "sha256": "067da2852c6c858bf5687e570fc4efc5d5f3255fd3468c534bf7fbb61e940f22",
+   "evidence": [
+    "scoring on the reviewed records of test documents",
+    "This is a deviation from criteria v2, chapter 2.1, item 1",
+    "Both gates stay OPEN."
+   ]
+  },
+  {
+   "id": "n080",
+   "chapter": "5.5",
+   "values": [
+    "7,000"
+   ],
+   "meaning": "L3: LoRA model of iteration 3, trained on dev rows; second R2 head on the same dev rows",
+   "source": "S7",
+   "path": "crisp-dm/00-cross-cutting/protocol.md",
+   "sha256": "067da2852c6c858bf5687e570fc4efc5d5f3255fd3468c534bf7fbb61e940f22",
+   "evidence": [
+    "L3 is the LoRA model of iteration 3, trained on 7,000 `dev` rows",
+    "the H100 makes the hidden states of the same 7,000 `dev` rows of L3",
+    "with the frozen recipe of H; only the training rows change"
+   ]
+  },
+  {
+   "id": "n081",
+   "chapter": "1, 5.5",
+   "values": [
+    "chapter 2.1, item 1"
+   ],
+   "meaning": "criteria v2, chapter 2.1, item 1 (path 2 was never to run the test documents of path 1; thus the 26 documents are not in the R2 final list and not in its blind check)",
+   "source": "S7",
+   "path": "crisp-dm/00-cross-cutting/protocol.md",
+   "sha256": "067da2852c6c858bf5687e570fc4efc5d5f3255fd3468c534bf7fbb61e940f22",
+   "evidence": [
+    "(path 2 was never to run these documents)"
+   ]
+  },
+  {
+   "id": "n082",
+   "chapter": "4, refs",
+   "values": [
+    "3cab44d",
+    "30.09.2026"
+   ],
+   "meaning": "eCH-0295 working draft commit",
+   "source": "public README.md, commit eaacef9",
+   "path": "public/README.md (commit eaacef9)",
+   "sha256": "9494aa5b145b6364c046e2d2852cc93b35abb2e3a5ba1d95f93a6c8b1b7ee44a",
+   "evidence": [
+    "commit `3cab44d` of 30.09.2026"
+   ]
+  },
+  {
+   "id": "n083",
+   "chapter": "5.5",
+   "values": [
+    "15",
+    "11"
+   ],
+   "meaning": "R2 truth of the 26 review records: yes, no",
+   "source": "S17",
+   "path": "daten/score26/score26_report.md",
+   "sha256": "d92851113dcb9c6b19da82f08033d56754da6806da41627da0cc7d8cf733cb61",
+   "evidence": [
+    "Counts: yes 15, no 11."
+   ]
+  },
+  {
+   "id": "n084",
+   "chapter": "1, 5.5",
+   "values": [
+    "24",
+    "0.933",
+    "0.867",
+    "1.000",
+    "0.125"
+   ],
+   "meaning": "head H on the 26 documents: correct of 26, balanced accuracy, recall yes, recall no, exact McNemar p against s1_answer",
+   "source": "S17",
+   "path": "daten/score26/score26_report.md",
+   "sha256": "d92851113dcb9c6b19da82f08033d56754da6806da41627da0cc7d8cf733cb61",
+   "evidence": [
+    "| H | 24 | 0.923 | 0.759 to 0.979 | 0.933 | 0.867 | 1.000 | 13 | 0 | 2 | 11 | 0 | 0.125 |"
+   ]
+  },
+  {
+   "id": "n085",
+   "chapter": "5.5",
+   "values": [
+    "24",
+    "0.933",
+    "0.867",
+    "1.000",
+    "0.125"
+   ],
+   "meaning": "LoRA L3 and LoRA L on the 26 documents: correct of 26, balanced accuracy, recall yes, recall no, McNemar p",
+   "source": "S17",
+   "path": "daten/score26/score26_report.md",
+   "sha256": "d92851113dcb9c6b19da82f08033d56754da6806da41627da0cc7d8cf733cb61",
+   "evidence": [
+    "| L3 | 24 | 0.923 | 0.759 to 0.979 | 0.933 | 0.867 | 1.000 | 13 | 0 | 2 | 11 | 0 | 0.125 |",
+    "| L | 24 | 0.923 | 0.759 to 0.979 | 0.933 | 0.867 | 1.000 | 13 | 0 | 2 | 11 | 0 | 0.125 |"
+   ]
+  },
+  {
+   "id": "n086",
+   "chapter": "5.5",
+   "values": [
+    "23",
+    "0.888",
+    "0.867",
+    "0.909",
+    "0.375"
+   ],
+   "meaning": "zero-shot readout (iteration 1) on the 26 documents: correct, balanced accuracy, recall yes, recall no, McNemar p",
+   "source": "S17",
+   "path": "daten/score26/score26_report.md",
+   "sha256": "d92851113dcb9c6b19da82f08033d56754da6806da41627da0cc7d8cf733cb61",
+   "evidence": [
+    "| ZS | 23 | 0.885 | 0.710 to 0.960 | 0.888 | 0.867 | 0.909 | 13 | 0 | 2 | 10 | 1 | 0.375 |"
+   ]
+  },
+  {
+   "id": "n087",
+   "chapter": "1, 5.5",
+   "values": [
+    "20",
+    "0.800",
+    "0.600",
+    "1.000"
+   ],
+   "meaning": "rule s1_answer (best rule) on the 26 documents: correct, balanced accuracy, recall yes, recall no",
+   "source": "S17",
+   "path": "daten/score26/score26_report.md",
+   "sha256": "d92851113dcb9c6b19da82f08033d56754da6806da41627da0cc7d8cf733cb61",
+   "evidence": [
+    "| rule s1_answer | 20 | 0.769 | 0.579 to 0.890 | 0.800 | 0.600 | 1.000 | 9 | 4 | 2 | 11 | 0 | – |",
+    "Best rule: `rule_s1_answer`."
+   ]
+  },
+  {
+   "id": "n088",
+   "chapter": "5.5",
+   "values": [
+    "18",
+    "0.733",
+    "0.467",
+    "1.000"
+   ],
+   "meaning": "rule heading on the 26 documents: correct, balanced accuracy, recall yes, recall no",
+   "source": "S17",
+   "path": "daten/score26/score26_report.md",
+   "sha256": "d92851113dcb9c6b19da82f08033d56754da6806da41627da0cc7d8cf733cb61",
+   "evidence": [
+    "| rule heading | 18 | 0.692 | 0.500 to 0.835 | 0.733 | 0.467 | 1.000 | 7 | 6 | 2 | 11 | 0 | – |"
+   ]
+  },
+  {
+   "id": "n089",
+   "chapter": "5.5",
+   "values": [
+    "0.759",
+    "0.979"
+   ],
+   "meaning": "Wilson 95 % interval of 24 of 26 correct",
+   "source": "S17",
+   "path": "daten/score26/score26_report.md",
+   "sha256": "d92851113dcb9c6b19da82f08033d56754da6806da41627da0cc7d8cf733cb61",
+   "evidence": [
+    "The Wilson 95 % interval of 24 of 26 correct is 0.759 to 0.979."
+   ]
+  },
+  {
+   "id": "n090",
+   "chapter": "1, 5.5",
+   "values": [
+    "2"
+   ],
+   "meaning": "documents with an empty export text: no value, truth yes; the 2 errors of the models",
+   "source": "S17",
+   "path": "daten/score26/score26_report.md",
+   "sha256": "d92851113dcb9c6b19da82f08033d56754da6806da41627da0cc7d8cf733cb61",
+   "evidence": [
+    "The 2 documents without text have an empty export text. For both, the R2 truth is yes.",
+    "Their 2 errors are the 2 documents without text.",
+    "A document without value is wrong."
+   ]
+  },
+  {
+   "id": "n091",
+   "chapter": "5.5",
+   "values": [
+    "4",
+    "0",
+    "0.125",
+    "0.05"
+   ],
+   "meaning": "H against the best rule: only H correct, only the rule correct, exact McNemar p; significance level",
+   "source": "S17",
+   "path": "daten/score26/score26_report.md",
+   "sha256": "d92851113dcb9c6b19da82f08033d56754da6806da41627da0cc7d8cf733cb61",
+   "evidence": [
+    "H, L3 and L are correct on 4 documents where the best rule is wrong. The best rule is correct on 0 documents where these models are wrong.",
+    "The exact McNemar p value of H and of L3 against the best rule is 0.125. With n = 26, this difference is not statistically significant at 0.05."
+   ]
+  },
+  {
+   "id": "n092",
+   "chapter": "5.5",
+   "values": [
+    "11",
+    "6"
+   ],
+   "meaning": "parliaments of the 26 documents; documents of the largest parliament",
+   "source": "S17",
+   "path": "daten/score26/score26_report.md",
+   "sha256": "d92851113dcb9c6b19da82f08033d56754da6806da41627da0cc7d8cf733cb61",
+   "evidence": [
+    "The 26 claimed documents come from 11 of these parliaments.",
+    "The largest parliament has 6 of the 26 documents."
+   ]
+  },
+  {
+   "id": "n093",
+   "chapter": "5.5, 6",
+   "values": [
+    "26",
+    "one human reviewer"
+   ],
+   "meaning": "reference and scope of the scores: one human reviewer, no second review, claimed set of path 1, not a random sample, no change of a model, evaluation after the freeze",
+   "source": "S17",
+   "path": "daten/score26/score26_report.md",
+   "sha256": "d92851113dcb9c6b19da82f08033d56754da6806da41627da0cc7d8cf733cb61",
+   "evidence": [
+    "There is no second review.",
+    "not a random sample of the test set",
+    "No model, head, template or rule changed for this score.",
+    "No design choice can use this result.",
+    "It is a deviation from criteria v2, chapter 2.1, item 1"
+   ]
+  },
+  {
+   "id": "n094",
+   "chapter": "7",
+   "values": [
+    "95fda857"
+   ],
+   "meaning": "R2 truth file of the 26 records (SHA-256 prefix)",
+   "source": "S17",
+   "path": "daten/score26/score26_report.md",
+   "sha256": "d92851113dcb9c6b19da82f08033d56754da6806da41627da0cc7d8cf733cb61",
+   "evidence": [
+    "SHA-256 of `truth_r2.csv`: `95fda857bda6fd7c3dfec6e5c065a2b29b8ddcb5c29df07a52a214b5ff271ebb`."
+   ]
+  },
+  {
+   "id": "n095",
+   "chapter": "5.5",
+   "values": [
+    "24",
+    "0.933",
+    "0.867",
+    "1.000",
+    "0.125"
+   ],
+   "meaning": "head H7k on the 26 documents: correct, balanced accuracy, recall yes, recall no, McNemar p",
+   "source": "S19",
+   "path": "daten/cls/h7k/h7k_report.md",
+   "sha256": "50865daad2c1914c7d1af34b382c492900e85463b567b68f0116846cb7ede953",
+   "evidence": [
+    "| **H7k** | 24 | 2 | 0.923 | 0.803 | **0.933** | 0.867 | 1.000 | 1.000 | 0.125 |"
+   ]
+  },
+  {
+   "id": "n096",
+   "chapter": "5.5",
+   "values": [
+    "26"
+   ],
+   "meaning": "H7k, H, L3 and L: same decision on each of the 26 documents",
+   "source": "S19",
+   "path": "daten/cls/h7k/h7k_report.md",
+   "sha256": "50865daad2c1914c7d1af34b382c492900e85463b567b68f0116846cb7ede953",
+   "evidence": [
+    "H7k, H, L3 and L give the same decision on each of the 26 documents."
+   ]
+  },
+  {
+   "id": "n097",
+   "chapter": "5.5",
+   "values": [
+    "7,000",
+    "800"
+   ],
+   "meaning": "training rows of H7k and of H (same frozen recipe; only the training rows change)",
+   "source": "S19",
+   "path": "daten/cls/h7k/h7k_report.md",
+   "sha256": "50865daad2c1914c7d1af34b382c492900e85463b567b68f0116846cb7ede953",
+   "evidence": [
+    "the head H saw only 800 `dev` rows. L3 saw 7,000 `dev` rows.",
+    "Only the training rows change."
+   ]
+  },
+  {
+   "id": "n098",
+   "chapter": "5.5",
+   "values": [
+    "129.82"
+   ],
+   "meaning": "GPU lock time on the H100 for the hidden states of the 7,000 rows (minutes)",
+   "source": "S19",
+   "path": "daten/cls/h7k/h7k_report.md",
+   "sha256": "50865daad2c1914c7d1af34b382c492900e85463b567b68f0116846cb7ede953",
+   "evidence": [
+    "Lock held 129.82 min"
+   ]
+  },
+  {
+   "id": "n099",
+   "chapter": "5.5",
+   "values": [
+    "0.996250"
+   ],
+   "meaning": "partition P (dev, out of fold, 800 rows): balanced accuracy of H and of H7k",
+   "source": "S19",
+   "path": "daten/cls/h7k/h7k_report.md",
+   "sha256": "50865daad2c1914c7d1af34b382c492900e85463b567b68f0116846cb7ede953",
+   "evidence": [
+    "| all | 13 parliaments | 800 | – | **0.996250** | **0.996250** | 0.978750 |"
+   ]
+  },
+  {
+   "id": "n100",
+   "chapter": "5.5",
+   "values": [
+    "0.917",
+    "0.919",
+    "0.979",
+    "0.980"
+   ],
+   "meaning": "validation balanced accuracy: H7k and H on 920 documents; H7k and H without K7 (714)",
+   "source": "S19",
+   "path": "daten/cls/h7k/h7k_report.md",
+   "sha256": "50865daad2c1914c7d1af34b382c492900e85463b567b68f0116846cb7ede953",
+   "evidence": [
+    "| H7k (7,000 rows) | 826 of 920 (0.898) | 0.880 | 0.889 | **0.917** |",
+    "| H (800 rows, frozen) | 827 of 920 (0.899) | 0.882 | 0.891 | **0.919** |",
+    "| H7k (7,000 rows) | 700 of 714 (0.980) | 0.970 | 0.980 | **0.979** |",
+    "| H (800 rows, frozen) | 700 of 714 (0.980) | 0.970 | 0.980 | **0.980** |"
+   ]
+  },
+  {
+   "id": "n101",
+   "chapter": "5.5",
+   "values": [
+    "−0.0026",
+    "−0.0076",
+    "5 %"
+   ],
+   "meaning": "H7k minus H on all 920 validation documents: point difference and 5 % bound of the paired bootstrap",
+   "source": "S19",
+   "path": "daten/cls/h7k/h7k_report.md",
+   "sha256": "50865daad2c1914c7d1af34b382c492900e85463b567b68f0116846cb7ede953",
+   "evidence": [
+    "| H7k minus H | all 920 | -0.0026 | -0.0076 |"
+   ]
+  },
+  {
+   "id": "n102",
+   "chapter": "5.5",
+   "values": [
+    "0 of 800",
+    "5 of 920"
+   ],
+   "meaning": "different decisions of H7k and H: partition P rows; validation documents",
+   "source": "S19",
+   "path": "daten/cls/h7k/h7k_report.md",
+   "sha256": "50865daad2c1914c7d1af34b382c492900e85463b567b68f0116846cb7ede953",
+   "evidence": [
+    "H and H7k give the same decision on 800 of 800 C2 rows.",
+    "The decisions differ on 5 of 920 documents."
+   ]
+  },
+  {
+   "id": "n103",
+   "chapter": "1, 5.5",
+   "values": [
+    "19 of 26",
+    "0.574"
+   ],
+   "meaning": "path 1, L9: exact documents (exact_block) of the 26 claimed documents; Jeffreys lower bound",
+   "source": "S18",
+   "path": "daten/score26/path1_info.md",
+   "sha256": "3078d95f9a77c1854805c8e482d62ff7bd208f4c90d0257870e2bac9e8edd223",
+   "evidence": [
+    "| Exact documents, rule `exact_block` (G3a.9) | 19 of 26 (0.731) | Jeffreys lower bound 0.574;"
+   ]
+  },
+  {
+   "id": "n104",
+   "chapter": "1, 5.5",
+   "values": [
+    "17 of 26"
+   ],
+   "meaning": "path 1: exact documents of the trivial converter role only",
+   "source": "S18",
+   "path": "daten/score26/path1_info.md",
+   "sha256": "3078d95f9a77c1854805c8e482d62ff7bd208f4c90d0257870e2bac9e8edd223",
+   "evidence": [
+    "| Exact documents of the trivial converter \"role only\" on the same documents | 17 of 26 (0.654) | switch documents: 0 of 7 |"
+   ]
+  },
+  {
+   "id": "n105",
+   "chapter": "5.5",
+   "values": [
+    "26 of 40"
+   ],
+   "meaning": "path 1: claimed documents of the 40 selected test documents",
+   "source": "S18",
+   "path": "daten/score26/path1_info.md",
+   "sha256": "3078d95f9a77c1854805c8e482d62ff7bd208f4c90d0257870e2bac9e8edd223",
+   "evidence": [
+    "| Claimed documents of the selected documents (G3a.13) | 26 of 40 (0.650) |"
+   ]
+  },
+  {
+   "id": "n106",
+   "chapter": "5.5",
+   "values": [
+    "17 of 18",
+    "2 of 7",
+    "0 of 7"
+   ],
+   "meaning": "path 1: exact documents with one reference block (role only the same); with an author switch (role only)",
+   "source": "S18",
+   "path": "daten/score26/path1_info.md",
+   "sha256": "3078d95f9a77c1854805c8e482d62ff7bd208f4c90d0257870e2bac9e8edd223",
+   "evidence": [
+    "| 1 | 18 | 17 | 17 |",
+    "| 2 or more | 7 | 2 | 0 |",
+    "| Exact switch documents (G3a.18) | 2 of 7 (0.286) |"
+   ]
+  },
+  {
+   "id": "n107",
+   "chapter": "5.5",
+   "values": [
+    "0.308"
+   ],
+   "meaning": "path 1: labelled boundary F1",
+   "source": "S18",
+   "path": "daten/score26/path1_info.md",
+   "sha256": "3078d95f9a77c1854805c8e482d62ff7bd208f4c90d0257870e2bac9e8edd223",
+   "evidence": [
+    "| Labelled boundary F1 (G3a.5) | 0.308, Jeffreys lower bound 0.096 |"
+   ]
+  },
+  {
+   "id": "n108",
+   "chapter": "5.5",
+   "values": [
+    "0"
+   ],
+   "meaning": "path 1: block omission",
+   "source": "S18",
+   "path": "daten/score26/path1_info.md",
+   "sha256": "3078d95f9a77c1854805c8e482d62ff7bd208f4c90d0257870e2bac9e8edd223",
+   "evidence": [
+    "| Block omission: reference blocks without a converter text atom | 0 |"
+   ]
+  },
+  {
+   "id": "n109",
+   "chapter": "5.5",
+   "values": [
+    "676",
+    "0.305"
+   ],
+   "meaning": "path 1: atom intrusion (frame atoms in the converter text), rate 0.3048",
+   "source": "S18",
+   "path": "daten/score26/path1_info.md",
+   "sha256": "3078d95f9a77c1854805c8e482d62ff7bd208f4c90d0257870e2bac9e8edd223",
+   "evidence": [
+    "| Atom intrusion (G3a.6): frame atoms in the converter text | 676 atoms (0.3048) |"
+   ]
+  },
+  {
+   "id": "n110",
+   "chapter": "5.5",
+   "values": [
+    "22 of 26"
+   ],
+   "meaning": "path 1: agreement of the two AI coder proposals, worse direction",
+   "source": "S18",
+   "path": "daten/score26/path1_info.md",
+   "sha256": "3078d95f9a77c1854805c8e482d62ff7bd208f4c90d0257870e2bac9e8edd223",
+   "evidence": [
+    "| Coder pair `proposal_A` and `proposal_B` (G3a.3), worse direction | 22 of 26 (0.846) |"
+   ]
+  },
+  {
+   "id": "n111",
+   "chapter": "5.5",
+   "values": [
+    "1 of the 26"
+   ],
+   "meaning": "path 1: claimed documents where Apertus gave the S1 role",
+   "source": "S18",
+   "path": "daten/score26/path1_info.md",
+   "sha256": "3078d95f9a77c1854805c8e482d62ff7bd208f4c90d0257870e2bac9e8edd223",
+   "evidence": [
+    "Claimed documents at L9 where Apertus gave the S1 combined role: 1 of 26."
+   ]
+  },
+  {
+   "id": "n112",
+   "chapter": "5.5",
+   "values": [
+    "G3a.2",
+    "G3a.16"
+   ],
+   "meaning": "path 1 values without a gate result: gate functions, not the gate command; acceptance and blind repetition missing",
+   "source": "S18",
+   "path": "daten/score26/path1_info.md",
+   "sha256": "3078d95f9a77c1854805c8e482d62ff7bd208f4c90d0257870e2bac9e8edd223",
+   "evidence": [
+    "The gate command `measure` is not used. This script calls the same functions in the same order.",
+    "No criterion gets MET or NOT MET. There is no gate result.",
+    "G3a.2 is missing",
+    "G3a.16 is missing"
+   ]
+  },
+  {
+   "id": "n113",
+   "chapter": "5.5",
+   "values": [
+    "0 FAIL"
+   ],
+   "meaning": "independent check of S17 and S18: all R2 scores with own code; 0 FAIL",
+   "source": "S20",
+   "path": "daten/score26/verify.md",
+   "sha256": "5e87ecdb2b792b6e4417c0bf5e97b7bdfa8891d7ec78ca7ba44ced1065a89420",
+   "evidence": [
+    "Total: 0 FAIL. 13 PASS, 4 of them with a note.",
+    "| V2 | All values of `scores_r2.json` and `per_doc_r2.csv`, own code | – | PASS |",
+    "Own code calculated each value again from the method outputs."
+   ]
+  },
+  {
+   "id": "n114",
+   "chapter": "5.5",
+   "values": [
+    "0 FAIL"
+   ],
+   "meaning": "independent check of S19: values of each H7k table with own code; all items PASS (0 FAIL)",
+   "source": "S21",
+   "path": "daten/cls/h7k/verify.md",
+   "sha256": "0fe9443f5b84acb49981a8551986272e9072dc3f7c9b87f20a7d4476296e70b5",
+   "evidence": [
+    "1. Calculate 3 values of each table again with own code.",
+    "| Table 1 (partition P) | PASS. Own fold fits give each value of the table. |",
+    "| Table 3 (26 test documents) | PASS. Own values are equal to the report. |",
+    "| Recipe | PASS. Only the training rows change. |"
+   ]
+  },
+  {
+   "id": "n115",
+   "chapter": "5.5",
+   "values": [
+    "5"
+   ],
+   "meaning": "path 1: the 5 values that the independent check calculated again with the functions of the gate script (exact documents, switch documents, claimed documents, coder pair, role only); the other path-1 values were not calculated again",
+   "source": "S20",
+   "path": "daten/score26/verify.md",
+   "sha256": "5e87ecdb2b792b6e4417c0bf5e97b7bdfa8891d7ec78ca7ba44ced1065a89420",
+   "evidence": [
+    "Own code called the functions of `src/m05_gate3a_v4_measure.py`",
+    "| G3a.9 exact documents | 19 of 26, lower bound 0.574 | 19 of 26, 0.5738 |",
+    "| G3a.18 exact switch documents | 2 of 7 | 2 of 7 |",
+    "| G3a.13 claimed of selected | 26 of 40 | 26 of 40 |",
+    "| G3a.3 coder pair | 22 and 24, worse 22 | 22 and 24, worse 22 |",
+    "| Role only, same documents | 17 (switch 0) | 17 (switch 0) |"
+   ]
+  },
+  {
+   "id": "n116",
+   "chapter": "5.5",
+   "values": [
+    "H7k"
+   ],
+   "meaning": "H7k is a new head with the frozen recipe of H; only the training rows change; nobody chose a variant on its values",
+   "source": "S19",
+   "path": "daten/cls/h7k/h7k_report.md",
+   "sha256": "50865daad2c1914c7d1af34b382c492900e85463b567b68f0116846cb7ede953",
+   "evidence": [
+    "trains the R2 head again with the frozen recipe of H. Only the training rows change.",
+    "5. Nobody chose a variant on these values."
+   ]
+  },
+  {
+   "id": "n117",
+   "chapter": "5.5",
+   "values": [
+    "H, L3, L"
+   ],
+   "meaning": "the score of S17 covers H, L3, L, the zero-shot readout and the two rules; H7k is not in this score",
+   "source": "S17",
+   "path": "daten/score26/score26_report.md",
+   "sha256": "d92851113dcb9c6b19da82f08033d56754da6806da41627da0cc7d8cf733cb61",
+   "evidence": [
+    "No model, head, template or rule changed for this score.",
+    "The new head of the protocol entry of 14:43 (7,000 `dev` rows) is not in this score."
+   ]
+  }
+ ],
+ "pdf": {
+  "file": "track_2a/technical_report.pdf (not in the repository: the file of the submission form)",
+  "pages": 6,
+  "sha256": "5b2e33d06a67a57291f21c686058427d0189bf04f8f6a3218d5ada5994f81720",
+  "md_sha256": "50f5b12dca5dd3581978941d0aba42f71c9aaf462d19b0bae12d1c9e261f6b60",
+  "tools": {
+   "pandoc": "pandoc 3.8.1",
+   "xelatex": "XeTeX 3.141592653-2.6-0.999997 (TeX Live 2025)",
+   "fonts": "Helvetica Neue (text), Menlo (code), macOS system fonts"
+  },
+  "steps": [
+   "pandoc technical_report.md -s -o rep.tex --shift-heading-level-by=-1 -V geometry:a4paper,margin=15mm -V fontsize=10pt -V mainfont='Helvetica Neue' -V monofont=Menlo -V colorlinks=true -V linkcolor=black -V urlcolor=blue -H header.tex",
+   "remove the minipage wrappers of the table header cells in rep.tex",
+   "xelatex -interaction=nonstopmode -halt-on-error rep.tex (one pass: with a second pass, longtable reused wrong column widths from the .aux file)"
+  ],
+  "header_tex": "\\usepackage{etoolbox}\n\\AtBeginEnvironment{longtable}{\\footnotesize}\n\\setlength{\\parskip}{3pt plus 1pt}\n\\setlength{\\parindent}{0pt}\n\\usepackage{titlesec}\n\\titleformat{\\section}{\\large\\bfseries}{}{0pt}{}\n\\titleformat{\\subsection}{\\normalsize\\bfseries}{}{0pt}{}\n\\titlespacing*{\\section}{0pt}{7pt}{2pt}\n\\titlespacing*{\\subsection}{0pt}{5pt}{1pt}\n\\setlength{\\LTpre}{3pt}\n\\setlength{\\LTpost}{3pt}\n\\renewcommand{\\arraystretch}{1.05}\n\\usepackage{enumitem}\n\\setlist{nosep,topsep=1pt,leftmargin=*}\n\\usepackage{xurl}\n\\usepackage{titling}\n\\setlength{\\droptitle}{-1.6cm}\n\\pretitle{\\begin{center}\\Large\\bfseries}\n\\posttitle{\\par\\end{center}\\vspace{-1.2em}}\n\\predate{}\\postdate{}\n"
+ }
+}

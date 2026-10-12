@@ -1,0 +1,714 @@
+# Provenance side file (src/m06_ech_profil.yaml version 0.2.0) of instances/26171.yaml
+global_uri: https://data.parlpdfech.example/provenance/converter-l9/i95/affair-115961/doc-26171
+describes_delivery: https://data.parlpdfech.example/converter/l9/i95/affair-115961/doc-26171
+ech_schema_version: eCH-0295 I95 (input/schema.yaml), Commit 3cab44d
+pipeline_run:
+  script_name: src/m06_converter.py
+  decomposition_source: 'converter answers of iso-runner-1 (method nos4, isolation level L9): out/run/records/26171.json (SHA-256 3e6e5c9fd117d2eb98ecb9fbc3c28d2c9db4bfece44e81e93b954f8bdb965e70); export record export/26171.json (SHA-256 fe3103ba9599225e5c0b256b7d0ba83a3da07417030944fbeffaa407a2937635)'
+  decomposition_accepted: false
+  taxonomy_version: 'E20 version 5.0, chapter 7: isolation level L9, map SLOT_NOTITLE, block unit'
+  atom_version: atome-v3 2026-10-05T13:16:12+00:00
+  ech_commit: 3cab44d6a07f60bd8211cccdcf948717ef8fba5c
+  linkml_version: linkml==1.11.1
+  datetime_generated: '2026-10-12T12:54:58Z'
+source_documents:
+- global_uri: https://api.openparldata.ch/v1/docs/26171
+  local_id: '26171'
+  manifestation_url: https://files.openparldata.ch/doc/BS/983545420862d4d42f592e71918230f03e8a4cf46f90e7fd4a380c08e1cc7667
+  publisher_url: https://grosserrat.bs.ch/?dnr=19.5497.01
+  export_hash: 983545420862d4d42f592e71918230f03e8a4cf46f90e7fd4a380c08e1cc7667
+  docling_json_sha256: febb52f3ac01b861af95a39054d1d069bec26d529d76fe4f617351616efcf026
+  atom_fingerprint: cd6888309d74990737f34067739f48d04763e9c044ac5f267fdbaa7c311868f0
+  page_count: 1
+  document_language: de
+  document_language_source: the export has no language (docs.language); column sprache of daten/analyse/lehrer_stichprobe/auswahl_lehrer.csv, source heuristik (export field, else the function-word rule on the export text, else the language of the parliament; src/m03_lehrer_stichprobe.py)
+  document_kind: claimed at L9, converter role proposal
+text_block_records:
+- global_uri: https://data.parlpdfech.example/converter/l9/affair-115961/doc-26171/textblock/1
+  about_entity: https://data.parlpdfech.example/converter/l9/affair-115961/step/submission/doc-26171
+  instance_path: affairs[0].submission.texts[0]
+  ech_slot: Submission.texts
+  section_key: submitted
+  mapping_status: in_ech_instance
+  extent_value_status: unsure
+  text_form: richtext
+  char_count: 2623
+  source_document: https://api.openparldata.ch/v1/docs/26171
+  units:
+  - unit_id: block-1
+    unit_type: submitted
+    atom_evidence:
+    - atom_id: B1.1
+      page_number: 1
+      bbox:
+        bbox_left: 65.76
+        bbox_top: 72.96
+        bbox_right: 266.36
+        bbox_bottom: 83.32
+      char_start: 0
+      char_end: 38
+      from_ocr: false
+    - atom_id: B2.1
+      page_number: 1
+      bbox:
+        bbox_left: 65.76
+        bbox_top: 85.68
+        bbox_right: 425.96
+        bbox_bottom: 96.04
+      char_start: 40
+      char_end: 109
+      from_ocr: false
+    - atom_id: B2.2
+      page_number: 1
+      bbox:
+        bbox_left: 65.76
+        bbox_top: 98.4
+        bbox_right: 91.51
+        bbox_bottom: 108.76
+      char_start: 110
+      char_end: 115
+      from_ocr: false
+    - atom_id: B3.1
+      page_number: 1
+      bbox:
+        bbox_left: 62.4
+        bbox_top: 114.0
+        bbox_right: 536.36
+        bbox_bottom: 124.36
+      char_start: 117
+      char_end: 212
+      from_ocr: false
+    - atom_id: B3.2
+      page_number: 1
+      bbox:
+        bbox_left: 62.4
+        bbox_top: 126.6
+        bbox_right: 515.06
+        bbox_bottom: 136.96
+      char_start: 213
+      char_end: 299
+      from_ocr: false
+    - atom_id: B3.3
+      page_number: 1
+      bbox:
+        bbox_left: 62.4
+        bbox_top: 139.32
+        bbox_right: 516.8
+        bbox_bottom: 149.68
+      char_start: 300
+      char_end: 390
+      from_ocr: false
+    - atom_id: B3.4
+      page_number: 1
+      bbox:
+        bbox_left: 62.4
+        bbox_top: 151.92
+        bbox_right: 532.01
+        bbox_bottom: 162.28
+      char_start: 391
+      char_end: 485
+      from_ocr: false
+    - atom_id: B3.5
+      page_number: 1
+      bbox:
+        bbox_left: 62.4
+        bbox_top: 164.64
+        bbox_right: 528.43
+        bbox_bottom: 175.0
+      char_start: 486
+      char_end: 576
+      from_ocr: false
+    - atom_id: B3.6
+      page_number: 1
+      bbox:
+        bbox_left: 62.4
+        bbox_top: 177.24
+        bbox_right: 476.3
+        bbox_bottom: 187.6
+      char_start: 577
+      char_end: 661
+      from_ocr: false
+    - atom_id: B3.7
+      page_number: 1
+      bbox:
+        bbox_left: 62.4
+        bbox_top: 189.96
+        bbox_right: 296.47
+        bbox_bottom: 200.32
+      char_start: 662
+      char_end: 708
+      from_ocr: false
+    - atom_id: B4.1
+      page_number: 1
+      bbox:
+        bbox_left: 62.4
+        bbox_top: 208.56
+        bbox_right: 517.39
+        bbox_bottom: 218.92
+      char_start: 710
+      char_end: 802
+      from_ocr: false
+    - atom_id: B4.2
+      page_number: 1
+      bbox:
+        bbox_left: 62.4
+        bbox_top: 221.16
+        bbox_right: 537.08
+        bbox_bottom: 231.52
+      char_start: 803
+      char_end: 896
+      from_ocr: false
+    - atom_id: B4.3
+      page_number: 1
+      bbox:
+        bbox_left: 62.4
+        bbox_top: 233.88
+        bbox_right: 502.7
+        bbox_bottom: 244.24
+      char_start: 897
+      char_end: 981
+      from_ocr: false
+    - atom_id: B4.4
+      page_number: 1
+      bbox:
+        bbox_left: 62.4
+        bbox_top: 246.48
+        bbox_right: 532.64
+        bbox_bottom: 256.84
+      char_start: 982
+      char_end: 1071
+      from_ocr: false
+    - atom_id: B4.5
+      page_number: 1
+      bbox:
+        bbox_left: 62.4
+        bbox_top: 259.2
+        bbox_right: 532.76
+        bbox_bottom: 269.56
+      char_start: 1072
+      char_end: 1163
+      from_ocr: false
+    - atom_id: B4.6
+      page_number: 1
+      bbox:
+        bbox_left: 62.4
+        bbox_top: 271.8
+        bbox_right: 500.9
+        bbox_bottom: 282.16
+      char_start: 1164
+      char_end: 1248
+      from_ocr: false
+    - atom_id: B4.7
+      page_number: 1
+      bbox:
+        bbox_left: 62.4
+        bbox_top: 284.4
+        bbox_right: 512.6
+        bbox_bottom: 294.76
+      char_start: 1249
+      char_end: 1336
+      from_ocr: false
+    - atom_id: B4.8
+      page_number: 1
+      bbox:
+        bbox_left: 62.4
+        bbox_top: 297.12
+        bbox_right: 504.44
+        bbox_bottom: 307.48
+      char_start: 1337
+      char_end: 1424
+      from_ocr: false
+    - atom_id: B4.9
+      page_number: 1
+      bbox:
+        bbox_left: 62.4
+        bbox_top: 309.72
+        bbox_right: 519.98
+        bbox_bottom: 320.08
+      char_start: 1425
+      char_end: 1513
+      from_ocr: false
+    - atom_id: B4.10
+      page_number: 1
+      bbox:
+        bbox_left: 62.4
+        bbox_top: 322.44
+        bbox_right: 105.31
+        bbox_bottom: 332.8
+      char_start: 1514
+      char_end: 1523
+      from_ocr: false
+    - atom_id: B5.1
+      page_number: 1
+      bbox:
+        bbox_left: 62.4
+        bbox_top: 341.04
+        bbox_right: 504.62
+        bbox_bottom: 351.4
+      char_start: 1525
+      char_end: 1609
+      from_ocr: false
+    - atom_id: B5.2
+      page_number: 1
+      bbox:
+        bbox_left: 62.4
+        bbox_top: 353.64
+        bbox_right: 100.39
+        bbox_bottom: 364.0
+      char_start: 1610
+      char_end: 1617
+      from_ocr: false
+    - atom_id: B6.1
+      page_number: 1
+      bbox:
+        bbox_left: 62.4
+        bbox_top: 372.36
+        bbox_right: 531.14
+        bbox_bottom: 382.72
+      char_start: 1619
+      char_end: 1708
+      from_ocr: false
+    - atom_id: B6.2
+      page_number: 1
+      bbox:
+        bbox_left: 90.72
+        bbox_top: 384.96
+        bbox_right: 306.62
+        bbox_bottom: 395.32
+      char_start: 1709
+      char_end: 1753
+      from_ocr: false
+    - atom_id: B7.1
+      page_number: 1
+      bbox:
+        bbox_left: 62.4
+        bbox_top: 403.68
+        bbox_right: 462.14
+        bbox_bottom: 414.04
+      char_start: 1755
+      char_end: 1829
+      from_ocr: false
+    - atom_id: B8.1
+      page_number: 1
+      bbox:
+        bbox_left: 62.4
+        bbox_top: 422.28
+        bbox_right: 515.76
+        bbox_bottom: 432.64
+      char_start: 1831
+      char_end: 1918
+      from_ocr: false
+    - atom_id: B8.2
+      page_number: 1
+      bbox:
+        bbox_left: 90.72
+        bbox_top: 434.88
+        bbox_right: 412.58
+        bbox_bottom: 445.24
+      char_start: 1919
+      char_end: 1979
+      from_ocr: false
+    - atom_id: B9.1
+      page_number: 1
+      bbox:
+        bbox_left: 62.4
+        bbox_top: 453.6
+        bbox_right: 506.6
+        bbox_bottom: 463.96
+      char_start: 1981
+      char_end: 2066
+      from_ocr: false
+    - atom_id: B9.2
+      page_number: 1
+      bbox:
+        bbox_left: 90.72
+        bbox_top: 466.2
+        bbox_right: 468.02
+        bbox_bottom: 476.56
+      char_start: 2067
+      char_end: 2140
+      from_ocr: false
+    - atom_id: B10.1
+      page_number: 1
+      bbox:
+        bbox_left: 62.4
+        bbox_top: 484.92
+        bbox_right: 510.92
+        bbox_bottom: 495.28
+      char_start: 2142
+      char_end: 2227
+      from_ocr: false
+    - atom_id: B10.2
+      page_number: 1
+      bbox:
+        bbox_left: 90.72
+        bbox_top: 497.52
+        bbox_right: 493.1
+        bbox_bottom: 507.88
+      char_start: 2228
+      char_end: 2307
+      from_ocr: false
+    - atom_id: B10.3
+      page_number: 1
+      bbox:
+        bbox_left: 90.72
+        bbox_top: 510.12
+        bbox_right: 265.82
+        bbox_bottom: 520.48
+      char_start: 2308
+      char_end: 2341
+      from_ocr: false
+    - atom_id: B11.1
+      page_number: 1
+      bbox:
+        bbox_left: 62.4
+        bbox_top: 528.84
+        bbox_right: 534.2
+        bbox_bottom: 539.2
+      char_start: 2343
+      char_end: 2435
+      from_ocr: false
+    - atom_id: B11.2
+      page_number: 1
+      bbox:
+        bbox_left: 90.72
+        bbox_top: 541.44
+        bbox_right: 518.9
+        bbox_bottom: 551.8
+      char_start: 2436
+      char_end: 2517
+      from_ocr: false
+    - atom_id: B12.1
+      page_number: 1
+      bbox:
+        bbox_left: 119.04
+        bbox_top: 560.16
+        bbox_right: 235.94
+        bbox_bottom: 570.52
+      char_start: 2519
+      char_end: 2543
+      from_ocr: false
+    - atom_id: B13.1
+      page_number: 1
+      bbox:
+        bbox_left: 441.48
+        bbox_top: 73.56
+        bbox_right: 496.7
+        bbox_bottom: 83.92
+      char_start: 2545
+      char_end: 2555
+      from_ocr: false
+  text_changes:
+    hyphens_removed: []
+    list_markers_removed:
+    - range_start: 1619
+      range_end: 1622
+    - range_start: 1755
+      range_end: 1758
+    - range_start: 1831
+      range_end: 1834
+    - range_start: 1981
+      range_end: 1984
+    - range_start: 2142
+      range_end: 2145
+    - range_start: 2343
+      range_end: 2346
+    empty_atoms: []
+    nfc_changed: false
+value_records:
+- about_entity: https://data.parlpdfech.example/converter/l9/i95/affair-115961/doc-26171
+  instance_path: global_uri
+  ech_slot: Container.global_uri
+  recorded_value: https://data.parlpdfech.example/converter/l9/i95/affair-115961/doc-26171
+  derivation: identifier_minted
+  rule_applied: '{namespace}/converter/l9/i95/affair-{id}/doc-{doc_id}'
+  mapping_match: not_applicable
+  pdf_consistency: not_checked
+- about_entity: https://api.openparldata.ch/v1/affairs/115961
+  instance_path: affairs[0].global_uri
+  ech_slot: Interpellation.global_uri
+  recorded_value: https://api.openparldata.ch/v1/affairs/115961
+  derivation: identifier_from_metadata
+  rule_applied: https://api.openparldata.ch/v1/affairs/{id} (OpenParlData API, provisional; E3, F19)
+  mapping_match: not_applicable
+  metadata_evidence:
+  - export_file: daten/roh/exports/affairs.ndjson.gz
+    record_type: affair
+    record_id: '115961'
+    field_name: id
+    source_value: '115961'
+    datetime_export_retrieved: '2026-10-04T13:26:03Z'
+  pdf_consistency: not_checked
+- about_entity: https://api.openparldata.ch/v1/affairs/115961
+  instance_path: affairs[0].local_id
+  ech_slot: Interpellation.local_id
+  recorded_value: '200109965'
+  derivation: copied_from_metadata
+  rule_applied: id in the information system of the parliament (external_id)
+  mapping_match: not_applicable
+  metadata_evidence:
+  - export_file: daten/roh/exports/affairs.ndjson.gz
+    record_type: affair
+    record_id: '115961'
+    field_name: external_id
+    source_value: '200109965'
+    datetime_export_retrieved: '2026-10-04T13:26:03Z'
+  pdf_consistency: not_checked
+- about_entity: https://api.openparldata.ch/v1/affairs/115961
+  instance_path: affairs[0].affair_number
+  ech_slot: Interpellation.affair_number
+  recorded_value: '19.5497'
+  derivation: copied_from_metadata
+  mapping_match: not_applicable
+  metadata_evidence:
+  - export_file: daten/roh/exports/affairs.ndjson.gz
+    record_type: affair
+    record_id: '115961'
+    field_name: number
+    source_value: '19.5497'
+    datetime_export_retrieved: '2026-10-04T13:26:03Z'
+  pdf_evidence:
+  - atom_id: B13.1
+    page_number: 1
+    bbox:
+      bbox_left: 441.48
+      bbox_top: 73.56
+      bbox_right: 496.7
+      bbox_bottom: 83.92
+    char_start: 2545
+    char_end: 2555
+    from_ocr: false
+    matched_text: '19.5497'
+    match_start: 0
+    match_end: 7
+  pdf_consistency: confirmed
+- about_entity: https://api.openparldata.ch/v1/affairs/115961
+  instance_path: affairs[0].affair_type
+  ech_slot: Interpellation.affair_type
+  recorded_value: interpellation
+  derivation: mapped_from_metadata
+  rule_applied: m02_ech_regeln.typ_ech (Quelle lokal, Regel exakt)
+  mapping_match: exact
+  metadata_evidence:
+  - export_file: daten/roh/exports/affairs.ndjson.gz
+    record_type: affair
+    record_id: '115961'
+    field_name: type_name_de
+    source_value: Interpellation
+    datetime_export_retrieved: '2026-10-04T13:26:03Z'
+  - export_file: daten/roh/exports/affairs.ndjson.gz
+    record_type: affair
+    record_id: '115961'
+    field_name: type_harmonized_id
+    source_value: '8'
+    datetime_export_retrieved: '2026-10-04T13:26:03Z'
+  pdf_consistency: not_checked
+- about_entity: https://api.openparldata.ch/v1/affairs/115961
+  instance_path: affairs[0].title[0].text
+  ech_slot: Interpellation.title.text
+  recorded_value: Der OECD-Steuerreform und den Folgen für den Kanton Basel-Stadt
+  derivation: copied_from_metadata
+  mapping_match: not_applicable
+  metadata_evidence:
+  - &id001
+    export_file: daten/roh/exports/affairs.ndjson.gz
+    record_type: affair
+    record_id: '115961'
+    field_name: title_de
+    source_value: Der OECD-Steuerreform und den Folgen für den Kanton Basel-Stadt
+    datetime_export_retrieved: '2026-10-04T13:26:03Z'
+  pdf_consistency: not_found
+- about_entity: https://api.openparldata.ch/v1/affairs/115961
+  instance_path: affairs[0].title[0].text_language
+  ech_slot: Interpellation.title.text_language
+  recorded_value: de
+  derivation: normalized_from_metadata
+  rule_applied: language code from the field name title_<language>
+  mapping_match: not_applicable
+  metadata_evidence:
+  - *id001
+  pdf_consistency: not_checked
+- about_entity: https://api.openparldata.ch/v1/affairs/115961
+  instance_path: affairs[0].title[0].text_type
+  ech_slot: Interpellation.title.text_type
+  recorded_value: title
+  derivation: fixed_by_schema
+  rule_applied: title of the affair from the export record -> TextTypeEnum title (J4)
+  mapping_match: not_applicable
+  pdf_consistency: not_checked
+- about_entity: https://data.parlpdfech.example/converter/l9/affair-115961/step/submission/doc-26171
+  instance_path: affairs[0].submission.global_uri
+  ech_slot: Submission.global_uri
+  recorded_value: https://data.parlpdfech.example/converter/l9/affair-115961/step/submission/doc-26171
+  derivation: identifier_minted
+  rule_applied: '{namespace}/converter/l9/affair-{id}/step/{step}/doc-{doc_id} (deterministic, provisional namespace)'
+  mapping_match: not_applicable
+  pdf_consistency: not_checked
+- about_entity: https://data.parlpdfech.example/converter/l9/affair-115961/step/submission/doc-26171
+  instance_path: affairs[0].submission.submission_date
+  ech_slot: Submission.submission_date
+  recorded_value: '2019-10-24'
+  derivation: normalized_from_metadata
+  rule_applied: event with title_harmonized_id 1 (submitted); Datumsteil (JJJJ-MM-TT) des Zeitstempels
+  mapping_match: exact
+  metadata_evidence:
+  - export_file: daten/roh/exports/events.ndjson.gz
+    record_type: event
+    record_id: '728200'
+    field_name: date
+    source_value: '2019-10-24T00:00:00'
+    datetime_export_retrieved: '2026-10-04T13:26:03Z'
+  pdf_consistency: not_found
+- about_entity: https://data.parlpdfech.example/converter/l9/affair-115961/step/submission/doc-26171
+  instance_path: affairs[0].submission.texts[0].text
+  ech_slot: Submission.texts.text
+  recorded_value: sha256:638f950f6fc75770fba7383179c0ede4f988f52ca6329e9c2dae9ab33a6a4de0
+  derivation: extracted_from_pdf
+  rule_applied: 'converter block 1 (coarse answer submitted, isolation level L9, block unit, E20 version 5.0 chapter 7.4): wording of its text atoms with m03_gold_record.richtext (G19, without G20a); evidence in the TextBlockRecord https://data.parlpdfech.example/converter/l9/affair-115961/doc-26171/textblock/1'
+  mapping_match: not_applicable
+  pdf_consistency: not_checked
+- about_entity: https://data.parlpdfech.example/converter/l9/affair-115961/step/submission/doc-26171
+  instance_path: affairs[0].submission.texts[0].text_language
+  ech_slot: Submission.texts.text_language
+  recorded_value: de
+  derivation: detected_by_rule
+  rule_applied: the export has no language (docs.language); column sprache of daten/analyse/lehrer_stichprobe/auswahl_lehrer.csv, source heuristik (export field, else the function-word rule on the export text, else the language of the parliament; src/m03_lehrer_stichprobe.py)
+  mapping_match: not_applicable
+  pdf_consistency: not_checked
+- about_entity: https://data.parlpdfech.example/converter/l9/affair-115961/step/submission/doc-26171
+  instance_path: affairs[0].submission.texts[0].document_url
+  ech_slot: Submission.texts.document_url
+  recorded_value: https://files.openparldata.ch/doc/BS/983545420862d4d42f592e71918230f03e8a4cf46f90e7fd4a380c08e1cc7667
+  derivation: copied_from_metadata
+  mapping_match: not_applicable
+  metadata_evidence:
+  - export_file: daten/roh/exports/docs/docs_BS.ndjson.gz
+    record_type: doc
+    record_id: '26171'
+    field_name: url_oparl
+    source_value: https://files.openparldata.ch/doc/BS/983545420862d4d42f592e71918230f03e8a4cf46f90e7fd4a380c08e1cc7667
+    datetime_export_retrieved: '2026-10-04T13:26:03Z'
+  pdf_consistency: not_checked
+- about_entity: https://data.parlpdfech.example/converter/l9/affair-115961/step/response/doc-26171
+  instance_path: affairs[0].response_steps[0].global_uri
+  ech_slot: ResponseStep.global_uri
+  recorded_value: https://data.parlpdfech.example/converter/l9/affair-115961/step/response/doc-26171
+  derivation: identifier_minted
+  rule_applied: '{namespace}/converter/l9/affair-{id}/step/{step}/doc-{doc_id} (deterministic, provisional namespace)'
+  mapping_match: not_applicable
+  pdf_consistency: not_checked
+- about_entity: https://data.parlpdfech.example/converter/l9/affair-115961/step/response/doc-26171
+  instance_path: affairs[0].response_steps[0].date_end_actual
+  ech_slot: ResponseStep.date_end_actual
+  recorded_value: '2019-12-04'
+  derivation: normalized_from_metadata
+  rule_applied: 'event with title_harmonized_id 6 (answered); Datumsteil (JJJJ-MM-TT) des Zeitstempels; I95 has no response date: end of the response step (date_end_actual)'
+  mapping_match: close
+  metadata_evidence:
+  - export_file: daten/roh/exports/events.ndjson.gz
+    record_type: event
+    record_id: '153641'
+    field_name: date
+    source_value: '2019-12-04T00:00:00'
+    datetime_export_retrieved: '2026-10-04T13:26:03Z'
+  pdf_consistency: not_found
+- about_entity: https://data.parlpdfech.example/converter/l9/affair-115961/step/response/doc-26171
+  instance_path: affairs[0].response_steps[0].responder.global_uri
+  ech_slot: ResponseStep.responder.global_uri
+  recorded_value: https://api.openparldata.ch/v1/groups/1300
+  derivation: identifier_from_metadata
+  rule_applied: https://api.openparldata.ch/v1/groups/{id}; the only active group council_executive of the parliament
+  mapping_match: not_applicable
+  metadata_evidence:
+  - export_file: daten/roh/exports/groups.ndjson.gz
+    record_type: group
+    record_id: '1300'
+    field_name: id
+    source_value: '1300'
+    datetime_export_retrieved: '2026-10-04T13:26:03Z'
+  pdf_consistency: not_checked
+- about_entity: https://data.parlpdfech.example/converter/l9/affair-115961/step/response/doc-26171
+  instance_path: affairs[0].response_steps[0].responder.name[0].text
+  ech_slot: ResponseStep.responder.name.text
+  recorded_value: Regierungsrat Basel-Stadt
+  derivation: copied_from_metadata
+  mapping_match: not_applicable
+  metadata_evidence:
+  - export_file: daten/roh/exports/groups.ndjson.gz
+    record_type: group
+    record_id: '1300'
+    field_name: name_de
+    source_value: Regierungsrat Basel-Stadt
+    datetime_export_retrieved: '2026-10-04T13:26:03Z'
+  pdf_consistency: not_checked
+- about_entity: https://data.parlpdfech.example/converter/l9/affair-115961/step/response/doc-26171
+  instance_path: affairs[0].response_steps[0].responder.name[0].text_language
+  ech_slot: ResponseStep.responder.name.text_language
+  recorded_value: de
+  derivation: normalized_from_metadata
+  rule_applied: Sprachcode aus dem Feldnamen name_<sprache>
+  mapping_match: not_applicable
+  metadata_evidence:
+  - export_file: daten/roh/exports/groups.ndjson.gz
+    record_type: group
+    record_id: '1300'
+    field_name: name_de
+    source_value: Regierungsrat Basel-Stadt
+    datetime_export_retrieved: '2026-10-04T13:26:03Z'
+  pdf_consistency: not_checked
+- about_entity: https://data.parlpdfech.example/converter/l9/affair-115961/step/response/doc-26171
+  instance_path: affairs[0].response_steps[0].responder.wikidata_uri
+  ech_slot: ResponseStep.responder.wikidata_uri
+  recorded_value: http://www.wikidata.org/entity/Q13142860
+  derivation: identifier_from_metadata
+  rule_applied: http://www.wikidata.org/entity/{wikidata_id}
+  mapping_match: not_applicable
+  metadata_evidence:
+  - export_file: daten/roh/exports/groups.ndjson.gz
+    record_type: group
+    record_id: '1300'
+    field_name: wikidata_id
+    source_value: Q13142860
+    datetime_export_retrieved: '2026-10-04T13:26:03Z'
+  pdf_consistency: not_checked
+not_mapped_records:
+- not_mapped_item: Parliament (chamber)
+  not_mapped_reason: I95 has no slot for the parliament on the affair or on Submission
+  candidate_value: https://api.openparldata.ch/v1/groups/33
+  candidate_source: groups (council_legislative)
+- not_mapped_item: event Traktandiert
+  not_mapped_reason: not in the scope of this writer (only the submission and the response step)
+  candidate_value: '2019-12-03'
+  candidate_source: events 877830
+- not_mapped_item: event Traktandiert
+  not_mapped_reason: not in the scope of this writer (only the submission and the response step)
+  candidate_value: '2019-12-11'
+  candidate_source: events 877831
+- not_mapped_item: event Traktandiert
+  not_mapped_reason: not in the scope of this writer (only the submission and the response step)
+  candidate_value: '2019-12-18'
+  candidate_source: events 877832
+- not_mapped_item: event Traktandiert
+  not_mapped_reason: not in the scope of this writer (only the submission and the response step)
+  candidate_value: '2019-12-19'
+  candidate_source: events 877833
+- not_mapped_item: event Erledigt
+  not_mapped_reason: not in the scope of this writer (only the submission and the response step)
+  candidate_value: '2019-12-19'
+  candidate_source: events 275459
+- not_mapped_item: Document (FRBR work, expression, manifestation)
+  not_mapped_reason: eCH-0295 has only document_url on a TextBlock; the side file gives the source document
+  candidate_value: https://api.openparldata.ch/v1/docs/26171
+  candidate_source: docs
+- not_mapped_item: Sponsorships
+  not_mapped_reason: not in the scope of this writer (data minimisation, as src/m06_ech_ausgabe.py); the contributors export gives person ids
+  candidate_source: contributors
+verbatim_check:
+  check_method: 'Each leaf value needs a ValueRecord. Each text block: its letters (no markup, no white space) are the letters of the Docling wording of its atoms after the recorded changes only (line-end hyphens, list markers at the atom start, empty atoms, NFC). Metadata values against the export record, terms against the enumerations of I95.'
+  text_blocks_checked: 1
+  characters_checked: 2185
+  hyphens_removed_count: 0
+  list_markers_removed_count: 6
+  metadata_values_checked: 14
+  leaves_without_provenance: 0
+  check_passed: true

@@ -1,0 +1,2397 @@
+{
+ "doc_id": "879163",
+ "zelle": null,
+ "version": "atome-v3",
+ "skript": "src/m03_atome.py",
+ "erzeugt_utc": "2026-10-05T12:37:28+00:00",
+ "quelle": "daten/iso/docling/879163.json",
+ "quelle_sha256": "4c1f7e5f288adcabaa4f6006ef363fbcd496e4aa0dc794acb6e9f25f21316c01",
+ "docling_lauf": "iso_gruppen",
+ "werkzeug": {
+  "docling": "2.133.0",
+  "docling-core": "2.99.0",
+  "docling-parse": "7.22.1",
+  "docling-ibm-models": "4.0.3",
+  "torch": "2.14.1",
+  "ocrmac": "1.0.1",
+  "pdftotext": "pdftotext version 26.04.0"
+ },
+ "textschicht": {
+  "pdf": "daten/pdf/lehrer_stichprobe/879163.pdf",
+  "pdf_sha256": "7b160c11fcf55c0b70d14c5287589c1bbf7e4e7da9d2e791ba715f667f4ba5d5",
+  "pdf_gleich_docling": true,
+  "werkzeug": "pdftotext -bbox -cropbox (Poppler)",
+  "version": "pdftotext version 26.04.0"
+ },
+ "parameter": {
+  "satz_ab": 200,
+  "lang_ab": 200,
+  "kurz_bis": 2,
+  "spaltenluecke_pt": 18,
+  "rahmen_toleranz_pt": 3,
+  "satz_ohne_leerzeichen": true
+ },
+ "status": "success",
+ "legende": {
+  "Spalten": "ID | Seite | Hinweise | Text. ID <Block>.<Zeile>, Teil einer Zeile <Block>.<Zeile>.<Teil>.",
+  "Text": "Wortlaut der Zeile unverändert; Tabellenzellen mit ¦ getrennt; (ohne Text) = Bild ohne Text.",
+  "Form": "Docling-Form des Blocks: Überschrift, Listenpunkt, Tabelle, Verzeichnis, Kopfzeile, Fusszeile, Fussnote, Bild, Bildlegende, Kästchen; Feld = Schlüssel-Wert-Bereich, Formular, im Bild; OCR = Texterkennung; ohne Zeilen = Docling-Text ohne Zeilenumbrüche. Ohne Formangabe: Text.",
+  "Teile": "Spaltenteil k/n = Zeile an einer grossen Lücke zwischen Wörtern geteilt (Spalten nebeneinander); Rahmenteil = Zeile über mehrere Rahmen geteilt; Satzteil k/n = an einer Satzgrenze geteilte Zeile (lange Zeile oder Satzende ohne Leerzeichen wie «…Ende.Neuer Satz»); neuer Rahmen = Block läuft hier in einem weiteren Rahmen weiter; lange Zeile = über 200 Zeichen; gedreht = einzeiliger Rahmen höher als breit.",
+  "Lage": "Seitenwechsel (zurück = Lesereihenfolge springt auf frühere Seite); im Block = derselbe Docling-Block läuft weiter; Drittel-Regel verletzt = Teil endet nicht im unteren bzw. beginnt nicht im oberen Seitendrittel, der Block ist vermutlich falsch zusammengefügt; über Vorgänger = Zeile steht auf der Seite über der vorangehenden Zeile derselben Spalte (Lesereihenfolge springt zurück); ausserhalb Rahmen = Zeile liegt laut Textschicht nicht im Rahmen ihres Blocks.",
+  "Marker": "Bezug Frage n (Zu Frage n, Ad n, Réponse à la question n …), Frage n, Aufzählung <Zeichen>, Stichwort <Wort>, Typbezeichnung (Motion, Interpellation, Anfrage …), Einleitung Fragen (folgende Fragen, questions suivantes …), Auftragsformel (wird beauftragt, est chargé …), Einleitung folgt (wie folgt: …), Unterschriftsformel (auch Gruss- und Protokollformel), Ort und Datum, Datum, Verteiler, Seitenzahl, Sperrschrift, Marker im Atom (Antwortmarker mit Doppelpunkt nicht am Atomanfang). Folgenummer n (Zeile beginnt mit der nächsten Nummer nach einer nummerierten Zeile desselben Blocks, z. B. zweite Fussnote im selben Block), Klammerzeile mit Datum, Zitatende (kurze Zeile, die nach einem Satzende mit einem schliessenden Anführungszeichen endet), Zellenzahl wechselt (Tabellenzeile mit anderer Zahl gefüllter Zellen als die vorige). Alles nur Kandidaten.",
+  "Schlüssel-Wert": "Schlüssel→ID = Feldname, Wert im genannten Atom; Wert←ID = Wert zum genannten Feldnamen; Schlüssel ohne Wert; Wert ohne Schlüssel (unter ID = steht unter diesem Wert); Schlüssel: Wert in Zeile."
+ },
+ "werte": {
+  "merkmale": {
+   "form": "{p}",
+   "group": "{p}",
+   "ocr": "OCR",
+   "no_line_breaks": "ohne Zeilen",
+   "table_row": "Tabellenzeile {p}",
+   "no_text": "ohne Text",
+   "column_part": "Spaltenteil {p}",
+   "frame_part": "Rahmenteil",
+   "sentence_part": "Satzteil {p}",
+   "long_line": "lange Zeile",
+   "rotated": "gedreht",
+   "new_frame": "neuer Rahmen",
+   "page_break": "Seitenwechsel",
+   "page_break_back": "Seitenwechsel zurück",
+   "page_break_in_block": "Seitenwechsel im Block",
+   "thirds_rule_violated": "Drittel-Regel verletzt",
+   "above_previous": "über Vorgänger",
+   "outside_frame": "ausserhalb Rahmen",
+   "letterspacing": "Sperrschrift",
+   "page_number": "Seitenzahl",
+   "answer_reference": "Bezug Frage {p}",
+   "question_number": "Frage {p}",
+   "enumeration": "Aufzählung {p}",
+   "keyword": "Stichwort {p}",
+   "affair_type": "Typbezeichnung",
+   "intro_questions": "Einleitung Fragen",
+   "demand_formula": "Auftragsformel",
+   "intro_follows": "Einleitung folgt",
+   "signature_formula": "Unterschriftsformel",
+   "place_date": "Ort und Datum",
+   "date_line": "Datum",
+   "distribution": "Verteiler",
+   "marker_inside": "Marker im Atom",
+   "kv_key": "Schlüssel→{p}",
+   "kv_value": "Wert←{p}",
+   "kv_key_without_value": "Schlüssel ohne Wert",
+   "kv_value_without_key": "Wert ohne Schlüssel{p}",
+   "kv_inline": "Schlüssel: Wert in Zeile",
+   "number_sequence": "Folgenummer {p}",
+   "bracket_date": "Klammerzeile mit Datum",
+   "quote_end": "Zitatende",
+   "table_cells_change": "Zellenzahl wechselt"
+  },
+  "stichworte": {
+   "proposal": "Antrag",
+   "reasoning": "Begründung",
+   "response": "Antwort",
+   "preliminary_remark": "Vorbemerkung",
+   "questions": "Fragen",
+   "demand": "Auftrag",
+   "resolution": "Beschluss",
+   "recall": "Rappel",
+   "sponsorship": "Urheberschaft"
+  },
+  "teilung": {
+   "sentence": "Satzgrenze",
+   "frame": "Rahmengrenze",
+   "column": "Spaltenlücke",
+   "frame_column": "Rahmengrenze und Spaltenlücke",
+   "sentence_no_space": "Satzgrenze ohne Leerzeichen"
+  },
+  "kv_rolle": {
+   "key": "Schlüssel",
+   "value": "Wert",
+   "key_value_inline": "Schlüssel und Wert in einer Zeile"
+  },
+  "zeilenrahmen_quelle": {
+   "text_layer": "Wortrahmen der Textschicht (pdftotext)",
+   "estimated": "geschätzt: Blockrahmen gleichmässig auf seine Zeilen verteilt"
+  },
+  "merkmal_ech": {
+   "keyword:proposal": {
+    "text_type_input": "recommendation",
+    "text_type_kern": null,
+    "bemerkung": "Kern v0.2.0: Antrag als Wert in ExecutiveResponseStep.recommendation (RecommendationEnum), kein eigener Texttyp"
+   },
+   "keyword:reasoning": {
+    "text_type_input": "reasoning",
+    "text_type_kern": "reasoning"
+   },
+   "keyword:response": {
+    "text_type_input": "response",
+    "text_type_kern": "response"
+   },
+   "keyword:preliminary_remark": {
+    "text_type_input": "response",
+    "text_type_kern": "response",
+    "bemerkung": "nur im Antwortteil; in einem Vorstoss submitted bzw. main_text"
+   },
+   "keyword:questions": {
+    "text_type_input": "submitted",
+    "text_type_kern": "main_text"
+   },
+   "keyword:demand": {
+    "text_type_input": "submitted",
+    "text_type_kern": "main_text"
+   },
+   "keyword:resolution": {
+    "text_type_input": null,
+    "text_type_kern": null,
+    "bemerkung": "kein Texttyp für Beschluss oder Dispositiv (eCH-Befund 11)"
+   },
+   "keyword:recall": {
+    "text_type_input": "submitted",
+    "text_type_kern": "main_text",
+    "bemerkung": "zitierter Vorstoss in einer Antwort; nicht doppelt übernehmen, wenn das Original vorliegt"
+   },
+   "keyword:sponsorship": {
+    "text_type_input": null,
+    "text_type_kern": null,
+    "bemerkung": "Beleg für die Urheberschaft (input: Affair.sponsorship), kein Text"
+   },
+   "affair_type": {
+    "text_type_input": "title",
+    "text_type_kern": null,
+    "bemerkung": "Beleg für affair_type; Titelzeile: input TextTypeEnum.title, Kern v0.2.0 Feld Affair.title statt Texttyp"
+   },
+   "question_number": {
+    "text_type_input": "submitted",
+    "text_type_kern": "main_text"
+   },
+   "intro_questions": {
+    "text_type_input": "submitted",
+    "text_type_kern": "main_text"
+   },
+   "demand_formula": {
+    "text_type_input": "submitted",
+    "text_type_kern": "main_text"
+   },
+   "answer_reference": {
+    "text_type_input": "response",
+    "text_type_kern": "response"
+   }
+  }
+ },
+ "pruefung": {
+  "zeichen_gesamt": 2327,
+  "zeichen_in_atomen": 2266,
+  "zeichen_trenner": 61,
+  "trenner_zwischen_bloecken": 40,
+  "trenner_zeilenumbruch": 21,
+  "trenner_sonst_leerraum": 0,
+  "nichtleer_ausserhalb": 0,
+  "ueberschneidungen": 0,
+  "wortlaut_abweichend": [],
+  "ausserhalb_block": [],
+  "ueber_rahmengrenze": [],
+  "bloecke_ohne_atom": [],
+  "ids_eindeutig": true,
+  "reihenfolge_steigend": true,
+  "vollstaendig": true
+ },
+ "kennzahlen": {
+  "seiten": 1,
+  "bloecke": 24,
+  "bloecke_ohne_text": 3,
+  "atome": 45,
+  "atome_mit_text": 42,
+  "atome_je_block_median": 1,
+  "atome_je_block_max": 5,
+  "zeichen_gesamt": 2327,
+  "zeichen_in_atomen": 2266,
+  "zeichen_trenner": 61,
+  "trenner_zwischen_bloecken": 40,
+  "trenner_zeilenumbruch": 21,
+  "trenner_sonst_leerraum": 0,
+  "nichtleer_ausserhalb": 0,
+  "ueberschneidungen": 0,
+  "wortlaut_abweichend": 0,
+  "ausserhalb_block": 0,
+  "ueber_rahmengrenze": 0,
+  "vollstaendig": "ja",
+  "laenge_median": 56,
+  "laenge_p90": 88,
+  "laenge_max": 96,
+  "laengstes_atom": "B13.3",
+  "atome_lang": 0,
+  "atome_lang_tabelle": 0,
+  "atome_kurz": 0,
+  "prompt_zeichen": 3447,
+  "prompt_tokens_schaetzung": 991,
+  "blockformat_tokens_schaetzung": 830,
+  "faktor_atom_zu_block": 1.19,
+  "zeilen_satzgeteilt": 0,
+  "rahmenteilungen": 0,
+  "spaltenteilungen": 0,
+  "seitenwechsel": 0,
+  "seitenwechsel_zurueck": 0,
+  "seitenwechsel_im_block": 0,
+  "drittel_regel_verletzt": 0,
+  "ueber_vorgaenger": 0,
+  "ausserhalb_rahmen": 0,
+  "bezug_frage": 0,
+  "frage_nr": 0,
+  "aufzaehlung": 0,
+  "stichwort": 0,
+  "typbezeichnung": 0,
+  "einleitung_fragen": 0,
+  "auftragsformel": 0,
+  "einleitung_folgt": 0,
+  "unterschriftsformel": 0,
+  "ort_datum": 0,
+  "datumszeile": 0,
+  "verteiler": 0,
+  "seitenzahl": 0,
+  "sperrschrift": 0,
+  "marker_im_atom": 0,
+  "gedreht": 0,
+  "kv_paare": 0,
+  "satzanfaenge_im_atom": 8,
+  "atome_mit_satzanfang": 8,
+  "satzgrenzen_am_atomende": 0,
+  "ts_zeilen": 0,
+  "ts_gefunden": 0,
+  "ts_ausserhalb_rahmen": 0,
+  "ts_typografie": 0,
+  "ts_nicht_gefunden": 0,
+  "zeilenrahmen_textschicht": 0,
+  "zeilenrahmen_geschaetzt": 42,
+  "text_textschicht_abweichend": 0,
+  "zeilen_satz_ohne_leerzeichen": 0,
+  "folgenummer": 0,
+  "klammerzeile_datum": 0,
+  "zitatende": 0,
+  "zellenzahl_wechselt": 0,
+  "kv_schluessel_ohne_wert": 0,
+  "kv_wert_ohne_schluessel": 0,
+  "kv_in_zeile": 0,
+  "gp_atome": 29,
+  "gp_laenge_median": 63,
+  "gp_laenge_p90": 182,
+  "gp_laenge_max": 264,
+  "gp_atome_lang": 2,
+  "gp_marker_gesamt": 0,
+  "gp_marker_isoliert": 0
+ },
+ "atome": [
+  {
+   "id": "B1.1",
+   "block": "B1",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "picture",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    0,
+    0
+   ],
+   "rahmen": [
+    43.21,
+    22.96,
+    203.57,
+    82.45
+   ],
+   "zeilenrahmen": null,
+   "zeilenrahmen_quelle": null,
+   "zellen": null,
+   "text": "",
+   "text_textschicht": null,
+   "satzanfaenge": null,
+   "merkmale": [
+    [
+     "form",
+     "Bild"
+    ],
+    [
+     "ocr",
+     null
+    ],
+    [
+     "no_text",
+     null
+    ]
+   ],
+   "hinweise": [
+    "Bild",
+    "OCR",
+    "ohne Text"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B2.1",
+   "block": "B2",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": "picture",
+   "zeichen": [
+    0,
+    10
+   ],
+   "rahmen": [
+    101.33,
+    30.0,
+    202.67,
+    40.67
+   ],
+   "zeilenrahmen": [
+    101.33,
+    30.0,
+    202.67,
+    40.67
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "COMMUNE DE",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "group",
+     "im Bild"
+    ],
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "im Bild",
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B3.1",
+   "block": "B3",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": "picture",
+   "zeichen": [
+    12,
+    25
+   ],
+   "rahmen": [
+    101.33,
+    42.67,
+    202.67,
+    54.67
+   ],
+   "zeilenrahmen": [
+    101.33,
+    42.67,
+    202.67,
+    54.67
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "VAL DE BAGNES",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "group",
+     "im Bild"
+    ],
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "im Bild",
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B4.1",
+   "block": "B4",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    27,
+    47
+   ],
+   "rahmen": [
+    102.0,
+    95.33,
+    188.67,
+    115.33
+   ],
+   "zeilenrahmen": [
+    102.0,
+    95.33,
+    188.67,
+    105.33
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "Autorités communales",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B4.2",
+   "block": "B4",
+   "zeile": 2,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    48,
+    65
+   ],
+   "rahmen": [
+    102.0,
+    95.33,
+    188.67,
+    115.33
+   ],
+   "zeilenrahmen": [
+    102.0,
+    105.33,
+    188.67,
+    115.33
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "Conseil municipal",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B5.1",
+   "block": "B5",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "section_header",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    67,
+    111
+   ],
+   "rahmen": [
+    220.92,
+    146.33,
+    536.01,
+    156.33
+   ],
+   "zeilenrahmen": [
+    220.92,
+    146.33,
+    536.01,
+    156.33
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "PREAVIS DU CONSEIL MUNICIPAL SUR LE POSTULAT",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Überschrift"
+    ],
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "Überschrift",
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B6.1",
+   "block": "B6",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "section_header",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    113,
+    155
+   ],
+   "rahmen": [
+    282.15,
+    168.37,
+    535.39,
+    180.62
+   ],
+   "zeilenrahmen": [
+    282.15,
+    168.37,
+    535.39,
+    180.62
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "de Mme Tristan et Mme Heinis du 30.03.2023",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Überschrift"
+    ],
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "Überschrift",
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B7.1",
+   "block": "B7",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    157,
+    235
+   ],
+   "rahmen": [
+    119.66,
+    189.0,
+    535.34,
+    201.0
+   ],
+   "zeilenrahmen": [
+    119.66,
+    189.0,
+    535.34,
+    201.0
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "intitulé « Fonds d'aide au maintien des petits commerces et cafés du villages»",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B8.1",
+   "block": "B8",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    237,
+    326
+   ],
+   "rahmen": [
+    101.33,
+    234.0,
+    537.33,
+    272.0
+   ],
+   "zeilenrahmen": [
+    101.33,
+    234.0,
+    537.33,
+    246.67
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "En séance du 18 avril, le Conseil municipal a pris connaissance du postulat déposé auprès",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B8.2",
+   "block": "B8",
+   "zeile": 2,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    327,
+    415
+   ],
+   "rahmen": [
+    101.33,
+    234.0,
+    537.33,
+    272.0
+   ],
+   "zeilenrahmen": [
+    101.33,
+    246.67,
+    537.33,
+    259.33
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "du bureau par Mme Tristan et Mme. Heinis concernant la constitution d'un fonds d'aide au",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B8.3",
+   "block": "B8",
+   "zeile": 3,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    416,
+    473
+   ],
+   "rahmen": [
+    101.33,
+    234.0,
+    537.33,
+    272.0
+   ],
+   "zeilenrahmen": [
+    101.33,
+    259.33,
+    537.33,
+    272.0
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "maintien des petits commerces et cafés dans les villages.",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B9.1",
+   "block": "B9",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    475,
+    559
+   ],
+   "rahmen": [
+    101.27,
+    284.09,
+    538.06,
+    337.33
+   ],
+   "zeilenrahmen": [
+    101.27,
+    284.09,
+    538.06,
+    297.4
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "Le Conseil a demandé à la commission « Finances et gestion » de préaviser le dossier",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B9.2",
+   "block": "B9",
+   "zeile": 2,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    560,
+    646
+   ],
+   "rahmen": [
+    101.27,
+    284.09,
+    538.06,
+    337.33
+   ],
+   "zeilenrahmen": [
+    101.27,
+    297.4,
+    538.06,
+    310.71
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "pour s'assurer de la faisabilité juridique, financière et opérationnelle des démarches",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B9.3",
+   "block": "B9",
+   "zeile": 3,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    647,
+    735
+   ],
+   "rahmen": [
+    101.27,
+    284.09,
+    538.06,
+    337.33
+   ],
+   "zeilenrahmen": [
+    101.27,
+    310.71,
+    538.06,
+    324.02
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "proposées. En amont de l'entrée en matière, le Conseil municipal porte à la connaissance",
+   "text_textschicht": null,
+   "satzanfaenge": [
+    11
+   ],
+   "merkmale": [
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B9.4",
+   "block": "B9",
+   "zeile": 4,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    736,
+    766
+   ],
+   "rahmen": [
+    101.27,
+    284.09,
+    538.06,
+    337.33
+   ],
+   "zeilenrahmen": [
+    101.27,
+    324.02,
+    538.06,
+    337.33
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "des membres du Conseil général",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B10.1",
+   "block": "B10",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "section_header",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    768,
+    790
+   ],
+   "rahmen": [
+    101.33,
+    352.0,
+    233.33,
+    363.33
+   ],
+   "zeilenrahmen": [
+    101.33,
+    352.0,
+    233.33,
+    363.33
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "Commerces de proximité",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Überschrift"
+    ],
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "Überschrift",
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B11.1",
+   "block": "B11",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    792,
+    876
+   ],
+   "rahmen": [
+    100.67,
+    363.28,
+    538.67,
+    402.67
+   ],
+   "zeilenrahmen": [
+    100.67,
+    363.28,
+    538.67,
+    376.41
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "L'importance du maintien des commerces de proximité dans les villages de montagne ne",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B11.2",
+   "block": "B11",
+   "zeile": 2,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    877,
+    960
+   ],
+   "rahmen": [
+    100.67,
+    363.28,
+    538.67,
+    402.67
+   ],
+   "zeilenrahmen": [
+    100.67,
+    376.41,
+    538.67,
+    389.54
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "relève d'aucune contestation. Les magasins sont des lieux d'échanges de produits et",
+   "text_textschicht": null,
+   "satzanfaenge": [
+    30
+   ],
+   "merkmale": [
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B11.3",
+   "block": "B11",
+   "zeile": 3,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    961,
+    1039
+   ],
+   "rahmen": [
+    100.67,
+    363.28,
+    538.67,
+    402.67
+   ],
+   "zeilenrahmen": [
+    100.67,
+    389.54,
+    538.67,
+    402.67
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "surtout d'échanges humains indéniables. Ils jouent ainsi un rôle social avéré.",
+   "text_textschicht": null,
+   "satzanfaenge": [
+    40
+   ],
+   "merkmale": [
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B12.1",
+   "block": "B12",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "section_header",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    1041,
+    1054
+   ],
+   "rahmen": [
+    101.33,
+    417.33,
+    174.67,
+    428.67
+   ],
+   "zeilenrahmen": [
+    101.33,
+    417.33,
+    174.67,
+    428.67
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "Bases légales",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Überschrift"
+    ],
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "Überschrift",
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B13.1",
+   "block": "B13",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    1056,
+    1133
+   ],
+   "rahmen": [
+    100.63,
+    430.0,
+    537.33,
+    494.0
+   ],
+   "zeilenrahmen": [
+    100.63,
+    430.0,
+    537.33,
+    442.8
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "Ces dernières années, la Commune a été approchée à quelques reprises pour des",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B13.2",
+   "block": "B13",
+   "zeile": 2,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    1134,
+    1216
+   ],
+   "rahmen": [
+    100.63,
+    430.0,
+    537.33,
+    494.0
+   ],
+   "zeilenrahmen": [
+    100.63,
+    442.8,
+    537.33,
+    455.6
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "demandes de soutiens financiers. Malheureusement, sans bases légales, il n'est pas",
+   "text_textschicht": null,
+   "satzanfaenge": [
+    33
+   ],
+   "merkmale": [
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B13.3",
+   "block": "B13",
+   "zeile": 3,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    1217,
+    1313
+   ],
+   "rahmen": [
+    100.63,
+    430.0,
+    537.33,
+    494.0
+   ],
+   "zeilenrahmen": [
+    100.63,
+    455.6,
+    537.33,
+    468.4
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "possible d'octroyer des aides qui les justifieraient. L'interrogation réside dans les limites du",
+   "text_textschicht": null,
+   "satzanfaenge": [
+    54
+   ],
+   "merkmale": [
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B13.4",
+   "block": "B13",
+   "zeile": 4,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    1314,
+    1399
+   ],
+   "rahmen": [
+    100.63,
+    430.0,
+    537.33,
+    494.0
+   ],
+   "zeilenrahmen": [
+    100.63,
+    468.4,
+    537.33,
+    481.2
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "champ d'application de ces aides. Aussi, pourquoi tels secteurs privés devraient être",
+   "text_textschicht": null,
+   "satzanfaenge": [
+    34
+   ],
+   "merkmale": [
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B13.5",
+   "block": "B13",
+   "zeile": 5,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    1400,
+    1441
+   ],
+   "rahmen": [
+    100.63,
+    430.0,
+    537.33,
+    494.0
+   ],
+   "zeilenrahmen": [
+    100.63,
+    481.2,
+    537.33,
+    494.0
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "soutenus par la Commune et pas d'autres ?",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B14.1",
+   "block": "B14",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "section_header",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    1443,
+    1460
+   ],
+   "rahmen": [
+    101.33,
+    508.0,
+    199.33,
+    520.0
+   ],
+   "zeilenrahmen": [
+    101.33,
+    508.0,
+    199.33,
+    520.0
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "Prochaines étapes",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Überschrift"
+    ],
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "Überschrift",
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B15.1",
+   "block": "B15",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    1462,
+    1551
+   ],
+   "rahmen": [
+    101.3,
+    520.67,
+    538.0,
+    585.33
+   ],
+   "zeilenrahmen": [
+    101.3,
+    520.67,
+    538.0,
+    533.6
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "La création d'un fonds nécessiterait donc un nouveau règlement. Avant d'en arriver là, et",
+   "text_textschicht": null,
+   "satzanfaenge": [
+    64
+   ],
+   "merkmale": [
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B15.2",
+   "block": "B15",
+   "zeile": 2,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    1552,
+    1640
+   ],
+   "rahmen": [
+    101.3,
+    520.67,
+    538.0,
+    585.33
+   ],
+   "zeilenrahmen": [
+    101.3,
+    533.6,
+    538.0,
+    546.53
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "pour respecter la volonté des dépositaires du postulat - s'il est accepté par le Conseil",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B15.3",
+   "block": "B15",
+   "zeile": 3,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    1641,
+    1731
+   ],
+   "rahmen": [
+    101.3,
+    520.67,
+    538.0,
+    585.33
+   ],
+   "zeilenrahmen": [
+    101.3,
+    546.53,
+    538.0,
+    559.47
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "général - l'Administration devrait mandater un bureau pour l'accompagner dans la réflexion",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B15.4",
+   "block": "B15",
+   "zeile": 4,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    1732,
+    1817
+   ],
+   "rahmen": [
+    101.3,
+    520.67,
+    538.0,
+    585.33
+   ],
+   "zeilenrahmen": [
+    101.3,
+    559.47,
+    538.0,
+    572.4
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "avec l'appui du nouveau délégué à la promotion économique. L'étude qui résulterait du",
+   "text_textschicht": null,
+   "satzanfaenge": [
+    59
+   ],
+   "merkmale": [
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B15.5",
+   "block": "B15",
+   "zeile": 5,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    1818,
+    1875
+   ],
+   "rahmen": [
+    101.3,
+    520.67,
+    538.0,
+    585.33
+   ],
+   "zeilenrahmen": [
+    101.3,
+    572.4,
+    538.0,
+    585.33
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "postulat permettrait de se doter d'un éventuel règlement.",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B16.1",
+   "block": "B16",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    1877,
+    1965
+   ],
+   "rahmen": [
+    100.67,
+    599.33,
+    537.33,
+    624.67
+   ],
+   "zeilenrahmen": [
+    100.67,
+    599.33,
+    537.33,
+    612.0
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "Saluant la démarche proposée, le Conseil municipal préavise favorablement ce postulat et",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B16.2",
+   "block": "B16",
+   "zeile": 2,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    1966,
+    2023
+   ],
+   "rahmen": [
+    100.67,
+    599.33,
+    537.33,
+    624.67
+   ],
+   "zeilenrahmen": [
+    100.67,
+    612.0,
+    537.33,
+    624.67
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "recommande aux membres du Conseil général de l'approuver.",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B17.1",
+   "block": "B17",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    2025,
+    2080
+   ],
+   "rahmen": [
+    100.67,
+    640.67,
+    385.33,
+    652.0
+   ],
+   "zeilenrahmen": [
+    100.67,
+    640.67,
+    385.33,
+    652.0
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "Approuvé en séance du Conseil municipal du 20 juin 2023",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B18.1",
+   "block": "B18",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": "key_value_area",
+   "zeichen": [
+    2082,
+    2107
+   ],
+   "rahmen": [
+    101.32,
+    684.33,
+    237.19,
+    695.67
+   ],
+   "zeilenrahmen": [
+    101.32,
+    684.33,
+    237.19,
+    695.67
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "Pour le Conseil municipal",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "group",
+     "Feld"
+    ],
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "Feld",
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B19.1",
+   "block": "B19",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "picture",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": "key_value_area",
+   "zeichen": [
+    2107,
+    2107
+   ],
+   "rahmen": [
+    162.56,
+    691.3,
+    246.17,
+    752.34
+   ],
+   "zeilenrahmen": null,
+   "zeilenrahmen_quelle": null,
+   "zellen": null,
+   "text": "",
+   "text_textschicht": null,
+   "satzanfaenge": null,
+   "merkmale": [
+    [
+     "form",
+     "Bild"
+    ],
+    [
+     "group",
+     "Feld"
+    ],
+    [
+     "no_text",
+     null
+    ]
+   ],
+   "hinweise": [
+    "Bild",
+    "Feld",
+    "ohne Text"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B20.1",
+   "block": "B20",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "caption",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": "picture",
+   "zeichen": [
+    2109,
+    2125
+   ],
+   "rahmen": [
+    101.29,
+    727.67,
+    189.23,
+    752.47
+   ],
+   "zeilenrahmen": [
+    101.29,
+    727.67,
+    189.23,
+    740.07
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "Christophe Maret",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Bildlegende"
+    ],
+    [
+     "group",
+     "im Bild"
+    ],
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "Bildlegende",
+    "im Bild",
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B20.2",
+   "block": "B20",
+   "zeile": 2,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "caption",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": "picture",
+   "zeichen": [
+    2126,
+    2135
+   ],
+   "rahmen": [
+    101.29,
+    727.67,
+    189.23,
+    752.47
+   ],
+   "zeilenrahmen": [
+    101.29,
+    740.07,
+    189.23,
+    752.47
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "Président",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Bildlegende"
+    ],
+    [
+     "group",
+     "im Bild"
+    ],
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "Bildlegende",
+    "im Bild",
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B21.1",
+   "block": "B21",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "picture",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": "key_value_area",
+   "zeichen": [
+    2135,
+    2135
+   ],
+   "rahmen": [
+    328.43,
+    687.91,
+    408.19,
+    723.13
+   ],
+   "zeilenrahmen": null,
+   "zeilenrahmen_quelle": null,
+   "zellen": null,
+   "text": "",
+   "text_textschicht": null,
+   "satzanfaenge": null,
+   "merkmale": [
+    [
+     "form",
+     "Bild"
+    ],
+    [
+     "group",
+     "Feld"
+    ],
+    [
+     "no_text",
+     null
+    ]
+   ],
+   "hinweise": [
+    "Bild",
+    "Feld",
+    "ohne Text"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B22.1",
+   "block": "B22",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "caption",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": "picture",
+   "zeichen": [
+    2137,
+    2157
+   ],
+   "rahmen": [
+    313.11,
+    728.33,
+    413.01,
+    754.33
+   ],
+   "zeilenrahmen": [
+    313.11,
+    728.33,
+    413.01,
+    741.33
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "Pierre-Martin Moulin",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Bildlegende"
+    ],
+    [
+     "group",
+     "im Bild"
+    ],
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "Bildlegende",
+    "im Bild",
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B22.2",
+   "block": "B22",
+   "zeile": 2,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "caption",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": "picture",
+   "zeichen": [
+    2158,
+    2176
+   ],
+   "rahmen": [
+    313.11,
+    728.33,
+    413.01,
+    754.33
+   ],
+   "zeilenrahmen": [
+    313.11,
+    741.33,
+    413.01,
+    754.33
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "Secrétaire général",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Bildlegende"
+    ],
+    [
+     "group",
+     "im Bild"
+    ],
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "Bildlegende",
+    "im Bild",
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B23.1",
+   "block": "B23",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "caption",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    2178,
+    2218
+   ],
+   "rahmen": [
+    99.99,
+    782.75,
+    277.15,
+    810.33
+   ],
+   "zeilenrahmen": [
+    99.99,
+    782.75,
+    277.15,
+    791.94
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "Autorités communales - Conseil municipal",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Bildlegende"
+    ],
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "Bildlegende",
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B23.2",
+   "block": "B23",
+   "zeile": 2,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "caption",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    2219,
+    2260
+   ],
+   "rahmen": [
+    99.99,
+    782.75,
+    277.15,
+    810.33
+   ],
+   "zeilenrahmen": [
+    99.99,
+    791.94,
+    277.15,
+    801.14
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "Route de Clouchèvre 44, 1934 Le Châble VS",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Bildlegende"
+    ],
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "Bildlegende",
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B23.3",
+   "block": "B23",
+   "zeile": 3,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "caption",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    2261,
+    2307
+   ],
+   "rahmen": [
+    99.99,
+    782.75,
+    277.15,
+    810.33
+   ],
+   "zeilenrahmen": [
+    99.99,
+    801.14,
+    277.15,
+    810.33
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "Tel. 027 777 11 00 - etat-major@valdebagnes.ch",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Bildlegende"
+    ],
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "Bildlegende",
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B24.1",
+   "block": "B24",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "page_footer",
+   "schicht": "furniture",
+   "kopf_fuss": "fuss",
+   "eltern": null,
+   "zeichen": [
+    2309,
+    2327
+   ],
+   "rahmen": [
+    453.3,
+    801.89,
+    535.03,
+    811.11
+   ],
+   "zeilenrahmen": [
+    453.3,
+    801.89,
+    535.03,
+    811.11
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "www.valdebagnes.ch",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Fusszeile"
+    ],
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "Fusszeile",
+    "OCR"
+   ],
+   "kv": null
+  }
+ ],
+ "prompt": [
+  "B1.1 | 1 | Bild, OCR, ohne Text | (ohne Text)",
+  "B2.1 | 1 | im Bild, OCR | COMMUNE DE",
+  "B3.1 | 1 | im Bild, OCR | VAL DE BAGNES",
+  "B4.1 | 1 | OCR | Autorités communales",
+  "B4.2 | 1 | OCR | Conseil municipal",
+  "B5.1 | 1 | Überschrift, OCR | PREAVIS DU CONSEIL MUNICIPAL SUR LE POSTULAT",
+  "B6.1 | 1 | Überschrift, OCR | de Mme Tristan et Mme Heinis du 30.03.2023",
+  "B7.1 | 1 | OCR | intitulé « Fonds d'aide au maintien des petits commerces et cafés du villages»",
+  "B8.1 | 1 | OCR | En séance du 18 avril, le Conseil municipal a pris connaissance du postulat déposé auprès",
+  "B8.2 | 1 | OCR | du bureau par Mme Tristan et Mme. Heinis concernant la constitution d'un fonds d'aide au",
+  "B8.3 | 1 | OCR | maintien des petits commerces et cafés dans les villages.",
+  "B9.1 | 1 | OCR | Le Conseil a demandé à la commission « Finances et gestion » de préaviser le dossier",
+  "B9.2 | 1 | OCR | pour s'assurer de la faisabilité juridique, financière et opérationnelle des démarches",
+  "B9.3 | 1 | OCR | proposées. En amont de l'entrée en matière, le Conseil municipal porte à la connaissance",
+  "B9.4 | 1 | OCR | des membres du Conseil général",
+  "B10.1 | 1 | Überschrift, OCR | Commerces de proximité",
+  "B11.1 | 1 | OCR | L'importance du maintien des commerces de proximité dans les villages de montagne ne",
+  "B11.2 | 1 | OCR | relève d'aucune contestation. Les magasins sont des lieux d'échanges de produits et",
+  "B11.3 | 1 | OCR | surtout d'échanges humains indéniables. Ils jouent ainsi un rôle social avéré.",
+  "B12.1 | 1 | Überschrift, OCR | Bases légales",
+  "B13.1 | 1 | OCR | Ces dernières années, la Commune a été approchée à quelques reprises pour des",
+  "B13.2 | 1 | OCR | demandes de soutiens financiers. Malheureusement, sans bases légales, il n'est pas",
+  "B13.3 | 1 | OCR | possible d'octroyer des aides qui les justifieraient. L'interrogation réside dans les limites du",
+  "B13.4 | 1 | OCR | champ d'application de ces aides. Aussi, pourquoi tels secteurs privés devraient être",
+  "B13.5 | 1 | OCR | soutenus par la Commune et pas d'autres ?",
+  "B14.1 | 1 | Überschrift, OCR | Prochaines étapes",
+  "B15.1 | 1 | OCR | La création d'un fonds nécessiterait donc un nouveau règlement. Avant d'en arriver là, et",
+  "B15.2 | 1 | OCR | pour respecter la volonté des dépositaires du postulat - s'il est accepté par le Conseil",
+  "B15.3 | 1 | OCR | général - l'Administration devrait mandater un bureau pour l'accompagner dans la réflexion",
+  "B15.4 | 1 | OCR | avec l'appui du nouveau délégué à la promotion économique. L'étude qui résulterait du",
+  "B15.5 | 1 | OCR | postulat permettrait de se doter d'un éventuel règlement.",
+  "B16.1 | 1 | OCR | Saluant la démarche proposée, le Conseil municipal préavise favorablement ce postulat et",
+  "B16.2 | 1 | OCR | recommande aux membres du Conseil général de l'approuver.",
+  "B17.1 | 1 | OCR | Approuvé en séance du Conseil municipal du 20 juin 2023",
+  "B18.1 | 1 | Feld, OCR | Pour le Conseil municipal",
+  "B19.1 | 1 | Bild, Feld, ohne Text | (ohne Text)",
+  "B20.1 | 1 | Bildlegende, im Bild, OCR | Christophe Maret",
+  "B20.2 | 1 | Bildlegende, im Bild, OCR | Président",
+  "B21.1 | 1 | Bild, Feld, ohne Text | (ohne Text)",
+  "B22.1 | 1 | Bildlegende, im Bild, OCR | Pierre-Martin Moulin",
+  "B22.2 | 1 | Bildlegende, im Bild, OCR | Secrétaire général",
+  "B23.1 | 1 | Bildlegende, OCR | Autorités communales - Conseil municipal",
+  "B23.2 | 1 | Bildlegende, OCR | Route de Clouchèvre 44, 1934 Le Châble VS",
+  "B23.3 | 1 | Bildlegende, OCR | Tel. 027 777 11 00 - etat-major@valdebagnes.ch",
+  "B24.1 | 1 | Fusszeile, OCR | www.valdebagnes.ch"
+ ]
+}

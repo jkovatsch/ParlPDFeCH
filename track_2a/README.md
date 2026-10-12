@@ -1,198 +1,217 @@
 # ParlPDFeCH: project folder for Track 2A
 
-This folder is the project root for the judges of Hack Apertus. The front page of the repository is [../README.md](../README.md). The technical report is [technical_report.md](technical_report.md).
+This folder is the project root for the judges of Hack Apertus. The front page of the repository is [../README.md](../README.md). The technical report is [technical_report.md](technical_report.md). The PDF of the submission form is made from this file ([technical_report_numbers.json](technical_report_numbers.json), key `pdf`).
+
+ParlPDFeCH converts PDF documents of Swiss parliamentary affairs into the working draft eCH-0295 (version I95). The converter writes no text: each text value is the wording of the PDF. A provenance side file gives the page, the frame and the character range of each line.
+
+State of this text: 12.10.2026. Both gates of the project are OPEN. No value of this repository is a gate measurement. After the freeze, the project scored both paths against the records of the 26 reviewed test documents, outside the gate criteria. The chapter "Results" and the technical report (chapter 5.5) give these values as counts and rates, with no value of a single document.
 
 ## Run it
 
-`make run` is not ready. At this time, it does not run the converter. It stops with a message. The reasons:
+Requirement: [uv](https://docs.astral.sh/uv/) 0.11 or later. Run the commands in this folder (`track_2a/`).
 
-1. The converter is not complete. Only the stages 1 to 3 (Docling, atoms, isolation) have code in this repository.
-2. The isolation stage did not meet its gate (gate 3a, NOT MET on 06.10.2026). See the technical report, chapter 5.
-3. The repository has no container file yet.
-4. The isolation stage needs a trained adapter. The adapter weights are not in this repository.
+```bash
+make setup   # one time, with network: Python 3.12, PyYAML, numpy, scipy, linkml, two eCH-0295 schema files
+make run     # no network, no GPU, no model
+make test    # optional
+```
 
-[pending: `Dockerfile`, the target `run` in the `Makefile`, and sample documents that the container downloads at run time]
+`make run` does these steps on the 3 samples in `samples/`:
 
-The scripts in `src/` come from the private project (commit `a1db1fb`), with edits for publication (chapter "Code"). They read and write below the data root (chapter "Settings").
+1. It makes a work folder `build/layout/` with the copied code, the stored input of the samples and the schema files.
+2. Stage 1, rule stage (`src/converter/m05_iso_runner.py`): the frozen method `nos4` at isolation level L9 gives each line (atom) of a document an answer. It then gives the document a claim flag.
+3. Stage 2, eCH-0295 writer (`src/converter/m06_converter.py`): one eCH-0295 instance and one provenance side file for each document. The writer validates both files.
+4. Validator (`src/validate_ech.py`): it validates each output file again with `linkml-validate`.
+5. It compares the output with the stored output in `samples/<doc>/expected/`.
+6. It prints the stored results table (`results/stored_results.json`). These values do not come from the run.
 
-The private project ran the current pipeline in this order:
+The output is in `build/layout/out/`. On a Mac with Apple M4, the run takes less than 15 seconds. It ends with `Result of make run: PASS` and the exit code 0.
 
-| Order | Script | What it does |
-|---|---|---|
-| 1 | `src/m02_exporte_holen.sh` | Downloads the OpenParlData exports and records the time in UTC. |
-| 2 | `src/m02_synthese_split.py` | Assigns whole parliaments to the training set, the validation set and the test set. |
-| 3 | `src/m03_iso_gruppen.py`, `src/m03_iso_gruppe7.py`, `src/m03_iso_pool.py` | Select the measured groups and the training pool, with fixed seeds. |
-| 4 | `src/m03_docling_zerlegen.py` | Converts each PDF document with Docling into blocks with page, frame and text. |
-| 5 | `src/m03_atome.py` | Divides the blocks into atoms. Checks that the atoms cover the full text exactly one time. |
-| 6 | `src/m03_iso_hints.py` | Makes the layout hints and the title anchor. |
-| 7 | `src/m04_text_branch_extrahieren.py` | Takes the text weights out of the downloaded Apertus-v1.5-8B, with MLX. The values of the kept weights stay in bf16. |
-| 8 | `src/m04_iso_bundle.py` | Makes the token bundle for the GPU: token ids only. |
-| 9 | `src/m04_iso_torch.py` | Trains the LoRA adapter on a GPU. Reads out the documents with the adapter. |
-| 10 | `src/m04_iso_import4.py` | Decides the answers of each document with the Viterbi decoder and the fixed answers. |
-| 11 | `src/m03_iso_v4.py`, `src/m04_iso_report.py` | Measure the answers against an AI reference. |
+`make test` runs these checks:
 
-Gaps in this order:
+- `src/check_sources.py`: each copied file is equal to its source file in the private project, without the license line and the recorded edits ([SOURCES.md](SOURCES.md)).
+- The validator accepts the 6 stored output files and rejects `tests/invalid_instance.yaml` (a value that is not in an enumeration of I95).
 
-- Steps 3 and 6 read the list of a stratified sample, and steps 3 and 4 use its PDF documents. An earlier script selected and downloaded this sample, from an earlier version of the split. That script is not part of the current pipeline. It is not in this repository. The scripts find the list and the PDF files at the paths `SAMPLE_LIST` and `SAMPLE_PDF` of `src/m03_iso_paths.py` (settings `PARLPDFECH_SAMPLE_LIST` and `PARLPDFECH_SAMPLE_PDF`). [pending: a download script for published document lists]
-- Steps 2, 3 and 5 read the table of the PDF inspection (`augenschein.csv`). The scripts that make it are not in this repository. [pending: fix of this dependency]
-- Step 2 also reads a table of `m02_texte_profil.py` and the training examples of earlier pilots. The scripts that make them are not in this repository. [pending: fix of this dependency]
-- Steps 8 to 11 need the AI references and the list of the personal data examination. They are not in this repository.
-- `src/m03_gold_bulk.py` has no selection step. The selection needs the code of a candidate pool that is not in this repository. The script starts from the two lists of the selection.
-- The script that selected group 6 (seed 20261006) is not in this repository.
+`make head-selftest` runs the self-check of the Apertus head code of path 2 on synthetic data (about 5 minutes, no model).
+
+Docker: this version has no container file. `make run` needs uv on the computer. The template asks for a run in Docker.
 
 ## Requirements
 
 | Item | Requirement |
 |---|---|
-| Runtime | Python 3.12 with uv; Docling 2.133.0; Poppler (`pdftotext`, `pdfinfo`, `pdftoppm`); on macOS MLX 0.32.3 and mlx-lm 0.32.0. For the GPU: PyTorch 2.8.0, transformers 5.18.0, peft 0.21.2 (recorded on 05.10.2026 for the first rented GPU). |
-| System | Two computers at this time. Docling with Apple Vision OCR (`ocrmac`), MLX in step 7 and the tokenizer of `mlx-lm` in step 8 need macOS. The training and the readout need Linux with a CUDA GPU. [pending: one Linux container] |
-| Hardware | Development: Mac mini M4 with 32 GB memory. Training and readout: rented H100 GPUs with 80 GB memory, one for each run, in European data centers. |
-| API keys | `HF_TOKEN` for the download of Apertus with the Hugging Face tools. No script in this repository reads it. `RUNPOD_API_KEY` for `src/m04_runpod.py` (rented GPU), from the environment or from the file `.env.runpod` in this folder. The current pipeline does not use `LLM_BASE_URL` and `LLM_API_KEY`. [pending: use of `LLM_NAME`, `LLM_BASE_URL` and `LLM_API_KEY` in `make run`] |
-| Model weights | Apertus-v1.5-8B in bf16. Each user downloads the weights with an own account (see below). No weights are in this repository. |
+| Runtime of `make run` | uv 0.11 or later; Python 3.12.13 (uv installs it); PyYAML 6.0.3; linkml 1.11.1 (with `uvx`). Tested on macOS (Apple silicon) on 12.10.2026. |
+| Downloads of `make setup` | Python 3.12, PyYAML 6.0.3, numpy 2.5.3 and scipy 1.18.1 into the cache of uv; linkml 1.11.1 into the tool cache of uv; the two eCH-0295 schema files into `.cache/ech-0295/` (`src/fetch_schema.py`, pinned commit and SHA-256). |
+| Hardware of `make run` | A normal computer. No GPU. |
+| API keys | None for `make run`. |
+| Model weights | None for `make run`. A run of Apertus needs the weights of Apertus-v1.5-8B in bf16 (own download, chapter "Use of Apertus"). |
+| Environment variables | `make run` reads none. The template names `LLM_NAME`, `LLM_BASE_URL` and `LLM_API_KEY`. The converter does not use them: the Apertus readouts of this project need token probabilities or hidden states of a local model. |
 
-### Settings
+## Samples
 
-The file `.env.example` gives the names of the settings without values. The scripts read the settings only from the environment. They do not read a file `.env`. To use a file `.env`, load it into the environment, for example with `set -a; . ./.env; set +a`. `.gitignore` excludes all files `.env*` except `.env.example` from the repository. `.dockerignore` excludes all files `.env*` from a container image.
+The samples are 3 development documents of path 1 (`dev`). Two AI agents examined each of them for personal data of third parties, with the result PASS. The documents name only persons with a public role: members of a parliament or an executive, and officials who sign for an authority.
 
-| Name | Use |
+| Document | Parliament | Language | Content | Result of the converter |
+|---|---|---|---|---|
+| 26171 | Grosser Rat Basel-Stadt (canton) | German | Text of an interpellation | Claimed at L9: one TextBlock in `Submission.texts` |
+| 879163 | Conseil général Val de Bagnes (municipality) | French | Statement of the executive on a postulate | Claimed at L9: one TextBlock in `ResponseStep.texts` |
+| 714840 | Basel-Stadt (canton) | German | Resolution of the executive in its own competence | Not claimed: the S1 role is `other`, so the writer gives only the values from the export record |
+
+Sources of the PDF documents:
+
+| Document | URL of the publisher | Copy of OpenParlData | SHA-256 of the PDF |
+|---|---|---|---|
+| 26171 | https://grosserrat.bs.ch/?dnr=19.5497.01 | https://files.openparldata.ch/doc/BS/983545420862d4d42f592e71918230f03e8a4cf46f90e7fd4a380c08e1cc7667 | `f2e5fe4ae6747a886d93bc753795611117fe11b4d23f4ae30d53866fcedb1493` |
+| 879163 | https://www.valdebagnes.ch/_doc/4552844 | https://files.openparldata.ch/doc/6037/cc7eb17fcc026efde7c970a1e762e7b70538e06787859cbe44f4fb2b3de11a19 | `7b160c11fcf55c0b70d14c5287589c1bbf7e4e7da9d2e791ba715f667f4ba5d5` |
+| 714840 | https://www.bs.ch/api/government-resolutions/document/e159ecf6d8a64510b698e6232b719538-332/5/Dokument | https://files.openparldata.ch/doc/BS/210f283a44ef070a6ac958970636bbf12900f44a6d97f687de9bad9a1b1827bf | `8bb01b408e55d4277550fa7521783392ddae4b8fe881d70165632e36f8391fe2` |
+
+Files of each sample (`samples/<doc>/`):
+
+| File | Content |
 |---|---|
-| `PARLPDFECH_DATA` | The data root of all scripts, as an absolute path. Without it: the folder `data/` of this folder. All data paths of the scripts are below the data root. |
-| `PARLPDFECH_SAMPLE_LIST`, `PARLPDFECH_SAMPLE_PDF` | Optional. The list of the stratified sample and the folder of its PDF files. Without them: `<data>/analyse/stichprobe/auswahl.csv` and `<data>/pdf/stichprobe`. |
-| `HF_TOKEN` | The download of Apertus-v1.5-8B from Hugging Face. No script in this repository reads it. |
-| `RUNPOD_API_KEY` | Optional. The key of the Runpod API for `src/m04_runpod.py` |
-| `RUNPOD_SSH_KEY` | Optional. The private key file for the ssh command of `src/m04_runpod.py`. Without it: `~/.ssh/runpod_parlpdfech`. Use a key pair only for this project. The command `create` stops if the public half (`<key file>.pub`) does not exist. |
-| `LLM_NAME`, `LLM_BASE_URL`, `LLM_API_KEY` | The names of the template. The current pipeline does not use them. |
-| `PDFTOTEXT` | Optional. The `pdftotext` program for `src/m03_docling_zerlegen.py`. Without it: `pdftotext` in the search path. `src/m03_atome.py` always uses `pdftotext` in the search path. Without it, `src/m03_atome.py` makes the atoms without the text layer and gives no message. |
-| `ISO_DEVICE` | Optional. The device of `src/m04_iso_torch.py`. Without it: `cuda`. |
+| `source.json` | The source URLs, the SHA-256 of the PDF, the Docling versions, the S1 rule id and the claim flag |
+| `input/docling.json` | The stored Docling output of the PDF (Docling 2.133.0, backend `docling-parse`, OCR with Apple Vision) |
+| `input/atoms.json` | The stored atoms: one atom for each line of a block or each row of a table, with page, frame and character range |
+| `input/export.json` | The export record of OpenParlData for the document: document, affair, events, councils, parliament (exports of 04.10.2026) |
+| `expected/instance.yaml` | The eCH-0295 instance (I95, class `Container`) |
+| `expected/provenance.yaml` | The provenance side file (profile 0.2.0, class `ExtractionRecord`) |
+| `expected/runner_core.json` | The answers of the rule stage: one answer for each atom, the L9 answers, the claim flags, the S1 role |
 
-The sub-paths below the data root are the sub-paths of the private project, with German names, for example `iso/`, `gold/`, `analyse/` and `roh/exports/`. The two paths of the stratified sample are an exception. To use the private layout without a change, set `PARLPDFECH_DATA` to the data folder of the private project. Also set the two sample settings to the sample of the private project. `.gitignore` excludes the content of `data/` except the file `data/.gitkeep`. `.dockerignore` excludes `data/`.
+`samples/pdf_index.csv` and `samples/languages.csv` hold the rows of the 3 samples of two tables of the private project: the PDF index (export fields) and the language of the document. The repository holds no PDF.
 
-Relative paths on the command line: these options are relative to the data root: `--ref` of `src/m03_iso_jev.py` and `src/m03_iso_jev4.py`, `--pool-ref` and `--group-ref` of `src/m04_iso_bundle.py`, `--ref-groups` and `--ref-pool` of `src/m04_iso_crf.py`, `--trans-ref-groups` and `--trans-ref-pool` of `src/m04_iso_import4.py`, and `--ausgabe` of `src/m03_docling_zerlegen.py`. All other relative paths on the command line are relative to the current folder.
+Evidence of a value: in `expected/provenance.yaml`, each TextBlock has a `TextBlockRecord`. It lists the atoms of the block with page, frame (`bbox`) and character range. For example, the TextBlock of document 26171 has 37 atoms on page 1. Each value from the export record has a `ValueRecord` with the export file, the record and the field. Each claimed TextBlock has `extent_value_status: unsure`: the converter does not claim which lines are body text.
 
-### Model weights
+## Results
 
-- This repository contains no Apertus weights. A container image of this project must also contain no Apertus weights.
-- Get access to the weights on https://huggingface.co/swiss-ai/Apertus-v1.5-8B with your own account. Agree to the license (Apache-2.0) and to the Apertus Acceptable Use Policy v1.5.
-- Download the weights with the Hugging Face tools into `<data>/modelle/Apertus-v1.5-8B`. `src/m04_text_branch_extrahieren.py` reads them there (option `--quelle`). No script in this repository downloads Apertus.
-- The project uses only the text weights, in bf16. It uses no quantized model.
+`make run` prints these values from `results/stored_results.json`. Each part names its record in the private project and the SHA-256 of the record file. The private project is not public.
 
-The Apertus Acceptable Use Policy v1.5 has these duties for each user:
+Path 1, rule stage at isolation level L9 (method `nos4`): gate 3a version 4 is OPEN. It has no gate measurement.
 
-1. The user indemnifies ETH Zurich and EPFL against claims of third parties from the use of Apertus.
-2. The user is an independent controller for personal data in the model output.
-3. The Swiss National AI Institute gives a file of hash values as an output filter. The policy advises to apply it every six months.
-4. If you give Apertus to other persons, give them the policy too. Make this depend on their express agreement. Pass these duties on to all later recipients.
+| Item | Value |
+|---|---|
+| Gate 3a on the full isolation task | NOT MET (06.10.2026). This result does not change. |
+| Selected test documents | 40 of 13 parliaments (German 21, French 17, Italian 2), selected by a script with a fixed seed |
+| Run of the frozen converter on the test documents | One run on 09.10.2026. Answers sealed with SHA-256. Claimed at L9: 26 of 40. |
+| Human reference | The author examined the 26 gold set records (proposals of AI coders) on 11.10.2026. |
+| Gate measurement | None. The blind repetition of 4 records (criterion G3a.16) and the acceptance of the reference (G3a.2) did not take place. |
+| Scores after the freeze on the 26 review records (information) | Exact documents: 19 of 26 (Jeffreys lower bound 0.574). A converter that gives only the role: 17 of 26. Documents with an author switch: 2 of 7 exact. Labelled boundary F1: 0.308. Block omission: 0. Atom intrusion rate: 0.305. Agreement of the two AI coder proposals: 22 of 26. Not a gate measurement (technical report, chapter 5.5). |
+| Development values (information) | `dev`: 124 of 183 documents claimed, 99 of 124 block exact. `eval`: 15 of 22 claimed, 15 of 15 block exact. |
 
-## Data
+The development values compare the converter with AI references, not with a human reference. On `dev`, they are in-sample: AI agents wrote the rules on these documents. The project measured `eval` several times before. These values are not accuracy.
 
-- Source: OpenParlData (https://openparldata.ch). API: https://api.openparldata.ch. Exports: https://files.openparldata.ch/exports/. PDF documents: https://files.openparldata.ch/doc/.
-- The project used the exports of 04.10.2026, 13:26 UTC.
-- OpenParlData publishes its data under CC BY 4.0 (API description, read on 06.10.2026). Attribution: "Source: OpenParlData.ch". The API description and the project page do not say if this license applies to the PDF copies.
-- `data/` is empty. This repository contains no PDF document and no export.
-- The documents contain names of persons, for example members of a parliament or of an executive. Some documents contain personal data of third parties.
-- Some documents went to a rented GPU (Runpod) or to the CSCS inference API. Before that, two AI agents (Claude Opus 5.5) examined each of these documents for personal data of third parties. Only documents with the verdict PASS from both AI agents went to these services. Of 321 examined documents, 308 had PASS and 13 had FAIL.
-- This examination did not apply to the AI agents (Claude Opus 5.5). Documents of the project went to them without this examination, for example development documents and the 28 test documents of the gold set.
-- The planned eCH-0295 output has fields for submitters and co-signers. Thus, the output will contain names of persons with a public role.
+Path 2, Apertus-v1.5-8B with a trained head, task R2 ("the document holds a response of the executive"): the gate is OPEN.
 
-## Code
+| Set | Head | Zero-shot Apertus readout | Best rule (`s1_answer`) |
+|---|---|---|---|
+| Validation, 920 documents (balanced accuracy) | 0.919 | 0.899 | 0.932 |
+| Validation without the K7 categories, 714 documents | 0.980 | 0.953 | 0.965 |
 
-`src/` contains 40 files. 39 of them come from the 109 files in `src/` of the private project at commit `a1db1fb` of 06.10.2026 (108 scripts and one profile file). The new module `m03_render.py` contains a part of one more private module. Many file names, identifiers and comments are German.
+- The source label of R2 comes from the local category of the document. The K7 categories are local categories that give only the name of an affair type, for example `Interpellation`. 78 of the 93 wrong decisions on all 920 documents are `no` documents with such a category.
+- The final run on the test parliaments is sealed: 1,523 documents, 12.10.2026. It has no measurement, because the blind check of the reference did not take place.
+- Information: a LoRA adapter on all layers (one H100 GPU) and a cascade of rules and head were tried and not chosen.
 
-| Part | Scripts | Content |
+Path 2, task R2, scores after the freeze on the 26 reviewed test documents (information, not a gate measurement). The truth comes from the 26 review records: `yes` 15, `no` 11. A document without a value counts as wrong.
+
+| Method | Correct of 26 | Balanced accuracy | McNemar p against `s1_answer` |
+|---|---|---|---|
+| Head H (800 `dev` training rows, frozen) | 24 | 0.933 | 0.125 |
+| Head H7k (the recipe of H, 7,000 `dev` training rows) | 24 | 0.933 | 0.125 |
+| LoRA L3 (7,000 `dev` rows) and LoRA L | 24 each | 0.933 | 0.125 |
+| Zero-shot Apertus readout | 23 | 0.888 | 0.375 |
+| Rule `s1_answer` | 20 | 0.800 | – |
+| Rule `heading` | 18 | 0.733 | – |
+
+- The 2 errors of H, H7k, L3 and L are the 2 documents with an empty export text (no value). Their truth is `yes`.
+- H, H7k, L3 and L give the same decision on each of the 26 documents. Against `s1_answer`: 4 documents only H correct, 0 only the rule correct.
+- n = 26, one human reviewer. The 26 documents are the claimed set of path 1 (not a random sample), from 11 parliaments.
+- Path 2 ran on these documents on the instruction of the author. This is a deviation from criteria v2 of its gate, chapter 2.1, item 1.
+- Head H7k against H: partition P of `dev` 0.996250 and 0.996250; validation 0.917 and 0.919; validation without K7 0.979 and 0.980.
+
+Path 2, task R1 (the recommendation of the executive, for or against): stopped, negative result.
+
+| Set | Head | Best rule | Zero-shot Apertus readout |
+|---|---|---|---|
+| Validation, 287 documents (correct decisions) | 250 | 186 | 196 |
+| Date-linked validation set, 115 documents (correct decisions) | 98 | 104 | 94 |
+
+Causes: the gain on all 287 documents comes from submitted texts without a recommendation. The head follows the reasons of a letter more than its formula. Without the option `none`, a head gives a confident value to a document without a recommendation.
+
+Sources: the report of path 2, iteration 2 (SHA-256 `43d44910…`), chapters 0, 6.1, 6.2 and 12.1; the criteria of gate 3a version 4 (`1db4b2c2…`); the freeze manifest of path 1 (`440e4247…`); the results of the complexity ladder (`7491c0ed…`, isolation level L9, method `nos4`); the protocol of the private project. Scores after the freeze: the R2 score report (`d9285111…`), the path-1 values (`3078d95f…`), the H7k report (`50865daa…`) and their independent checks (`5e87ecdb…`, `0fe9443f…`). `results/stored_results.json` gives the full SHA-256 values and the dates of the protocol entries.
+
+## Converter
+
+Input of the converter: the stored Docling output of a PDF, its atoms and the export record of OpenParlData. The stages before (PDF to Docling output to atoms) are the scripts `src/m03_docling_zerlegen.py` and `src/m03_atome.py` of the first public version ([docs/stages-1-3.md](docs/stages-1-3.md)). `make run` starts from their stored output.
+
+| Stage | Code | What it does |
 |---|---|---|
-| Corpus | `m02_exporte_holen.sh`, `m02_korpus_basis.py`, `m02_korpus_geschaefte.py`, `m02_dokumente_extrakt.py`, `m02_dokumente_profil.py`, `m02_pdf_index.py` | Download of the exports. Figures of parliaments, affairs and documents, without full text and without file names. |
-| eCH-0295 comparison | `m02_ech_regeln.py`, `m02_ech_abgleich.py` | Rules that relate OpenParlData values to eCH-0295 values. The coverage of the eCH-0295 fields. |
-| Split and test set | `m02_synthese_split.py`, `m02_synthese_pilot_kandidaten.py`, `m00_pruefe_testset.py` | Split by whole parliaments, with the candidates of an earlier pilot that the split reads. A check that a document list contains no test document. |
-| Selection | `m03_iso_gruppen.py`, `m03_iso_gruppe7.py`, `m03_iso_pool.py`, `m03_iso_paths.py` | Groups and training pool with fixed seeds. The data root, and the paths that keep the Docling files and the atoms of the test documents apart from the development files. |
-| Docling and atoms | `m03_docling_zerlegen.py`, `m03_atome.py`, `m03_render.py` | PDF to blocks, blocks to atoms. The block form for the names of the Docling forms and for a token estimate of the atom script. |
-| Isolation task | `m03_iso_hilfe.py`, `m03_iso_v4.py`, `m03_iso_jev4.py`, `m03_iso_hints.py`, `m03_iso_jev.py`, `m03_iso_mass.py` | Fixed answers, the 12 answers, the readout questions for Apertus, the layout hints, the measurement. The last two files are earlier versions that the current files import. |
-| Model | `m04_text_branch_extrahieren.py`, `m04_iso_bundle.py`, `m04_iso_torch.py`, `m04_runpod.py` | Text weights, token bundle, training and readout, a client for the rented GPU. |
-| Decoder and measurement | `m04_iso_import4.py`, `m04_iso_crf.py`, `m04_iso_report.py`, `m04_iso_errors.py` | Viterbi decoder, CRF decoder, gate values, error analysis. |
-| Gold set | `m03_gold_select.py`, `m03_gold_bulk.py`, `m03_gold_prepare.py`, `m03_gold_review.py`, `m03_gold_report.py`, `m03_gold_freeze.py`, `m03_iso_review.py` | Lists with fixed seeds, the download of larger lists, preparation, the local review tool, reports, the record of the accepted task definition, the AI proposal. |
-| Text rules | `m00_pruefe_dokumente.py` | A check of English text files against the text rules of the project. |
+| Fixed answers | `src/converter/m03_iso_v4.py`, `m03_iso_hilfe.py` | Page furniture and frame lines by fixed rules |
+| S1 role | `src/converter/m03_sub_s1_role.py` | The role of the document from the atoms and three export fields: proposal, response, combined, minutes, committee or other. For the rule id R1 only, Apertus decides the role (prompt `src/prompts/s1_role.txt`). |
+| S2 switch | `src/converter/m03_sub_s2_switch.py` | The points where the author changes (rule) |
+| S5 type and composition | `src/converter/m03_sub_s5_type.py`, `m03_sub_assemble.py`, `m03_sub_common.py` | The answers of the atoms from the sub-task results |
+| Isolation level L9 | `src/converter/m03_ladder.py` | The answers after the map `SLOT_NOTITLE` at the block unit. Scope rule `role_agreement`: the role of the answers and the S1 role must be author roles, and the role of the answers must be the S1 rule role. Else the converter does not claim the document. |
+| Runner | `src/converter/m05_iso_runner.py` | Applies the chain to new documents, with guards, and seals each record with SHA-256 |
+| eCH-0295 writer | `src/converter/m06_converter.py`, `m06_ech_ausgabe.py`, `m02_ech_regeln.py`, `m03_gold_record.py` | The instance and the provenance side file. Metadata values come from the export record. The text of a TextBlock is the wording of its atoms. |
+| Profile | `src/converter/m06_ech_profil.yaml` | LinkML profile 0.2.0 of the provenance side file. It changes no eCH-0295 class. |
+| Method data | `src/converter/method/ladder.json`, `s1_selection.json` | The collapse maps and the isolation levels; the rule ids that keep the rule role |
 
-The readout questions for Apertus (the Apertus prompts) are in `src/m03_iso_jev4.py`. They are in German.
+The code in `src/converter/` is a copy of the frozen code of the private project. [SOURCES.md](SOURCES.md) gives the SHA-256 of each source file and of each copy, and the few edits for publication. On 8 development documents, the copied converter gave the same eCH-0295 instances as the private converter, byte for byte ([SOURCES.md](SOURCES.md)).
 
-### Edits for publication
+The code has German names and some German comments. Names such as E20, G3a.2 or "process rule 6" refer to the decision list and the gate criteria of the private project. [docs/stages-1-3.md](docs/stages-1-3.md) (chapter "Names in the code") and the technical report explain the main ones.
 
-An AI agent (Claude Opus 5.5) made these edits on 06.10.2026. No human examined them.
+## Validator
 
-1. Each code file starts with the line `SPDX-License-Identifier: Apache-2.0`.
-2. Data root: all data paths are below `PARLPDFECH_DATA` (`m03_iso_paths.DATA`). The scripts give paths in their records relative to the folder above the data root.
-3. Fixed paths of the computer of the author are removed. Usage examples use the folder `data/`.
-4. References to files of the private project are removed or replaced by a short explanation or by the technical report.
-5. `m03_render.py` is the part of a private module that `m03_atome.py` needs. Its code is not changed. Only some comments are changed.
-6. `m03_atome.py`: six short strings of its own check came from development documents. Invented values replace them. The other strings of the check contain no personal data. The usage examples use `DOC_ID` in place of document ids.
-7. New options:
-   - `m03_docling_zerlegen.py`: `--ocr-engine`.
-   - `m04_text_branch_extrahieren.py`: `--quelle`, `--ziel`.
-   - `m04_iso_import4.py`: the reference folders of the transitions. `run.json` records them.
-   - `m04_iso_report.py`: the two agreement values of AI agents.
-   - `m03_gold_freeze.py`: `--e20`, `--accepted-by`.
-   - `m03_gold_review.py`: `--e20`, `--coder`.
-8. New defaults: `m04_iso_bundle.py` uses the schema `v4b`. The default reference folders depend on the schema. `meta.json` records the reference folders relative to the folder above the data root, as in the private project.
-9. `m03_iso_gruppen.py` and `m03_iso_pool.py` stop when their output file exists.
-10. `m03_gold_bulk.py` has no selection step (chapter "Run it").
-11. `m03_gold_report.py` writes the word "annotator" in its output keys.
-12. `m04_runpod.py` reads the key and the ssh key file from the settings. The default key file is `~/.ssh/runpod_parlpdfech`. The command `create` stops if the public half of the key does not exist. Its text describes only the behaviour of the code.
-13. `m03_docling_zerlegen.py` finds `pdftotext` in the search path and calculates the memory value correctly on Linux. A relative folder of `--ausgabe` is below the data root.
-14. `m02_synthese_split.py`: two labels in its output table name the source "Phase 2" in place of a file of the private project.
-15. The reference folders on the command line of `m03_iso_jev.py`, `m03_iso_jev4.py`, `m04_iso_bundle.py` and `m04_iso_crf.py` are relative to the data root.
-16. `m02_exporte_holen.sh` makes its target folders. It downloads only files with simple names, and it writes the time of the download only when all files are downloaded without an error.
-17. `m03_iso_paths.py`: the paths of the stratified sample have neutral names and two settings (chapter "Settings").
-18. Each script shows its help text with `--help` and then stops. `m02_ech_abgleich.py` stops with a message when the exports are missing. `m03_iso_v4.py` stops with a message for an unknown command.
-19. `m03_gold_freeze.py` records the E20 file relative to the folder above the data root. `m03_gold_review.py` finds it there from each working folder.
-20. `m03_gold_review.py` answers only requests to `127.0.0.1` or `localhost` on its port. It saves only requests without an origin or from its own pages.
-21. `m03_gold_bulk.py` and `m03_gold_prepare.py`: their texts state the known limits (chapter "Known limits of the code of the gold set").
-22. `m04_iso_torch.py`: an empty `ISO_DEVICE` gives the default `cuda`.
-23. `m00_pruefe_dokumente.py`: its list of German words has one word less.
+```bash
+uv run --offline --no-project --python 3.12 --with pyyaml==6.0.3 python src/validate_ech.py FILE [FILE ...]
+```
 
-Checks of the edits (AI agent, Claude Opus 5.5, 06.10.2026):
+- An instance is validated against I95 (`ech-0295_affairs/input/schema.yaml` of https://github.com/swiss/political-affairs-ech-group, commit `3cab44d`), class `Container`.
+- A provenance side file (a file with the key `describes_delivery`) is validated against the profile `src/converter/m06_ech_profil.yaml`, class `ExtractionRecord`.
+- Tool: `linkml-validate` of linkml 1.11.1. The exit code is 0 only if each file is valid.
+- The schema files are not in this repository. `make setup` downloads them from their pinned URLs and examines their SHA-256 (`src/fetch_schema.py`).
 
-- Each Python file compiles. `bash -n` accepts the shell script. Each import of a project module refers to a file in `src/`.
-- The private modules and the public modules gave byte-identical outputs: the block form of `m03_render.py` and the atoms of `m03_atome.py`. The first run used 3 development documents and one synthetic document. A second run with the final code used 3 other development documents and one other synthetic document.
-- The own check of `m03_atome.py` (option `--selbsttest`) gives the same result as the private version. Its printed output is the same, except one line with an invented value.
-- Each script and the shell script ran with `--help` and an empty data root. Each one stopped with return code 0 and wrote no file.
-- Small tests without project data examined these edits:
-  - the host and origin check of `m03_gold_review.py` and the record of the E20 file;
-  - the default reference folders of `m04_iso_bundle.py`;
-  - the stop of `m04_runpod.py` without a key file;
-  - `m02_exporte_holen.sh` with a fake download program.
-- Apart from these checks, nobody ran the scripts again with the edited code.
+## Use of Apertus
 
-### Known limits of the code of the gold set
+| Item | Path 1 (converter) | Path 2 (head, not in the converter) |
+|---|---|---|
+| Model | Apertus-v1.5-8B on the CSCS inference API. CSCS does not document the precision. A comparison with the local bf16 model on synthetic text found no difference above the bf16 noise (05.10.2026). | Apertus-v1.5-8B, bf16, no quantization, all 32 decoder layers |
+| Task | The S1 role of a document with the S1 rule id R1 | R2: does the document hold a response of the executive (yes or no) |
+| Method | Readout of the token probabilities of a fixed list of answers. Apertus writes no text. | A softmax regression on the hidden state of decoder layer 16 at the last prompt token. The weights of Apertus do not change. |
+| Prompt | `src/prompts/s1_role.txt` | `src/prompts/r2_v1_de.txt` (exact form: `r2_v1_de.template.json`) |
+| Where it ran | CSCS inference API (Swiss National Supercomputing Centre), Hack Apertus access | Locally on a Mac with MLX; the final run in a VM with one H100 GPU of a Swiss provider (free capacity for Hack Apertus). An equality check of the two places gave PASS. |
+| In `make run` | No question: the 3 samples have S1 rule ids that do not need Apertus. A document with the rule id R1 stops the run in the mode `cache-only`. | No. `src/apertus_head/README.md` describes the code. |
 
-The private project changed five scripts of the gold set after commit `a1db1fb`. This repository has the code of `a1db1fb` with the edits above. [pending: decision of the author about these changes]
+In both paths, the whole document comes first and the question comes last. [src/prompts/README.md](src/prompts/README.md) lists the prompts and which method uses them.
 
-- `m03_gold_prepare.py`: the time limit applies to a chunk of up to 25 documents, not to each document. The script does not examine the content of a Docling result file.
-- `m03_gold_bulk.py`: the hash in a URL of files.openparldata.ch is not the SHA-256 of the file. Thus, the column `sha_ok` of the download status has no meaning.
-- `m03_gold_review.py`: the page images of all batches go to `<data>/gold/cache/pages_cropbox`. The batch `test_repeat` goes to `<data>/gold/test_repeat/`. Both folders are outside `<data>/gold/test`.
-- The PDF files of the 28 test documents of `m03_gold_select.py` are in the folder of the stratified sample, together with development documents.
+Model weights:
 
-### Names in the code
+- This repository contains no Apertus weights and no weights of the head.
+- Get access to the weights on https://huggingface.co/swiss-ai/Apertus-v1.5-8B with your own account. Agree to the license (Apache-2.0) and to the Apertus Acceptable Use Policy v1.5.
+- The Apertus Acceptable Use Policy v1.5 has duties for each user: indemnity for ETH Zurich and EPFL; the role of an independent controller for personal data in the model output; the output filter of hash values of the Swiss National AI Institute (the policy advises to apply it every six months); the policy goes with each copy of Apertus.
 
-The code uses names of the private project. E15 to E32 are items of the decision list of the private project. Some of them are only proposed.
+Other models in the project: AI agents (Claude Opus 5.5) wrote the code, the rules and the proposals of the gold set records, and they checked texts. AI agents (Claude Haiku 5.5) gave a second look at the text blocks of the 26 records of test documents. Docling uses its own layout and table models (layout model `layout_heron`). The OCR engine of the stored Docling output is Apple Vision (`ocrmac`, macOS only). Sample 879163 is a scan: 43 of its 45 atoms come from OCR, and the side file marks them with `from_ocr: true`. The technical report describes the role of each model.
 
-| Name | Meaning |
-|---|---|
-| E15 | Apertus only in bf16, no quantization. |
-| E18 | Each readout gets the whole document. |
-| E19 | The model writes no text. |
-| E20 | The definition of the isolation task. Chapter 2.2 of the technical report gives a summary of version 4.1. |
-| E26 | The split version 2, with the rule "no development document in the test set". |
-| E29 | Cross-validation over groups of parliaments. |
-| E32 | A human gold set by the author with AI support. |
-| process rule 6 | The test documents stay apart from the development. A script examines each document list. |
-| process rule 2.4 | The author checks 10 to 20 % of the documents a second time, blind and at least one day later. |
-| G3a.1, G3a.3, G3a.11 | Criteria of gate 3a (technical report, chapter 5.3). |
-| step 3.7, step 3.9 | Steps of the project plan: the groups and the pool, the readout. |
-| `Gold` | The value of the test set in the split. |
+## Limits
+
+1. Both gates are OPEN. No value of this repository is a gate measurement. The scores on the 26 reviewed test documents come after the freeze, from one human reviewer, with n = 26.
+2. The converter isolates written affairs only. It does not isolate debate and committee texts, although eCH-0295 holds them.
+3. At the block unit, the converter claims the author sequence and the switch points. It does not claim which lines are body text (`extent_value_status: unsure`).
+4. The converter claims only a part of the documents. On `dev`, it claimed 124 of 183 documents.
+5. The converter writes no value of path 2 (R1, R2), because neither task has an ACCEPTED gate.
+6. The 3 samples are development documents. AI agents wrote the rules on these documents.
+7. `make run` starts from the stored Docling output. A new PDF needs Docling first (`src/m03_docling_zerlegen.py`, `src/m03_atome.py`).
+8. The runner needs the files of the private layout. `make run` makes this layout from the files of this repository, with guard files that hold no rows.
+9. No container file. `make run` is tested on macOS only.
+
+## Other code in `src/`
+
+The 40 scripts at the top of `src/` are the first public version of 06.10.2026. They make the stages 1 to 3: Docling, atoms, and the isolation with a LoRA adapter. Other scripts give the corpus figures, the eCH-0295 comparison, the split and the tools of the gold set. [docs/stages-1-3.md](docs/stages-1-3.md) describes them, with their settings and their known limits.
 
 ## License
 
-- Code in `src/` and the `Makefile`: Apache-2.0 (`../LICENSE`).
-- This text and the technical report: CC-BY-4.0 (`../LICENSES/CC-BY-4.0.txt`).
-- Copyright 2026 Jonathan Kovatsch. The full table and the attributions are in `../NOTICE` and in the chapter "License" of [../README.md](../README.md).
+- Code in `src/`, the `Makefile` and the prompts in `src/prompts/`: Apache-2.0 (`../LICENSE`). Each code file and each prompt text file has the line `SPDX-License-Identifier: Apache-2.0`. The JSON template `src/prompts/r2_v1_de.template.json` has no such line, because JSON has no comment lines. The `NOTICE` table applies to it.
+- This text, `SOURCES.md`, the technical report, `technical_report_numbers.json` and `docs/`: CC-BY-4.0 (`../LICENSES/CC-BY-4.0.txt`).
+- `samples/`: data of OpenParlData under CC BY 4.0, and texts of the documents. See `samples/NOTICE.md`.
+- Copyright 2026 Jonathan Kovatsch. The full table and the attributions are in `../NOTICE`.
 - Hack Apertus terms, chapter 6: https://hackapertus.ch/terms-and-conditions
 
 ## Text of the template
@@ -265,5 +284,5 @@ The text below is the text of the file `track_2a/README.md` of the Hack Apertus 
 ## About this text
 
 - Language: English, to the rules of ASD-STE100 (Issue 9).
-- Authoring: AI agents (Claude Opus 5.5) wrote this text for the author from the records and the code of the private project. The private project is the project folder of the author. It is not public.
-- Check of the facts: on 06.10.2026, two more AI agents compared each statement of fact with these records and the code. One did this before and one after the assembly of this repository.
+- Authoring: AI agents (Claude Opus 5.5) wrote this text for the author on 12.10.2026, from the records and the code of the private project. The private project is the project folder of the author. It is not public.
+- No human examined this version of the text.

@@ -32,3 +32,6 @@ build/
 # Pipeline data below the default data root (PARLPDFECH_DATA): never in the repository
 data/*
 !data/.gitkeep
+
+# Downloads of make setup (eCH-0295 schema files): never in the repository
+.cache/

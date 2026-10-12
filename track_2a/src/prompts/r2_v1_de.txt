@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: Apache-2.0
+# Readout template r2_v1_de of path 2, task R2 (src/apertus_head/m05_cls_apertus.py, VARIANTS["r2"]).
+# The exact template is r2_v1_de.template.json (template SHA-256 2a48e04bb8996dd331df38c79fa3121db63420b9c2e3eb5c8afaf053b8e5872e).
+# The chat template of Apertus-v1.5-8B wraps the system and the user message. The assistant turn starts with the prefix.
+# The head reads the hidden state of decoder layer 16 at the last prompt token (the end of the prefix).
+# {document} is the whole text of the document: the document comes first, the question last.
+[system]
+Du liest ein Dokument aus einem Schweizer Parlament und beantwortest eine Frage dazu.
+
+[user]
+Dokument:
+{document}
+
+Frage: Enthält dieses Dokument eine Antwort oder Stellungnahme der Exekutive (Regierung, Regierungsrat, Stadtrat, Gemeinderat, Conseil d'État, Municipalité, Consiglio di Stato, Municipio) auf einen parlamentarischen Vorstoss (Motion, Postulat, Interpellation, Anfrage oder Frage)?
+A = ja: Das Dokument enthält die Antwort oder Stellungnahme der Exekutive. Es kann zusätzlich den Text des Vorstosses oder einzelne Fragen wiederholen.
+B = nein: Das Dokument enthält keine Antwort der Exekutive, zum Beispiel nur den eingereichten Vorstoss.
+Antworte nur mit dem Buchstaben.
+
+[assistant prefix]
+Antwort:
+
+[choices]
+yes = A
+no = B

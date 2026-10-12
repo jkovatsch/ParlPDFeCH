@@ -1,0 +1,20 @@
+{
+ "note": "Reduced copy for the public repository: the three keys of the S1 combined selection that the runner checks at the start (m05_iso_runner.check_frozen_method). The values are equal to the source file.",
+ "chosen": {
+  "kind": "sure_ids",
+  "t": null
+ },
+ "sure_ids": [
+  "A1",
+  "A2",
+  "C1",
+  "D0",
+  "E1",
+  "M1",
+  "O1",
+  "O2",
+  "P1",
+  "P2"
+ ],
+ "apertus_prompt_sha256": "a458b4258d86"
+}

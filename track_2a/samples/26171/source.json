@@ -1,0 +1,30 @@
+{
+ "doc_id": "26171",
+ "parliament_key": "BS",
+ "parliament": "Basel-Stadt",
+ "affair_id": "115961",
+ "document_name": "Text Interpellation",
+ "publisher_url": "https://grosserrat.bs.ch/?dnr=19.5497.01",
+ "openparldata_url": "https://files.openparldata.ch/doc/BS/983545420862d4d42f592e71918230f03e8a4cf46f90e7fd4a380c08e1cc7667",
+ "pdf_sha256": "f2e5fe4ae6747a886d93bc753795611117fe11b4d23f4ae30d53866fcedb1493",
+ "pages": 1,
+ "docling": {
+  "docling": "2.133.0",
+  "docling-core": "2.99.0",
+  "docling-parse": "7.22.1",
+  "docling-ibm-models": "4.0.3",
+  "torch": "2.14.1",
+  "ocrmac": "1.0.1",
+  "pdftotext": "pdftotext version 26.04.0"
+ },
+ "docling_backend": "docling-parse",
+ "atoms": 36,
+ "split_path_1": "dev",
+ "triage_personal_data": "PASS",
+ "s1_rule_id": "P1",
+ "s1_role": "proposal",
+ "s1_source": "rule",
+ "claimed_L9": true,
+ "abstention_reason_L9": null,
+ "license": "Source: OpenParlData.ch, CC BY 4.0 (see samples/NOTICE.md)"
+}

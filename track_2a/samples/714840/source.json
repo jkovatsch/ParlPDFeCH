@@ -1,0 +1,30 @@
+{
+ "doc_id": "714840",
+ "parliament_key": "BS",
+ "parliament": "Basel-Stadt",
+ "affair_id": "305382",
+ "document_name": "Regierungsratsbeschluss-P",
+ "publisher_url": "https://www.bs.ch/api/government-resolutions/document/e159ecf6d8a64510b698e6232b719538-332/5/Dokument",
+ "openparldata_url": "https://files.openparldata.ch/doc/BS/210f283a44ef070a6ac958970636bbf12900f44a6d97f687de9bad9a1b1827bf",
+ "pdf_sha256": "8bb01b408e55d4277550fa7521783392ddae4b8fe881d70165632e36f8391fe2",
+ "pages": 1,
+ "docling": {
+  "docling": "2.133.0",
+  "docling-core": "2.99.0",
+  "docling-parse": "7.22.1",
+  "docling-ibm-models": "4.0.3",
+  "torch": "2.14.1",
+  "ocrmac": "1.0.1",
+  "pdftotext": "pdftotext version 26.04.0"
+ },
+ "docling_backend": "docling-parse",
+ "atoms": 11,
+ "split_path_1": "dev",
+ "triage_personal_data": "PASS",
+ "s1_rule_id": "O1",
+ "s1_role": "other",
+ "s1_source": "rule",
+ "claimed_L9": false,
+ "abstention_reason_L9": "the S1 combined role is not an author role",
+ "license": "Source: OpenParlData.ch, CC BY 4.0 (see samples/NOTICE.md)"
+}

@@ -1,0 +1,29 @@
+# SPDX-License-Identifier: Apache-2.0
+[system]
+Du liest ein Dokument aus einem Schweizer Parlament und bestimmst seine Kategorie. Die Kategorie sagt, von wem die Texte im Dokument stammen. Kopfzeilen, Adressen, Daten, Unterschriften, Verteiler und Beilagen zählen nicht.
+
+Vorstoss = Das Dokument enthält nur den eingereichten Text: einen Vorstoss eines Mitglieds, einer Fraktion oder von Bürgern (Motion, Postulat, Interpellation, Anfrage, Frage, Petition, Resolution) oder einen Antrag, eine Vorlage oder einen Bericht der Regierung an das Parlament zur Beschlussfassung. Es enthält keine Antwort auf einen Vorstoss.
+Regierungsantwort = Das Dokument enthält nur die Antwort oder Stellungnahme der Regierung (Exekutive: Regierungsrat, Stadtrat, Gemeinderat, Conseil d'État, Municipalité, Consiglio di Stato, Municipio) auf einen Vorstoss. Einzelne Fragen, die die Regierung vor ihren Antworten wiederholt, gehören zur Antwort.
+Beides = Das Dokument enthält den vollständigen Text des Vorstosses als eigenen Teil und dazu die Regierungsantwort.
+Protokoll = Protokoll oder Protokollauszug einer Sitzung des Parlaments mit Voten, Reden, Abstimmungen oder Beschlüssen des Parlaments.
+Kommission = Bericht oder Antrag einer Kommission des Parlaments.
+Sonstiges = Keiner dieser Texte, zum Beispiel ein Beschluss der Regierung in eigener Zuständigkeit, eine Beilage, ein Reglement, Statuten, eine Tabelle, ein Faktenblatt oder eine Vernehmlassung.
+
+[question]
+Frage: Welche Kategorie hat dieses Dokument (Vorstoss, Regierungsantwort, Beides, Protokoll, Kommission oder Sonstiges)?
+
+[choices]
+proposal = Vorstoss
+response = Regierungsantwort
+combined = Beides
+minutes = Protokoll
+committee = Kommission
+other = Sonstiges
+
+[shots]
+other = 710696, 712981
+committee = 71718, 228188
+minutes = 637225, 119132
+combined = 465732, 64364
+response = 77964, 611771
+proposal = 189322, 695355

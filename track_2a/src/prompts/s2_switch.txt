@@ -1,0 +1,75 @@
+# SPDX-License-Identifier: Apache-2.0
+# Prompt of sub-task S2 (author switch points) for Apertus-v1.5-8B, used by src/m03_sub_s2_switch.py.
+# Sections start with "=== <name>". Lines that start with "#" before the first section are comments.
+# Placeholders in {braces} are filled by the script. The output is a constrained choice (E19):
+# start:  Vorstoss | Exekutive | Kommission | Parlament
+# switch: Vorstoss | Exekutive | Kommission | Parlament | gleich
+# The user message is "Dokument:\n" + the whole document, then an empty line, then the question (E18).
+=== system
+Du liest ein Dokument aus einem Schweizer Parlament (Gemeinde, Kanton oder Bund). Jede Zeile des Dokuments hat die Form «ID | Seite | Hinweise | Text». Ein Dokument kann Texte von mehreren Autoren enthalten. Es gibt vier Autoren:
+- Vorstoss: die Einreichenden. Ihr Text ist der Wortlaut eines Vorstosses (Motion, Postulat, Interpellation, Anfrage, Frage, Initiative, Petition): die Fragen, der Auftrag, das Begehren und die Begründung. Auch eine Vorlage, die die Regierung dem Parlament zum Beschluss vorlegt (Beschlussentwurf), ist ein Text der Einreichenden.
+- Exekutive: die Regierung (Regierungsrat, Stadtrat, Gemeinderat, Conseil d'État, Conseil-exécutif, Conseil communal, Municipalité, Consiglio di Stato, Municipio). Ihr Text ist die Antwort, die Stellungnahme oder der Bericht zu einem Vorstoss und ihr Antrag dazu, auch die mündliche Antwort eines Regierungsmitglieds in der Debatte. Fragen, die die Exekutive in ihrer Antwort wiederholt, und Zitate in der Antwort gehören zur Antwort der Exekutive.
+- Kommission: eine Kommission des Parlaments mit ihrem Antrag oder Beschluss.
+- Parlament: die Debatte im Plenum (Voten der Ratsmitglieder) und die Abstimmung oder der Beschluss des Parlaments.
+Kopfzeilen, Anrede, Grussformel, Unterschriften, Ort und Datum sind kein Text eines Autors.
+=== start
+Frage: Wer ist der Autor des ersten Textes in diesem Dokument (nach dem Titel und nach Anrede, Kopf und Einleitungssatz)?
+Vorstoss = der erste Text ist der Wortlaut des Vorstosses der Einreichenden.
+Exekutive = der erste Text ist die Antwort, Stellungnahme oder der Bericht der Exekutive.
+Kommission = der erste Text ist der Antrag oder Beschluss einer Kommission.
+Parlament = der erste Text ist ein Votum der Debatte oder ein Beschluss des Parlaments.
+Antworte mit genau einem Wort: Vorstoss, Exekutive, Kommission oder Parlament.
+=== switch
+Zeile {id}: «{text}»
+Die Zeile davor ist {prev_id}: «{prev_text}»
+Frage: Wer schreibt den Text ab Zeile {id}? Wechselt dort der Autor?
+Vorstoss = ab Zeile {id} folgt der Wortlaut des Vorstosses der Einreichenden.
+Exekutive = ab Zeile {id} folgt die Antwort, Stellungnahme oder der Bericht der Exekutive.
+Kommission = ab Zeile {id} folgt der Antrag oder Beschluss einer Kommission.
+Parlament = ab Zeile {id} folgen Voten der Debatte oder der Beschluss des Parlaments.
+gleich = ab Zeile {id} schreibt derselbe Autor wie im Text vor dieser Zeile (kein Wechsel).
+Antworte mit genau einem Wort: Vorstoss, Exekutive, Kommission, Parlament oder gleich.
+=== system_v2
+Du liest ein Dokument aus einem Schweizer Parlament (Gemeinde, Kanton oder Bund). Jede Zeile des Dokuments hat die Form «ID | Seite | Hinweise | Text». Ein Dokument kann Texte von mehreren Autoren enthalten. Es gibt vier Autoren:
+- Vorstoss: die Einreichenden. Ihr Text ist der Wortlaut eines Vorstosses (Motion, Postulat, Interpellation, Anfrage, Frage, Initiative, Petition): die Fragen, der Auftrag, das Begehren und die Begründung. Auch eine Vorlage, die die Regierung dem Parlament zum Beschluss vorlegt (Beschlussentwurf), ist ein Text der Einreichenden.
+- Exekutive: die Regierung (Regierungsrat, Stadtrat, Gemeinderat, Conseil d'État, Conseil-exécutif, Conseil communal, Municipalité, Consiglio di Stato, Municipio). Ihr Text ist die Antwort, die Stellungnahme oder der Bericht zu einem Vorstoss und ihr Antrag dazu, auch die mündliche Antwort eines Regierungsmitglieds in der Debatte.
+- Kommission: eine Kommission des Parlaments mit ihrem Antrag oder Beschluss.
+- Parlament: die Debatte im Plenum (Voten der Ratsmitglieder) und die Abstimmung oder der Beschluss des Parlaments.
+Wichtig: Viele Antworten der Exekutive wiederholen die Fragen des Vorstosses, zum Beispiel «Frage 1: ...?», «Zu Frage 2» oder «1. Wie ...?», und beantworten sie dann. Eine solche wiederholte Frage gehört zur Antwort der Exekutive. Der Autor wechselt dort nicht. Auch eine Zwischenüberschrift oder ein Zitat in einem Text gehört zu diesem Text.
+Kopfzeilen, Anrede, Grussformel, Unterschriften, Ort und Datum sind kein Text eines Autors.
+=== start_v2
+Frage: Was folgt in diesem Dokument nach dem Titel als erster Text?
+Exekutive = das Dokument beginnt direkt mit der Antwort, der Stellungnahme oder dem Bericht der Exekutive. Oft steht davor nur ein Satz wie «Am ... reichte X eine Interpellation ein» oder eine Anrede. Fragen, die die Exekutive in der Antwort wiederholt, zählen zur Antwort.
+Vorstoss = zuerst steht der Wortlaut des Vorstosses der Einreichenden (Fragen, Auftrag, Begehren, Begründung); erst danach kommt eine Antwort, oder es gibt keine Antwort.
+Kommission = zuerst steht der Antrag oder Beschluss einer Kommission.
+Parlament = zuerst steht ein Votum der Debatte oder ein Beschluss des Parlaments.
+Antworte mit genau einem Wort: Exekutive, Vorstoss, Kommission oder Parlament.
+=== switch_v2
+Zeile {id}: «{text}»
+Die Zeile davor ist {prev_id}: «{prev_text}»
+Der Text vor Zeile {id} ist {state}.
+Frage: Wechselt bei Zeile {id} der Autor des Textes?
+gleich = kein Wechsel: ab Zeile {id} folgt weiter {state}. Das gilt auch für eine Zwischenüberschrift, eine wiederholte Frage oder ein Zitat.
+Vorstoss = Wechsel: ab Zeile {id} folgt der Wortlaut des Vorstosses der Einreichenden.
+Exekutive = Wechsel: ab Zeile {id} folgt die Antwort, Stellungnahme oder der Bericht der Exekutive.
+Kommission = Wechsel: ab Zeile {id} folgt der Antrag oder Beschluss einer Kommission.
+Parlament = Wechsel: ab Zeile {id} folgen Voten der Debatte oder der Beschluss des Parlaments.
+Antworte mit genau einem Wort: gleich, Vorstoss, Exekutive, Kommission oder Parlament.
+=== start_v2_rev
+Frage: Was folgt in diesem Dokument nach dem Titel als erster Text?
+Parlament = zuerst steht ein Votum der Debatte oder ein Beschluss des Parlaments.
+Kommission = zuerst steht der Antrag oder Beschluss einer Kommission.
+Vorstoss = zuerst steht der Wortlaut des Vorstosses der Einreichenden (Fragen, Auftrag, Begehren, Begründung); erst danach kommt eine Antwort, oder es gibt keine Antwort.
+Exekutive = das Dokument beginnt direkt mit der Antwort, der Stellungnahme oder dem Bericht der Exekutive. Oft steht davor nur ein Satz wie «Am ... reichte X eine Interpellation ein» oder eine Anrede. Fragen, die die Exekutive in der Antwort wiederholt, zählen zur Antwort.
+Antworte mit genau einem Wort: Parlament, Kommission, Vorstoss oder Exekutive.
+=== switch_v2_rev
+Zeile {id}: «{text}»
+Die Zeile davor ist {prev_id}: «{prev_text}»
+Der Text vor Zeile {id} ist {state}.
+Frage: Wechselt bei Zeile {id} der Autor des Textes?
+Parlament = Wechsel: ab Zeile {id} folgen Voten der Debatte oder der Beschluss des Parlaments.
+Kommission = Wechsel: ab Zeile {id} folgt der Antrag oder Beschluss einer Kommission.
+Exekutive = Wechsel: ab Zeile {id} folgt die Antwort, Stellungnahme oder der Bericht der Exekutive.
+Vorstoss = Wechsel: ab Zeile {id} folgt der Wortlaut des Vorstosses der Einreichenden.
+gleich = kein Wechsel: ab Zeile {id} folgt weiter {state}. Das gilt auch für eine Zwischenüberschrift, eine wiederholte Frage oder ein Zitat.
+Antworte mit genau einem Wort: Parlament, Kommission, Exekutive, Vorstoss oder gleich.

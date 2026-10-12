@@ -1,0 +1,30 @@
+{
+ "doc_id": "879163",
+ "parliament_key": "6037",
+ "parliament": "Val de Bagnes",
+ "affair_id": "329535",
+ "document_name": "P02 - Préavis au postulat (Fonds d'aide maintien commerces et cafés) - 21.06.23",
+ "publisher_url": "https://www.valdebagnes.ch/_doc/4552844",
+ "openparldata_url": "https://files.openparldata.ch/doc/6037/cc7eb17fcc026efde7c970a1e762e7b70538e06787859cbe44f4fb2b3de11a19",
+ "pdf_sha256": "7b160c11fcf55c0b70d14c5287589c1bbf7e4e7da9d2e791ba715f667f4ba5d5",
+ "pages": 1,
+ "docling": {
+  "docling": "2.133.0",
+  "docling-core": "2.99.0",
+  "docling-parse": "7.22.1",
+  "docling-ibm-models": "4.0.3",
+  "torch": "2.14.1",
+  "ocrmac": "1.0.1",
+  "pdftotext": "pdftotext version 26.04.0"
+ },
+ "docling_backend": "docling-parse",
+ "atoms": 45,
+ "split_path_1": "dev",
+ "triage_personal_data": "PASS",
+ "s1_rule_id": "A2",
+ "s1_role": "response",
+ "s1_source": "rule",
+ "claimed_L9": true,
+ "abstention_reason_L9": null,
+ "license": "Source: OpenParlData.ch, CC BY 4.0 (see samples/NOTICE.md)"
+}

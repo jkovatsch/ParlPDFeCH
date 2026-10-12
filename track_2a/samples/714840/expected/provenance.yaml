@@ -1,0 +1,176 @@
+# Provenance side file (src/m06_ech_profil.yaml version 0.2.0) of instances/714840.yaml
+global_uri: https://data.parlpdfech.example/provenance/converter-l9/i95/affair-305382/doc-714840
+describes_delivery: https://data.parlpdfech.example/converter/l9/i95/affair-305382/doc-714840
+ech_schema_version: eCH-0295 I95 (input/schema.yaml), Commit 3cab44d
+pipeline_run:
+  script_name: src/m06_converter.py
+  decomposition_source: 'converter answers of iso-runner-1 (method nos4, isolation level L9): out/run/records/714840.json (SHA-256 e8a3d260294a0af7ac45c4d9b9a1984c204b90d977bc16b310c752aac07b150c); export record export/714840.json (SHA-256 ebf5f2b6b755fbb8efc67829b33e0204b138727f9897c5c0e6864472b6942886)'
+  decomposition_accepted: false
+  taxonomy_version: 'E20 version 5.0, chapter 7: isolation level L9, map SLOT_NOTITLE, block unit'
+  atom_version: atome-v3 2026-10-05T12:37:28+00:00
+  ech_commit: 3cab44d6a07f60bd8211cccdcf948717ef8fba5c
+  linkml_version: linkml==1.11.1
+  datetime_generated: '2026-10-12T12:54:58Z'
+source_documents:
+- global_uri: https://api.openparldata.ch/v1/docs/714840
+  local_id: '714840'
+  manifestation_url: https://files.openparldata.ch/doc/BS/210f283a44ef070a6ac958970636bbf12900f44a6d97f687de9bad9a1b1827bf
+  publisher_url: https://www.bs.ch/api/government-resolutions/document/e159ecf6d8a64510b698e6232b719538-332/5/Dokument
+  export_hash: 210f283a44ef070a6ac958970636bbf12900f44a6d97f687de9bad9a1b1827bf
+  docling_json_sha256: dfbb63375b3e15bf5e329d91b51a78324b9daf14728b678c1988547fb8aff02b
+  atom_fingerprint: 6e8e80aa881990c51f0ed926a28d5fcf562c02b971cc0da33399d529be5c1041
+  page_count: 1
+  document_language: de
+  document_language_source: export (docs.language)
+  document_kind: not claimed at L9
+text_block_records: []
+value_records:
+- about_entity: https://data.parlpdfech.example/converter/l9/i95/affair-305382/doc-714840
+  instance_path: global_uri
+  ech_slot: Container.global_uri
+  recorded_value: https://data.parlpdfech.example/converter/l9/i95/affair-305382/doc-714840
+  derivation: identifier_minted
+  rule_applied: '{namespace}/converter/l9/i95/affair-{id}/doc-{doc_id}'
+  mapping_match: not_applicable
+  pdf_consistency: not_checked
+- about_entity: https://api.openparldata.ch/v1/affairs/305382
+  instance_path: affairs[0].global_uri
+  ech_slot: DraftDecree.global_uri
+  recorded_value: https://api.openparldata.ch/v1/affairs/305382
+  derivation: identifier_from_metadata
+  rule_applied: https://api.openparldata.ch/v1/affairs/{id} (OpenParlData API, provisional; E3, F19)
+  mapping_match: not_applicable
+  metadata_evidence:
+  - export_file: daten/roh/exports/affairs.ndjson.gz
+    record_type: affair
+    record_id: '305382'
+    field_name: id
+    source_value: '305382'
+    datetime_export_retrieved: '2026-10-04T13:26:03Z'
+  pdf_consistency: not_checked
+- about_entity: https://api.openparldata.ch/v1/affairs/305382
+  instance_path: affairs[0].local_id
+  ech_slot: DraftDecree.local_id
+  recorded_value: 194a233a1ff24f83a6d7f68a174bf85d
+  derivation: copied_from_metadata
+  rule_applied: id in the information system of the parliament (external_id)
+  mapping_match: not_applicable
+  metadata_evidence:
+  - export_file: daten/roh/exports/affairs.ndjson.gz
+    record_type: affair
+    record_id: '305382'
+    field_name: external_id
+    source_value: 194a233a1ff24f83a6d7f68a174bf85d
+    datetime_export_retrieved: '2026-10-04T13:26:03Z'
+  pdf_consistency: not_checked
+- about_entity: https://api.openparldata.ch/v1/affairs/305382
+  instance_path: affairs[0].affair_number
+  ech_slot: DraftDecree.affair_number
+  recorded_value: P140393
+  derivation: copied_from_metadata
+  mapping_match: not_applicable
+  metadata_evidence:
+  - export_file: daten/roh/exports/affairs.ndjson.gz
+    record_type: affair
+    record_id: '305382'
+    field_name: number
+    source_value: P140393
+    datetime_export_retrieved: '2026-10-04T13:26:03Z'
+  pdf_evidence:
+  - atom_id: B4.1.2
+    page_number: 1
+    bbox:
+      bbox_left: 496.2
+      bbox_top: 201.74
+      bbox_right: 544.26
+      bbox_bottom: 213.0
+    char_start: 154
+    char_end: 161
+    from_ocr: false
+    matched_text: P140393
+    match_start: 0
+    match_end: 7
+  pdf_consistency: confirmed
+- about_entity: https://api.openparldata.ch/v1/affairs/305382
+  instance_path: affairs[0].affair_type
+  ech_slot: DraftDecree.affair_type
+  recorded_value: draft_decree
+  derivation: mapped_from_metadata
+  rule_applied: m02_ech_regeln.typ_ech (Quelle lokal, Regel weiter)
+  mapping_match: broad
+  metadata_evidence:
+  - export_file: daten/roh/exports/affairs.ndjson.gz
+    record_type: affair
+    record_id: '305382'
+    field_name: type_name_de
+    source_value: Regierungsratsbeschluss
+    datetime_export_retrieved: '2026-10-04T13:26:03Z'
+  pdf_consistency: not_checked
+- about_entity: https://api.openparldata.ch/v1/affairs/305382
+  instance_path: affairs[0].title[0].text
+  ech_slot: DraftDecree.title.text
+  recorded_value: Swisslos-Fondsbeitrag; Verein MusikRaumBasel; Festival KlangBasel 2014
+  derivation: copied_from_metadata
+  mapping_match: not_applicable
+  metadata_evidence:
+  - &id001
+    export_file: daten/roh/exports/affairs.ndjson.gz
+    record_type: affair
+    record_id: '305382'
+    field_name: title_de
+    source_value: Swisslos-Fondsbeitrag; Verein MusikRaumBasel; Festival KlangBasel 2014
+    datetime_export_retrieved: '2026-10-04T13:26:03Z'
+  pdf_evidence:
+  - atom_id: B4.1.1
+    page_number: 1
+    bbox:
+      bbox_left: 63.84
+      bbox_top: 201.74
+      bbox_right: 464.81
+      bbox_bottom: 213.0
+    char_start: 83
+    char_end: 153
+    from_ocr: false
+    matched_text: Swisslos-Fondsbeitrag; Verein MusikRaumBasel; Festival KlangBasel 2014
+    match_start: 0
+    match_end: 70
+  pdf_consistency: confirmed
+- about_entity: https://api.openparldata.ch/v1/affairs/305382
+  instance_path: affairs[0].title[0].text_language
+  ech_slot: DraftDecree.title.text_language
+  recorded_value: de
+  derivation: normalized_from_metadata
+  rule_applied: language code from the field name title_<language>
+  mapping_match: not_applicable
+  metadata_evidence:
+  - *id001
+  pdf_consistency: not_checked
+- about_entity: https://api.openparldata.ch/v1/affairs/305382
+  instance_path: affairs[0].title[0].text_type
+  ech_slot: DraftDecree.title.text_type
+  recorded_value: title
+  derivation: fixed_by_schema
+  rule_applied: title of the affair from the export record -> TextTypeEnum title (J4)
+  mapping_match: not_applicable
+  pdf_consistency: not_checked
+not_mapped_records:
+- not_mapped_item: TextBlocks of the PDF (Submission.texts and ResponseStep.texts)
+  not_mapped_reason: 'The converter does not claim the document at the isolation level L9 (claim flag false): the S1 combined role is not an author role. The instance has only the metadata values (E20 version 5.0, chapter 7.7).'
+  candidate_value: 'converter blocks: 1; converter role proposal; S1 rule role other; S1 combined role other'
+  candidate_source: runner record out/run/records/714840.json (SHA-256 e8a3d260294a0af7ac45c4d9b9a1984c204b90d977bc16b310c752aac07b150c)
+- not_mapped_item: Document (FRBR work, expression, manifestation)
+  not_mapped_reason: eCH-0295 has only document_url on a TextBlock; the side file gives the source document
+  candidate_value: https://api.openparldata.ch/v1/docs/714840
+  candidate_source: docs
+- not_mapped_item: Sponsorships
+  not_mapped_reason: not in the scope of this writer (data minimisation, as src/m06_ech_ausgabe.py); the contributors export gives person ids
+  candidate_source: contributors
+verbatim_check:
+  check_method: 'Each leaf value needs a ValueRecord. Each text block: its letters (no markup, no white space) are the letters of the Docling wording of its atoms after the recorded changes only (line-end hyphens, list markers at the atom start, empty atoms, NFC). Metadata values against the export record, terms against the enumerations of I95.'
+  text_blocks_checked: 0
+  characters_checked: 0
+  hyphens_removed_count: 0
+  list_markers_removed_count: 0
+  metadata_values_checked: 6
+  leaves_without_provenance: 0
+  check_passed: true

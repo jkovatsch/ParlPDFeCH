@@ -1,0 +1,267 @@
+{
+ "doc_id": "714840",
+ "quelle": "daten/pdf/lehrer_stichprobe/714840.pdf",
+ "sha256": "8bb01b408e55d4277550fa7521783392ddae4b8fe881d70165632e36f8391fe2",
+ "erzeugt_utc": "2026-10-05T12:36:24Z",
+ "skript": "src/m03_docling_zerlegen.py",
+ "lauf": "iso_gruppen",
+ "werkzeug": {
+  "docling": "2.133.0",
+  "docling-core": "2.99.0",
+  "docling-parse": "7.22.1",
+  "docling-ibm-models": "4.0.3",
+  "torch": "2.14.1",
+  "ocrmac": "1.0.1",
+  "pdftotext": "pdftotext version 26.04.0"
+ },
+ "konfiguration": {
+  "ocr": "auto",
+  "ocr_engine": "ocrmac (Apple Vision, accurate)",
+  "ocr_sprachen": [
+   "de-DE",
+   "fr-FR",
+   "it-IT",
+   "en-US"
+  ],
+  "geraet": "auto",
+  "threads": 4,
+  "tabellen": "genau",
+  "zellabgleich": true,
+  "backend": "docling-parse",
+  "layout_modell": "layout_heron",
+  "document_timeout_s": 900
+ },
+ "koordinaten": "PDF-Punkte, Ursprung oben links, bbox = [links, oben, rechts, unten]",
+ "gesamttext_trenner": "\n\n",
+ "status": "success",
+ "backend": "docling-parse",
+ "einfarbige_seiten_standard_backend": [],
+ "fehler": [],
+ "laufzeit_s": 0.604,
+ "seiten": [
+  {
+   "seite": 1,
+   "breite": 595.0,
+   "hoehe": 842.0,
+   "zellen": 9,
+   "ocr_zellen": 1,
+   "textquelle": "gemischt"
+  }
+ ],
+ "bloecke": [
+  {
+   "id": "B1",
+   "docling_ref": "#/pictures/0",
+   "label": "picture",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "text_quelle": "docling",
+   "text": "",
+   "seite": 1,
+   "bbox": [
+    24.94,
+    40.13,
+    45.83,
+    72.05
+   ],
+   "ocr_anteil": null,
+   "ocr_konfidenz": null,
+   "zeichen": [
+    0,
+    0
+   ]
+  },
+  {
+   "id": "B2",
+   "docling_ref": "#/texts/0",
+   "label": "section_header",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "text_quelle": "zeilen",
+   "text": "Regierungsrat des Kantons Basel-Stadt",
+   "seite": 1,
+   "bbox": [
+    62.4,
+    60.48,
+    269.71,
+    70.84
+   ],
+   "ocr_anteil": 0.0,
+   "ocr_konfidenz": null,
+   "zeichen": [
+    0,
+    37
+   ]
+  },
+  {
+   "id": "B3",
+   "docling_ref": "#/texts/1",
+   "label": "section_header",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "text_quelle": "zeilen",
+   "text": "Regierungsratsbeschluss vom 08. April 2014",
+   "seite": 1,
+   "bbox": [
+    63.84,
+    142.22,
+    319.38,
+    153.48
+   ],
+   "ocr_anteil": 0.0,
+   "ocr_konfidenz": null,
+   "zeichen": [
+    39,
+    81
+   ]
+  },
+  {
+   "id": "B4",
+   "docling_ref": "#/texts/2",
+   "label": "section_header",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": {
+    "ref": "#/groups/0",
+    "label": "key_value_area",
+    "gruppe": true
+   },
+   "text_quelle": "zeilen",
+   "text": "Swisslos-Fondsbeitrag; Verein MusikRaumBasel; Festival KlangBasel 2014 P140393",
+   "seite": 1,
+   "bbox": [
+    63.84,
+    201.74,
+    544.26,
+    213.0
+   ],
+   "ocr_anteil": 0.0,
+   "ocr_konfidenz": null,
+   "zeichen": [
+    83,
+    161
+   ]
+  },
+  {
+   "id": "B5",
+   "docling_ref": "#/texts/3",
+   "label": "list_item",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": {
+    "ref": "#/groups/1",
+    "label": "list",
+    "gruppe": true
+   },
+   "text_quelle": "zeilen",
+   "text_docling": "1. Dem Verein MusikRaumBasel wird für das Musikfestival \"KlangBasel\" im September 2014 ein Beitrag aus dem Swisslos-Fonds in Höhe von Fr. 250'000 bewilligt.",
+   "text_docling_normalisiert": "Dem Verein MusikRaumBasel wird für das Musikfestival \"KlangBasel\" im September 2014 ein Beitrag aus dem Swisslos-Fonds in Höhe von Fr. 250'000 bewilligt.",
+   "text": "1. Dem Verein MusikRaumBasel wird für das Musikfestival \"KlangBasel\"\nim September 2014 ein Beitrag aus dem Swisslos-Fonds in Höhe von\nFr. 250'000 bewilligt.",
+   "liste": {
+    "marker": "1.",
+    "nummeriert": true
+   },
+   "seite": 1,
+   "bbox": [
+    63.84,
+    286.1,
+    475.1,
+    324.96
+   ],
+   "ocr_anteil": 0.0,
+   "ocr_konfidenz": null,
+   "zeichen": [
+    163,
+    319
+   ]
+  },
+  {
+   "id": "B6",
+   "docling_ref": "#/pictures/1",
+   "label": "picture",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "text_quelle": "docling",
+   "text": "",
+   "seite": 1,
+   "bbox": [
+    338.95,
+    330.77,
+    446.93,
+    438.9
+   ],
+   "ocr_anteil": 1.0,
+   "ocr_konfidenz": 1.0,
+   "zeichen": [
+    319,
+    319
+   ]
+  },
+  {
+   "id": "B7",
+   "docling_ref": "#/texts/4",
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": {
+    "ref": "#/pictures/1",
+    "label": "picture",
+    "gruppe": false
+   },
+   "text_quelle": "zeilen",
+   "text": "0V18 19500",
+   "seite": 1,
+   "bbox": [
+    353.86,
+    402.26,
+    431.92,
+    430.91
+   ],
+   "ocr_anteil": 1.0,
+   "ocr_konfidenz": 1.0,
+   "zeichen": [
+    321,
+    331
+   ]
+  },
+  {
+   "id": "B8",
+   "docling_ref": "#/texts/5",
+   "label": "page_footer",
+   "schicht": "furniture",
+   "kopf_fuss": "fuss",
+   "eltern": null,
+   "text_quelle": "zeilen",
+   "text": "Seite 1/1",
+   "seite": 1,
+   "bbox": [
+    503.16,
+    791.33,
+    538.76,
+    799.77
+   ],
+   "ocr_anteil": 0.0,
+   "ocr_konfidenz": null,
+   "zeichen": [
+    333,
+    342
+   ]
+  }
+ ],
+ "text_gesamt": "Regierungsrat des Kantons Basel-Stadt\n\nRegierungsratsbeschluss vom 08. April 2014\n\nSwisslos-Fondsbeitrag; Verein MusikRaumBasel; Festival KlangBasel 2014 P140393\n\n1. Dem Verein MusikRaumBasel wird für das Musikfestival \"KlangBasel\"\nim September 2014 ein Beitrag aus dem Swisslos-Fonds in Höhe von\nFr. 250'000 bewilligt.\n\n0V18 19500\n\nSeite 1/1",
+ "pruefung": {
+  "pdftotext_woerter": 46,
+  "bloecke_woerter": 48,
+  "wiedergefunden": 46,
+  "anteil_pdftotext_in_bloecken": 1.0,
+  "davon_ueber_silbentrennung": 0,
+  "anteil_bloecke_in_pdftotext": 0.9583,
+  "wortfolge_aehnlichkeit": 0.9787,
+  "anteil_5gramme_pdftotext_in_bloecken": 0.9498,
+  "fehlend_haeufigste": []
+ }
+}

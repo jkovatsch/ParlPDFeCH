@@ -1,0 +1,14 @@
+# Test input for make test: a copy of samples/714840/expected/instance.yaml with a value that is not in
+# the enumeration of I95 (affair_type). The validator must reject it.
+# eCH-0295 instance (I95, root class Container), src/m06_converter.py (converter-ech-writer-1), document 714840
+# Isolation level L9 (E20 version 5.0, chapter 7). Side file: provenance/714840.yaml
+global_uri: https://data.parlpdfech.example/converter/l9/i95/affair-305382/doc-714840
+affairs:
+- global_uri: https://api.openparldata.ch/v1/affairs/305382
+  local_id: 194a233a1ff24f83a6d7f68a174bf85d
+  affair_number: P140393
+  affair_type: not_an_affair_type
+  title:
+  - text: Swisslos-Fondsbeitrag; Verein MusikRaumBasel; Festival KlangBasel 2014
+    text_language: de
+    text_type: title

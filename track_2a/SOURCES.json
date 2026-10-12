@@ -1,0 +1,784 @@
+{
+ "schema": "parlpdfech-sources/1",
+ "private_commit": "7efdc54",
+ "written": "12.10.2026, 15:30 CEST",
+ "spdx_line": "# SPDX-License-Identifier: Apache-2.0",
+ "files": [
+  {
+   "copy": "src/converter/m05_iso_runner.py",
+   "copy_sha256": "91df23fd92add3367e02833e6a101f35d4a6b6b910672d526a0f17620ee2d895",
+   "source": "src/m05_iso_runner.py",
+   "source_sha256": "352ee843635088bbd67f0cde3277d28c9072c9ddb58942af212dc40000411557",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      3,
+      3
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5), step",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      6,
+      6
+     ],
+     "new": "Context: decision E34 of the author (08.10.2026) sets gate 3a version 4 at the isolation level L9 with the method",
+     "reason": "comment or docstring: the first name of the author is replaced by \"the author\""
+    }
+   ],
+   "masked_source_sha256": "df280088c8dd4da8d004c210eaa0ad9bbc523b794d85eb6bb1a4bd5aeb42200c"
+  },
+  {
+   "copy": "src/converter/m03_gold_record.py",
+   "copy_sha256": "9685820235f4e326fdc869d173f9de07c1894f0c910de811bb14f9a8e83b4ae9",
+   "source": "src/m03_gold_record.py",
+   "source_sha256": "15b77f5c7f9f0bd2011d67a78b1be3f1682f0938959a526198691dcd9134f0e2",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      14,
+      14
+     ],
+     "new": "coders), proposal (adjudicated), review (after the review of the author).",
+     "reason": "comment or docstring: the first name of the author is replaced by \"the author\""
+    },
+    {
+     "lines": [
+      22,
+      22
+     ],
+     "new": "  checkf DOC --stage S           compare the derived answers with the block decision of the author of the pilot (Check F)",
+     "reason": "comment or docstring: the first name of the author is replaced by \"the author\""
+    },
+    {
+     "lines": [
+      1228,
+      1228
+     ],
+     "new": "    # G52, A2, process rule 2.6: only the author reviews; a correction keeps the proposal",
+     "reason": "comment or docstring: the first name of the author is replaced by \"the author\""
+    }
+   ],
+   "masked_source_sha256": "9381eda4be651d2fd8f7779d5c3ae89b01edacfdf5035db39a7fc36a69490669"
+  },
+  {
+   "copy": "src/converter/m03_iso_hilfe.py",
+   "copy_sha256": "8a804aacd8925dc69ff1743e1f8497088021dadcf6fd2ed39f5da40989d98dbe",
+   "source": "src/m03_iso_hilfe.py",
+   "source_sha256": "54aef51933965ff77413bd3fff395e1449e13fc1025a830da8e29ec6b01e0092",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": []
+  },
+  {
+   "copy": "src/converter/m03_iso_jev.py",
+   "copy_sha256": "566aac9a907f7c283439dd0a945dc4f8ea5227d5daf29d36d9f861abc1d9810a",
+   "source": "src/m03_iso_jev.py",
+   "source_sha256": "142b1b23a336558d97b57daf9874994a129dfd621a8093e5358eb468b4066ec7",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": []
+  },
+  {
+   "copy": "src/converter/m03_iso_mass.py",
+   "copy_sha256": "c8f4e6d119c333e8fc0decf39c54b5805e79377be9398035c93ced09620eb217",
+   "source": "src/m03_iso_mass.py",
+   "source_sha256": "01187a779a6082e93e3f71d6ef15dc143a4c2543ed0d2820968e3e8a57e30e88",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": []
+  },
+  {
+   "copy": "src/converter/m03_iso_paths.py",
+   "copy_sha256": "795316d8652092cc9ad0a22c380a019c3ba78e9f8ff2cf338a60ea61ffecbd3c",
+   "source": "src/m03_iso_paths.py",
+   "source_sha256": "7e726c76a29aadd1521cd903ae758838347b9432dd1acd638712042b13001362",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": []
+  },
+  {
+   "copy": "src/converter/m03_iso_v4.py",
+   "copy_sha256": "eecf84e9546820218af56ed9549a23446c5c4d3ad03126794a1178b5388641c5",
+   "source": "src/m03_iso_v4.py",
+   "source_sha256": "f3327021cc4febd3b72416a52b2db9b52b520af34ed65c80759715b9465f65be",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": []
+  },
+  {
+   "copy": "src/converter/m03_ladder.py",
+   "copy_sha256": "65a1857d2fcd49f8f82e2f8dffad1595d66359754c8400a2c9ee30469624a8f4",
+   "source": "src/m03_ladder.py",
+   "source_sha256": "953d66ee13e88a7fbabfb2d11d8de1aa3476a3bd76b29211d1121923f3304567",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      3,
+      3
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5).",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      6,
+      6
+     ],
+     "new": "Context: gate 3a (E20 version 4.2) is NOT MET. The author decided on 08.10.2026 to reduce the complexity of the",
+     "reason": "comment or docstring: the first name of the author is replaced by \"the author\""
+    },
+    {
+     "lines": [
+      866,
+      866
+     ],
+     "new": "                       \"note\": \"coverage floor not set by the author: reported only\"}",
+     "reason": "note text of the measurement record (not used by the converter): the first name of the author is replaced by \"the author\""
+    },
+    {
+     "lines": [
+      1250,
+      1251
+     ],
+     "new": "    w(\"1. On 08.10.2026, the author decided to reduce the complexity of the isolation task until a gate \"\n      \"can be passed.\")",
+     "reason": "report text of the command report (not used by the converter): a quotation from a chat (internal note) is replaced"
+    },
+    {
+     "lines": [
+      1254,
+      1254
+     ],
+     "new": "    w(\"4. This file gives no gate result. The author selects an isolation level and its gate criteria before the measurement (process rule 1.5).\")",
+     "reason": "report text of the command report (not used by the converter): the first name of the author is replaced by \"the author\""
+    }
+   ],
+   "masked_source_sha256": "1cf9e4e3160c14a91352d6a21b87c45082e571f6901665ef68fb0a2f3f15c9b4"
+  },
+  {
+   "copy": "src/converter/m03_sub_assemble.py",
+   "copy_sha256": "155b12a06cf6b771bced04e4f5b5f3bf1ff9a1e341d031566b50667eaad2d6d9",
+   "source": "src/m03_sub_assemble.py",
+   "source_sha256": "d706d707fdb4a8b811b6ba5b09275792548413e0b3972e64eebadf939ca292b9",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      2,
+      2
+     ],
+     "new": "gate 3a, 08.10.2026). Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      45,
+      45
+     ],
+     "new": "ROOT = Path(__file__).resolve().parents[1]",
+     "reason": "code: the absolute path of the private computer is replaced by the folder above src (same folder in the private layout)"
+    }
+   ],
+   "masked_source_sha256": "df5917af6e07c31006c873c111c6e346937ef846896c7b8345c5155f4718b884"
+  },
+  {
+   "copy": "src/converter/m03_sub_common.py",
+   "copy_sha256": "7dc3147cb03ac47039f1d65e6a406dbf166f53204788b4bdf3bd7ba11adcf00a",
+   "source": "src/m03_sub_common.py",
+   "source_sha256": "9b8f4b7df485fcccba4ed329001412eecb5210178c5ce4681e2a6fec1cedbfb1",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      5,
+      5
+     ],
+     "new": "block with the wrong author (response <-> submitted). The author asked (08.10.2026) to break the task into",
+     "reason": "comment or docstring: the first name of the author is replaced by \"the author\""
+    },
+    {
+     "lines": [
+      7,
+      8
+     ],
+     "new": "that split. Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agents\n(Claude Opus 5.5).",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    }
+   ],
+   "masked_source_sha256": "3b68775d704a2fd4344a6d80385d7d79d2789f62d48b3d579aacd159d6ffff44"
+  },
+  {
+   "copy": "src/converter/m03_sub_s1_role.py",
+   "copy_sha256": "3b2ebce55044d4247d005aeb26a3094900090e12313a69f6b8253fd7212c6705",
+   "source": "src/m03_sub_s1_role.py",
+   "source_sha256": "af0aa97caf1d1d22595ac53cb267d8f5558185a33d351cd5b3586dc29764e42d",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      3,
+      4
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agents (Claude Opus 5.5).\nShared base: `m03_sub_common.py` (splits, families, labels, compose, measure, ask).",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    }
+   ],
+   "masked_source_sha256": "20aa066fc00330da7bad477041a3565428d1aa55cb79c7deb4ebbf1058a36ba1"
+  },
+  {
+   "copy": "src/converter/m03_sub_s2_switch.py",
+   "copy_sha256": "9481e3ac9a66e4a1fc29be8760014226e1f82dc0ce05337cf19ff77ede400706",
+   "source": "src/m03_sub_s2_switch.py",
+   "source_sha256": "6517a9b4ca7489b20ee1d819e484f078452b536549f3186e4428e772c1e5247b",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      2,
+      3
+     ],
+     "new": "an Apertus-8B probe. Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agents (Claude\nOpus 5.5). Status: feasibility measurement in stage 3 (iteration of gate 3a); no gate result.",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    }
+   ],
+   "masked_source_sha256": "854e2177306d52bb2eaae6da16df79e7da20a258be50cee44e3e6b4934793f38"
+  },
+  {
+   "copy": "src/converter/m03_sub_s5_type.py",
+   "copy_sha256": "b6a44316150d4753148c88ef0abbcef2072db3042f2c9cf86a1de33baeb1f6cb",
+   "source": "src/m03_sub_s5_type.py",
+   "source_sha256": "624de1593d00912477b396e8ce16d52936a99bd33fb2bf5b2d6b08738a2c15bc",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      3,
+      3
+     ],
+     "new": "Context: gate 3a (isolation, E20) is NOT MET. The author asked (08.10.2026) to break the task into small",
+     "reason": "comment or docstring: the first name of the author is replaced by \"the author\""
+    },
+    {
+     "lines": [
+      5,
+      5
+     ],
+     "new": "English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5).",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    }
+   ],
+   "masked_source_sha256": "270b6499f2d5dcb69f7898b615e9867939f0d7c9d489e0691fe75f969ec7d02a"
+  },
+  {
+   "copy": "src/converter/m04_iso_cscs.py",
+   "copy_sha256": "a1f368a8e604604ab9351853f5475c0249c8e129aafd6138dc302168928c626f",
+   "source": "src/m04_iso_cscs.py",
+   "source_sha256": "daa345d4f3d8349fbc7892d9e681202831f1591fb3a9766c7964799f03b7ae5d",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": []
+  },
+  {
+   "copy": "src/converter/m06_converter.py",
+   "copy_sha256": "4776d97a7f2bc57eb0ddb336e14271869f1496864cf7131a4af472ba053f5442",
+   "source": "src/m06_converter.py",
+   "source_sha256": "c0b9a9d383abeafe447f14db4f6edd8d18ba72126fc193eaf14c37be83969ab4",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      3,
+      4
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5), step\nconverter eCH writer. Status: NOT RELEASED. This file gives no gate result.",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    }
+   ],
+   "masked_source_sha256": "94ceb8d0bc78c0f3c945186a8ff941ec33eb7577fd6b40ad6c406194e6358e4f"
+  },
+  {
+   "copy": "src/converter/m06_ech_ausgabe.py",
+   "copy_sha256": "61fe809e8fdaaf3c46839411a6b24e99f60b3e6bb59c350aafaa16aa58bc2b2c",
+   "source": "src/m06_ech_ausgabe.py",
+   "source_sha256": "19ec1cbc47d4ca5f2a1b350878e84f3d29e5a0f9c9775a54f85ba726f5694996",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      3,
+      4
+     ],
+     "new": "Ziel: eine saubere Datei, die korrekt gelabelt ist und sich in die Metadaten\neinfügen lässt. Dieser Prototyp",
+     "reason": "docstring: a quotation from a chat (internal note) is replaced by the goal in neutral words"
+    }
+   ],
+   "masked_source_sha256": "81b32f2fc24a57aca3de7ac3b73c552eb0215a28bbb615ee3395ac472f4f9a95"
+  },
+  {
+   "copy": "src/converter/m02_ech_regeln.py",
+   "copy_sha256": "511aab179205b8c45531b6986e73e262e2f5be49217ead767cfee8957fedbfd4",
+   "source": "src/m02_ech_regeln.py",
+   "source_sha256": "e2e37098ea069ff294ae0c3916e0d84bb460d15e0c9022a88268f29046187ca7",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": []
+  },
+  {
+   "copy": "src/converter/m03_isolierung_taxonomie.py",
+   "copy_sha256": "a01f6b2e96abaf9c466732dd63526a78189ab4ac99fe82ee20ff62714b4144d0",
+   "source": "src/m03_isolierung_taxonomie.py",
+   "source_sha256": "6399981d967c43aac7fdd8934e0923203e2020dbb8357b0de84dc06bc6c7db42",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": []
+  },
+  {
+   "copy": "src/converter/m03_atome.py",
+   "copy_sha256": "e02324e356d83709efcb1921e6070e6b32ee5fbc338bb96cecef03505e1ed6e3",
+   "source": "src/m03_atome.py",
+   "source_sha256": "3988f7ae9bfc172a4f91fe2833a5add17e2e18567d9fe304b64a1c25fee02155",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      63,
+      63
+     ],
+     "new": "  cd <project folder>",
+     "reason": "docstring: path of the private computer"
+    }
+   ],
+   "masked_source_sha256": "6b1e15e5c43720481a20802b718ecde7c7a3d5e21a2872c41349e61369b20fe0"
+  },
+  {
+   "copy": "src/converter/m03_iter2_aufgabe.py",
+   "copy_sha256": "7762aee7933209457b90d6a78d588032bde8dc6e6ff0cd067025af381d83bb92",
+   "source": "src/m03_iter2_aufgabe.py",
+   "source_sha256": "11694a2ecb16d22bf1d9313f131552751abfdfe9caab34f0b3e5d111d424166a",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": []
+  },
+  {
+   "copy": "src/converter/m03_lehrer_vorgaben.py",
+   "copy_sha256": "a1bab9d530c8c8015bc745228baaed30ff76d32d87dceaa3b8f9b2d29f5e03f6",
+   "source": "src/m03_lehrer_vorgaben.py",
+   "source_sha256": "6075bf8cc59fce171625490d098c69ad16d4aafd9f558485a920f66591771fc5",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": []
+  },
+  {
+   "copy": "src/converter/m06_ech_profil.yaml",
+   "copy_sha256": "fe7e49a343ebe19073ec640c9bf1f228d5fd19c6aa8d044cb0fdc478d58846a7",
+   "source": "src/m06_ech_profil.yaml",
+   "source_sha256": "b8a2c343b903ab8d7d13d80ca06d5d770fe3880c7f55522cfc67a713ce461d90",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": []
+  },
+  {
+   "copy": "src/apertus_head/m05_cls_it2_head.py",
+   "copy_sha256": "4f2814ca386fe114fd113b57e5a7eefb4ca58f7b086b67f5979bf8fe3cc0a26e",
+   "source": "src/m05_cls_it2_head.py",
+   "source_sha256": "d1ddeca2b5435549656cc7db57c1d5f4ab5e09c4fc53e0c5f41d17edc5161d73",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      3,
+      4
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5).\nThis file does not change an existing file. It only appends records to",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    }
+   ],
+   "masked_source_sha256": "66d5f18907c6a2a4688a9140fd93dfeea667cac383e733f0577d2fcd862098f8"
+  },
+  {
+   "copy": "src/apertus_head/m05_cls_it2_states.py",
+   "copy_sha256": "30096142c6ccd9f7b247ec44acf2643268a4a27b278921a9fdfda34bde1883b2",
+   "source": "src/m05_cls_it2_states.py",
+   "source_sha256": "81b5e4b56e8b3fe2a7f6b7ead38d307febe0e6431e8b35aa7972441e4d363b16",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      3,
+      4
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5).\nThis file does not change an existing file. It uses src/m05_cls_data.py (rows, text,",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    }
+   ],
+   "masked_source_sha256": "5c4937567b8ab1de29dd7b944739a7c8583f9f4ccb3060b0b69e326008fa1d9c"
+  },
+  {
+   "copy": "src/apertus_head/m05_cls_apertus.py",
+   "copy_sha256": "a1243b2490ec6a9fe55186c69c235212e005b8cbbfc296fc2906f852f68f7b1b",
+   "source": "src/m05_cls_apertus.py",
+   "source_sha256": "f3677338ec95a2c53ad0254655cc4438d15ac722e3b446769f5ff3498191a8a2",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      3,
+      4
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5).\nData: src/m05_cls_data.py (datasets, text cache, lock, assert_allowed).",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      74,
+      74
+     ],
+     "new": "              the one validation run (assert_allowed with the split validation).",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    }
+   ],
+   "masked_source_sha256": "10ec81c32c88e3fd78540c119837c50f0c9c4b38bd1655e883a32ecae00acf8c"
+  },
+  {
+   "copy": "src/apertus_head/m05_cls_data.py",
+   "copy_sha256": "222a6a76b57bcf16eb298cb8c762552b4e74d68816345a7743b446d92ba6196e",
+   "source": "src/m05_cls_data.py",
+   "source_sha256": "88a0207465bd6e6d704a82b138752a1e0caf0059cb7f8795040582fee1ebe4ae",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": []
+  },
+  {
+   "copy": "src/apertus_head/m04_kern.py",
+   "copy_sha256": "a92da107e45dde9eb5c2ca25461c103c32b1cbe508b3758e785dcc87979b0ac0",
+   "source": "src/m04_kern.py",
+   "source_sha256": "2aa0aa14ccb9dcb7a8c3ef464d5e76313cfa2fd9461b32554e5d1e12f1c0bb7f",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      19,
+      19
+     ],
+     "new": "# Volle Präzision (bf16), keine Quantisierung: Entscheid des Autors 05.10.2026 (E15).",
+     "reason": "comment: the first name of the author is replaced by \"des Autors\""
+    }
+   ],
+   "masked_source_sha256": "cff674a431badba743e4ddc169c3ac0fe61e50ac89f9ad1b5dd8cbe65218fe7b"
+  },
+  {
+   "copy": "src/apertus_head/m05_cls_verify_critic_counts.py",
+   "copy_sha256": "cb5134bae4b3f2d2327f9f77d6060bf7bc762f7c37f58cca9f751c8b1a1f5315",
+   "source": "src/m05_cls_verify_critic_counts.py",
+   "source_sha256": "4556b83b19edd64c6e2acc96e3b28458a45ea5ee7ccd5a314dcdbb626c203afc",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": []
+  },
+  {
+   "copy": "src/apertus_head/m07_h_vm_states.py",
+   "copy_sha256": "f52de43fef7b8a894ed4ec39825d9721daba3c16bf953790380c0101789926a8",
+   "source": "src/m07_h_vm_states.py",
+   "source_sha256": "3d79ba6113dff82e624f918e3212caece18e0857954316899af1807b254a4446",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      3,
+      4
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5).\nThis file does not change an existing file. It does not write into daten/cls/it2/states or",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    }
+   ],
+   "masked_source_sha256": "7177981c651d46e88546053709609dc7b8feb2c00cd570b7a7af7b3a0d529e16"
+  },
+  {
+   "copy": "src/apertus_head/m02_dokumente_extrakt.py",
+   "copy_sha256": "27c4f06bf50c49304de1b6c21fbfe8ca35318d1f859804b826be7ae7dbd9deb0",
+   "source": "src/m02_dokumente_extrakt.py",
+   "source_sha256": "3bb74ee58e9e9ff75c3492aa0ef730257dbda114a5da27616b471340f1550acc",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      33,
+      33
+     ],
+     "new": "cd <project folder> &&",
+     "reason": "docstring: path of the private computer"
+    }
+   ],
+   "masked_source_sha256": "84a37d11cd2d9ad9532bcf84114a2e89b92e2eb542f7c916c5933fd864c5ccb1"
+  },
+  {
+   "copy": "src/apertus_head/m02_dokumente_profil.py",
+   "copy_sha256": "da5cb82279a1cc219c340c1a821f70045d21e202caeed445603807847f5678c1",
+   "source": "src/m02_dokumente_profil.py",
+   "source_sha256": "4d84fd721bd224db0938993257d41cd51b1c1747f33ac8ecdbcc7db0a1f35af2",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      21,
+      21
+     ],
+     "new": "cd <project folder> &&",
+     "reason": "docstring: path of the private computer"
+    }
+   ],
+   "masked_source_sha256": "ea896932cf3789cdc9bc5206817aa02633cd676ac7d3bb7a729d0a7dd18cd190"
+  },
+  {
+   "copy": "src/apertus_head/m03_iso_hilfe.py",
+   "copy_sha256": "8a804aacd8925dc69ff1743e1f8497088021dadcf6fd2ed39f5da40989d98dbe",
+   "source": "src/m03_iso_hilfe.py",
+   "source_sha256": "54aef51933965ff77413bd3fff395e1449e13fc1025a830da8e29ec6b01e0092",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": []
+  },
+  {
+   "copy": "src/apertus_head/m03_iso_jev.py",
+   "copy_sha256": "566aac9a907f7c283439dd0a945dc4f8ea5227d5daf29d36d9f861abc1d9810a",
+   "source": "src/m03_iso_jev.py",
+   "source_sha256": "142b1b23a336558d97b57daf9874994a129dfd621a8093e5358eb468b4066ec7",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": []
+  },
+  {
+   "copy": "src/apertus_head/m03_iso_mass.py",
+   "copy_sha256": "c8f4e6d119c333e8fc0decf39c54b5805e79377be9398035c93ced09620eb217",
+   "source": "src/m03_iso_mass.py",
+   "source_sha256": "01187a779a6082e93e3f71d6ef15dc143a4c2543ed0d2820968e3e8a57e30e88",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": []
+  },
+  {
+   "copy": "src/apertus_head/m03_iso_paths.py",
+   "copy_sha256": "795316d8652092cc9ad0a22c380a019c3ba78e9f8ff2cf338a60ea61ffecbd3c",
+   "source": "src/m03_iso_paths.py",
+   "source_sha256": "7e726c76a29aadd1521cd903ae758838347b9432dd1acd638712042b13001362",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": []
+  },
+  {
+   "copy": "src/apertus_head/m03_iso_v4.py",
+   "copy_sha256": "eecf84e9546820218af56ed9549a23446c5c4d3ad03126794a1178b5388641c5",
+   "source": "src/m03_iso_v4.py",
+   "source_sha256": "f3327021cc4febd3b72416a52b2db9b52b520af34ed65c80759715b9465f65be",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": []
+  },
+  {
+   "copy": "src/prompts/s1_role.txt",
+   "copy_sha256": "1b3b6dd3e22f8b715a15d49f1cad39d624e074dfe277bc78d41bd17f1ee0a06e",
+   "source": "src/prompts/s1_role.txt",
+   "source_sha256": "a458b4258d86c895b52e781b60c738e2c2cd81db9ca257d503aa09440386298f",
+   "kind": "prompt",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": []
+  },
+  {
+   "copy": "src/prompts/s2_switch.txt",
+   "copy_sha256": "5556ece00cd29ee44cf98ff9a9d7c73d70a46d82f69684fc703c80dcf9b66de1",
+   "source": "src/prompts/s2_switch.txt",
+   "source_sha256": "9e910a1b4dd4344689ef2cf1e04b3e1f5dc5e3c4bccdb41b4c188477fc9cc63b",
+   "kind": "prompt",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": []
+  },
+  {
+   "copy": "src/prompts/s3_frame.txt",
+   "copy_sha256": "15802fb8f207b363221b95d5c384f6374a13e5c7498bd84694815dda92a98e5b",
+   "source": "src/prompts/s3_frame.txt",
+   "source_sha256": "0d1b2a0be28118171d4ce9d6b1deb9a16ee3af6c37ff418962340a75a377b351",
+   "kind": "prompt",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": []
+  },
+  {
+   "copy": "src/prompts/s4_title.txt",
+   "copy_sha256": "3c3c1c74526ec0b4b16a0e9fc6446594e13616ab4258079f6963501485848291",
+   "source": "src/prompts/s4_title.txt",
+   "source_sha256": "799455710a320eb15fbeb81e9d9e93f9d08bbf5238ad262bbc369e11869949f2",
+   "kind": "prompt",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      14,
+      14
+     ],
+     "new": "Nicht zum Titel gehören: eine Zeile mit der Art des Geschäfts und nur dem Namen einer Person ohne Thema (zum Beispiel «Question X»), die Anrede, Unterschriften und der Text des Vorstosses oder der Antwort.",
+     "reason": "prompt example: the name of a real person is replaced by \"X\""
+    }
+   ],
+   "masked_source_sha256": "b64d1eb6a39d6412cd174d78c5700a0294363fcede60732c81ea5e19bf01c337"
+  },
+  {
+   "copy": "src/prompts/s5_type.txt",
+   "copy_sha256": "93132a7cc56d18f6949c8da1f635ff9e9f1fda6dfee066effbd8a5c96ac82539",
+   "source": "src/prompts/s5_type.txt",
+   "source_sha256": "6949ca9cc36704a9e94d22454ba3b28091f94d654e21ca1a32febbd3dd430ca5",
+   "kind": "prompt",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": []
+  },
+  {
+   "copy": "src/prompts/r2_v1_de.template.json",
+   "copy_sha256": "8551d9fd0ce5eeb5ff82fb198d517554b1daa757ccbe12b63dfe73e1735fce6b",
+   "source": "src/m05_cls_apertus.py (constants SYSTEM, DOC_HEAD, SEP, Q_R2_DE, LETTERS_DE, OPTIONS)",
+   "source_sha256": "f3677338ec95a2c53ad0254655cc4438d15ac722e3b446769f5ff3498191a8a2",
+   "kind": "prompt template",
+   "check": "SHA-256 of the canonical JSON (sort_keys, separators , and :) = template SHA-256 of the frozen head 2a48e04bb8996dd331df38c79fa3121db63420b9c2e3eb5c8afaf053b8e5872e",
+   "edits": []
+  },
+  {
+   "copy": "src/converter/method/ladder.json",
+   "copy_sha256": "9a53760a485a6c0bfcdea0e5cf0d3e6fb302b484f91738e6799f12288d618d98",
+   "source": "daten/iso/ladder/ladder.json",
+   "source_sha256": "1b040f8cde2c5bcbb0b8575ade123bcb81ce73b46a05872c4edf743386da8652",
+   "kind": "method data, reduced",
+   "edits": [
+    {
+     "reason": "only the keys that the code reads; values equal"
+    }
+   ]
+  },
+  {
+   "copy": "src/converter/method/s1_selection.json",
+   "copy_sha256": "341eb9984018c75cb7bb907d7d3ed1c2c7b40eb99ab3741712493468d9602a1f",
+   "source": "daten/iso/sub/s1_role/combined_dev.json",
+   "source_sha256": "eedcb4aeefd85d9f756b50bb24bc688831fae9270429b19077c11522d919fa9f",
+   "kind": "method data, reduced",
+   "edits": [
+    {
+     "reason": "only the keys chosen, sure_ids and apertus_prompt_sha256; values equal"
+    }
+   ]
+  },
+  {
+   "copy": "samples/26171/input/atoms.json",
+   "copy_sha256": "2ad0622a850dc22d2bbcc23f913f175bb55ab867f54ad6b58e117ffa2c0b6c91",
+   "source": "daten/iso/atome/26171.json",
+   "source_sha256": "2ad0622a850dc22d2bbcc23f913f175bb55ab867f54ad6b58e117ffa2c0b6c91",
+   "kind": "sample input",
+   "edits": []
+  },
+  {
+   "copy": "samples/26171/input/docling.json",
+   "copy_sha256": "febb52f3ac01b861af95a39054d1d069bec26d529d76fe4f617351616efcf026",
+   "source": "daten/iso/docling/26171.json",
+   "source_sha256": "febb52f3ac01b861af95a39054d1d069bec26d529d76fe4f617351616efcf026",
+   "kind": "sample input",
+   "edits": []
+  },
+  {
+   "copy": "samples/26171/input/export.json",
+   "copy_sha256": "fe3103ba9599225e5c0b256b7d0ba83a3da07417030944fbeffaa407a2937635",
+   "source": "output of `src/m06_converter.py export` on the OpenParlData exports of 04.10.2026",
+   "source_sha256": null,
+   "kind": "sample input",
+   "edits": []
+  },
+  {
+   "copy": "samples/714840/input/atoms.json",
+   "copy_sha256": "0c3c74be512490f64ff900a83595f812dd7f099ba9fd9deb62957bf60f97cd43",
+   "source": "daten/iso/atome/714840.json",
+   "source_sha256": "0c3c74be512490f64ff900a83595f812dd7f099ba9fd9deb62957bf60f97cd43",
+   "kind": "sample input",
+   "edits": []
+  },
+  {
+   "copy": "samples/714840/input/docling.json",
+   "copy_sha256": "dfbb63375b3e15bf5e329d91b51a78324b9daf14728b678c1988547fb8aff02b",
+   "source": "daten/iso/docling/714840.json",
+   "source_sha256": "dfbb63375b3e15bf5e329d91b51a78324b9daf14728b678c1988547fb8aff02b",
+   "kind": "sample input",
+   "edits": []
+  },
+  {
+   "copy": "samples/714840/input/export.json",
+   "copy_sha256": "ebf5f2b6b755fbb8efc67829b33e0204b138727f9897c5c0e6864472b6942886",
+   "source": "output of `src/m06_converter.py export` on the OpenParlData exports of 04.10.2026",
+   "source_sha256": null,
+   "kind": "sample input",
+   "edits": []
+  },
+  {
+   "copy": "samples/879163/input/atoms.json",
+   "copy_sha256": "bec495c273a56baa05f32c1339db4902376475af3e3b3d8b14a69b7a5f2b32ce",
+   "source": "daten/iso/atome/879163.json",
+   "source_sha256": "bec495c273a56baa05f32c1339db4902376475af3e3b3d8b14a69b7a5f2b32ce",
+   "kind": "sample input",
+   "edits": []
+  },
+  {
+   "copy": "samples/879163/input/docling.json",
+   "copy_sha256": "4c1f7e5f288adcabaa4f6006ef363fbcd496e4aa0dc794acb6e9f25f21316c01",
+   "source": "daten/iso/docling/879163.json",
+   "source_sha256": "4c1f7e5f288adcabaa4f6006ef363fbcd496e4aa0dc794acb6e9f25f21316c01",
+   "kind": "sample input",
+   "edits": []
+  },
+  {
+   "copy": "samples/879163/input/export.json",
+   "copy_sha256": "d081d9005890cf93617d9f682ccc0c6005f4e598d1b6f633c310d0e2f100c92d",
+   "source": "output of `src/m06_converter.py export` on the OpenParlData exports of 04.10.2026",
+   "source_sha256": null,
+   "kind": "sample input",
+   "edits": []
+  },
+  {
+   "copy": "samples/pdf_index.csv",
+   "copy_sha256": "9a7246b9206abe89bcab812bf34ff2b0a18167c50b511adb9096a9e3d062dc07",
+   "source": "daten/analyse/pdf/docs_pdf_index.csv.gz",
+   "source_sha256": "c7390de9c03012bb4feecbe24a27bc7aef576f23ccae3817324a61c1f68e6c5f",
+   "kind": "sample input, reduced",
+   "edits": [
+    {
+     "reason": "the rows of the 3 samples only, not compressed"
+    }
+   ]
+  },
+  {
+   "copy": "samples/languages.csv",
+   "copy_sha256": "31647ee64cf05825ece72e7e5580eb006760f4171b12ebb80c04e0dce48dba80",
+   "source": "daten/analyse/lehrer_stichprobe/auswahl_lehrer.csv",
+   "source_sha256": "75887e61eecc02fd19ad8181ff21a7ddee65b280389e0dbe1819043784c0942a",
+   "kind": "sample input, reduced",
+   "edits": [
+    {
+     "reason": "the columns doc_id, sprache, sprache_quelle of the 3 samples only"
+    }
+   ]
+  }
+ ]
+}

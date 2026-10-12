@@ -1,0 +1,69 @@
+{
+ "nos4": [
+  "none",
+  "submitted",
+  "submitted",
+  "submitted",
+  "submitted",
+  "submitted",
+  "submitted",
+  "submitted",
+  "none",
+  "submitted",
+  "furniture"
+ ],
+ "l9": [
+  "none",
+  "submitted",
+  "submitted",
+  "submitted",
+  "submitted",
+  "submitted",
+  "submitted",
+  "submitted",
+  "none",
+  "submitted",
+  "furniture"
+ ],
+ "claims": {
+  "L8": [
+   false,
+   "the S1 combined role is not an author role"
+  ],
+  "L9": [
+   false,
+   "the S1 combined role is not an author role"
+  ]
+ },
+ "s1": [
+  "other",
+  "O1",
+  "other",
+  "rule"
+ ],
+ "s2": {
+  "runs": [
+   [
+    "B1.1",
+    "SPONSOR"
+   ]
+  ],
+  "start_weak": true,
+  "s1_start_applied": false
+ },
+ "converter_role": "proposal",
+ "ids": [
+  "B1.1",
+  "B2.1",
+  "B3.1",
+  "B4.1.1",
+  "B4.1.2",
+  "B5.1",
+  "B5.2",
+  "B5.3",
+  "B6.1",
+  "B7.1",
+  "B8.1"
+ ],
+ "atoms_sha256": "0c3c74be512490f64ff900a83595f812dd7f099ba9fd9deb62957bf60f97cd43"
+}

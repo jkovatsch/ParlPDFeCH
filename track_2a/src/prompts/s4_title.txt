@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: Apache-2.0
+Frage: Wie lautet der Titel des Geschäfts?
+
+Der Titel ist die gedruckte Überschrift, die den GEGENSTAND des Geschäfts nennt, also das Thema, um das es geht. Beispiele: «Interpellation betreffend Lärmschutz an der Bahnlinie», «Postulat: Mehr Velowege für die Stadt», «Teilrevision des Energiegesetzes», «Titre : Quelle réponse face au terrorisme climatique ?».
+
+So findest du den Titel:
+1. Überspringe den Kopf der ersten Seite. Das sind NIE Titelzeilen: der Name eines Parlaments, einer Regierung, einer Behörde, einer Gemeinde, eines Kantons oder einer Partei (zum Beispiel «Stadtrat», «Kanton Bern», «Regierungsrat des Kantons Schwyz», «Grosser Gemeinderat»), Logos, Absender und Adressen, Telefon und E-Mail, Ort und Datum, Sitzungs- und Protokollangaben («Auszug aus dem Protokoll», «Sitzung vom …», «Beschluss Nr. …»), Formularfelder (zum Beispiel «Déposée par:», «N° d'affaire:»), Kästchen und Namen von Personen.
+2. Der Titel ist die erste Zeile danach, die das Thema nennt. Er steht vor dem Text (vor der Anrede «Sehr geehrte …» oder vor dem ersten Absatz).
+3. Der Titel kann mehrere Zeilen haben. Nimm alle Zeilen der Überschrift bis zur letzten Zeile, die noch zur Überschrift gehört.
+
+Zum Titel gehören auch:
+- eine Zeile direkt darüber oder darunter, die nur die Art des Geschäfts (zum Beispiel «Interpellation», «Motion»), die Art des Dokuments (zum Beispiel «Beantwortung», «Antwort des Regierungsrates») oder eine Nummer enthält;
+- Zeilen innerhalb der Überschrift mit den Urhebern oder dem Datum (zum Beispiel «von Gemeinderätin X», «de Mme X du 30.03.2023»).
+
+Nicht zum Titel gehören: eine Zeile mit der Art des Geschäfts und nur dem Namen einer Person ohne Thema (zum Beispiel «Question X»), die Anrede, Unterschriften und der Text des Vorstosses oder der Antwort.
+
+Schreibe den Titel genau so ab, wie er im Dokument steht: Zeile für Zeile, je Zeile nur den Text (ohne ID, Seite und Hinweise). Setze den Titel in «». Schliesse mit » nach der letzten Zeile der Überschrift; die Anrede, Formularfelder und der Text danach gehören nicht dazu.

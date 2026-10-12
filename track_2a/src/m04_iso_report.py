@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 """Gate 3a values of one method (gate 3a criteria, version 3): pooled, each group, scans, selective.
 
-The technical report (track_2a/technical_report.md, chapter 5.3) gives the criteria and their limits.
+The technical report version 1 (commit eaacef9, chapter 5.3) gives the criteria and their limits.
 
 Input: the answer files of the method (<data>/iso/v4/hyp_<name>), the readout files with the log
 probabilities (for the confidence of G3a.11) and the reference directory.

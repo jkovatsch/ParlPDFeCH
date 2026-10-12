@@ -1,0 +1,391 @@
+{
+ "schema": "parlpdfech-complexity-ladder/1",
+ "title": "Complexity ladder of the isolation (E20 version 4.2)",
+ "version": "1",
+ "note": "Reduced copy for the public repository: only the keys that the converter code reads (collapse maps, level definitions, ids of the criterion and limit changes). The values are equal to the source file. SOURCES.md gives the SHA-256 of the source file.",
+ "rule_library": {
+  "collapse_maps": {
+   "IDENTITY": {
+    "title": "title",
+    "short_title": "short_title",
+    "submitted": "submitted",
+    "reasoning": "reasoning",
+    "response": "response",
+    "recommendation": "recommendation",
+    "summary": "summary",
+    "committee_recommendation": "committee_recommendation",
+    "speech": "speech",
+    "proposition": "proposition",
+    "vote": "vote",
+    "none": "none",
+    "furniture": "furniture"
+   },
+   "SLOT": {
+    "title": "title",
+    "short_title": "title",
+    "submitted": "submitted",
+    "reasoning": "submitted",
+    "response": "response",
+    "recommendation": "response",
+    "summary": "summary",
+    "committee_recommendation": "committee_recommendation",
+    "speech": "speech",
+    "proposition": "proposition",
+    "vote": "vote",
+    "none": "none",
+    "furniture": "furniture"
+   },
+   "SLOT_NOTITLE": {
+    "title": "none",
+    "short_title": "none",
+    "submitted": "submitted",
+    "reasoning": "submitted",
+    "response": "response",
+    "recommendation": "response",
+    "summary": "summary",
+    "committee_recommendation": "committee_recommendation",
+    "speech": "speech",
+    "proposition": "proposition",
+    "vote": "vote",
+    "none": "none",
+    "furniture": "furniture"
+   }
+  }
+ },
+ "levels": [
+  {
+   "id": "L0",
+   "name": "Identity: E20 version 4.2 as measured today",
+   "parent": null,
+   "path": "trunk",
+   "collapse_map_id": "IDENTITY",
+   "scope_rule": {
+    "id": "all"
+   },
+   "abstention_rule": {
+    "zones": []
+   },
+   "unit_rule": {
+    "id": "atom"
+   },
+   "metrics": {
+    "exact_rule": "exact_atom"
+   },
+   "method_output": "hyp_assembled_<split> (rule composite assembled)",
+   "reduction_or_limit_change": "identity (no reduction)"
+  },
+  {
+   "id": "L1",
+   "name": "I95 slot classes",
+   "parent": "L0",
+   "path": "trunk",
+   "collapse_map_id": "SLOT",
+   "scope_rule": {
+    "id": "all"
+   },
+   "abstention_rule": {
+    "zones": []
+   },
+   "unit_rule": {
+    "id": "atom"
+   },
+   "metrics": {
+    "exact_rule": "exact_atom"
+   },
+   "method_output": "hyp_assembled_<split>",
+   "reduction_or_limit_change": "reduction: fewer classes"
+  },
+  {
+   "id": "L2",
+   "name": "Affair.title from the source record",
+   "parent": "L1",
+   "path": "trunk",
+   "collapse_map_id": "SLOT_NOTITLE",
+   "scope_rule": {
+    "id": "all"
+   },
+   "abstention_rule": {
+    "zones": []
+   },
+   "unit_rule": {
+    "id": "atom"
+   },
+   "metrics": {
+    "exact_rule": "exact_atom"
+   },
+   "method_output": "hyp_assembled_<split>",
+   "reduction_or_limit_change": "reduction: fewer classes (one I95 slot comes from the source record)"
+  },
+  {
+   "id": "L3",
+   "name": "Unsure trim zones",
+   "parent": "L2",
+   "path": "atom path",
+   "collapse_map_id": "SLOT_NOTITLE",
+   "scope_rule": {
+    "id": "all"
+   },
+   "abstention_rule": {
+    "zones": [
+     {
+      "id": "interior"
+     },
+     {
+      "id": "edge_blocks_1"
+     }
+    ]
+   },
+   "unit_rule": {
+    "id": "atom"
+   },
+   "metrics": {
+    "exact_rule": "exact_atom"
+   },
+   "method_output": "hyp_assembled_<split>",
+   "reduction_or_limit_change": "reduction: abstention"
+  },
+  {
+   "id": "L4",
+   "name": "Written affairs only",
+   "parent": "L3",
+   "path": "atom path",
+   "collapse_map_id": "SLOT_NOTITLE",
+   "scope_rule": {
+    "id": "written_affair"
+   },
+   "abstention_rule": {
+    "zones": [
+     {
+      "id": "interior"
+     },
+     {
+      "id": "edge_blocks_1"
+     }
+    ]
+   },
+   "unit_rule": {
+    "id": "atom"
+   },
+   "metrics": {
+    "exact_rule": "exact_atom"
+   },
+   "method_output": "hyp_assembled_<split>",
+   "reduction_or_limit_change": "reduction: narrower scope"
+  },
+  {
+   "id": "L5",
+   "name": "Role agreement",
+   "parent": "L4",
+   "path": "atom path",
+   "collapse_map_id": "SLOT_NOTITLE",
+   "scope_rule": {
+    "id": "role_agreement"
+   },
+   "abstention_rule": {
+    "zones": [
+     {
+      "id": "interior"
+     },
+     {
+      "id": "edge_blocks_1"
+     }
+    ]
+   },
+   "unit_rule": {
+    "id": "atom"
+   },
+   "metrics": {
+    "exact_rule": "exact_atom"
+   },
+   "method_output": "hyp_assembled_<split>",
+   "reduction_or_limit_change": "reduction: abstention on whole documents"
+  },
+  {
+   "id": "L6",
+   "name": "Single-author documents with Apertus agreement",
+   "parent": "L5",
+   "path": "atom path",
+   "collapse_map_id": "SLOT_NOTITLE",
+   "scope_rule": {
+    "id": "single_author_agreement"
+   },
+   "abstention_rule": {
+    "zones": [
+     {
+      "id": "interior"
+     },
+     {
+      "id": "edge_blocks_1"
+     }
+    ]
+   },
+   "unit_rule": {
+    "id": "atom"
+   },
+   "metrics": {
+    "exact_rule": "exact_atom"
+   },
+   "method_output": "hyp_assembled_<split>",
+   "reduction_or_limit_change": "reduction: narrower scope and abstention"
+  },
+  {
+   "id": "L7",
+   "name": "Author core",
+   "parent": "L6",
+   "path": "atom path",
+   "collapse_map_id": "SLOT_NOTITLE",
+   "scope_rule": {
+    "id": "single_author_agreement"
+   },
+   "abstention_rule": {
+    "zones": [
+     {
+      "id": "interior"
+     },
+     {
+      "id": "edge_blocks_1"
+     },
+     {
+      "id": "run_band_3"
+     }
+    ]
+   },
+   "unit_rule": {
+    "id": "atom"
+   },
+   "metrics": {
+    "exact_rule": "exact_atom"
+   },
+   "method_output": "hyp_assembled_<split>",
+   "reduction_or_limit_change": "reduction: abstention"
+  },
+  {
+   "id": "L8",
+   "name": "Author sequence at the block unit",
+   "parent": "L4",
+   "path": "block path",
+   "collapse_map_id": "SLOT_NOTITLE",
+   "scope_rule": {
+    "id": "written_affair"
+   },
+   "abstention_rule": {
+    "zones": []
+   },
+   "unit_rule": {
+    "id": "block"
+   },
+   "metrics": {
+    "exact_rule": "exact_block"
+   },
+   "method_output": "err_recompose_nos4_<split>.json (S3 all text, S4 not used)",
+   "reduction_or_limit_change": "reduction: coarser unit and abstention on the frame extent"
+  },
+  {
+   "id": "L9",
+   "name": "Author sequence at the block unit with role agreement",
+   "parent": "L8",
+   "path": "block path",
+   "collapse_map_id": "SLOT_NOTITLE",
+   "scope_rule": {
+    "id": "role_agreement"
+   },
+   "abstention_rule": {
+    "zones": []
+   },
+   "unit_rule": {
+    "id": "block"
+   },
+   "metrics": {
+    "exact_rule": "exact_block"
+   },
+   "method_output": "err_recompose_nos4_<split>.json",
+   "reduction_or_limit_change": "reduction: abstention on whole documents"
+  },
+  {
+   "id": "L10",
+   "name": "Document unit: the set of I95 steps that hold text",
+   "parent": "L8",
+   "path": "document unit (terminal)",
+   "collapse_map_id": "SLOT_NOTITLE",
+   "scope_rule": {
+    "id": "written_affair"
+   },
+   "abstention_rule": {
+    "zones": []
+   },
+   "unit_rule": {
+    "id": "document"
+   },
+   "metrics": {
+    "exact_rule": "exact_document"
+   },
+   "method_output": "hyp_assembled_<split>",
+   "reduction_or_limit_change": "reduction: coarser unit (ends the isolation in the sense of E20)"
+  }
+ ],
+ "criterion_changes": [
+  {
+   "id": "CC1",
+   "applies_to": [
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6",
+    "L7",
+    "L8",
+    "L9",
+    "L10"
+   ]
+  },
+  {
+   "id": "CC2",
+   "applies_to": [
+    "L8",
+    "L9"
+   ]
+  },
+  {
+   "id": "CC3",
+   "applies_to": [
+    "L6",
+    "L7"
+   ]
+  },
+  {
+   "id": "CC4",
+   "applies_to": [
+    "L3",
+    "L4",
+    "L5",
+    "L6",
+    "L7",
+    "L8",
+    "L9",
+    "L10"
+   ]
+  },
+  {
+   "id": "CC5",
+   "applies_to": [
+    "L8",
+    "L9",
+    "L10"
+   ]
+  }
+ ],
+ "limit_changes": [
+  {
+   "id": "LC1",
+   "applies_to": [
+    "L0",
+    "L1",
+    "L4",
+    "L5",
+    "L8",
+    "L9",
+    "L10"
+   ]
+  }
+ ]
+}

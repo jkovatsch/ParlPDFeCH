@@ -2,7 +2,7 @@
 """CRF decoder on out-of-fold (OOF) emissions for E20 version 4 (step 3.9, second decoder of gate 3a).
 
 The rule of gate 3a: use the CRF on the final group only if it is better than the Viterbi decoder of
-`m04_iso_import4.py` on the out-of-fold set. It was not better (technical report, chapter 5.3).
+`m04_iso_import4.py` on the out-of-fold set. It was not better (technical report version 1, commit eaacef9, chapter 5.3).
 
 The model readout (`m04_iso_torch.py`) gives log probabilities of the 12 answers for each atom. The
 CRF learns how to combine them with the block structure. State = the last text answer of the

@@ -1,0 +1,4 @@
+id,body_key,ebene,language,parent_type,affair_id,category_de,category_harmonized,name_klasse,size,text_len,text_nonws,hash,url_oparl,date
+26171,BS,kanton,,affair,115961,,,vorstoss,44730,2587,2197,983545420862d4d42f592e71918230f03e8a4cf46f90e7fd4a380c08e1cc7667,https://files.openparldata.ch/doc/BS/983545420862d4d42f592e71918230f03e8a4cf46f90e7fd4a380c08e1cc7667,2019-10-24
+879163,6037,gemeinde,,affair,329535,,,vorstoss,221387,2319,1961,cc7eb17fcc026efde7c970a1e762e7b70538e06787859cbe44f4fb2b3de11a19,https://files.openparldata.ch/doc/6037/cc7eb17fcc026efde7c970a1e762e7b70538e06787859cbe44f4fb2b3de11a19,
+714840,BS,kanton,de,affair,305382,Regierungsratsbeschluss-P,government_resolution,antwort,106481,365,286,210f283a44ef070a6ac958970636bbf12900f44a6d97f687de9bad9a1b1827bf,https://files.openparldata.ch/doc/BS/210f283a44ef070a6ac958970636bbf12900f44a6d97f687de9bad9a1b1827bf,2014-04-08

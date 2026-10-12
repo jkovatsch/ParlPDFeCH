@@ -1,0 +1,1322 @@
+# SPDX-License-Identifier: Apache-2.0
+# ParlPDFeCH-Provenienzprofil (Prototyp, Stand 05.10.2026)
+# ----------------------------------------------------------------
+# Begleitschema für Seitendateien zu eCH-0295-Instanzen (K95 und I95). Es ändert kein eCH-Schema:
+# Die eCH-Instanz bleibt unverändert gültig oder ungültig, die Provenienz steht in einer eigenen
+# Datei, die per IRI auf die eCH-Objekte zeigt (ech-weisungen.md, Vorgabe 4: Begleitklassen statt
+# Unterklassen in eCH-Slots). Importiert nur die gemeinsamen Elemente aus eCH-0292 (schema_common,
+# Commit 3cab44d); keine Namen, die dort schon vergeben sind (value, label, language, remark …).
+# Namensraum ppx: ist ein Platzhalter (RFC 2606, .example), bis der IRI-Namensraum entschieden ist (E3).
+# Erzeugt und geprüft von src/m06_ech_ausgabe.py; Bericht: crisp-dm/06-deployment/ech-ausgabe-prototyp.md.
+#
+# Version 0.2.0, 09.10.2026 (step 3.18, decision D2 of isolation-complexity-ladder.md chapter 8, decision E34):
+# optional slot extent_value_status on TextBlockRecord with ExtentValueStatusEnum (certain, unsure). It gives
+# the value status (glossary) of the extent of a text block. At the isolation level L9 (E20 version 5.0,
+# chapter 7) each TextBlock of a claimed block has the value status unsure for its extent. No other change.
+
+id: https://schema.parlpdfech.example/profile/provenance
+name: parlpdfech-provenance
+title: ParlPDFeCH provenance profile (prototype)
+description: |
+  Companion schema for provenance side files of eCH-0295 instances derived from PDF documents.
+  It records, for every text block and every value of an eCH-0295 instance, where it comes from
+  (PDF atoms with page, bounding box and character range, or an OpenParlData export record),
+  how it was derived, and placeholder probabilities for later Jev decisions. It points to eCH
+  entities by IRI and does not change any eCH schema.
+annotations:
+  description_de: |
+    Begleitschema für Provenienz-Seitendateien zu eCH-0295-Instanzen aus PDF-Dokumenten. Es hält
+    für jeden Textblock und jeden Wert fest, woher er stammt (PDF-Atome mit Seite, Rahmen und
+    Zeichenbereich oder ein Datensatz des OpenParlData-Exports), wie er entstanden ist, und enthält
+    Platzhalter für spätere Jev-Wahrscheinlichkeiten. Es verweist per IRI auf eCH-Objekte und
+    ändert kein eCH-Schema.
+  description_fr: |
+    Schéma d'accompagnement pour des fichiers de provenance liés à des instances eCH-0295 issues
+    de documents PDF. Il indique pour chaque bloc de texte et chaque valeur sa source, sa
+    dérivation et des probabilités provisoires; il renvoie aux objets eCH par IRI.
+version: 0.2.0
+prefixes:
+  linkml: https://w3id.org/linkml/
+  ppx: https://schema.parlpdfech.example/profile/
+  mcm: https://ld.ech.ch/schema/0292/meta-common/
+  prov: http://www.w3.org/ns/prov#
+  oa: http://www.w3.org/ns/oa#
+  dcterms: http://purl.org/dc/terms/
+  schema: http://schema.org/
+  xsd: http://www.w3.org/2001/XMLSchema#
+  skos: http://www.w3.org/2004/02/skos/core#
+default_prefix: ppx
+default_range: string
+imports:
+  - linkml:types
+  - ../quellen/political-affairs-ech-group/ech-0292_meta/input/schema_common
+
+# CLASSES
+# ----------------------------------------------------------------
+
+classes:
+
+  ExtractionRecord:
+    tree_root: true
+    description: Provenance side file for one eCH-0295 delivery (one affair, one schema version).
+    annotations:
+      description_de: Provenienz-Seitendatei zu einer eCH-0295-Lieferung (ein Geschäft, eine Fassung).
+      description_fr: Fichier de provenance d'une livraison eCH-0295 (une affaire, une version).
+    class_uri: prov:Bundle
+    mixins:
+      - HasIdentification
+    slots:
+      - describes_delivery
+      - ech_schema_version
+      - pipeline_run
+      - source_documents
+      - text_block_records
+      - value_records
+      - not_mapped_records
+      - verbatim_check
+
+  EchEntity:
+    description: Any entity of an eCH-0295 instance, referenced by its IRI (affair, step, container).
+    annotations:
+      description_de: Ein Objekt einer eCH-0295-Instanz, über seine IRI referenziert (Geschäft, Schritt, Container).
+      description_fr: Un objet d'une instance eCH-0295, référencé par son IRI.
+    class_uri: prov:Entity
+    mixins:
+      - HasIdentification
+
+  PipelineRun:
+    description: The run that produced the delivery (decomposition source, versions).
+    annotations:
+      description_de: Lauf, der die Lieferung erzeugt hat (Quelle der Zerlegung, Versionen).
+      description_fr: Exécution ayant produit la livraison (source de la segmentation, versions).
+    class_uri: prov:Activity
+    slots:
+      - script_name
+      - decomposition_source
+      - decomposition_accepted
+      - taxonomy_version
+      - taxonomy_prompt_hash
+      - atom_version
+      - ech_commit
+      - linkml_version
+      - datetime_generated
+
+  SourceDocument:
+    description: The PDF file the texts come from (FRBR manifestation in eCH-0292 terms).
+    annotations:
+      description_de: Die PDF-Datei, aus der die Texte stammen (Manifestation im Sinn von eCH-0292).
+      description_fr: Le fichier PDF dont proviennent les textes (manifestation au sens d'eCH-0292).
+    class_uri: prov:Entity
+    mixins:
+      - HasIdentification
+    slots:
+      - manifestation_url
+      - publisher_url
+      - file_sha256
+      - export_hash
+      - docling_json_sha256
+      - atom_fingerprint
+      - page_count
+      - document_language
+      - document_language_source
+      - document_kind
+
+  TextBlockRecord:
+    description: |
+      Provenance of one text block: the eCH slot it fills (or why it is not in the eCH instance),
+      the units and atoms it consists of, and the permitted changes applied to the wording.
+    annotations:
+      description_de: |
+        Provenienz eines Textblocks: welches eCH-Feld er füllt (oder warum er nicht in der eCH-Instanz
+        steht), aus welchen Einheiten und Atomen er besteht, welche erlaubten Änderungen am Wortlaut
+        vorgenommen wurden.
+      description_fr: |
+        Provenance d'un bloc de texte: champ eCH rempli (ou raison de l'absence), unités et atomes
+        sources, modifications autorisées du libellé.
+    mixins:
+      - HasIdentification
+    slots:
+      - about_entity
+      - instance_path
+      - ech_slot
+      - ech_text_type
+      - section_key
+      - quotation_status
+      - mapping_status
+      - not_mapped_reason
+      - extent_value_status
+      - text_form
+      - text_content
+      - char_count
+      - source_document
+      - units
+      - text_changes
+
+  UnitRecord:
+    description: One isolated unit (ordered atoms with one function in the procedure) inside a text block.
+    annotations:
+      description_de: Eine isolierte Einheit (geordnete Atome mit einer Funktion im Verfahren) in einem Textblock.
+      description_fr: Une unité isolée (atomes ordonnés ayant une fonction dans la procédure) d'un bloc.
+    slots:
+      - unit_id
+      - unit_type
+      - printed_numbers
+      - refers_to_units
+      - html_ranges
+      - atom_evidence
+      - decisions
+
+  AtomEvidence:
+    description: A located piece of the PDF (one atom = one line) with page, bounding box and character range.
+    annotations:
+      description_de: Eine verortete Stelle im PDF (ein Atom = eine Zeile) mit Seite, Rahmen und Zeichenbereich.
+      description_fr: Un passage localisé du PDF (un atome = une ligne) avec page, cadre et plage de caractères.
+    class_uri: ppx:AtomEvidence
+    close_mappings:
+      - oa:SpecificResource
+    slots:
+      - atom_id
+      - page_number
+      - bbox
+      - char_start
+      - char_end
+      - from_ocr
+      - matched_text
+      - match_start
+      - match_end
+
+  BoundingBox:
+    description: Rectangle on a PDF page in PDF points, origin top left.
+    annotations:
+      description_de: Rechteck auf einer PDF-Seite in PDF-Punkten, Ursprung oben links.
+      description_fr: Rectangle sur une page PDF en points PDF, origine en haut à gauche.
+    close_mappings:
+      - oa:FragmentSelector
+    slots:
+      - bbox_left
+      - bbox_top
+      - bbox_right
+      - bbox_bottom
+
+  CharRange:
+    description: Half-open character range [range_start, range_end) in a string.
+    annotations:
+      description_de: Halboffener Zeichenbereich [range_start, range_end) in einer Zeichenkette.
+      description_fr: Plage de caractères semi-ouverte [range_start, range_end) dans une chaîne.
+    close_mappings:
+      - oa:TextPositionSelector
+    slots:
+      - range_start
+      - range_end
+
+  TextChanges:
+    description: Permitted, reversible changes between atom wording and rich text (all logged).
+    annotations:
+      description_de: Erlaubte, umkehrbare Änderungen zwischen Atom-Wortlaut und Richtext (alle protokolliert).
+      description_fr: Modifications autorisées et réversibles entre le libellé des atomes et le texte riche.
+    slots:
+      - hyphens_removed
+      - list_markers_removed
+      - empty_atoms
+      - nfc_changed
+
+  Decision:
+    description: |
+      One decision of the pipeline (boundary, unit type, section …) with its probability. In this
+      prototype the decisions come from a reference decomposition; the probability 1.0 is a placeholder.
+    annotations:
+      description_de: |
+        Ein Entscheid der Pipeline (Grenze, Einheitstyp, Abschnitt …) mit Wahrscheinlichkeit. Im Prototyp
+        stammen die Entscheide aus einer Referenz-Zerlegung; die Wahrscheinlichkeit 1.0 ist ein Platzhalter.
+      description_fr: |
+        Une décision du pipeline (limite, type d'unité, section …) avec sa probabilité; ici issue d'une
+        segmentation de référence, la probabilité 1.0 est provisoire.
+    slots:
+      - decision_kind
+      - chosen_value
+      - probability
+      - probability_source
+      - is_placeholder
+
+  ValueRecord:
+    description: Provenance of one leaf value of the eCH instance (identifier, number, date, enum value, text).
+    annotations:
+      description_de: Provenienz eines einzelnen Werts der eCH-Instanz (Kennung, Nummer, Datum, Begriff, Text).
+      description_fr: Provenance d'une valeur de l'instance eCH (identifiant, numéro, date, terme, texte).
+    slots:
+      - about_entity
+      - instance_path
+      - ech_slot
+      - recorded_value
+      - derivation
+      - rule_applied
+      - mapping_match
+      - metadata_evidence
+      - pdf_evidence
+      - pdf_consistency
+      - alternatives
+
+  MetadataEvidence:
+    description: The OpenParlData export record and field a value was taken from.
+    annotations:
+      description_de: Datensatz und Feld des OpenParlData-Exports, aus dem ein Wert stammt.
+      description_fr: Enregistrement et champ de l'export OpenParlData dont provient une valeur.
+    slots:
+      - export_file
+      - record_type
+      - record_id
+      - field_name
+      - source_value
+      - datetime_export_retrieved
+
+  AlternativeValue:
+    description: Another candidate value for the same slot (e.g. a date found in the PDF).
+    annotations:
+      description_de: Ein anderer Kandidatenwert für dasselbe Feld (z.B. ein im PDF gefundenes Datum).
+      description_fr: Une autre valeur candidate pour le même champ (p. ex. une date trouvée dans le PDF).
+    slots:
+      - alternative_value
+      - alternative_source
+      - alternative_note
+
+  NotMappedRecord:
+    description: Information present in the sources that the eCH schema version cannot hold (reported, not dropped).
+    annotations:
+      description_de: Information aus den Quellen, die die eCH-Fassung nicht aufnehmen kann (gemeldet, nicht verworfen).
+      description_fr: Information présente dans les sources que la version eCH ne peut accueillir (signalée).
+    slots:
+      - not_mapped_item
+      - not_mapped_reason
+      - candidate_value
+      - candidate_source
+
+  VerbatimCheck:
+    description: Result of the check that no text was generated (E19).
+    annotations:
+      description_de: Ergebnis der Prüfung, dass kein Text erzeugt wurde (E19).
+      description_fr: Résultat du contrôle qu'aucun texte n'a été généré (E19).
+    slots:
+      - check_method
+      - text_blocks_checked
+      - characters_checked
+      - hyphens_removed_count
+      - list_markers_removed_count
+      - metadata_values_checked
+      - leaves_without_provenance
+      - check_passed
+
+# SLOTS
+# ----------------------------------------------------------------
+
+slots:
+
+  describes_delivery:
+    slot_uri: ppx:describesDelivery
+    range: EchEntity
+    inlined: false
+    required: true
+    description: IRI of the eCH-0295 container this side file belongs to.
+    annotations:
+      description_de: IRI des eCH-0295-Containers, zu dem diese Seitendatei gehört.
+      description_fr: IRI du conteneur eCH-0295 auquel ce fichier se rapporte.
+  ech_schema_version:
+    slot_uri: ppx:echSchemaVersion
+    required: true
+    description: eCH-0295 version and commit the instance was built for (K95 core v0.2.0 or I95, commit 3cab44d).
+    annotations:
+      description_de: eCH-0295-Fassung und Commit, für die die Instanz gebaut wurde.
+      description_fr: Version eCH-0295 et commit visés par l'instance.
+  pipeline_run:
+    slot_uri: prov:wasGeneratedBy
+    range: PipelineRun
+    inlined: true
+    required: true
+    description: The run that generated the delivery.
+    annotations:
+      description_de: Der Lauf, der die Lieferung erzeugt hat.
+      description_fr: L'exécution ayant généré la livraison.
+  source_documents:
+    slot_uri: ppx:sourceDocument
+    range: SourceDocument
+    multivalued: true
+    inlined_as_list: true
+    description: Source PDF documents of the delivery.
+    annotations:
+      description_de: Quell-PDF der Lieferung.
+      description_fr: Documents PDF sources de la livraison.
+  text_block_records:
+    slot_uri: ppx:textBlockRecord
+    range: TextBlockRecord
+    multivalued: true
+    inlined_as_list: true
+    description: Provenance of every text block, including blocks the eCH version cannot hold.
+    annotations:
+      description_de: Provenienz jedes Textblocks, auch der Blöcke, die die eCH-Fassung nicht aufnimmt.
+      description_fr: Provenance de chaque bloc de texte, y compris ceux que la version eCH n'accueille pas.
+  value_records:
+    slot_uri: ppx:valueRecord
+    range: ValueRecord
+    multivalued: true
+    inlined_as_list: true
+    description: Provenance of every leaf value of the eCH instance.
+    annotations:
+      description_de: Provenienz jedes Einzelwerts der eCH-Instanz.
+      description_fr: Provenance de chaque valeur de l'instance eCH.
+  not_mapped_records:
+    slot_uri: ppx:notMappedRecord
+    range: NotMappedRecord
+    multivalued: true
+    inlined_as_list: true
+    description: Information that could not be expressed in the eCH version.
+    annotations:
+      description_de: Information, die in der eCH-Fassung nicht ausdrückbar war.
+      description_fr: Informations non exprimables dans la version eCH.
+  verbatim_check:
+    slot_uri: ppx:verbatimCheck
+    range: VerbatimCheck
+    inlined: true
+    description: Result of the no-generated-text check.
+    annotations:
+      description_de: Ergebnis der Prüfung «kein erzeugter Text».
+      description_fr: Résultat du contrôle «aucun texte généré».
+
+  script_name:
+    slot_uri: ppx:scriptName
+    description: Script that produced the delivery.
+    annotations:
+      description_de: Skript, das die Lieferung erzeugt hat.
+      description_fr: Script ayant produit la livraison.
+  decomposition_source:
+    slot_uri: ppx:decompositionSource
+    description: Where the units come from (reference decomposition ref_a/ref_b, or an isolator run).
+    annotations:
+      description_de: Herkunft der Einheiten (Referenz-Zerlegung ref_a/ref_b oder Isolierer-Lauf).
+      description_fr: Origine des unités (segmentation de référence ou isolateur).
+  decomposition_accepted:
+    slot_uri: ppx:decompositionAccepted
+    range: boolean
+    description: Whether the decomposition was accepted by a human reviewer.
+    annotations:
+      description_de: Ob die Zerlegung von Hand abgenommen ist.
+      description_fr: Si la segmentation a été validée par une personne.
+  taxonomy_version:
+    slot_uri: ppx:taxonomyVersion
+    description: Version of the isolation taxonomy.
+    annotations:
+      description_de: Fassung der Isolierungs-Taxonomie.
+      description_fr: Version de la taxonomie d'isolation.
+  taxonomy_prompt_hash:
+    slot_uri: ppx:taxonomyPromptHash
+    description: Hash of the isolation instructions the decomposition follows.
+    annotations:
+      description_de: Hash der Isolierungs-Anleitung, der die Zerlegung folgt.
+      description_fr: Empreinte des instructions d'isolation suivies.
+  atom_version:
+    slot_uri: ppx:atomVersion
+    description: Version of the atom segmentation (atom IDs are internal anchors, not IRIs).
+    annotations:
+      description_de: Fassung der Atome (Atom-IDs sind interne Bezugspunkte, keine IRIs).
+      description_fr: Version des atomes (identifiants internes, pas des IRI).
+  ech_commit:
+    slot_uri: ppx:echCommit
+    description: Commit of the eCH repository the schemas were read from.
+    annotations:
+      description_de: Commit des eCH-Repositorys, aus dem die Schemata stammen.
+      description_fr: Commit du dépôt eCH utilisé.
+  linkml_version:
+    slot_uri: ppx:linkmlVersion
+    description: LinkML version used for validation and conversion.
+    annotations:
+      description_de: Für Validierung und Umwandlung verwendete LinkML-Version.
+      description_fr: Version de LinkML utilisée.
+  datetime_generated:
+    slot_uri: prov:endedAtTime
+    range: datetime
+    description: Time the delivery was generated (UTC).
+    annotations:
+      description_de: Zeitpunkt der Erzeugung (UTC).
+      description_fr: Moment de la génération (UTC).
+
+  manifestation_url:
+    slot_uri: ppx:manifestationUrl
+    range: uri
+    description: Public URL of the PDF copy used (OpenParlData file store).
+    annotations:
+      description_de: Öffentliche URL der verwendeten PDF-Kopie (Dateiablage OpenParlData).
+      description_fr: URL publique de la copie PDF utilisée.
+  publisher_url:
+    slot_uri: ppx:publisherUrl
+    range: uri
+    description: URL of the document at the publishing parliament, as given in the export.
+    annotations:
+      description_de: URL des Dokuments beim publizierenden Parlament, wie im Export angegeben.
+      description_fr: URL du document auprès du parlement éditeur.
+  file_sha256:
+    slot_uri: ppx:fileSha256
+    description: SHA-256 of the PDF file processed.
+    annotations:
+      description_de: SHA-256 der verarbeiteten PDF-Datei.
+      description_fr: SHA-256 du fichier PDF traité.
+  export_hash:
+    slot_uri: ppx:exportHash
+    description: Value of the field hash in the OpenParlData export (meaning not documented).
+    annotations:
+      description_de: Wert des Felds hash im OpenParlData-Export (Bedeutung nicht dokumentiert).
+      description_fr: Valeur du champ hash de l'export OpenParlData.
+  docling_json_sha256:
+    slot_uri: ppx:doclingJsonSha256
+    description: SHA-256 of the Docling decomposition the character ranges refer to.
+    annotations:
+      description_de: SHA-256 der Docling-Zerlegung, auf die sich die Zeichenbereiche beziehen.
+      description_fr: SHA-256 de la décomposition Docling de référence pour les plages.
+  atom_fingerprint:
+    slot_uri: ppx:atomFingerprint
+    description: Fingerprint of the atom list (IDs and character ranges).
+    annotations:
+      description_de: Fingerabdruck der Atomliste (IDs und Zeichenbereiche).
+      description_fr: Empreinte de la liste d'atomes.
+  page_count:
+    slot_uri: ppx:pageCount
+    range: integer
+    description: Number of pages of the PDF.
+    annotations:
+      description_de: Seitenzahl des PDF.
+      description_fr: Nombre de pages du PDF.
+  document_language:
+    slot_uri: ppx:documentLanguage
+    pattern: "^[a-z]{2}$"
+    description: Language of the document (ISO 639-1).
+    annotations:
+      description_de: Sprache des Dokuments (ISO 639-1).
+      description_fr: Langue du document (ISO 639-1).
+  document_language_source:
+    slot_uri: ppx:documentLanguageSource
+    description: Where the document language comes from.
+    annotations:
+      description_de: Herkunft der Sprachangabe.
+      description_fr: Origine de l'indication de langue.
+  document_kind:
+    slot_uri: ppx:documentKind
+    description: Kind of document (submitted instrument, executive response …) as coded in the inspection sample.
+    annotations:
+      description_de: Dokumentart (eingereichter Vorstoss, Antwort der Exekutive …) laut Augenschein.
+      description_fr: Type de document selon l'inspection manuelle.
+
+  about_entity:
+    slot_uri: ppx:aboutEntity
+    range: EchEntity
+    inlined: false
+    related_mappings:
+      - oa:hasTarget
+    description: IRI of the eCH entity (affair, step) the record is about.
+    annotations:
+      description_de: IRI des eCH-Objekts (Geschäft, Schritt), auf das sich der Eintrag bezieht.
+      description_fr: IRI de l'objet eCH concerné.
+  instance_path:
+    slot_uri: ppx:instancePath
+    description: JSON path of the element inside the eCH instance (needed because TextBlock has no identifier).
+    annotations:
+      description_de: JSON-Pfad in der eCH-Instanz (nötig, weil TextBlock keine Kennung hat).
+      description_fr: Chemin JSON dans l'instance eCH (TextBlock n'a pas d'identifiant).
+  ech_slot:
+    slot_uri: ppx:echSlot
+    description: Class and slot of the eCH schema version, e.g. ExecutiveResponseStep.texts.
+    annotations:
+      description_de: Klasse und Slot der eCH-Fassung, z.B. ExecutiveResponseStep.texts.
+      description_fr: Classe et slot de la version eCH.
+  ech_text_type:
+    slot_uri: ppx:echTextType
+    description: TextTypeEnum value of the eCH version.
+    annotations:
+      description_de: Wert aus TextTypeEnum der eCH-Fassung.
+      description_fr: Valeur de TextTypeEnum de la version eCH.
+  section_key:
+    slot_uri: ppx:sectionKey
+    description: Section key of the isolation taxonomy (title, submitted_text, reasoning, response …).
+    annotations:
+      description_de: Abschnitt der Isolierungs-Taxonomie (title, submitted_text, reasoning, response …).
+      description_fr: Section de la taxonomie d'isolation.
+  quotation_status:
+    slot_uri: ppx:quotationStatus
+    range: QuotationStatusEnum
+    description: Whether the block is the document's own text or a reproduction of another text.
+    annotations:
+      description_de: Ob der Block eigener Text des Dokuments oder Wiedergabe eines anderen Texts ist.
+      description_fr: Texte propre au document ou reproduction d'un autre texte.
+  mapping_status:
+    slot_uri: ppx:mappingStatus
+    range: MappingStatusEnum
+    required: true
+    description: Whether the block is in the eCH instance or only in this side file.
+    annotations:
+      description_de: Ob der Block in der eCH-Instanz steht oder nur in dieser Seitendatei.
+      description_fr: Bloc présent dans l'instance eCH ou seulement dans ce fichier.
+  not_mapped_reason:
+    slot_uri: ppx:notMappedReason
+    description: Reason why the block is not in the eCH instance.
+    annotations:
+      description_de: Grund, warum der Block nicht in der eCH-Instanz steht.
+      description_fr: Raison de l'absence dans l'instance eCH.
+  extent_value_status:
+    slot_uri: ppx:extentValueStatus
+    range: ExtentValueStatusEnum
+    description: |
+      Value status (glossary) of the extent of the text block, that is, which atoms between its first
+      and its last atom are body text of its slot. The value unsure tells that the converter claims the
+      slot, the author and the position of the block, but not its extent: the text can hold frame lines
+      (E20 version 5.0, chapter 7). Optional. Without this slot, the side file states nothing about
+      the extent.
+    annotations:
+      description_de: |
+        Wertstatus (Glossar) der Ausdehnung des Textblocks, also welche Atome zwischen seinem ersten und
+        seinem letzten Atom Haupttext seines Felds sind. Der Wert unsure sagt, dass der Konverter Feld,
+        Urheber und Lage des Blocks angibt, aber nicht seine Ausdehnung: Der Text kann Rahmenzeilen
+        enthalten (E20 Version 5.0, Kapitel 7). Optional. Ohne diesen Slot sagt die Seitendatei nichts
+        über die Ausdehnung.
+      description_fr: |
+        Statut de valeur (glossaire) de l'étendue du bloc de texte, c'est-à-dire quels atomes entre son
+        premier et son dernier atome sont du texte principal de son champ. La valeur unsure indique que
+        le convertisseur donne le champ, l'auteur et la position du bloc, mais pas son étendue: le texte
+        peut contenir des lignes de cadre (E20 version 5.0, chapitre 7). Facultatif.
+  text_form:
+    slot_uri: ppx:textForm
+    description: plain (no markup) or richtext (eCH-0292 chapter 06 HTML subset).
+    annotations:
+      description_de: plain (ohne Auszeichnung) oder richtext (HTML-Teilmenge nach eCH-0292 Kapitel 06).
+      description_fr: plain ou richtext (sous-ensemble HTML eCH-0292 chap. 06).
+  text_content:
+    slot_uri: ppx:textContent
+    description: Wording of a block that is not in the eCH instance (so that nothing is dropped silently).
+    annotations:
+      description_de: Wortlaut eines Blocks, der nicht in der eCH-Instanz steht (damit nichts still wegfällt).
+      description_fr: Libellé d'un bloc absent de l'instance eCH.
+  char_count:
+    slot_uri: ppx:charCount
+    range: integer
+    description: Length of the block text in characters.
+    annotations:
+      description_de: Länge des Blocktexts in Zeichen.
+      description_fr: Longueur du texte en caractères.
+  source_document:
+    slot_uri: prov:wasDerivedFrom
+    range: SourceDocument
+    inlined: false
+    description: The source document the block was derived from.
+    annotations:
+      description_de: Das Quelldokument, aus dem der Block abgeleitet ist.
+      description_fr: Le document source du bloc.
+  units:
+    slot_uri: ppx:unit
+    range: UnitRecord
+    multivalued: true
+    inlined_as_list: true
+    description: Units of the block in reading order.
+    annotations:
+      description_de: Einheiten des Blocks in Lesereihenfolge.
+      description_fr: Unités du bloc dans l'ordre de lecture.
+  text_changes:
+    slot_uri: ppx:textChanges
+    range: TextChanges
+    inlined: true
+    description: Changes applied to the wording.
+    annotations:
+      description_de: Am Wortlaut vorgenommene Änderungen.
+      description_fr: Modifications apportées au libellé.
+
+  unit_id:
+    slot_uri: ppx:unitId
+    required: true
+    description: Unit ID in the decomposition (E1 … En, internal).
+    annotations:
+      description_de: Kennung der Einheit in der Zerlegung (E1 … En, intern).
+      description_fr: Identifiant interne de l'unité.
+  unit_type:
+    slot_uri: ppx:unitType
+    description: Unit type of the isolation taxonomy (25 types).
+    annotations:
+      description_de: Einheitstyp der Isolierungs-Taxonomie (25 Typen).
+      description_fr: Type d'unité de la taxonomie (25 types).
+  printed_numbers:
+    slot_uri: ppx:printedNumber
+    multivalued: true
+    description: Number(s) printed in the document for the unit (question 1, answer 2 …).
+    annotations:
+      description_de: Im Dokument gedruckte Nummer(n) der Einheit (Frage 1, Antwort 2 …).
+      description_fr: Numéro(s) imprimé(s) de l'unité.
+  refers_to_units:
+    slot_uri: ppx:refersToUnit
+    multivalued: true
+    description: Units this unit refers to (an answer to its question).
+    annotations:
+      description_de: Einheiten, auf die sich die Einheit bezieht (Antwort auf ihre Frage).
+      description_fr: Unités auxquelles l'unité se rapporte.
+  html_ranges:
+    slot_uri: ppx:htmlRange
+    range: CharRange
+    multivalued: true
+    inlined_as_list: true
+    description: Character ranges of the unit inside the rich text of the block.
+    annotations:
+      description_de: Zeichenbereiche der Einheit im Richtext des Blocks.
+      description_fr: Plages de l'unité dans le texte riche du bloc.
+  atom_evidence:
+    slot_uri: ppx:atomEvidence
+    range: AtomEvidence
+    multivalued: true
+    inlined_as_list: true
+    description: Atoms of the unit with location.
+    annotations:
+      description_de: Atome der Einheit mit Fundort.
+      description_fr: Atomes de l'unité avec localisation.
+  decisions:
+    slot_uri: ppx:decision
+    range: Decision
+    multivalued: true
+    inlined_as_list: true
+    description: Decisions that produced the unit, each with a probability.
+    annotations:
+      description_de: Entscheide, aus denen die Einheit hervorging, je mit Wahrscheinlichkeit.
+      description_fr: Décisions ayant produit l'unité, chacune avec probabilité.
+
+  atom_id:
+    slot_uri: ppx:atomId
+    required: true
+    description: Atom ID (B12.3 = block 12, line 3), internal anchor tied to atom version and Docling run.
+    annotations:
+      description_de: Atom-ID (B12.3 = Block 12, Zeile 3), interner Bezugspunkt, gebunden an Atom-Fassung und Docling-Lauf.
+      description_fr: Identifiant d'atome (B12.3 = bloc 12, ligne 3), ancre interne.
+  page_number:
+    slot_uri: ppx:pageNumber
+    range: integer
+    required: true
+    description: Page of the PDF (1-based).
+    annotations:
+      description_de: Seite im PDF (ab 1).
+      description_fr: Page du PDF (à partir de 1).
+  bbox:
+    slot_uri: ppx:bbox
+    range: BoundingBox
+    inlined: true
+    description: Line rectangle on the page.
+    annotations:
+      description_de: Zeilenrahmen auf der Seite.
+      description_fr: Cadre de la ligne sur la page.
+  char_start:
+    slot_uri: ppx:charStart
+    range: integer
+    required: true
+    close_mappings:
+      - oa:start
+    description: Start of the atom in the Docling full text (inclusive).
+    annotations:
+      description_de: Anfang des Atoms im Docling-Gesamttext (einschliesslich).
+      description_fr: Début de l'atome dans le texte intégral Docling (inclus).
+  char_end:
+    slot_uri: ppx:charEnd
+    range: integer
+    required: true
+    close_mappings:
+      - oa:end
+    description: End of the atom in the Docling full text (exclusive).
+    annotations:
+      description_de: Ende des Atoms im Docling-Gesamttext (ausschliesslich).
+      description_fr: Fin de l'atome dans le texte intégral Docling (exclue).
+  from_ocr:
+    slot_uri: ppx:fromOcr
+    range: boolean
+    description: Whether the atom text comes from OCR.
+    annotations:
+      description_de: Ob der Atomtext aus Texterkennung stammt.
+      description_fr: Texte de l'atome issu de l'OCR.
+  matched_text:
+    slot_uri: ppx:matchedText
+    close_mappings:
+      - oa:exact
+    description: Exact text matched inside the atom (for value evidence).
+    annotations:
+      description_de: Gefundener Wortlaut im Atom (für Wertbelege).
+      description_fr: Texte exact trouvé dans l'atome.
+  match_start:
+    slot_uri: ppx:matchStart
+    range: integer
+    description: Start of the match inside the atom text.
+    annotations:
+      description_de: Anfang des Treffers im Atomtext.
+      description_fr: Début de la correspondance dans l'atome.
+  match_end:
+    slot_uri: ppx:matchEnd
+    range: integer
+    description: End of the match inside the atom text (exclusive).
+    annotations:
+      description_de: Ende des Treffers im Atomtext (ausschliesslich).
+      description_fr: Fin de la correspondance dans l'atome.
+
+  bbox_left:
+    slot_uri: ppx:bboxLeft
+    range: float
+    required: true
+    description: Left edge in PDF points.
+    annotations:
+      description_de: Linker Rand in PDF-Punkten.
+      description_fr: Bord gauche en points PDF.
+  bbox_top:
+    slot_uri: ppx:bboxTop
+    range: float
+    required: true
+    description: Top edge in PDF points (origin top left).
+    annotations:
+      description_de: Oberer Rand in PDF-Punkten (Ursprung oben links).
+      description_fr: Bord supérieur en points PDF.
+  bbox_right:
+    slot_uri: ppx:bboxRight
+    range: float
+    required: true
+    description: Right edge in PDF points.
+    annotations:
+      description_de: Rechter Rand in PDF-Punkten.
+      description_fr: Bord droit en points PDF.
+  bbox_bottom:
+    slot_uri: ppx:bboxBottom
+    range: float
+    required: true
+    description: Bottom edge in PDF points.
+    annotations:
+      description_de: Unterer Rand in PDF-Punkten.
+      description_fr: Bord inférieur en points PDF.
+
+  range_start:
+    slot_uri: ppx:rangeStart
+    range: integer
+    required: true
+    description: Start offset (inclusive).
+    annotations:
+      description_de: Anfang (einschliesslich).
+      description_fr: Début (inclus).
+  range_end:
+    slot_uri: ppx:rangeEnd
+    range: integer
+    required: true
+    description: End offset (exclusive).
+    annotations:
+      description_de: Ende (ausschliesslich).
+      description_fr: Fin (exclue).
+
+  hyphens_removed:
+    slot_uri: ppx:hyphenRemoved
+    range: integer
+    multivalued: true
+    description: Positions in the Docling full text of hyphens removed at line ends.
+    annotations:
+      description_de: Positionen entfernter Trennstriche am Zeilenende im Docling-Gesamttext.
+      description_fr: Positions des traits d'union supprimés en fin de ligne.
+  list_markers_removed:
+    slot_uri: ppx:listMarkerRemoved
+    range: CharRange
+    multivalued: true
+    inlined_as_list: true
+    description: Ranges in the Docling full text of list markers turned into ol/ul.
+    annotations:
+      description_de: Bereiche im Docling-Gesamttext von Listenmarkern, die in ol/ul übergingen.
+      description_fr: Plages des marqueurs de liste transformés en ol/ul.
+  empty_atoms:
+    slot_uri: ppx:emptyAtom
+    multivalued: true
+    description: Atoms without text (pictures) that do not appear in the rich text.
+    annotations:
+      description_de: Atome ohne Text (Bilder), die im Richtext nicht erscheinen.
+      description_fr: Atomes sans texte (images) absents du texte riche.
+  nfc_changed:
+    slot_uri: ppx:nfcChanged
+    range: boolean
+    description: Whether Unicode NFC normalisation changed the text.
+    annotations:
+      description_de: Ob die Unicode-Normalisierung NFC den Text geändert hat.
+      description_fr: Si la normalisation NFC a modifié le texte.
+
+  decision_kind:
+    slot_uri: ppx:decisionKind
+    range: DecisionKindEnum
+    required: true
+    description: What was decided.
+    annotations:
+      description_de: Was entschieden wurde.
+      description_fr: Objet de la décision.
+  chosen_value:
+    slot_uri: ppx:chosenValue
+    required: true
+    description: The chosen option (atom ID, type key, section key …).
+    annotations:
+      description_de: Die gewählte Option (Atom-ID, Typ-Schlüssel, Abschnitt …).
+      description_fr: L'option retenue.
+  probability:
+    slot_uri: ppx:probability
+    range: float
+    minimum_value: 0
+    maximum_value: 1
+    description: Probability of the chosen option (Jev readout); placeholder 1.0 for reference decisions.
+    annotations:
+      description_de: Wahrscheinlichkeit der gewählten Option (Jev-Auslesen); Platzhalter 1.0 bei Referenz-Entscheiden.
+      description_fr: Probabilité de l'option retenue; 1.0 provisoire pour les décisions de référence.
+  probability_source:
+    slot_uri: ppx:probabilitySource
+    range: ProbabilitySourceEnum
+    required: true
+    description: Where the probability comes from.
+    annotations:
+      description_de: Herkunft der Wahrscheinlichkeit.
+      description_fr: Origine de la probabilité.
+  is_placeholder:
+    slot_uri: ppx:isPlaceholder
+    range: boolean
+    description: True if the probability is a placeholder, not a measured value.
+    annotations:
+      description_de: Wahr, wenn die Wahrscheinlichkeit ein Platzhalter und kein Messwert ist.
+      description_fr: Vrai si la probabilité est provisoire.
+
+  recorded_value:
+    slot_uri: ppx:recordedValue
+    required: true
+    description: The value as written in the eCH instance (as string).
+    annotations:
+      description_de: Der Wert, wie er in der eCH-Instanz steht (als Zeichenkette).
+      description_fr: La valeur telle qu'écrite dans l'instance eCH.
+  derivation:
+    slot_uri: ppx:derivation
+    range: ValueDerivationEnum
+    required: true
+    related_mappings:
+      - prov:wasDerivedFrom
+    description: How the value was obtained.
+    annotations:
+      description_de: Wie der Wert entstanden ist.
+      description_fr: Mode d'obtention de la valeur.
+  rule_applied:
+    slot_uri: ppx:ruleApplied
+    description: Rule or mapping applied (short, technical).
+    annotations:
+      description_de: Angewendete Regel oder Abbildung (kurz, technisch).
+      description_fr: Règle ou correspondance appliquée.
+  mapping_match:
+    slot_uri: ppx:mappingMatch
+    range: MappingMatchEnum
+    description: Match quality of a mapping (to a controlled vocabulary or to the meaning of an eCH slot).
+    annotations:
+      description_de: Güte einer Abbildung (auf eine Begriffsliste oder auf die Bedeutung eines eCH-Felds).
+      description_fr: Qualité d'une correspondance (vocabulaire contrôlé ou sens d'un champ eCH).
+  metadata_evidence:
+    slot_uri: ppx:metadataEvidence
+    range: MetadataEvidence
+    multivalued: true
+    inlined_as_list: true
+    description: Export records the value comes from.
+    annotations:
+      description_de: Export-Datensätze, aus denen der Wert stammt.
+      description_fr: Enregistrements d'export à l'origine de la valeur.
+  pdf_evidence:
+    slot_uri: ppx:pdfEvidence
+    range: AtomEvidence
+    multivalued: true
+    inlined_as_list: true
+    description: Places in the PDF where the value occurs or from which it was taken.
+    annotations:
+      description_de: Stellen im PDF, an denen der Wert vorkommt oder aus denen er stammt.
+      description_fr: Passages du PDF où la valeur apparaît ou d'où elle provient.
+  pdf_consistency:
+    slot_uri: ppx:pdfConsistency
+    range: PdfConsistencyEnum
+    description: Comparison of a metadata value with the PDF.
+    annotations:
+      description_de: Abgleich eines Metadatenwerts mit dem PDF.
+      description_fr: Comparaison d'une valeur de métadonnées avec le PDF.
+  alternatives:
+    slot_uri: ppx:alternative
+    range: AlternativeValue
+    multivalued: true
+    inlined_as_list: true
+    description: Other candidate values.
+    annotations:
+      description_de: Andere Kandidatenwerte.
+      description_fr: Autres valeurs candidates.
+
+  export_file:
+    slot_uri: ppx:exportFile
+    description: File of the OpenParlData export (relative path).
+    annotations:
+      description_de: Datei des OpenParlData-Exports (relativer Pfad).
+      description_fr: Fichier de l'export OpenParlData.
+  record_type:
+    slot_uri: ppx:recordType
+    description: Record type of the export (affair, doc, event, group, body).
+    annotations:
+      description_de: Datensatzart des Exports (affair, doc, event, group, body).
+      description_fr: Type d'enregistrement de l'export.
+  record_id:
+    slot_uri: ppx:recordId
+    description: ID of the export record.
+    annotations:
+      description_de: ID des Export-Datensatzes.
+      description_fr: Identifiant de l'enregistrement.
+  field_name:
+    slot_uri: ppx:fieldName
+    description: Field of the export record.
+    annotations:
+      description_de: Feld des Export-Datensatzes.
+      description_fr: Champ de l'enregistrement.
+  source_value:
+    slot_uri: ppx:sourceValue
+    description: Raw value in the export field.
+    annotations:
+      description_de: Rohwert im Exportfeld.
+      description_fr: Valeur brute du champ.
+  datetime_export_retrieved:
+    slot_uri: ppx:datetimeExportRetrieved
+    range: datetime
+    description: Retrieval time of the export (UTC).
+    annotations:
+      description_de: Abrufzeit des Exports (UTC).
+      description_fr: Moment de récupération de l'export (UTC).
+
+  alternative_value:
+    slot_uri: ppx:alternativeValue
+    required: true
+    description: Candidate value.
+    annotations:
+      description_de: Kandidatenwert.
+      description_fr: Valeur candidate.
+  alternative_source:
+    slot_uri: ppx:alternativeSource
+    description: Source of the candidate value.
+    annotations:
+      description_de: Herkunft des Kandidatenwerts.
+      description_fr: Source de la valeur candidate.
+  alternative_note:
+    slot_uri: ppx:alternativeNote
+    description: Why the candidate was not chosen.
+    annotations:
+      description_de: Warum der Kandidat nicht gewählt wurde.
+      description_fr: Pourquoi la candidate n'a pas été retenue.
+
+  not_mapped_item:
+    slot_uri: ppx:notMappedItem
+    required: true
+    description: What could not be expressed (step, field, text block).
+    annotations:
+      description_de: Was nicht ausdrückbar war (Schritt, Feld, Textblock).
+      description_fr: Élément non exprimable.
+  candidate_value:
+    slot_uri: ppx:candidateValue
+    description: The value that would have been delivered.
+    annotations:
+      description_de: Der Wert, der geliefert worden wäre.
+      description_fr: La valeur qui aurait été livrée.
+  candidate_source:
+    slot_uri: ppx:candidateSource
+    description: Source of that value.
+    annotations:
+      description_de: Herkunft dieses Werts.
+      description_fr: Source de cette valeur.
+
+  check_method:
+    slot_uri: ppx:checkMethod
+    description: How the check works.
+    annotations:
+      description_de: Wie die Prüfung vorgeht.
+      description_fr: Méthode du contrôle.
+  text_blocks_checked:
+    slot_uri: ppx:textBlocksChecked
+    range: integer
+    description: Number of text blocks aligned against the atoms.
+    annotations:
+      description_de: Anzahl gegen die Atome abgeglichener Textblöcke.
+      description_fr: Nombre de blocs alignés sur les atomes.
+  characters_checked:
+    slot_uri: ppx:charactersChecked
+    range: integer
+    description: Non-whitespace characters aligned against the atoms.
+    annotations:
+      description_de: Gegen die Atome abgeglichene Zeichen ohne Leerraum.
+      description_fr: Caractères (hors espaces) alignés sur les atomes.
+  hyphens_removed_count:
+    slot_uri: ppx:hyphensRemovedCount
+    range: integer
+    description: Hyphens at line ends dropped during the alignment.
+    annotations:
+      description_de: Beim Abgleich übersprungene Trennstriche am Zeilenende.
+      description_fr: Traits d'union de fin de ligne omis.
+  list_markers_removed_count:
+    slot_uri: ppx:listMarkersRemovedCount
+    range: integer
+    description: List markers at atom starts dropped during the alignment.
+    annotations:
+      description_de: Beim Abgleich übersprungene Listenmarker am Atomanfang.
+      description_fr: Marqueurs de liste omis.
+  metadata_values_checked:
+    slot_uri: ppx:metadataValuesChecked
+    range: integer
+    description: Values checked verbatim against the export records.
+    annotations:
+      description_de: Wörtlich gegen die Export-Datensätze geprüfte Werte.
+      description_fr: Valeurs vérifiées mot pour mot dans l'export.
+  leaves_without_provenance:
+    slot_uri: ppx:leavesWithoutProvenance
+    range: integer
+    description: Leaf values of the eCH instance without a provenance record (must be 0).
+    annotations:
+      description_de: Einzelwerte der eCH-Instanz ohne Provenienz-Eintrag (muss 0 sein).
+      description_fr: Valeurs sans provenance (doit être 0).
+  check_passed:
+    slot_uri: ppx:checkPassed
+    range: boolean
+    required: true
+    description: Whether all checks passed.
+    annotations:
+      description_de: Ob alle Prüfungen bestanden sind.
+      description_fr: Si tous les contrôles sont réussis.
+
+# ENUMS
+# ----------------------------------------------------------------
+
+enums:
+
+  QuotationStatusEnum:
+    description: Own text of the document or reproduction (proposal for TextOriginEnum, value quoted).
+    annotations:
+      description_de: Eigener Text des Dokuments oder Wiedergabe (Vorschlag für TextOriginEnum, Wert quoted).
+      description_fr: Texte propre ou reproduction (proposition pour TextOriginEnum, valeur quoted).
+    permissible_values:
+      own_text:
+        description: Text written in this document by its author.
+        annotations:
+          description_de: In diesem Dokument von seiner Verfasserin verfasster Text.
+          description_fr: Texte rédigé dans ce document par son auteur.
+      quoted:
+        description: Reproduction of a text from another document (e.g. the instrument inside the response).
+        annotations:
+          description_de: Wiedergabe eines Texts aus einem anderen Dokument (z.B. Vorstoss in der Antwort).
+          description_fr: Reproduction d'un texte d'un autre document.
+
+  MappingStatusEnum:
+    description: Whether a text block is part of the eCH instance.
+    annotations:
+      description_de: Ob ein Textblock Teil der eCH-Instanz ist.
+      description_fr: Si un bloc fait partie de l'instance eCH.
+    permissible_values:
+      in_ech_instance:
+        description: The block is a TextBlock (or title) of the eCH instance.
+        annotations:
+          description_de: Der Block ist ein TextBlock (oder Titel) der eCH-Instanz.
+          description_fr: Le bloc figure dans l'instance eCH.
+      profile_only:
+        description: The block is only in this side file (no eCH slot, or quoted while the original exists).
+        annotations:
+          description_de: Der Block steht nur in dieser Seitendatei (kein eCH-Feld oder zitiert bei vorhandenem Original).
+          description_fr: Le bloc figure uniquement dans ce fichier.
+
+  ExtentValueStatusEnum:
+    description: |
+      Value status (glossary: certain, unsure, absent) of the extent of a text block. The value absent
+      has no meaning for the extent of a block that exists, so this list has only certain and unsure.
+    annotations:
+      description_de: |
+        Wertstatus (Glossar: certain, unsure, absent) der Ausdehnung eines Textblocks. Der Wert absent
+        hat für die Ausdehnung eines vorhandenen Blocks keine Bedeutung; die Liste hat nur certain und unsure.
+      description_fr: |
+        Statut de valeur (glossaire: certain, unsure, absent) de l'étendue d'un bloc de texte. La valeur
+        absent n'a pas de sens pour un bloc existant; la liste n'a que certain et unsure.
+    permissible_values:
+      certain:
+        description: The extent is a claim. Each atom of the block that is not page furniture is body text of its slot.
+        annotations:
+          description_de: Die Ausdehnung ist eine Angabe. Jedes Atom des Blocks, das kein Seitenelement ist, ist Haupttext seines Felds.
+          description_fr: L'étendue est une affirmation. Chaque atome du bloc qui n'est pas un élément de page est du texte principal.
+      unsure:
+        description: |
+          The extent is not a claim. The text of the block can hold frame lines (lines that fill no text
+          field, E20 rule F). E20 version 5.0, chapter 7 gives the extent rule of the isolation level L9.
+        annotations:
+          description_de: |
+            Die Ausdehnung ist keine Angabe. Der Text des Blocks kann Rahmenzeilen enthalten (Zeilen ohne
+            Textfeld, E20 Regel F). E20 Version 5.0, Kapitel 7 gibt die Regel der Ausdehnung auf der
+            Isolationsstufe L9.
+          description_fr: |
+            L'étendue n'est pas une affirmation. Le texte du bloc peut contenir des lignes de cadre (lignes
+            sans champ de texte, E20 règle F). E20 version 5.0, chapitre 7 donne la règle de l'étendue au
+            niveau d'isolation L9.
+
+  DecisionKindEnum:
+    description: Kinds of pipeline decisions.
+    annotations:
+      description_de: Arten von Pipeline-Entscheiden.
+      description_fr: Types de décisions du pipeline.
+    permissible_values:
+      boundary_start:
+        description: A new unit starts at this atom (isolator, E16).
+        annotations:
+          description_de: An diesem Atom beginnt eine neue Einheit (Isolierer, E16).
+          description_fr: Une nouvelle unité commence à cet atome.
+      unit_type:
+        description: Type of the unit (labeller, E16).
+        annotations:
+          description_de: Typ der Einheit (Beschrifter, E16).
+          description_fr: Type de l'unité.
+      section:
+        description: Section the unit belongs to.
+        annotations:
+          description_de: Abschnitt, zu dem die Einheit gehört.
+          description_fr: Section de l'unité.
+      quoted:
+        description: Whether the unit is a reproduction.
+        annotations:
+          description_de: Ob die Einheit eine Wiedergabe ist.
+          description_fr: Si l'unité est une reproduction.
+      refers_to:
+        description: Link to another unit (answer to question).
+        annotations:
+          description_de: Bezug auf eine andere Einheit (Antwort auf Frage).
+          description_fr: Lien vers une autre unité.
+
+  ProbabilitySourceEnum:
+    description: Source of a probability.
+    annotations:
+      description_de: Herkunft einer Wahrscheinlichkeit.
+      description_fr: Origine d'une probabilité.
+    permissible_values:
+      reference_decomposition:
+        description: Decision taken from a reference decomposition; probability set to 1.0 as placeholder.
+        annotations:
+          description_de: Entscheid aus einer Referenz-Zerlegung; Wahrscheinlichkeit als Platzhalter 1.0.
+          description_fr: Décision de référence; probabilité 1.0 provisoire.
+      jev_isolator:
+        description: Probability read from the logits of the isolator adapter.
+        annotations:
+          description_de: Aus den Logits des Isolierer-Adapters gelesen.
+          description_fr: Lue dans les logits de l'adaptateur isolateur.
+      jev_labeller:
+        description: Probability read from the logits of the labeller adapter.
+        annotations:
+          description_de: Aus den Logits des Beschrifter-Adapters gelesen.
+          description_fr: Lue dans les logits de l'adaptateur étiqueteur.
+      human_review:
+        description: Confirmed or corrected by a human reviewer.
+        annotations:
+          description_de: Von Hand bestätigt oder korrigiert.
+          description_fr: Confirmée ou corrigée par une personne.
+
+  ValueDerivationEnum:
+    description: How a value of the eCH instance was obtained.
+    annotations:
+      description_de: Wie ein Wert der eCH-Instanz entstanden ist.
+      description_fr: Mode d'obtention d'une valeur de l'instance eCH.
+    permissible_values:
+      copied_from_metadata:
+        description: Copied verbatim from an export field.
+        annotations:
+          description_de: Wörtlich aus einem Exportfeld übernommen.
+          description_fr: Copiée telle quelle d'un champ d'export.
+      normalized_from_metadata:
+        description: Taken from an export field with a documented normalisation (e.g. date part of a timestamp).
+        annotations:
+          description_de: Aus einem Exportfeld mit dokumentierter Normalisierung (z.B. Datumsteil eines Zeitstempels).
+          description_fr: Tirée d'un champ d'export avec normalisation documentée.
+      mapped_from_metadata:
+        description: Mapped from an export value to a controlled vocabulary by a rule.
+        annotations:
+          description_de: Per Regel von einem Exportwert auf eine Begriffsliste abgebildet.
+          description_fr: Correspondance d'une valeur d'export vers un vocabulaire contrôlé.
+      identifier_from_metadata:
+        description: IRI built from an export ID by a fixed pattern.
+        annotations:
+          description_de: IRI aus einer Export-ID nach festem Muster.
+          description_fr: IRI construite à partir d'un identifiant d'export.
+      identifier_minted:
+        description: IRI minted deterministically in the provisional namespace (steps, deliveries).
+        annotations:
+          description_de: IRI deterministisch im vorläufigen Namensraum gebildet (Schritte, Lieferungen).
+          description_fr: IRI créée de manière déterministe dans l'espace provisoire.
+      fixed_by_schema:
+        description: Constant required by the schema (step_type) or by the section mapping (text_type).
+        annotations:
+          description_de: Vom Schema (step_type) oder von der Abschnittsabbildung (text_type) vorgegebener Wert.
+          description_fr: Constante imposée par le schéma ou la correspondance de section.
+      detected_by_rule:
+        description: Determined by an automatic rule outside the export (e.g. language detection).
+        annotations:
+          description_de: Durch eine automatische Regel ausserhalb des Exports bestimmt (z.B. Spracherkennung).
+          description_fr: Déterminée par une règle automatique (p. ex. détection de langue).
+      extracted_from_pdf:
+        description: Wording taken from the PDF atoms (rich text, permitted changes only).
+        annotations:
+          description_de: Wortlaut aus den PDF-Atomen (Richtext, nur erlaubte Änderungen).
+          description_fr: Libellé tiré des atomes du PDF.
+      extracted_from_pdf_by_rule:
+        description: Value parsed by a rule from wording in the PDF (e.g. a date in the closing formula).
+        annotations:
+          description_de: Per Regel aus Wortlaut im PDF gelesener Wert (z.B. Datum in der Schlussformel).
+          description_fr: Valeur lue par règle dans le libellé du PDF.
+
+  MappingMatchEnum:
+    description: Match quality (SKOS-like) of a mapping to a controlled vocabulary.
+    annotations:
+      description_de: Güte einer Abbildung auf eine Begriffsliste (in Anlehnung an SKOS).
+      description_fr: Qualité d'une correspondance (selon SKOS).
+    permissible_values:
+      exact:
+        meaning: skos:exactMatch
+        description: Same concept.
+        annotations:
+          description_de: Gleicher Begriff.
+          description_fr: Même concept.
+      close:
+        meaning: skos:closeMatch
+        description: Same concept with slightly different scope.
+        annotations:
+          description_de: Gleicher Begriff, Umfang leicht verschieden.
+          description_fr: Même concept, portée légèrement différente.
+      broad:
+        meaning: skos:broadMatch
+        description: Only partly overlapping; target is the nearest value.
+        annotations:
+          description_de: Nur teilweise deckungsgleich; Zielwert ist der nächstliegende.
+          description_fr: Recouvrement partiel.
+      none:
+        description: No corresponding value; other or empty.
+        annotations:
+          description_de: Keine Entsprechung; other bzw. leer.
+          description_fr: Aucune correspondance.
+      not_applicable:
+        description: No mapping involved.
+        annotations:
+          description_de: Keine Abbildung beteiligt.
+          description_fr: Sans objet.
+
+  PdfConsistencyEnum:
+    description: Result of comparing a value with the PDF wording.
+    annotations:
+      description_de: Ergebnis des Abgleichs eines Werts mit dem PDF-Wortlaut.
+      description_fr: Résultat de la comparaison avec le libellé du PDF.
+    permissible_values:
+      confirmed:
+        description: The value occurs in the PDF.
+        annotations:
+          description_de: Der Wert kommt im PDF vor.
+          description_fr: La valeur figure dans le PDF.
+      not_found:
+        description: The value was not found in the PDF.
+        annotations:
+          description_de: Der Wert wurde im PDF nicht gefunden.
+          description_fr: La valeur n'a pas été trouvée dans le PDF.
+      differs:
+        description: The PDF states a different value for the same slot.
+        annotations:
+          description_de: Das PDF nennt für dasselbe Feld einen anderen Wert.
+          description_fr: Le PDF indique une autre valeur.
+      metadata_differs:
+        description: The value comes from the PDF; the export states a different value (see alternatives).
+        annotations:
+          description_de: Der Wert stammt aus dem PDF; der Export nennt einen anderen Wert (siehe alternatives).
+          description_fr: La valeur provient du PDF; l'export indique une autre valeur.
+      not_checked:
+        description: Not compared.
+        annotations:
+          description_de: Nicht abgeglichen.
+          description_fr: Non comparé.

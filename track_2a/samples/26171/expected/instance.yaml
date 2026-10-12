@@ -1,0 +1,28 @@
+# eCH-0295 instance (I95, root class Container), src/m06_converter.py (converter-ech-writer-1), document 26171
+# Isolation level L9 (E20 version 5.0, chapter 7). Side file: provenance/26171.yaml
+global_uri: https://data.parlpdfech.example/converter/l9/i95/affair-115961/doc-26171
+affairs:
+- global_uri: https://api.openparldata.ch/v1/affairs/115961
+  local_id: '200109965'
+  affair_number: '19.5497'
+  affair_type: interpellation
+  title:
+  - text: Der OECD-Steuerreform und den Folgen für den Kanton Basel-Stadt
+    text_language: de
+    text_type: title
+  submission:
+    global_uri: https://data.parlpdfech.example/converter/l9/affair-115961/step/submission/doc-26171
+    submission_date: '2019-10-24'
+    texts:
+    - text: <h2>Interpellation Nr. 121 (November 2019)</h2><p>betreffend der OECD-Steuerreform und den Folgen für den Kanton Basel-Stadt</p><p>Die OECD plant eine Steuerreform. Teil dieser Reform soll auch eine generelle Neuverteilung der Gewinnsteuern zwischen den Sitzländern der Unternehmen und den Absatzländern sein. Die Besteuerung soll neu auch dort erfolgen, wo der Gewinn erzielt wird. Die OECD und die G20-Staaten wollen sich im Januar 2020 auf die Eckwerte einigen, bis Ende des nächsten Jahres soll die Reform zur Gewinnbesteuerung von international tätigen Unternehmen abgeschlossen sein. Verlierer dieser Umverteilung könnten Länder mit starkem Export sein, die zahlreiche Konzernsitze aufweisen, also auch die Schweiz.</p><p>In unserem Kanton haben einige exportorientierte international bedeutende Firmen ihren Sitz. Deren Steuerzahlungen haben in den letzten Jahren dazu geführt, dass der Kanton zum Teil sehr hohe Überschüsse in seiner Jahresrechnung ausweisen konnte. Eine Neuregelung wie sie offenbar der OECD vorschwebt, könnte gravierende Auswirkungen auf die Steuereinnahmen der Schweiz und besonders auch auf die Steuereinnahmen des Kantons Basel-Stadt haben. Es gilt - im Rahmen der beschränkten Möglichkeiten unseres Kantons - über den Bund Einfluss zu nehmen, um zu verhindern, dass die Steuereinahmen von diesen Firmen in Zukunft geringer ausfallen werden. Die Folgen für Basel-Stadt wären verheerend, das sehr hohe Niveau der staatlichen Leistungen könnte nicht gehalten werden, massive Ausgabenreduktionen müssten erfolgen.</p><p>In diesem Zusammenhang bitte ich den Regierungsrat um die Beantwortung der folgenden Fragen:</p><ol><li>Teilt der Regierungsrat die Befürchtung, wonach die Umsetzung dieser Ideen zu massiven Steuerausfällen für Basel-Stadt führen wird?</li><li>Hat der Regierungsrat eine Stellungnahme zu den Vorhaben ausgearbeitet?</li><li>Ist der Regierungsrat beim Bundesrat vorstellig geworden, um die Haltung des Kantons Basel-Stadt gegen solche Änderungen zum Ausdruck zu bringen?</li><li>Ist der Regierungsrat bereit, in Zusammenarbeit mit den betroffenen Unternehmen im Kanton Basel-Stadt gegenüber dem Bund die Basler Interessen zu vertreten?</li><li>Ist der Regierungsrat bereit, dem Grossen Rat über die Weiterentwicklung des OECD-Vorhabens und über die Aktivitäten der Schweiz zur Verhinderung von erheblichen Einnahmen-Verlusten zu berichten?</li><li>Teilt der Regierungsrat die Meinung, dass bei tatsächlich resultierenden Steuereinnahmen-Verlusten durch diese Reform die Kantonsausgaben massiv reduziert werden müssten?</li></ol><p>Patricia von Falkenstein</p><p>19.5497.01</p>
+      text_language: de
+      document_url: https://files.openparldata.ch/doc/BS/983545420862d4d42f592e71918230f03e8a4cf46f90e7fd4a380c08e1cc7667
+  response_steps:
+  - global_uri: https://data.parlpdfech.example/converter/l9/affair-115961/step/response/doc-26171
+    date_end_actual: '2019-12-04'
+    responder:
+      global_uri: https://api.openparldata.ch/v1/groups/1300
+      name:
+      - text: Regierungsrat Basel-Stadt
+        text_language: de
+      wikidata_uri: http://www.wikidata.org/entity/Q13142860

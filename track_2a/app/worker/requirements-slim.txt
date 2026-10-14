@@ -1,0 +1,11 @@
+# Python packages of the worker, profile slim (no Docling, no torch).
+# Status: EXCEPTION, NOT RELEASED. Not tested with pip: no install ran on the build host.
+# Measured on 13.10.2026: the versions of the project environment in which the gate of the worker passed.
+# pip resolves the dependencies of these 6 packages. The file imported-distributions.txt lists the
+# 53 distributions that the two modes imported in the traced runs (measured), with their versions.
+numpy==2.5.3
+scipy==1.18.1
+PyYAML==6.0.3
+rdflib==7.6.0
+linkml==1.11.1
+linkml-runtime==1.12.0

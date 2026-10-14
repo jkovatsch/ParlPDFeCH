@@ -1,0 +1,137 @@
+{
+ "schema": "parlpdfech-sample/1",
+ "doc_id": "714840",
+ "record_id": "s-714840",
+ "pdf_sha256": "8bb01b408e55d4277550fa7521783392ddae4b8fe881d70165632e36f8391fe2",
+ "title": "Swisslos-Fondsbeitrag; Verein MusikRaumBasel; Festival KlangBasel 2014",
+ "kind": "draft_decree",
+ "parliament": "BS",
+ "parliament_name": "Basel-Stadt",
+ "language": "de",
+ "pages": 1,
+ "blocks": 8,
+ "lines": 11,
+ "modes": [
+  "auto",
+  "rules"
+ ],
+ "apertus": "stored",
+ "in_sample": true,
+ "source_url": "https://www.bs.ch/api/government-resolutions/document/e159ecf6d8a64510b698e6232b719538-332/5/Dokument",
+ "split": "dev",
+ "sets": [
+  "dev"
+ ],
+ "states_job": "daten/gj/states/gpu1_labelled",
+ "reference_run": "daten/gj/fullrun_b1s_dev",
+ "files": [
+  {
+   "name": "docling.json",
+   "project_path": "daten/iso/docling/714840.json",
+   "modes": [
+    1,
+    2
+   ],
+   "sha256": "dfbb63375b3e15bf5e329d91b51a78324b9daf14728b678c1988547fb8aff02b",
+   "bytes": 5745
+  },
+  {
+   "name": "atoms.json",
+   "project_path": "daten/iso/atome/714840.json",
+   "modes": [
+    1,
+    2
+   ],
+   "sha256": "0c3c74be512490f64ff900a83595f812dd7f099ba9fd9deb62957bf60f97cd43",
+   "bytes": 18993
+  },
+  {
+   "name": "blocks.json",
+   "project_path": "daten/gj/docs/714840.json",
+   "modes": [
+    1,
+    2
+   ],
+   "sha256": "7da37fa337924a3e055d0aab526c7484e12889b360c397e6499bfad2beb31211",
+   "bytes": 1861,
+   "run_record": {
+    "path": "daten/gj/docs_build.json",
+    "sha256_equal": true
+   }
+  },
+  {
+   "name": "rules.json",
+   "project_path": "daten/gj/rules/714840.json",
+   "source_path": "daten/gj/rules_pdf/714840.json",
+   "modes": [
+    1,
+    2
+   ],
+   "sha256": "797c47d1bc009ece4b79808829dc600831a82c5d7126231e63b9aa31e7c1dcf6",
+   "bytes": 3460,
+   "run_record": {
+    "path": "daten/gj_values/round4/rules_pdf_build.json",
+    "sha256_equal": true
+   },
+   "no_export_record": true,
+   "keys_that_differ_from_the_stored_rule_file": [
+    "body_key",
+    "export_record"
+   ]
+  },
+  {
+   "name": "export.json",
+   "project_path": "daten/gj/fullrun_b1s_dev/714840/export/714840.json",
+   "modes": [
+    1,
+    2
+   ],
+   "sha256": "ebf5f2b6b755fbb8efc67829b33e0204b138727f9897c5c0e6864472b6942886",
+   "bytes": 7613
+  },
+  {
+   "name": "states.npz",
+   "project_path": "daten/gj/states/gpu1_labelled/states/714840.npz",
+   "modes": [
+    2
+   ],
+   "sha256": "ea5d26c1228b00e718d011adf21312046dc3a1739f53254679ef98e3f8408300",
+   "bytes": 530499
+  },
+  {
+   "name": "r2.json",
+   "project_path": null,
+   "modes": [
+    2
+   ],
+   "sha256": "ebb74bd306c6725b99ab0758af09f7274223c57c8196859c9352afece0d6e1ac",
+   "bytes": 537,
+   "note": "one entry of daten/gj/r2/dev_r2_docling.json"
+  },
+  {
+   "name": "source.pdf",
+   "project_path": null,
+   "source_path": "daten/pdf/lehrer_stichprobe/714840.pdf",
+   "modes": [
+    1,
+    2
+   ],
+   "role": "source_pdf",
+   "sha256": "8bb01b408e55d4277550fa7521783392ddae4b8fe881d70165632e36f8391fe2",
+   "bytes": 106481
+  },
+  {
+   "name": "page-1.png",
+   "project_path": null,
+   "modes": [
+    1,
+    2
+   ],
+   "role": "page_image",
+   "page": 1,
+   "renderer": "pypdfium2 5.14.0, scale 2.0",
+   "sha256": "bac1341adc8c363770b322ebd920ae1f86f3dc1217ad5bbc80ca965a5fa1734d",
+   "bytes": 145258
+  }
+ ]
+}

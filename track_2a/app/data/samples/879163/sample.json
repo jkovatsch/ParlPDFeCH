@@ -1,0 +1,138 @@
+{
+ "schema": "parlpdfech-sample/1",
+ "doc_id": "879163",
+ "record_id": "s-879163",
+ "pdf_sha256": "7b160c11fcf55c0b70d14c5287589c1bbf7e4e7da9d2e791ba715f667f4ba5d5",
+ "title": "Fonds d'aide au maintien des petits commerces et cafés dans les villages",
+ "kind": "postulate",
+ "parliament": "6037",
+ "parliament_name": "Val de Bagnes",
+ "language": "fr",
+ "pages": 1,
+ "blocks": 24,
+ "lines": 45,
+ "modes": [
+  "auto",
+  "rules"
+ ],
+ "apertus": "stored",
+ "in_sample": true,
+ "source_url": "https://www.valdebagnes.ch/_doc/4552844",
+ "split": "dev",
+ "sets": [
+  "dev",
+  "pilot_overrides"
+ ],
+ "states_job": "daten/gj/states/gpu1_labelled",
+ "reference_run": "daten/gj/fullrun_b1s_dev",
+ "files": [
+  {
+   "name": "docling.json",
+   "project_path": "daten/iso/docling/879163.json",
+   "modes": [
+    1,
+    2
+   ],
+   "sha256": "4c1f7e5f288adcabaa4f6006ef363fbcd496e4aa0dc794acb6e9f25f21316c01",
+   "bytes": 17784
+  },
+  {
+   "name": "atoms.json",
+   "project_path": "daten/iso/atome/879163.json",
+   "modes": [
+    1,
+    2
+   ],
+   "sha256": "bec495c273a56baa05f32c1339db4902376475af3e3b3d8b14a69b7a5f2b32ce",
+   "bytes": 45365
+  },
+  {
+   "name": "blocks.json",
+   "project_path": "daten/gj/docs/879163.json",
+   "modes": [
+    1,
+    2
+   ],
+   "sha256": "c64d09b42860b1c0a435184f2ffd97bd7f90c5ce69cd296b80faf73d21112d7e",
+   "bytes": 6069,
+   "run_record": {
+    "path": "daten/gj/docs_build.json",
+    "sha256_equal": true
+   }
+  },
+  {
+   "name": "rules.json",
+   "project_path": "daten/gj/rules/879163.json",
+   "source_path": "daten/gj/rules_pdf/879163.json",
+   "modes": [
+    1,
+    2
+   ],
+   "sha256": "71d995411724df66097cf4700d736dc4260887f77ba4d55f555b94f36b0ce192",
+   "bytes": 8156,
+   "run_record": {
+    "path": "daten/gj_values/round4/rules_pdf_build.json",
+    "sha256_equal": true
+   },
+   "no_export_record": true,
+   "keys_that_differ_from_the_stored_rule_file": [
+    "body_key",
+    "export_record"
+   ]
+  },
+  {
+   "name": "export.json",
+   "project_path": "daten/gj/fullrun_b1s_dev/879163/export/879163.json",
+   "modes": [
+    1,
+    2
+   ],
+   "sha256": "84273fd4142663bf7220dc5d8727ea28c5048d9099bfe96d06b6b2e634220765",
+   "bytes": 8976
+  },
+  {
+   "name": "states.npz",
+   "project_path": "daten/gj/states/gpu1_labelled/states/879163.npz",
+   "modes": [
+    2
+   ],
+   "sha256": "8e04ab241e960664a1a54903bb27c6512625dfd402a86d06699b9f86f7eea3af",
+   "bytes": 1456935
+  },
+  {
+   "name": "r2.json",
+   "project_path": null,
+   "modes": [
+    2
+   ],
+   "sha256": "6dfcd99259f0e33cc663b1708793ddb49961e2b1ca66d027db591caffdac0b03",
+   "bytes": 537,
+   "note": "one entry of daten/gj/r2/dev_r2_docling.json"
+  },
+  {
+   "name": "source.pdf",
+   "project_path": null,
+   "source_path": "daten/pdf/lehrer_stichprobe/879163.pdf",
+   "modes": [
+    1,
+    2
+   ],
+   "role": "source_pdf",
+   "sha256": "7b160c11fcf55c0b70d14c5287589c1bbf7e4e7da9d2e791ba715f667f4ba5d5",
+   "bytes": 221387
+  },
+  {
+   "name": "page-1.png",
+   "project_path": null,
+   "modes": [
+    1,
+    2
+   ],
+   "role": "page_image",
+   "page": 1,
+   "renderer": "pypdfium2 5.14.0, scale 2.0",
+   "sha256": "324dac302159154be636dfa7a2a1a6a1128d5247b380815051f125415aab0876",
+   "bytes": 842377
+  }
+ ]
+}

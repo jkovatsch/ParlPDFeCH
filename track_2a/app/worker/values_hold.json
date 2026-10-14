@@ -1,0 +1,7 @@
+{
+ "schema": "parlpdfech-values-hold/1",
+ "status": "EXCEPTION, NOT RELEASED",
+ "why": "A sample that this list names keeps the earlier record form (head values from the OpenParlData export, notice head_from_export): no value reader runs on it. The list is empty. Until 13.10.2026 it named the samples 26171 and 714840, because the documents of their parliament were kept apart for a measurement of the value readers. That part was opened on 13.10.2026 at 14:35 (daten/gj_values/opening.json of the project) and measured. The 3 samples now get the record with values read from the PDF.",
+ "how_to_use": "To hold a sample again, add an object with doc_id and pdf_sha256 to the list. No other file changes.",
+ "hold": []
+}

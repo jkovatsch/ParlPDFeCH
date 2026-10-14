@@ -1,0 +1,1763 @@
+{
+ "doc_id": "26171",
+ "zelle": null,
+ "version": "atome-v3",
+ "skript": "src/m03_atome.py",
+ "erzeugt_utc": "2026-10-05T13:16:12+00:00",
+ "quelle": "daten/iso/docling/26171.json",
+ "quelle_sha256": "febb52f3ac01b861af95a39054d1d069bec26d529d76fe4f617351616efcf026",
+ "docling_lauf": "iso_pool",
+ "werkzeug": {
+  "docling": "2.133.0",
+  "docling-core": "2.99.0",
+  "docling-parse": "7.22.1",
+  "docling-ibm-models": "4.0.3",
+  "torch": "2.14.1",
+  "ocrmac": "1.0.1",
+  "pdftotext": "pdftotext version 26.04.0"
+ },
+ "textschicht": {
+  "pdf": "daten/pdf/lehrer_stichprobe/26171.pdf",
+  "pdf_sha256": "f2e5fe4ae6747a886d93bc753795611117fe11b4d23f4ae30d53866fcedb1493",
+  "pdf_gleich_docling": true,
+  "werkzeug": "pdftotext -bbox -cropbox (Poppler)",
+  "version": "pdftotext version 26.04.0"
+ },
+ "parameter": {
+  "satz_ab": 200,
+  "lang_ab": 200,
+  "kurz_bis": 2,
+  "spaltenluecke_pt": 18,
+  "rahmen_toleranz_pt": 3,
+  "satz_ohne_leerzeichen": true
+ },
+ "status": "success",
+ "legende": {
+  "Spalten": "ID | Seite | Hinweise | Text. ID <Block>.<Zeile>, Teil einer Zeile <Block>.<Zeile>.<Teil>.",
+  "Text": "Wortlaut der Zeile unverändert; Tabellenzellen mit ¦ getrennt; (ohne Text) = Bild ohne Text.",
+  "Form": "Docling-Form des Blocks: Überschrift, Listenpunkt, Tabelle, Verzeichnis, Kopfzeile, Fusszeile, Fussnote, Bild, Bildlegende, Kästchen; Feld = Schlüssel-Wert-Bereich, Formular, im Bild; OCR = Texterkennung; ohne Zeilen = Docling-Text ohne Zeilenumbrüche. Ohne Formangabe: Text.",
+  "Teile": "Spaltenteil k/n = Zeile an einer grossen Lücke zwischen Wörtern geteilt (Spalten nebeneinander); Rahmenteil = Zeile über mehrere Rahmen geteilt; Satzteil k/n = an einer Satzgrenze geteilte Zeile (lange Zeile oder Satzende ohne Leerzeichen wie «…Ende.Neuer Satz»); neuer Rahmen = Block läuft hier in einem weiteren Rahmen weiter; lange Zeile = über 200 Zeichen; gedreht = einzeiliger Rahmen höher als breit.",
+  "Lage": "Seitenwechsel (zurück = Lesereihenfolge springt auf frühere Seite); im Block = derselbe Docling-Block läuft weiter; Drittel-Regel verletzt = Teil endet nicht im unteren bzw. beginnt nicht im oberen Seitendrittel, der Block ist vermutlich falsch zusammengefügt; über Vorgänger = Zeile steht auf der Seite über der vorangehenden Zeile derselben Spalte (Lesereihenfolge springt zurück); ausserhalb Rahmen = Zeile liegt laut Textschicht nicht im Rahmen ihres Blocks.",
+  "Marker": "Bezug Frage n (Zu Frage n, Ad n, Réponse à la question n …), Frage n, Aufzählung <Zeichen>, Stichwort <Wort>, Typbezeichnung (Motion, Interpellation, Anfrage …), Einleitung Fragen (folgende Fragen, questions suivantes …), Auftragsformel (wird beauftragt, est chargé …), Einleitung folgt (wie folgt: …), Unterschriftsformel (auch Gruss- und Protokollformel), Ort und Datum, Datum, Verteiler, Seitenzahl, Sperrschrift, Marker im Atom (Antwortmarker mit Doppelpunkt nicht am Atomanfang). Folgenummer n (Zeile beginnt mit der nächsten Nummer nach einer nummerierten Zeile desselben Blocks, z. B. zweite Fussnote im selben Block), Klammerzeile mit Datum, Zitatende (kurze Zeile, die nach einem Satzende mit einem schliessenden Anführungszeichen endet), Zellenzahl wechselt (Tabellenzeile mit anderer Zahl gefüllter Zellen als die vorige). Alles nur Kandidaten.",
+  "Schlüssel-Wert": "Schlüssel→ID = Feldname, Wert im genannten Atom; Wert←ID = Wert zum genannten Feldnamen; Schlüssel ohne Wert; Wert ohne Schlüssel (unter ID = steht unter diesem Wert); Schlüssel: Wert in Zeile."
+ },
+ "werte": {
+  "merkmale": {
+   "form": "{p}",
+   "group": "{p}",
+   "ocr": "OCR",
+   "no_line_breaks": "ohne Zeilen",
+   "table_row": "Tabellenzeile {p}",
+   "no_text": "ohne Text",
+   "column_part": "Spaltenteil {p}",
+   "frame_part": "Rahmenteil",
+   "sentence_part": "Satzteil {p}",
+   "long_line": "lange Zeile",
+   "rotated": "gedreht",
+   "new_frame": "neuer Rahmen",
+   "page_break": "Seitenwechsel",
+   "page_break_back": "Seitenwechsel zurück",
+   "page_break_in_block": "Seitenwechsel im Block",
+   "thirds_rule_violated": "Drittel-Regel verletzt",
+   "above_previous": "über Vorgänger",
+   "outside_frame": "ausserhalb Rahmen",
+   "letterspacing": "Sperrschrift",
+   "page_number": "Seitenzahl",
+   "answer_reference": "Bezug Frage {p}",
+   "question_number": "Frage {p}",
+   "enumeration": "Aufzählung {p}",
+   "keyword": "Stichwort {p}",
+   "affair_type": "Typbezeichnung",
+   "intro_questions": "Einleitung Fragen",
+   "demand_formula": "Auftragsformel",
+   "intro_follows": "Einleitung folgt",
+   "signature_formula": "Unterschriftsformel",
+   "place_date": "Ort und Datum",
+   "date_line": "Datum",
+   "distribution": "Verteiler",
+   "marker_inside": "Marker im Atom",
+   "kv_key": "Schlüssel→{p}",
+   "kv_value": "Wert←{p}",
+   "kv_key_without_value": "Schlüssel ohne Wert",
+   "kv_value_without_key": "Wert ohne Schlüssel{p}",
+   "kv_inline": "Schlüssel: Wert in Zeile",
+   "number_sequence": "Folgenummer {p}",
+   "bracket_date": "Klammerzeile mit Datum",
+   "quote_end": "Zitatende",
+   "table_cells_change": "Zellenzahl wechselt"
+  },
+  "stichworte": {
+   "proposal": "Antrag",
+   "reasoning": "Begründung",
+   "response": "Antwort",
+   "preliminary_remark": "Vorbemerkung",
+   "questions": "Fragen",
+   "demand": "Auftrag",
+   "resolution": "Beschluss",
+   "recall": "Rappel",
+   "sponsorship": "Urheberschaft"
+  },
+  "teilung": {
+   "sentence": "Satzgrenze",
+   "frame": "Rahmengrenze",
+   "column": "Spaltenlücke",
+   "frame_column": "Rahmengrenze und Spaltenlücke",
+   "sentence_no_space": "Satzgrenze ohne Leerzeichen"
+  },
+  "kv_rolle": {
+   "key": "Schlüssel",
+   "value": "Wert",
+   "key_value_inline": "Schlüssel und Wert in einer Zeile"
+  },
+  "zeilenrahmen_quelle": {
+   "text_layer": "Wortrahmen der Textschicht (pdftotext)",
+   "estimated": "geschätzt: Blockrahmen gleichmässig auf seine Zeilen verteilt"
+  },
+  "merkmal_ech": {
+   "keyword:proposal": {
+    "text_type_input": "recommendation",
+    "text_type_kern": null,
+    "bemerkung": "Kern v0.2.0: Antrag als Wert in ExecutiveResponseStep.recommendation (RecommendationEnum), kein eigener Texttyp"
+   },
+   "keyword:reasoning": {
+    "text_type_input": "reasoning",
+    "text_type_kern": "reasoning"
+   },
+   "keyword:response": {
+    "text_type_input": "response",
+    "text_type_kern": "response"
+   },
+   "keyword:preliminary_remark": {
+    "text_type_input": "response",
+    "text_type_kern": "response",
+    "bemerkung": "nur im Antwortteil; in einem Vorstoss submitted bzw. main_text"
+   },
+   "keyword:questions": {
+    "text_type_input": "submitted",
+    "text_type_kern": "main_text"
+   },
+   "keyword:demand": {
+    "text_type_input": "submitted",
+    "text_type_kern": "main_text"
+   },
+   "keyword:resolution": {
+    "text_type_input": null,
+    "text_type_kern": null,
+    "bemerkung": "kein Texttyp für Beschluss oder Dispositiv (eCH-Befund 11)"
+   },
+   "keyword:recall": {
+    "text_type_input": "submitted",
+    "text_type_kern": "main_text",
+    "bemerkung": "zitierter Vorstoss in einer Antwort; nicht doppelt übernehmen, wenn das Original vorliegt"
+   },
+   "keyword:sponsorship": {
+    "text_type_input": null,
+    "text_type_kern": null,
+    "bemerkung": "Beleg für die Urheberschaft (input: Affair.sponsorship), kein Text"
+   },
+   "affair_type": {
+    "text_type_input": "title",
+    "text_type_kern": null,
+    "bemerkung": "Beleg für affair_type; Titelzeile: input TextTypeEnum.title, Kern v0.2.0 Feld Affair.title statt Texttyp"
+   },
+   "question_number": {
+    "text_type_input": "submitted",
+    "text_type_kern": "main_text"
+   },
+   "intro_questions": {
+    "text_type_input": "submitted",
+    "text_type_kern": "main_text"
+   },
+   "demand_formula": {
+    "text_type_input": "submitted",
+    "text_type_kern": "main_text"
+   },
+   "answer_reference": {
+    "text_type_input": "response",
+    "text_type_kern": "response"
+   }
+  }
+ },
+ "pruefung": {
+  "zeichen_gesamt": 2555,
+  "zeichen_in_atomen": 2508,
+  "zeichen_trenner": 47,
+  "trenner_zwischen_bloecken": 24,
+  "trenner_zeilenumbruch": 23,
+  "trenner_sonst_leerraum": 0,
+  "nichtleer_ausserhalb": 0,
+  "ueberschneidungen": 0,
+  "wortlaut_abweichend": [],
+  "ausserhalb_block": [],
+  "ueber_rahmengrenze": [],
+  "bloecke_ohne_atom": [],
+  "ids_eindeutig": true,
+  "reihenfolge_steigend": true,
+  "vollstaendig": true
+ },
+ "kennzahlen": {
+  "seiten": 1,
+  "bloecke": 13,
+  "bloecke_ohne_text": 0,
+  "atome": 36,
+  "atome_mit_text": 36,
+  "atome_je_block_median": 2,
+  "atome_je_block_max": 10,
+  "zeichen_gesamt": 2555,
+  "zeichen_in_atomen": 2508,
+  "zeichen_trenner": 47,
+  "trenner_zwischen_bloecken": 24,
+  "trenner_zeilenumbruch": 23,
+  "trenner_sonst_leerraum": 0,
+  "nichtleer_ausserhalb": 0,
+  "ueberschneidungen": 0,
+  "wortlaut_abweichend": 0,
+  "ausserhalb_block": 0,
+  "ueber_rahmengrenze": 0,
+  "vollstaendig": "ja",
+  "laenge_median": 84,
+  "laenge_p90": 92,
+  "laenge_max": 95,
+  "laengstes_atom": "B3.1",
+  "atome_lang": 0,
+  "atome_lang_tabelle": 0,
+  "atome_kurz": 0,
+  "prompt_zeichen": 3349,
+  "prompt_tokens_schaetzung": 962,
+  "blockformat_tokens_schaetzung": 816,
+  "faktor_atom_zu_block": 1.18,
+  "zeilen_satzgeteilt": 0,
+  "rahmenteilungen": 0,
+  "spaltenteilungen": 0,
+  "seitenwechsel": 0,
+  "seitenwechsel_zurueck": 0,
+  "seitenwechsel_im_block": 0,
+  "drittel_regel_verletzt": 0,
+  "ueber_vorgaenger": 0,
+  "ausserhalb_rahmen": 0,
+  "bezug_frage": 0,
+  "frage_nr": 0,
+  "aufzaehlung": 6,
+  "stichwort": 1,
+  "typbezeichnung": 1,
+  "einleitung_fragen": 0,
+  "auftragsformel": 0,
+  "einleitung_folgt": 0,
+  "unterschriftsformel": 0,
+  "ort_datum": 0,
+  "datumszeile": 0,
+  "verteiler": 0,
+  "seitenzahl": 0,
+  "sperrschrift": 0,
+  "marker_im_atom": 0,
+  "gedreht": 0,
+  "satzanfaenge_im_atom": 6,
+  "atome_mit_satzanfang": 6,
+  "satzgrenzen_am_atomende": 2,
+  "ts_zeilen": 36,
+  "ts_gefunden": 36,
+  "ts_ausserhalb_rahmen": 0,
+  "ts_typografie": 0,
+  "ts_nicht_gefunden": 0,
+  "zeilenrahmen_textschicht": 36,
+  "zeilenrahmen_geschaetzt": 0,
+  "text_textschicht_abweichend": 0,
+  "zeilen_satz_ohne_leerzeichen": 0,
+  "folgenummer": 0,
+  "klammerzeile_datum": 0,
+  "zitatende": 0,
+  "zellenzahl_wechselt": 0,
+  "kv_paare": 0,
+  "kv_schluessel_ohne_wert": 0,
+  "kv_wert_ohne_schluessel": 0,
+  "kv_in_zeile": 0,
+  "gp_atome": 21,
+  "gp_laenge_median": 134,
+  "gp_laenge_p90": 199,
+  "gp_laenge_max": 207,
+  "gp_atome_lang": 1,
+  "gp_marker_gesamt": 0,
+  "gp_marker_isoliert": 0
+ },
+ "atome": [
+  {
+   "id": "B1.1",
+   "block": "B1",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "section_header",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    0,
+    38
+   ],
+   "rahmen": [
+    65.76,
+    72.96,
+    266.36,
+    83.32
+   ],
+   "zeilenrahmen": [
+    65.76,
+    72.96,
+    266.36,
+    83.32
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "Interpellation Nr. 121 (November 2019)",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Überschrift"
+    ],
+    [
+     "affair_type",
+     null
+    ]
+   ],
+   "hinweise": [
+    "Überschrift",
+    "Typbezeichnung"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B2.1",
+   "block": "B2",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    40,
+    109
+   ],
+   "rahmen": [
+    65.76,
+    85.68,
+    425.96,
+    108.76
+   ],
+   "zeilenrahmen": [
+    65.76,
+    85.68,
+    425.96,
+    96.04
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "betreffend der OECD-Steuerreform und den Folgen für den Kanton Basel-",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [],
+   "hinweise": [],
+   "kv": null
+  },
+  {
+   "id": "B2.2",
+   "block": "B2",
+   "zeile": 2,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    110,
+    115
+   ],
+   "rahmen": [
+    65.76,
+    85.68,
+    425.96,
+    108.76
+   ],
+   "zeilenrahmen": [
+    65.76,
+    98.4,
+    91.51,
+    108.76
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "Stadt",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [],
+   "hinweise": [],
+   "kv": null
+  },
+  {
+   "id": "B3.1",
+   "block": "B3",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    117,
+    212
+   ],
+   "rahmen": [
+    62.4,
+    114.0,
+    536.36,
+    200.32
+   ],
+   "zeilenrahmen": [
+    62.4,
+    114.0,
+    536.36,
+    124.36
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "Die OECD plant eine Steuerreform. Teil dieser Reform soll auch eine generelle Neuverteilung der",
+   "text_textschicht": null,
+   "satzanfaenge": [
+    34
+   ],
+   "merkmale": [],
+   "hinweise": [],
+   "kv": null
+  },
+  {
+   "id": "B3.2",
+   "block": "B3",
+   "zeile": 2,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    213,
+    299
+   ],
+   "rahmen": [
+    62.4,
+    114.0,
+    536.36,
+    200.32
+   ],
+   "zeilenrahmen": [
+    62.4,
+    126.6,
+    515.06,
+    136.96
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "Gewinnsteuern zwischen den Sitzländern der Unternehmen und den Absatzländern sein. Die",
+   "text_textschicht": null,
+   "satzanfaenge": [
+    83
+   ],
+   "merkmale": [],
+   "hinweise": [],
+   "kv": null
+  },
+  {
+   "id": "B3.3",
+   "block": "B3",
+   "zeile": 3,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    300,
+    390
+   ],
+   "rahmen": [
+    62.4,
+    114.0,
+    536.36,
+    200.32
+   ],
+   "zeilenrahmen": [
+    62.4,
+    139.32,
+    516.8,
+    149.68
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "Besteuerung soll neu auch dort erfolgen, wo der Gewinn erzielt wird. Die OECD und die G20-",
+   "text_textschicht": null,
+   "satzanfaenge": [
+    69
+   ],
+   "merkmale": [],
+   "hinweise": [],
+   "kv": null
+  },
+  {
+   "id": "B3.4",
+   "block": "B3",
+   "zeile": 4,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    391,
+    485
+   ],
+   "rahmen": [
+    62.4,
+    114.0,
+    536.36,
+    200.32
+   ],
+   "zeilenrahmen": [
+    62.4,
+    151.92,
+    532.01,
+    162.28
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "Staaten wollen sich im Januar 2020 auf die Eckwerte einigen, bis Ende des nächsten Jahres soll",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [],
+   "hinweise": [],
+   "kv": null
+  },
+  {
+   "id": "B3.5",
+   "block": "B3",
+   "zeile": 5,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    486,
+    576
+   ],
+   "rahmen": [
+    62.4,
+    114.0,
+    536.36,
+    200.32
+   ],
+   "zeilenrahmen": [
+    62.4,
+    164.64,
+    528.43,
+    175.0
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "die Reform zur Gewinnbesteuerung von international tätigen Unternehmen abgeschlossen sein.",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [],
+   "hinweise": [],
+   "kv": null
+  },
+  {
+   "id": "B3.6",
+   "block": "B3",
+   "zeile": 6,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    577,
+    661
+   ],
+   "rahmen": [
+    62.4,
+    114.0,
+    536.36,
+    200.32
+   ],
+   "zeilenrahmen": [
+    62.4,
+    177.24,
+    476.3,
+    187.6
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "Verlierer dieser Umverteilung könnten Länder mit starkem Export sein, die zahlreiche",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [],
+   "hinweise": [],
+   "kv": null
+  },
+  {
+   "id": "B3.7",
+   "block": "B3",
+   "zeile": 7,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    662,
+    708
+   ],
+   "rahmen": [
+    62.4,
+    114.0,
+    536.36,
+    200.32
+   ],
+   "zeilenrahmen": [
+    62.4,
+    189.96,
+    296.47,
+    200.32
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "Konzernsitze aufweisen, also auch die Schweiz.",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [],
+   "hinweise": [],
+   "kv": null
+  },
+  {
+   "id": "B4.1",
+   "block": "B4",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    710,
+    802
+   ],
+   "rahmen": [
+    62.4,
+    208.56,
+    537.08,
+    332.8
+   ],
+   "zeilenrahmen": [
+    62.4,
+    208.56,
+    517.39,
+    218.92
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "In unserem Kanton haben einige exportorientierte international bedeutende Firmen ihren Sitz.",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [],
+   "hinweise": [],
+   "kv": null
+  },
+  {
+   "id": "B4.2",
+   "block": "B4",
+   "zeile": 2,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    803,
+    896
+   ],
+   "rahmen": [
+    62.4,
+    208.56,
+    537.08,
+    332.8
+   ],
+   "zeilenrahmen": [
+    62.4,
+    221.16,
+    537.08,
+    231.52
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "Deren Steuerzahlungen haben in den letzten Jahren dazu geführt, dass der Kanton zum Teil sehr",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [],
+   "hinweise": [],
+   "kv": null
+  },
+  {
+   "id": "B4.3",
+   "block": "B4",
+   "zeile": 3,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    897,
+    981
+   ],
+   "rahmen": [
+    62.4,
+    208.56,
+    537.08,
+    332.8
+   ],
+   "zeilenrahmen": [
+    62.4,
+    233.88,
+    502.7,
+    244.24
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "hohe Überschüsse in seiner Jahresrechnung ausweisen konnte. Eine Neuregelung wie sie",
+   "text_textschicht": null,
+   "satzanfaenge": [
+    60
+   ],
+   "merkmale": [],
+   "hinweise": [],
+   "kv": null
+  },
+  {
+   "id": "B4.4",
+   "block": "B4",
+   "zeile": 4,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    982,
+    1071
+   ],
+   "rahmen": [
+    62.4,
+    208.56,
+    537.08,
+    332.8
+   ],
+   "zeilenrahmen": [
+    62.4,
+    246.48,
+    532.64,
+    256.84
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "offenbar der OECD vorschwebt, könnte gravierende Auswirkungen auf die Steuereinnahmen der",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [],
+   "hinweise": [],
+   "kv": null
+  },
+  {
+   "id": "B4.5",
+   "block": "B4",
+   "zeile": 5,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    1072,
+    1163
+   ],
+   "rahmen": [
+    62.4,
+    208.56,
+    537.08,
+    332.8
+   ],
+   "zeilenrahmen": [
+    62.4,
+    259.2,
+    532.76,
+    269.56
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "Schweiz und besonders auch auf die Steuereinnahmen des Kantons Basel-Stadt haben. Es gilt -",
+   "text_textschicht": null,
+   "satzanfaenge": [
+    82
+   ],
+   "merkmale": [],
+   "hinweise": [],
+   "kv": null
+  },
+  {
+   "id": "B4.6",
+   "block": "B4",
+   "zeile": 6,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    1164,
+    1248
+   ],
+   "rahmen": [
+    62.4,
+    208.56,
+    537.08,
+    332.8
+   ],
+   "zeilenrahmen": [
+    62.4,
+    271.8,
+    500.9,
+    282.16
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "im Rahmen der beschränkten Möglichkeiten unseres Kantons - über den Bund Einfluss zu",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [],
+   "hinweise": [],
+   "kv": null
+  },
+  {
+   "id": "B4.7",
+   "block": "B4",
+   "zeile": 7,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    1249,
+    1336
+   ],
+   "rahmen": [
+    62.4,
+    208.56,
+    537.08,
+    332.8
+   ],
+   "zeilenrahmen": [
+    62.4,
+    284.4,
+    512.6,
+    294.76
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "nehmen, um zu verhindern, dass die Steuereinahmen von diesen Firmen in Zukunft geringer",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [],
+   "hinweise": [],
+   "kv": null
+  },
+  {
+   "id": "B4.8",
+   "block": "B4",
+   "zeile": 8,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    1337,
+    1424
+   ],
+   "rahmen": [
+    62.4,
+    208.56,
+    537.08,
+    332.8
+   ],
+   "zeilenrahmen": [
+    62.4,
+    297.12,
+    504.44,
+    307.48
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "ausfallen werden. Die Folgen für Basel-Stadt wären verheerend, das sehr hohe Niveau der",
+   "text_textschicht": null,
+   "satzanfaenge": [
+    18
+   ],
+   "merkmale": [],
+   "hinweise": [],
+   "kv": null
+  },
+  {
+   "id": "B4.9",
+   "block": "B4",
+   "zeile": 9,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    1425,
+    1513
+   ],
+   "rahmen": [
+    62.4,
+    208.56,
+    537.08,
+    332.8
+   ],
+   "zeilenrahmen": [
+    62.4,
+    309.72,
+    519.98,
+    320.08
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "staatlichen Leistungen könnte nicht gehalten werden, massive Ausgabenreduktionen müssten",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [],
+   "hinweise": [],
+   "kv": null
+  },
+  {
+   "id": "B4.10",
+   "block": "B4",
+   "zeile": 10,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    1514,
+    1523
+   ],
+   "rahmen": [
+    62.4,
+    208.56,
+    537.08,
+    332.8
+   ],
+   "zeilenrahmen": [
+    62.4,
+    322.44,
+    105.31,
+    332.8
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "erfolgen.",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [],
+   "hinweise": [],
+   "kv": null
+  },
+  {
+   "id": "B5.1",
+   "block": "B5",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    1525,
+    1609
+   ],
+   "rahmen": [
+    62.4,
+    341.04,
+    504.62,
+    364.0
+   ],
+   "zeilenrahmen": [
+    62.4,
+    341.04,
+    504.62,
+    351.4
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "In diesem Zusammenhang bitte ich den Regierungsrat um die Beantwortung der folgenden",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [],
+   "hinweise": [],
+   "kv": null
+  },
+  {
+   "id": "B5.2",
+   "block": "B5",
+   "zeile": 2,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    1610,
+    1617
+   ],
+   "rahmen": [
+    62.4,
+    341.04,
+    504.62,
+    364.0
+   ],
+   "zeilenrahmen": [
+    62.4,
+    353.64,
+    100.39,
+    364.0
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "Fragen:",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "keyword",
+     "questions"
+    ]
+   ],
+   "hinweise": [
+    "Stichwort Fragen"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B6.1",
+   "block": "B6",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "list_item",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": "list",
+   "zeichen": [
+    1619,
+    1708
+   ],
+   "rahmen": [
+    62.4,
+    372.36,
+    531.14,
+    395.32
+   ],
+   "zeilenrahmen": [
+    62.4,
+    372.36,
+    531.14,
+    382.72
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "1. Teilt der Regierungsrat die Befürchtung, wonach die Umsetzung dieser Ideen zu massiven",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Listenpunkt"
+    ],
+    [
+     "enumeration",
+     "1."
+    ]
+   ],
+   "hinweise": [
+    "Listenpunkt",
+    "Aufzählung 1."
+   ],
+   "kv": null
+  },
+  {
+   "id": "B6.2",
+   "block": "B6",
+   "zeile": 2,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "list_item",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": "list",
+   "zeichen": [
+    1709,
+    1753
+   ],
+   "rahmen": [
+    62.4,
+    372.36,
+    531.14,
+    395.32
+   ],
+   "zeilenrahmen": [
+    90.72,
+    384.96,
+    306.62,
+    395.32
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "Steuerausfällen für Basel-Stadt führen wird?",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Listenpunkt"
+    ]
+   ],
+   "hinweise": [
+    "Listenpunkt"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B7.1",
+   "block": "B7",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "list_item",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": "list",
+   "zeichen": [
+    1755,
+    1829
+   ],
+   "rahmen": [
+    62.4,
+    403.68,
+    462.14,
+    414.04
+   ],
+   "zeilenrahmen": [
+    62.4,
+    403.68,
+    462.14,
+    414.04
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "2. Hat der Regierungsrat eine Stellungnahme zu den Vorhaben ausgearbeitet?",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Listenpunkt"
+    ],
+    [
+     "enumeration",
+     "2."
+    ]
+   ],
+   "hinweise": [
+    "Listenpunkt",
+    "Aufzählung 2."
+   ],
+   "kv": null
+  },
+  {
+   "id": "B8.1",
+   "block": "B8",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "list_item",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": "list",
+   "zeichen": [
+    1831,
+    1918
+   ],
+   "rahmen": [
+    62.4,
+    422.28,
+    515.76,
+    445.24
+   ],
+   "zeilenrahmen": [
+    62.4,
+    422.28,
+    515.76,
+    432.64
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "3. Ist der Regierungsrat beim Bundesrat vorstellig geworden, um die Haltung des Kantons",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Listenpunkt"
+    ],
+    [
+     "enumeration",
+     "3."
+    ]
+   ],
+   "hinweise": [
+    "Listenpunkt",
+    "Aufzählung 3."
+   ],
+   "kv": null
+  },
+  {
+   "id": "B8.2",
+   "block": "B8",
+   "zeile": 2,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "list_item",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": "list",
+   "zeichen": [
+    1919,
+    1979
+   ],
+   "rahmen": [
+    62.4,
+    422.28,
+    515.76,
+    445.24
+   ],
+   "zeilenrahmen": [
+    90.72,
+    434.88,
+    412.58,
+    445.24
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "Basel-Stadt gegen solche Änderungen zum Ausdruck zu bringen?",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Listenpunkt"
+    ]
+   ],
+   "hinweise": [
+    "Listenpunkt"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B9.1",
+   "block": "B9",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "list_item",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": "list",
+   "zeichen": [
+    1981,
+    2066
+   ],
+   "rahmen": [
+    62.4,
+    453.6,
+    506.6,
+    476.56
+   ],
+   "zeilenrahmen": [
+    62.4,
+    453.6,
+    506.6,
+    463.96
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "4. Ist der Regierungsrat bereit, in Zusammenarbeit mit den betroffenen Unternehmen im",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Listenpunkt"
+    ],
+    [
+     "enumeration",
+     "4."
+    ]
+   ],
+   "hinweise": [
+    "Listenpunkt",
+    "Aufzählung 4."
+   ],
+   "kv": null
+  },
+  {
+   "id": "B9.2",
+   "block": "B9",
+   "zeile": 2,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "list_item",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": "list",
+   "zeichen": [
+    2067,
+    2140
+   ],
+   "rahmen": [
+    62.4,
+    453.6,
+    506.6,
+    476.56
+   ],
+   "zeilenrahmen": [
+    90.72,
+    466.2,
+    468.02,
+    476.56
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "Kanton Basel-Stadt gegenüber dem Bund die Basler Interessen zu vertreten?",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Listenpunkt"
+    ]
+   ],
+   "hinweise": [
+    "Listenpunkt"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B10.1",
+   "block": "B10",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "list_item",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": "list",
+   "zeichen": [
+    2142,
+    2227
+   ],
+   "rahmen": [
+    62.4,
+    484.92,
+    510.92,
+    520.48
+   ],
+   "zeilenrahmen": [
+    62.4,
+    484.92,
+    510.92,
+    495.28
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "5. Ist der Regierungsrat bereit, dem Grossen Rat über die Weiterentwicklung des OECD-",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Listenpunkt"
+    ],
+    [
+     "enumeration",
+     "5."
+    ]
+   ],
+   "hinweise": [
+    "Listenpunkt",
+    "Aufzählung 5."
+   ],
+   "kv": null
+  },
+  {
+   "id": "B10.2",
+   "block": "B10",
+   "zeile": 2,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "list_item",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": "list",
+   "zeichen": [
+    2228,
+    2307
+   ],
+   "rahmen": [
+    62.4,
+    484.92,
+    510.92,
+    520.48
+   ],
+   "zeilenrahmen": [
+    90.72,
+    497.52,
+    493.1,
+    507.88
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "Vorhabens und über die Aktivitäten der Schweiz zur Verhinderung von erheblichen",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Listenpunkt"
+    ]
+   ],
+   "hinweise": [
+    "Listenpunkt"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B10.3",
+   "block": "B10",
+   "zeile": 3,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "list_item",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": "list",
+   "zeichen": [
+    2308,
+    2341
+   ],
+   "rahmen": [
+    62.4,
+    484.92,
+    510.92,
+    520.48
+   ],
+   "zeilenrahmen": [
+    90.72,
+    510.12,
+    265.82,
+    520.48
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "Einnahmen-Verlusten zu berichten?",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Listenpunkt"
+    ]
+   ],
+   "hinweise": [
+    "Listenpunkt"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B11.1",
+   "block": "B11",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "list_item",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": "list",
+   "zeichen": [
+    2343,
+    2435
+   ],
+   "rahmen": [
+    62.4,
+    528.84,
+    534.2,
+    551.8
+   ],
+   "zeilenrahmen": [
+    62.4,
+    528.84,
+    534.2,
+    539.2
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "6. Teilt der Regierungsrat die Meinung, dass bei tatsächlich resultierenden Steuereinnahmen-",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Listenpunkt"
+    ],
+    [
+     "enumeration",
+     "6."
+    ]
+   ],
+   "hinweise": [
+    "Listenpunkt",
+    "Aufzählung 6."
+   ],
+   "kv": null
+  },
+  {
+   "id": "B11.2",
+   "block": "B11",
+   "zeile": 2,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "list_item",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": "list",
+   "zeichen": [
+    2436,
+    2517
+   ],
+   "rahmen": [
+    62.4,
+    528.84,
+    534.2,
+    551.8
+   ],
+   "zeilenrahmen": [
+    90.72,
+    541.44,
+    518.9,
+    551.8
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "Verlusten durch diese Reform die Kantonsausgaben massiv reduziert werden müssten?",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Listenpunkt"
+    ]
+   ],
+   "hinweise": [
+    "Listenpunkt"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B12.1",
+   "block": "B12",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    2519,
+    2543
+   ],
+   "rahmen": [
+    119.04,
+    560.16,
+    235.94,
+    570.52
+   ],
+   "zeilenrahmen": [
+    119.04,
+    560.16,
+    235.94,
+    570.52
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "Patricia von Falkenstein",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [],
+   "hinweise": [],
+   "kv": null
+  },
+  {
+   "id": "B13.1",
+   "block": "B13",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    2545,
+    2555
+   ],
+   "rahmen": [
+    441.48,
+    73.56,
+    496.7,
+    83.92
+   ],
+   "zeilenrahmen": [
+    441.48,
+    73.56,
+    496.7,
+    83.92
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "19.5497.01",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [],
+   "hinweise": [],
+   "kv": null
+  }
+ ],
+ "prompt": [
+  "B1.1 | 1 | Überschrift, Typbezeichnung | Interpellation Nr. 121 (November 2019)",
+  "B2.1 | 1 |  | betreffend der OECD-Steuerreform und den Folgen für den Kanton Basel-",
+  "B2.2 | 1 |  | Stadt",
+  "B3.1 | 1 |  | Die OECD plant eine Steuerreform. Teil dieser Reform soll auch eine generelle Neuverteilung der",
+  "B3.2 | 1 |  | Gewinnsteuern zwischen den Sitzländern der Unternehmen und den Absatzländern sein. Die",
+  "B3.3 | 1 |  | Besteuerung soll neu auch dort erfolgen, wo der Gewinn erzielt wird. Die OECD und die G20-",
+  "B3.4 | 1 |  | Staaten wollen sich im Januar 2020 auf die Eckwerte einigen, bis Ende des nächsten Jahres soll",
+  "B3.5 | 1 |  | die Reform zur Gewinnbesteuerung von international tätigen Unternehmen abgeschlossen sein.",
+  "B3.6 | 1 |  | Verlierer dieser Umverteilung könnten Länder mit starkem Export sein, die zahlreiche",
+  "B3.7 | 1 |  | Konzernsitze aufweisen, also auch die Schweiz.",
+  "B4.1 | 1 |  | In unserem Kanton haben einige exportorientierte international bedeutende Firmen ihren Sitz.",
+  "B4.2 | 1 |  | Deren Steuerzahlungen haben in den letzten Jahren dazu geführt, dass der Kanton zum Teil sehr",
+  "B4.3 | 1 |  | hohe Überschüsse in seiner Jahresrechnung ausweisen konnte. Eine Neuregelung wie sie",
+  "B4.4 | 1 |  | offenbar der OECD vorschwebt, könnte gravierende Auswirkungen auf die Steuereinnahmen der",
+  "B4.5 | 1 |  | Schweiz und besonders auch auf die Steuereinnahmen des Kantons Basel-Stadt haben. Es gilt -",
+  "B4.6 | 1 |  | im Rahmen der beschränkten Möglichkeiten unseres Kantons - über den Bund Einfluss zu",
+  "B4.7 | 1 |  | nehmen, um zu verhindern, dass die Steuereinahmen von diesen Firmen in Zukunft geringer",
+  "B4.8 | 1 |  | ausfallen werden. Die Folgen für Basel-Stadt wären verheerend, das sehr hohe Niveau der",
+  "B4.9 | 1 |  | staatlichen Leistungen könnte nicht gehalten werden, massive Ausgabenreduktionen müssten",
+  "B4.10 | 1 |  | erfolgen.",
+  "B5.1 | 1 |  | In diesem Zusammenhang bitte ich den Regierungsrat um die Beantwortung der folgenden",
+  "B5.2 | 1 | Stichwort Fragen | Fragen:",
+  "B6.1 | 1 | Listenpunkt, Aufzählung 1. | 1. Teilt der Regierungsrat die Befürchtung, wonach die Umsetzung dieser Ideen zu massiven",
+  "B6.2 | 1 | Listenpunkt | Steuerausfällen für Basel-Stadt führen wird?",
+  "B7.1 | 1 | Listenpunkt, Aufzählung 2. | 2. Hat der Regierungsrat eine Stellungnahme zu den Vorhaben ausgearbeitet?",
+  "B8.1 | 1 | Listenpunkt, Aufzählung 3. | 3. Ist der Regierungsrat beim Bundesrat vorstellig geworden, um die Haltung des Kantons",
+  "B8.2 | 1 | Listenpunkt | Basel-Stadt gegen solche Änderungen zum Ausdruck zu bringen?",
+  "B9.1 | 1 | Listenpunkt, Aufzählung 4. | 4. Ist der Regierungsrat bereit, in Zusammenarbeit mit den betroffenen Unternehmen im",
+  "B9.2 | 1 | Listenpunkt | Kanton Basel-Stadt gegenüber dem Bund die Basler Interessen zu vertreten?",
+  "B10.1 | 1 | Listenpunkt, Aufzählung 5. | 5. Ist der Regierungsrat bereit, dem Grossen Rat über die Weiterentwicklung des OECD-",
+  "B10.2 | 1 | Listenpunkt | Vorhabens und über die Aktivitäten der Schweiz zur Verhinderung von erheblichen",
+  "B10.3 | 1 | Listenpunkt | Einnahmen-Verlusten zu berichten?",
+  "B11.1 | 1 | Listenpunkt, Aufzählung 6. | 6. Teilt der Regierungsrat die Meinung, dass bei tatsächlich resultierenden Steuereinnahmen-",
+  "B11.2 | 1 | Listenpunkt | Verlusten durch diese Reform die Kantonsausgaben massiv reduziert werden müssten?",
+  "B12.1 | 1 |  | Patricia von Falkenstein",
+  "B13.1 | 1 |  | 19.5497.01"
+ ]
+}

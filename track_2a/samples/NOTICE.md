@@ -16,9 +16,10 @@ License of the data of OpenParlData: CC BY 4.0 (https://creativecommons.org/lice
 - The API description of OpenParlData (read on 06.10.2026) does not say if CC BY 4.0 applies to the copies of the PDF documents.
 - The documents name persons with a public role: members of a parliament or an executive, and officials who sign for an authority.
 - Before the publication, two AI agents (Claude Opus 5.5) examined each of the 3 documents for personal data of third parties. Both gave PASS.
-- This repository contains no PDF document. `source.json` of each sample gives the URL of the publisher, the URL of the copy of OpenParlData and the SHA-256 of the PDF.
+- This folder contains no PDF document. `source.json` of each sample gives the URL of the publisher, the URL of the copy of OpenParlData and the SHA-256 of the PDF.
+- The app folder contains the PDF of the 3 documents with the same SHA-256 (`track_2a/app/data/samples/<doc>/source.pdf`) and one image of each page (`page-1.png`, made with pypdfium2). The app shows them in the result view.
 
 ## About this text
 
 - Language: English, to the rules of ASD-STE100 (Issue 9).
-- Authoring: an AI agent (Claude Opus 5.5) wrote this text on 12.10.2026. No human examined it.
+- Authoring: an AI agent (Claude Opus 5.5) wrote this text on 12.10.2026. On 14.10.2026, an AI agent added the item on the PDF files of the app folder. No human examined it.

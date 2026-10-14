@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: Apache-2.0
+Frage: Welchen Geschäftstyp nach eCH-0295 hat das Geschäft dieses Dokuments?
+A = Motion
+B = Postulat
+C = Interpellation
+D = (Einfache) Anfrage
+E = Frage für die Fragestunde
+F = Parlamentarische Initiative
+G = Beschlussesentwurf oder Erlassentwurf
+H = Motion und Postulat (kombiniert)
+I = ursprünglich Motion, später als Postulat behandelt
+J = ein anderer Geschäftstyp (zum Beispiel Petition)
+K = kein Geschäftstyp
+Antworte nur mit dem Buchstaben.<|user_end|><|assistant_start|>Antwort:

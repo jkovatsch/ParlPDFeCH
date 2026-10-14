@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+Frage: Was für ein Dokument ist das?
+A = nur ein Vorstoss eines Ratsmitglieds oder einer Fraktion
+B = nur die Antwort der Exekutive auf einen Vorstoss
+C = Vorstoss und Antwort der Exekutive zusammen
+D = Vorlage der Exekutive (Botschaft, Bericht mit Antrag an den Rat)
+E = Bericht einer Kommission
+F = Protokoll
+G = ein anderes Dokument
+Antworte nur mit dem Buchstaben.<|user_end|><|assistant_start|>Antwort:

@@ -1,0 +1,13 @@
+{"event":"stage","id":"read_pdf","state":"running"}
+{"event":"stage","id":"read_pdf","state":"done","origin":"stored","seconds":0.004,"counts":{"pages":1}}
+{"event":"stage","id":"lines","state":"running"}
+{"event":"stage","id":"lines","state":"done","origin":"stored","seconds":0.003,"counts":{"lines":36,"blocks":13}}
+{"event":"stage","id":"rules","state":"running"}
+{"event":"stage","id":"rules","state":"done","origin":"stored","seconds":0.002,"counts":{"blocks":13}}
+{"event":"stage","id":"apertus","state":"running"}
+{"event":"stage","id":"apertus","state":"done","origin":"stored","seconds":0.007,"counts":{"labels":14}}
+{"event":"stage","id":"write","state":"running"}
+{"event":"stage","id":"write","state":"done","origin":"new","seconds":0.391,"counts":{"labels":33,"triples":2577}}
+{"event":"stage","id":"check","state":"running"}
+{"event":"stage","id":"check","state":"done","origin":"new","seconds":0.566,"counts":{"passed":9,"total":10,"skipped":1}}
+{"event":"done","record_id":"s-26171","doc_id":"26171","valid":true,"mode":"auto","apertus":"stored","origin":"stored","pdf_sha256":"f2e5fe4ae6747a886d93bc753795611117fe11b4d23f4ae30d53866fcedb1493","seconds":{"read_pdf":0.004,"lines":0.003,"rules":0.002,"apertus":0.007,"write":0.391,"check":0.566,"total":0.973},"counts":{"pages":1,"lines":36,"blocks":13,"labels":33},"files":["26171.gesamt.trig","26171.ech.ttl","26171.gesamt.rdf.xml","26171.ech.rdf.xml","26171.ech.yaml","26171.labels.yaml","26171.provenance.yaml","manifest.json","validation.json","view.json","convert.json"]}

@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: Apache-2.0
+<s><|system_start|>Du liest ein Dokument aus einem Schweizer Parlament und beantwortest eine Frage dazu.<|system_end|><|developer_start|>Deliberation: disabled
+Tool Capabilities: disabled<|developer_end|><|user_start|>Dokument:
+[B<n> | S.<page> | <Docling label>] <block text>
+[B<n> | S.<page> | <Docling label>] <block text>
+...
+

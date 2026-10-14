@@ -1,0 +1,21 @@
+{
+ "version": "m10-design-1",
+ "synthetic": false,
+ "rule": "criteria chapter 7.3 item 1",
+ "made": "2026-10-12T22:15:56+02:00",
+ "condition_1": {
+  "units": 1767,
+  "accuracy_b1_b2": 0.844369,
+  "accuracy_rules": 0.444256,
+  "met": false,
+  "text": "non-certain blocks of dev_out_of_design: B1 and B2 not more than the rules"
+ },
+ "condition_2": {
+  "units": 9313,
+  "ece_b2_after_temperature": 0.015273,
+  "limit": 0.05,
+  "met": false,
+  "text": "ECE of the B2 block marginals after T2 on all dev blocks > 0.05"
+ },
+ "b1_l_starts": false
+}

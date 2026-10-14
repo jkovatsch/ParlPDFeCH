@@ -1,0 +1,24 @@
+{
+ "schema": "parlpdfech-health/1",
+ "version": "0.1.0",
+ "commit": "unknown",
+ "profile": "slim",
+ "status": "EXCEPTION, NOT RELEASED",
+ "modes": {
+  "samples": true,
+  "rules": true,
+  "apertus_stored": true,
+  "upload": false,
+  "apertus_gpu": false,
+  "read_only": false,
+  "sample_runs": true,
+  "reason": {"upload": "profile_slim", "apertus_gpu": "not_implemented"}
+ },
+ "ocr": "none",
+ "limits": {"max_bytes": 20971520, "max_pages": 25, "job_timeout_seconds": 600},
+ "busy": false,
+ "job_id": null,
+ "wasm": true,
+ "site": false,
+ "hosted": false
+}

@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'self'">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex">
+<meta name="color-scheme" content="light dark">
+<title>ParlPDFeCH</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="app.css">
+<script type="module" src="app.js"></script>
+</head>
+<body>
+<button type="button" class="skip" id="skip" data-i18n="app.skip"></button>
+
+<header class="top">
+<div class="wrap top-in">
+<a class="wordmark" href="#/" translate="no">ParlPDFeCH</a>
+<nav class="top-nav" id="nav" data-i18n-label="app.nav.label">
+<ul>
+<li><a href="#/" data-nav="start" data-i18n="nav.start"></a></li>
+<li><a href="#/samples" data-nav="samples" data-i18n="nav.samples"></a></li>
+<li><a href="#/upload" id="nav-upload" data-nav="upload" data-i18n="nav.upload"></a></li>
+<li><a href="#/about" data-nav="about" data-i18n="nav.about"></a></li>
+<li id="nav-site-item" hidden><a href="/" id="nav-site" data-i18n="nav.site"></a></li>
+</ul>
+</nav>
+<nav class="langs" id="langs" data-i18n-label="lang.label">
+<ul>
+<li><a href="?lang=en" id="lang-en" data-lang="en" lang="en" hreflang="en" data-i18n="lang.en"></a></li>
+<li><a href="?lang=de" id="lang-de" data-lang="de" lang="de" hreflang="de" data-i18n="lang.de"></a></li>
+</ul>
+</nav>
+</div>
+</header>
+
+<p class="fixture-note" id="fixture-note" hidden><span class="wrap" data-i18n="app.fixture"></span></p>
+
+<main id="main">
+<div class="wrap">
+
+<noscript><p class="boot-text">This page needs JavaScript. / Diese Seite braucht JavaScript.</p></noscript>
+<p class="boot" id="boot">The texts of the page did not load. Load the page again. / Die Texte der Seite wurden nicht geladen. Laden Sie die Seite neu.</p>
+
+<!-- S0 Start: what this is, in a few words; each topic has a link to the place with more -->
+<section class="screen" id="screen-start" aria-labelledby="h-start" hidden>
+<h1 id="h-start" class="start-title" tabindex="-1" data-i18n="start.title"></h1>
+
+<div class="flow" id="start-flow">
+<p class="vh" id="flow-text" data-i18n="start.flow.text"></p>
+<ol class="flow-steps" aria-describedby="flow-text">
+<li class="flow-step"><span class="flow-icon flow-pdf" aria-hidden="true"><span></span><span></span><span></span></span><span class="flow-name" data-i18n="start.flow.pdf"></span><span class="flow-note" data-i18n="start.flow.pdf.note"></span></li>
+<li class="flow-step"><span class="flow-icon flow-values" aria-hidden="true"><span></span><span></span><span></span></span><span class="flow-name" data-i18n="start.flow.values"></span><span class="flow-note" data-i18n="start.flow.values.note"></span></li>
+<li class="flow-step"><span class="flow-icon flow-rdf" aria-hidden="true"><span></span><span></span><span></span></span><span class="flow-name" data-i18n="start.flow.rdf"></span><span class="flow-note" data-i18n="start.flow.rdf.note"></span></li>
+</ol>
+<a class="more" href="#/about/method" data-i18n="start.more.method"></a>
+</div>
+
+<section class="start-part" aria-labelledby="h-start-samples">
+<h2 id="h-start-samples" data-i18n="start.samples.title"></h2>
+<p class="small" id="start-samples-wait" data-i18n="app.loading"></p>
+<ul class="start-cards" id="start-samples"></ul>
+<a class="more" href="#/samples" data-i18n="start.more.samples"></a>
+</section>
+
+<div class="start-row">
+<section class="good" aria-labelledby="h-good">
+<h2 id="h-good" data-i18n="start.good.title"></h2>
+<p class="good-lead" id="good-lead"></p>
+<ul class="good-list" id="good-list"></ul>
+<p class="good-limits"><span data-i18n="start.good.limits"></span> <a class="more" href="#/about/limits" data-i18n="start.more.limits"></a></p>
+<a class="more" href="#/about/numbers" data-i18n="start.more.numbers"></a>
+</section>
+
+<section class="own" aria-labelledby="h-own">
+<h2 id="h-own" data-i18n="start.own.title"></h2>
+<p><a class="btn btn-primary" id="start-upload" href="#/upload" data-i18n="s0.button.upload"></a></p>
+<p class="small" id="start-upload-note" data-i18n="s0.upload.note"></p>
+<a class="more" href="#/about/technical" data-i18n="start.more.technical"></a>
+</section>
+</div>
+</section>
+
+<!-- About: the long texts; the links «more» of the start page go to its sections -->
+<section class="screen about-screen" id="screen-about" aria-labelledby="h-about-page" hidden>
+<h1 id="h-about-page" tabindex="-1" data-i18n="about.title"></h1>
+<nav class="parts-nav" data-i18n-label="about.parts">
+<ul>
+<li><a href="#/about/method" data-i18n="about.method.title"></a></li>
+<li><a href="#/about/numbers" data-i18n="about.numbers.title"></a></li>
+<li><a href="#/about/limits" data-i18n="about.limits.title"></a></li>
+<li><a href="#/about/technical" data-i18n="about.technical.title"></a></li>
+</ul>
+</nav>
+
+<section class="about" id="about" aria-labelledby="h-about">
+<h2 id="h-about" tabindex="-1" data-i18n="about.method.title"></h2>
+<p class="lead" data-i18n="s0.title"></p>
+<p data-i18n="about.p1"></p>
+<p data-i18n="about.p5"></p>
+<h3 data-i18n="about.steps.title"></h3>
+<ol class="steps-plain">
+<li data-i18n="s3.stage.read_pdf"></li>
+<li data-i18n="s3.stage.lines"></li>
+<li data-i18n="s3.stage.rules"></li>
+<li data-i18n="about.steps.model"></li>
+<li data-i18n="s3.stage.write"></li>
+<li data-i18n="s3.stage.check"></li>
+</ol>
+<p class="small" data-i18n="about.steps.note"></p>
+<p data-i18n="about.p2"></p>
+<p data-i18n="about.p3"></p>
+</section>
+
+<section class="about" id="about-numbers" aria-labelledby="h-about-numbers">
+<h2 id="h-about-numbers" tabindex="-1" data-i18n="about.numbers.title"></h2>
+<p id="numbers-lead"></p>
+<table class="num-table">
+<caption class="vh" data-i18n="about.numbers.caption"></caption>
+<thead><tr><th scope="col" data-i18n="about.numbers.col.field"></th><th scope="col" data-i18n="about.numbers.col.share"></th><th scope="col" data-i18n="about.numbers.col.count"></th><th scope="col" data-i18n="about.numbers.col.precision"></th></tr></thead>
+<tbody id="numbers-rows"></tbody>
+</table>
+<p class="small" data-i18n="about.numbers.words"></p>
+<p class="small" id="numbers-source"></p>
+<p data-i18n="about.numbers.probability"></p>
+</section>
+
+<section class="about" id="about-limits" aria-labelledby="h-about-limits">
+<h2 id="h-about-limits" tabindex="-1" data-i18n="about.limits.title"></h2>
+<ul class="words-plain">
+<li data-i18n="about.limits.l1"></li>
+<li data-i18n="about.limits.l2"></li>
+<li data-i18n="about.limits.l3"></li>
+<li data-i18n="about.limits.l4"></li>
+<li data-i18n="about.limits.l5"></li>
+<li data-i18n="about.limits.l6"></li>
+<li data-i18n="about.limits.l7"></li>
+</ul>
+<section class="notices" aria-labelledby="h-start-notices">
+<h3 id="h-start-notices" data-i18n="notices.title"></h3>
+<ul class="notice-list" id="start-notices">
+<li data-i18n="notice.proposal"></li>
+<li data-i18n="notice.no_human_check"></li>
+</ul>
+</section>
+</section>
+
+<section class="about" id="about-technical" aria-labelledby="h-about-technical">
+<h2 id="h-about-technical" tabindex="-1" data-i18n="about.technical.title"></h2>
+<p data-i18n="about.technical.p1"></p>
+<p data-i18n="about.technical.p2"></p>
+<p id="start-line"></p>
+<p data-i18n="about.p4"></p>
+<p class="mode-line" id="start-mode" hidden></p>
+<p><a class="btn btn-second" href="#/samples" data-i18n="s0.button.sample"></a></p>
+<h3 id="h-words" data-i18n="words.title"></h3>
+<ul class="words-plain" aria-labelledby="h-words" data-words></ul>
+</section>
+</section>
+
+<!-- The result view: the PDF, the values with their probability, the RDF -->
+<section class="screen view-screen" id="screen-view" aria-labelledby="h-view" hidden>
+<p class="view-kicker" id="view-kicker"></p>
+<h1 id="h-view" tabindex="-1"></h1>
+<p class="view-title-note" id="view-title-note" hidden></p>
+<p class="view-facts" id="view-facts"></p>
+<p class="view-source" id="view-source"></p>
+<p class="view-help" id="view-help" data-i18n="view.help"></p>
+<p class="view-links"><a class="more" id="view-tech" href="#/" data-i18n="view.more.technical"></a> <a class="more" id="view-other-mode" href="#/"></a></p>
+<p class="view-none" id="view-none" hidden data-i18n="view.none"></p>
+<div class="view-grid" id="view-grid">
+<section class="view-place" aria-labelledby="h-view-pdf">
+<div class="place-head"><h2 id="h-view-pdf" data-i18n="view.pdf.title"></h2><a class="dl-small" id="view-pdf-dl" href="#/" data-i18n="view.pdf.download"></a></div>
+<p class="small" id="view-pdf-note"></p>
+<div class="view-pages" id="view-pages"></div>
+<p class="small"><a class="more" id="view-pdf-more" href="#/" data-i18n="view.more.lines"></a></p>
+</section>
+<section class="view-place" aria-labelledby="h-view-values">
+<div class="place-head"><h2 id="h-view-values" data-i18n="view.values.title"></h2></div>
+<p class="small" data-i18n="view.values.lead"></p>
+<p class="small" data-i18n="view.values.certain"></p>
+<table class="vt">
+<caption class="vh" data-i18n="view.values.title"></caption>
+<thead><tr><th scope="col" data-i18n="view.col.field"></th><th scope="col" data-i18n="view.col.value"></th><th scope="col" data-i18n="view.col.probability"></th><th scope="col" data-i18n="view.col.page"></th></tr></thead>
+<tbody id="view-rows"></tbody>
+</table>
+<p class="small view-not" id="view-not" hidden></p>
+<p class="small"><a class="more" href="#/about/numbers" data-i18n="view.more.numbers"></a></p>
+</section>
+<section class="view-place" aria-labelledby="h-view-rdf">
+<div class="place-head"><h2 id="h-view-rdf" data-i18n="view.rdf.title"></h2></div>
+<div class="rdf-tabs" role="tablist" data-i18n-label="view.rdf.title">
+<button type="button" role="tab" class="rdf-tab" id="tab-ech" aria-controls="rdf-text" aria-selected="true" data-i18n="view.rdf.tab.ech"></button>
+<button type="button" role="tab" class="rdf-tab" id="tab-values" aria-controls="rdf-text" aria-selected="false" data-i18n="view.rdf.tab.values"></button>
+</div>
+<p class="small" id="rdf-note"></p>
+<pre class="ttl" id="rdf-text" role="tabpanel" tabindex="0" aria-labelledby="tab-ech"></pre>
+<p class="small"><a class="dl-small" id="rdf-dl-ech" href="#/" data-i18n="view.rdf.dl.ech"></a> · <a class="dl-small" id="rdf-dl-values" href="#/" data-i18n="view.rdf.dl.values"></a></p>
+<p class="small"><a class="more" id="view-rdf-more" href="#/" data-i18n="view.more.rdf"></a></p>
+</section>
+</div>
+</section>
+
+<!-- S1 Samples -->
+<section class="screen" id="screen-samples" aria-labelledby="h-samples" hidden>
+<h1 id="h-samples" tabindex="-1" data-i18n="s1.title"></h1>
+<p class="lead" id="samples-lead" data-i18n="s1.lead"></p>
+<p id="samples-wait" data-i18n="app.loading"></p>
+<ul class="sample-list" id="samples-list"></ul>
+<details class="words-box">
+<summary data-i18n="words.title"></summary>
+<ul class="words-plain" data-i18n-label="words.title" data-words></ul>
+</details>
+</section>
+
+<!-- S2 Upload -->
+<section class="screen" id="screen-upload" aria-labelledby="h-upload" hidden>
+<h1 id="h-upload" tabindex="-1" data-i18n="s2.title"></h1>
+<p class="mode-line" id="upload-mode" hidden></p>
+<div id="upload-off" hidden>
+<p data-i18n="s2.read_only"></p>
+<p><a class="btn btn-primary" href="#/samples" data-i18n="s0.button.sample"></a></p>
+<p id="upload-off-site" hidden><a href="/" id="upload-off-site-link" data-i18n="nav.site"></a></p>
+</div>
+<form id="upload-form" class="upload" novalidate>
+<div class="drop" id="drop">
+<p class="drop-text" data-i18n="s2.drop"></p>
+<p class="file-pick">
+<input type="file" class="file-native" id="file" name="file" accept="application/pdf,.pdf" aria-describedby="limits file-line">
+<label class="btn btn-second file-btn" for="file" data-i18n="s2.choose"></label>
+</p>
+<p class="file-line" id="file-line"></p>
+</div>
+<p class="small" id="limits"></p>
+<div class="field">
+<label class="field-label" for="doc-id" data-i18n="s2.doc_id.label"></label>
+<input type="text" id="doc-id" name="doc_id" inputmode="numeric" autocomplete="off" spellcheck="false" maxlength="12" aria-describedby="doc-id-hint upload-err">
+<p class="small" id="doc-id-hint" data-i18n="s2.doc_id"></p>
+</div>
+<p class="form-err" id="upload-err" role="alert"></p>
+<p><button type="submit" class="btn btn-primary" id="upload-go" data-i18n="s2.convert"></button></p>
+<p class="small" data-i18n="s2.sending"></p>
+</form>
+</section>
+
+<!-- S3 Stages -->
+<section class="screen" id="screen-job" aria-labelledby="h-job" hidden>
+<h1 id="h-job" tabindex="-1" data-i18n="s3.title"></h1>
+<p class="lead" id="job-input"></p>
+<h2 class="vh" id="h-job-stages" data-i18n="s3.stages.label"></h2>
+<ol class="stages" id="job-stages" aria-labelledby="h-job-stages"></ol>
+<p class="job-time" id="job-time"></p>
+<p class="small" id="job-poll" hidden data-i18n="s3.poll"></p>
+<p><button type="button" class="btn btn-second" id="job-stop" data-i18n="s3.stop"></button></p>
+</section>
+
+<!-- S4 Result -->
+<section class="screen" id="screen-record" aria-labelledby="h-record" hidden>
+<h1 id="h-record" tabindex="-1" data-i18n="s4.title"></h1>
+<p><a class="more more-back" id="rec-to-view" href="#/" data-i18n="s4.to_view"></a></p>
+<p class="rec-doc" id="rec-doc"></p>
+<p class="rec-headline" id="rec-headline"></p>
+<section class="ech" id="rec-record-part" aria-labelledby="h-rec-record" hidden>
+<h2 id="h-rec-record" tabindex="-1" data-i18n="s4.record.title"></h2>
+<p class="lead" id="rec-record-lead"></p>
+<div class="cascade" id="rec-cascade"></div>
+<p class="ech-measured" id="rec-record-measured"></p>
+<p class="small" id="rec-record-conf"></p>
+<div class="ech-groups" id="rec-record"></div>
+</section>
+<section class="notices" aria-labelledby="h-rec-notices">
+<h2 id="h-rec-notices" data-i18n="notices.title"></h2>
+<ul class="notice-list" id="rec-notices"></ul>
+</section>
+<p class="rec-count" id="rec-count"></p>
+<p class="rec-cmp" id="rec-cmp" hidden></p>
+<dl class="summary" id="rec-summary"></dl>
+<details class="words-box">
+<summary data-i18n="words.title"></summary>
+<ul class="words-plain" data-i18n-label="words.title" data-words></ul>
+</details>
+<nav class="parts-nav" id="rec-parts" data-i18n-label="s4.parts.label">
+<ul>
+<li id="goto-record" hidden><button type="button" class="jump" data-goto="h-rec-record" data-i18n="s4.record.title"></button></li>
+<li><button type="button" class="jump" data-goto="h-rec-page" data-i18n="s4.page.title"></button></li>
+<li><button type="button" class="jump" data-goto="h-rec-labels" data-i18n="s4.labels.title"></button></li>
+<li><button type="button" class="jump" data-goto="h-rec-head" data-i18n="s4.head.title"></button></li>
+<li><button type="button" class="jump" data-goto="h-rec-checks" data-i18n="s4.checks.title"></button></li>
+<li><button type="button" class="jump" data-goto="h-rec-dl" data-i18n="s4.dl.title"></button></li>
+<li id="goto-rdf" hidden><button type="button" class="jump" data-goto="rdf-panel" data-i18n="rdf.title"></button></li>
+<li><button type="button" class="jump" data-goto="h-rec-tech" data-i18n="s4.tech.title"></button></li>
+</ul>
+</nav>
+
+<div class="panes">
+<section class="pane-page" id="rec-page-pane" aria-labelledby="h-rec-page">
+<h2 id="h-rec-page" tabindex="-1" data-i18n="s4.page.title"></h2>
+<p class="small" id="rec-page-help" data-i18n="s4.page.help"></p>
+<div class="pane-status" id="rec-status">
+<p class="marked" id="rec-marked"></p>
+<p class="line-panel" id="rec-line" hidden></p>
+<p><button type="button" class="btn btn-s" id="rec-to-card" hidden data-i18n="s4.page.back"></button></p>
+</div>
+<div class="pages" id="rec-pages"></div>
+<details class="lines-box" id="rec-lines-box">
+<summary data-i18n="s4.lines.title"></summary>
+<ol class="lines" id="rec-lines"></ol>
+</details>
+</section>
+
+<section class="pane-cards" id="rec-cards-pane" aria-labelledby="h-rec-labels">
+<h2 id="h-rec-labels" tabindex="-1" data-i18n="s4.labels.title"></h2>
+<div class="filters" id="rec-filters">
+<div class="filter-status" role="group" id="rec-filter-status" data-i18n-label="s4.filter.label">
+<button type="button" class="btn btn-s" data-filter="all" aria-pressed="true" data-i18n="s4.filter.all"></button>
+<button type="button" class="btn btn-s" data-filter="certain" aria-pressed="false" data-i18n="s4.filter.certain"></button>
+<button type="button" class="btn btn-s" data-filter="unsure" aria-pressed="false" data-i18n="s4.filter.unsure"></button>
+<button type="button" class="btn btn-s" data-filter="none" aria-pressed="false" data-i18n="s4.filter.none"></button>
+</div>
+<div class="filter-source">
+<label for="rec-filter-source" data-i18n="s4.filter.source"></label>
+<select id="rec-filter-source"></select>
+</div>
+<p class="small" id="rec-filter-count"></p>
+<p class="small" data-i18n="s4.filter.order"></p>
+</div>
+<ol class="cards" id="rec-cards"></ol>
+</section>
+</div>
+
+<section class="part" aria-labelledby="h-rec-head">
+<h2 id="h-rec-head" tabindex="-1" data-i18n="s4.head.title"></h2>
+<p class="lead" data-i18n="s4.head.lead"></p>
+<ul class="head-list" id="rec-head"></ul>
+</section>
+
+<section class="part" aria-labelledby="h-rec-checks">
+<h2 id="h-rec-checks" tabindex="-1" data-i18n="s4.checks.title"></h2>
+<p id="rec-checks-line"></p>
+<details>
+<summary data-i18n="s4.checks.list"></summary>
+<ul class="check-list" id="rec-checks"></ul>
+</details>
+</section>
+
+<section class="part" aria-labelledby="h-rec-dl">
+<h2 id="h-rec-dl" tabindex="-1" data-i18n="s4.dl.title"></h2>
+<ul class="dl-list" id="rec-downloads"></ul>
+<details>
+<summary data-i18n="dl.other.title"></summary>
+<ul class="dl-list dl-other" id="rec-files"></ul>
+</details>
+</section>
+
+<section class="part rdf-panel" id="rdf-panel" tabindex="-1" hidden></section>
+
+<section class="part" id="rec-delete-part" aria-labelledby="h-rec-delete">
+<h2 id="h-rec-delete" data-i18n="s4.delete.title"></h2>
+<p class="small" data-i18n="s4.delete.note"></p>
+<p><button type="button" class="btn btn-second" id="rec-delete" aria-expanded="false" aria-controls="rec-delete-ask" data-i18n="s4.delete"></button></p>
+<div class="ask" id="rec-delete-ask" hidden>
+<p id="rec-delete-q" tabindex="-1" data-i18n="s4.delete.ask"></p>
+<p class="ask-buttons">
+<button type="button" class="btn btn-primary" id="rec-delete-yes" data-i18n="s4.delete.yes"></button>
+<button type="button" class="btn btn-second" id="rec-delete-no" data-i18n="s4.delete.no"></button>
+</p>
+</div>
+</section>
+
+<section class="part" aria-labelledby="h-rec-tech">
+<h2 id="h-rec-tech" tabindex="-1" data-i18n="s4.tech.title"></h2>
+<details class="tech">
+<summary data-i18n="s4.tech.show"></summary>
+<dl class="summary tech-list" id="rec-tech"></dl>
+</details>
+</section>
+</section>
+
+<!-- Cases -->
+<section class="screen case" id="screen-case" aria-labelledby="h-case" hidden>
+<h1 id="h-case" tabindex="-1"></h1>
+<p class="case-text" id="case-text"></p>
+<p class="case-action" id="case-action"></p>
+<h2 class="vh" id="h-case-exits" data-i18n="case.exits.label"></h2>
+<ul class="exits" id="case-exits" aria-labelledby="h-case-exits"></ul>
+<p class="small mono" id="case-code"></p>
+</section>
+
+</div>
+</main>
+
+<footer class="foot">
+<div class="wrap">
+<p data-i18n="foot.line"></p>
+<p id="foot-version" hidden></p>
+</div>
+</footer>
+
+<p class="vh" id="live" role="status" aria-live="polite"></p>
+<p class="vh" id="alert" role="alert"></p>
+</body>
+</html>

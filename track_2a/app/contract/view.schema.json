@@ -1,0 +1,2390 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "urn:parlpdfech:schema:site-view:3",
+ "title": "parlpdfech-site-view/3",
+ "description": "The data of one record for the pages of the package (CONTRACT.md chapters 6, 16 and 17).",
+ "type": "object",
+ "properties": {
+  "schema": {
+   "const": "parlpdfech-site-view/3"
+  },
+  "record_id": {
+   "type": "string",
+   "pattern": "^(s-[0-9]+|u-[0-9a-f]{16})(-rules)?$"
+  },
+  "doc_id": {
+   "anyOf": [
+    {
+     "type": "string",
+     "pattern": "^[0-9]+$"
+    },
+    {
+     "type": "null"
+    }
+   ]
+  },
+  "run": {
+   "type": "object",
+   "properties": {
+    "origin": {
+     "enum": [
+      "stored",
+      "new"
+     ],
+     "description": "stored: the inputs (Docling output, lines, export record, states) come from the package. new: Docling ran on this computer (stage P0b)."
+    },
+    "mode": {
+     "enum": [
+      "auto",
+      "rules"
+     ],
+     "description": "The mode of the request."
+    },
+    "converter_mode": {
+     "enum": [
+      "cascade",
+      "floor"
+     ],
+     "description": "manifest.json key mode."
+    },
+    "apertus": {
+     "enum": [
+      "none",
+      "stored"
+     ],
+     "description": "stored: decisions from stored Apertus states. none: code rules only."
+    },
+    "profile": {
+     "enum": [
+      "slim",
+      "full",
+      "native"
+     ]
+    },
+    "status": {
+     "const": "EXCEPTION, NOT RELEASED",
+     "description": "Machine field. The pages do not show it."
+    },
+    "record_status": {
+     "type": "string",
+     "description": "manifest.json key status, not changed."
+    },
+    "human_checked": {
+     "const": false
+    },
+    "in_sample": {
+     "anyOf": [
+      {
+       "type": "boolean",
+       "description": "Three states. true: 1 or more labels of the record have in_sample true. false: no label has true, and 1 or more have false. null: not known. For origin new the value is null: the package knows the SHA-256 of its samples only and cannot tell if another PDF is one of the development documents."
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "valid": {
+     "type": "boolean",
+     "description": "manifest.json key validation.passed."
+    },
+    "generated_at": {
+     "type": "string",
+     "description": "labels file key label_run.datetime_generated (UTC)."
+    },
+    "seconds": {
+     "type": "object",
+     "additionalProperties": {
+      "type": "number"
+     },
+     "description": "Seconds of each step. Keys of the worker: one for each stage id, and total."
+    },
+    "candidate": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "model": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    }
+   },
+   "required": [
+    "origin",
+    "mode",
+    "converter_mode",
+    "apertus",
+    "profile",
+    "status",
+    "record_status",
+    "human_checked",
+    "in_sample",
+    "valid",
+    "generated_at",
+    "seconds"
+   ],
+   "additionalProperties": false
+  },
+  "notices": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "properties": {
+     "code": {
+      "enum": [
+       "proposal",
+       "no_human_check",
+       "in_sample_heads",
+       "in_sample_rules",
+       "stored_apertus",
+       "no_apertus",
+       "chosen_not_top",
+       "no_text_block",
+       "no_export",
+       "not_a_sample",
+       "not_examined_pipeline",
+       "ocr_apple",
+       "ocr_none",
+       "shacl_not_run",
+       "not_valid",
+       "rdfxml_not_readable",
+       "values_from_pdf",
+       "values_from_pdf_no_check",
+       "values_measured",
+       "weak_candidates",
+       "cascade_selection",
+       "addressee_candidate",
+       "response_signs",
+       "recorded_gaps",
+       "head_from_export"
+      ]
+     },
+     "params": {
+      "type": "object"
+     }
+    },
+    "required": [
+     "code",
+     "params"
+    ],
+    "additionalProperties": false,
+    "description": "The text is the string notice.<code> of ui/strings.json. params fills its placeholders."
+   }
+  },
+  "head_values": {
+   "type": "object",
+   "properties": {
+    "source": {
+     "enum": [
+      "pdf",
+      "export",
+      "none"
+     ],
+     "description": "Where the head values of the record come from. pdf: code rules read them from the PDF (manifest schema parlpdfech-pdf-values-record/1). export: the earlier record form of a sample (PARLPDFECH_VALUES=off). none: the earlier record form of a PDF with no export record."
+    },
+    "state": {
+     "enum": [
+      "pdf",
+      "off",
+      "held"
+     ],
+     "description": "The record path of the worker: pdf, the switch PARLPDFECH_VALUES=off, or a sample of worker/values_hold.json (that list is empty)."
+    },
+    "cross_check": {
+     "type": "boolean",
+     "description": "true: an export record was compared with the values (source pdf only)."
+    },
+    "probabilities_measured": {
+     "anyOf": [
+      {
+       "type": "boolean",
+       "description": "true: source pdf (the calibration file of the product). null: source is not pdf. Never false."
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "document_kind": {
+     "anyOf": [
+      {
+       "enum": [
+        "proposal",
+        "response",
+        "combined",
+        "executive_proposal",
+        "committee_report",
+        "minutes",
+        "other"
+       ],
+       "description": "The kind of the document: stage 0 of the cascade (manifest key cascade.kind). The kind selects which values are searched. null: source is not pdf, or the kind is not known (then each value is searched)."
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "cascade": {
+     "anyOf": [
+      {
+       "type": "object",
+       "properties": {
+        "version": {
+         "anyOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "reader": {
+         "anyOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "kind": {
+         "anyOf": [
+          {
+           "enum": [
+            "proposal",
+            "response",
+            "combined",
+            "executive_proposal",
+            "committee_report",
+            "minutes",
+            "other"
+           ]
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "kind_from": {
+         "enum": [
+          "rule_chain",
+          "rule_v5",
+          "argument",
+          "none"
+         ],
+         "description": "Where the kind comes from. rule_chain: code rules (the rule role and the rule id of the rule file). rule_v5: the rule chain made no decision (rule id D0); the type word and a response cue of the PDF decide (rule V5 of the cascade reader; kind_facts has the 2 facts). none: not known."
+        },
+        "kind_rule": {
+         "anyOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "rule_chain_id": {
+         "anyOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "kind_facts": {
+         "anyOf": [
+          {
+           "type": "object",
+           "properties": {
+            "kind_of_the_rule_chain": {
+             "enum": [
+              "proposal",
+              "response",
+              "combined",
+              "executive_proposal",
+              "committee_report",
+              "minutes",
+              "other"
+             ]
+            },
+            "type_word": {
+             "anyOf": [
+              {
+               "type": "string"
+              },
+              {
+               "type": "null"
+              }
+             ]
+            },
+            "response_cue": {
+             "type": "boolean"
+            },
+            "response_sign": {
+             "type": "boolean"
+            },
+            "changed": {
+             "type": "boolean"
+            }
+           },
+           "required": [
+            "kind_of_the_rule_chain",
+            "type_word",
+            "response_cue",
+            "response_sign",
+            "changed"
+           ],
+           "additionalProperties": false,
+           "description": "For a document with no decision of the rule chain (rule id D0): the 2 facts of the PDF that rule V5 uses. type_word: the list value of the type word that the type rule read, or null. response_cue: true if the responder rule found a responding body by the tier of an explicit response cue (a heading or a phrase of the first lines says that the executive answers). response_sign: true if the responder rule found the body by another tier that is not the tier of an addressed body and not the tier of a response phrase in the running text (for example a signature of the executive or the head of minutes). A type word with a cue or a sign gives the kind combined. A type word alone gives proposal. A cue alone gives response. A sign alone changes nothing. Not more than one of response_cue and response_sign is true. changed: true if the facts gave another kind than the kind of the rule chain (then kind_from is rule_v5). A type word draft_decree changes nothing. null: the rule chain made a decision."
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "affair_type": {
+         "anyOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "null"
+          }
+         ],
+         "description": "The affair type of stage 1: a value of the eCH-0295 list, or none (the type reader found no type that is used for the selection)."
+        },
+        "steps": {
+         "type": "array",
+         "items": {
+          "type": "object",
+          "properties": {
+           "step": {
+            "enum": [
+             "submission",
+             "response"
+            ]
+           },
+           "applies": {
+            "type": "boolean"
+           },
+           "rules": {
+            "type": "array",
+            "items": {
+             "type": "string"
+            }
+           }
+          },
+          "required": [
+           "step",
+           "applies",
+           "rules"
+          ],
+          "additionalProperties": false
+         },
+         "description": "The two steps of the record: applies true if a document of this kind can state the step."
+        },
+        "entries": {
+         "type": "array",
+         "items": {
+          "type": "object",
+          "properties": {
+           "field": {
+            "enum": [
+             "affair_type",
+             "title",
+             "affair_number",
+             "submission_date",
+             "response_date",
+             "responder",
+             "sponsor"
+            ]
+           },
+           "slot": {
+            "type": "string"
+           },
+           "group": {
+            "enum": [
+             "affair",
+             "submission",
+             "response"
+            ]
+           },
+           "state": {
+            "enum": [
+             "read_from_pdf",
+             "not_found_in_pdf",
+             "reader_scope",
+             "weak_candidate",
+             "not_searched",
+             "addressee_candidate"
+            ]
+           },
+           "searched": {
+            "type": "boolean"
+           },
+           "rules": {
+            "type": "array",
+            "items": {
+             "type": "string"
+            }
+           },
+           "reason": {
+            "type": "string"
+           },
+           "label_id": {
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ]
+           }
+          },
+          "required": [
+           "field",
+           "slot",
+           "group",
+           "state",
+           "searched",
+           "rules",
+           "reason",
+           "label_id"
+          ],
+          "additionalProperties": false
+         },
+         "description": "The 7 values, each with its state in this record. read_from_pdf: written, with a label pdf-<field>. not_found_in_pdf: searched, no value. reader_scope: searched, no value; the rule of the value does not read this document (slot reason reader_scope). weak_candidate: searched, a candidate that is not written. not_searched: the cascade does not search it in this kind of document. addressee_candidate: not searched; the body that the proposal addresses is a candidate that is not written."
+        },
+        "texts": {
+         "type": "array",
+         "items": {
+          "type": "object",
+          "properties": {
+           "step": {
+            "enum": [
+             "submission",
+             "response"
+            ]
+           },
+           "slot": {
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ]
+           },
+           "applies": {
+            "type": "boolean"
+           },
+           "cut": {
+            "type": "boolean"
+           },
+           "rules": {
+            "type": "array",
+            "items": {
+             "type": "string"
+            }
+           },
+           "blocks": {
+            "type": "integer"
+           },
+           "not_written": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "step",
+           "slot",
+           "applies",
+           "cut",
+           "rules",
+           "blocks",
+           "not_written"
+          ],
+          "additionalProperties": false
+         },
+         "description": "The text slot of each step. cut true: the cascade does not give the text slot to this kind of document; a text block of this family is then not written to the eCH-0295 part. blocks: the text blocks of the family in the eCH-0295 part. not_written: the text blocks of the family that are in the provenance file only."
+        },
+        "text_blocks_not_written": {
+         "type": "integer"
+        },
+        "register_only": {
+         "type": "integer",
+         "description": "The count of slots[] with the state register_only."
+        }
+       },
+       "required": [
+        "version",
+        "reader",
+        "kind",
+        "kind_from",
+        "kind_rule",
+        "rule_chain_id",
+        "kind_facts",
+        "affair_type",
+        "steps",
+        "entries",
+        "texts",
+        "text_blocks_not_written",
+        "register_only"
+       ],
+       "additionalProperties": false,
+       "description": "The cascade of this record: an earlier decision (the kind, then the affair type) selects which entries are searched. null: source is not pdf."
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "floor": {
+     "anyOf": [
+      {
+       "type": "object",
+       "properties": {
+        "threshold": {
+         "anyOf": [
+          {
+           "type": "number"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "not_written": {
+         "type": "array",
+         "items": {
+          "enum": [
+           "affair_type",
+           "title",
+           "affair_number",
+           "submission_date",
+           "response_date",
+           "responder",
+           "sponsor"
+          ]
+         }
+        }
+       },
+       "required": [
+        "threshold",
+        "not_written"
+       ],
+       "additionalProperties": false,
+       "description": "The floor of the values: a value of a rule tier whose stored probability is below threshold is not written. not_written: the fields with such a weak candidate. null: source is not pdf."
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "addressee_candidates": {
+     "type": "array",
+     "items": {
+      "enum": [
+       "affair_type",
+       "title",
+       "affair_number",
+       "submission_date",
+       "response_date",
+       "responder",
+       "sponsor"
+      ]
+     },
+     "description": "The fields with a candidate of the kind addressee."
+    },
+    "response_signs": {
+     "anyOf": [
+      {
+       "type": "object",
+       "properties": {
+        "responder_candidates": {
+         "anyOf": [
+          {
+           "type": "integer"
+          },
+          {
+           "type": "null"
+          }
+         ],
+         "description": "The count of candidates of the responder rule with a rule tier that is not the tier of an addressed body. null: the worker gave no count."
+        },
+        "responder_tiers": {
+         "type": "array",
+         "items": {
+          "type": "string"
+         },
+         "description": "The rule tiers of these candidates."
+        },
+        "text_blocks": {
+         "type": "integer",
+         "description": "The count of text blocks with a label of a response that are not written to the eCH-0295 part."
+        }
+       },
+       "required": [
+        "responder_candidates",
+        "responder_tiers",
+        "text_blocks"
+       ],
+       "additionalProperties": false,
+       "description": "Signs of a response in a document of the kind proposal or executive_proposal. The kind does not change; the view has the notice response_signs if one of the 2 counts is above 0. null: another kind, or source is not pdf."
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "i95_gaps": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     },
+     "description": "The required slots of eCH-0295 for which the rules found no value that is written (recorded gaps)."
+    },
+    "fields_not_read": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "properties": {
+       "field": {
+        "type": "string"
+       },
+       "reason": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "field",
+       "reason"
+      ],
+      "additionalProperties": false
+     }
+    },
+    "counts": {
+     "anyOf": [
+      {
+       "type": "object",
+       "description": "manifest.json key counts.values."
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "slot_counts": {
+     "anyOf": [
+      {
+       "type": "object",
+       "description": "manifest.json key counts.slots."
+      },
+      {
+       "type": "null"
+      }
+     ]
+    }
+   },
+   "required": [
+    "source",
+    "state",
+    "cross_check",
+    "probabilities_measured",
+    "document_kind",
+    "cascade",
+    "floor",
+    "addressee_candidates",
+    "response_signs",
+    "i95_gaps",
+    "fields_not_read",
+    "counts",
+    "slot_counts"
+   ],
+   "additionalProperties": false
+  },
+  "values": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "properties": {
+     "field": {
+      "enum": [
+       "affair_type",
+       "title",
+       "affair_number",
+       "submission_date",
+       "response_date",
+       "responder",
+       "sponsor"
+      ]
+     },
+     "slot": {
+      "type": "string",
+      "description": "<Class>.<slot> of eCH-0295, for example Affair.title."
+     },
+     "name_key": {
+      "type": "string",
+      "description": "The string key value.<field> of ui/strings.json."
+     },
+     "written": {
+      "type": "boolean",
+      "description": "true: the value is in the eCH-0295 part of the record (label id pdf-<field>). false: a candidate (label id candidate-<field>): the value is NOT in the eCH-0295 part (key candidate)."
+     },
+     "candidate": {
+      "anyOf": [
+       {
+        "enum": [
+         "weak",
+         "addressee"
+        ],
+        "description": "null for written true. weak: the stored probability of the rule tier is below head_values.floor.threshold; the slot has the state not_found_in_pdf with the reason weak_candidate_only. addressee: the body that the text of a proposal addresses; the cascade searches no response step in a document of the kind proposal or executive_proposal, so the slot has the state not_in_this_document_type and the body is never a responder of the record."
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "value_printed": {
+      "type": "string",
+      "description": "The wording of the PDF at the span, with no change (labels file key value_wording)."
+     },
+     "value": {
+      "type": "string",
+      "description": "The value of the label (labels file key label_object). For written true it is the value in the eCH-0295 record: the printed wording on one line, or a list value or a calendar day that follows from the printed wording (value_form)."
+     },
+     "value_form": {
+      "enum": [
+       "printed",
+       "list_value",
+       "iso_day"
+      ],
+      "description": "How value follows from value_printed. printed: the wording on one line (white space as one space; a hyphen at a line end joined). list_value: the value of the eCH-0295 list for the printed type word. iso_day: the printed date as a calendar day."
+     },
+     "differs_from_printed": {
+      "type": "boolean",
+      "description": "true: value and value_printed differ after each run of white space is one space. The page then shows the two strings."
+     },
+     "comparison_value": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "The comparison value of the value reader (manifest key comparison_values): the folded form for the cross-check and the calibration. It is not a value of the record. null if the manifest gives none."
+     },
+     "probability": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "The stored decimal of the label: the share of the development documents in which a value of this rule tier was equal to the OpenParlData value (Jeffreys mean, limits 0.005 and 0.995): the value of the rule tier over all folds, for each document, also a development document."
+     },
+     "value_status": {
+      "enum": [
+       "certain",
+       "unsure"
+      ],
+      "description": "The stored word of the label."
+     },
+     "measured": {
+      "type": "boolean",
+      "description": "Always true. The view function refuses a record with stand-in numbers."
+     },
+     "tier_probability": {
+      "anyOf": [
+       {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "The stored probability of the rule tier from all development documents (calibration parameter jeffreys_mean_all_folds). The floor uses this number."
+     },
+     "probability_source": {
+      "anyOf": [
+       {
+        "enum": [
+         "all_folds",
+         "no_unit"
+        ],
+        "description": "Where probability comes from. all_folds: the value of the rule tier over all folds of the calibration file (all development documents). no_unit: the calibration file has no document for this pair of field and tier; the number is its stored value for such a tier. No fold value is shown. null for a candidate."
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "in_sample": {
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "true: this document is one of the development documents that the number of the rule tier counts. false: it is not. null: the record does not say."
+     },
+     "tier": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "rule_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "normalisation_rule": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "page": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "last_page": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "char_start": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Start of the span in the document text."
+     },
+     "char_end": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "block_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "atom_ids": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "spans": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "atom_id": {
+         "type": "string"
+        },
+        "start": {
+         "type": "integer"
+        },
+        "end": {
+         "type": "integer"
+        }
+       },
+       "required": [
+        "atom_id",
+        "start",
+        "end"
+       ],
+       "additionalProperties": false
+      },
+      "description": "The part of each line that holds the value: positions in the text of the line."
+     },
+     "export_check": {
+      "enum": [
+       "equal_to_export",
+       "differs_from_export",
+       "no_export_value",
+       "not_compared"
+      ],
+      "description": "The cross-check with the OpenParlData export record. not_compared: no export record, or no comparison for the field (always for a weak candidate)."
+     },
+     "export_value": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "The value of the export for equal_to_export and differs_from_export, else null. It stands in the comparison only: it is never a value of the record."
+     },
+     "export_match": {
+      "anyOf": [
+       {
+        "enum": [
+         "exact",
+         "after_normalisation"
+        ],
+        "description": "For equal_to_export only, else null. exact: the export string is the value of the record. after_normalisation: equal by the comparison rule (case, accents, white space, punctuation, the table of the bodies), but the two strings differ."
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "label_id": {
+      "type": "string"
+     },
+     "calibration_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "instance_path": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "The path in the eCH-0295 file; null for a weak candidate."
+     }
+    },
+    "required": [
+     "field",
+     "slot",
+     "name_key",
+     "written",
+     "candidate",
+     "value_printed",
+     "value",
+     "value_form",
+     "differs_from_printed",
+     "comparison_value",
+     "probability",
+     "value_status",
+     "measured",
+     "tier_probability",
+     "probability_source",
+     "in_sample",
+     "tier",
+     "rule_id",
+     "normalisation_rule",
+     "page",
+     "last_page",
+     "char_start",
+     "char_end",
+     "block_id",
+     "atom_ids",
+     "spans",
+     "export_check",
+     "export_value",
+     "export_match",
+     "label_id",
+     "calibration_id",
+     "instance_path"
+    ],
+    "additionalProperties": false
+   },
+   "description": "One entry for each value that a code rule read from the PDF, in the sequence of the labels file: the values of the record (written true) and the weak candidates (written false). Empty if head_values.source is not pdf."
+  },
+  "slots": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "properties": {
+     "slot": {
+      "type": "string"
+     },
+     "state": {
+      "enum": [
+       "read_from_pdf",
+       "not_found_in_pdf",
+       "not_in_this_document_type",
+       "register_only"
+      ]
+     },
+     "reason": {
+      "type": "string",
+      "description": "The string key slot_reason.<reason>. weak_candidate_only: the rules found only a value of a tier below the floor; label_id names the candidate label. reader_scope (state not_found_in_pdf): the cascade searches the value, and the rule of the value does not read this document (for example a printed type word that has no value in the eCH-0295 list, or a response with no author in its head)."
+     },
+     "result": {
+      "anyOf": [
+       {
+        "enum": [
+         "not_searched"
+        ],
+        "description": "not_searched: the cascade does not search the slot in a document of this kind (state not_in_this_document_type; kind and cascade_rules say why). null: each other slot."
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "kind": {
+      "anyOf": [
+       {
+        "enum": [
+         "proposal",
+         "response",
+         "combined",
+         "executive_proposal",
+         "committee_report",
+         "minutes",
+         "other"
+        ],
+        "description": "For result not_searched: the kind of the document. Else null."
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "cascade_rules": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      },
+      "description": "For result not_searched: the ids of the cascade rules that cut the slot. Else empty."
+     },
+     "field": {
+      "anyOf": [
+       {
+        "enum": [
+         "affair_type",
+         "title",
+         "affair_number",
+         "submission_date",
+         "response_date",
+         "responder",
+         "sponsor"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "label_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "gap_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "export_has_value": {
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "For a field with no value in the record: true or false if the export record was compared (the value of the export is not in the view). null with no export record, with no comparison, and for each other slot."
+     },
+     "name_key": {
+      "type": "string",
+      "description": "The string key pslot.<Class>.<slot> of ui/strings.json."
+     }
+    },
+    "required": [
+     "slot",
+     "state",
+     "reason",
+     "result",
+     "kind",
+     "cascade_rules",
+     "field",
+     "label_id",
+     "gap_id",
+     "export_has_value",
+     "name_key"
+    ],
+    "additionalProperties": false
+   },
+   "description": "One entry for each slot of the classes Affair, Submission and ResponseStep of eCH-0295 with one of 4 states. Empty if head_values.source is not pdf."
+  },
+  "document": {
+   "type": "object",
+   "properties": {
+    "source_iri": {
+     "type": "string"
+    },
+    "record_iri": {
+     "type": "string"
+    },
+    "container_iri": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "named_graphs": {
+     "type": "object",
+     "additionalProperties": {
+      "type": "string"
+     }
+    },
+    "pdf_sha256": {
+     "type": "string",
+     "pattern": "^[0-9a-f]{64}$"
+    },
+    "page_count": {
+     "type": "integer"
+    },
+    "language": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "parliament": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "description": "The key of the body (block file key parliament)."
+    },
+    "parliament_name": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "description": "The name of the body (export record key body.name); null for a PDF with no export record."
+    },
+    "title": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "description": "The value of the record. With head_values.source pdf it is the value that a rule read from the PDF and that is in the record, or null if the rules found no value or only a weak candidate."
+    },
+    "affair_number": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "affair_type": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "has_export": {
+     "type": "boolean",
+     "description": "false for a PDF with no export record (stage P0b). With head_values.source pdf the export record gives the cross-check only."
+    },
+    "conformance": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "head": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "properties": {
+       "instance_path": {
+        "type": "string"
+       },
+       "ech_slot": {
+        "type": "string"
+       },
+       "value": {
+        "type": "string"
+       },
+       "derivation": {
+        "type": "string",
+        "description": "provenance file key value_records[].derivation, not changed."
+       },
+       "origin": {
+        "enum": [
+         "export",
+         "pdf_copy",
+         "pdf_rule",
+         "code_rule",
+         "identifier",
+         "schema"
+        ],
+        "description": "Source of the value, as view 1 groups the derivations. pdf_rule: a value reader (a code rule) read the value from the PDF (derivation extracted_from_pdf_by_rule)."
+       },
+       "pdf_consistency": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "mapping_match": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "atom_ids": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       },
+       "label_id": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       }
+      },
+      "required": [
+       "instance_path",
+       "ech_slot",
+       "value",
+       "derivation",
+       "origin",
+       "pdf_consistency",
+       "mapping_match",
+       "atom_ids",
+       "label_id"
+      ],
+      "additionalProperties": false
+     },
+     "description": "One entry for each leaf value of the eCH-0295 record (provenance file, value_records)."
+    },
+    "text_blocks": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "properties": {
+       "id": {
+        "type": "string"
+       },
+       "iri": {
+        "type": "string"
+       },
+       "ech_slot": {
+        "type": "string"
+       },
+       "text_type": {
+        "type": "string"
+       },
+       "instance_path": {
+        "type": "string"
+       },
+       "block_ids": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       },
+       "atom_ids": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       },
+       "char_count": {
+        "type": "integer"
+       },
+       "extent_value_status": {
+        "enum": [
+         "certain",
+         "unsure"
+        ]
+       },
+       "label_id": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       }
+      },
+      "required": [
+       "id",
+       "iri",
+       "ech_slot",
+       "text_type",
+       "instance_path",
+       "block_ids",
+       "atom_ids",
+       "char_count",
+       "extent_value_status",
+       "label_id"
+      ],
+      "additionalProperties": false
+     },
+     "description": "The author blocks of the eCH-0295 record (provenance file, text_block_records)."
+    }
+   },
+   "required": [
+    "source_iri",
+    "record_iri",
+    "container_iri",
+    "named_graphs",
+    "pdf_sha256",
+    "page_count",
+    "language",
+    "parliament",
+    "parliament_name",
+    "title",
+    "affair_number",
+    "affair_type",
+    "has_export",
+    "conformance",
+    "head",
+    "text_blocks"
+   ],
+   "additionalProperties": false
+  },
+  "pages": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "properties": {
+     "number": {
+      "type": "integer"
+     },
+     "width": {
+      "type": "number"
+     },
+     "height": {
+      "type": "number"
+     },
+     "text_source": {
+      "enum": [
+       "pdf",
+       "ocr",
+       "mixed"
+      ]
+     },
+     "lines": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "atom_id": {
+         "type": "string"
+        },
+        "block_id": {
+         "type": "string"
+        },
+        "frame": {
+         "type": "array",
+         "items": {
+          "type": "number"
+         },
+         "minItems": 4,
+         "maxItems": 4,
+         "description": "[left, top, right, bottom] in PDF points, origin top left."
+        },
+        "frame_source": {
+         "type": "string"
+        },
+        "text": {
+         "type": "string"
+        },
+        "char_start": {
+         "type": "integer"
+        },
+        "char_end": {
+         "type": "integer"
+        },
+        "from_ocr": {
+         "type": "boolean"
+        }
+       },
+       "required": [
+        "atom_id",
+        "block_id",
+        "frame",
+        "frame_source",
+        "text",
+        "char_start",
+        "char_end",
+        "from_ocr"
+       ],
+       "additionalProperties": false
+      }
+     },
+     "image": {
+      "type": "string",
+      "description": "Address of the PNG image of the page below /api/records/<record_id>/files/. Only a page with an image has this key."
+     }
+    },
+    "required": [
+     "number",
+     "width",
+     "height",
+     "text_source",
+     "lines"
+    ],
+    "additionalProperties": false
+   }
+  },
+  "blocks": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string"
+     },
+     "page": {
+      "type": "integer"
+     },
+     "docling_label": {
+      "type": "string"
+     },
+     "char_start": {
+      "type": "integer"
+     },
+     "char_end": {
+      "type": "integer"
+     },
+     "atom_ids": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "text": {
+      "type": "string"
+     },
+     "label_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "required": [
+     "id",
+     "page",
+     "docling_label",
+     "char_start",
+     "char_end",
+     "atom_ids",
+     "text",
+     "label_id"
+    ],
+    "additionalProperties": false
+   }
+  },
+  "labels": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": "Last part of the label IRI. One of a kind in the record."
+     },
+     "iri": {
+      "type": "string"
+     },
+     "kind": {
+      "enum": [
+       "document_text_parts",
+       "block_slot",
+       "author_switch",
+       "executive_response",
+       "text_wording",
+       "export_value",
+       "constant_value",
+       "pdf_value"
+      ],
+      "description": "labels file key label_kind. pdf_value: a value that a code rule read from the PDF (it has no options)."
+     },
+     "slot": {
+      "type": "string",
+      "description": "Local name of the predicate IRI."
+     },
+     "predicate": {
+      "type": "string"
+     },
+     "subject": {
+      "type": "string"
+     },
+     "target": {
+      "type": "object",
+      "properties": {
+       "type": {
+        "enum": [
+         "document",
+         "block",
+         "text_block",
+         "value"
+        ]
+       },
+       "block_id": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "atom_ids": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       },
+       "page": {
+        "anyOf": [
+         {
+          "type": "integer"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "last_page": {
+        "anyOf": [
+         {
+          "type": "integer"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "char_start": {
+        "anyOf": [
+         {
+          "type": "integer"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "char_end": {
+        "anyOf": [
+         {
+          "type": "integer"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "instance_path": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "about_entity": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       }
+      },
+      "required": [
+       "type",
+       "block_id",
+       "atom_ids",
+       "page",
+       "last_page",
+       "char_start",
+       "char_end",
+       "instance_path",
+       "about_entity"
+      ],
+      "additionalProperties": false
+     },
+     "value": {
+      "type": "string",
+      "description": "The selected option (labels file key label_object)."
+     },
+     "options": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "value": {
+         "type": "string"
+        },
+        "probability": {
+         "type": "number",
+         "minimum": 0,
+         "maximum": 1
+        }
+       },
+       "required": [
+        "value",
+        "probability"
+       ],
+       "additionalProperties": false
+      },
+      "description": "All options in the sequence of the record, each with its stored number. Each stored number has the limits 0.005 and 0.995, so the numbers of one label can sum to more than 1. Empty for a label with no probability."
+     },
+     "probability": {
+      "anyOf": [
+       {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "value_status": {
+      "enum": [
+       "certain",
+       "unsure",
+       "none"
+      ],
+      "description": "none: the label has no probability."
+     },
+     "chosen_is_top": {
+      "anyOf": [
+       {
+        "type": "boolean",
+        "description": "false if another option has a higher probability."
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "top_option": {
+      "anyOf": [
+       {
+        "type": "object",
+        "properties": {
+         "value": {
+          "type": "string"
+         },
+         "probability": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+         }
+        },
+        "required": [
+         "value",
+         "probability"
+        ],
+        "additionalProperties": false
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "source": {
+      "type": "object",
+      "properties": {
+       "kind": {
+        "enum": [
+         "rule",
+         "apertus_head",
+         "code_step",
+         "export",
+         "constant",
+         "copy"
+        ],
+        "description": "labels file key label_source, not changed."
+       },
+       "group": {
+        "enum": [
+         "rule",
+         "apertus_readout",
+         "export",
+         "constant",
+         "copy"
+        ],
+        "description": "Group for the page. apertus_head gives apertus_readout. code_step gives apertus_readout if run.apertus is stored, else rule."
+       },
+       "tier": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "rule_id": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "head": {
+        "anyOf": [
+         {
+          "enum": [
+           "D1",
+           "B1",
+           "R2"
+          ],
+          "description": "Read-out head whose values the label uses, if known."
+         },
+         {
+          "type": "null"
+         }
+        ]
+       }
+      },
+      "required": [
+       "kind",
+       "group",
+       "tier",
+       "rule_id",
+       "head"
+      ],
+      "additionalProperties": false
+     },
+     "calibration_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "in_sample": {
+      "anyOf": [
+       {
+        "type": "boolean",
+        "description": "null: the record does not say it, or origin is new (not known)."
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "note_code": {
+      "anyOf": [
+       {
+        "enum": [
+         "switch_between_blocks",
+         "value_derivation",
+         "wording_copy",
+         "final_check",
+         "unsure_final_check_differs",
+         "comparison_value",
+         "weak_candidate",
+         "addressee_candidate"
+        ],
+        "description": "The note of the label (labels file key label_note) as a code, if the view function knows the note. The page has the text note.<code> in its strings file."
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "note_params": {
+      "type": "object",
+      "description": "The values of the note: before and after (block ids) for switch_between_blocks; derivation for value_derivation; agrees (boolean) for final_check."
+     },
+     "note": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "A note that the view function does not know, in English, after a filter that removes paths, document numbers and working words of the project (mark […]). null if note_code is set or the label has no note. Only for the technical details of the page."
+     }
+    },
+    "required": [
+     "id",
+     "iri",
+     "kind",
+     "slot",
+     "predicate",
+     "subject",
+     "target",
+     "value",
+     "options",
+     "probability",
+     "value_status",
+     "chosen_is_top",
+     "top_option",
+     "source",
+     "calibration_id",
+     "in_sample",
+     "note_code",
+     "note_params",
+     "note"
+    ],
+    "additionalProperties": false
+   }
+  },
+  "calibrations": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string"
+     },
+     "iri": {
+      "type": "string"
+     },
+     "method": {
+      "type": "string"
+     },
+     "kind": {
+      "type": "string"
+     },
+     "fit_n": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "in_sample": {
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "target_status": {
+      "enum": [
+       "target_met",
+       "target_not_met",
+       "not_met_on_unseen_parliaments",
+       "not_measured"
+      ]
+     },
+     "certain_threshold": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "basis": {
+      "anyOf": [
+       {
+        "type": "object",
+        "properties": {
+         "n": {
+          "anyOf": [
+           {
+            "type": "integer"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "agreed": {
+          "type": "integer"
+         },
+         "documents": {
+          "anyOf": [
+           {
+            "type": "integer"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         }
+        },
+        "required": [
+         "n",
+         "agreed",
+         "documents"
+        ],
+        "additionalProperties": false,
+        "description": "The counts behind the number of a rule, if the calibration record holds them: n blocks (null if the record counts documents only), agreed, documents."
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "reference_code": {
+      "anyOf": [
+       {
+        "enum": [
+         "model_labels_not_human_checked",
+         "export_register_value",
+         "other"
+        ],
+        "description": "The reference that the probability is about, as a code. model_labels_not_human_checked: reference labels of the development documents, made by a language model and not checked by a human. other: the record names another reference. The text of the calibration record (key reference_source of the labels file) is not in the view."
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "measure_sets": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "name": {
+         "type": "string"
+        },
+        "n": {
+         "anyOf": [
+          {
+           "type": "integer"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "ece": {
+         "anyOf": [
+          {
+           "type": "number"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "ece_low": {
+         "anyOf": [
+          {
+           "type": "number"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "ece_high": {
+         "anyOf": [
+          {
+           "type": "number"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "brier": {
+         "anyOf": [
+          {
+           "type": "number"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "nll": {
+         "anyOf": [
+          {
+           "type": "number"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        }
+       },
+       "required": [
+        "name",
+        "n",
+        "ece",
+        "ece_low",
+        "ece_high",
+        "brier",
+        "nll"
+       ],
+       "additionalProperties": false
+      }
+     },
+     "note": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "calibration_note of the labels file, not changed: an English working text of the converter. The pages do not show it. null for a record of the kind pdf_value."
+     },
+     "tier": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "The rule tier of a record of the kind pdf_value, else null."
+     },
+     "measured": {
+      "type": "boolean",
+      "description": "Always true. The view function refuses a record with stand-in numbers."
+     }
+    },
+    "required": [
+     "id",
+     "iri",
+     "method",
+     "kind",
+     "fit_n",
+     "in_sample",
+     "target_status",
+     "certain_threshold",
+     "basis",
+     "reference_code",
+     "measure_sets",
+     "note",
+     "tier",
+     "measured"
+    ],
+    "additionalProperties": false
+   }
+  },
+  "counts": {
+   "type": "object",
+   "properties": {
+    "pages": {
+     "type": "integer"
+    },
+    "lines": {
+     "type": "integer"
+    },
+    "blocks": {
+     "type": "integer"
+    },
+    "labels": {
+     "type": "object",
+     "properties": {
+      "total": {
+       "type": "integer"
+      },
+      "with_probability": {
+       "type": "integer"
+      },
+      "certain": {
+       "type": "integer"
+      },
+      "unsure": {
+       "type": "integer"
+      },
+      "none": {
+       "type": "integer"
+      },
+      "chosen_not_top": {
+       "type": "integer"
+      },
+      "by_source": {
+       "type": "object",
+       "additionalProperties": {
+        "type": "integer"
+       }
+      },
+      "by_group": {
+       "type": "object",
+       "additionalProperties": {
+        "type": "integer"
+       }
+      },
+      "by_kind": {
+       "type": "object",
+       "additionalProperties": {
+        "type": "integer"
+       }
+      }
+     },
+     "required": [
+      "total",
+      "with_probability",
+      "certain",
+      "unsure",
+      "none",
+      "chosen_not_top",
+      "by_source",
+      "by_group",
+      "by_kind"
+     ],
+     "additionalProperties": false
+    },
+    "triples": {
+     "type": "object",
+     "additionalProperties": {
+      "type": "integer"
+     },
+     "description": "manifest.json key rdf.triples: one count for each named graph, and union."
+    },
+    "record": {
+     "type": "object",
+     "description": "manifest.json key counts, not changed."
+    }
+   },
+   "required": [
+    "pages",
+    "lines",
+    "blocks",
+    "labels",
+    "triples",
+    "record"
+   ],
+   "additionalProperties": false
+  },
+  "checks": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string"
+     },
+     "state": {
+      "enum": [
+       "passed",
+       "failed",
+       "skipped"
+      ],
+      "description": "skipped: the check did not run (reason shacl_tool_absent or earlier_check_failed)."
+     },
+     "reason": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "required": [
+     "id",
+     "state",
+     "reason"
+    ],
+    "additionalProperties": false
+   }
+  },
+  "files": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "properties": {
+     "name": {
+      "type": "string"
+     },
+     "role": {
+      "type": "string"
+     },
+     "media_type": {
+      "type": "string"
+     },
+     "bytes": {
+      "type": "integer"
+     },
+     "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+     },
+     "url": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "name",
+     "role",
+     "media_type",
+     "bytes",
+     "sha256",
+     "url"
+    ],
+    "additionalProperties": false
+   }
+  }
+ },
+ "required": [
+  "schema",
+  "record_id",
+  "doc_id",
+  "run",
+  "notices",
+  "head_values",
+  "values",
+  "slots",
+  "document",
+  "pages",
+  "blocks",
+  "labels",
+  "calibrations",
+  "counts",
+  "checks",
+  "files"
+ ],
+ "additionalProperties": false
+}

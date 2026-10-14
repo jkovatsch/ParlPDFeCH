@@ -1,0 +1,1128 @@
+{
+ "schema": "parlpdfech-layout-files/1",
+ "status": "EXCEPTION, NOT RELEASED",
+ "modes": {
+  "1": "rules only (worker mode rules)",
+  "2": "stored Apertus states, candidate B1-S (worker mode auto)",
+  "3": "fresh conversion of a PDF that is not a sample, rules only (worker/fresh.py)"
+ },
+ "method": "Python audit event open in the worker process after the scratch root is made, plus the files of the imported modules (sys.modules); one run of each mode; paths in the scratch root",
+ "traces": [
+  {
+   "mode": "rules",
+   "mode_number": 1,
+   "doc_id": "26171",
+   "converter_files_opened": 32,
+   "paths_opened": 1883,
+   "subprocesses": 0,
+   "network_events": 1
+  },
+  {
+   "mode": "auto",
+   "mode_number": 2,
+   "doc_id": "26171",
+   "converter_files_opened": 59,
+   "paths_opened": 2074,
+   "subprocesses": 0,
+   "network_events": 1
+  },
+  {
+   "mode": "fresh",
+   "mode_number": 3,
+   "doc_id": "local",
+   "converter_files_opened": 45,
+   "paths_opened": 8905,
+   "subprocesses": 6,
+   "network_events": 1
+  }
+ ],
+ "totals": {
+  "files": 86,
+  "bytes": 14973556,
+  "by_mode": {
+   "1": {
+    "files": 46,
+    "bytes": 4995526
+   },
+   "2": {
+    "files": 73,
+    "bytes": 14381894
+   },
+   "3": {
+    "files": 59,
+    "bytes": 5609071
+   }
+  }
+ },
+ "files": [
+  {
+   "path": "src/m02_ech_regeln.py",
+   "bytes": 33304,
+   "sha256": "e2e37098ea069ff294ae0c3916e0d84bb460d15e0c9022a88268f29046187ca7",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "import of a module of the chain (module import of the traced run)"
+  },
+  {
+   "path": "src/m03_atome.py",
+   "bytes": 102015,
+   "sha256": "3988f7ae9bfc172a4f91fe2833a5add17e2e18567d9fe304b64a1c25fee02155",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "import of a module of the chain (module import of the traced run)"
+  },
+  {
+   "path": "src/m03_docling_zerlegen.py",
+   "bytes": 29956,
+   "sha256": "b6401f62770275904af036b01319728d21aa0e7822b7101438d8c50ae866a1d9",
+   "kind": "code",
+   "modes": [
+    3
+   ],
+   "why": "fresh branch: the Docling step (function main) that docling_main calls"
+  },
+  {
+   "path": "src/m03_ech_export_schema.yaml",
+   "bytes": 813,
+   "sha256": "69fccc1816c2e66058795c092e9a2c5cda2d9b8df59fb1dfb331650853252474",
+   "kind": "schema",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "LinkML wrapper schema of the eCH-0295 record"
+  },
+  {
+   "path": "src/m03_gold_record.py",
+   "bytes": 70902,
+   "sha256": "15b77f5c7f9f0bd2011d67a78b1be3f1682f0938959a526198691dcd9134f0e2",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "wording and E19 signatures that the writer reuses (manifest key reused_files)"
+  },
+  {
+   "path": "src/m03_iso_hilfe.py",
+   "bytes": 9628,
+   "sha256": "54aef51933965ff77413bd3fff395e1449e13fc1025a830da8e29ec6b01e0092",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "import of a module of the chain (module import of the traced run)"
+  },
+  {
+   "path": "src/m03_iso_jev.py",
+   "bytes": 10923,
+   "sha256": "142b1b23a336558d97b57daf9874994a129dfd621a8093e5358eb468b4066ec7",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "import of a module of the chain (module import of the traced run)"
+  },
+  {
+   "path": "src/m03_iso_mass.py",
+   "bytes": 8812,
+   "sha256": "01187a779a6082e93e3f71d6ef15dc143a4c2543ed0d2820968e3e8a57e30e88",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "import of a module of the chain (module import of the traced run)"
+  },
+  {
+   "path": "src/m03_iso_paths.py",
+   "bytes": 1136,
+   "sha256": "7e726c76a29aadd1521cd903ae758838347b9432dd1acd638712042b13001362",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "path function that the writer checks (manifest key reused_files)"
+  },
+  {
+   "path": "src/m03_iso_v4.py",
+   "bytes": 21612,
+   "sha256": "f3327021cc4febd3b72416a52b2db9b52b520af34ed65c80759715b9465f65be",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "fixed answers that the writer reuses (manifest key reused_files)"
+  },
+  {
+   "path": "src/m03_isolierung_taxonomie.py",
+   "bytes": 141479,
+   "sha256": "6399981d967c43aac7fdd8934e0923203e2020dbb8357b0de84dc06bc6c7db42",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "import of a module of the chain (module import of the traced run)"
+  },
+  {
+   "path": "src/m03_iter2_aufgabe.py",
+   "bytes": 21289,
+   "sha256": "11694a2ecb16d22bf1d9313f131552751abfdfe9caab34f0b3e5d111d424166a",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "import of a module of the chain (module import of the traced run)"
+  },
+  {
+   "path": "src/m03_ladder.py",
+   "bytes": 97227,
+   "sha256": "953d66ee13e88a7fbabfb2d11d8de1aa3476a3bd76b29211d1121923f3304567",
+   "kind": "code",
+   "modes": [
+    3
+   ],
+   "why": "fresh branch: collapse map, block form and scope rules of the rule chain (converter_view)"
+  },
+  {
+   "path": "src/m03_lehrer_vorgaben.py",
+   "bytes": 41950,
+   "sha256": "6075bf8cc59fce171625490d098c69ad16d4aafd9f558485a920f66591771fc5",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "import of a module of the chain (module import of the traced run)"
+  },
+  {
+   "path": "src/m03_sub_assemble.py",
+   "bytes": 15028,
+   "sha256": "d706d707fdb4a8b811b6ba5b09275792548413e0b3972e64eebadf939ca292b9",
+   "kind": "code",
+   "modes": [
+    3
+   ],
+   "why": "fresh branch: the composition of the answers (assemble)"
+  },
+  {
+   "path": "src/m03_sub_common.py",
+   "bytes": 37174,
+   "sha256": "9b8f4b7df485fcccba4ed329001412eecb5210178c5ce4681e2a6fec1cedbfb1",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "import of a module of the chain (module import of the traced run)"
+  },
+  {
+   "path": "src/m03_sub_s1_role.py",
+   "bytes": 29137,
+   "sha256": "af0aa97caf1d1d22595ac53cb267d8f5558185a33d351cd5b3586dc29764e42d",
+   "kind": "code",
+   "modes": [
+    3
+   ],
+   "why": "fresh branch: the S1 rule (document role)"
+  },
+  {
+   "path": "src/m03_sub_s2_switch.py",
+   "bytes": 43202,
+   "sha256": "6517a9b4ca7489b20ee1d819e484f078452b536549f3186e4428e772c1e5247b",
+   "kind": "code",
+   "modes": [
+    3
+   ],
+   "why": "fresh branch: the S2 rule (author switch)"
+  },
+  {
+   "path": "src/m03_sub_s5_type.py",
+   "bytes": 45650,
+   "sha256": "624de1593d00912477b396e8ce16d52936a99bd33fb2bf5b2d6b08738a2c15bc",
+   "kind": "code",
+   "modes": [
+    3
+   ],
+   "why": "fresh branch: the S5 rule (text type of a paragraph)"
+  },
+  {
+   "path": "src/m05_cls_data.py",
+   "bytes": 40589,
+   "sha256": "88a0207465bd6e6d704a82b138752a1e0caf0059cb7f8795040582fee1ebe4ae",
+   "kind": "code",
+   "modes": [
+    3
+   ],
+   "why": "fresh branch: the language rule of the block file (function language)"
+  },
+  {
+   "path": "src/m05_iso_runner.py",
+   "bytes": 39894,
+   "sha256": "352ee843635088bbd67f0cde3277d28c9072c9ddb58942af212dc40000411557",
+   "kind": "code",
+   "modes": [
+    3
+   ],
+   "why": "fresh branch: the frozen runner that the rule step imports (check_frozen_method, runner_doc)"
+  },
+  {
+   "path": "src/m06_converter.py",
+   "bytes": 50462,
+   "sha256": "c0b9a9d383abeafe447f14db4f6edd8d18ba72126fc193eaf14c37be83969ab4",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "export record, wording and E19 functions that the writer reuses (manifest key reused_files)"
+  },
+  {
+   "path": "src/m06_ech_ausgabe.py",
+   "bytes": 77433,
+   "sha256": "19ec1cbc47d4ca5f2a1b350878e84f3d29e5a0f9c9775a54f85ba726f5694996",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "metadata values and the YAML writer that the writer reuses (manifest key reused_files)"
+  },
+  {
+   "path": "src/m06_ech_profil.yaml",
+   "bytes": 56286,
+   "sha256": "b8a2c343b903ab8d7d13d80ca06d5d770fe3880c7f55522cfc67a713ce461d90",
+   "kind": "schema",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "LinkML schema of the provenance file"
+  },
+  {
+   "path": "src/m10_b1s.py",
+   "bytes": 86410,
+   "sha256": "4cdd9ac8a7a74e73ab4cb7e44a039ab7adaf967b86c7a483683c46174d3d90ac",
+   "kind": "code",
+   "modes": [
+    2
+   ],
+   "why": "b1s_decisions and design_check of candidate B1-S"
+  },
+  {
+   "path": "src/m10_b2x.py",
+   "bytes": 65431,
+   "sha256": "86c990ac7c1ef282dc1949f27fae47eac6c604e88f5a2bb5b4bfb3869df509d0",
+   "kind": "code",
+   "modes": [
+    2
+   ],
+   "why": "the B2 forms of the block step (self-check: SHA-256 in addendum C)"
+  },
+  {
+   "path": "src/m10_calibrate.py",
+   "bytes": 60740,
+   "sha256": "03df26e311c3d31e69fbd3185124944c3b0ca1606f8e79bbe424bdccfb43aa19",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "floor lookup, checked_file (SHA-256 check of the rule record), clip"
+  },
+  {
+   "path": "src/m10_cascade.py",
+   "bytes": 17139,
+   "sha256": "21cea21a75fb2a1695068841b5158cd19b0b72bcbb8ac206e646402f5cd3cd51",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "floor_decisions and check_decisions (interface 7)"
+  },
+  {
+   "path": "src/m10_convert.py",
+   "bytes": 58477,
+   "sha256": "c48afc3c9cae9d0591d6e1b06d40cdc9b0654f66cd18eb29d17099275c004bce",
+   "kind": "code",
+   "modes": [
+    3
+   ],
+   "why": "fresh branch: the step functions docling_main, atoms_of_docling and block_file, and the stored settings"
+  },
+  {
+   "path": "src/m10_design.py",
+   "bytes": 113481,
+   "sha256": "9e6b912ed0ba1f5b773a12c572eef991da24c4788c40875f7889f1de40cf2adb",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "frozen design: load_frozen, read_states, head functions (self-check: SHA-256 in the design freeze file)"
+  },
+  {
+   "path": "src/m10_docs.py",
+   "bytes": 11310,
+   "sha256": "80110478861dd41396da6c826bcdbea0042838fbad5dac09621631c99347a142",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "document text and block spans of the block file"
+  },
+  {
+   "path": "src/m10_fullrun.py",
+   "bytes": 35014,
+   "sha256": "e1e60d1102b2f2c29f31fee2650ffe59b2c43c239382faf6a4096a7e20b25835",
+   "kind": "code",
+   "modes": [
+    1,
+    2
+   ],
+   "why": "batch tool of the floor mode: worker_state, valid_output, folder rules; m10_fullrun2 imports it"
+  },
+  {
+   "path": "src/m10_fullrun2.py",
+   "bytes": 44385,
+   "sha256": "97015dff844a6892bab8c60a69c1c39984700fbcc6cc1b0f281f5e33548bf8a6",
+   "kind": "code",
+   "modes": [
+    2
+   ],
+   "why": "batch tool of candidate B1-S: worker_state, decisions_of, document_state (the functions of the reference run)"
+  },
+  {
+   "path": "src/m10_gaps.py",
+   "bytes": 22536,
+   "sha256": "58750027ed407962e44f1a4f1b7fd9672d4ff47563b1d8c2ff8d67bd768ce91d",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "recorded gaps and conformance names; import of writer, RDF step and validator"
+  },
+  {
+   "path": "src/m10_guard.py",
+   "bytes": 22692,
+   "sha256": "1290d740ec49bb5be22303db0147e073501a8014d308f258828c217365f94519",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "split guard; the worker gives it a table in memory"
+  },
+  {
+   "path": "src/m10_label_schema.yaml",
+   "bytes": 36040,
+   "sha256": "07b779a759f55264b2bb426e684e152b5f86117b537255fb71242500fd2ac9e6",
+   "kind": "schema",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "LinkML schema of the label file"
+  },
+  {
+   "path": "src/m10_lora_design.py",
+   "bytes": 65608,
+   "sha256": "8f483b946742aa4e7a9a560f104e0b0bd874f24c4bd04e3b37af4849386e4160",
+   "kind": "code",
+   "modes": [
+    2
+   ],
+   "why": "lora_decisions (the decision function that m10_b1s calls), gate object, addenda check"
+  },
+  {
+   "path": "src/m10_lora_validation.py",
+   "bytes": 57000,
+   "sha256": "46d980306365eab7eb1bb88b104a0b84c7a2eb90624880cd64f4b9f841b9a721",
+   "kind": "code",
+   "modes": [
+    2
+   ],
+   "why": "import of m10_b1s"
+  },
+  {
+   "path": "src/m10_pipeline.py",
+   "bytes": 29801,
+   "sha256": "329cc6e3778b9a7b95e1b01a9a17f24f632b2806f6ec90fcbdab745af3e21a87",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "decide (mode floor), load_floor, load_design, load_rules, design_inputs"
+  },
+  {
+   "path": "src/m10_rdf.py",
+   "bytes": 21663,
+   "sha256": "e61face996fd44cbcfd0101c02ddb873f87b4480a3711715268b34a3ce80c549",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "RDF step: TriG, Turtle and RDF/XML files"
+  },
+  {
+   "path": "src/m10_rules.py",
+   "bytes": 35756,
+   "sha256": "9b349f855fd363c071d6559185cb54c07769840c890baa5f09eaaf9a79a6c80f",
+   "kind": "code",
+   "modes": [
+    3
+   ],
+   "why": "fresh branch: the rule record of one document (check_identity_record, run_document)"
+  },
+  {
+   "path": "src/m10_score.py",
+   "bytes": 56897,
+   "sha256": "aca5bd0997b7a5cb7ce7a5fed9d8902a4da79639a686ba5a3f5d43b454bf8bd2",
+   "kind": "code",
+   "modes": [
+    2,
+    3
+   ],
+   "why": "import of m10_b2x and m10_lora_design (code record)"
+  },
+  {
+   "path": "src/m10_validate.py",
+   "bytes": 34424,
+   "sha256": "20af9f10b3f7bde59a8e18e0343c09c0dd6f4ff790e384b02d635bd79acfa659",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "validator: checks C1 to C10 and validation.json"
+  },
+  {
+   "path": "src/m10_validation_run.py",
+   "bytes": 125359,
+   "sha256": "6686e4bfe8242a0e6b4c1625355e0d714ebce1f18b17b51f91828d569f38eb22",
+   "kind": "code",
+   "modes": [
+    2
+   ],
+   "why": "load_r2, load_calibration_records and the rule gj12 that m10_fullrun2 uses"
+  },
+  {
+   "path": "src/m10_writer.py",
+   "bytes": 53762,
+   "sha256": "71830486948ab76daa63ab5a6b2e721805eb13fc08b96c55359fc5e9827c892f",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "writer: the three YAML files and the manifest"
+  },
+  {
+   "path": "src/prompts/s1_role.txt",
+   "bytes": 1846,
+   "sha256": "a458b4258d86c895b52e781b60c738e2c2cd81db9ca257d503aa09440386298f",
+   "kind": "self_check_text",
+   "modes": [
+    3
+   ],
+   "why": "fresh branch: the S1 prompt text; check_frozen_method compares its SHA-256 (the text is not sent)"
+  },
+  {
+   "path": "crisp-dm/04-modeling/gate-jev-cascade-criteria-addendum-b.md",
+   "bytes": 3400,
+   "sha256": "af77c2ac8573ee1c08bba9c75cd7e46739c8850f5988d066b3254a557153d651",
+   "kind": "self_check_text",
+   "modes": [
+    2
+   ],
+   "why": "addendum B (SHA-256 self-check; the text is not used)"
+  },
+  {
+   "path": "crisp-dm/04-modeling/gate-jev-cascade-criteria-addendum-c.md",
+   "bytes": 11873,
+   "sha256": "264a3810d7637aa3c6c6e39fbab82068d9c15f59ca4f6b88a820b7cc2cc41d5c",
+   "kind": "self_check_text",
+   "modes": [
+    2
+   ],
+   "why": "addendum C (SHA-256 self-check; holds the SHA-256 of m10_b2x.py)"
+  },
+  {
+   "path": "crisp-dm/04-modeling/gate-jev-cascade-criteria-addendum-d.md",
+   "bytes": 3525,
+   "sha256": "43e8414dd3f00fbf9111fa167c22a3c09617651d47540b8c9f1ee187f31bad10",
+   "kind": "self_check_text",
+   "modes": [
+    2
+   ],
+   "why": "addendum D (SHA-256 self-check of m10_b1s; the text is not used)"
+  },
+  {
+   "path": "crisp-dm/04-modeling/gate-jev-cascade-criteria.md",
+   "bytes": 46745,
+   "sha256": "6f6d15c0562cba2070995c302080a9aaedfe665f8d746ed5b0fdd9248bc20bfe",
+   "kind": "self_check_text",
+   "modes": [
+    2
+   ],
+   "why": "criteria file (SHA-256 self-check of m10_lora_design; the text is not used)"
+  },
+  {
+   "path": "daten/gj/calibration/floor_v1.json",
+   "bytes": 142185,
+   "sha256": "e8ff80df04f6b3a91f2249332f77d111ab5e7788884570570e6808a6b82f37c5",
+   "kind": "data",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "floor calibration file: probabilities of the rule tiers"
+  },
+  {
+   "path": "daten/gj/calibration/floor_v1_fitset.json",
+   "bytes": 42294,
+   "sha256": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "kind": "data",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "fit set of the floor calibration (SHA-256 check in load_floor; gives in_sample of the floor labels)"
+  },
+  {
+   "path": "daten/gj/design/b2_hmm.json",
+   "bytes": 4050,
+   "sha256": "1a1c1106b6347e94fbca8952aec77158606742202dd0a1142cf5a871debdd73a",
+   "kind": "data",
+   "modes": [
+    2
+   ],
+   "why": "sequence step of the frozen design"
+  },
+  {
+   "path": "daten/gj/design/calibration_records.json",
+   "bytes": 9636,
+   "sha256": "859a7965617b4bd7ce054e78664af9a01fa030e30b1937efd9f32d936057df9e",
+   "kind": "data",
+   "modes": [
+    2
+   ],
+   "why": "calibration records of the frozen design"
+  },
+  {
+   "path": "daten/gj/design/design.json",
+   "bytes": 36573,
+   "sha256": "aae764085e46cabe9a7e10a6862137be4ca4f301b617aa85ba76e67adc58f3b7",
+   "kind": "data",
+   "modes": [
+    2
+   ],
+   "why": "design file (SHA-256 check in load_frozen)"
+  },
+  {
+   "path": "daten/gj/design/heads/b1_head.npz",
+   "bytes": 265787,
+   "sha256": "eea315eef8fa9df77385847b34d307ef2c9e4ad4140ca1b23a3cff5d715a4eb7",
+   "kind": "data",
+   "modes": [
+    2
+   ],
+   "why": "read-out head B1 (block slot)"
+  },
+  {
+   "path": "daten/gj/design/heads/d1_head.npz",
+   "bytes": 199915,
+   "sha256": "c583c7aaf79564af87092585f24cc0c3faf1d9df9ea2b7d65a3887f884220bd3",
+   "kind": "data",
+   "modes": [
+    2
+   ],
+   "why": "read-out head D1 (document text parts)"
+  },
+  {
+   "path": "daten/gj/design/lora_trigger.json",
+   "bytes": 543,
+   "sha256": "ea692af4278821aa9b99ffe6c594c9dec50c10a333bc94a0d01f23600f3333dc",
+   "kind": "data",
+   "modes": [
+    2
+   ],
+   "why": "design file (SHA-256 check in load_frozen)"
+  },
+  {
+   "path": "daten/gj/design/thresholds.json",
+   "bytes": 5101,
+   "sha256": "b04ef908aa97511094a9c9a5eb50c0caccee96224fcec3b65cff1ee3febcd5aa",
+   "kind": "data",
+   "modes": [
+    2
+   ],
+   "why": "design file (SHA-256 check in load_frozen)"
+  },
+  {
+   "path": "daten/gj/design/tier_table.json",
+   "bytes": 11424,
+   "sha256": "49ed195358bbf6b9e0627d6eaec47fc84051cd40240b98fc4722159c4dd545db",
+   "kind": "data",
+   "modes": [
+    2
+   ],
+   "why": "certain rule tiers of the frozen design"
+  },
+  {
+   "path": "daten/gj/design/verifiers.json",
+   "bytes": 1375,
+   "sha256": "638a3b3cc0c5dbc2aa32d842baa57a529fd359a828d9849d45f44c1e78e8a527",
+   "kind": "data",
+   "modes": [
+    2
+   ],
+   "why": "verifier parameters of the frozen design"
+  },
+  {
+   "path": "daten/gj/design_b1s/calibration_records.json",
+   "bytes": 9851,
+   "sha256": "efc2b0700d35d78cc03bf6277733046b717f26ecf09a028daf1065b0d437ad25",
+   "kind": "data",
+   "modes": [
+    2
+   ],
+   "why": "calibration records of candidate B1-S"
+  },
+  {
+   "path": "daten/gj/design_b1s/design_b1s.json",
+   "bytes": 43681,
+   "sha256": "3a78badab1cc2b7e3164a670822f1466d0addd3c7f189b24e163b5c13aee0e0f",
+   "kind": "data",
+   "modes": [
+    2
+   ],
+   "why": "design of candidate B1-S: form, strength, temperatures"
+  },
+  {
+   "path": "daten/gj/design_b1s/design_b1s_dev.md",
+   "bytes": 8296,
+   "sha256": "15d5cf5cfe598193231e7283250f8d241738314d0b7a50ac819d87b1bbe07f49",
+   "kind": "data",
+   "modes": [
+    2
+   ],
+   "why": "output file of the B1-S design (SHA-256 check in load_design_b1s; the text is not used)"
+  },
+  {
+   "path": "daten/gj/design_b1s/oof/b1s_oof.npz",
+   "bytes": 7994969,
+   "sha256": "b594d98493bde7e4f945c5aa07edcac8929bfd51d5734c12d5936ff58ac50073",
+   "kind": "data",
+   "modes": [
+    2
+   ],
+   "why": "output file of the B1-S design (SHA-256 check in load_design_b1s; the values are not used)"
+  },
+  {
+   "path": "daten/gj/design_freeze.json",
+   "bytes": 57526,
+   "sha256": "add6fdad843cf24c08c0cf69992d610c0017cb8f77ae7e28f6c1aef0770e5e52",
+   "kind": "data",
+   "modes": [
+    2
+   ],
+   "why": "design freeze file: SHA-256 values of the design files and of 3 code files"
+  },
+  {
+   "path": "daten/gj/fullrun_b1s_dev/calibrations.json",
+   "bytes": 168908,
+   "sha256": "90bf5386a0edb150fac4acb82cae222102c1900fa966f69712c5485421eca9a7",
+   "kind": "data",
+   "modes": [
+    2
+   ],
+   "why": "calibration file of the reference run; the writer puts its path and SHA-256 into each record"
+  },
+  {
+   "path": "daten/gj/r2/dev_r2_docling_calibrations.json",
+   "bytes": 2100,
+   "sha256": "677edb1e37dfc35535dac2b6a1271fd75af92c55bed9ca0812faa5dc20edd611",
+   "kind": "data",
+   "modes": [
+    2
+   ],
+   "why": "calibration record of the R2 value (load_r2_files)"
+  },
+  {
+   "path": "daten/gj/runs/m10_rules_identity.json",
+   "bytes": 7850,
+   "sha256": "cb50b2078b7881dcd15827be3031e48eca5506a24969bf6aa01c534ff0e3704d",
+   "kind": "data",
+   "modes": [
+    3
+   ],
+   "why": "fresh branch: the identity record of the rule step (check_identity_record compares the SHA-256 of m10_rules.py)"
+  },
+  {
+   "path": "daten/iso/ladder/ladder.json",
+   "bytes": 147050,
+   "sha256": "1b040f8cde2c5bcbb0b8575ade123bcb81ce73b46a05872c4edf743386da8652",
+   "kind": "data",
+   "modes": [
+    3
+   ],
+   "why": "fresh branch: the ladder definitions (collapse maps, levels L8 and L9) that m03_ladder loads"
+  },
+  {
+   "path": "quellen/political-affairs-ech-group/ech-0292_meta/input/schema_common.yaml",
+   "bytes": 28004,
+   "sha256": "ab6c097c41cd57c40ad175e9bb130d70f4d4d8eb85281d329bee8c53c8f08b11",
+   "kind": "schema",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "eCH-0292 common schema that the eCH-0295 schema imports"
+  },
+  {
+   "path": "quellen/political-affairs-ech-group/ech-0295_affairs/input/schema.yaml",
+   "bytes": 56696,
+   "sha256": "7af4c7a712f16270b653a773179d08cbd1859de053b20fe0beac6b2c2ef30d20",
+   "kind": "schema",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "eCH-0295 LinkML schema I95 (commit 3cab44d)"
+  },
+  {
+   "path": "src/m11_writer.py",
+   "bytes": 116084,
+   "sha256": "8a70b0f5574f6781e6415f8eafc86725cc27f89cce51f5f6e12e45dbbda8e6d1",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "writer of the record whose head values are read from the PDF (write_record, rdf_step)"
+  },
+  {
+   "path": "src/m11_validate.py",
+   "bytes": 130417,
+   "sha256": "9a2f3327ecf269479e6e82247d61dfa967243832e4355d6cfb83d0afc0a76d63",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "validator of that record: the checks C1 to C22 and validation.json (C22 runs the readers again)"
+  },
+  {
+   "path": "src/m11_label_schema.yaml",
+   "bytes": 56291,
+   "sha256": "ace138c2a0cf90912e1be8f4de329f3e74f12498b5c5930baddf1de6ad76ba95",
+   "kind": "schema",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "LinkML schema of the label file, version 0.2.0 (label kind pdf_value)"
+  },
+  {
+   "path": "src/m11_values_base.py",
+   "bytes": 50979,
+   "sha256": "92a75106966ae9170131b8c3e0b4e92aa2d524158fff7a1df34f030b585abb18",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "interface of the value readers (load_from_block_file, read_all)"
+  },
+  {
+   "path": "src/m11_values_type_number.py",
+   "bytes": 87228,
+   "sha256": "8514d505e40b6de3f2757bad3ee388754b1ca147d5db168661fc2423d566e461",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "value readers: affair type and affair number"
+  },
+  {
+   "path": "src/m11_values_title.py",
+   "bytes": 123424,
+   "sha256": "e92f86226b8ef4f066e2b5e4b3ddef00c3bb19b8d10b91510d1d3334d73b3a8c",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "value reader: title"
+  },
+  {
+   "path": "src/m11_values_dates_responder.py",
+   "bytes": 105781,
+   "sha256": "323406333d390da4b3b4bc1bc7ac2fd8abd0fde729837c534825bf0bdf1ca0cf",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "value readers: submission date, response date, responder"
+  },
+  {
+   "path": "src/m11_values_sponsor.py",
+   "bytes": 110417,
+   "sha256": "7c7db813e302d9944f615ea83ac861c3ad4609a917a06736162c5696440b47fe",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "value reader: first author"
+  },
+  {
+   "path": "src/m11_value_norm.py",
+   "bytes": 26120,
+   "sha256": "0966639df3a425c1a9028618e97dae8c4ebdfce8a2bc9cb82a624a4115f8d75c",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "comparison forms of the cross-check with the export record"
+  },
+  {
+   "path": "src/m11_value_reference.py",
+   "bytes": 40958,
+   "sha256": "6c184b6888f16786323c2eaa115e95dc822200f58e4a90b38cf4e717ad128674",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "reference values of the cross-check (the functions ref_*; no export file is read)"
+  },
+  {
+   "path": "src/m11_values_cascade.py",
+   "bytes": 31163,
+   "sha256": "91aed34f49a7d0d8a5af436d117ccef2b2d81d4dcba31c697d75e06df3485bed",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "the cascade reader (read_document): the kind of the document selects which of the 7 values are searched"
+  },
+  {
+   "path": "src/m11_cascade.py",
+   "bytes": 43136,
+   "sha256": "b4fb41bab7905aff57e2f2938d2fe1e0623b0defc8f799cef176951fd0d896b5",
+   "kind": "code",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "the cascade of eCH-0295 (labels_for(kind, affair_type), kind_of_role)"
+  },
+  {
+   "path": "src/m11_cascade.yaml",
+   "bytes": 51645,
+   "sha256": "ec8f7a51ae8e69ee2f9b6b531ac44f4dacb9c6e2c62853bba3b3376f04b5b5e7",
+   "kind": "data",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "machine form of the cascade: the 5 stages, the kinds, the rules R1 to R53"
+  },
+  {
+   "path": "daten/gj_values/round4/calibration_dev_all.json",
+   "bytes": 2608884,
+   "sha256": "e48e7a8d8efdd1e10b68071df85275dc0c5b69e004bb8051b2aecd2a1d4229d7",
+   "kind": "data",
+   "modes": [
+    1,
+    2,
+    3
+   ],
+   "why": "value calibration file of the product (round 4, cascade reader version 4): for each rule tier, the share of the 1,793 development documents in which the value was equal to the OpenParlData value. Development documents of 44 parliaments that the rule authors read; the rule files of the reader are made from the PDF alone. The one fixed run of 13.10.2026 used 872 documents of 26 other parliaments. There the share correct (correct / documents with an export value) was 0.2214 for the affair number and 0.2729 for the submission date. Before the run, AI agents had read 116 or more of these documents in earlier work."
+  }
+ ],
+ "generated_for_each_run": [
+  {
+   "path": "daten/gj/sets.json",
+   "modes": [
+    1,
+    2
+   ],
+   "replaces": "the set file with the ids of all labelled documents",
+   "form": "the 5 set keys; each list holds only the id of the sample, if sample.json names the set"
+  },
+  {
+   "path": "daten/gj/docs_build.json",
+   "modes": [
+    1,
+    2
+   ],
+   "replaces": "the run record of the block files of 2,665 documents",
+   "form": "key outputs with one entry: the block file of the sample and its SHA-256"
+  },
+  {
+   "path": "daten/gj/runs/m10_rules_run.json",
+   "modes": [
+    1,
+    2
+   ],
+   "replaces": "the run record of the rule files of all documents",
+   "form": "key outputs with one entry: the rule file of the sample and its SHA-256 (the value of sample.json)"
+  },
+  {
+   "path": "daten/gj/labels_build.json",
+   "modes": [
+    1,
+    2
+   ],
+   "replaces": "the run record of the label files of the AI reference",
+   "form": "key outputs with no entry; the chain reads the file but uses no entry"
+  },
+  {
+   "path": "daten/gj/r2/<name of the R2 value file>",
+   "modes": [
+    2
+   ],
+   "replaces": "the R2 value file of 193 or 1,600 documents",
+   "form": "one entry: the R2 value of the sample (r2.json key value)"
+  },
+  {
+   "path": "(memory) m10_guard table",
+   "modes": [
+    1,
+    2
+   ],
+   "replaces": "the guard tables: split.csv, splits.json, gruppen.csv, the duplicate list, the export table and the lists of protected test ids",
+   "form": "one table object in memory: the parliament of the sample with the role Training and the split dev; no id list. The worker refuses a sample whose block file has another split than dev."
+  },
+  {
+   "path": "the 12 files and the 1 folder of worker/fresh_tables.json",
+   "modes": [
+    3
+   ],
+   "replaces": "tables of the rule chain with rows of project documents: gruppen.csv, pool.csv, triage.csv, split.csv, 6 role files of the S1 step, 2 answer files of the ladder, the folder of the review records",
+   "form": "the header line of each CSV file, an empty document map of each JSON file (the S1 selection file keeps its 3 selection keys), an empty folder; made by worker/make_fresh_tables.py"
+  },
+  {
+   "path": "daten/pdf/local/local.pdf, daten/iso/docling/local.json, daten/iso/atome/local.json, daten/iso/atome_prompt/local.txt, daten/gj/docs/local.json, daten/gj/rules/local.json",
+   "modes": [
+    3
+   ],
+   "replaces": "the stored inputs of a document",
+   "form": "made in the run from the PDF of the request"
+  },
+  {
+   "path": "(memory) pdftotext place and module finder",
+   "modes": [
+    3
+   ],
+   "replaces": "the fixed pdftotext path of m03_docling_zerlegen and the fixed module folder of m03_sub_assemble",
+   "form": "the place of pdftotext on this computer; converter modules come from the scratch root only"
+  }
+ ],
+ "not_in_the_layout": [
+  {
+   "path": "daten/gold/cache/hyphen_vocab.json and daten/iso/atome/*.json of other documents",
+   "why": "word counts of all development documents (m03_gold_record.hyphen_vocab). The package has only the atoms of the sample. In the package the counts come from the sample document only. The worker records the number of line-end hyphen decisions in convert.json."
+  },
+  {
+   "path": "daten/roh/exports/*",
+   "why": "the OpenParlData export. The worker gives the stored export record of the sample to the writer."
+  },
+  {
+   "path": "daten/gj/states/*/states/<other>.npz",
+   "why": "states of other documents"
+  },
+  {
+   "path": "daten/gj/validation*, daten/gold, daten/score26, sealed files",
+   "why": "never read by the tools of the package"
+  }
+ ],
+ "added_after_the_traces": {
+  "tool": "worker/layout_add.py",
+  "note": "These paths are not from a trace file of worker/make_layout_list.py. A new run of that tool does not keep them: run worker/layout_add.py --values after it.",
+  "paths": [
+   "daten/gj_values/round4/calibration_dev_all.json",
+   "src/m11_cascade.py",
+   "src/m11_cascade.yaml",
+   "src/m11_label_schema.yaml",
+   "src/m11_validate.py",
+   "src/m11_value_norm.py",
+   "src/m11_value_reference.py",
+   "src/m11_values_base.py",
+   "src/m11_values_cascade.py",
+   "src/m11_values_dates_responder.py",
+   "src/m11_values_sponsor.py",
+   "src/m11_values_title.py",
+   "src/m11_values_type_number.py",
+   "src/m11_writer.py"
+  ]
+ }
+}

@@ -1,0 +1,814 @@
+{
+ "schema": "parlpdfech-gj-design-freeze/1",
+ "version": "m10-design-1",
+ "status": "EXCEPTION (process rule 10, gate GJ); NOT RELEASED",
+ "made": "2026-10-13T04:02:21+02:00",
+ "dry_run": false,
+ "synthetic_design": false,
+ "problems": [],
+ "criteria": {
+  "path": "crisp-dm/04-modeling/gate-jev-cascade-criteria.md",
+  "sha256": "6f6d15c0562cba2070995c302080a9aaedfe665f8d746ed5b0fdd9248bc20bfe",
+  "protocol_value": "6f6d15c0562cba2070995c302080a9aaedfe665f8d746ed5b0fdd9248bc20bfe"
+ },
+ "template": {
+  "job_template": {
+   "path": "daten/gj/jobs/gpu1_labelled/template.json",
+   "sha256": "9a6d72a0b9577b13ce3a328e0e83dacdf60fb38796f1f9b964d0e6bfff545100"
+  },
+  "template_sha256": "72d2eafcc54c0e07d3abeb23c649988c93ccd32147cad14f65c63bc06c3ae70c",
+  "T0": "72d2eafcc54c0e07d3abeb23c649988c93ccd32147cad14f65c63bc06c3ae70c",
+  "is_T0": true,
+  "states_template_sha256": "72d2eafcc54c0e07d3abeb23c649988c93ccd32147cad14f65c63bc06c3ae70c"
+ },
+ "code": {
+  "src/m10_calibrate.py": "03df26e311c3d31e69fbd3185124944c3b0ca1606f8e79bbe424bdccfb43aa19",
+  "src/m10_calibrate_test.py": "6c7135f249a698778cf233e7e710bd77abffd039c3f6d91849bc64ddd50d75fb",
+  "src/m10_cascade.py": "21cea21a75fb2a1695068841b5158cd19b0b72bcbb8ac206e646402f5cd3cd51",
+  "src/m10_cascade_test.py": "fbfac65e924a2e7fe07d0a7d2281c2c95583a66f6919217792a61be2753468c7",
+  "src/m10_convert.py": "c48afc3c9cae9d0591d6e1b06d40cdc9b0654f66cd18eb29d17099275c004bce",
+  "src/m10_convert_test.py": "d2fc8fa46a3ca928e03b008d92f024c98cb9c182974b14f7639a5cb1623b961d",
+  "src/m10_design.py": "9e6b912ed0ba1f5b773a12c572eef991da24c4788c40875f7889f1de40cf2adb",
+  "src/m10_design_test.py": "feed8225bcdf652305daedeaedcb96efc1169b8a8dab4ce043a4ec1db3cebc74",
+  "src/m10_docs.py": "80110478861dd41396da6c826bcdbea0042838fbad5dac09621631c99347a142",
+  "src/m10_freeze.py": "8a920e91e43e72fa344a2abeccf0ecf02b06cd090061a0e0f7aa77e55d33786a",
+  "src/m10_fullrun.py": "e1e60d1102b2f2c29f31fee2650ffe59b2c43c239382faf6a4096a7e20b25835",
+  "src/m10_fullrun_test.py": "7007fd5f146a94ba6d807739d396dfffd5e6272783d3a822c07838a4b23981bc",
+  "src/m10_gaps.py": "58750027ed407962e44f1a4f1b7fd9672d4ff47563b1d8c2ff8d67bd768ce91d",
+  "src/m10_gaps_test.py": "dced8a59f11a989fac12810ce6eefe2ef1169f4e32ec09c7826f7fcabe638555",
+  "src/m10_guard.py": "1290d740ec49bb5be22303db0147e073501a8014d308f258828c217365f94519",
+  "src/m10_guard_test.py": "f012daebb0e5429c7761c110a6bd7d2a6631911c088f4f63566fe9678303937f",
+  "src/m10_job.py": "4416308201c396144017657c9e672498d9fc4f98123047c6afa346dae248b019",
+  "src/m10_label_schema.yaml": "07b779a759f55264b2bb426e684e152b5f86117b537255fb71242500fd2ac9e6",
+  "src/m10_labels.py": "afb249cb09b663e34cc6a4beb0c2751a95f464f048967e60132bb0e8091e54de",
+  "src/m10_pipeline.py": "329cc6e3778b9a7b95e1b01a9a17f24f632b2806f6ec90fcbdab745af3e21a87",
+  "src/m10_pipeline_test.py": "179eda5d7993afd1643d026ac646adc24ae1dabb87288ffb2ba4f0887c25fdac",
+  "src/m10_prompts.py": "afa15e27806eb32dbf92f8e40886193f7cba598684de39e80229edae00c8b6e8",
+  "src/m10_prompts_test.py": "599a7eb69c887f4c96502bb306ade8b1985f4e0f2a9b4ed982f1d8e45a79cc8f",
+  "src/m10_r2_bulk.py": "b5c9ad6cdd702e5f942efc57feb25fb111ba9ea03805389780a762f1d078e230",
+  "src/m10_r2_docling.py": "0ec90cfe6b1e1f433f2ba0cae0f73dfcd96f34d9481941750914a4e35880fe56",
+  "src/m10_r2_docling_test.py": "bc5672cced34963d4e2fe88888ec6cebc695083c08418dd8202deb4a83671b9d",
+  "src/m10_r2_parts.py": "be7b507262e2465fd05fcae79711a5634e9ce8a43db9462a638e6024e540f3da",
+  "src/m10_r2_parts_test.py": "37d7f31a871700975d1bb88a21ff0f1a9d700de87a9f628204ff7dc84231c9d6",
+  "src/m10_r2_step0a.py": "8e44aa1f14fc7b583cbe1f7f0f40d6d50f145710be9d90353f8d68ce316208c5",
+  "src/m10_r2_step0a_test.py": "fd1b9b250ef5041c16a30d2fc9c6732682a9c835990b9ae21eff2e72256a1f88",
+  "src/m10_r2_step0b.py": "cf504b78938156ac57362bcc2ff6f21e97c90be59650f212d3f6f52d25f2b5ca",
+  "src/m10_r2_step0b_test.py": "7450cf36eb49ebf509a755e9bafe584a56c053f19a557b8c94a5eb356f8ddc16",
+  "src/m10_rdf.py": "e61face996fd44cbcfd0101c02ddb873f87b4480a3711715268b34a3ce80c549",
+  "src/m10_rules.py": "9b349f855fd363c071d6559185cb54c07769840c890baa5f09eaaf9a79a6c80f",
+  "src/m10_score.py": "aca5bd0997b7a5cb7ce7a5fed9d8902a4da79639a686ba5a3f5d43b454bf8bd2",
+  "src/m10_score_test.py": "8f24e61acc13bfc0f7356d2343a15d46c2fc22414ed7b19a2034bd0a8105e08f",
+  "src/m10_sealed.py": "2a1dcd0f056c26156b691807afc4d8341f540f4e8ac4a64046cc0a17f98a6fdb",
+  "src/m10_sealed_test.py": "d693631c153f1cea2aba8734389a8929cebadacd6663e91aef50601756bc6726",
+  "src/m10_validate.py": "20af9f10b3f7bde59a8e18e0343c09c0dd6f4ff790e384b02d635bd79acfa659",
+  "src/m10_validation_run.py": "6686e4bfe8242a0e6b4c1625355e0d714ebce1f18b17b51f91828d569f38eb22",
+  "src/m10_validation_run_test.py": "06658e7f03fca0e90cc7f0e4046248bc2996faeafb55dae5b72c20791871e524",
+  "src/m10_vm_states.py": "3cd1eb9f1b66034e8c8289ca292adb6663d8a6794a3c6d165656ff3ab5e8c53b",
+  "src/m10_vm_states_test.py": "583b5385dd55c67649604019036c2aef2126b287690238ac4f6c8881653a119f",
+  "src/m10_writer.py": "71830486948ab76daa63ab5a6b2e721805eb13fc08b96c55359fc5e9827c892f",
+  "src/m10_writer_test.py": "204b2f42323212b6df7b42c47a8c397943eb65af335c39592f5629440f24eee7"
+ },
+ "sets": {
+  "path": "daten/gj/sets.json",
+  "sha256": "e5e4f80ffce0c7d5157ae0f6ff5e67eef6a2da1058f57423f9c51606d0ca8f19"
+ },
+ "labels": {
+  "files": 294,
+  "digest": "7e96bb676676b872c1c4b77e46828e5dcfc58507ffb13e8b48514cccfa6be807",
+  "sha256": {
+   "daten/gj/labels/102726.json": "f74ef679a254bad14ffeb27f9b6979131388d0d2b66fd4b91e442bbcf785a816",
+   "daten/gj/labels/104636.json": "f577657de6099a8d3585d564d191d37b4b3cfadb00ecb7f43f0ac98ace5455c7",
+   "daten/gj/labels/108570.json": "35394646eef670d2e6e5a8c4658cee6d446b68f5151c323a524f6d524592ca0a",
+   "daten/gj/labels/108837.json": "5215e590ff9a2de3e152c30ee1c08689ef0380bedfaa8aaf6823bb0be02e857c",
+   "daten/gj/labels/111155.json": "7863be569d5b107526354fa8c3538e5a48fb178b85382487b432265d467e6e9a",
+   "daten/gj/labels/114387.json": "cd4caf0aa29da5e65b15f842c0a0c9bcee9fd2ee567dd75a11203f54795174bb",
+   "daten/gj/labels/119132.json": "cc4608bd09d4123e513663065c4ed70dae756324e4e6a4a815d992e456d5a7ec",
+   "daten/gj/labels/120062.json": "7d1d4f8d307610a5426f2c83714984eeea665da8ac68d33018ea6d4c6b8b9136",
+   "daten/gj/labels/120923.json": "764c3b7d12bdc75ed5a52242ea338f58c9b3b9af4b559503d9e0fd2d2585afe9",
+   "daten/gj/labels/126165.json": "0c4e4570271bb120108280870440c7163c235390b5e75a6c6801d10f2cf3dda5",
+   "daten/gj/labels/130623.json": "b26efde659e3fe00c626745d0ce2c3cbd580f1c546ab61b4a871db1cf042dd81",
+   "daten/gj/labels/133954.json": "2637443d7a0ed7a5a9e0b254c0a311720de0e6a8ad61e5c83bbd18d262998e0c",
+   "daten/gj/labels/134081.json": "534c4874025fbfdc809899a9e0cede837268412c56327cc08d5a30bf54cda7ca",
+   "daten/gj/labels/134258.json": "f5422a4c91f463e596d19fd820ad03a29bfe0a1defaace028b8fd7a75cd2ae9e",
+   "daten/gj/labels/13486.json": "828ef747e7cfcaad8871cc88270af765e71703ac43c91d67eafc68d2f0fe5363",
+   "daten/gj/labels/135026.json": "e9504b2b3706b574010f89a5260966000c3e1e7b761468bb972145acf0d3c15c",
+   "daten/gj/labels/138378.json": "1a8d406d295b4dc61e3fa8a24adf817f7f0040d41b23514fce6c02c4f8e13119",
+   "daten/gj/labels/138381.json": "c6aa6080f67838516dec3d10f8796756ffe1c146f7ef4be8c55995facdee70ee",
+   "daten/gj/labels/138801.json": "723982e3f3f60e6ba19ca705a425c6def3a2c35e25c8d33fb9bf07318fadd6f5",
+   "daten/gj/labels/139041.json": "4a538beb2457ddc8206fac929583f2a4c30b2f3977740483eccf8834dd57a1f7",
+   "daten/gj/labels/139091.json": "70abe3ec12beaf289c6064e3eedc7cfbb47735e2edbae992d5089b9ad01fca40",
+   "daten/gj/labels/158721.json": "62e68e359f552424b69358e2eee1f612c98e9dadee435cfa3ab47064b2d631ee",
+   "daten/gj/labels/160393.json": "516af4ced6379510e1dfc0ed6565e450cdad9e56be5b53bdcc41b38e97b87b5a",
+   "daten/gj/labels/165453.json": "34924319fcd0e07e573659828b47e9027d85b86d4beffcea30ef71a73820a824",
+   "daten/gj/labels/166963.json": "f1c03edb5877df85dfe7d54ff805f8af834d7f1570fd58696194eff019f48fb0",
+   "daten/gj/labels/17101.json": "f4523d0e2afe88f78113d59fd5bdb981fbf632d433640c5a0c6fa308333f11c5",
+   "daten/gj/labels/17325.json": "7669911276b2b1208459e9ca7fc8df8c8a70ab2e6ebfb5e693611595833b4e63",
+   "daten/gj/labels/175889.json": "d9b5548363db1f946c9f20461080f58f72db7836644f99ab745ebd0b59e6edaa",
+   "daten/gj/labels/176319.json": "5f38a1efd1772a9b8244b2a89e62a9822c67d830cf53ebce5d6b0605857945e3",
+   "daten/gj/labels/178012.json": "18616008da266ce31819719ef467517c4df9fb69e69d0f00048227e722f7331e",
+   "daten/gj/labels/183580.json": "e6ea0b71dd9ce1012c9293bcabd574ea7e70996854a96930c1cfa3a26d58900f",
+   "daten/gj/labels/183716.json": "bda2aeb3c91b166d18dce644320f235b39bb8b68bccc4de3189d30ef2df6ea13",
+   "daten/gj/labels/183727.json": "c88ef2bc60de3d23d845201135ab5a697b8969aeef03503a0f78d7cceb85dda7",
+   "daten/gj/labels/183743.json": "bad33bd986dad7cd0ed4e736a17a2b995e7ee877dacb76cfbe4ac42a9e18e6b4",
+   "daten/gj/labels/183744.json": "7c0b29ea05cc4d1ddcef5241411bf08ea426f7fa7d295f2332adebbb71cb64cd",
+   "daten/gj/labels/18407.json": "f51f19f17bc96f10314d06be9efcfa6d72fc4f60887750a3a120c8ab40ef2cc8",
+   "daten/gj/labels/185571.json": "00e9274d5b43acfda055a056515c6aaaa0bcd3a71f1d36b6c9765669e536f279",
+   "daten/gj/labels/185635.json": "4b5fa6f185a2dac462db549504a4948def6590d4ed97962c132dad90f52f3d0c",
+   "daten/gj/labels/189322.json": "8e43be381f6566912a04af1f1cc11e9457423621befa4d2aafceca24b3a5903c",
+   "daten/gj/labels/190346.json": "7c48ac31e5ced8eaf09c081dd9f6b04c11cbd60fb14e693c2c15bb589fef8e6d",
+   "daten/gj/labels/190402.json": "310fae28029de861564335946552c7bd837c76ae56036ba09934e23fb803e34b",
+   "daten/gj/labels/190737.json": "16d3b14bac8e344bb24b66a9cd030e4eab92e1ae4bf4f5a4122b5372d7f7e075",
+   "daten/gj/labels/195494.json": "55360e7409dadb1a1b34a15478985f8330b4bb9337d61747adede8f1ede82dff",
+   "daten/gj/labels/20106.json": "52c37e67f92f569e91a2ad112e1bc0b582d07135cb0804fe2a4e6ab3eebd55ea",
+   "daten/gj/labels/213364.json": "c45359b5031cb4bd752f71877ea9f440a5a99035b3124e2f3b740781ecd11421",
+   "daten/gj/labels/214513.json": "d9d1dbb55eacbfe1a60c97f7558634509bce1862c09e445d155aceaed81ab99f",
+   "daten/gj/labels/215493.json": "0f943231bbbe208ff028d0155ebd06eb87a58cb166d7d791c756f812336772d3",
+   "daten/gj/labels/216412.json": "daa41a514f99484e94baff29268d32a3ef0e523c54de8a74f3f53c6a9b02829c",
+   "daten/gj/labels/219446.json": "75f3b2f5a1c00b7bd769795f9836ebacedd92640ed72d0a4f7709e74696d8e25",
+   "daten/gj/labels/22046.json": "36efe18cd8bc332fca594b59541800111ed0e8b3b43f039bf9abfa362834c9e9",
+   "daten/gj/labels/221062.json": "7c718922fc2651ce4a3d2ceccbd8396b0749513857ffc8523d93e9f42a6e5991",
+   "daten/gj/labels/22353.json": "ab11855fa160d4ecbdf5e8f58a8a1400121667121e74e8f62a3f8961cb92838f",
+   "daten/gj/labels/224639.json": "2477f90e27b5456eb55451737cd453b30c6b617bd81311115a45c35d91083884",
+   "daten/gj/labels/226277.json": "165605db085071f816614c9e6fa0b6460b3320af780596146e862facdb8ac920",
+   "daten/gj/labels/226812.json": "a90dc210a0d9c1fb1af8cb985a9f7a7ec2bb87f66fcd5564bcae3e43a8d876dd",
+   "daten/gj/labels/227262.json": "c1328e875a06d0b44233108b2f9c6aa45e2794da73571dac1738a9dc98574dff",
+   "daten/gj/labels/228188.json": "5cc86d01e9a6042e0258cfc0eab3fa82b9de7c23d9536cf1d431f53b177a6e38",
+   "daten/gj/labels/228352.json": "6e22673368e0d9c7bb308742dfd1148fc53a2e8ee5f3bfc1709011b1781d66de",
+   "daten/gj/labels/229005.json": "f32b60335b601f9c7a06e90fe21aa92003a127d30867414f422b81c5e63a48ac",
+   "daten/gj/labels/229711.json": "bcdaf5dda8547b7e60fd0fdff497044f1ed8f55427b6a016b346733f71d65723",
+   "daten/gj/labels/2309.json": "69160f9f22b2de9df44ae251116544ed88793540938bf1304b563c96573b73cc",
+   "daten/gj/labels/236557.json": "254d5d1b18eb72dba509c49bf137a4e1c7b310cf5f865499c486db2f0671ff54",
+   "daten/gj/labels/238376.json": "4b5837585a1794a5204a596b1013952bcf62ee0dcff1c4b4e1c360d8678bc1fa",
+   "daten/gj/labels/245334.json": "8b3e9d65e494b8cdfd7efc623adb330b1613793862166251c53fa3ab5383d682",
+   "daten/gj/labels/245456.json": "c58fc6b57138741860a996135c5fbc47863f0e7db993a435f5c10279911dd81f",
+   "daten/gj/labels/245458.json": "e0b9c26fc905fc2db09736acb6c118b7bad667e8749f4d8eb875556ba7325efb",
+   "daten/gj/labels/246008.json": "5588c1412f97e8f270b700b158b7960ac300fba5ba0d3687b3b7cee89fd02505",
+   "daten/gj/labels/246769.json": "14af4e83332355e91e54b9b93cb1aaebcce8a957bd08ef41ce8d2e200160f119",
+   "daten/gj/labels/246948.json": "7c17f517a9f88978a591a13959aea46763776606c63786e14b22d46fb2a34849",
+   "daten/gj/labels/249082.json": "202d6b23dabb3dc2467d81f76c263450d7e99e622f0a64e8058e79be3c9fbbcb",
+   "daten/gj/labels/259645.json": "302240364782392a14e1811807dc206693f80526d5b2ddd17dceb8746b5cea37",
+   "daten/gj/labels/26171.json": "885e97aac69ccffef2fe43aea7b70394ac54632e960a0c73e3bfd99621967cda",
+   "daten/gj/labels/272486.json": "78b370418fa0acc34aa3f4527d09381c09f701fe657cc1981d05f269a4b8378b",
+   "daten/gj/labels/280982.json": "112925c221eb6ac997e16b21f3e76eb33eea3cdbbd122ac7e884fa57e863bef6",
+   "daten/gj/labels/281362.json": "b3f3f2639bb57d3b844f1aefd98158752bb1ada2de09cd3dfe57309c41dda63e",
+   "daten/gj/labels/281854.json": "eb5a7b543fb8e1a485bfa95ac9d3ea7ac321e44990dcb66c66d99022873a8e6b",
+   "daten/gj/labels/2868.json": "2ac7692e1367ff360959c16078ec4d3772e3bf4d69c936daf25d3139cc8bcbde",
+   "daten/gj/labels/286829.json": "0560630329fe6d073375a0028aafed32cf9793c55ff85ece700560393767eda2",
+   "daten/gj/labels/290969.json": "04396d6dc499adde2b1a0d345ba27a628f4bb4fe9b5edf9009830ce1cbc35f41",
+   "daten/gj/labels/295784.json": "93710c686f33129248bab976476ddbee394ce2bda8fcee644efc11f074853d48",
+   "daten/gj/labels/295840.json": "8fff45e6e4c86493e2fe874f2278599039ace0f978492a1c16866ac86501b9b3",
+   "daten/gj/labels/297924.json": "5f08e969758d166dc52270307dc88f97c8f79908250c4d51721493b1da3b7360",
+   "daten/gj/labels/300240.json": "cbbdf4bc9babebb35d64e95d830163eb599d3f7d4cf1f888259fcb3ca0aa3786",
+   "daten/gj/labels/3012.json": "e936eed682550ed0ebff2320f1bfbff09725a2c22b50a557b20417142c85823e",
+   "daten/gj/labels/3068.json": "44659056ff8a771e29d221d0ed4c250cebd504988f67bab34178a2fc94e15da3",
+   "daten/gj/labels/317765.json": "156b213adc24dc4bf682de3ea58b3fb21ff8b8bcbad567600e40598acf650153",
+   "daten/gj/labels/322406.json": "2739696c202935bd5a3de973ace768b86fe8b54f1437569ea6815b9d04e419e3",
+   "daten/gj/labels/323629.json": "70b3a42a675fd2ba94c209ba6c12ccd4ecd74d7d7d48ba974873dee564af81e6",
+   "daten/gj/labels/325622.json": "386683de960579785785c19f98db0263f17e2b6f51ae4c0edeb40a234e257075",
+   "daten/gj/labels/330152.json": "a5a350a6f3e3db5b2c16f8928fe42b2fbd28827c75b348d02af843b764a4032f",
+   "daten/gj/labels/332217.json": "bf68e6a57da94249df65bcc65a6376d55b732f44a4f9faec68a17a9ca9859ad6",
+   "daten/gj/labels/345171.json": "cac6ac5bcadede408ac9463e286e10214c8a8a9ff64cf202acac1aad16d540d8",
+   "daten/gj/labels/345202.json": "795be0fd85076f90eef3690af1ad3970849397c897b516e13a964b58d93026c0",
+   "daten/gj/labels/350326.json": "0c30c2e18f7f8f04ffdeeea004f1376a61ff10888fb80de8e15e0fc8c92f39bd",
+   "daten/gj/labels/350935.json": "f67ec037134a7f22faf8ee5bd360e435816e9ce552c248784f83a3fd3e400e4f",
+   "daten/gj/labels/3594.json": "d4fec4296e4168271cbf5868349f4730b5de3813267fab50e50d47aae4883909",
+   "daten/gj/labels/361482.json": "391c9505ff60e7c5ea106326a7ce19eadaf5a927441cb64ca274ae03a5388c7c",
+   "daten/gj/labels/368972.json": "d81c445afe02f1c3a63d49107f03342bbb59b35fd977697a591283fe0d107c97",
+   "daten/gj/labels/369378.json": "214b08a169b7871bbee881645e0b1b4563f8abe00a8e4a70ed7f0e6adf30d166",
+   "daten/gj/labels/370157.json": "c358eaa5ee56bca7d219405fc1320a9c0e228d5ad190b6f236a17cd7e9831e4b",
+   "daten/gj/labels/374138.json": "6960a903c672f960d562fe082f02666e990dc81b790b839e67742cf91d49bdd3",
+   "daten/gj/labels/374214.json": "707e4ae27c9130b37169e3ef39089e04c908758cd37b6e144cbb4de5cb80632b",
+   "daten/gj/labels/374584.json": "1112e719617c89cdc7593254c7fe3f4770187cb8512d2ece43f011d6b8619328",
+   "daten/gj/labels/375917.json": "ee9f70dc7dd530355169f1848a9d20934d1f2a337f13cc1085569bf45d442f94",
+   "daten/gj/labels/376479.json": "1db5625afc29b9c54d1afeccf580159516a3c25de8a80c6325606d0642d23dc8",
+   "daten/gj/labels/379997.json": "db4e3dddc2023aef9fe26850e0e9e97cf18cab034a7069247331ae629d474b75",
+   "daten/gj/labels/396338.json": "b715f361b37684b22593116dca8a5234076227fd3caf37064610feeb5385be98",
+   "daten/gj/labels/397801.json": "c4a47046c709f5e5df8eaf59aababfb31fdf40a56ff0d470e6d30a6e0beaaa69",
+   "daten/gj/labels/400061.json": "6389d858904c83ac403d74d1aa2f8ca077b047fcd049bbdda94456b355908119",
+   "daten/gj/labels/417237.json": "98aebb56df5b54ec9ad17cc6db7dc9ad510a4f7e3691e3628840fa9258ddfea7",
+   "daten/gj/labels/417413.json": "07e4bf6f13d4309816bb6fa7b2d2fd22f612a90d7cbc268f0316247714333ec4",
+   "daten/gj/labels/423294.json": "0260f9950787e73753eecd9b9a8143460f73a716f0c7c899cbb330a2437077cb",
+   "daten/gj/labels/424886.json": "79f7df87bc4457c6a6f31eaa72dd65470576ad4c9066faa282018b84e2a90db8",
+   "daten/gj/labels/431396.json": "ebbd8820e2b10ca4d81e4e174df3d7dddfe49e2728911493805969c03dee7d5a",
+   "daten/gj/labels/431775.json": "774ca5df0d2ae100e36ac5b222406a4c29cc6c57c1b2f37c4bccc9af8abcb3f1",
+   "daten/gj/labels/432151.json": "755c5b72b9592fed56e413c6f94400548b3c0b0c7b4cf5e2615b4b91f4cf7bfc",
+   "daten/gj/labels/432161.json": "5b4f15c8f4a37934b3e6072f508e0faf0f7669089031e34c6484d1c3d0c18a15",
+   "daten/gj/labels/433055.json": "5bc21da80674bbb1defddb175a9d35de27a9b9bffabcb6fa8b3ff4afe147518c",
+   "daten/gj/labels/433199.json": "912df92cbf19322956fd669420e04df59290f4e9115aef5b33975eeafb5923ce",
+   "daten/gj/labels/44062.json": "93ad7dd031c1a2ca2b988e5500f9325ef52be56dcbbd2369d397231f4354cf60",
+   "daten/gj/labels/44721.json": "d0854b915630bd832fb194d73070ee4260e8745e527e953ba93e56c4722c505c",
+   "daten/gj/labels/451375.json": "b0b004dcc87c71558ff68ddd123617b0ea6b00ae657d600d246bacf87fa4e180",
+   "daten/gj/labels/451418.json": "8ae1eeceec222f892b8a66005b56394db5540c61f49e958032c3a93ac6cd5c71",
+   "daten/gj/labels/4517.json": "19c1e5d004f110346f15425fcbced3142c25fe36958080872b99dea7e20633db",
+   "daten/gj/labels/451958.json": "bde2407979389a1b621a923174135abd6a400238a6e52329b1ee14cfa090665b",
+   "daten/gj/labels/452175.json": "48f85696f6edc608b85c0b83632e66acf9f06ce11d3b7a8c0f477e9cb50bb6d9",
+   "daten/gj/labels/452904.json": "1b40a32d98f4983bd10ec1e5467c288e2964916729d555d453fdaafb0e81386b",
+   "daten/gj/labels/453149.json": "7ed157493cb4600bd02e600c928388379c2cb986a392ad8018699266a8ea5dca",
+   "daten/gj/labels/454034.json": "1dbfbfccd5f744c43e1a71186e9ee05102008fbd52a39298815eb2d71f804d2c",
+   "daten/gj/labels/458920.json": "0cbe0c764a2123f0e98c14103db50b1f90da2fbae1bbb1512168dc95edaaf826",
+   "daten/gj/labels/459320.json": "a14953ff36f3a7623fd24de5ae2429cc5fec6c1b0a8ed151491fbb41de330532",
+   "daten/gj/labels/459321.json": "f56246e3b6d13bb3495a124f92872b679389a89ee6a2f555688813e4c1471538",
+   "daten/gj/labels/460794.json": "1de425dc63d6e2860f3e31357f75b20699911a45d39159b3518390b74dfa2de7",
+   "daten/gj/labels/460843.json": "fbfe2e62e097fa41c36bcd711fb39130843f054c332271ecc47d0acbe6dae4ca",
+   "daten/gj/labels/462799.json": "d26eea22caf72b2edc5a6e9563333d9da8e337f01eba948a12a560d5fec78204",
+   "daten/gj/labels/465245.json": "bcbedf91721cfcc58a8878d78668539dc7e26f7243dc578b4414d20c35b19f8a",
+   "daten/gj/labels/465732.json": "83a00414c83e2ac91a6eaa1c46effb4ba18cab23a5e612a2ab30ab5dc9da8e48",
+   "daten/gj/labels/465736.json": "4c864993f191a2a41cb2df8989c1a5ef78dfbf111f1afb11ec92bb02e9449c16",
+   "daten/gj/labels/466918.json": "9f9724aa2c5a85db1c0a5cc1c8ba8cddc80f6f584a47c9b0854d28ec904a9fa3",
+   "daten/gj/labels/476306.json": "0a6a03adf4ad6e0647df5ba9465b8b189b003324cfcd03fa7c146e1465d50659",
+   "daten/gj/labels/476326.json": "cf0dcf4bf05505e64d2ad1dc6032af940b81e52d4c7d41ae5e278dbac2bc8dba",
+   "daten/gj/labels/477232.json": "dd27f03010cbabbae98a4b6aa403063aee7251b9b4bc86c3eb9227cf4d5d0000",
+   "daten/gj/labels/480157.json": "905b0b80420c991d23a04f6e1a93281c747637a8ce5269fcb34a1ca11b5e56b4",
+   "daten/gj/labels/487043.json": "dbcc3c3267ee9c7ec99948bc2d229577946938e75c1ebc4f7e6b10cc678d3c43",
+   "daten/gj/labels/49058.json": "af93bb8f69f0d91b38d424f073a877df1166c45e9396c2eab42e273cd7e9be49",
+   "daten/gj/labels/511558.json": "ec942602180d0bd9b8d2fca4e16955df8c163ee9770e4e0da68b043436ffba00",
+   "daten/gj/labels/512085.json": "1fda3f38b145dd8514748d5b3672f94ccffb5f9a9339a80ab768e1a4b1c95e6b",
+   "daten/gj/labels/513538.json": "11070bdb64879d3de425f566147ca6882c832ef9d0f76910e384c19517cdf541",
+   "daten/gj/labels/514988.json": "d591c7668f09e0e150e8b63012467308a04aae21c944376e2e7911d3ac7ca4a4",
+   "daten/gj/labels/516104.json": "ec911cd680bba57e07baecf4061b53eb6eb9f53f927f879ff46edb8843fffdff",
+   "daten/gj/labels/516792.json": "7faf2cf615948b89c1e747f02441ea5a615960e7a549806469c5dbcf22769b01",
+   "daten/gj/labels/524933.json": "20ce8a21a0dcc92bf562fd46081b06453fd9affc3f4fb7474451df8b9d79a1cc",
+   "daten/gj/labels/525423.json": "b82d40eb5b3b0c05b624980c588892c23d20431c17c10223cfe214d305db984e",
+   "daten/gj/labels/526038.json": "bccef5ca7c19bb55390a699cb1340fb4cb27fe204b2385dadc684dfb713ca8fd",
+   "daten/gj/labels/530011.json": "f9331f36de93ccb2016cb0209593d7acc0fa30149f8de4ef4ac496bbd6d18d4a",
+   "daten/gj/labels/530635.json": "3f96b13f5c30f50dd3177c28b869cc9351ab75c1880accc5c27663c6ac83d9b4",
+   "daten/gj/labels/530636.json": "12f2e5072666ff9ebb0805faf1fd03eb67c381ebc8d16059ee6f840940f593fd",
+   "daten/gj/labels/531066.json": "f67f3e12807161ef9b6002d0397ded172a5d19e4f0205939c0e5cf7fa8200437",
+   "daten/gj/labels/535334.json": "3dc34ad30ffda26854acb0f20cd3a787fc09b1c8dbc72eac1062f2da94723592",
+   "daten/gj/labels/546531.json": "e959a8415f21a661a97c660552295988f919e11dacb30adce9554426ae6d2ac4",
+   "daten/gj/labels/54797.json": "bde4c14ae4e80ad9c5777e3c54060ec06e5e15e6625b8c6ac97d52ca41453fad",
+   "daten/gj/labels/549014.json": "880d090a978766f0921ee213b61b29b4d4dfd360c3b4c2623c09cbbe66f82e73",
+   "daten/gj/labels/549018.json": "612ecc527e0159d3968657e2abb48bee7a2b70aff024a6199808b7df98363521",
+   "daten/gj/labels/549658.json": "986a78889a741b8d423d86ab41b88d726e11135767ae628ef45dab912a7ac58d",
+   "daten/gj/labels/549661.json": "62465e598872719e8ebb5d2a512d9b68ca4aa9a03749aec3c5689c77080fb251",
+   "daten/gj/labels/549798.json": "55de24c4bd2396dc39d2f1ccaf3a98a61894ca0190b8c325781dea38be502127",
+   "daten/gj/labels/553297.json": "fa96358f504ede435d13258b10c8fb5eac0867611f6f154b7d0d9ece1df5a200",
+   "daten/gj/labels/556767.json": "570082203f47fddb9955cda3717c7761c59812aff056e339b01090411e567d62",
+   "daten/gj/labels/556781.json": "0c646d4b18af5c37f0833974c1019e4db95b0dddda4e82948b7e393e0d0f7563",
+   "daten/gj/labels/564011.json": "42d5e3e82d784f019ac31afb587d40ca42830bbe69edf5b37c1f7586de580db1",
+   "daten/gj/labels/564024.json": "7c2185fa871f8c354156262e4c6f79a357fe15488fdd808b877f2e3103c8571d",
+   "daten/gj/labels/566219.json": "02af7a4d10b776e93ee2d466828d6887c80707334d26847b8c7de996ab56782c",
+   "daten/gj/labels/567835.json": "d8a9ab3414ac366bf46a58021f2b2e4aa0dd5bde0ce65c460272e16802aa8b0e",
+   "daten/gj/labels/569516.json": "becebbe31d35a0852895a31bd2f9456849d5df21e2ec3faee7ae23cef9911ee8",
+   "daten/gj/labels/570441.json": "ae25671624976ed2999a1438e0dff79f557c675203ae3586a72024f9b5b42c42",
+   "daten/gj/labels/571688.json": "50b0ecac130cb65b3068a8c9da10742a85ff8d5ff8caace46ceaad924f5fbe9b",
+   "daten/gj/labels/57192.json": "d9c24237d73363e37dcdf1e79a9f90ac8c79787061e2c34846c1ab740598b9fd",
+   "daten/gj/labels/573162.json": "16481a663fa5dbdfc1ebc987a62dd50460292f74bd498c0f104bcaedbd5bd53d",
+   "daten/gj/labels/597283.json": "dee07af38911313c38541ffee522aaeeacb0626faa1290d0f367378836401e4f",
+   "daten/gj/labels/605130.json": "17e4f9b4f49ccce4f654d307ed3a2fd1ed3c769cd989529f1226c4d8ac8deab9",
+   "daten/gj/labels/611771.json": "d710716d8f34b95188f46299be17983c4022696e257bf4efd747e82958988851",
+   "daten/gj/labels/611791.json": "9185121cd52269a63af29659a408488bd77b5e71f8b97d3d7ea21c37618bae90",
+   "daten/gj/labels/611807.json": "2ab931f09e45c2893fc4002aed6a3b7546575e2a259b81ca1de7a3e12f95a3dc",
+   "daten/gj/labels/614150.json": "1eb77347117cf91cb33c5ee4846e05dcac81d7ec2720134a09e49912a493dc9d",
+   "daten/gj/labels/615378.json": "aafee5ef1f29bb095359cc3735beaafec386c03a61b7b2e87ad2f954d6ff8b31",
+   "daten/gj/labels/615437.json": "3d29c0ea54509d2bd9c70fbd6be7267fc26f4af1aa9c4dbc41ab7241bff0b9a8",
+   "daten/gj/labels/616428.json": "5ea133a88ba3f47bf212ef9b7520d41ff5f56dbbe0e392664b7f8c663baa95e8",
+   "daten/gj/labels/616429.json": "8415f58196c08f4c021a0acea54348bf11dbe4ba239851891136840ceb23e7c8",
+   "daten/gj/labels/631.json": "6240cc7a7ba3b118b8156815a97015ef95248e66cbd052ab651115b107873011",
+   "daten/gj/labels/63203.json": "6a2d1d073ee94682a0126fade411e46bbe7bdf8716f9347189294775158648c5",
+   "daten/gj/labels/632231.json": "03669573c022dbda7531111c3a62fe79a352d9455981c35d5333f98a06a6ab05",
+   "daten/gj/labels/634118.json": "48c93683ab3edf4130853bf8db3dc0f7a0b5fb840458ff470f03f9f12dd10330",
+   "daten/gj/labels/634545.json": "d29cbc554d9d4d0c0c27bb4a8fc2e4c0b790297d7f112f9075a118a3700ea757",
+   "daten/gj/labels/635227.json": "b8a26ae05e547531ff486ebe68ae7c1d043d3232cdf0449849e61b73b81d4835",
+   "daten/gj/labels/635272.json": "14db3baa11dd14980d407b202c5f14891435342b7489039e18775c2358031c50",
+   "daten/gj/labels/636180.json": "6b3034d556d6960d57767579ea35b2604e62f4dbd55db0148a90543a7cc51b03",
+   "daten/gj/labels/636806.json": "8e82c1882d0b814468fa87662080f78a5ee297a0a7b18c81dadc4a2e4b63893a",
+   "daten/gj/labels/636953.json": "c544b0e847731f194a66a521ee3b85f32ed84820e6fae3b9ade4088588ac16ec",
+   "daten/gj/labels/636978.json": "ecc5b2e4087ca6bad51af0a654e5b76ee38e79e7e56205daa5f0783f0c4e1457",
+   "daten/gj/labels/637189.json": "a3d183b1ec0058829ffbde71c7d1287fa6f287bfd48b90843336d284090e858d",
+   "daten/gj/labels/637225.json": "0b6b3ad5f637d5a6676ac3b65a3c4fd57082a80f436fc78caf7eadc3fe0d6ea9",
+   "daten/gj/labels/63760.json": "fd043a864005c09d42dcb288f818e27c62989160371b5a65fad7494c77b6f882",
+   "daten/gj/labels/638945.json": "9944952e8548afe239861f05fa76b2cec272319ca2eb50bf1412104a218ff43a",
+   "daten/gj/labels/64364.json": "8f121543840945c801ffbc02766425a7996359dbdc9923889f79d28766b8a6f1",
+   "daten/gj/labels/651936.json": "e7b8cb03b2d40fedeae0dc1fae7cb64aa8be14141a7ec2ad1e937105ab74ea26",
+   "daten/gj/labels/654701.json": "3b250089946ccefc19b89f3986291c74df3882f035b66b61265b288d3b3c1117",
+   "daten/gj/labels/656746.json": "406085e4e9c1ed6fe72432608e5d64412bf29190b6ae5258112ab03a584c8900",
+   "daten/gj/labels/657226.json": "de196342419903bd592af9ed542f343041f74fc31067a9362a98a73fe2b2d94d",
+   "daten/gj/labels/657227.json": "973bc66d9d8c88749c3a6cead886e2e513afdb38ba7e06374f31726702237ac8",
+   "daten/gj/labels/676531.json": "82e91bda9ec3f222b81d45951fa248db118ccc8446cf328c90cfa761315cb10f",
+   "daten/gj/labels/677784.json": "7b9824be81f7e31b40cc5711a262f03352feb5eb01b418d3de25c4653dcc89d8",
+   "daten/gj/labels/680089.json": "8ce15f32c6ceabc68634048620b2d060a08f3dbc27705c23e4d6404b0af0baaa",
+   "daten/gj/labels/684152.json": "e88daccdf729f0c7e191d0010253b5417550cd9f2916cf5405a2190fb121050e",
+   "daten/gj/labels/684951.json": "36ee0147757c7ca63ca0ab930a658f6466a9d37e5386f09950688d7249c03c82",
+   "daten/gj/labels/685728.json": "892800058e969557c0f4033d1fdfecaa0225ab734ea652de04f78d3cfab0eaeb",
+   "daten/gj/labels/687434.json": "42e64c4c7b343a09440c1c42cd569d9c7f3f2391ba014c795d20414b57541fdc",
+   "daten/gj/labels/687677.json": "5eb80c6fed5db9d5019009084b58567e9c4dfb617f8707cc051c42f32e7f7452",
+   "daten/gj/labels/688388.json": "d19e40912dc6223408cba097f4e89cf228b895006a7385d662f94f43b099fba6",
+   "daten/gj/labels/691706.json": "091b8f30866a4c69d98be7902ee9983c715c09ee437df9c5aa59552994b25b0f",
+   "daten/gj/labels/695355.json": "58422ee067abea633e6d87f71b1e27e55edf67847877ce14cbc623401543b7a4",
+   "daten/gj/labels/699081.json": "863177d0d4717b40c5a35a23a45166d80cf000a3293ce3c0f29a782e306c0ed1",
+   "daten/gj/labels/699939.json": "4984a25cb55f7b4c95dcc6ea7a2d261133d037a5dbc1d29fd8a15b3fc05294a9",
+   "daten/gj/labels/70507.json": "bc2d441457070e6b6e9e658734f3ad31dcb6e808723d51e2dcefba161794fc31",
+   "daten/gj/labels/707357.json": "f0462d3c9f5202ff75e60a504ec2a022b279e49bbd5b2c4013aab4b0011cc1db",
+   "daten/gj/labels/710696.json": "803a0f13779a79cbe5e2c6b951ac898578b3f6ef5e7a520406ba68790c070db0",
+   "daten/gj/labels/712981.json": "3808c76ea91bbb2cbf79c14e58b6b95c5e2de9d162400dae5b102ce89078125e",
+   "daten/gj/labels/714840.json": "24deb47210e58c7ae8140460b9bee13c0a3b6075f768ebcfd75b15de54fb44f0",
+   "daten/gj/labels/71718.json": "1b8d0ea83ffdcddc7aa485eede646f0a7ef1154e2f128822b38d5cfdc1b114db",
+   "daten/gj/labels/72672.json": "2f1bedb6025c37163190a7bdcf7616ae405ea0f42342286b741d924cade503a1",
+   "daten/gj/labels/72846.json": "c621d8403325d6731a6f0fe83d80979d04345ba972dc74f9e07cb340a4dea744",
+   "daten/gj/labels/73004.json": "63bfbe268d3655df7c8a98440835cdf5a7d1e2e59dd2f8dee48fefcc80ecae10",
+   "daten/gj/labels/74087.json": "6d771e78f71cda73c870a903d3b2defc2f9de9f7952fe5f7ecc41e59698c6969",
+   "daten/gj/labels/77789.json": "5ea8e7961592f3aa5dd222a46aba85f8b898f4a2ce1fa4cfe03b4325805d1306",
+   "daten/gj/labels/77964.json": "024d5dd7670afb3e97f82c5341607601271f95d3015a963486407d2fbce72a5f",
+   "daten/gj/labels/79275.json": "84ee4de59edc21c230a1cda69bcbf82da980193aba12ba728d671e202dab63af",
+   "daten/gj/labels/82004.json": "3b7f600efc24e4b93f2ca1d652d8740276594794233620eaa317705d614c05b1",
+   "daten/gj/labels/83387.json": "490caf5045b2a5634931d0b2872d6e6b95ac1b5a18383094d4ad564de0fb51cc",
+   "daten/gj/labels/83514.json": "ace70f543efd9c8c8e1d794af5104a2a52daae64e6a4b2e858b450a16ca42ccf",
+   "daten/gj/labels/868801.json": "3e0701a7393976ef107cbf1d637660d44b065528b5d481fdb5d37a989299851a",
+   "daten/gj/labels/874213.json": "1e0d6f304df02096601964bedbb06718661486fe378181a3e822c9c0283ce774",
+   "daten/gj/labels/874396.json": "2aaddf4cc7c35566548fdb091f27991fa47272c065668257f98a0be3b426de15",
+   "daten/gj/labels/877009.json": "98a0d542dbe1ce15b90a7439d80690b68c6538f2660b97ea23aa9a4ddc5904f9",
+   "daten/gj/labels/877074.json": "0bdf588ee0909fdc7a07059012fb325c9ee19c0cf217af4c7fd5bc7238d181eb",
+   "daten/gj/labels/877101.json": "8a784fd03de423a594535ac7b1dd25169856dee3c63394b38139f0f21406f08e",
+   "daten/gj/labels/877109.json": "2b5e13983c42840bd173789a68de8926c4b137db7541d3b9f5fa92f06f61c8d5",
+   "daten/gj/labels/877115.json": "59127d3059d8e87ef5371ecae8b006be6bb7f8b4bb6e40ce764a92e2cccf2b48",
+   "daten/gj/labels/877232.json": "d03a36de10a5a1f4265d6d4a8278f4af075b30079ffce97cdbc987de37bae7bc",
+   "daten/gj/labels/878189.json": "706917752efcfae7cd3dc7f0723e904410d6b4fe3bdfd4b7164329a7f9885e0d",
+   "daten/gj/labels/879148.json": "23b77768e29afb8e9dbcd12ebc036d26ecbeede9819fd4bf69e8b0c1376feb6f",
+   "daten/gj/labels/879150.json": "f688efe50193400ac57889f9753b6ea3d3c144b08b9a038675755b9c15a76045",
+   "daten/gj/labels/879152.json": "ceb3a4013be39f575ac3558c5ae70444c97c4c2bafa77919b76166f549fe2817",
+   "daten/gj/labels/879155.json": "9a9f90111a299f541e183d04e29f69a1632fe49e09c9b99c8895aaabc8b3c14e",
+   "daten/gj/labels/879163.json": "63e98555bc665f880feb80d9544b3192f2952a1b2758f36ac777c440ba7245d6",
+   "daten/gj/labels/879167.json": "c0459f4b78bd6bd1925db4b450c5b0d68dc2d445acf72e4a084e3687962387c3",
+   "daten/gj/labels/883067.json": "2d4d301ee015e20cdd6fa01618e32a0eb6a0d8688a22ed5d0491101b123c7989",
+   "daten/gj/labels/883881.json": "0eef930ae5076bb9507015631934c455443de38e5cdf43f37a59b4d3299b86d9",
+   "daten/gj/labels/883980.json": "375f2d81b79cea887d99e4ec736665f116862f75bac940e098e33e6feef8a698",
+   "daten/gj/labels/884556.json": "653ef39ba6db99909f19292af5bd23c1b52d212b3b327a7ffcdca43cd9f97426",
+   "daten/gj/labels/885275.json": "458c685267f8a000e935618eece4cd1e7ebe90422781b9ecbb1fffc3465cb806",
+   "daten/gj/labels/885318.json": "6bbe117c457fc9a41b1c51b0cd8ebd985a6fe3a551310631fc68ae8522f28623",
+   "daten/gj/labels/885357.json": "07ed8cedce809f044a33f8194d592d9ff637357d79d5fbd5d2514042e0ceba61",
+   "daten/gj/labels/885410.json": "57505120a90b983240dc63d830455102dbee61f048d329c879e57e2b79e11b3a",
+   "daten/gj/labels/887970.json": "4547d29e826fe17d5d77128bfb9d72ec1a8f3593fd54f74a01177946a5f9867a",
+   "daten/gj/labels/888350.json": "2e4664bdfebb198eeabf83c0e76195dbe2f68a972d1c700878e6b9a38c203595",
+   "daten/gj/labels/888393.json": "0e249361d59a17cfd06498fb5067703211c5b7451fab8ccc01ed103289e9d51f",
+   "daten/gj/labels/891625.json": "e13a68c1af99922569cbf8d8557fc277cec5594cf32e73f1939e73359499b8f6",
+   "daten/gj/labels/891646.json": "4e26c1498f5bcd745cff927a425ad636fe4c9440420283573cc4d813d267bb34",
+   "daten/gj/labels/892807.json": "20756e0f0c8739ac77f38903b792b5a2be6dcd17c09e1e255603f761d2a9f75f",
+   "daten/gj/labels/893422.json": "d723ccf5ac4c396c822b3eb8f7a37e84a13e2bd8e2b451b8985394aa887f32d0",
+   "daten/gj/labels/894715.json": "e5cd851e2de9753c11f11d93641920228644d945b8fe4ca4754dc6741a6147ab",
+   "daten/gj/labels/894716.json": "811bb4bc8a095a8d62d6df4b5fe2880de9aeaebcc9b95fe64e19bfe8d2c9f581",
+   "daten/gj/labels/894788.json": "6c03a8fcf8798445cd5d193f7f84d62874a34a4cf011a29dda2fc9b18a2d5468",
+   "daten/gj/labels/894842.json": "2fb122ba4cf96884116a1c2b062b2766aae7e0d9a132a304982f6f3e9bef5a38",
+   "daten/gj/labels/895535.json": "eba1af650b875fe61eaa48e99503dd5cddb18ca88555a614bcbced4a356700ec",
+   "daten/gj/labels/895726.json": "b375d23553111c70a1155793eb18748ceeec93a9e931caeb85cbf5089b949e9f",
+   "daten/gj/labels/895727.json": "853e6f66365386082cfe487a02ab47f6ab8a3996ba990e4873c1a1f1440efee6",
+   "daten/gj/labels/895728.json": "f4188f07b7e7d0e61c78ef3949cc6fdd2dd44b44417027a6bd981422c20e706e",
+   "daten/gj/labels/898134.json": "b564869a4ce44c53d6ce5ae0346086763950e7377c693c56d3ea03eb96811566",
+   "daten/gj/labels/899305.json": "c21621d54d7942e37d81fa73d142ba9961b8d0bc87f522b8360a2cbe4ad9fcd8",
+   "daten/gj/labels/900128.json": "66669b6953a6f4229919f66950ed86be645f3c850a29827e41dee19588b22d72",
+   "daten/gj/labels/912407.json": "cd6c936d12e60d3925e751a8e56e91d618735b8f33d07e1c9b926f51bb947704",
+   "daten/gj/labels/917890.json": "2d08dab4367858223aec7b7eae901e1f61ad5080ced113df9fddc17edc587487",
+   "daten/gj/labels/917941.json": "dc91c04c04c6a99603d19c714553387ff6023b2f2e75a713db5726394658196e",
+   "daten/gj/labels/919839.json": "2b62295ab27109073d53d828befd98a0ec08508e5cd1498e81cdff084c7fb101",
+   "daten/gj/labels/921074.json": "25997237af0eb06c68f5cbae50c29986981cea04482c54b14252e4cfce87ee60",
+   "daten/gj/labels/923720.json": "5c0899824be6a3652dea0057b9dd852c3b283a9bd36b1c45119a417c329056d6",
+   "daten/gj/labels/923736.json": "d21ae4267f668bb4723e090497d74443dc3af8e472a8eafd8325773ac0487047",
+   "daten/gj/labels/924846.json": "2d5380d358f003beb771af08e433eb8f862cf8d0d3c9e18abd558d4ca3a0beec",
+   "daten/gj/labels/925529.json": "0c77e07f85ebec77e13534cabb9f9df9f3ace8b86c985d67ad53bb07c32ef0f5",
+   "daten/gj/labels/925636.json": "cf84a7bac178bf1a5c4618d3ffb280a0bd25521cc2c58ff721911c96da390651",
+   "daten/gj/labels/925950.json": "ee0d43e84dc2a9ca469b64e10f83232de3d6155bf94111e611b3db19a780c9c5",
+   "daten/gj/labels/926953.json": "9bc1afbdf07c93f21dbf794804ccb7b4bcbdd0434d572c49295b187e2b0d1fdb",
+   "daten/gj/labels/927092.json": "ec74dc60997e35574c88b7ad53cbb13f0cd8fd4fb615b6b4f9295b442a380247",
+   "daten/gj/labels/933.json": "123d315ec6b9cc912c893d76615ff605ed65bde6d0aa33cb5138ee4b4aae0f28"
+  }
+ },
+ "design_files": {
+  "daten/gj/design/heads/d1_head.npz": "c583c7aaf79564af87092585f24cc0c3faf1d9df9ea2b7d65a3887f884220bd3",
+  "daten/gj/design/heads/b1_head.npz": "eea315eef8fa9df77385847b34d307ef2c9e4ad4140ca1b23a3cff5d715a4eb7",
+  "daten/gj/design/b2_hmm.json": "1a1c1106b6347e94fbca8952aec77158606742202dd0a1142cf5a871debdd73a",
+  "daten/gj/design/verifiers.json": "638a3b3cc0c5dbc2aa32d842baa57a529fd359a828d9849d45f44c1e78e8a527",
+  "daten/gj/design/tier_table.json": "49ed195358bbf6b9e0627d6eaec47fc84051cd40240b98fc4722159c4dd545db",
+  "daten/gj/design/thresholds.json": "b04ef908aa97511094a9c9a5eb50c0caccee96224fcec3b65cff1ee3febcd5aa",
+  "daten/gj/design/lora_trigger.json": "ea692af4278821aa9b99ffe6c594c9dec50c10a333bc94a0d01f23600f3333dc",
+  "daten/gj/design/calibration_records.json": "859a7965617b4bd7ce054e78664af9a01fa030e30b1937efd9f32d936057df9e",
+  "daten/gj/design/design.json": "aae764085e46cabe9a7e10a6862137be4ca4f301b617aa85ba76e67adc58f3b7"
+ },
+ "design_folder": {
+  "daten/gj/design/b2_hmm.json": "1a1c1106b6347e94fbca8952aec77158606742202dd0a1142cf5a871debdd73a",
+  "daten/gj/design/calibration_records.json": "859a7965617b4bd7ce054e78664af9a01fa030e30b1937efd9f32d936057df9e",
+  "daten/gj/design/checks/m10_design_test.json": "ac52778754a49f2428d86217826d3865bf4e0eebf617de9349baba69e9486d79",
+  "daten/gj/design/design.json": "aae764085e46cabe9a7e10a6862137be4ca4f301b617aa85ba76e67adc58f3b7",
+  "daten/gj/design/design_dev.md": "d230756f0979e2857db9b2093c87e343a92fc87c1e2885927da97996567b73af",
+  "daten/gj/design/folds.csv": "5b0804d6086d9578fb39b7e943fbe7c59e8e4d938d671c2f6379690bc9b73088",
+  "daten/gj/design/folds.json": "b61f8f214e0901c5432143a64174d8cca3afea3b3927d0bbdf2e34c86ff4ef5c",
+  "daten/gj/design/folds_run.json": "61eeb3be3975021d25307974bdc988e96083447d7237a66ccfc48173749d79e0",
+  "daten/gj/design/heads/b1_head.npz": "eea315eef8fa9df77385847b34d307ef2c9e4ad4140ca1b23a3cff5d715a4eb7",
+  "daten/gj/design/heads/d1_head.npz": "c583c7aaf79564af87092585f24cc0c3faf1d9df9ea2b7d65a3887f884220bd3",
+  "daten/gj/design/lora_trigger.json": "ea692af4278821aa9b99ffe6c594c9dec50c10a333bc94a0d01f23600f3333dc",
+  "daten/gj/design/oof/b1_oof.npz": "0b680699a0bd9217b081450d2abe9c8b2cddbe2fd2864c3cbd0df8f9ff9c7b29",
+  "daten/gj/design/oof/b2_oof.npz": "4acaecd27c331b2bf3590747ae0bf87c65ccecbbffe91ad56b1210781353de1b",
+  "daten/gj/design/oof/d1_oof.npz": "2465071fa18d0323594ff7c53cfbb4c1a111b01e672611ae80c92bebb9c1238b",
+  "daten/gj/design/run_design.events.jsonl": "ff24bd9121834989d3628573e427e5e532c6560e459afba4a6a4ad02f51b2aeb",
+  "daten/gj/design/run_design.json": "8b2a732689c9b68616aa5a0089ca841212fe04c0b6393b295a7ce8a75a31d6bd",
+  "daten/gj/design/thresholds.json": "b04ef908aa97511094a9c9a5eb50c0caccee96224fcec3b65cff1ee3febcd5aa",
+  "daten/gj/design/tier_table.json": "49ed195358bbf6b9e0627d6eaec47fc84051cd40240b98fc4722159c4dd545db",
+  "daten/gj/design/verifiers.json": "638a3b3cc0c5dbc2aa32d842baa57a529fd359a828d9849d45f44c1e78e8a527"
+ },
+ "design_run": {
+  "path": "daten/gj/design/run_design.json",
+  "sha256": "8b2a732689c9b68616aa5a0089ca841212fe04c0b6393b295a7ce8a75a31d6bd",
+  "script_sha256": "9e6b912ed0ba1f5b773a12c572eef991da24c4788c40875f7889f1de40cf2adb",
+  "script_sha256_recorded": "2026-10-12T21:23:11+02:00",
+  "first_out_of_fold_value": "2026-10-12T21:23:12+02:00"
+ },
+ "choices": {
+  "d1": {
+   "layer": 20,
+   "C": 0.01,
+   "T": 1.0312945796996467
+  },
+  "b1": {
+   "layer": 20,
+   "C": 0.001,
+   "T": 1.1050075502408903
+  },
+  "b2": {
+   "form": "free",
+   "T2": 2.3587225985216405
+  },
+  "hmm": {
+   "path": "daten/gj/design/b2_hmm.json",
+   "sha256": "1a1c1106b6347e94fbca8952aec77158606742202dd0a1142cf5a871debdd73a"
+  },
+  "platt": {
+   "d1": {
+    "alpha": 0.8848284260225239,
+    "beta": 1.040388982867347,
+    "n": 48
+   },
+   "b2": {
+    "alpha": 0.8595448659266071,
+    "beta": 0.7365653084877033,
+    "n": 1767
+   }
+  },
+  "certain_pairs": [
+   [
+    "fixed:R1",
+    "none"
+   ],
+   [
+    "fixed:R3",
+    "none"
+   ],
+   [
+    "fixed:R4",
+    "none"
+   ]
+  ],
+  "thresholds": {
+   "document_text_parts": {
+    "d1_entered": null,
+    "d1_not_entered": 0.9
+   },
+   "block_slot": {
+    "b12_entered": null,
+    "b12_not_entered": null
+   },
+   "author_switch": {
+    "b12_entered": null,
+    "b12_not_entered": null
+   }
+  },
+  "lora_trigger": false
+ },
+ "frozen_files": {
+  "source": "src/m05_gate3a_v4_measure.py",
+  "source_sha256": "6de97312a7ea7fa730b8837141a53bf7c6e8e883e7efc9db5d673de544e7d641",
+  "files": 29,
+  "different": [],
+  "sha256": {
+   "src/m03_ladder.py": "953d66ee13e88a7fbabfb2d11d8de1aa3476a3bd76b29211d1121923f3304567",
+   "src/m03_iso_v4.py": "f3327021cc4febd3b72416a52b2db9b52b520af34ed65c80759715b9465f65be",
+   "src/m03_sub_common.py": "9b8f4b7df485fcccba4ed329001412eecb5210178c5ce4681e2a6fec1cedbfb1",
+   "src/m03_iso_hilfe.py": "54aef51933965ff77413bd3fff395e1449e13fc1025a830da8e29ec6b01e0092",
+   "src/m03_iso_paths.py": "7e726c76a29aadd1521cd903ae758838347b9432dd1acd638712042b13001362",
+   "src/m03_iso_jev.py": "142b1b23a336558d97b57daf9874994a129dfd621a8093e5358eb468b4066ec7",
+   "src/m03_iso_mass.py": "01187a779a6082e93e3f71d6ef15dc143a4c2543ed0d2820968e3e8a57e30e88",
+   "src/m03_gold_record.py": "15b77f5c7f9f0bd2011d67a78b1be3f1682f0938959a526198691dcd9134f0e2",
+   "src/m00_pruefe_dokumente.py": "4629a782fa9512f19a62f0fe87ce2fae38a31fdb6057747bd86a19a87faefd54",
+   "src/m00_pruefe_testset.py": "c40ec8b5cc2838a443a850a23dc2cd4b5411f24f002cef7e67d84f043bf59c3f",
+   "src/m06_converter.py": "c0b9a9d383abeafe447f14db4f6edd8d18ba72126fc193eaf14c37be83969ab4",
+   "src/m06_ech_ausgabe.py": "19ec1cbc47d4ca5f2a1b350878e84f3d29e5a0f9c9775a54f85ba726f5694996",
+   "src/m02_ech_regeln.py": "e2e37098ea069ff294ae0c3916e0d84bb460d15e0c9022a88268f29046187ca7",
+   "src/m03_atome.py": "3988f7ae9bfc172a4f91fe2833a5add17e2e18567d9fe304b64a1c25fee02155",
+   "src/m03_isolierung_taxonomie.py": "6399981d967c43aac7fdd8934e0923203e2020dbb8357b0de84dc06bc6c7db42",
+   "src/m03_iter2_aufgabe.py": "11694a2ecb16d22bf1d9313f131552751abfdfe9caab34f0b3e5d111d424166a",
+   "src/m03_lehrer_vorgaben.py": "6075bf8cc59fce171625490d098c69ad16d4aafd9f558485a920f66591771fc5",
+   "src/m05_iso_runner.py": "352ee843635088bbd67f0cde3277d28c9072c9ddb58942af212dc40000411557",
+   "daten/iso/ladder/ladder.json": "1b040f8cde2c5bcbb0b8575ade123bcb81ce73b46a05872c4edf743386da8652",
+   "daten/iso/gruppen.csv": "b551722db1907fb25b6b21600c85980fc4f42eb4810f149d0d8100a3592e0917",
+   "daten/iso/pool.csv": "6756b9e6b16f2449c0aaae649d1068a12c26b2e5da6369187e51fa5400f8e616",
+   "daten/iso/triage.csv": "b27eae7b7d18b22dc12ce0760081945be869f65a05c27920cb4d09b5d8e8ce9e",
+   "daten/analyse/synthese/split.csv": "3369609a06df1981b6ec19f5e4b9f9e8cbd4a31bf80d44eda358319acdc2596c",
+   "daten/analyse/dokumente/dokumente_merkmale.csv.gz": "2464e48ab5bc582282a821c8cd2ee4e6efe596cde5167c881fc9708935cf8cca",
+   "daten/analyse/pdf/docs_pdf_index.csv.gz": "c7390de9c03012bb4feecbe24a27bc7aef576f23ccae3817324a61c1f68e6c5f",
+   "daten/gold/test.csv": "b9e92735534fcdada38d5ae87bf98417789c82c118b98ba6c43fe7e7e84d000e",
+   "daten/gold/bulk_test.csv": "f1922463db74d88635401e30f412893f82c7aff7bbce9c35fb4abb3250548a59",
+   "src/m03_gold_profile.yaml": "58ab281986f4112ad0903ff13529be68ffe4abbc274e16847be20d3a7d417301",
+   "quellen/political-affairs-ech-group/ech-0295_affairs/input/schema.yaml": "7af4c7a712f16270b653a773179d08cbd1859de053b20fe0beac6b2c2ef30d20"
+  }
+ },
+ "model_fingerprint": {
+  "apertus-v1.5-8b-text-bf16:c10cd28db5bd3adf6043a5047a1435dedc5c3e55c45d5abc2ca82baf2a7786c3": 193
+ },
+ "additions": {
+  "writer": {
+   "path": "src/m10_freeze.py",
+   "sha256": "8a920e91e43e72fa344a2abeccf0ecf02b06cd090061a0e0f7aa77e55d33786a",
+   "version": "m10-freeze-2"
+  },
+  "made": "2026-10-13T04:02:21+02:00",
+  "code": {
+   "src/m10_calibrate.py": "03df26e311c3d31e69fbd3185124944c3b0ca1606f8e79bbe424bdccfb43aa19",
+   "src/m10_calibrate_test.py": "6c7135f249a698778cf233e7e710bd77abffd039c3f6d91849bc64ddd50d75fb",
+   "src/m10_cascade.py": "21cea21a75fb2a1695068841b5158cd19b0b72bcbb8ac206e646402f5cd3cd51",
+   "src/m10_cascade_test.py": "fbfac65e924a2e7fe07d0a7d2281c2c95583a66f6919217792a61be2753468c7",
+   "src/m10_convert.py": "c48afc3c9cae9d0591d6e1b06d40cdc9b0654f66cd18eb29d17099275c004bce",
+   "src/m10_convert_test.py": "d2fc8fa46a3ca928e03b008d92f024c98cb9c182974b14f7639a5cb1623b961d",
+   "src/m10_design.py": "9e6b912ed0ba1f5b773a12c572eef991da24c4788c40875f7889f1de40cf2adb",
+   "src/m10_design_test.py": "feed8225bcdf652305daedeaedcb96efc1169b8a8dab4ce043a4ec1db3cebc74",
+   "src/m10_docs.py": "80110478861dd41396da6c826bcdbea0042838fbad5dac09621631c99347a142",
+   "src/m10_freeze.py": "8a920e91e43e72fa344a2abeccf0ecf02b06cd090061a0e0f7aa77e55d33786a",
+   "src/m10_fullrun.py": "e1e60d1102b2f2c29f31fee2650ffe59b2c43c239382faf6a4096a7e20b25835",
+   "src/m10_fullrun_test.py": "7007fd5f146a94ba6d807739d396dfffd5e6272783d3a822c07838a4b23981bc",
+   "src/m10_gaps.py": "58750027ed407962e44f1a4f1b7fd9672d4ff47563b1d8c2ff8d67bd768ce91d",
+   "src/m10_gaps_test.py": "dced8a59f11a989fac12810ce6eefe2ef1169f4e32ec09c7826f7fcabe638555",
+   "src/m10_guard.py": "1290d740ec49bb5be22303db0147e073501a8014d308f258828c217365f94519",
+   "src/m10_guard_test.py": "f012daebb0e5429c7761c110a6bd7d2a6631911c088f4f63566fe9678303937f",
+   "src/m10_job.py": "4416308201c396144017657c9e672498d9fc4f98123047c6afa346dae248b019",
+   "src/m10_label_schema.yaml": "07b779a759f55264b2bb426e684e152b5f86117b537255fb71242500fd2ac9e6",
+   "src/m10_labels.py": "afb249cb09b663e34cc6a4beb0c2751a95f464f048967e60132bb0e8091e54de",
+   "src/m10_pipeline.py": "329cc6e3778b9a7b95e1b01a9a17f24f632b2806f6ec90fcbdab745af3e21a87",
+   "src/m10_pipeline_test.py": "179eda5d7993afd1643d026ac646adc24ae1dabb87288ffb2ba4f0887c25fdac",
+   "src/m10_prompts.py": "afa15e27806eb32dbf92f8e40886193f7cba598684de39e80229edae00c8b6e8",
+   "src/m10_prompts_test.py": "599a7eb69c887f4c96502bb306ade8b1985f4e0f2a9b4ed982f1d8e45a79cc8f",
+   "src/m10_r2_bulk.py": "b5c9ad6cdd702e5f942efc57feb25fb111ba9ea03805389780a762f1d078e230",
+   "src/m10_r2_docling.py": "0ec90cfe6b1e1f433f2ba0cae0f73dfcd96f34d9481941750914a4e35880fe56",
+   "src/m10_r2_docling_test.py": "bc5672cced34963d4e2fe88888ec6cebc695083c08418dd8202deb4a83671b9d",
+   "src/m10_r2_parts.py": "be7b507262e2465fd05fcae79711a5634e9ce8a43db9462a638e6024e540f3da",
+   "src/m10_r2_parts_test.py": "37d7f31a871700975d1bb88a21ff0f1a9d700de87a9f628204ff7dc84231c9d6",
+   "src/m10_r2_step0a.py": "8e44aa1f14fc7b583cbe1f7f0f40d6d50f145710be9d90353f8d68ce316208c5",
+   "src/m10_r2_step0a_test.py": "fd1b9b250ef5041c16a30d2fc9c6732682a9c835990b9ae21eff2e72256a1f88",
+   "src/m10_r2_step0b.py": "cf504b78938156ac57362bcc2ff6f21e97c90be59650f212d3f6f52d25f2b5ca",
+   "src/m10_r2_step0b_test.py": "7450cf36eb49ebf509a755e9bafe584a56c053f19a557b8c94a5eb356f8ddc16",
+   "src/m10_rdf.py": "e61face996fd44cbcfd0101c02ddb873f87b4480a3711715268b34a3ce80c549",
+   "src/m10_rules.py": "9b349f855fd363c071d6559185cb54c07769840c890baa5f09eaaf9a79a6c80f",
+   "src/m10_score.py": "aca5bd0997b7a5cb7ce7a5fed9d8902a4da79639a686ba5a3f5d43b454bf8bd2",
+   "src/m10_score_test.py": "8f24e61acc13bfc0f7356d2343a15d46c2fc22414ed7b19a2034bd0a8105e08f",
+   "src/m10_sealed.py": "2a1dcd0f056c26156b691807afc4d8341f540f4e8ac4a64046cc0a17f98a6fdb",
+   "src/m10_sealed_test.py": "d693631c153f1cea2aba8734389a8929cebadacd6663e91aef50601756bc6726",
+   "src/m10_validate.py": "20af9f10b3f7bde59a8e18e0343c09c0dd6f4ff790e384b02d635bd79acfa659",
+   "src/m10_validation_run.py": "6686e4bfe8242a0e6b4c1625355e0d714ebce1f18b17b51f91828d569f38eb22",
+   "src/m10_validation_run_test.py": "06658e7f03fca0e90cc7f0e4046248bc2996faeafb55dae5b72c20791871e524",
+   "src/m10_vm_states.py": "3cd1eb9f1b66034e8c8289ca292adb6663d8a6794a3c6d165656ff3ab5e8c53b",
+   "src/m10_vm_states_test.py": "583b5385dd55c67649604019036c2aef2126b287690238ac4f6c8881653a119f",
+   "src/m10_writer.py": "71830486948ab76daa63ab5a6b2e721805eb13fc08b96c55359fc5e9827c892f",
+   "src/m10_writer_test.py": "204b2f42323212b6df7b42c47a8c397943eb65af335c39592f5629440f24eee7"
+  },
+  "criteria": {
+   "path": "crisp-dm/04-modeling/gate-jev-cascade-criteria.md",
+   "sha256": "6f6d15c0562cba2070995c302080a9aaedfe665f8d746ed5b0fdd9248bc20bfe",
+   "protocol_value": "6f6d15c0562cba2070995c302080a9aaedfe665f8d746ed5b0fdd9248bc20bfe"
+  },
+  "criteria_addendum_a": {
+   "path": "crisp-dm/04-modeling/gate-jev-cascade-criteria-addendum-a.md",
+   "sha256": "e22fb18b8dc63397b381173149441828c0c9d081e1920f4ac2d5de28f9c1e7f1",
+   "protocol_value": "e22fb18b8dc63397b381173149441828c0c9d081e1920f4ac2d5de28f9c1e7f1",
+   "equal_to_the_protocol_value": true
+  },
+  "glossary": {
+   "path": "crisp-dm/00-cross-cutting/glossary.md",
+   "sha256": "8df6a4b466b8f3fe0da3ba83e4166d5831072d39d0e684bac08b78a42e6a33c8"
+  },
+  "calibration": {
+   "floor_v1.json": {
+    "path": "daten/gj/calibration/floor_v1.json",
+    "sha256": "e8ff80df04f6b3a91f2249332f77d111ab5e7788884570570e6808a6b82f37c5"
+   },
+   "certainty_dev.json": {
+    "path": "daten/gj/calibration/certainty_dev.json",
+    "sha256": "eef70de9c83db9aea7c2f7a3f62b8f10584f2467656307b0ad6cf281c614217f"
+   },
+   "floor_v1_fitset.json": {
+    "path": "daten/gj/calibration/floor_v1_fitset.json",
+    "sha256": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250"
+   },
+   "runs/floor_fit_v1.json": {
+    "path": "daten/gj/calibration/runs/floor_fit_v1.json",
+    "sha256": "2986bef2c74fba3cd8cc1ddf8dbffe505e43a214a9796d765ac2a84e168773eb"
+   }
+  },
+  "r2_step0b": {
+   "path": "daten/gj/r2/step0b_platt.json",
+   "sha256": "fc4a835205ccc1628f626891024a7bffeacdd9a3f1d688a4267aec3c6d67c4d6",
+   "files": {
+    "step0b_platt.json": {
+     "path": "daten/gj/r2/step0b_platt.json",
+     "sha256": "fc4a835205ccc1628f626891024a7bffeacdd9a3f1d688a4267aec3c6d67c4d6"
+    },
+    "step0b_fitset.json": {
+     "path": "daten/gj/r2/step0b_fitset.json",
+     "sha256": "2fc96be76182468209b5cd62aa24c8be2248dd796c79a206cbb474d10119e093"
+    },
+    "step0b_fit_run.json": {
+     "path": "daten/gj/r2/step0b_fit_run.json",
+     "sha256": "3139d258e6dc4c891c844d0e2440a8d89c9e6f2220e1457567879c7b4201ae3c"
+    }
+   },
+   "fit_run": {
+    "status": "DONE",
+    "script_sha256": "cf504b78938156ac57362bcc2ff6f21e97c90be59650f212d3f6f52d25f2b5ca",
+    "outputs_unchanged": true,
+    "problems": 0
+   },
+   "calibration_id": "gj1-r2-platt-step0b",
+   "fit_problems": 0,
+   "fit_set_sha256_of_the_map": "2fc96be76182468209b5cd62aa24c8be2248dd796c79a206cbb474d10119e093",
+   "use": "R2 labels and the GJ.14 measure (criteria 8.4 item 2)"
+  },
+  "design_folder": {
+   "daten/gj/design/b2_hmm.json": "1a1c1106b6347e94fbca8952aec77158606742202dd0a1142cf5a871debdd73a",
+   "daten/gj/design/calibration_records.json": "859a7965617b4bd7ce054e78664af9a01fa030e30b1937efd9f32d936057df9e",
+   "daten/gj/design/checks/m10_design_test.json": "ac52778754a49f2428d86217826d3865bf4e0eebf617de9349baba69e9486d79",
+   "daten/gj/design/design.json": "aae764085e46cabe9a7e10a6862137be4ca4f301b617aa85ba76e67adc58f3b7",
+   "daten/gj/design/design_dev.md": "d230756f0979e2857db9b2093c87e343a92fc87c1e2885927da97996567b73af",
+   "daten/gj/design/folds.csv": "5b0804d6086d9578fb39b7e943fbe7c59e8e4d938d671c2f6379690bc9b73088",
+   "daten/gj/design/folds.json": "b61f8f214e0901c5432143a64174d8cca3afea3b3927d0bbdf2e34c86ff4ef5c",
+   "daten/gj/design/folds_run.json": "61eeb3be3975021d25307974bdc988e96083447d7237a66ccfc48173749d79e0",
+   "daten/gj/design/heads/b1_head.npz": "eea315eef8fa9df77385847b34d307ef2c9e4ad4140ca1b23a3cff5d715a4eb7",
+   "daten/gj/design/heads/d1_head.npz": "c583c7aaf79564af87092585f24cc0c3faf1d9df9ea2b7d65a3887f884220bd3",
+   "daten/gj/design/lora_trigger.json": "ea692af4278821aa9b99ffe6c594c9dec50c10a333bc94a0d01f23600f3333dc",
+   "daten/gj/design/oof/b1_oof.npz": "0b680699a0bd9217b081450d2abe9c8b2cddbe2fd2864c3cbd0df8f9ff9c7b29",
+   "daten/gj/design/oof/b2_oof.npz": "4acaecd27c331b2bf3590747ae0bf87c65ccecbbffe91ad56b1210781353de1b",
+   "daten/gj/design/oof/d1_oof.npz": "2465071fa18d0323594ff7c53cfbb4c1a111b01e672611ae80c92bebb9c1238b",
+   "daten/gj/design/run_design.events.jsonl": "ff24bd9121834989d3628573e427e5e532c6560e459afba4a6a4ad02f51b2aeb",
+   "daten/gj/design/run_design.json": "8b2a732689c9b68616aa5a0089ca841212fe04c0b6393b295a7ce8a75a31d6bd",
+   "daten/gj/design/thresholds.json": "b04ef908aa97511094a9c9a5eb50c0caccee96224fcec3b65cff1ee3febcd5aa",
+   "daten/gj/design/tier_table.json": "49ed195358bbf6b9e0627d6eaec47fc84051cd40240b98fc4722159c4dd545db",
+   "daten/gj/design/verifiers.json": "638a3b3cc0c5dbc2aa32d842baa57a529fd359a828d9849d45f44c1e78e8a527"
+  },
+  "design_run_outputs_unchanged": true,
+  "records": {
+   "sets": {
+    "path": "daten/gj/sets.json",
+    "sha256": "e5e4f80ffce0c7d5157ae0f6ff5e67eef6a2da1058f57423f9c51606d0ca8f19"
+   },
+   "labels_build": {
+    "path": "daten/gj/labels_build.json",
+    "sha256": "7655ad8a4d7794390a99535cc42afcc9a44770547a3caf4b27dbbcec488ead98"
+   },
+   "docs_build": {
+    "path": "daten/gj/docs_build.json",
+    "sha256": "08c6ae8e200540728a190925442c77bc9e18e6b30d4002a83868b222f860f8bb"
+   },
+   "rules_run": {
+    "path": "daten/gj/runs/m10_rules_run.json",
+    "sha256": "0e7ec4b9e8d889fab9cd23212b5a48e97b7e7174ae9393d639a249c42932248f"
+   },
+   "rules_identity": {
+    "path": "daten/gj/runs/m10_rules_identity.json",
+    "sha256": "cb50b2078b7881dcd15827be3031e48eca5506a24969bf6aa01c534ff0e3704d"
+   },
+   "scorer_reproduction": {
+    "path": "daten/gj/runs/m10_score_reproduction.json",
+    "sha256": "161f4d77f19e3d8bca2d9f5b6032a6670cff38493a7225cfe01d2ac36089ed6b",
+    "status": "MET",
+    "scorer_sha256": "aca5bd0997b7a5cb7ce7a5fed9d8902a4da79639a686ba5a3f5d43b454bf8bd2"
+   }
+  },
+  "templates": {
+   "gpu0_smoke": {
+    "template_json": {
+     "path": "daten/gj/jobs/gpu0_smoke/template.json",
+     "sha256": "9a6d72a0b9577b13ce3a328e0e83dacdf60fb38796f1f9b964d0e6bfff545100"
+    },
+    "template_sha256": "72d2eafcc54c0e07d3abeb23c649988c93ccd32147cad14f65c63bc06c3ae70c",
+    "build_record": {
+     "path": "daten/gj/jobs/gpu0_smoke.build.json",
+     "sha256": "4a22148137b5ce267103d468581d73f07944caa5872efb5fe7e2acfc44ecd5d7"
+    },
+    "items_jsonl": {
+     "path": "daten/gj/jobs/gpu0_smoke/items.jsonl",
+     "sha256": "2a5b7ddfdf4037e1d0104351ebe3eb2ec4a650ee6e674094c12a926cc404de44"
+    }
+   },
+   "gpu1_labelled": {
+    "template_json": {
+     "path": "daten/gj/jobs/gpu1_labelled/template.json",
+     "sha256": "9a6d72a0b9577b13ce3a328e0e83dacdf60fb38796f1f9b964d0e6bfff545100"
+    },
+    "template_sha256": "72d2eafcc54c0e07d3abeb23c649988c93ccd32147cad14f65c63bc06c3ae70c",
+    "build_record": {
+     "path": "daten/gj/jobs/gpu1_labelled.build.json",
+     "sha256": "c1a184964ccaefd2753d39273212935d49ffc84bc6b6fc98622a0961f1604e56"
+    },
+    "items_jsonl": {
+     "path": "daten/gj/jobs/gpu1_labelled/items.jsonl",
+     "sha256": "c1f1594f40eb5b1b30caa97cfb21c7b6b0a22d7a0199f9b706761055595d5848"
+    }
+   },
+   "gpu2_bulk": {
+    "template_json": {
+     "path": "daten/gj/jobs/gpu2_bulk/template.json",
+     "sha256": "9a6d72a0b9577b13ce3a328e0e83dacdf60fb38796f1f9b964d0e6bfff545100"
+    },
+    "template_sha256": "72d2eafcc54c0e07d3abeb23c649988c93ccd32147cad14f65c63bc06c3ae70c",
+    "build_record": {
+     "path": "daten/gj/jobs/gpu2_bulk.build.json",
+     "sha256": "76a9a46b62fff220e8c45adeb48df9e413607f58ab3891035246d9a073efe3c0"
+    },
+    "items_jsonl": {
+     "path": "daten/gj/jobs/gpu2_bulk/items.jsonl",
+     "sha256": "752a86e62afe0dafef2785156e996029c0652e06d7001965294aec5c1f39d51d"
+    }
+   }
+  },
+  "T0": "72d2eafcc54c0e07d3abeb23c649988c93ccd32147cad14f65c63bc06c3ae70c",
+  "each_prompt_job_has_T0": true,
+  "states": {
+   "gpu0_smoke": {
+    "outputs_json": {
+     "path": "daten/gj/states/gpu0_smoke/outputs.json",
+     "sha256": "daa548520abe53a86677f9045acd642dfc29b9956896adb052a40ee65405d18f"
+    },
+    "state_files": 5
+   },
+   "gpu1_labelled": {
+    "outputs_json": {
+     "path": "daten/gj/states/gpu1_labelled/outputs.json",
+     "sha256": "7877169710fe9276f9542f65acea7364b95363a0585aa25ded76cfcd1610d615"
+    },
+    "state_files": 294
+   },
+   "gpu2_bulk": {
+    "outputs_json": {
+     "path": "daten/gj/states/gpu2_bulk/outputs.json",
+     "sha256": "6f8b25504415302f2a42ef584870ada251c96e02f22102f64e7e5bea4baa9fb1"
+    },
+    "state_files": 2370
+   }
+  },
+  "frozen_files": {
+   "source": "src/m05_gate3a_v4_measure.py",
+   "source_sha256": "6de97312a7ea7fa730b8837141a53bf7c6e8e883e7efc9db5d673de544e7d641",
+   "files": 29,
+   "different": []
+  },
+  "model_fingerprint": {
+   "apertus-v1.5-8b-text-bf16:c10cd28db5bd3adf6043a5047a1435dedc5c3e55c45d5abc2ca82baf2a7786c3": 193
+  },
+  "lora_trigger": false,
+  "validation_runner": {
+   "path": "src/m10_validation_run.py",
+   "sha256": "6686e4bfe8242a0e6b4c1625355e0d714ebce1f18b17b51f91828d569f38eb22"
+  },
+  "entry_rules": "criteria chapters 7.1 and 7.2, script src/m10_validation_run.py",
+  "checks": {
+   "before_the_write": {
+    "dry_run": false,
+    "problems": 0,
+    "constants_changed_for_the_check": true,
+    "checks": {
+     "C1_m10_calibrate_freeze_check": {
+      "accepted": true,
+      "named": [
+       "daten/gj/calibration/floor_v1.json",
+       "src/m10_calibrate.py",
+       "src/m10_cascade.py"
+      ]
+     },
+     "C2_m10_design_load_frozen": {
+      "accepted": true
+     },
+     "C3_m10_design_assert_apply_allowed": {
+      "accepted": true
+     },
+     "C4_m10_convert_held_out_check": {
+      "accepted": true
+     },
+     "C5_m10_r2_step0b_freeze_check": {
+      "accepted": true,
+      "named": [
+       "daten/gj/r2/step0b_platt.json",
+       "src/m10_r2_step0b.py"
+      ]
+     },
+     "C6_m10_pipeline_load_design": {
+      "accepted": true
+     }
+    },
+    "expected": {
+     "C1_m10_calibrate_freeze_check": true,
+     "C2_m10_design_load_frozen": true,
+     "C3_m10_design_assert_apply_allowed": true,
+     "C4_m10_convert_held_out_check": true,
+     "C5_m10_r2_step0b_freeze_check": true,
+     "C6_m10_pipeline_load_design": true
+    },
+    "all_as_expected": true
+   }
+  }
+ },
+ "kind": "design freeze (criteria chapter 10.1)"
+}

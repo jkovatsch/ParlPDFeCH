@@ -1,0 +1,224 @@
+{
+ "template_id": "gj_values_v1_de",
+ "sha256": "54abf49ab788b2779b7bd00d8ebfb99abb3daf0fbe076e274fec30851dca81f6",
+ "system_text_source": {
+  "file": "src/m05_cls_apertus.py",
+  "file_sha256": "f3677338ec95a2c53ad0254655cc4438d15ac722e3b446769f5ff3498191a8a2",
+  "constants": "SYSTEM, DOC_HEAD, SEP, LETTERS_DE['prefix'] (R2 path, frozen template r2_v1_de)",
+  "system": "Du liest ein Dokument aus einem Schweizer Parlament und beantwortest eine Frage dazu.",
+  "doc_head": "Dokument:\n",
+  "sep": "\n\n",
+  "answer_prefix": "Antwort:"
+ },
+ "prefix_format": {
+  "chat_head": "<s><|system_start|>Du liest ein Dokument aus einem Schweizer Parlament und beantwortest eine Frage dazu.<|system_end|><|developer_start|>Deliberation: disabled\nTool Capabilities: disabled<|developer_end|><|user_start|>",
+  "doc_head": "Dokument:\n",
+  "line": "[B<n> | S.<page> | <Docling label>] <block text>",
+  "line_join": "\n",
+  "line_rules": "block text: Docling text, line breaks replaced by one space, lines stripped, empty lines left out; a block without text gives the marker only; furniture stays in; nothing is cut",
+  "prefix_end": "\n\n",
+  "suffix": "question + chat_tail + answer_prefix",
+  "suffix_start": "Frage: ",
+  "chat_tail": "<|user_end|><|assistant_start|>",
+  "answer_prefix": "Antwort:",
+  "suffix_order": "Q0, Q1, then one Q2 suffix for each selected block in reading order (id Q2.B<n>)",
+  "tokenization": "ids = tokens(prefix, add_special_tokens=False) + tokens(suffix, add_special_tokens=False)",
+  "chat_template": {
+   "file": "daten/modelle/apertus-v1.5-8b-text-bf16/chat_template.jinja",
+   "sha256": "d23af2850029e9df88bb017e06e0c14a0462604588f1dbe4f519cdfac3e260e0",
+   "call": "apply_chat_template(add_generation_prompt=True, enable_thinking=False)"
+  }
+ },
+ "d1_question": "Frage: Was für ein Dokument ist das?\nA = nur ein Vorstoss eines Ratsmitglieds oder einer Fraktion\nB = nur die Antwort der Exekutive auf einen Vorstoss\nC = Vorstoss und Antwort der Exekutive zusammen\nD = Vorlage der Exekutive (Botschaft, Bericht mit Antrag an den Rat)\nE = Bericht einer Kommission\nF = Protokoll\nG = ein anderes Dokument\nAntworte nur mit dem Buchstaben.",
+ "b1_question": "Frage: Welche dieser Angaben zum Geschäft nennt Block [{block}] auf Seite {page}, der mit «{first_words}» beginnt? Mehrere sind möglich.\nA = Geschäftsnummer\nB = Titel des Geschäfts\nC = Datum der Einreichung\nD = Name der Person oder Gruppe, die das Geschäft einreicht\nE = Datum der Antwort oder des Beschlusses der Exekutive\nF = Name der antwortenden Stelle\nG = Antrag oder Empfehlung der Exekutive (annehmen, ablehnen usw.)\nH = keine dieser Angaben\nAntworte mit den Buchstaben aller Angaben, die der Block nennt.",
+ "questions": {
+  "q0": "Frage: Was für ein Dokument ist das?\nA = nur ein Vorstoss eines Ratsmitglieds oder einer Fraktion\nB = nur die Antwort der Exekutive auf einen Vorstoss\nC = Vorstoss und Antwort der Exekutive zusammen\nD = Vorlage der Exekutive (Botschaft, Bericht mit Antrag an den Rat)\nE = Bericht einer Kommission\nF = Protokoll\nG = ein anderes Dokument\nAntworte nur mit dem Buchstaben.",
+  "q1": "Frage: Welchen Geschäftstyp nach eCH-0295 hat das Geschäft dieses Dokuments?\nA = Motion\nB = Postulat\nC = Interpellation\nD = (Einfache) Anfrage\nE = Frage für die Fragestunde\nF = Parlamentarische Initiative\nG = Beschlussesentwurf oder Erlassentwurf\nH = Motion und Postulat (kombiniert)\nI = ursprünglich Motion, später als Postulat behandelt\nJ = ein anderer Geschäftstyp (zum Beispiel Petition)\nK = kein Geschäftstyp\nAntworte nur mit dem Buchstaben.",
+  "q2": "Frage: Welche dieser Angaben zum Geschäft nennt Block [{block}] auf Seite {page}, der mit «{first_words}» beginnt? Mehrere sind möglich.\nA = Geschäftsnummer\nB = Titel des Geschäfts\nC = Datum der Einreichung\nD = Name der Person oder Gruppe, die das Geschäft einreicht\nE = Datum der Antwort oder des Beschlusses der Exekutive\nF = Name der antwortenden Stelle\nG = Antrag oder Empfehlung der Exekutive (annehmen, ablehnen usw.)\nH = keine dieser Angaben\nAntworte mit den Buchstaben aller Angaben, die der Block nennt."
+ },
+ "options": {
+  "q0": [
+   {
+    "letter": "A",
+    "option": "proposal",
+    "text": "nur ein Vorstoss eines Ratsmitglieds oder einer Fraktion"
+   },
+   {
+    "letter": "B",
+    "option": "response",
+    "text": "nur die Antwort der Exekutive auf einen Vorstoss"
+   },
+   {
+    "letter": "C",
+    "option": "proposal_and_response",
+    "text": "Vorstoss und Antwort der Exekutive zusammen"
+   },
+   {
+    "letter": "D",
+    "option": "executive_proposal",
+    "text": "Vorlage der Exekutive (Botschaft, Bericht mit Antrag an den Rat)"
+   },
+   {
+    "letter": "E",
+    "option": "committee_report",
+    "text": "Bericht einer Kommission"
+   },
+   {
+    "letter": "F",
+    "option": "minutes",
+    "text": "Protokoll"
+   },
+   {
+    "letter": "G",
+    "option": "other",
+    "text": "ein anderes Dokument"
+   }
+  ],
+  "q1": [
+   {
+    "letter": "A",
+    "option": "motion",
+    "text": "Motion"
+   },
+   {
+    "letter": "B",
+    "option": "postulate",
+    "text": "Postulat"
+   },
+   {
+    "letter": "C",
+    "option": "interpellation",
+    "text": "Interpellation"
+   },
+   {
+    "letter": "D",
+    "option": "request",
+    "text": "(Einfache) Anfrage"
+   },
+   {
+    "letter": "E",
+    "option": "question",
+    "text": "Frage für die Fragestunde"
+   },
+   {
+    "letter": "F",
+    "option": "parliamentary_initiative",
+    "text": "Parlamentarische Initiative"
+   },
+   {
+    "letter": "G",
+    "option": "draft_decree",
+    "text": "Beschlussesentwurf oder Erlassentwurf"
+   },
+   {
+    "letter": "H",
+    "option": "motion_and_postulate",
+    "text": "Motion und Postulat (kombiniert)"
+   },
+   {
+    "letter": "I",
+    "option": "motion_then_postulate",
+    "text": "ursprünglich Motion, später als Postulat behandelt"
+   },
+   {
+    "letter": "J",
+    "option": "other",
+    "text": "ein anderer Geschäftstyp (zum Beispiel Petition)"
+   },
+   {
+    "letter": "K",
+    "option": "none",
+    "text": "kein Geschäftstyp"
+   }
+  ],
+  "q2": [
+   {
+    "letter": "A",
+    "option": "affair_number",
+    "text": "Geschäftsnummer"
+   },
+   {
+    "letter": "B",
+    "option": "title",
+    "text": "Titel des Geschäfts"
+   },
+   {
+    "letter": "C",
+    "option": "submission_date",
+    "text": "Datum der Einreichung"
+   },
+   {
+    "letter": "D",
+    "option": "sponsor",
+    "text": "Name der Person oder Gruppe, die das Geschäft einreicht"
+   },
+   {
+    "letter": "E",
+    "option": "response_date",
+    "text": "Datum der Antwort oder des Beschlusses der Exekutive"
+   },
+   {
+    "letter": "F",
+    "option": "responder",
+    "text": "Name der antwortenden Stelle"
+   },
+   {
+    "letter": "G",
+    "option": "recommendation",
+    "text": "Antrag oder Empfehlung der Exekutive (annehmen, ablehnen usw.)"
+   },
+   {
+    "letter": "H",
+    "option": "none",
+    "text": "keine dieser Angaben"
+   }
+  ],
+  "first_words": 12,
+  "no_text": "(ohne Text)"
+ },
+ "suffix_ids": {
+  "q0": "Q0",
+  "q1": "Q1",
+  "q2": "Q2.B<n>"
+ },
+ "readout": {
+  "state": "the hidden state at the last suffix token (layers 8 to 32 in steps of 4); no text generation",
+  "q0": "one head with one class for each option (single label)",
+  "q1": "one head with one class for each option (single label)",
+  "q2": "MULTI-LABEL: one binary head for each of the 7 value kinds, all fitted on the state of this one question; a block can state 2 or more values; the letter is not the read-out",
+  "q2_value_kinds": [
+   "affair_number",
+   "title",
+   "submission_date",
+   "sponsor",
+   "response_date",
+   "responder",
+   "recommendation"
+  ],
+  "letter_logprobs": "m10_vm_states.py stores them for the letters A to F only; the heads do not use them"
+ },
+ "sources": {
+  "q0": "no rule in the standard: project choice (eCH-0295 has no list of document kinds); the options A, B and C are the options A, B and C of the question D1 of the template gj_jev_v1_de",
+  "q1": {
+   "A_to_I": "quellen/political-affairs-ech-group/ech-0295_affairs/input/schema.yaml: class Affair, slot affair_type, range AffairTypeEnum (9 values, order and German names of the schema)",
+   "J_and_K": "no rule in the standard: project choice (the list has no value for a petition, for another type or for no type)",
+   "schema_sha256": "7af4c7a712f16270b653a773179d08cbd1859de053b20fe0beac6b2c2ef30d20"
+  },
+  "q2": {
+   "affair_number": "quellen/political-affairs-ech-group/ech-0295_affairs/input/schema.yaml: class Affair, slot affair_number",
+   "title": "quellen/political-affairs-ech-group/ech-0295_affairs/input/schema.yaml: class Affair, slot title",
+   "submission_date": "quellen/political-affairs-ech-group/ech-0295_affairs/input/schema.yaml: class Submission, slot submission_date",
+   "sponsor": "quellen/political-affairs-ech-group/ech-0295_affairs/input/schema.yaml: class Submission, slot sponsorship (class Sponsorship, slots actor and sponsor_role)",
+   "response_date": "project rule (src/m11_values_base.py, FIELDS: ResponseStep.date_end_actual)",
+   "responder": "quellen/political-affairs-ech-group/ech-0295_affairs/input/schema.yaml: class ResponseStep, slot responder",
+   "recommendation": "quellen/political-affairs-ech-group/ech-0295_affairs/input/schema.yaml: class ResponseStep, slot recommendation (range RecommendationEnum)",
+   "none": "no rule in the standard: project choice (a block that states none of the 7 value kinds)"
+  }
+ },
+ "extractor_keys": "d1_question and b1_question exist because src/m10_vm_states.py (frozen) needs these keys: d1_question = the text of Q0, b1_question = the text form of Q2",
+ "same_prefix_as": {
+  "template_id": "gj_jev_v1_de",
+  "template_sha256": "72d2eafcc54c0e07d3abeb23c649988c93ccd32147cad14f65c63bc06c3ae70c",
+  "function": "m10_prompts.prefix_of"
+ }
+}

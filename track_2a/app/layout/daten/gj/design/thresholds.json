@@ -1,0 +1,309 @@
+{
+ "version": "m10-design-1",
+ "synthetic": false,
+ "rule": "criteria chapter 8.6 (P17)",
+ "grid": [
+  0.6,
+  0.7,
+  0.8,
+  0.9,
+  0.95,
+  0.99
+ ],
+ "kinds": {
+  "document_text_parts": {
+   "d1_entered": {
+    "a": null,
+    "units": 193,
+    "rows": [
+     {
+      "a": 0.6,
+      "n": 156,
+      "coverage": 0.80829,
+      "accuracy": 0.852564,
+      "meets": false
+     },
+     {
+      "a": 0.7,
+      "n": 139,
+      "coverage": 0.720207,
+      "accuracy": 0.899281,
+      "meets": false
+     },
+     {
+      "a": 0.8,
+      "n": 121,
+      "coverage": 0.626943,
+      "accuracy": 0.92562,
+      "meets": false
+     },
+     {
+      "a": 0.9,
+      "n": 82,
+      "coverage": 0.42487,
+      "accuracy": 0.963415,
+      "meets": false
+     },
+     {
+      "a": 0.95,
+      "n": 55,
+      "coverage": 0.284974,
+      "accuracy": 0.981818,
+      "meets": false
+     },
+     {
+      "a": 0.99,
+      "n": 25,
+      "coverage": 0.129534,
+      "accuracy": 1.0,
+      "meets": false
+     }
+    ]
+   },
+   "d1_not_entered": {
+    "a": 0.9,
+    "units": 193,
+    "rows": [
+     {
+      "a": 0.6,
+      "n": 139,
+      "coverage": 0.720207,
+      "accuracy": 0.899281,
+      "meets": false
+     },
+     {
+      "a": 0.7,
+      "n": 128,
+      "coverage": 0.663212,
+      "accuracy": 0.929688,
+      "meets": false
+     },
+     {
+      "a": 0.8,
+      "n": 118,
+      "coverage": 0.611399,
+      "accuracy": 0.940678,
+      "meets": false
+     },
+     {
+      "a": 0.9,
+      "n": 98,
+      "coverage": 0.507772,
+      "accuracy": 0.979592,
+      "meets": true
+     },
+     {
+      "a": 0.95,
+      "n": 71,
+      "coverage": 0.367876,
+      "accuracy": 0.985915,
+      "meets": false
+     },
+     {
+      "a": 0.99,
+      "n": 33,
+      "coverage": 0.170984,
+      "accuracy": 1.0,
+      "meets": false
+     }
+    ]
+   }
+  },
+  "block_slot": {
+   "b12_entered": {
+    "a": null,
+    "units": 9313,
+    "rows": [
+     {
+      "a": 0.6,
+      "n": 7782,
+      "coverage": 0.835606,
+      "accuracy": 0.885505,
+      "meets": false
+     },
+     {
+      "a": 0.7,
+      "n": 7023,
+      "coverage": 0.754107,
+      "accuracy": 0.911291,
+      "meets": false
+     },
+     {
+      "a": 0.8,
+      "n": 5988,
+      "coverage": 0.642972,
+      "accuracy": 0.934536,
+      "meets": false
+     },
+     {
+      "a": 0.9,
+      "n": 4501,
+      "coverage": 0.483303,
+      "accuracy": 0.971118,
+      "meets": false
+     },
+     {
+      "a": 0.95,
+      "n": 3173,
+      "coverage": 0.340707,
+      "accuracy": 0.989285,
+      "meets": false
+     },
+     {
+      "a": 0.99,
+      "n": 1621,
+      "coverage": 0.174058,
+      "accuracy": 0.999383,
+      "meets": false
+     }
+    ]
+   },
+   "b12_not_entered": {
+    "a": null,
+    "units": 9313,
+    "rows": [
+     {
+      "a": 0.6,
+      "n": 4458,
+      "coverage": 0.478686,
+      "accuracy": 0.909601,
+      "meets": false
+     },
+     {
+      "a": 0.7,
+      "n": 4184,
+      "coverage": 0.449264,
+      "accuracy": 0.929015,
+      "meets": false
+     },
+     {
+      "a": 0.8,
+      "n": 3842,
+      "coverage": 0.412542,
+      "accuracy": 0.950547,
+      "meets": false
+     },
+     {
+      "a": 0.9,
+      "n": 3282,
+      "coverage": 0.352411,
+      "accuracy": 0.973187,
+      "meets": false
+     },
+     {
+      "a": 0.95,
+      "n": 2710,
+      "coverage": 0.290991,
+      "accuracy": 0.994465,
+      "meets": false
+     },
+     {
+      "a": 0.99,
+      "n": 1579,
+      "coverage": 0.169548,
+      "accuracy": 1.0,
+      "meets": false
+     }
+    ]
+   }
+  },
+  "author_switch": {
+   "b12_entered": {
+    "a": null,
+    "units": 46,
+    "rows": [
+     {
+      "a": 0.6,
+      "n": 21,
+      "coverage": 0.456522,
+      "accuracy": 0.285714,
+      "meets": false
+     },
+     {
+      "a": 0.7,
+      "n": 15,
+      "coverage": 0.326087,
+      "accuracy": 0.266667,
+      "meets": false
+     },
+     {
+      "a": 0.8,
+      "n": 6,
+      "coverage": 0.130435,
+      "accuracy": 0.166667,
+      "meets": false
+     },
+     {
+      "a": 0.9,
+      "n": 1,
+      "coverage": 0.021739,
+      "accuracy": 0.0,
+      "meets": false
+     },
+     {
+      "a": 0.95,
+      "n": 0,
+      "coverage": 0.0,
+      "accuracy": null,
+      "meets": false
+     },
+     {
+      "a": 0.99,
+      "n": 0,
+      "coverage": 0.0,
+      "accuracy": null,
+      "meets": false
+     }
+    ]
+   },
+   "b12_not_entered": {
+    "a": null,
+    "units": 38,
+    "rows": [
+     {
+      "a": 0.6,
+      "n": 7,
+      "coverage": 0.184211,
+      "accuracy": 0.714286,
+      "meets": false
+     },
+     {
+      "a": 0.7,
+      "n": 4,
+      "coverage": 0.105263,
+      "accuracy": 0.75,
+      "meets": false
+     },
+     {
+      "a": 0.8,
+      "n": 1,
+      "coverage": 0.026316,
+      "accuracy": 1.0,
+      "meets": false
+     },
+     {
+      "a": 0.9,
+      "n": 0,
+      "coverage": 0.0,
+      "accuracy": null,
+      "meets": false
+     },
+     {
+      "a": 0.95,
+      "n": 0,
+      "coverage": 0.0,
+      "accuracy": null,
+      "meets": false
+     },
+     {
+      "a": 0.99,
+      "n": 0,
+      "coverage": 0.0,
+      "accuracy": null,
+      "meets": false
+     }
+    ]
+   }
+  }
+ }
+}

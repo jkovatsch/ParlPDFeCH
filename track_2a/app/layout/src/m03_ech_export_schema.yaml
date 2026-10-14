@@ -1,0 +1,19 @@
+# Wrapper of the eCH-0295 schema (I95, upstream commit 3cab44d) for the RDF export of gold set records.
+# It adds no class and no slot. It only declares the prefix mcm of eCH-0292 (schema_common.yaml), which
+# the LinkML converter does not take over from an imported schema.
+id: https://schema.parlpdfech.example/export/ech-0295
+name: parlpdfech-ech-0295-export
+prefixes:
+  linkml: https://w3id.org/linkml/
+  aff: https://ch.paf.link/schema/affairs/
+  chpaf: https://ch.paf.link/
+  mcm: https://ld.ech.ch/schema/0292/meta-common/
+  xsd: http://www.w3.org/2001/XMLSchema#
+  prov: http://www.w3.org/ns/prov#
+  dcterms: http://purl.org/dc/terms/
+  schema: http://schema.org/
+default_prefix: aff
+default_range: string
+imports:
+  - linkml:types
+  - ../quellen/political-affairs-ech-group/ech-0295_affairs/input/schema

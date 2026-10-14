@@ -1,0 +1,865 @@
+# The cascade of eCH-0295 in a machine form. Reader: src/m11_cascade.py (labels_for, self-check, paths).
+# Written in English to the STE rules (ASD-STE100, Issue 9). Document: crisp-dm/04-modeling/ech-cascade.md.
+# Actor: workflow sub-agent (Claude Opus 5.5) for the main agent, 13.10.2026. No human checked this file.
+# This file names slots and classes only. src/m11_cascade.py reads the schema files at run time for the
+# requirement of each slot, the range of each slot and the values of each value list.
+
+schema: parlpdfech-cascade/1
+version: m11-cascade-2
+status: "PROPOSED, NOT RELEASED"
+made: "2026-10-13"
+changed: "2026-10-13: rule R30 (decision D2 of the main agent): Submission.sponsorship applies to the kind response"
+
+# ---------------------------------------------------------------------------------------------- sources
+sources:
+  I95: {file: "quellen/political-affairs-ech-group/ech-0295_affairs/input/schema.yaml", what: "the schema that the converter writes (35 classes, 87 slots, 20 value lists)"}
+  C92: {file: "quellen/political-affairs-ech-group/ech-0292_meta/input/schema_common.yaml", what: "the imported common schema (mixins)"}
+  K95: {file: "quellen/political-affairs-ech-group/ech-0295_affairs/02_LinkML_files/ech-0295_affairs.yaml", what: "the kernel, version 0.2.0 (19 classes, 74 slots, 16 value lists)"}
+  PM: {file: "quellen/political-affairs-ech-group/ech-0295_affairs/02_LinkML_files/ech-0295_affairs_motion_profile.yaml", what: "the motion profile"}
+  PI: {file: "quellen/political-affairs-ech-group/ech-0295_affairs/02_LinkML_files/ech-0295_affairs_parliamentary_initiative_profile.yaml", what: "the parliamentary initiative profile"}
+  EX_I: {file: "quellen/political-affairs-ech-group/ech-0295_affairs/input/data_interpellation_example.yaml", what: "example of I95: interpellation"}
+  EX_M1: {file: "quellen/political-affairs-ech-group/ech-0295_affairs/input/data_motion_20-4232.yaml", what: "example of I95: motion with assignment, response and committee step"}
+  EX_M2: {file: "quellen/political-affairs-ech-group/ech-0295_affairs/input/data_motion_21-3734.yaml", what: "example of I95: motion with a withdrawal"}
+  EX_K_PI: {file: "quellen/political-affairs-ech-group/ech-0295_affairs/03_Example_Pursuits:Affairs/example_parliamentary_initiative_23-432.yaml", what: "example of the kernel: parliamentary initiative with an executive response on the drafted act"}
+  G_M1: {file: "quellen/political-affairs-ech-group/ech-0295_affairs/01_Meeting_Protokolle/01_Meeting_21_Mai_2025/Protokoll.txt", what: "guide text: notes of the first meeting of the affairs subgroup (21.05.2025)"}
+  G_M2: {file: "quellen/political-affairs-ech-group/ech-0295_affairs/01_Meeting_Protokolle/02_Meeting_28_Mai_2025/ECH-Subgruppe Geschäfte.pdf", what: "guide text: notes of the second meeting of the affairs subgroup (28.05.2025), groups of affair types"}
+  G_DEP: {file: "quellen/political-affairs-ech-group/docs/plenum/resolved_dependencies_2025-09-01.md", what: "guide text: decisions of the plenum of 01.09.2025 on the limits between the standards"}
+  G_GRP: {file: "quellen/political-affairs-ech-group/docs/plenum/group_dependencies.md", what: "guide text: notes of the plenum on the subgroups and their limits"}
+  P_TYPES: {file: "src/m02_ech_regeln.py", what: "project rule: term list typ_ech, type sets VORSTOSS_TYPEN, ANTRAG_TYPEN, ANTWORT_TYPEN, EMPFEHLUNG_REGELN"}
+  P_ROLE: {file: "src/m03_sub_s1_role.py", what: "project rule: the S1 rule role of a document (rule ids O1, O2, M1, C1, A1, A2, P1, P2, E1, R1, D0)"}
+  P_D1: {file: "src/m10_rules.py", what: "project rule: D1_OF_ROLE, the D1 answer of a rule role"}
+  P_GAP: {file: "src/m10_gaps.py", what: "project rule: recorded gap of affair_type and affair_number (addendum A, rules A1 and A2)"}
+  P_WRITER: {file: "src/m11_writer.py", what: "project rule: FIELD_TABLE, PRIMARY_ROLES, REGISTER_ONLY, OTHER_STEPS, NO_RULE, the selection of the text blocks by the kind"}
+  P_FORM: {file: "daten/gj_values/record_form.md", what: "project rule: record form, chapter 2.3 rule 16 and chapter 6"}
+  P_REF: {file: "src/m11_value_reference.py", what: "project rule: PRIMARY_ROLES of the two response fields (addendum G, table 1)"}
+  P_ADD_G: {file: "crisp-dm/04-modeling/gate-jev-cascade-criteria-addendum-g.md", what: "project rule: addendum G, the 7 fields and their primary sets"}
+  P_PROMPT: {file: "src/m10_prompts.py", what: "project rule: the questions D1 and B1 of the stored Apertus states"}
+  P_ECH: {file: "crisp-dm/02-data-understanding/abschnitte/ech.md", what: "project document: comparison of the export with eCH-0295, findings 1 to 12"}
+  P_LANG: {file: "src/m06_ech_ausgabe.py", what: "project rule: the language of a text block and the cross-check search"}
+
+# ---------------------------------------------------------------------------------------------- stages
+stages:
+  - {id: 0, name: document_kind, decides: "what this PDF is", selects: "the process steps that the document can state"}
+  - {id: 1, name: affair_type, decides: "the list value of the affair type", selects: "the process steps that the type can have and the values of stage 4"}
+  - {id: 2, name: process_steps, decides: "the steps that a document of this kind and type can state", selects: "the classes of the record"}
+  - {id: 3, name: slots, decides: "the slots of each step: required, optional, not applicable; and the origin of each value", selects: "the block options of the block question"}
+  - {id: 4, name: values, decides: "the values and the value lists", selects: "the options of each value question"}
+
+# ---------------------------------------------------------------------------------------------- stage 0
+kinds:
+  proposal: {de: "Vorstoss eines Ratsmitglieds, einer Fraktion oder einer Kommission (eingereichter Text)", rule_roles: [proposal], d1: A, built: true}
+  response: {de: "Antwort oder Stellungnahme der Exekutive zu einem Vorstoss", rule_roles: [response], d1: B, built: true}
+  combined: {de: "Vorstoss und Antwort der Exekutive in einem Dokument", rule_roles: [combined], d1: C, built: true}
+  executive_proposal: {de: "Vorlage der Exekutive (Botschaft, Bericht und Antrag, Erlassentwurf)", rule_roles: [proposal], rule_ids: [E1], d1: D, built: true}
+  committee_report: {de: "Bericht oder Antrag einer Kommission", rule_roles: [committee], d1: D, built: true}
+  minutes: {de: "Protokoll oder Beschluss des Rates", rule_roles: [minutes], d1: D, built: true}
+  other: {de: "anderes Dokument (Beilage, Regierungsbeschluss, Liste)", rule_roles: [other], d1: D, built: true}
+
+# ---------------------------------------------------------------------------------------------- stage 1
+# The keys must be equal to the values of AffairTypeEnum of I95 plus the key none (self-check).
+affair_types:
+  motion: {de: "Motion", i95_class: Motion, profile: PM, steps: all, group: soliciting}
+  postulate: {de: "Postulat", i95_class: Postulate, profile: null, steps: all, group: soliciting}
+  motion_and_postulate: {de: "Motion und Postulat (kombiniert)", i95_class: null, profile: null, steps: all, group: soliciting}
+  motion_then_postulate: {de: "Motion, später als Postulat behandelt", i95_class: null, profile: null, steps: all, group: soliciting}
+  interpellation: {de: "Interpellation", i95_class: Interpellation, profile: null, steps: question_types, group: inquiring}
+  request: {de: "Anfrage (schriftliche oder einfache Anfrage)", i95_class: Request, profile: null, steps: question_types, group: inquiring}
+  question: {de: "Frage für die Fragestunde", i95_class: Question, profile: null, steps: question_types, group: inquiring}
+  parliamentary_initiative: {de: "Parlamentarische Initiative", i95_class: ParliamentaryInitiative, profile: PI, steps: all, group: legislating}
+  draft_decree: {de: "Beschlussesentwurf oder Erlassentwurf (Vorlage)", i95_class: DraftDecree, profile: null, steps: all, group: legislating}
+  none: {de: "keiner dieser Typen", i95_class: null, profile: null, steps: all, group: none}
+
+# ---------------------------------------------------------------------------------------------- stage 2
+# The 9 step types of the kernel (K95 StepTypeEnum) and their form in I95.
+steps:
+  submission:
+    k95_class: SubmissionStep
+    i95: {holder: Affair.submission, class: Submission}
+    built: true
+  withdrawal:
+    k95_class: WithdrawalStep
+    i95: {holder: null, class: null, slots: [Submission.withdrawn_date], values: {ProcedureStageEnum: [withdrawal], ProcedureDecisionEnum: [withdrawn], VoteOutcomeEnum: [withdrawn]}}
+    built: false
+  validation:
+    k95_class: ValidationStep
+    i95: {holder: Affair.submission_validation_steps, class: SubmissionValidationStep}
+    built: false
+  assignment:
+    k95_class: AssignmentStep
+    i95: {holder: Affair.assignment_steps, class: AssignmentStep, values: {AssignmentStepTypeEnum: [chamber_assignment, committee_referral, executive_routing]}}
+    built: false
+  executive_response:
+    k95_class: ExecutiveResponseStep
+    i95: {holder: Affair.response_steps, class: ResponseStep}
+    built: true
+  agenda:
+    k95_class: AgendaStep
+    i95: {holder: Affair.assignment_steps, class: AssignmentStep, values: {AssignmentStepTypeEnum: [agenda_placement]}}
+    built: false
+  committee_deliberation:
+    k95_class: CommitteeDeliberationStep
+    i95: {holder: Affair.committee_deliberation_steps, class: CommitteeDeliberationStep}
+    built: false
+  plenary_debate:
+    k95_class: PlenaryDebateStep
+    i95: {holder: Affair.plenary_debates, class: PlenaryDebate, slots: [Submission.reasoning_in_council]}
+    built: false
+  implementation:
+    k95_class: ImplementationStep
+    i95: {holder: null, class: null, slots: [], values: {ProcedureStageEnum: [forwarded_to_executive, report_submitted_to_council, report_review_in_council], PlenaryDebateTypeEnum: [abschreibung]}}
+    built: false
+
+# The steps that an affair type can have (rules R11 to R17).
+type_steps:
+  all: {steps: [submission, withdrawal, validation, assignment, executive_response, agenda, committee_deliberation, plenary_debate, implementation]}
+  question_types: {steps: [submission, withdrawal, validation, assignment, executive_response, agenda, plenary_debate]}
+type_step_rules:
+  motion: [R11, R12]
+  postulate: [R11, R14]
+  motion_and_postulate: [R11, R14]
+  motion_then_postulate: [R11, R14]
+  interpellation: [R11, R15]
+  request: [R11, R15]
+  question: [R11, R15]
+  parliamentary_initiative: [R11, R13]
+  draft_decree: [R11, R16]
+  none: [R17]
+# A step with a condition for one type (the step stays in the set; the condition is given with the step).
+type_step_conditions:
+  parliamentary_initiative:
+    executive_response: {rule: R13, condition: "only for the act that the committee drafted; not in the preliminary examination"}
+  draft_decree:
+    executive_response: {rule: R16, condition: "only if the author of the decree is not the executive"}
+
+# The steps that a document of a kind can state (rules R18 to R24).
+kind_steps:
+  proposal: {steps: [submission], rule: R18}
+  response: {steps: [submission, executive_response, assignment], rule: R19}
+  combined: {steps: [submission, executive_response, assignment], rule: R20}
+  executive_proposal: {steps: [submission], rule: R21}
+  committee_report: {steps: [committee_deliberation, assignment], rule: R22}
+  minutes: {steps: [plenary_debate, validation, withdrawal, agenda, implementation], rule: R23}
+  other: {steps: [], rule: R24}
+
+# ---------------------------------------------------------------------------------------------- stage 3
+# Origin of a value: pdf_block (a block of the PDF states it), derived (a stated rule gives it), minted (an IRI
+# that the writer makes), register (a register only), structure (the slot holds an object of a class).
+# today: the writer of today fills the slot (src/m11_writer.py). ask: the option of the new Apertus block question
+# or the id of a document question. A flag of a slot is valid only if the same flag of its holder slot is valid.
+# kinds / types: the slot applies only for these kinds / these affair types. step: the slot is part of another step.
+
+# Slots of the mixins of C92. Key: slot name. A class entry in the map slots replaces this default.
+common_slots:
+  global_uri: {origin: minted, today: true, rules: [R27]}
+  local_id: {origin: register, rules: [R33]}
+  wikidata_uri: {origin: register, rules: [R33]}
+  date_created: {origin: register, rules: [R33]}
+  datetime_created: {origin: register, rules: [R33]}
+  date_modified: {origin: register, rules: [R33]}
+  datetime_modified: {origin: register, rules: [R33]}
+  date_begin_actual: {origin: pdf_block, rules: [R39]}
+  datetime_begin_actual: {origin: pdf_block, rules: [R39]}
+  date_end_actual: {origin: pdf_block, rules: [R39]}
+  datetime_end_actual: {origin: pdf_block, rules: [R39]}
+  date_begin_planned: {origin: register, rules: [R39]}
+  datetime_begin_planned: {origin: register, rules: [R39]}
+  date_end_planned: {origin: register, rules: [R39]}
+  datetime_end_planned: {origin: register, rules: [R39]}
+  remark: {origin: derived, rules: [R39]}
+
+# Each slot of each class of I95 (own slots). The self-check refuses a missing pair and an unknown pair.
+slots:
+  # ---- root and affair
+  Container.affairs: {origin: structure, today: true, rules: [R26]}
+  Affair.affair_number: {origin: pdf_block, today: true, ask: affair_number, rules: [R26, R6]}
+  Affair.affair_type: {origin: pdf_block, derivation: "the printed type word gives the list value by the term list typ_ech", today: true, ask: Q1, rules: [R3, R4, R5, R6]}
+  Affair.title: {origin: structure, today: true, ask: title, rules: [R43]}
+  Affair.linked_affairs: {origin: pdf_block, derivation: "the printed number of another affair; the IRI needs a register", rules: [R39]}
+  Affair.submission: {origin: structure, today: true, ask: QB, rules: [R9]}
+  Affair.submission_validation_steps: {origin: structure, rules: [R9]}
+  Affair.assignment_steps: {origin: structure, rules: [R9, R51]}
+  Affair.response_steps: {origin: structure, today: true, ask: QB, rules: [R9]}
+  Affair.committee_deliberation_steps: {origin: structure, rules: [R9]}
+  Affair.plenary_debates: {origin: structure, rules: [R9]}
+  Affair.lifecycle_flags: {origin: structure, kinds: [proposal, response, combined, minutes], rules: [R52]}
+  Affair.current_state: {origin: register, rules: [R33, R46, R47]}
+  Affair.procedure_states: {origin: register, rules: [R33, R46, R47]}
+  # ---- submission step
+  Submission.submission_date: {origin: pdf_block, today: true, ask: submission_date, rules: [R39]}
+  Submission.sponsorship: {origin: structure, today: true, ask: author, kinds: [proposal, response, combined, executive_proposal], rules: [R30, R38]}
+  Submission.texts: {origin: structure, today: true, ask: B1, kinds: [proposal, combined, executive_proposal], rules: [R30, R43]}
+  Submission.withdrawn_date: {origin: pdf_block, step: withdrawal, rules: [R10]}
+  Submission.reasoning_in_council: {origin: structure, step: plenary_debate, rules: [R37]}
+  Submission.date_begin_actual: {origin: derived, derivation: "equal to submission_date (example files of I95)", rules: [R40]}
+  Sponsorship.actor: {origin: structure, today: true, ask: author, rules: [R38]}
+  Sponsorship.sponsor_role: {origin: derived, derivation: "sponsor for the first author; cosponsor for a co-signatory; transferred from a register only", today: true, ask: cosigner, rules: [R28, R44]}
+  Sponsorship.start_date: {origin: derived, derivation: "equal to submission_date (example files of I95)", rules: [R40]}
+  Sponsorship.end_date: {origin: register, rules: [R33]}
+  # ---- executive response step
+  ResponseStep.responder: {origin: structure, today: true, ask: responder, rules: [R31]}
+  ResponseStep.recommendation: {origin: pdf_block, derivation: "the wording of the request of the executive gives the list value", ask: recommendation, types: [motion, postulate, motion_and_postulate, motion_then_postulate, parliamentary_initiative, draft_decree, none], rules: [R41, R42]}
+  ResponseStep.texts: {origin: structure, today: true, ask: B1, rules: [R43]}
+  ResponseStep.date_end_actual: {origin: pdf_block, today: true, ask: response_date, rules: [R31, R32]}
+  # ---- validation step
+  SubmissionValidationStep.validation_step_type: {origin: derived, derivation: "from the wording of the decision", rules: [R51]}
+  SubmissionValidationStep.decided_by: {origin: structure, rules: [R39]}
+  SubmissionValidationStep.decision_result: {origin: pdf_block, rules: [R39]}
+  SubmissionValidationStep.deadline: {origin: pdf_block, rules: [R39]}
+  # ---- assignment step and agenda step
+  AssignmentStep.assignment_step_type: {origin: derived, derivation: "from the wording and the body that gets the affair", rules: [R51]}
+  AssignmentStep.assigned_to: {origin: structure, rules: [R39]}
+  AssignmentStep.deadline: {origin: pdf_block, rules: [R39]}
+  # ---- committee deliberation step
+  CommitteeDeliberationStep.committee: {origin: structure, rules: [R39]}
+  CommitteeDeliberationStep.council: {origin: derived, derivation: "from the parliament of the document", rules: [R49]}
+  CommitteeDeliberationStep.committee_decision: {origin: structure, rules: [R39]}
+  CommitteeDeliberationStep.spokesperson: {origin: structure, rules: [R39]}
+  CommitteeDeliberationStep.meeting_refs: {origin: register, rules: [R33]}
+  CommitteeDecision.decision_date: {origin: pdf_block, rules: [R39]}
+  CommitteeDecision.positions: {origin: structure, rules: [R39]}
+  CommitteeDecision.text: {origin: structure, rules: [R43]}
+  CommitteePosition.position_type: {origin: pdf_block, derivation: "the words majority or minority give the list value", rules: [R28]}
+  CommitteePosition.position_name: {origin: pdf_block, rules: [R39]}
+  CommitteePosition.recommendation: {origin: pdf_block, derivation: "the wording of the request gives the list value", rules: [R41]}
+  CommitteePosition.supporters: {origin: structure, rules: [R39]}
+  # ---- plenary debate step
+  PlenaryDebate.council: {origin: derived, derivation: "from the parliament of the document", rules: [R49]}
+  PlenaryDebate.debate_type: {origin: derived, derivation: "from the heading of the item", rules: [R48]}
+  PlenaryDebate.meeting_ref: {origin: register, rules: [R33]}
+  PlenaryDebate.debate_events: {origin: structure, rules: [R34]}
+  PlenaryDebateEvent.sequence_number: {origin: derived, derivation: "the position of the event in the minutes", rules: [R34]}
+  PlenaryDebateEvent.event_type: {origin: derived, derivation: "from the kind of the block", rules: [R34]}
+  PlenaryDebateEvent.speech: {origin: structure, rules: [R34]}
+  PlenaryDebateEvent.proposition: {origin: structure, rules: [R34]}
+  PlenaryDebateEvent.vote: {origin: structure, rules: [R34, R45]}
+  PlenaryDebateEvent.timestamp: {origin: pdf_block, rules: [R39]}
+  PlenaryDebateEvent.deadline: {origin: pdf_block, rules: [R39]}
+  Speech.speaker: {origin: structure, rules: [R39]}
+  Speech.debate_role: {origin: pdf_block, derivation: "the printed function of the speaker gives the list value", rules: [R39]}
+  Speech.text: {origin: structure, rules: [R43]}
+  Proposition.proposer: {origin: structure, rules: [R39]}
+  Proposition.proposition_type: {origin: pdf_block, rules: [R39]}
+  Proposition.text: {origin: structure, rules: [R43]}
+  Vote.vote_registration_number: {origin: pdf_block, rules: [R45]}
+  Vote.vote_type: {origin: derived, derivation: "from the wording of the vote", rules: [R45]}
+  Vote.text: {origin: structure, rules: [R43]}
+  Vote.vote_outcome: {origin: pdf_block, derivation: "the printed result gives the list value", rules: [R45]}
+  Vote.vote_meaning_yes: {origin: pdf_block, rules: [R45]}
+  Vote.vote_meaning_no: {origin: pdf_block, rules: [R45]}
+  Vote.count_yes: {origin: pdf_block, rules: [R45]}
+  Vote.count_no: {origin: pdf_block, rules: [R45]}
+  Vote.count_abstain: {origin: pdf_block, rules: [R45]}
+  Vote.count_excused: {origin: pdf_block, rules: [R45]}
+  Vote.count_not_present: {origin: pdf_block, rules: [R45]}
+  Vote.named_votes: {origin: structure, rules: [R35]}
+  NamedVote.voter: {origin: structure, rules: [R35]}
+  NamedVote.individual_vote: {origin: pdf_block, rules: [R28, R35]}
+  # ---- helper classes
+  ProcedureState.as_of_date: {origin: register, rules: [R33]}
+  ProcedureState.status: {origin: register, rules: [R28, R33]}
+  ProcedureState.phase: {origin: register, derivation: "follows from the stage (R46)", rules: [R28, R33, R46]}
+  ProcedureState.stage: {origin: register, rules: [R28, R33]}
+  ProcedureState.decision: {origin: register, rules: [R33, R47]}
+  LifecycleFlags.flag_date: {origin: derived, derivation: "the date of the step that states the flag", rules: [R40]}
+  LifecycleFlags.urgent: {origin: pdf_block, derivation: "the word for urgent in the type word or in the title", rules: [R52]}
+  TextBlock.text: {origin: pdf_block, today: true, ask: inherit, rules: [R43]}
+  TextBlock.text_language: {origin: derived, derivation: "the rule for the language of a text block", today: true, rules: [R50]}
+  TextBlock.text_type: {origin: derived, derivation: "fixed by the holder slot and the block role", today: true, rules: [R43]}
+  TextBlock.text_origin: {origin: register, rules: [R39]}
+  TextBlock.text_date: {origin: derived, derivation: "the date of the step (example files of I95)", rules: [R40]}
+  TextBlock.document_url: {origin: register, rules: [R33]}
+  MultilingualString.text: {origin: pdf_block, today: true, ask: inherit, rules: [R39]}
+  MultilingualString.text_language: {origin: derived, derivation: "the rule for the language of a text block", today: true, rules: [R28, R50]}
+  Actor.name: {origin: structure, today: true, ask: inherit, rules: [R39]}
+  # ---- a class with no holder slot in I95 (R36): no path can reach it
+  CommitteeMeeting.committee: {origin: no_holder, rules: [R36]}
+  CommitteeMeeting.president: {origin: no_holder, rules: [R36]}
+  CommitteeMeeting.vice_president: {origin: no_holder, rules: [R36]}
+  CommitteeMeeting.attendees: {origin: no_holder, rules: [R36]}
+  CommitteeMeeting.absentees: {origin: no_holder, rules: [R36]}
+  CommitteeMeeting.excused: {origin: no_holder, rules: [R36]}
+  CommitteeMeeting.discussed_affairs: {origin: no_holder, rules: [R36]}
+
+# Slot names of the 87 that no path can reach, because their one class has no holder slot (checked at run time).
+no_holder_slots: [president, vice_president, attendees, absentees, excused, discussed_affairs]
+# Slot names of the 87 whose value comes from a register in each place (checked at run time against the map slots).
+register_only_slots: [current_state, procedure_states, as_of_date, status, phase, stage, decision, end_date, meeting_refs, meeting_ref, text_origin, document_url]
+
+# ---------------------------------------------------------------------------------------------- stage 4
+# The values of a value list that apply at a place. Key: path suffix "Class.slot" or "Holder.slot/Class.slot".
+values:
+  "Affair.title/TextBlock.text_type": {values: [title, short_title], rule: R43}
+  "Submission.texts/TextBlock.text_type": {values: [submitted, reasoning], rule: R43}
+  "ResponseStep.texts/TextBlock.text_type":
+    values: [response, recommendation]
+    rule: R43
+    by_type: {interpellation: [response], request: [response], question: [response]}
+    by_type_rule: R41
+  "Sponsorship.sponsor_role": {values: [sponsor, cosponsor], register_values: [transferred], rule: R44}
+  "ResponseStep.recommendation": {values: [accept, reject, partial_acceptance, already_done, no_competence, defer, neutral], rule: R41}
+  "PlenaryDebate.debate_type":
+    values: [eintreten, detailberatung, beantwortung, abschreibung, fristverlaengerung, verzoegerung, other]
+    rule: R48
+    by_type:
+      interpellation: [beantwortung, verzoegerung, other]
+      request: [beantwortung, verzoegerung, other]
+      question: [beantwortung, verzoegerung, other]
+    by_type_rule: R48
+  "PlenaryDebateEvent.event_type": {values: [speech, proposition, vote], rule: R34}
+  "SubmissionValidationStep.validation_step_type": {values: [initial_check, urgency_request], rule: R51}
+  "AssignmentStep.assignment_step_type": {values: [chamber_assignment, committee_referral, executive_routing, agenda_placement], rule: R51}
+
+# Stage 4, derived values with a rule of the standard.
+derived_values:
+  phase_of_stage:
+    rule: R46
+    map:
+      preparation: null
+      submission: pre_parliamentary
+      submission_validation: pre_parliamentary
+      executive_response: pre_parliamentary
+      urgency_review: null
+      withdrawal: null
+      committee: parliamentary
+      plenary: parliamentary
+      forwarded_to_executive: post_parliamentary
+      report_submitted_to_council: post_parliamentary
+      report_review_in_council: post_parliamentary
+  decisions_of_stage:
+    rule: R47
+    map:
+      submission_validation: [validated, failed_validation]
+      executive_response: [recommended_for, recommended_against]
+      urgency_review: [urgency_granted, urgency_denied]
+      plenary: [adopted, rejected, partially_adopted]
+      withdrawal: [withdrawn]
+      report_review_in_council: [report_adopted, report_rejected]
+
+# ---------------------------------------------------------------------------------------------- questions
+# The new Apertus questions that this cascade proposes. The job builder decides the final wording.
+questions:
+  Q0:
+    stage: 0
+    scope: document
+    de: "Was für ein Dokument ist das?"
+    options: kinds
+    built: true
+  Q1:
+    stage: 1
+    scope: document
+    de: "Welchen Geschäftstyp nach eCH-0295 hat das Geschäft dieses Dokuments?"
+    options: affair_types
+    built: true
+  QB:
+    stage: 3
+    scope: block
+    de: "Welchen Wert nach eCH-0295 nennt Block [B<n>] auf Seite <p>, der mit «<erste 12 Wörter>» beginnt?"
+    options: block_options
+    built: true
+  QR:
+    stage: 4
+    scope: document
+    de: "Welchen Antrag stellt die Exekutive zum Vorstoss?"
+    options: "values of ResponseStep.recommendation"
+    condition: "ResponseStep.recommendation applies (R41)"
+    built: true
+  B1:
+    stage: 3
+    scope: block
+    de: "the existing question B1 of src/m10_prompts.py (text parts)"
+    options: [submitted, reasoning, response, recommendation, title, none]
+    built: true
+    existing: true
+
+# The options of the block question QB. An option is in the list of a path if one of its slots applies.
+block_options:
+  type_word: {de: "Geschäftstyp (Typwort)", slots: [Affair.affair_type]}
+  title: {de: "Titel des Geschäfts", slots: [Affair.title]}
+  affair_number: {de: "Geschäftsnummer", slots: [Affair.affair_number]}
+  submission_date: {de: "Datum der Einreichung", slots: [Submission.submission_date]}
+  author: {de: "Urheberin oder Urheber (Erstunterzeichnende)", slots: [Submission.sponsorship]}
+  cosigner: {de: "Mitunterzeichnende", slots: [Submission.sponsorship]}
+  responder: {de: "antwortende Behörde", slots: [ResponseStep.responder]}
+  response_date: {de: "Datum der Antwort", slots: [ResponseStep.date_end_actual]}
+  recommendation: {de: "Antrag der Exekutive", slots: [ResponseStep.recommendation]}
+  none: {de: "keinen dieser Werte", slots: []}
+
+# ---------------------------------------------------------------------------------------------- rules
+# basis: standard (a schema file, a profile or a text of the standard states it),
+#        project_rule (a file of the project states it),
+#        project_choice (no rule in the standard: a choice of this cascade).
+rules:
+  # ---- stage 0
+  - id: R1
+    stage: 0
+    basis: project_choice
+    if: "a PDF comes in"
+    then: "the kind of the document is one of 7 options: proposal, response, combined, executive_proposal, committee_report, minutes, other"
+    source:
+      - {ref: I95, where: "no class and no slot for the kind of a document; TextBlock.document_url is the one link to a document"}
+      - {ref: G_GRP, where: "last list: the documents of affairs are a point that is open for a common discussion"}
+      - {ref: P_ROLE, where: "function rule: the 6 rule roles"}
+    note: "No rule in the standard: project choice."
+  - id: R2
+    stage: 0
+    basis: project_rule
+    if: "the rule role of the rule chain is known"
+    then: "proposal gives the kind proposal (rule id E1: executive_proposal); response, combined, minutes and other give the kind of the same name; committee gives committee_report"
+    source:
+      - {ref: P_ROLE, where: "function rule: rule ids O1, O2, M1, C1, A1, A2, P1, P2, E1, R1, D0"}
+      - {ref: P_D1, where: "D1_OF_ROLE"}
+    note: "The link of rule id E1 to executive_proposal is a choice of this cascade. It is used for counts only."
+  # ---- stage 1
+  - id: R3
+    stage: 1
+    basis: standard
+    if: "an affair is written"
+    then: "affair_type is required and has one value of the 9 values of AffairTypeEnum"
+    source:
+      - {ref: I95, where: "class Affair, slot_usage affair_type required; value list AffairTypeEnum"}
+  - id: R4
+    stage: 1
+    basis: standard
+    if: "affair_type is motion or parliamentary_initiative"
+    then: "the class is Motion or ParliamentaryInitiative"
+    else: "I95 has a class of the same name for 5 more values and no class for motion_and_postulate and motion_then_postulate"
+    source:
+      - {ref: PM, where: "class Motion, slot_usage affair_type equals_string motion"}
+      - {ref: PI, where: "class ParliamentaryInitiative, slot_usage affair_type equals_string parliamentary_initiative"}
+      - {ref: I95, where: "classes Motion, Postulate, Interpellation, Request, Question, ParliamentaryInitiative, DraftDecree; last comment block"}
+  - id: R5
+    stage: 1
+    basis: project_rule
+    if: "the PDF prints a type word"
+    then: "the list value follows from the term list (first rule that applies)"
+    source:
+      - {ref: P_TYPES, where: "TYP_LOKAL_REGELN, typ_lokal, typ_ech"}
+  - id: R6
+    stage: 1
+    basis: project_rule
+    if: "no list value of I95 applies, or no affair number is found"
+    then: "the slot is absent and the record has a recorded gap; no value is invented; the stages 2 to 4 use the type none"
+    source:
+      - {ref: P_GAP, where: "GAP_SLOTS, rules A1 and A2 of addendum A"}
+      - {ref: I95, where: "AffairTypeEnum has no value other"}
+  - id: R7
+    stage: 1
+    basis: project_choice
+    if: "the kind is known"
+    then: "the kind does not change the options of the type question: all 9 values and none stay"
+    source:
+      - {ref: I95, where: "no slot links a document kind to an affair type"}
+      - {ref: P_ROLE, where: "counts of rule role by export type, command paths of src/m11_cascade.py"}
+    note: "No rule in the standard: project choice. Measured: each rule role has documents of the type draft_decree."
+  - id: R8
+    stage: 1
+    basis: standard
+    if: "the kernel K95 is the reference"
+    then: "the type list has 8 values: it has cantonal_initiative, petition and other, and it has no request, draft_decree, motion_and_postulate, motion_then_postulate"
+    else: "the cascade uses the list of I95, because the converter writes I95"
+    source:
+      - {ref: K95, where: "value list AffairTypeEnum"}
+      - {ref: I95, where: "value list AffairTypeEnum"}
+  # ---- stage 2
+  - id: R9
+    stage: 2
+    basis: standard
+    if: "a step has a step type"
+    then: "the step type selects the class of the step and its slots"
+    source:
+      - {ref: K95, where: "slot step_type (description); value list StepTypeEnum with meaning; 9 subclasses of ProcessStep"}
+      - {ref: I95, where: "class Affair: one holder slot for each of the 6 step classes"}
+  - id: R10
+    stage: 2
+    basis: project_choice
+    if: "a step type of the kernel has no class in I95"
+    then: "withdrawal is Submission.withdrawn_date; agenda is an AssignmentStep with the type agenda_placement; implementation is values of ProcedureStageEnum and the debate type abschreibung"
+    source:
+      - {ref: K95, where: "classes WithdrawalStep, AgendaStep, ImplementationStep"}
+      - {ref: I95, where: "slot withdrawn_date; AssignmentStepTypeEnum agenda_placement; ProcedureStageEnum; PlenaryDebateTypeEnum abschreibung"}
+      - {ref: EX_M2, where: "withdrawn_date with the stage withdrawal"}
+    note: "The standard gives no map between the two schema files: project choice."
+  - id: R11
+    stage: 2
+    basis: standard
+    if: "the affair has one of the 9 types"
+    then: "I95 permits each step for each type: each subclass has all slots of Affair and no slot_usage"
+    source:
+      - {ref: I95, where: "classes Motion to DraftDecree: is_a Affair, no slots, no slot_usage"}
+  - id: R12
+    stage: 2
+    basis: standard
+    if: "affair_type is motion"
+    then: "all 9 step types are permitted; the executive response and 1 or more plenary debates are normally present"
+    source:
+      - {ref: PM, where: "class Motion, slot_usage procedure_steps: description and annotation allowed_step_types"}
+  - id: R13
+    stage: 2
+    basis: standard
+    if: "affair_type is parliamentary_initiative"
+    then: "all 9 step types are permitted; the committee recommends in a committee step and the council decides in a plenary step"
+    else: "an executive response is not in the preliminary examination; it comes only for the act that the committee drafted"
+    source:
+      - {ref: PI, where: "class ParliamentaryInitiative, slot_usage procedure_steps: description and annotation allowed_step_types; header comment"}
+      - {ref: EX_K_PI, where: "step executive_response after the committee steps"}
+  - id: R14
+    stage: 2
+    basis: project_choice
+    if: "affair_type is postulate, motion_and_postulate or motion_then_postulate"
+    then: "the steps are those of a motion"
+    source:
+      - {ref: P_TYPES, where: "ANTRAG_TYPEN"}
+      - {ref: I95, where: "no profile and no condition for these types"}
+      - {ref: G_M2, where: "group of the soliciting affairs: motion, postulate"}
+    note: "No rule in the standard: project choice."
+  - id: R15
+    stage: 2
+    basis: project_choice
+    if: "affair_type is interpellation, request or question"
+    then: "7 steps apply: submission, withdrawal, validation, assignment, executive_response, agenda, plenary_debate"
+    else: "committee_deliberation and implementation are not asked"
+    source:
+      - {ref: I95, where: "class descriptions Interpellation, Request, Question (text only, no constraint)"}
+      - {ref: P_TYPES, where: "ANTWORT_TYPEN without ANTRAG_TYPEN"}
+      - {ref: G_M2, where: "group of the inquiring affairs: interpellation, request, question"}
+    note: "No rule in the standard: project choice."
+  - id: R16
+    stage: 2
+    basis: project_choice
+    if: "affair_type is draft_decree"
+    then: "all steps apply; an executive response applies only if the author is not the executive"
+    source:
+      - {ref: I95, where: "class DraftDecree (description only)"}
+      - {ref: PI, where: "description: the executive gives a statement on the act that the committee drafted"}
+      - {ref: G_M2, where: "group of the legislating affairs: parliamentary initiative, affair of the executive with a decree text"}
+    note: "No rule in the standard: project choice. The kernel has no value draft_decree."
+  - id: R17
+    stage: 2
+    basis: project_choice
+    if: "the type is none (recorded gap)"
+    then: "the type does not select steps; the kind alone selects them"
+    source:
+      - {ref: P_GAP, where: "rule A1"}
+    note: "No rule in the standard: project choice."
+  - id: R18
+    stage: 2
+    basis: project_choice
+    if: "the kind is proposal"
+    then: "the document can state the submission step"
+    source:
+      - {ref: P_D1, where: "D1_OF_ROLE: proposal gives A (submitted text only)"}
+      - {ref: P_WRITER, where: "OTHER_STEPS have the state not_in_this_document_type"}
+    note: "No rule in the standard: project choice."
+  - id: R19
+    stage: 2
+    basis: project_choice
+    if: "the kind is response"
+    then: "the document can state the executive response step, the submission date of the submission step, and an assignment to a department"
+    source:
+      - {ref: P_D1, where: "D1_OF_ROLE: response gives B"}
+      - {ref: P_REF, where: "PRIMARY_ROLES"}
+      - {ref: P_ADD_G, where: "table 1: submission_date has all documents as its primary set"}
+    note: "No rule in the standard: project choice. The assignment is a reading, not a count."
+  - id: R20
+    stage: 2
+    basis: project_choice
+    if: "the kind is combined"
+    then: "the document can state the submission step, the executive response step and an assignment to a department"
+    source:
+      - {ref: P_D1, where: "D1_OF_ROLE: combined gives C"}
+    note: "No rule in the standard: project choice."
+  - id: R21
+    stage: 2
+    basis: project_choice
+    if: "the kind is executive_proposal"
+    then: "the document can state the submission step; the author is the executive"
+    source:
+      - {ref: P_ROLE, where: "rule id E1"}
+      - {ref: P_ECH, where: "finding 11: TextTypeEnum has no type for the text of a decree"}
+    note: "No rule in the standard: project choice."
+  - id: R22
+    stage: 2
+    basis: project_choice
+    if: "the kind is committee_report"
+    then: "the document can state the committee deliberation step and an assignment to the committee"
+    source:
+      - {ref: P_ROLE, where: "rule id C1"}
+      - {ref: EX_M1, where: "committee_deliberation_steps with committee_decision"}
+    note: "No rule in the standard: project choice."
+  - id: R23
+    stage: 2
+    basis: project_choice
+    if: "the kind is minutes"
+    then: "the document can state the plenary debate step, a validation step (urgency), a withdrawal, an agenda step and the values of an implementation"
+    source:
+      - {ref: P_ROLE, where: "rule id M1"}
+      - {ref: I95, where: "class PlenaryDebate; class Vote (a formal vote in the plenary)"}
+    note: "No rule in the standard: project choice."
+  - id: R24
+    stage: 2
+    basis: project_choice
+    if: "the kind is other"
+    then: "the document states no step; only the head values of the affair are asked"
+    source:
+      - {ref: P_ROLE, where: "rule ids O1, O2, D0"}
+    note: "No rule in the standard: project choice."
+  - id: R25
+    stage: 2
+    basis: project_choice
+    if: "the kind and the type are decided"
+    then: "a step applies if the kind can state it and the type can have it"
+    else: "the step and all its slots are not applicable for this path"
+    source:
+      - {ref: P_WRITER, where: "state not_in_this_document_type"}
+    note: "No rule in the standard: project choice."
+  # ---- stage 3
+  - id: R26
+    stage: 3
+    basis: standard
+    if: "an affair is written"
+    then: "affair_number, affair_type and global_uri are required; each other slot of Affair is optional"
+    requires: [Affair.affair_number, Affair.affair_type]
+    source:
+      - {ref: I95, where: "slot affair_number required; class Affair slot_usage affair_type required"}
+      - {ref: C92, where: "mixin HasIdentification; slot global_uri identifier and required"}
+  - id: R27
+    stage: 3
+    basis: standard
+    if: "an object of a class with HasIdentification or IsProcessStep is written"
+    then: "its global_uri is required"
+    requires: ["*.global_uri"]
+    source:
+      - {ref: C92, where: "mixins HasIdentification and IsProcessStep; slot global_uri"}
+      - {ref: I95, where: "the mixins of the classes"}
+  - id: R28
+    stage: 3
+    basis: standard
+    if: "an object of the class is written"
+    then: "Sponsorship needs sponsor_role; CommitteePosition needs position_type; NamedVote needs individual_vote; ProcedureState needs status, phase and stage; MultilingualString needs text_language"
+    requires: [Sponsorship.sponsor_role, CommitteePosition.position_type, NamedVote.individual_vote, ProcedureState.status, ProcedureState.phase, ProcedureState.stage, MultilingualString.text_language]
+    source:
+      - {ref: I95, where: "slots sponsor_role, position_type, individual_vote, status, phase, stage: required; class MultilingualString slot_usage text_language"}
+  - id: R29
+    stage: 3
+    basis: standard
+    if: "the kernel K95 is the reference"
+    then: "18 slots are required, among them submission_date, responder, response_date, withdrawal_date, assignment_type, assigned_to, assignment_date, committee, debate_type, debate_date, sequence_number, event_type"
+    else: "in I95 these slots are optional or absent"
+    source:
+      - {ref: K95, where: "slots with required true; classes SubmissionStep and ExecutiveResponseStep slot_usage texts required"}
+    k95_required: [affair_number, affair_type, step_type, submission_date, withdrawal_date, validation_type, assignment_type, assigned_to, assignment_date, responder, response_date, committee, debate_type, debate_date, sponsor_role, position_type, sequence_number, event_type]
+  - id: R30
+    stage: 3
+    basis: project_choice
+    if: "the kind is proposal, response, combined or executive_proposal"
+    then: "Submission.sponsorship applies: the document can print the first author of the proposal. Submission.texts applies only for the kinds proposal, combined and executive_proposal: these documents hold the submitted text"
+    else: "the two slots are not applicable for this kind"
+    source:
+      - {ref: P_FORM, where: "chapter 2.3, rule 16 (decision D2); chapter 6"}
+      - {ref: P_WRITER, where: "function cascade_state (keys selection and texts); function slot_list"}
+    note: "No rule in the standard: project choice (decision D2 of the main agent, 13.10.2026). A response document that prints the authors and the date of the proposal in its head states them. Its record has a submission step with the sponsorship and the date and with no text block. Before this decision the rule cut the sponsorship for the kind response."
+  - id: R31
+    stage: 3
+    basis: project_rule
+    if: "the kind is response or combined"
+    then: "the responder and the response date apply"
+    else: "they are not applicable for this kind"
+    source:
+      - {ref: P_REF, where: "PRIMARY_ROLES, ROLE_PRIMARY_FIELDS"}
+      - {ref: P_ADD_G, where: "table 1"}
+  - id: R32
+    stage: 3
+    basis: project_rule
+    if: "a response date is read"
+    then: "the slot is ResponseStep.date_end_actual"
+    source:
+      - {ref: P_WRITER, where: "FIELD_TABLE response_date"}
+      - {ref: I95, where: "class ResponseStep has no slot for a date; mixin IsProcessStep"}
+      - {ref: K95, where: "slot response_date, required"}
+      - {ref: EX_I, where: "response_steps with date_begin_actual"}
+    note: "The example file of I95 uses date_begin_actual. The standard states no rule for the slot."
+  - id: R33
+    stage: 3
+    basis: project_rule
+    if: "the slot is an identifier of a register, a state of the affair at a later date, or a link"
+    then: "the value comes from a register only; the PDF is not asked"
+    source:
+      - {ref: P_WRITER, where: "REGISTER_ONLY"}
+      - {ref: P_FORM, where: "chapter 6"}
+  - id: R34
+    stage: 3
+    basis: standard
+    if: "event_type is speech, proposition or vote"
+    then: "the slot of the same name holds the object; the two other slots are empty"
+    source:
+      - {ref: I95, where: "class PlenaryDebateEvent; slots speech, proposition, vote (descriptions); PlenaryDebateEventTypeEnum"}
+      - {ref: K95, where: "class DebateEvent (description: exactly one)"}
+  - id: R35
+    stage: 3
+    basis: standard
+    if: "the vote is a vote by name"
+    then: "named_votes applies, with one NamedVote for each person"
+    else: "named_votes is not applicable"
+    source:
+      - {ref: I95, where: "class Vote; slot named_votes (description); class NamedVote"}
+  - id: R36
+    stage: 3
+    basis: standard
+    if: "the class is CommitteeMeeting"
+    then: "no slot of I95 has this class as its range: a record cannot hold it"
+    source:
+      - {ref: I95, where: "class CommitteeMeeting; slots meeting_refs and meeting_ref have the range uriorcurie; last comment block: the link to eCH-0293 is an open point"}
+  - id: R37
+    stage: 3
+    basis: standard
+    if: "the affair was given reasons orally in the council"
+    then: "Submission.reasoning_in_council can hold the plenary debate; the slot is optional"
+    source:
+      - {ref: I95, where: "slot reasoning_in_council (description, range PlenaryDebate)"}
+  - id: R38
+    stage: 3
+    basis: standard
+    if: "a sponsor is written"
+    then: "the actor is a person or an organization; the kernel permits exactly one of person_reference and group_reference"
+    source:
+      - {ref: I95, where: "class Actor (description) and its subclasses; class Sponsorship"}
+      - {ref: K95, where: "class Sponsorship, exactly_one_of"}
+  - id: R39
+    stage: 3
+    basis: project_choice
+    if: "a slot applies"
+    then: "its origin is one of: a block of the PDF, a derivation rule, a minted IRI, a register, a holder of an object"
+    source:
+      - {ref: P_WRITER, where: "REGISTER_ONLY, NO_RULE, derivations of rule T"}
+      - {ref: P_FORM, where: "chapter 6"}
+    note: "No rule in the standard: project choice. The origin of a slot of a design-only step is a reading, not a count."
+  - id: R40
+    stage: 3
+    basis: project_choice
+    if: "a step has a date"
+    then: "Submission.date_begin_actual and Sponsorship.start_date are equal to submission_date; text_date is the date of the step"
+    source:
+      - {ref: EX_I, where: "submission, sponsorship, texts"}
+      - {ref: EX_M1, where: "submission, sponsorship, texts"}
+    note: "The example files show this. No rule text of the standard states it: project choice. The writer of today does not fill these slots."
+  # ---- stage 4
+  - id: R41
+    stage: 4
+    basis: project_choice
+    if: "affair_type is interpellation, request or question"
+    then: "no recommendation of the executive is asked, and the text type recommendation is not an option"
+    else: "ResponseStep.recommendation is asked with the 7 values of RecommendationEnum"
+    source:
+      - {ref: I95, where: "slot recommendation and RecommendationEnum: no condition by type"}
+      - {ref: P_TYPES, where: "ANTRAG_TYPEN"}
+      - {ref: EX_I, where: "response step with no recommendation"}
+      - {ref: EX_M1, where: "response step with recommendation reject"}
+      - {ref: EX_K_PI, where: "executive response with recommendation reject"}
+    note: "No rule in the standard: project choice."
+  - id: R42
+    stage: 4
+    basis: standard
+    if: "the executive requests to accept a motion as a postulate"
+    then: "the kernel has the value accept_as_postulate (for motions); I95 has no such value"
+    else: "the project rule maps this wording to partial_acceptance"
+    source:
+      - {ref: K95, where: "RecommendationEnum accept_as_postulate (description)"}
+      - {ref: I95, where: "RecommendationEnum (7 values)"}
+      - {ref: P_TYPES, where: "EMPFEHLUNG_REGELN"}
+  - id: R43
+    stage: 4
+    basis: standard
+    if: "a text block is written"
+    then: "the holder selects the text types: title and short_title for Affair.title; submitted and reasoning for Submission.texts; response and recommendation for ResponseStep.texts"
+    source:
+      - {ref: I95, where: "TextTypeEnum (descriptions of the values); slot texts (description)"}
+      - {ref: EX_M1, where: "text_type values of each step"}
+      - {ref: P_PROMPT, where: "question B1"}
+    note: "The value descriptions name the author of each text type. The schema has no constraint by holder."
+  - id: R44
+    stage: 4
+    basis: standard
+    if: "a sponsorship is written"
+    then: "sponsor_role is sponsor, cosponsor or transferred"
+    else: "the project reads sponsor and cosponsor from the PDF; transferred comes from a register"
+    source:
+      - {ref: I95, where: "SponsorRoleEnum (descriptions)"}
+      - {ref: P_TYPES, where: "ROLLE_HARMONISIERT, ROLLE_LOKAL_REGELN"}
+  - id: R45
+    stage: 4
+    basis: standard
+    if: "a vote is written"
+    then: "the vote is an object below an event of a plenary debate; the value lists of the vote apply only there"
+    source:
+      - {ref: I95, where: "class Vote; slot vote of class PlenaryDebateEvent; VoteTypeEnum, VoteOutcomeEnum, IndividualVoteEnum"}
+      - {ref: G_DEP, where: "operations and affairs: vote results go to operations (eCH-0293); the content of a vote goes to affairs"}
+    note: "Thus only a document that states a plenary debate can give a vote result (R23). The plenum note puts vote results in eCH-0293."
+  - id: R46
+    stage: 4
+    basis: standard
+    if: "the stage of a procedure state is known"
+    then: "the phase follows from the stage"
+    source:
+      - {ref: I95, where: "ProcedurePhaseEnum (descriptions name the stages of each phase)"}
+    note: "The descriptions give no phase for the stages preparation, urgency_review and withdrawal."
+  - id: R47
+    stage: 4
+    basis: standard
+    if: "the stage of a procedure state is known"
+    then: "the stage selects the decision values, as the value descriptions name them"
+    source:
+      - {ref: I95, where: "ProcedureDecisionEnum (descriptions)"}
+      - {ref: EX_M1, where: "recommended_against at the stage committee"}
+    note: "The schema has no constraint. One example file uses recommended_against at the stage committee."
+  - id: R48
+    stage: 4
+    basis: project_choice
+    if: "affair_type is interpellation, request or question"
+    then: "the debate types are beantwortung, verzoegerung and other"
+    else: "all 7 debate types are options"
+    source:
+      - {ref: I95, where: "PlenaryDebateTypeEnum: no condition by type"}
+    note: "No rule in the standard: project choice."
+  - id: R49
+    stage: 4
+    basis: project_choice
+    if: "a council value is needed"
+    then: "the value follows from the parliament of the document, not from a block"
+    source:
+      - {ref: I95, where: "CouncilEnum; no slot for the parliament on Affair or Submission"}
+    note: "No rule in the standard: project choice."
+  - id: R50
+    stage: 4
+    basis: project_rule
+    if: "a text block or a name is written"
+    then: "text_language follows from the rule for the language"
+    source:
+      - {ref: P_LANG, where: "language of a text block"}
+      - {ref: I95, where: "LanguageCodeEnum; class MultilingualString slot_usage text_language required"}
+  - id: R51
+    stage: 4
+    basis: standard
+    if: "a validation step or an assignment step is written"
+    then: "validation_step_type is initial_check or urgency_request; assignment_step_type is one of 4 values, and agenda_placement is the agenda step"
+    source:
+      - {ref: I95, where: "SubmissionReviewStepTypeEnum; AssignmentStepTypeEnum"}
+  - id: R52
+    stage: 4
+    basis: project_choice
+    if: "the type word or the title has a word for urgent"
+    then: "LifecycleFlags.urgent is true; the value false is not written"
+    source:
+      - {ref: I95, where: "class LifecycleFlags, slot urgent; class Interpellation (description names urgent interpellations)"}
+      - {ref: P_TYPES, where: "DRINGLICH"}
+      - {ref: P_ECH, where: "chapter 2.1, lifecycle_flags.urgent"}
+    note: "The slot is valid for each type. The origin of the value is a project choice."
+  # ---- added after the guide texts of the subgroup were read (stage 1)
+  - id: R53
+    stage: 1
+    basis: standard
+    if: "the affair type is known"
+    then: "the type is in one of 3 groups: soliciting (motion, postulate), inquiring (interpellation, request, question), legislating (parliamentary initiative, affair of the executive with a decree text)"
+    source:
+      - {ref: G_M2, where: "list of the affair types by group"}
+      - {ref: G_M1, where: "items 4 and 5: coarse types as classes; the procedure state is a class of its own, not a subclass of a type"}
+    note: "A working note of the subgroup, not a text of the schema. It gives groups. It gives no step and no slot for a group."

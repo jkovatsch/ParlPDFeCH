@@ -1,0 +1,10 @@
+{
+ "error": {
+  "code": "busy",
+  "title": {"en": "One conversion runs now", "de": "Eine Umwandlung läuft gerade"},
+  "text": {"en": "One conversion runs now. This package runs one conversion at a time.", "de": "Eine Umwandlung läuft gerade. Dieses Paket führt eine Umwandlung nach der anderen aus."},
+  "action": {"en": "Try again when it is done.", "de": "Versuchen Sie es danach erneut."},
+  "exits": ["retry", "sample"],
+  "detail": {"job_id": "0b7c1c0e-5a3f-4d0e-9b1a-2f6c8f1d7e42"}
+ }
+}

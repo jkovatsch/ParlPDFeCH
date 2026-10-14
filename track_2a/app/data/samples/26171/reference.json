@@ -1,0 +1,106 @@
+{
+ "schema": "parlpdfech-sample-reference/1",
+ "doc_id": "26171",
+ "run_record": {
+  "path": "daten/gj/fullrun_b1s_dev/runs/run_1.json",
+  "key": "results.26171"
+ },
+ "decisions_sha256": "56c1f89e41fc747bf9407940eb7696f6223cb53baddc213f0da876d1898b456b",
+ "manifest_sha256": "dec01b0a56760552b08e22ff1dd53ece14a3c887d6750555a581e6ae9576f5b1",
+ "outputs": {
+  "ech_yaml": "22e58b798dc48f8f530e422b43c24b801e7b14c970b7b565bcda753e301a33a8",
+  "provenance_yaml": "2a5950ceccd5f7299581fa8037f1290464eca2d7f865eadaaac1b366f9f3fd30",
+  "labels_yaml": "e16a812c51908ccad2d09959a5fe8f321ae7bc0bc7ce5ceef46b2204d1a8724b",
+  "gesamt_trig": "3d5f1e8f7012771f052387fe51327c86aaaba11b520ed2dba60b9755022aaadb",
+  "gesamt_rdfxml": "e074849b45dd178bec2ade274361174ff1d3caa39d3357b36e95fa1bbaca1fe0",
+  "ech_ttl": "0aa5822ffb6283de434990fd7e5e80682755bfcac7b35c8f52e4acc231d07bef",
+  "ech_rdfxml": "8d4b5259a029ca2a451fdd1c9e1d4b7c26de4268dd15bd19d58eeb349905b4eb",
+  "validation": "f700aaf94bccb73eba5cdd4dc3f9335df4180b7ff5646d398ebc2bb7f4a2b185"
+ },
+ "reference_files_equal_to_the_run_record": true,
+ "run_time_utc": "2026-10-13T04:54:36Z",
+ "run_time_values": [
+  "2026-10-13T04:54:36Z"
+ ],
+ "run_time_occurrences": {
+  "provenance_yaml": [
+   "2026-10-13T04:54:36Z"
+  ],
+  "labels_yaml": [
+   "2026-10-13T04:54:36Z"
+  ],
+  "gesamt_trig": [
+   "2026-10-13T04:54:36+00:00",
+   "2026-10-13T04:54:36+00:00"
+  ],
+  "gesamt_rdfxml": [
+   "2026-10-13T04:54:36+00:00",
+   "2026-10-13T04:54:36+00:00"
+  ]
+ },
+ "result": "valid",
+ "conformance": "i95",
+ "checks": {
+  "C1_linkml": true,
+  "C2_parse": true,
+  "C3_isomorphism": true,
+  "C4_parts": true,
+  "C5_leaf_values": true,
+  "C6_iri_scheme": true,
+  "C7_C8_labels": true,
+  "C9_e19": true
+ },
+ "c10_shacl": "skipped",
+ "counts": {
+  "blocks": 13,
+  "block_options": {
+   "submitted": 9,
+   "title": 2,
+   "none": 2
+  },
+  "author_blocks": 1,
+  "textblocks_by_slot": {
+   "submission": 1,
+   "response": 0
+  },
+  "textblock_records_profile_only": 0,
+  "path_switch_points": 0,
+  "path_switch_points_without_boundary_label": 0,
+  "boundary_labels": 0,
+  "label_assertions": 33,
+  "label_assertions_by_source": {
+   "apertus_head": 1,
+   "code_step": 13,
+   "constant": 7,
+   "copy": 1,
+   "export": 10,
+   "rule": 1
+  },
+  "certain_labels": 9,
+  "unsure_labels": 6,
+  "r2_agrees_with_block_path": true,
+  "d1_option": "A",
+  "leaf_values": 20,
+  "value_records": 20,
+  "e19": {
+   "text_blocks": 1,
+   "characters": 2054,
+   "hyphens_removed": 0,
+   "list_markers_removed": 6,
+   "problems": 0
+  },
+  "metadata_check": {
+   "values_checked": 14,
+   "problems": 0,
+   "leaves_without_provenance": 0
+  }
+ },
+ "triples": {
+  "ech-0295": 30,
+  "provenance": 897,
+  "atoms": 684,
+  "labels": 966,
+  "union": 2577
+ },
+ "converter_mode": "cascade"
+}

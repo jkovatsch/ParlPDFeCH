@@ -1,0 +1,212 @@
+# Pipeline of the ParlPDFeCH package for a hosted sample site (profile slim).
+#
+# STATE: written and read. This pipeline never ran. No image was built.
+# Place: the root of a GitLab project whose root is the self-contained source tree (dist-src/),
+# with the file name .gitlab-ci.yml. 'make dist-src' of the package writes it there.
+#
+# The runner has no Docker daemon (Kubernetes executor). The image is built with Kaniko, as in the
+# pipeline of the pattern site.
+# Variables: only the predefined variables of GitLab are used (CI_REGISTRY, CI_REGISTRY_USER,
+# CI_REGISTRY_PASSWORD, CI_REGISTRY_IMAGE, CI_COMMIT_SHORT_SHA, CI_COMMIT_BRANCH, CI_PROJECT_DIR).
+# The file holds no value of a key or a token and no name of a private host. It names 4 public images
+# (python, rust, alpine of Docker Hub, and the Kaniko image of gcr.io).
+# The target full is not built here: its build installs torch and Docling and downloads the Docling
+# models from huggingface.co (Dockerfile, stage py-full).
+
+stages:
+  - check
+  - build
+  - release
+
+variables:
+  CARGO_TERM_COLOR: always
+  CARGO_HOME: "$CI_PROJECT_DIR/.cargo"
+  CARGO_TARGET_DIR: "$CI_PROJECT_DIR/target-ci"
+  PIP_DISABLE_PIP_VERSION_CHECK: "1"
+  # Resources of the build pods. Estimates: no job of this file ran.
+  KUBERNETES_CPU_REQUEST: "1"
+  KUBERNETES_CPU_LIMIT: "3"
+  KUBERNETES_MEMORY_REQUEST: 2Gi
+  KUBERNETES_MEMORY_LIMIT: 6Gi
+
+# --- stage 1: checks ----------------------------------------------------------------------------
+
+# Each file of the tree has the SHA-256 of DIST-MANIFEST.json, and each layout copy has the SHA-256
+# of the layout manifest. Standard library only.
+tree:
+  stage: check
+  image: python:3.12-slim-bookworm
+  script:
+    - python -B container/check_dist.py
+    - python -B worker/layout.py --check --out layout
+  rules:
+    - if: $CI_COMMIT_BRANCH
+
+# Measured on the build host of the package (13.10.2026): 'cargo fmt --check' reports 228 places in
+# 11 files. The package has no rustfmt.toml and its lines are longer than the default width.
+# Thus this job can fail and the pipeline continues.
+rust-fmt:
+  stage: check
+  image: rust:1-bookworm
+  allow_failure: true
+  before_script:
+    - rustup component add rustfmt
+  script:
+    - cargo fmt --all -- --check
+  rules:
+    - if: $CI_COMMIT_BRANCH
+
+rust-clippy-test:
+  stage: check
+  image: rust:1-bookworm
+  cache:
+    key: parlpdfech-cargo
+    paths:
+      - .cargo/registry
+      - target-ci
+  before_script:
+    - rustup component add clippy
+    - rustup target add wasm32-unknown-unknown
+    # The tests of the server start a stand-in worker with python3.
+    - command -v python3 || (apt-get update && apt-get install -y --no-install-recommends python3)
+  script:
+    - cargo clippy --locked -p parlpdfech-server --all-targets -- -D warnings
+    - cargo clippy --locked -p parlpdfech-rdfcheck --all-targets -- -D warnings
+    - cargo clippy --locked -p parlpdfech-rdfcheck --lib --target wasm32-unknown-unknown -- -D warnings
+    - cargo test --locked -p parlpdfech-server
+    - cargo test --locked -p parlpdfech-rdfcheck
+  rules:
+    - if: $CI_COMMIT_BRANCH
+
+# The Python checks that need no project data: the packages of the profile slim install and agree,
+# the example view is valid, and the real worker converts the 3 samples from the files of the tree.
+# check_seed.py compares the SHA-256 of each decisions file (mode auto) with the reference run.
+# This job is the first run of the worker on Linux. It was never run.
+python-worker:
+  stage: check
+  image: python:3.12-slim-bookworm
+  variables:
+    PARLPDFECH_PROFILE: slim
+    PARLPDFECH_DATA_DIR: "$CI_PROJECT_DIR/data"
+    PARLPDFECH_CODE_DIR: "$CI_PROJECT_DIR/layout"
+    PARLPDFECH_VIEW_DIR: "$CI_PROJECT_DIR/view"
+    PARLPDFECH_WORKER_CWD: "$CI_PROJECT_DIR"
+    PYTHONDONTWRITEBYTECODE: "1"
+  script:
+    - python -m pip install --no-compile -r container/requirements-slim.txt
+    - python -m pip check
+    - python -B contract/tools/validate_view.py contract/view.schema.json contract/examples/view_26171.json
+    - python -B container/seed_records.py --out /tmp/seed/records
+    - python -B container/check_seed.py --records /tmp/seed/records
+  rules:
+    - if: $CI_COMMIT_BRANCH
+
+# --- stage 2: the image of the target slim (Kaniko) ----------------------------------------------
+# Tags: latest and the short commit id. The digest goes to the file image-digest.txt.
+#
+# The Dockerfile has two lines 'RUN --network=none' (the sample records are made with no network).
+# It is not known if Kaniko accepts this flag. The job builds from a copy of the Dockerfile with no
+# such flag. Then the step has the network of the build pod. Measured with no container: the worker
+# opens no connection in a sample run (trace of the Python process: one bind to the loopback address).
+#
+# --skip-unused-stages=true: the Dockerfile has the stages py-full and full before the stage slim. With
+# no such flag Kaniko builds each stage up to the target, also the ones that the target does not use
+# (torch, Docling, the download of the Docling models, the seed step of the profile full). The flag is
+# read in the Kaniko documentation. It was NOT RUN: it is not measured that the job builds only the
+# stages of the target slim. If the log of the job shows a stage py-full or full, stop the job.
+build-image:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  needs: [tree, rust-clippy-test, python-worker]
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+  variables:
+    # A layer above about 100 MB gets 413 from the public registry host (Cloudflare). The runner is
+    # in the cluster and pushes to the internal registry service; the storage and the digests are
+    # the same, and a pull through the public host works (form of the owner's other large images).
+    REGISTRY_INTERNAL: gitlab-registry.gitlab.svc.cluster.local:5000
+  script:
+    - mkdir -p /kaniko/.docker
+    - >
+      printf '{"auths":{"%s":{"username":"%s","password":"%s"},"%s":{"username":"%s","password":"%s"}}}'
+      "$CI_REGISTRY" "$CI_REGISTRY_USER" "$CI_REGISTRY_PASSWORD"
+      "$REGISTRY_INTERNAL" "$CI_REGISTRY_USER" "$CI_REGISTRY_PASSWORD"
+      > /kaniko/.docker/config.json
+    - sed 's/^RUN --network=none /RUN /' "$CI_PROJECT_DIR/Dockerfile" > "$CI_PROJECT_DIR/Dockerfile.ci"
+    - >
+      /kaniko/executor
+      --context "dir://$CI_PROJECT_DIR"
+      --dockerfile "$CI_PROJECT_DIR/Dockerfile.ci"
+      --target slim
+      --skip-unused-stages=true
+      --build-arg "PARLPDFECH_COMMIT=$CI_COMMIT_SHORT_SHA"
+      --insecure-registry "$REGISTRY_INTERNAL"
+      --destination "$REGISTRY_INTERNAL/$CI_PROJECT_PATH:latest"
+      --destination "$REGISTRY_INTERNAL/$CI_PROJECT_PATH:$CI_COMMIT_SHORT_SHA"
+      --digest-file "$CI_PROJECT_DIR/image-digest.txt"
+  artifacts:
+    paths:
+      - image-digest.txt
+    expire_in: 90 days
+
+# --- stage 2b: a start test of the image ---------------------------------------------------------
+# The job starts the new image as a service with its own start command (entrypoint.py). The runner
+# has a Kubernetes executor, thus the service and the job share the address 127.0.0.1.
+# The job calls /healthz, /api/health, /app/, /api/samples and the seed record s-26171.
+# It changes nothing. It never ran.
+image-health:
+  stage: build
+  image: python:3.12-slim-bookworm
+  needs: [build-image]
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+  services:
+    - name: "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA"
+      alias: parlpdfech
+  variables:
+    PARLPDFECH_READONLY: "1"
+    PARLPDFECH_SAMPLE_RUNS: "off"
+  script:
+    - |
+      python - <<'PY'
+      import json, sys, time, urllib.request
+      base = "http://127.0.0.1:8080"
+      def get(path):
+          with urllib.request.urlopen(base + path, timeout=10) as r:
+              return r.status, r.read()
+      for i in range(60):
+          try:
+              if get("/healthz")[0] == 200:
+                  break
+          except OSError:
+              pass
+          time.sleep(3)
+      else:
+          sys.exit("FAIL: /healthz gave no answer 200 in 180 s")
+      rows = []
+      for path in ["/healthz", "/api/health", "/app/", "/api/samples", "/api/records/s-26171"]:
+          status, body = get(path)
+          rows.append((path, status, len(body)))
+          print(f"{path}: {status}, {len(body)} bytes")
+      health = json.loads(get("/api/health")[1])
+      print("api/health:", json.dumps({k: health.get(k) for k in ("profile", "modes", "version", "commit") if k in health}))
+      sys.exit(0 if all(s == 200 for _, s, _ in rows) else 1)
+      PY
+
+# --- stage 3: the digest for the infrastructure repository -----------------------------------------
+# Prints the image name with its digest. The job changes nothing. The owner copies the digest into
+# deploy/k8s/deployment.yaml by hand (deploy/RUNBOOK.md, step 4).
+image-digest:
+  stage: release
+  image: alpine:3
+  needs:
+    - job: build-image
+      artifacts: true
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+  script:
+    - 'echo "IMAGE_DIGEST=$(cat image-digest.txt)"'
+    - 'echo "image by digest - $CI_REGISTRY_IMAGE@$(cat image-digest.txt)"'
+    - 'echo "tags - latest, $CI_COMMIT_SHORT_SHA"'

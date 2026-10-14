@@ -1,0 +1,4629 @@
+{
+ "schema": "parlpdfech-complexity-ladder/1",
+ "title": "Complexity ladder of the isolation (E20 version 4.2)",
+ "version": "1",
+ "status": "NOT RELEASED",
+ "run_date": "08.10.2026, 12:56 CEST",
+ "actor": "workflow sub-agent (Claude Opus 5.5), step Ladder",
+ "decision_served": "Jonathan, 08.10.2026: 'Das ergibt wenig Sinn etwas nicht zu bestehen wir müssen einfach die komplexität reduzieren bis wir diese bestehen.' Reduce the complexity of the task until a gate can be passed.",
+ "inputs": {
+  "map": "daten/iso/ladder/MAP.md",
+  "designs": [
+   "daten/iso/ladder/design_standard.json",
+   "daten/iso/ladder/design_error.json",
+   "daten/iso/ladder/design_use.json"
+  ],
+  "proposal_ids": {
+   "STD": "design_standard.json",
+   "ERR-L": "design_error.json (its ids L1 to L6, LC)",
+   "U": "design_use.json"
+  }
+ },
+ "implementation": {
+  "script": "daten/iso/ladder/scratch/ladder_impl.py",
+  "sha256": "ddbf89a5fc3a8da039dad8c498984c7d402b6484b256b230d776ec9ff9acb008",
+  "values": "daten/iso/ladder/scratch/ladder_values.json",
+  "values_sha256": "c0aa7e2bdd700dab9421c6c7dbd24f432fdfc1ede912ab76f12e55e91d32491f",
+  "scope_choice": "daten/iso/ladder/scratch/ladder_scope_check.py",
+  "check": "each atom-unit value is asserted equal to m03_iso_v4.compare_docs on the same answers",
+  "command": "uv run --no-project --with pyyaml python daten/iso/ladder/scratch/ladder_impl.py"
+ },
+ "conventions": {
+  "answers": [
+   "title",
+   "short_title",
+   "submitted",
+   "reasoning",
+   "response",
+   "recommendation",
+   "summary",
+   "committee_recommendation",
+   "speech",
+   "proposition",
+   "vote",
+   "none",
+   "furniture"
+  ],
+  "value_labels": {
+   "dev": "in-sample: AI agents wrote the rules of the composite on dev; the L4 scope signal was chosen on dev",
+   "eval": "validation: eval was measured several times before; never a final measurement",
+   "gold set records": "2 eval records (549658, 368972) and 3 dev records (879163, 375917, 465245); 877101 is a tool record, not used"
+  },
+  "reference": "ref41 for group documents, pool_ref41 for pool documents (m03_sub_common.reference)",
+  "method": "rule composite assembled (daten/iso/sub/assemble/hyp_assembled_<split>); block unit: nos4 variant",
+  "converter_inputs": "The PDF atoms after Docling, the fixed answers, the stored sub-task outputs of the same document, and the export record of the same document (OpenParlData). Never a reference. The S1 files also hold the fields reference and correct; ladder_impl.py drops them when it reads the file.",
+  "open_question": "The S1 rule reads export fields (category_de, category_harmonized, name_klasse). If Jonathan rules that only the PDF counts as 'the document', measure the S1 rule again without them for L4 to L10.",
+  "masking": "zone atoms: a text answer becomes none on both sides; the atom leaves boundaries, omission, intrusion and class error",
+  "paths": "trunk L0 to L2; atom path L3 to L7 (each level adds to its parent); block path L8 and L9 (from L4, with the frame extent abstained instead of the L3 zones); L10 document unit (from L8)."
+ },
+ "rule_library": {
+  "collapse_maps": {
+   "IDENTITY": {
+    "title": "title",
+    "short_title": "short_title",
+    "submitted": "submitted",
+    "reasoning": "reasoning",
+    "response": "response",
+    "recommendation": "recommendation",
+    "summary": "summary",
+    "committee_recommendation": "committee_recommendation",
+    "speech": "speech",
+    "proposition": "proposition",
+    "vote": "vote",
+    "none": "none",
+    "furniture": "furniture"
+   },
+   "SLOT": {
+    "title": "title",
+    "short_title": "title",
+    "submitted": "submitted",
+    "reasoning": "submitted",
+    "response": "response",
+    "recommendation": "response",
+    "summary": "summary",
+    "committee_recommendation": "committee_recommendation",
+    "speech": "speech",
+    "proposition": "proposition",
+    "vote": "vote",
+    "none": "none",
+    "furniture": "furniture"
+   },
+   "SLOT_NOTITLE": {
+    "title": "none",
+    "short_title": "none",
+    "submitted": "submitted",
+    "reasoning": "submitted",
+    "response": "response",
+    "recommendation": "response",
+    "summary": "summary",
+    "committee_recommendation": "committee_recommendation",
+    "speech": "speech",
+    "proposition": "proposition",
+    "vote": "vote",
+    "none": "none",
+    "furniture": "furniture"
+   }
+  },
+  "scope_rules": {
+   "all": {
+    "definition": "The converter claims each document.",
+    "inputs": [],
+    "reads_reference": false
+   },
+   "written_affair": {
+    "definition": "The converter claims a document only if two converter signals both give an author role (proposal, response or combined): (1) m03_sub_common.role_of over the families of the text answers of the converter, (2) the S1 combined role of the document. Else the converter abstains on the whole document, and the document leaves the measurement.",
+    "inputs": [
+     "converter answers of the document (13 answers per atom, before the collapse map)",
+     "S1 combined role: daten/iso/sub/s1_role/combined_<split>.json, field role (S1 rule; Apertus-v1.5-8B only for the rule id R1)"
+    ],
+    "code": "ladder_impl.written_affair",
+    "reads_reference": false,
+    "chosen_on": "dev (in-sample): the intersection of the U4 signal and the ERR-L4 signal gave the highest exact rate at the atom unit (53 of 146) and at the block unit (108 of 147), and the fewest documents with block intrusion (11 and 15). Script ladder_scope_check.py."
+   },
+   "role_agreement": {
+    "definition": "written_affair, and the role of the converter answers is equal to the S1 rule role. Else the converter abstains on the whole document with the reason 'role disagreement'.",
+    "inputs": [
+     "converter answers of the document",
+     "S1 combined role (field role)",
+     "S1 rule role: daten/iso/sub/s1_role/rule_<split>.json, field role. The S1 rule reads the atoms and the export fields category_de, category_harmonized and name_klasse of the same document."
+    ],
+    "code": "ladder_impl.role_agreement",
+    "reads_reference": false
+   },
+   "single_author_agreement": {
+    "definition": "role_agreement, the role is proposal or response, and the S1 Apertus role is the same role. Else the converter abstains on the whole document.",
+    "inputs": [
+     "converter answers",
+     "S1 combined role",
+     "S1 rule role",
+     "S1 Apertus role: daten/iso/sub/s1_role/apertus_<split>.json, field role (Apertus-v1.5-8B, constrained choice; a final run needs CSCS requests in a later step)"
+    ],
+    "code": "ladder_impl.single_author_agreement",
+    "reads_reference": false
+   }
+  },
+  "abstention_zones": {
+   "interior": {
+    "definition": "Section: a maximal run of one coarse text answer of the converter, with only non-text atoms between its atoms. Zone a: each non-text atom of the converter inside one of its own sections.",
+    "inputs": [
+     "converter answers after the collapse map"
+    ],
+    "code": "ladder_impl.z_interior"
+   },
+   "edge_blocks_1": {
+    "definition": "Zone b: the first and the last Docling block of each section, and the one block directly before and after it. The block order skips atoms with a fixed answer. Atoms with a fixed answer are never in the zone.",
+    "inputs": [
+     "converter answers after the collapse map",
+     "Docling block id of each atom (atom field block)",
+     "fixed answers (src/m03_iso_hilfe.py, rules R1, R3, R4, R5)"
+    ],
+    "parameters": {
+     "blocks": 1
+    },
+    "code": "ladder_impl.z_edge_blocks(1)"
+   },
+   "run_band_3": {
+    "definition": "Text-side band: the first 3 and the last 3 atoms of each maximal run of converter text atoms (any class) in atom order.",
+    "inputs": [
+     "converter answers after the collapse map"
+    ],
+    "parameters": {
+     "atoms": 3
+    },
+    "code": "ladder_impl.z_run_band(3)"
+   }
+  },
+  "units": {
+   "atom": "Each atom gets one coarse answer. The measurement is m03_iso_v4.compare_docs on the transformed answers (collapse map on both sides; a text answer in an abstention zone becomes none on both sides; documents out of scope leave the measurement).",
+   "block": "A block is a maximal run of one coarse text answer over the text atoms of a document; non-text atoms between two runs of the same answer do not split it (E20 chapter 4). The converter claims the class sequence, the boundary positions and the existence of each block. It does not claim the extent: it keeps each atom without a fixed answer as text (S3 all text) and does not isolate the title (S4 not used). Method output: daten/iso/ladder/scratch/err_recompose_nos4_<split>.json (script err_recompose3.py).",
+   "document": "The converter claims, for each document, the set of coarse text classes in its answers. It claims no extent and no position."
+  },
+  "metrics": {
+   "labelled_boundary_f1": "compare_docs: boundaries on the text sequence of the reference (carried atoms skipped); a method boundary is correct only if the answers on both sides are equal to the reference. Lower bound: harmonic mean of the one-sided 95 % Jeffreys bounds of precision and recall.",
+   "text_omission": "reference text atoms that the converter gives none or furniture, divided by all reference text atoms (atoms outside the zones of claimed documents)",
+   "documents_with_omission": "claimed documents with at least one omitted atom",
+   "text_intrusion": "converter text atoms that the reference gives none or furniture, divided by all converter text atoms (outside the zones)",
+   "text_class_error": "atoms with a text answer on both sides and different coarse answers, divided by atoms with a text answer on both sides",
+   "block_omission": "a reference block with no converter text atom on its atoms",
+   "block_intrusion": "a converter block with no reference text atom on its atoms (a text field that does not exist)",
+   "exact_atom": "all labelled boundaries exact, no omission, no intrusion, no class error (compare_docs)",
+   "exact_block": "all labelled boundaries exact, no class error, no atom omission, no block omission, no block intrusion",
+   "exact_document": "the set of coarse text classes of the converter is equal to the set of the reference",
+   "exact_rate_lower": "one-sided 95 % Jeffreys lower bound of the exact rate (m03_iso_v4.jeffreys_lower)",
+   "coverage_documents": "claimed documents divided by all documents of the set",
+   "coverage_ref_text": "reference text atoms in claimed documents and outside the zones, divided by all reference text atoms of the set (after the collapse map)",
+   "unsure_share": "zone atoms divided by all atoms of the claimed documents",
+   "trivial_role_same_scope": "exact documents of the trivial converter 'role only' (each atom without a fixed answer gets the default answer of the S1 combined role) on the documents and atoms that the method claims. A level where this value reaches the method value measures no isolation."
+  }
+ },
+ "levels": [
+  {
+   "id": "L0",
+   "name": "Identity: E20 version 4.2 as measured today",
+   "parent": null,
+   "path": "trunk",
+   "dimensions": [],
+   "change_against_parent": "None. This is the task of gate 3a (criteria version 3.1).",
+   "reduction_or_limit_change": "identity (no reduction)",
+   "source_proposals": {
+    "canonical": [
+     "STD baseline",
+     "ERR-L0",
+     "U0"
+    ],
+    "merged": [],
+    "variants": []
+   },
+   "collapse_map": {
+    "title": "title",
+    "short_title": "short_title",
+    "submitted": "submitted",
+    "reasoning": "reasoning",
+    "response": "response",
+    "recommendation": "recommendation",
+    "summary": "summary",
+    "committee_recommendation": "committee_recommendation",
+    "speech": "speech",
+    "proposition": "proposition",
+    "vote": "vote",
+    "none": "none",
+    "furniture": "furniture"
+   },
+   "collapse_map_id": "IDENTITY",
+   "classes": {
+    "title": "Affair.title, text_type title",
+    "short_title": "Affair.title, text_type short_title",
+    "submitted": "Submission.texts, text_type submitted",
+    "reasoning": "Submission.texts, text_type reasoning",
+    "response": "ResponseStep.texts, text_type response",
+    "recommendation": "ResponseStep.texts, text_type recommendation",
+    "summary": "texts of the step of its author, text_type summary",
+    "committee_recommendation": "CommitteeDecision.text",
+    "speech": "Speech.text",
+    "proposition": "Proposition.text",
+    "vote": "Vote.text",
+    "none": "no text field",
+    "furniture": "page furniture (fixed rules R1, R4, R5 only)"
+   },
+   "title_source": "PDF (E20 rule T)",
+   "unit_rule": {
+    "id": "atom",
+    "definition": "Each atom gets one coarse answer. The measurement is m03_iso_v4.compare_docs on the transformed answers (collapse map on both sides; a text answer in an abstention zone becomes none on both sides; documents out of scope leave the measurement)."
+   },
+   "scope_rule": {
+    "definition": "The converter claims each document.",
+    "inputs": [],
+    "reads_reference": false,
+    "id": "all"
+   },
+   "abstention_rule": {
+    "zones": [],
+    "masking": "none",
+    "reads_reference": false
+   },
+   "method_output": "hyp_assembled_<split> (rule composite assembled)",
+   "metrics": {
+    "unit": "atom",
+    "decisive_candidates": [
+     "G3a.5",
+     "G3a.6",
+     "G3a.6b",
+     "G3a.9"
+    ],
+    "reported": [
+     "labelled_boundary_f1 with lower bound",
+     "text_omission",
+     "documents_with_omission",
+     "text_intrusion",
+     "text_class_error",
+     "exact rate with Jeffreys lower bound",
+     "coverage_documents",
+     "coverage_ref_text",
+     "unsure_share",
+     "trivial_role_same_scope"
+    ],
+    "note": "",
+    "exact_rule": "exact_atom"
+   },
+   "ech_output": "As E20 version 4.2: each TextBlock in its slot with its text_type; Affair.title from the printed heading atoms (rule T).",
+   "standard_grounding": "E20 version 4.2 (isolation-level-e20.md, chapters 2 to 5).",
+   "values": {
+    "dev_in_sample": {
+     "documents": 183,
+     "documents_all": 183,
+     "coverage_documents": 1.0,
+     "coverage_ref_text": 1.0,
+     "unsure_share_of_claimed_atoms": 0.0,
+     "boundaries_ref": 283,
+     "boundaries_hyp": 269,
+     "correct": 193,
+     "labelled_f1": 0.6993,
+     "labelled_f1_lower": 0.6525,
+     "text_omission": 0.0191,
+     "documents_with_omission": 74,
+     "text_intrusion": 0.2268,
+     "text_class_error": 0.145,
+     "block_intrusion": 135,
+     "documents_with_block_intrusion": 104,
+     "exact": 8,
+     "exact_rate": 0.0437,
+     "exact_lower": 0.0239,
+     "claimed_by_language": {
+      "de": "140/140",
+      "fr": "29/29",
+      "it": "13/13",
+      "unbestimmt": "1/1"
+     },
+     "trivial_role_same_scope_exact": "0/183"
+    },
+    "eval_validation": {
+     "documents": 22,
+     "documents_all": 22,
+     "coverage_documents": 1.0,
+     "coverage_ref_text": 1.0,
+     "unsure_share_of_claimed_atoms": 0.0,
+     "boundaries_ref": 37,
+     "boundaries_hyp": 33,
+     "correct": 21,
+     "labelled_f1": 0.6,
+     "labelled_f1_lower": 0.4614,
+     "text_omission": 0.0241,
+     "documents_with_omission": 11,
+     "text_intrusion": 0.2924,
+     "text_class_error": 0.0618,
+     "block_intrusion": 12,
+     "documents_with_block_intrusion": 11,
+     "exact": 2,
+     "exact_rate": 0.0909,
+     "exact_lower": 0.0266,
+     "claimed_by_language": {
+      "de": "14/14",
+      "fr": "5/5",
+      "it": "2/2",
+      "rm": "1/1"
+     },
+     "trivial_role_same_scope_exact": "0/22"
+    },
+    "agreement": {
+     "X|Y": {
+      "documents": 41,
+      "boundaries": 64,
+      "f1_sym": 0.9844,
+      "omission_first_as_ref": 0.0024,
+      "omitted_atoms_first_as_ref": "7/2895",
+      "intrusion_first_as_ref": 0.0007,
+      "class_error": 0.0,
+      "exact_documents_both_directions": [
+       35,
+       35
+      ]
+     },
+     "X|ref41": {
+      "documents": 41,
+      "boundaries": 64,
+      "f1_sym": 0.9494,
+      "omission_first_as_ref": 0.2083,
+      "omitted_atoms_first_as_ref": "603/2895",
+      "intrusion_first_as_ref": 0.0,
+      "class_error": 0.0336,
+      "exact_documents_both_directions": [
+       32,
+       32
+      ]
+     },
+     "Y|ref41": {
+      "documents": 41,
+      "boundaries": 64,
+      "f1_sym": 0.9338,
+      "omission_first_as_ref": 0.2083,
+      "omitted_atoms_first_as_ref": "602/2890",
+      "intrusion_first_as_ref": 0.0017,
+      "class_error": 0.0337,
+      "exact_documents_both_directions": [
+       33,
+       33
+      ]
+     },
+     "gold|ref41": {
+      "documents": 5,
+      "boundaries": 9,
+      "f1_sym": 0.9706,
+      "omission_first_as_ref": 0.007,
+      "omitted_atoms_first_as_ref": "2/285",
+      "intrusion_first_as_ref": 0.0,
+      "class_error": 0.0,
+      "exact_documents_both_directions": [
+       3,
+       3
+      ]
+     }
+    },
+    "converter_vs_gold_set_records_eval_validation": {
+     "documents": 2,
+     "exact": 0,
+     "text_omission": 0.0476,
+     "text_intrusion": 0.0244
+    }
+   },
+   "gate_check_on_stored_outputs": {
+    "dev_in_sample": {
+     "G3a.5": false,
+     "G3a.6": false,
+     "G3a.6b": false,
+     "G3a.9": false
+    },
+    "eval_validation": {
+     "G3a.5": false,
+     "G3a.6": false,
+     "G3a.6b": false,
+     "G3a.9": false
+    }
+   },
+   "process_rule_2_3": {
+    "omission_limit": 0.002,
+    "blind_XY_omission": 0.0024,
+    "atoms": "7/2895",
+    "conflict": true,
+    "exact_rate_limit": 0.8,
+    "blind_XY_exact": [
+     35,
+     35
+    ],
+    "documents": 41
+   },
+   "final_set_estimate_28_documents": {
+    "basis": "pooled dev and eval rates of the claimed documents (no test content read)",
+    "claimed_documents_of_28": 28,
+    "reference_boundaries": 43.7,
+    "g3a5_lower_bound_possible": true,
+    "exact_documents_for_0.80": 23,
+    "jeffreys_lower_all_exact": 0.9343,
+    "jeffreys_lower_at_0.80_point": 0.6813
+   },
+   "usefulness": "Full value: all 11 text fields and the frame decision for each atom.",
+   "risks": [
+    "Gate 3a NOT MET with each method (OOF F1 0.315; composite eval F1 0.600).",
+    "Process rule 2.3 conflict: blind X|Y omission 0.0024 (7 of 2,895 atoms) is above the G3a.6 limit 0.002.",
+    "Native coders of group 7: 0.917 (published), below the G3a.5 limit 0.95."
+   ]
+  },
+  {
+   "id": "L1",
+   "name": "I95 slot classes",
+   "parent": "L0",
+   "path": "trunk",
+   "dimensions": [
+    "classes"
+   ],
+   "change_against_parent": "Collapse map: short_title to title, reasoning to submitted, recommendation to response. 13 answers become 10.",
+   "reduction_or_limit_change": "reduction: fewer classes",
+   "source_proposals": {
+    "canonical": [
+     "U1",
+     "ERR-L1"
+    ],
+    "merged": [
+     "STD1"
+    ],
+    "variants": [
+     "L1v_STD1_plenary_merged (speech and proposition to vote; same eval values, 2 dev boundaries less)"
+    ]
+   },
+   "collapse_map": {
+    "title": "title",
+    "short_title": "title",
+    "submitted": "submitted",
+    "reasoning": "submitted",
+    "response": "response",
+    "recommendation": "response",
+    "summary": "summary",
+    "committee_recommendation": "committee_recommendation",
+    "speech": "speech",
+    "proposition": "proposition",
+    "vote": "vote",
+    "none": "none",
+    "furniture": "furniture"
+   },
+   "collapse_map_id": "SLOT",
+   "classes": {
+    "title": "Affair.title (I95:522-529)",
+    "submitted": "Submission.texts (I95:145-158, I95:645-654)",
+    "response": "ResponseStep.texts (I95:188-199, I95:645-654)",
+    "summary": "texts of the step of its author (the answer does not give the step; E20 chapter 2)",
+    "committee_recommendation": "CommitteeDecision.text (I95:289-302)",
+    "speech": "Speech.text (I95:389-400)",
+    "proposition": "Proposition.text (I95:374-387)",
+    "vote": "Vote.text (I95:338-362)",
+    "none": "no text field",
+    "furniture": "page furniture (fixed rules R1, R4, R5 only)"
+   },
+   "title_source": "PDF (E20 rule T)",
+   "unit_rule": {
+    "id": "atom",
+    "definition": "Each atom gets one coarse answer. The measurement is m03_iso_v4.compare_docs on the transformed answers (collapse map on both sides; a text answer in an abstention zone becomes none on both sides; documents out of scope leave the measurement)."
+   },
+   "scope_rule": {
+    "definition": "The converter claims each document.",
+    "inputs": [],
+    "reads_reference": false,
+    "id": "all"
+   },
+   "abstention_rule": {
+    "zones": [],
+    "masking": "none",
+    "reads_reference": false
+   },
+   "method_output": "hyp_assembled_<split>",
+   "metrics": {
+    "unit": "atom",
+    "decisive_candidates": [
+     "G3a.5",
+     "G3a.6",
+     "G3a.6b",
+     "G3a.9"
+    ],
+    "reported": [
+     "labelled_boundary_f1 with lower bound",
+     "text_omission",
+     "documents_with_omission",
+     "text_intrusion",
+     "text_class_error",
+     "exact rate with Jeffreys lower bound",
+     "coverage_documents",
+     "coverage_ref_text",
+     "unsure_share",
+     "trivial_role_same_scope"
+    ],
+    "note": "",
+    "exact_rule": "exact_atom"
+   },
+   "ech_output": "Affair.title from the printed heading. One TextBlock for each run of Submission.texts and of ResponseStep.texts, without text_type (or text_type with the value status unsure). The value of ResponseStep.recommendation (I95:744-749) stays a task of the labeling step. CommitteeDecision.text, Speech.text, Proposition.text and Vote.text as in E20 version 4.2.",
+   "standard_grounding": "TextBlock.text_type is optional (I95:402-416; slot I95:1214-1221). Submission.texts and ResponseStep.texts are one shared slot texts (I95:645-654) that names main text, reasoning, response and recommendation as blocks of one step. E20 rule L and C13 decide where I95 is silent.",
+   "values": {
+    "dev_in_sample": {
+     "documents": 183,
+     "documents_all": 183,
+     "coverage_documents": 1.0,
+     "coverage_ref_text": 1.0,
+     "unsure_share_of_claimed_atoms": 0.0,
+     "boundaries_ref": 217,
+     "boundaries_hyp": 201,
+     "correct": 143,
+     "labelled_f1": 0.6842,
+     "labelled_f1_lower": 0.6297,
+     "text_omission": 0.0191,
+     "documents_with_omission": 74,
+     "text_intrusion": 0.2268,
+     "text_class_error": 0.1362,
+     "block_intrusion": 117,
+     "documents_with_block_intrusion": 100,
+     "exact": 9,
+     "exact_rate": 0.0492,
+     "exact_lower": 0.0279,
+     "claimed_by_language": {
+      "de": "140/140",
+      "fr": "29/29",
+      "it": "13/13",
+      "unbestimmt": "1/1"
+     },
+     "trivial_role_same_scope_exact": "0/183"
+    },
+    "eval_validation": {
+     "documents": 22,
+     "documents_all": 22,
+     "coverage_documents": 1.0,
+     "coverage_ref_text": 1.0,
+     "unsure_share_of_claimed_atoms": 0.0,
+     "boundaries_ref": 29,
+     "boundaries_hyp": 23,
+     "correct": 15,
+     "labelled_f1": 0.5769,
+     "labelled_f1_lower": 0.4172,
+     "text_omission": 0.0241,
+     "documents_with_omission": 11,
+     "text_intrusion": 0.2924,
+     "text_class_error": 0.0535,
+     "block_intrusion": 12,
+     "documents_with_block_intrusion": 11,
+     "exact": 2,
+     "exact_rate": 0.0909,
+     "exact_lower": 0.0266,
+     "claimed_by_language": {
+      "de": "14/14",
+      "fr": "5/5",
+      "it": "2/2",
+      "rm": "1/1"
+     },
+     "trivial_role_same_scope_exact": "0/22"
+    },
+    "agreement": {
+     "X|Y": {
+      "documents": 41,
+      "boundaries": 53,
+      "f1_sym": 0.9811,
+      "omission_first_as_ref": 0.0024,
+      "omitted_atoms_first_as_ref": "7/2895",
+      "intrusion_first_as_ref": 0.0007,
+      "class_error": 0.0,
+      "exact_documents_both_directions": [
+       35,
+       35
+      ]
+     },
+     "X|ref41": {
+      "documents": 41,
+      "boundaries": 53,
+      "f1_sym": 0.9761,
+      "omission_first_as_ref": 0.2083,
+      "omitted_atoms_first_as_ref": "603/2895",
+      "intrusion_first_as_ref": 0.0,
+      "class_error": 0.0318,
+      "exact_documents_both_directions": [
+       34,
+       34
+      ]
+     },
+     "Y|ref41": {
+      "documents": 41,
+      "boundaries": 53,
+      "f1_sym": 0.9568,
+      "omission_first_as_ref": 0.2083,
+      "omitted_atoms_first_as_ref": "602/2890",
+      "intrusion_first_as_ref": 0.0017,
+      "class_error": 0.0319,
+      "exact_documents_both_directions": [
+       34,
+       34
+      ]
+     },
+     "gold|ref41": {
+      "documents": 5,
+      "boundaries": 8,
+      "f1_sym": 0.9667,
+      "omission_first_as_ref": 0.007,
+      "omitted_atoms_first_as_ref": "2/285",
+      "intrusion_first_as_ref": 0.0,
+      "class_error": 0.0,
+      "exact_documents_both_directions": [
+       3,
+       3
+      ]
+     }
+    },
+    "converter_vs_gold_set_records_eval_validation": {
+     "documents": 2,
+     "exact": 0,
+     "text_omission": 0.0476,
+     "text_intrusion": 0.0244
+    }
+   },
+   "gate_check_on_stored_outputs": {
+    "dev_in_sample": {
+     "G3a.5": false,
+     "G3a.6": false,
+     "G3a.6b": false,
+     "G3a.9": false
+    },
+    "eval_validation": {
+     "G3a.5": false,
+     "G3a.6": false,
+     "G3a.6b": false,
+     "G3a.9": false
+    }
+   },
+   "process_rule_2_3": {
+    "omission_limit": 0.002,
+    "blind_XY_omission": 0.0024,
+    "atoms": "7/2895",
+    "conflict": true,
+    "exact_rate_limit": 0.8,
+    "blind_XY_exact": [
+     35,
+     35
+    ],
+    "documents": 41
+   },
+   "final_set_estimate_28_documents": {
+    "basis": "pooled dev and eval rates of the claimed documents (no test content read)",
+    "claimed_documents_of_28": 28,
+    "reference_boundaries": 33.6,
+    "g3a5_lower_bound_possible": true,
+    "exact_documents_for_0.80": 23,
+    "jeffreys_lower_all_exact": 0.9343,
+    "jeffreys_lower_at_0.80_point": 0.6813
+   },
+   "usefulness": "High: both authors and all slots stay. Lost: the split of reasoning and of the recommendation paragraph inside a step.",
+   "risks": [
+    "No method gain: the labelled F1 falls a little, because correct boundaries inside a step also go.",
+    "Process rule 2.3 conflict on G3a.6 stays (X|Y omission 0.0024).",
+    "native_N against ref41: 0.928 at this isolation level (ERR design), below the G3a.5 limit 0.95."
+   ]
+  },
+  {
+   "id": "L2",
+   "name": "Affair.title from the source record",
+   "parent": "L1",
+   "path": "trunk",
+   "dimensions": [
+    "classes",
+    "title source"
+   ],
+   "change_against_parent": "Collapse map of L1, and title and short_title to none on both sides. The isolation does not claim the extent of the printed heading.",
+   "reduction_or_limit_change": "reduction: fewer classes (one I95 slot comes from the source record)",
+   "source_proposals": {
+    "canonical": [
+     "ERR-L2",
+     "STD2"
+    ],
+    "merged": [
+     "U3 (class part)"
+    ],
+    "variants": []
+   },
+   "collapse_map": {
+    "title": "none",
+    "short_title": "none",
+    "submitted": "submitted",
+    "reasoning": "submitted",
+    "response": "response",
+    "recommendation": "response",
+    "summary": "summary",
+    "committee_recommendation": "committee_recommendation",
+    "speech": "speech",
+    "proposition": "proposition",
+    "vote": "vote",
+    "none": "none",
+    "furniture": "furniture"
+   },
+   "collapse_map_id": "SLOT_NOTITLE",
+   "classes": {
+    "submitted": "Submission.texts (I95:145-158, I95:645-654)",
+    "response": "ResponseStep.texts (I95:188-199, I95:645-654)",
+    "summary": "texts of the step of its author (the answer does not give the step; E20 chapter 2)",
+    "committee_recommendation": "CommitteeDecision.text (I95:289-302)",
+    "speech": "Speech.text (I95:389-400)",
+    "proposition": "Proposition.text (I95:374-387)",
+    "vote": "Vote.text (I95:338-362)",
+    "none": "no text field; the printed heading atoms are also none: Affair.title comes from the source record (export fields title_de, title_fr, title_it, title_rm)",
+    "furniture": "page furniture (fixed rules R1, R4, R5 only)"
+   },
+   "title_source": "source record: OpenParlData affairs export, fields title_de, title_fr, title_it, title_rm (all 205 dev and eval documents have one; err_titlemeta.py)",
+   "unit_rule": {
+    "id": "atom",
+    "definition": "Each atom gets one coarse answer. The measurement is m03_iso_v4.compare_docs on the transformed answers (collapse map on both sides; a text answer in an abstention zone becomes none on both sides; documents out of scope leave the measurement)."
+   },
+   "scope_rule": {
+    "definition": "The converter claims each document.",
+    "inputs": [],
+    "reads_reference": false,
+    "id": "all"
+   },
+   "abstention_rule": {
+    "zones": [],
+    "masking": "none",
+    "reads_reference": false
+   },
+   "method_output": "hyp_assembled_<split>",
+   "metrics": {
+    "unit": "atom",
+    "decisive_candidates": [
+     "G3a.6",
+     "G3a.6b",
+     "G3a.9"
+    ],
+    "reported": [
+     "labelled_boundary_f1 with lower bound",
+     "text_omission",
+     "documents_with_omission",
+     "text_intrusion",
+     "text_class_error",
+     "exact rate with Jeffreys lower bound",
+     "coverage_documents",
+     "coverage_ref_text",
+     "unsure_share",
+     "trivial_role_same_scope"
+    ],
+    "note": "",
+    "exact_rule": "exact_atom"
+   },
+   "ech_output": "Affair.title from the export, with the origin of the export. The printed heading atoms go to the provenance as a TextBlockRecord with mapping_status profile_only and the value status unsure for its extent. The step TextBlocks as in L1. With an export defect (K1, document 549658), the labeling step takes the title value as a PDF span.",
+   "standard_grounding": "Decision J4 of Jonathan (gold-record-guideline.md chapter 8.2a, rule G24 detail 9): Affair.title is the registry title; the printed heading is evidence and never a text block of whole atoms. Affair.title is an attribute of the affair (I95:50-78, I95:522-529). All 5 gold set records hold the heading as profile_only.",
+   "values": {
+    "dev_in_sample": {
+     "documents": 183,
+     "documents_all": 183,
+     "coverage_documents": 1.0,
+     "coverage_ref_text": 1.0,
+     "unsure_share_of_claimed_atoms": 0.0,
+     "boundaries_ref": 53,
+     "boundaries_hyp": 40,
+     "correct": 25,
+     "labelled_f1": 0.5376,
+     "labelled_f1_lower": 0.4183,
+     "text_omission": 0.0182,
+     "documents_with_omission": 70,
+     "text_intrusion": 0.2349,
+     "text_class_error": 0.137,
+     "block_intrusion": 32,
+     "documents_with_block_intrusion": 31,
+     "exact": 11,
+     "exact_rate": 0.0601,
+     "exact_lower": 0.0362,
+     "claimed_by_language": {
+      "de": "140/140",
+      "fr": "29/29",
+      "it": "13/13",
+      "unbestimmt": "1/1"
+     },
+     "trivial_role_same_scope_exact": "0/183"
+    },
+    "eval_validation": {
+     "documents": 22,
+     "documents_all": 22,
+     "coverage_documents": 1.0,
+     "coverage_ref_text": 1.0,
+     "unsure_share_of_claimed_atoms": 0.0,
+     "boundaries_ref": 8,
+     "boundaries_hyp": 5,
+     "correct": 5,
+     "labelled_f1": 0.7692,
+     "labelled_f1_lower": 0.459,
+     "text_omission": 0.0229,
+     "documents_with_omission": 12,
+     "text_intrusion": 0.3057,
+     "text_class_error": 0.0341,
+     "block_intrusion": 1,
+     "documents_with_block_intrusion": 1,
+     "exact": 2,
+     "exact_rate": 0.0909,
+     "exact_lower": 0.0266,
+     "claimed_by_language": {
+      "de": "14/14",
+      "fr": "5/5",
+      "it": "2/2",
+      "rm": "1/1"
+     },
+     "trivial_role_same_scope_exact": "0/22"
+    },
+    "agreement": {
+     "X|Y": {
+      "documents": 41,
+      "boundaries": 14,
+      "f1_sym": 1.0,
+      "omission_first_as_ref": 0.0018,
+      "omitted_atoms_first_as_ref": "5/2797",
+      "intrusion_first_as_ref": 0.0007,
+      "class_error": 0.0,
+      "exact_documents_both_directions": [
+       37,
+       37
+      ]
+     },
+     "X|ref41": {
+      "documents": 41,
+      "boundaries": 14,
+      "f1_sym": 1.0,
+      "omission_first_as_ref": 0.2138,
+      "omitted_atoms_first_as_ref": "598/2797",
+      "intrusion_first_as_ref": 0.0,
+      "class_error": 0.0332,
+      "exact_documents_both_directions": [
+       38,
+       38
+      ]
+     },
+     "Y|ref41": {
+      "documents": 41,
+      "boundaries": 14,
+      "f1_sym": 1.0,
+      "omission_first_as_ref": 0.2144,
+      "omitted_atoms_first_as_ref": "599/2794",
+      "intrusion_first_as_ref": 0.0018,
+      "class_error": 0.0333,
+      "exact_documents_both_directions": [
+       36,
+       36
+      ]
+     },
+     "gold|ref41": {
+      "documents": 5,
+      "boundaries": 3,
+      "f1_sym": 0.9,
+      "omission_first_as_ref": 0.0073,
+      "omitted_atoms_first_as_ref": "2/275",
+      "intrusion_first_as_ref": 0.0,
+      "class_error": 0.0,
+      "exact_documents_both_directions": [
+       3,
+       3
+      ]
+     }
+    },
+    "converter_vs_gold_set_records_eval_validation": {
+     "documents": 2,
+     "exact": 0,
+     "text_omission": 0.0492,
+     "text_intrusion": 0.0333
+    }
+   },
+   "gate_check_on_stored_outputs": {
+    "dev_in_sample": {
+     "G3a.5": "not decisive (CC1): F1 0.5376, lower bound 0.4183, 53 reference boundaries",
+     "G3a.6": false,
+     "G3a.6b": false,
+     "G3a.9": false
+    },
+    "eval_validation": {
+     "G3a.5": "not decisive (CC1): F1 0.7692, lower bound 0.459, 8 reference boundaries",
+     "G3a.6": false,
+     "G3a.6b": false,
+     "G3a.9": false
+    }
+   },
+   "process_rule_2_3": {
+    "omission_limit": 0.002,
+    "blind_XY_omission": 0.0018,
+    "atoms": "5/2797",
+    "conflict": false,
+    "exact_rate_limit": 0.8,
+    "blind_XY_exact": [
+     37,
+     37
+    ],
+    "documents": 41
+   },
+   "final_set_estimate_28_documents": {
+    "basis": "pooled dev and eval rates of the claimed documents (no test content read)",
+    "claimed_documents_of_28": 28,
+    "reference_boundaries": 8.3,
+    "g3a5_lower_bound_possible": false,
+    "exact_documents_for_0.80": 23,
+    "jeffreys_lower_all_exact": 0.9343,
+    "jeffreys_lower_at_0.80_point": 0.6813
+   },
+   "usefulness": "High for the record: the official title of the affair. Lost: the printed heading text as a claimed TextBlock.",
+   "risks": [
+    "Few boundaries remain (dev 53, eval 8; about 0.29 for each document). G3a.5 cannot decide on 28 test documents (criterion change CC1).",
+    "The title errors of S4 move to the edge between heading and body (omission and intrusion)."
+   ]
+  },
+  {
+   "id": "L3",
+   "name": "Unsure trim zones",
+   "parent": "L2",
+   "path": "atom path",
+   "dimensions": [
+    "abstention (frame trim)"
+   ],
+   "change_against_parent": "Abstention zones a (interior) and b (edge blocks, 1 Docling block). Zone atoms leave the measurement on both sides.",
+   "reduction_or_limit_change": "reduction: abstention",
+   "source_proposals": {
+    "canonical": [
+     "STD3"
+    ],
+    "merged": [
+     "U2 (frame-side atom band)",
+     "U3 (head band: the first body block is in zone b)"
+    ],
+    "variants": [
+     "L3v_U2U3_atom_bands (frame band 3 atoms and head band 3 atoms)",
+     "L3v_edge_blocks_2 (2 Docling blocks)"
+    ]
+   },
+   "collapse_map": {
+    "title": "none",
+    "short_title": "none",
+    "submitted": "submitted",
+    "reasoning": "submitted",
+    "response": "response",
+    "recommendation": "response",
+    "summary": "summary",
+    "committee_recommendation": "committee_recommendation",
+    "speech": "speech",
+    "proposition": "proposition",
+    "vote": "vote",
+    "none": "none",
+    "furniture": "furniture"
+   },
+   "collapse_map_id": "SLOT_NOTITLE",
+   "classes": {
+    "submitted": "Submission.texts (I95:145-158, I95:645-654)",
+    "response": "ResponseStep.texts (I95:188-199, I95:645-654)",
+    "summary": "texts of the step of its author (the answer does not give the step; E20 chapter 2)",
+    "committee_recommendation": "CommitteeDecision.text (I95:289-302)",
+    "speech": "Speech.text (I95:389-400)",
+    "proposition": "Proposition.text (I95:374-387)",
+    "vote": "Vote.text (I95:338-362)",
+    "none": "no text field; the printed heading atoms are also none: Affair.title comes from the source record (export fields title_de, title_fr, title_it, title_rm)",
+    "furniture": "page furniture (fixed rules R1, R4, R5 only)"
+   },
+   "title_source": "source record",
+   "unit_rule": {
+    "id": "atom",
+    "definition": "Each atom gets one coarse answer. The measurement is m03_iso_v4.compare_docs on the transformed answers (collapse map on both sides; a text answer in an abstention zone becomes none on both sides; documents out of scope leave the measurement)."
+   },
+   "scope_rule": {
+    "definition": "The converter claims each document.",
+    "inputs": [],
+    "reads_reference": false,
+    "id": "all"
+   },
+   "abstention_rule": {
+    "zones": [
+     {
+      "definition": "Section: a maximal run of one coarse text answer of the converter, with only non-text atoms between its atoms. Zone a: each non-text atom of the converter inside one of its own sections.",
+      "inputs": [
+       "converter answers after the collapse map"
+      ],
+      "code": "ladder_impl.z_interior",
+      "id": "interior"
+     },
+     {
+      "definition": "Zone b: the first and the last Docling block of each section, and the one block directly before and after it. The block order skips atoms with a fixed answer. Atoms with a fixed answer are never in the zone.",
+      "inputs": [
+       "converter answers after the collapse map",
+       "Docling block id of each atom (atom field block)",
+       "fixed answers (src/m03_iso_hilfe.py, rules R1, R3, R4, R5)"
+      ],
+      "parameters": {
+       "blocks": 1
+      },
+      "code": "ladder_impl.z_edge_blocks(1)",
+      "id": "edge_blocks_1"
+     }
+    ],
+    "masking": "a text answer of an atom in a zone becomes none on both sides; the atom leaves all counts",
+    "reads_reference": false
+   },
+   "method_output": "hyp_assembled_<split>",
+   "metrics": {
+    "unit": "atom",
+    "decisive_candidates": [
+     "G3a.6",
+     "G3a.6b",
+     "G3a.9",
+     "coverage floor (CC4)"
+    ],
+    "reported": [
+     "labelled_boundary_f1 with lower bound",
+     "text_omission",
+     "documents_with_omission",
+     "text_intrusion",
+     "text_class_error",
+     "exact rate with Jeffreys lower bound",
+     "coverage_documents",
+     "coverage_ref_text",
+     "unsure_share",
+     "trivial_role_same_scope"
+    ],
+    "note": "",
+    "exact_rule": "exact_atom"
+   },
+   "ech_output": "Each TextBlock is in its claimed slot. Its text holds the atoms that the converter gives as text. The provenance lists each zone atom (atom id, page, box) with the value status unsure. The converter deletes no zone atom; a human reviewer adds or rejects each one.",
+   "standard_grounding": "E20 rule F (body only) is a project rule where I95 is silent (E20 chapter 4). The challenge asks to mark a value that is not reliable as unsure (business understanding chapter 1.6, item 5). The glossary defines the value status unsure. The guideline builds the TextBlock text from printed paragraphs (G19 detail 4, RT92), so the Docling block is the unit of zone b.",
+   "values": {
+    "dev_in_sample": {
+     "documents": 183,
+     "documents_all": 183,
+     "coverage_documents": 1.0,
+     "coverage_ref_text": 0.9302,
+     "unsure_share_of_claimed_atoms": 0.2232,
+     "boundaries_ref": 44,
+     "boundaries_hyp": 32,
+     "correct": 24,
+     "labelled_f1": 0.6316,
+     "labelled_f1_lower": 0.4995,
+     "text_omission": 0.002,
+     "documents_with_omission": 5,
+     "text_intrusion": 0.2192,
+     "text_class_error": 0.1382,
+     "block_intrusion": 26,
+     "documents_with_block_intrusion": 26,
+     "exact": 58,
+     "exact_rate": 0.3169,
+     "exact_lower": 0.2627,
+     "claimed_by_language": {
+      "de": "140/140",
+      "fr": "29/29",
+      "it": "13/13",
+      "unbestimmt": "1/1"
+     },
+     "trivial_role_same_scope_exact": "6/183"
+    },
+    "eval_validation": {
+     "documents": 22,
+     "documents_all": 22,
+     "coverage_documents": 1.0,
+     "coverage_ref_text": 0.9048,
+     "unsure_share_of_claimed_atoms": 0.2431,
+     "boundaries_ref": 8,
+     "boundaries_hyp": 5,
+     "correct": 5,
+     "labelled_f1": 0.7692,
+     "labelled_f1_lower": 0.459,
+     "text_omission": 0.0,
+     "documents_with_omission": 0,
+     "text_intrusion": 0.3071,
+     "text_class_error": 0.0369,
+     "block_intrusion": 1,
+     "documents_with_block_intrusion": 1,
+     "exact": 11,
+     "exact_rate": 0.5,
+     "exact_lower": 0.3317,
+     "claimed_by_language": {
+      "de": "14/14",
+      "fr": "5/5",
+      "it": "2/2",
+      "rm": "1/1"
+     },
+     "trivial_role_same_scope_exact": "2/22"
+    },
+    "agreement": {
+     "X|Y": {
+      "documents": 41,
+      "boundaries": 10,
+      "f1_sym": 1.0,
+      "omission_first_as_ref": 0.002,
+      "omitted_atoms_first_as_ref": "5/2444",
+      "intrusion_first_as_ref": 0.0008,
+      "class_error": 0.0,
+      "exact_documents_both_directions": [
+       37,
+       37
+      ]
+     },
+     "X|ref41": {
+      "documents": 41,
+      "boundaries": 10,
+      "f1_sym": 1.0,
+      "omission_first_as_ref": 0.2013,
+      "omitted_atoms_first_as_ref": "492/2444",
+      "intrusion_first_as_ref": 0.0,
+      "class_error": 0.0374,
+      "exact_documents_both_directions": [
+       38,
+       38
+      ]
+     },
+     "Y|ref41": {
+      "documents": 41,
+      "boundaries": 10,
+      "f1_sym": 1.0,
+      "omission_first_as_ref": 0.202,
+      "omitted_atoms_first_as_ref": "493/2441",
+      "intrusion_first_as_ref": 0.002,
+      "class_error": 0.0375,
+      "exact_documents_both_directions": [
+       36,
+       36
+      ]
+     },
+     "gold|ref41": {
+      "documents": 5,
+      "boundaries": 0,
+      "f1_sym": 0.0,
+      "omission_first_as_ref": 0.0045,
+      "omitted_atoms_first_as_ref": "1/220",
+      "intrusion_first_as_ref": 0.0,
+      "class_error": 0.0,
+      "exact_documents_both_directions": [
+       4,
+       4
+      ]
+     }
+    },
+    "converter_vs_gold_set_records_eval_validation": {
+     "documents": 2,
+     "exact": 2,
+     "text_omission": 0.0,
+     "text_intrusion": 0.0
+    }
+   },
+   "gate_check_on_stored_outputs": {
+    "dev_in_sample": {
+     "G3a.5": "not decisive (CC1): F1 0.6316, lower bound 0.4995, 44 reference boundaries",
+     "G3a.6": true,
+     "G3a.6b": false,
+     "G3a.9": false
+    },
+    "eval_validation": {
+     "G3a.5": "not decisive (CC1): F1 0.7692, lower bound 0.459, 8 reference boundaries",
+     "G3a.6": true,
+     "G3a.6b": false,
+     "G3a.9": false
+    }
+   },
+   "process_rule_2_3": {
+    "omission_limit": 0.002,
+    "blind_XY_omission": 0.002,
+    "atoms": "5/2444",
+    "conflict": false,
+    "exact_rate_limit": 0.8,
+    "blind_XY_exact": [
+     37,
+     37
+    ],
+    "documents": 41
+   },
+   "final_set_estimate_28_documents": {
+    "basis": "pooled dev and eval rates of the claimed documents (no test content read)",
+    "claimed_documents_of_28": 28,
+    "reference_boundaries": 7.1,
+    "g3a5_lower_bound_possible": false,
+    "exact_documents_for_0.80": 23,
+    "jeffreys_lower_all_exact": 0.9343,
+    "jeffreys_lower_at_0.80_point": 0.6813
+   },
+   "usefulness": "Medium to high: the texts stay complete and in the correct slot; only the edge paragraphs and the inner frame lines carry the status unsure.",
+   "risks": [
+    "Intrusion does not fall (documents without reference text, frame blocks far from an edge).",
+    "A converter can make its zones larger: a coverage floor is necessary (CC4).",
+    "Zone width: the STD design compared 1 and 2 blocks on dev and eval in one run; each eval value is a validation value."
+   ]
+  },
+  {
+   "id": "L4",
+   "name": "Written affairs only",
+   "parent": "L3",
+   "path": "atom path",
+   "dimensions": [
+    "scope"
+   ],
+   "change_against_parent": "Scope rule written_affair. A document that a converter signal reads as minutes, committee text or other leaves the claim.",
+   "reduction_or_limit_change": "reduction: narrower scope",
+   "source_proposals": {
+    "canonical": [
+     "U4",
+     "ERR-L4"
+    ],
+    "merged": [
+     "STD4"
+    ],
+    "variants": [
+     "L4v_U4_composite_role",
+     "L4v_ERR_L4_s1_role",
+     "L4v_STD4_s1_sure"
+    ]
+   },
+   "collapse_map": {
+    "title": "none",
+    "short_title": "none",
+    "submitted": "submitted",
+    "reasoning": "submitted",
+    "response": "response",
+    "recommendation": "response",
+    "summary": "summary",
+    "committee_recommendation": "committee_recommendation",
+    "speech": "speech",
+    "proposition": "proposition",
+    "vote": "vote",
+    "none": "none",
+    "furniture": "furniture"
+   },
+   "collapse_map_id": "SLOT_NOTITLE",
+   "classes": {
+    "submitted": "Submission.texts (I95:145-158, I95:645-654)",
+    "response": "ResponseStep.texts (I95:188-199, I95:645-654)",
+    "summary": "texts of the step of its author (the answer does not give the step; E20 chapter 2)",
+    "committee_recommendation": "CommitteeDecision.text (I95:289-302)",
+    "speech": "Speech.text (I95:389-400)",
+    "proposition": "Proposition.text (I95:374-387)",
+    "vote": "Vote.text (I95:338-362)",
+    "none": "no text field; the printed heading atoms are also none: Affair.title comes from the source record (export fields title_de, title_fr, title_it, title_rm)",
+    "furniture": "page furniture (fixed rules R1, R4, R5 only)"
+   },
+   "title_source": "source record",
+   "unit_rule": {
+    "id": "atom",
+    "definition": "Each atom gets one coarse answer. The measurement is m03_iso_v4.compare_docs on the transformed answers (collapse map on both sides; a text answer in an abstention zone becomes none on both sides; documents out of scope leave the measurement)."
+   },
+   "scope_rule": {
+    "definition": "The converter claims a document only if two converter signals both give an author role (proposal, response or combined): (1) m03_sub_common.role_of over the families of the text answers of the converter, (2) the S1 combined role of the document. Else the converter abstains on the whole document, and the document leaves the measurement.",
+    "inputs": [
+     "converter answers of the document (13 answers per atom, before the collapse map)",
+     "S1 combined role: daten/iso/sub/s1_role/combined_<split>.json, field role (S1 rule; Apertus-v1.5-8B only for the rule id R1)"
+    ],
+    "code": "ladder_impl.written_affair",
+    "reads_reference": false,
+    "chosen_on": "dev (in-sample): the intersection of the U4 signal and the ERR-L4 signal gave the highest exact rate at the atom unit (53 of 146) and at the block unit (108 of 147), and the fewest documents with block intrusion (11 and 15). Script ladder_scope_check.py.",
+    "id": "written_affair"
+   },
+   "abstention_rule": {
+    "zones": [
+     {
+      "definition": "Section: a maximal run of one coarse text answer of the converter, with only non-text atoms between its atoms. Zone a: each non-text atom of the converter inside one of its own sections.",
+      "inputs": [
+       "converter answers after the collapse map"
+      ],
+      "code": "ladder_impl.z_interior",
+      "id": "interior"
+     },
+     {
+      "definition": "Zone b: the first and the last Docling block of each section, and the one block directly before and after it. The block order skips atoms with a fixed answer. Atoms with a fixed answer are never in the zone.",
+      "inputs": [
+       "converter answers after the collapse map",
+       "Docling block id of each atom (atom field block)",
+       "fixed answers (src/m03_iso_hilfe.py, rules R1, R3, R4, R5)"
+      ],
+      "parameters": {
+       "blocks": 1
+      },
+      "code": "ladder_impl.z_edge_blocks(1)",
+      "id": "edge_blocks_1"
+     }
+    ],
+    "masking": "a text answer of an atom in a zone becomes none on both sides; the atom leaves all counts",
+    "reads_reference": false
+   },
+   "method_output": "hyp_assembled_<split>",
+   "metrics": {
+    "unit": "atom",
+    "decisive_candidates": [
+     "G3a.6",
+     "G3a.6b",
+     "G3a.9",
+     "coverage floor (CC4)"
+    ],
+    "reported": [
+     "labelled_boundary_f1 with lower bound",
+     "text_omission",
+     "documents_with_omission",
+     "text_intrusion",
+     "text_class_error",
+     "exact rate with Jeffreys lower bound",
+     "coverage_documents",
+     "coverage_ref_text",
+     "unsure_share",
+     "trivial_role_same_scope"
+    ],
+    "note": "",
+    "exact_rule": "exact_atom"
+   },
+   "ech_output": "Claimed documents as in L3. A document out of scope gives a record with the export metadata and no TextBlock from the PDF. Its candidate blocks go to the side file with the value status unsure and the mapping_status profile_only. The isolation claims no CommitteeDecision.text, Speech.text, Proposition.text or Vote.text.",
+   "standard_grounding": "Submission (I95:145-158) and ResponseStep (I95:188-199) are the steps of a written affair (I95:80-116). Debate texts (I95:201-249, I95:289-400) are the subject of gap 1 of the challenge (TEI, Parla-CLARIN). E20 C1 and C6 and decision J3: some documents have no I95 text slot.",
+   "values": {
+    "dev_in_sample": {
+     "documents": 146,
+     "documents_all": 183,
+     "coverage_documents": 0.7978,
+     "coverage_ref_text": 0.856,
+     "unsure_share_of_claimed_atoms": 0.2174,
+     "boundaries_ref": 40,
+     "boundaries_hyp": 30,
+     "correct": 23,
+     "labelled_f1": 0.6571,
+     "labelled_f1_lower": 0.5199,
+     "text_omission": 0.0022,
+     "documents_with_omission": 5,
+     "text_intrusion": 0.1388,
+     "text_class_error": 0.1236,
+     "block_intrusion": 11,
+     "documents_with_block_intrusion": 11,
+     "exact": 53,
+     "exact_rate": 0.363,
+     "exact_lower": 0.2999,
+     "claimed_by_language": {
+      "de": "106/140",
+      "fr": "27/29",
+      "it": "12/13",
+      "unbestimmt": "1/1"
+     },
+     "trivial_role_same_scope_exact": "4/146"
+    },
+    "eval_validation": {
+     "documents": 19,
+     "documents_all": 22,
+     "coverage_documents": 0.8636,
+     "coverage_ref_text": 0.7255,
+     "unsure_share_of_claimed_atoms": 0.1848,
+     "boundaries_ref": 6,
+     "boundaries_hyp": 4,
+     "correct": 4,
+     "labelled_f1": 0.8,
+     "labelled_f1_lower": 0.4442,
+     "text_omission": 0.0,
+     "documents_with_omission": 0,
+     "text_intrusion": 0.0552,
+     "text_class_error": 0.0383,
+     "block_intrusion": 0,
+     "documents_with_block_intrusion": 0,
+     "exact": 10,
+     "exact_rate": 0.5263,
+     "exact_lower": 0.3439,
+     "claimed_by_language": {
+      "de": "12/14",
+      "fr": "4/5",
+      "it": "2/2",
+      "rm": "1/1"
+     },
+     "trivial_role_same_scope_exact": "2/19"
+    },
+    "agreement": {
+     "X|Y": {
+      "documents": 34,
+      "boundaries": 7,
+      "f1_sym": 1.0,
+      "omission_first_as_ref": 0.0026,
+      "omitted_atoms_first_as_ref": "4/1558",
+      "intrusion_first_as_ref": 0.0013,
+      "class_error": 0.0,
+      "exact_documents_both_directions": [
+       31,
+       31
+      ]
+     },
+     "X|ref41": {
+      "documents": 34,
+      "boundaries": 7,
+      "f1_sym": 1.0,
+      "omission_first_as_ref": 0.0006,
+      "omitted_atoms_first_as_ref": "1/1558",
+      "intrusion_first_as_ref": 0.0,
+      "class_error": 0.0469,
+      "exact_documents_both_directions": [
+       32,
+       32
+      ]
+     },
+     "Y|ref41": {
+      "documents": 34,
+      "boundaries": 7,
+      "f1_sym": 1.0,
+      "omission_first_as_ref": 0.0013,
+      "omitted_atoms_first_as_ref": "2/1556",
+      "intrusion_first_as_ref": 0.0019,
+      "class_error": 0.047,
+      "exact_documents_both_directions": [
+       31,
+       31
+      ]
+     },
+     "gold|ref41": {
+      "documents": 4,
+      "boundaries": 0,
+      "f1_sym": 0.0,
+      "omission_first_as_ref": 0.0061,
+      "omitted_atoms_first_as_ref": "1/165",
+      "intrusion_first_as_ref": 0.0,
+      "class_error": 0.0,
+      "exact_documents_both_directions": [
+       3,
+       3
+      ]
+     }
+    },
+    "converter_vs_gold_set_records_eval_validation": {
+     "documents": 2,
+     "exact": 2,
+     "text_omission": 0.0,
+     "text_intrusion": 0.0
+    }
+   },
+   "gate_check_on_stored_outputs": {
+    "dev_in_sample": {
+     "G3a.5": "not decisive (CC1): F1 0.6571, lower bound 0.5199, 40 reference boundaries",
+     "G3a.6": false,
+     "G3a.6b": false,
+     "G3a.9": false
+    },
+    "eval_validation": {
+     "G3a.5": "not decisive (CC1): F1 0.8, lower bound 0.4442, 6 reference boundaries",
+     "G3a.6": true,
+     "G3a.6b": false,
+     "G3a.9": false
+    }
+   },
+   "process_rule_2_3": {
+    "omission_limit": 0.002,
+    "blind_XY_omission": 0.0026,
+    "atoms": "4/1558",
+    "conflict": true,
+    "exact_rate_limit": 0.8,
+    "blind_XY_exact": [
+     31,
+     31
+    ],
+    "documents": 34
+   },
+   "final_set_estimate_28_documents": {
+    "basis": "pooled dev and eval rates of the claimed documents (no test content read)",
+    "claimed_documents_of_28": 23,
+    "reference_boundaries": 6.4,
+    "g3a5_lower_bound_possible": false,
+    "exact_documents_for_0.80": 19,
+    "jeffreys_lower_all_exact": 0.9207,
+    "jeffreys_lower_at_0.80_point": 0.6704
+   },
+   "usefulness": "Medium: written affairs (proposal, answer, or both in one PDF) are the core of OpenParlData. Protocols and committee reports go to review.",
+   "risks": [
+    "The record holds no debate text; the report must say this.",
+    "Process rule 2.3 conflict on G3a.6: X|Y omission 0.0026 (4 of 1,558 atoms) with the converter zones and scope.",
+    "Documents without a text field that both signals read as an author role stay claimed (dev intrusion 0.139)."
+   ]
+  },
+  {
+   "id": "L5",
+   "name": "Role agreement",
+   "parent": "L4",
+   "path": "atom path",
+   "dimensions": [
+    "abstention (document)"
+   ],
+   "change_against_parent": "Scope rule role_agreement: the converter abstains on a document where its composed role and the S1 rule role differ.",
+   "reduction_or_limit_change": "reduction: abstention on whole documents",
+   "source_proposals": {
+    "canonical": [
+     "U5"
+    ],
+    "merged": [],
+    "variants": [
+     "L5v_U5 (without the S1 combined condition; same values)"
+    ]
+   },
+   "collapse_map": {
+    "title": "none",
+    "short_title": "none",
+    "submitted": "submitted",
+    "reasoning": "submitted",
+    "response": "response",
+    "recommendation": "response",
+    "summary": "summary",
+    "committee_recommendation": "committee_recommendation",
+    "speech": "speech",
+    "proposition": "proposition",
+    "vote": "vote",
+    "none": "none",
+    "furniture": "furniture"
+   },
+   "collapse_map_id": "SLOT_NOTITLE",
+   "classes": {
+    "submitted": "Submission.texts (I95:145-158, I95:645-654)",
+    "response": "ResponseStep.texts (I95:188-199, I95:645-654)",
+    "summary": "texts of the step of its author (the answer does not give the step; E20 chapter 2)",
+    "committee_recommendation": "CommitteeDecision.text (I95:289-302)",
+    "speech": "Speech.text (I95:389-400)",
+    "proposition": "Proposition.text (I95:374-387)",
+    "vote": "Vote.text (I95:338-362)",
+    "none": "no text field; the printed heading atoms are also none: Affair.title comes from the source record (export fields title_de, title_fr, title_it, title_rm)",
+    "furniture": "page furniture (fixed rules R1, R4, R5 only)"
+   },
+   "title_source": "source record",
+   "unit_rule": {
+    "id": "atom",
+    "definition": "Each atom gets one coarse answer. The measurement is m03_iso_v4.compare_docs on the transformed answers (collapse map on both sides; a text answer in an abstention zone becomes none on both sides; documents out of scope leave the measurement)."
+   },
+   "scope_rule": {
+    "definition": "written_affair, and the role of the converter answers is equal to the S1 rule role. Else the converter abstains on the whole document with the reason 'role disagreement'.",
+    "inputs": [
+     "converter answers of the document",
+     "S1 combined role (field role)",
+     "S1 rule role: daten/iso/sub/s1_role/rule_<split>.json, field role. The S1 rule reads the atoms and the export fields category_de, category_harmonized and name_klasse of the same document."
+    ],
+    "code": "ladder_impl.role_agreement",
+    "reads_reference": false,
+    "id": "role_agreement"
+   },
+   "abstention_rule": {
+    "zones": [
+     {
+      "definition": "Section: a maximal run of one coarse text answer of the converter, with only non-text atoms between its atoms. Zone a: each non-text atom of the converter inside one of its own sections.",
+      "inputs": [
+       "converter answers after the collapse map"
+      ],
+      "code": "ladder_impl.z_interior",
+      "id": "interior"
+     },
+     {
+      "definition": "Zone b: the first and the last Docling block of each section, and the one block directly before and after it. The block order skips atoms with a fixed answer. Atoms with a fixed answer are never in the zone.",
+      "inputs": [
+       "converter answers after the collapse map",
+       "Docling block id of each atom (atom field block)",
+       "fixed answers (src/m03_iso_hilfe.py, rules R1, R3, R4, R5)"
+      ],
+      "parameters": {
+       "blocks": 1
+      },
+      "code": "ladder_impl.z_edge_blocks(1)",
+      "id": "edge_blocks_1"
+     }
+    ],
+    "masking": "a text answer of an atom in a zone becomes none on both sides; the atom leaves all counts",
+    "reads_reference": false
+   },
+   "method_output": "hyp_assembled_<split>",
+   "metrics": {
+    "unit": "atom",
+    "decisive_candidates": [
+     "G3a.6",
+     "G3a.6b",
+     "G3a.9",
+     "coverage floor (CC4)"
+    ],
+    "reported": [
+     "labelled_boundary_f1 with lower bound",
+     "text_omission",
+     "documents_with_omission",
+     "text_intrusion",
+     "text_class_error",
+     "exact rate with Jeffreys lower bound",
+     "coverage_documents",
+     "coverage_ref_text",
+     "unsure_share",
+     "trivial_role_same_scope"
+    ],
+    "note": "",
+    "exact_rule": "exact_atom"
+   },
+   "ech_output": "As L4. More documents get only the metadata values; the side file names the reason 'role disagreement'.",
+   "standard_grounding": "Value status unsure (glossary); gate 3a result chapter 7 item 3: the eCH output can use the isolation output only with the value status unsure or with a person who examines it. The role decides the step of the shared slot texts (I95:645-654).",
+   "values": {
+    "dev_in_sample": {
+     "documents": 124,
+     "documents_all": 183,
+     "coverage_documents": 0.6776,
+     "coverage_ref_text": 0.6927,
+     "unsure_share_of_claimed_atoms": 0.2068,
+     "boundaries_ref": 31,
+     "boundaries_hyp": 24,
+     "correct": 19,
+     "labelled_f1": 0.6909,
+     "labelled_f1_lower": 0.537,
+     "text_omission": 0.0027,
+     "documents_with_omission": 5,
+     "text_intrusion": 0.1444,
+     "text_class_error": 0.1156,
+     "block_intrusion": 8,
+     "documents_with_block_intrusion": 8,
+     "exact": 47,
+     "exact_rate": 0.379,
+     "exact_lower": 0.3099,
+     "claimed_by_language": {
+      "de": "88/140",
+      "fr": "25/29",
+      "it": "10/13",
+      "unbestimmt": "1/1"
+     },
+     "trivial_role_same_scope_exact": "4/124"
+    },
+    "eval_validation": {
+     "documents": 15,
+     "documents_all": 22,
+     "coverage_documents": 0.6818,
+     "coverage_ref_text": 0.6067,
+     "unsure_share_of_claimed_atoms": 0.1858,
+     "boundaries_ref": 4,
+     "boundaries_hyp": 4,
+     "correct": 4,
+     "labelled_f1": 1.0,
+     "labelled_f1_lower": 0.6375,
+     "text_omission": 0.0,
+     "documents_with_omission": 0,
+     "text_intrusion": 0.0158,
+     "text_class_error": 0.0,
+     "block_intrusion": 0,
+     "documents_with_block_intrusion": 0,
+     "exact": 9,
+     "exact_rate": 0.6,
+     "exact_lower": 0.3906,
+     "claimed_by_language": {
+      "de": "10/14",
+      "fr": "2/5",
+      "it": "2/2",
+      "rm": "1/1"
+     },
+     "trivial_role_same_scope_exact": "2/15"
+    },
+    "agreement": {
+     "X|Y": {
+      "documents": 30,
+      "boundaries": 5,
+      "f1_sym": 1.0,
+      "omission_first_as_ref": 0.0029,
+      "omitted_atoms_first_as_ref": "4/1387",
+      "intrusion_first_as_ref": 0.0007,
+      "class_error": 0.0,
+      "exact_documents_both_directions": [
+       28,
+       28
+      ]
+     },
+     "X|ref41": {
+      "documents": 30,
+      "boundaries": 5,
+      "f1_sym": 1.0,
+      "omission_first_as_ref": 0.0007,
+      "omitted_atoms_first_as_ref": "1/1387",
+      "intrusion_first_as_ref": 0.0,
+      "class_error": 0.0527,
+      "exact_documents_both_directions": [
+       28,
+       28
+      ]
+     },
+     "Y|ref41": {
+      "documents": 30,
+      "boundaries": 5,
+      "f1_sym": 1.0,
+      "omission_first_as_ref": 0.0007,
+      "omitted_atoms_first_as_ref": "1/1384",
+      "intrusion_first_as_ref": 0.0022,
+      "class_error": 0.0528,
+      "exact_documents_both_directions": [
+       28,
+       28
+      ]
+     },
+     "gold|ref41": {
+      "documents": 4,
+      "boundaries": 0,
+      "f1_sym": 0.0,
+      "omission_first_as_ref": 0.0061,
+      "omitted_atoms_first_as_ref": "1/165",
+      "intrusion_first_as_ref": 0.0,
+      "class_error": 0.0,
+      "exact_documents_both_directions": [
+       3,
+       3
+      ]
+     }
+    },
+    "converter_vs_gold_set_records_eval_validation": {
+     "documents": 2,
+     "exact": 2,
+     "text_omission": 0.0,
+     "text_intrusion": 0.0
+    }
+   },
+   "gate_check_on_stored_outputs": {
+    "dev_in_sample": {
+     "G3a.5": "not decisive (CC1): F1 0.6909, lower bound 0.537, 31 reference boundaries",
+     "G3a.6": false,
+     "G3a.6b": false,
+     "G3a.9": false
+    },
+    "eval_validation": {
+     "G3a.5": "not decisive (CC1): F1 1.0, lower bound 0.6375, 4 reference boundaries",
+     "G3a.6": true,
+     "G3a.6b": false,
+     "G3a.9": false
+    }
+   },
+   "process_rule_2_3": {
+    "omission_limit": 0.002,
+    "blind_XY_omission": 0.0029,
+    "atoms": "4/1387",
+    "conflict": true,
+    "exact_rate_limit": 0.8,
+    "blind_XY_exact": [
+     28,
+     28
+    ],
+    "documents": 30
+   },
+   "final_set_estimate_28_documents": {
+    "basis": "pooled dev and eval rates of the claimed documents (no test content read)",
+    "claimed_documents_of_28": 19,
+    "reference_boundaries": 4.8,
+    "g3a5_lower_bound_possible": false,
+    "exact_documents_for_0.80": 16,
+    "jeffreys_lower_all_exact": 0.9051,
+    "jeffreys_lower_at_0.80_point": 0.6718
+   },
+   "usefulness": "About two thirds of the documents and of the text; the rest goes to the review step with a reason.",
+   "risks": [
+    "The two signals are not independent (the composite uses S1 when S2 has no strong cue).",
+    "Coverage by language falls (eval fr 2 of 5).",
+    "Process rule 2.3 conflict on G3a.6: X|Y omission 0.0029 (4 of 1,387 atoms)."
+   ]
+  },
+  {
+   "id": "L6",
+   "name": "Single-author documents with Apertus agreement",
+   "parent": "L5",
+   "path": "atom path",
+   "dimensions": [
+    "scope",
+    "abstention (document)"
+   ],
+   "change_against_parent": "Scope rule single_author_agreement: only proposal or response documents, and the S1 Apertus role agrees.",
+   "reduction_or_limit_change": "reduction: narrower scope and abstention",
+   "source_proposals": {
+    "canonical": [
+     "U6"
+    ],
+    "merged": [],
+    "variants": []
+   },
+   "collapse_map": {
+    "title": "none",
+    "short_title": "none",
+    "submitted": "submitted",
+    "reasoning": "submitted",
+    "response": "response",
+    "recommendation": "response",
+    "summary": "summary",
+    "committee_recommendation": "committee_recommendation",
+    "speech": "speech",
+    "proposition": "proposition",
+    "vote": "vote",
+    "none": "none",
+    "furniture": "furniture"
+   },
+   "collapse_map_id": "SLOT_NOTITLE",
+   "classes": {
+    "submitted": "Submission.texts (I95:145-158, I95:645-654)",
+    "response": "ResponseStep.texts (I95:188-199, I95:645-654)",
+    "summary": "texts of the step of its author (the answer does not give the step; E20 chapter 2)",
+    "committee_recommendation": "CommitteeDecision.text (I95:289-302)",
+    "speech": "Speech.text (I95:389-400)",
+    "proposition": "Proposition.text (I95:374-387)",
+    "vote": "Vote.text (I95:338-362)",
+    "none": "no text field; the printed heading atoms are also none: Affair.title comes from the source record (export fields title_de, title_fr, title_it, title_rm)",
+    "furniture": "page furniture (fixed rules R1, R4, R5 only)"
+   },
+   "title_source": "source record",
+   "unit_rule": {
+    "id": "atom",
+    "definition": "Each atom gets one coarse answer. The measurement is m03_iso_v4.compare_docs on the transformed answers (collapse map on both sides; a text answer in an abstention zone becomes none on both sides; documents out of scope leave the measurement)."
+   },
+   "scope_rule": {
+    "definition": "role_agreement, the role is proposal or response, and the S1 Apertus role is the same role. Else the converter abstains on the whole document.",
+    "inputs": [
+     "converter answers",
+     "S1 combined role",
+     "S1 rule role",
+     "S1 Apertus role: daten/iso/sub/s1_role/apertus_<split>.json, field role (Apertus-v1.5-8B, constrained choice; a final run needs CSCS requests in a later step)"
+    ],
+    "code": "ladder_impl.single_author_agreement",
+    "reads_reference": false,
+    "id": "single_author_agreement"
+   },
+   "abstention_rule": {
+    "zones": [
+     {
+      "definition": "Section: a maximal run of one coarse text answer of the converter, with only non-text atoms between its atoms. Zone a: each non-text atom of the converter inside one of its own sections.",
+      "inputs": [
+       "converter answers after the collapse map"
+      ],
+      "code": "ladder_impl.z_interior",
+      "id": "interior"
+     },
+     {
+      "definition": "Zone b: the first and the last Docling block of each section, and the one block directly before and after it. The block order skips atoms with a fixed answer. Atoms with a fixed answer are never in the zone.",
+      "inputs": [
+       "converter answers after the collapse map",
+       "Docling block id of each atom (atom field block)",
+       "fixed answers (src/m03_iso_hilfe.py, rules R1, R3, R4, R5)"
+      ],
+      "parameters": {
+       "blocks": 1
+      },
+      "code": "ladder_impl.z_edge_blocks(1)",
+      "id": "edge_blocks_1"
+     }
+    ],
+    "masking": "a text answer of an atom in a zone becomes none on both sides; the atom leaves all counts",
+    "reads_reference": false
+   },
+   "method_output": "hyp_assembled_<split>",
+   "metrics": {
+    "unit": "atom",
+    "decisive_candidates": [
+     "G3a.6",
+     "G3a.6b",
+     "G3a.9",
+     "class error <= 0.01 (CC3)",
+     "coverage floor (CC4)"
+    ],
+    "reported": [
+     "labelled_boundary_f1 with lower bound",
+     "text_omission",
+     "documents_with_omission",
+     "text_intrusion",
+     "text_class_error",
+     "exact rate with Jeffreys lower bound",
+     "coverage_documents",
+     "coverage_ref_text",
+     "unsure_share",
+     "trivial_role_same_scope"
+    ],
+    "note": "",
+    "exact_rule": "exact_atom"
+   },
+   "ech_output": "Claimed documents: one Submission with its TextBlocks (proposal), or one ResponseStep with its TextBlocks (response). Combined documents and documents with disagreement get only the metadata values.",
+   "standard_grounding": "A written affair has one Submission (I95:541) and a list of ResponseSteps (I95:571); a single-author document fills one of the two texts slots. Deliverable 2 asks for a converter with Apertus: here Apertus is the second opinion of the abstention.",
+   "values": {
+    "dev_in_sample": {
+     "documents": 80,
+     "documents_all": 183,
+     "coverage_documents": 0.4372,
+     "coverage_ref_text": 0.3368,
+     "unsure_share_of_claimed_atoms": 0.2253,
+     "boundaries_ref": 8,
+     "boundaries_hyp": 0,
+     "correct": 0,
+     "labelled_f1": 0.0,
+     "labelled_f1_lower": 0.0,
+     "text_omission": 0.0053,
+     "documents_with_omission": 4,
+     "text_intrusion": 0.0442,
+     "text_class_error": 0.109,
+     "block_intrusion": 2,
+     "documents_with_block_intrusion": 2,
+     "exact": 40,
+     "exact_rate": 0.5,
+     "exact_lower": 0.4091,
+     "claimed_by_language": {
+      "de": "59/140",
+      "fr": "11/29",
+      "it": "9/13",
+      "unbestimmt": "1/1"
+     },
+     "trivial_role_same_scope_exact": "4/80"
+    },
+    "eval_validation": {
+     "documents": 11,
+     "documents_all": 22,
+     "coverage_documents": 0.5,
+     "coverage_ref_text": 0.3259,
+     "unsure_share_of_claimed_atoms": 0.21,
+     "boundaries_ref": 0,
+     "boundaries_hyp": 0,
+     "correct": 0,
+     "labelled_f1": 0.0,
+     "labelled_f1_lower": 0.0,
+     "text_omission": 0.0,
+     "documents_with_omission": 0,
+     "text_intrusion": 0.0085,
+     "text_class_error": 0.0,
+     "block_intrusion": 0,
+     "documents_with_block_intrusion": 0,
+     "exact": 8,
+     "exact_rate": 0.7273,
+     "exact_lower": 0.4816,
+     "claimed_by_language": {
+      "de": "8/14",
+      "fr": "1/5",
+      "it": "1/2",
+      "rm": "1/1"
+     },
+     "trivial_role_same_scope_exact": "2/11"
+    },
+    "agreement": {
+     "X|Y": {
+      "documents": 23,
+      "boundaries": 0,
+      "f1_sym": 0.0,
+      "omission_first_as_ref": 0.0,
+      "omitted_atoms_first_as_ref": "0/901",
+      "intrusion_first_as_ref": 0.0011,
+      "class_error": 0.0,
+      "exact_documents_both_directions": [
+       22,
+       22
+      ]
+     },
+     "X|ref41": {
+      "documents": 23,
+      "boundaries": 0,
+      "f1_sym": 0.0,
+      "omission_first_as_ref": 0.0,
+      "omitted_atoms_first_as_ref": "0/901",
+      "intrusion_first_as_ref": 0.0,
+      "class_error": 0.081,
+      "exact_documents_both_directions": [
+       22,
+       22
+      ]
+     },
+     "Y|ref41": {
+      "documents": 23,
+      "boundaries": 0,
+      "f1_sym": 0.0,
+      "omission_first_as_ref": 0.0011,
+      "omitted_atoms_first_as_ref": "1/902",
+      "intrusion_first_as_ref": 0.0,
+      "class_error": 0.081,
+      "exact_documents_both_directions": [
+       22,
+       22
+      ]
+     },
+     "gold|ref41": {
+      "documents": 2,
+      "boundaries": 0,
+      "f1_sym": 0.0,
+      "omission_first_as_ref": 0.0,
+      "omitted_atoms_first_as_ref": "0/113",
+      "intrusion_first_as_ref": 0.0,
+      "class_error": 0.0,
+      "exact_documents_both_directions": [
+       2,
+       2
+      ]
+     }
+    },
+    "converter_vs_gold_set_records_eval_validation": {
+     "documents": 2,
+     "exact": 2,
+     "text_omission": 0.0,
+     "text_intrusion": 0.0
+    }
+   },
+   "gate_check_on_stored_outputs": {
+    "dev_in_sample": {
+     "G3a.5": "not decisive (CC1): F1 0.0, lower bound 0.0, 8 reference boundaries",
+     "G3a.6": false,
+     "G3a.6b": false,
+     "G3a.9": false,
+     "class_error_0.01": false
+    },
+    "eval_validation": {
+     "G3a.5": "not decisive (CC1): F1 0.0, lower bound 0.0, 0 reference boundaries",
+     "G3a.6": true,
+     "G3a.6b": true,
+     "G3a.9": false,
+     "class_error_0.01": true
+    }
+   },
+   "process_rule_2_3": {
+    "omission_limit": 0.002,
+    "blind_XY_omission": 0.0,
+    "atoms": "0/901",
+    "conflict": false,
+    "exact_rate_limit": 0.8,
+    "blind_XY_exact": [
+     22,
+     22
+    ],
+    "documents": 23
+   },
+   "final_set_estimate_28_documents": {
+    "basis": "pooled dev and eval rates of the claimed documents (no test content read)",
+    "claimed_documents_of_28": 12,
+    "reference_boundaries": 1.1,
+    "g3a5_lower_bound_possible": false,
+    "exact_documents_for_0.80": 10,
+    "jeffreys_lower_all_exact": 0.8549,
+    "jeffreys_lower_at_0.80_point": 0.61
+   },
+   "usefulness": "About 45 % of the documents run without review, with one author slot each. The jury can read it as a choice of easy documents.",
+   "risks": [
+    "Breadth: dev fr 11 of 29; eval fr 1 of 5, federal 0 of 1.",
+    "Almost no boundaries: an author error shows only as class error and in the exact rate.",
+    "Executive text after a repeated sponsor text, and executive reports (C1), stay wrong (dev class error 0.109)."
+   ]
+  },
+  {
+   "id": "L7",
+   "name": "Author core",
+   "parent": "L6",
+   "path": "atom path",
+   "dimensions": [
+    "abstention (text-side trim)"
+   ],
+   "change_against_parent": "Zone run_band_3 in addition to the L3 zones: the first 3 and the last 3 atoms of each converter text run are unsure.",
+   "reduction_or_limit_change": "reduction: abstention",
+   "source_proposals": {
+    "canonical": [
+     "U7"
+    ],
+    "merged": [],
+    "variants": [
+     "L7v_U7_atom_bands (U2 and U3 bands instead of the L3 zones)"
+    ]
+   },
+   "collapse_map": {
+    "title": "none",
+    "short_title": "none",
+    "submitted": "submitted",
+    "reasoning": "submitted",
+    "response": "response",
+    "recommendation": "response",
+    "summary": "summary",
+    "committee_recommendation": "committee_recommendation",
+    "speech": "speech",
+    "proposition": "proposition",
+    "vote": "vote",
+    "none": "none",
+    "furniture": "furniture"
+   },
+   "collapse_map_id": "SLOT_NOTITLE",
+   "classes": {
+    "submitted": "Submission.texts (I95:145-158, I95:645-654)",
+    "response": "ResponseStep.texts (I95:188-199, I95:645-654)",
+    "summary": "texts of the step of its author (the answer does not give the step; E20 chapter 2)",
+    "committee_recommendation": "CommitteeDecision.text (I95:289-302)",
+    "speech": "Speech.text (I95:389-400)",
+    "proposition": "Proposition.text (I95:374-387)",
+    "vote": "Vote.text (I95:338-362)",
+    "none": "no text field; the printed heading atoms are also none: Affair.title comes from the source record (export fields title_de, title_fr, title_it, title_rm)",
+    "furniture": "page furniture (fixed rules R1, R4, R5 only)"
+   },
+   "title_source": "source record",
+   "unit_rule": {
+    "id": "atom",
+    "definition": "Each atom gets one coarse answer. The measurement is m03_iso_v4.compare_docs on the transformed answers (collapse map on both sides; a text answer in an abstention zone becomes none on both sides; documents out of scope leave the measurement)."
+   },
+   "scope_rule": {
+    "definition": "role_agreement, the role is proposal or response, and the S1 Apertus role is the same role. Else the converter abstains on the whole document.",
+    "inputs": [
+     "converter answers",
+     "S1 combined role",
+     "S1 rule role",
+     "S1 Apertus role: daten/iso/sub/s1_role/apertus_<split>.json, field role (Apertus-v1.5-8B, constrained choice; a final run needs CSCS requests in a later step)"
+    ],
+    "code": "ladder_impl.single_author_agreement",
+    "reads_reference": false,
+    "id": "single_author_agreement"
+   },
+   "abstention_rule": {
+    "zones": [
+     {
+      "definition": "Section: a maximal run of one coarse text answer of the converter, with only non-text atoms between its atoms. Zone a: each non-text atom of the converter inside one of its own sections.",
+      "inputs": [
+       "converter answers after the collapse map"
+      ],
+      "code": "ladder_impl.z_interior",
+      "id": "interior"
+     },
+     {
+      "definition": "Zone b: the first and the last Docling block of each section, and the one block directly before and after it. The block order skips atoms with a fixed answer. Atoms with a fixed answer are never in the zone.",
+      "inputs": [
+       "converter answers after the collapse map",
+       "Docling block id of each atom (atom field block)",
+       "fixed answers (src/m03_iso_hilfe.py, rules R1, R3, R4, R5)"
+      ],
+      "parameters": {
+       "blocks": 1
+      },
+      "code": "ladder_impl.z_edge_blocks(1)",
+      "id": "edge_blocks_1"
+     },
+     {
+      "definition": "Text-side band: the first 3 and the last 3 atoms of each maximal run of converter text atoms (any class) in atom order.",
+      "inputs": [
+       "converter answers after the collapse map"
+      ],
+      "parameters": {
+       "atoms": 3
+      },
+      "code": "ladder_impl.z_run_band(3)",
+      "id": "run_band_3"
+     }
+    ],
+    "masking": "a text answer of an atom in a zone becomes none on both sides; the atom leaves all counts",
+    "reads_reference": false
+   },
+   "method_output": "hyp_assembled_<split>",
+   "metrics": {
+    "unit": "atom",
+    "decisive_candidates": [
+     "G3a.6",
+     "G3a.6b",
+     "G3a.9",
+     "class error <= 0.01 (CC3)",
+     "coverage floor (CC4)"
+    ],
+    "reported": [
+     "labelled_boundary_f1 with lower bound",
+     "text_omission",
+     "documents_with_omission",
+     "text_intrusion",
+     "text_class_error",
+     "exact rate with Jeffreys lower bound",
+     "coverage_documents",
+     "coverage_ref_text",
+     "unsure_share",
+     "trivial_role_same_scope"
+    ],
+    "note": "",
+    "exact_rule": "exact_atom"
+   },
+   "ech_output": "As L6. The TextBlock holds all converter text atoms; the side file marks the zone atoms as unsure. Only the core of each block is a sure claim.",
+   "standard_grounding": "As L3 (rule F is a project rule; value status unsure; the challenge asks to mark, not to guess).",
+   "values": {
+    "dev_in_sample": {
+     "documents": 80,
+     "documents_all": 183,
+     "coverage_documents": 0.4372,
+     "coverage_ref_text": 0.2688,
+     "unsure_share_of_claimed_atoms": 0.3674,
+     "boundaries_ref": 8,
+     "boundaries_hyp": 0,
+     "correct": 0,
+     "labelled_f1": 0.0,
+     "labelled_f1_lower": 0.0,
+     "text_omission": 0.0067,
+     "documents_with_omission": 4,
+     "text_intrusion": 0.0201,
+     "text_class_error": 0.1022,
+     "block_intrusion": 0,
+     "documents_with_block_intrusion": 0,
+     "exact": 55,
+     "exact_rate": 0.6875,
+     "exact_lower": 0.5982,
+     "claimed_by_language": {
+      "de": "59/140",
+      "fr": "11/29",
+      "it": "9/13",
+      "unbestimmt": "1/1"
+     },
+     "trivial_role_same_scope_exact": "8/80"
+    },
+    "eval_validation": {
+     "documents": 11,
+     "documents_all": 22,
+     "coverage_documents": 0.5,
+     "coverage_ref_text": 0.271,
+     "unsure_share_of_claimed_atoms": 0.3163,
+     "boundaries_ref": 0,
+     "boundaries_hyp": 0,
+     "correct": 0,
+     "labelled_f1": 0.0,
+     "labelled_f1_lower": 0.0,
+     "text_omission": 0.0,
+     "documents_with_omission": 0,
+     "text_intrusion": 0.0051,
+     "text_class_error": 0.0,
+     "block_intrusion": 0,
+     "documents_with_block_intrusion": 0,
+     "exact": 10,
+     "exact_rate": 0.9091,
+     "exact_lower": 0.695,
+     "claimed_by_language": {
+      "de": "8/14",
+      "fr": "1/5",
+      "it": "1/2",
+      "rm": "1/1"
+     },
+     "trivial_role_same_scope_exact": "2/11"
+    },
+    "agreement": {
+     "X|Y": {
+      "documents": 23,
+      "boundaries": 0,
+      "f1_sym": 0.0,
+      "omission_first_as_ref": 0.0,
+      "omitted_atoms_first_as_ref": "0/754",
+      "intrusion_first_as_ref": 0.0013,
+      "class_error": 0.0,
+      "exact_documents_both_directions": [
+       22,
+       22
+      ]
+     },
+     "X|ref41": {
+      "documents": 23,
+      "boundaries": 0,
+      "f1_sym": 0.0,
+      "omission_first_as_ref": 0.0,
+      "omitted_atoms_first_as_ref": "0/754",
+      "intrusion_first_as_ref": 0.0,
+      "class_error": 0.0769,
+      "exact_documents_both_directions": [
+       22,
+       22
+      ]
+     },
+     "Y|ref41": {
+      "documents": 23,
+      "boundaries": 0,
+      "f1_sym": 0.0,
+      "omission_first_as_ref": 0.0013,
+      "omitted_atoms_first_as_ref": "1/755",
+      "intrusion_first_as_ref": 0.0,
+      "class_error": 0.0769,
+      "exact_documents_both_directions": [
+       22,
+       22
+      ]
+     },
+     "gold|ref41": {
+      "documents": 2,
+      "boundaries": 0,
+      "f1_sym": 0.0,
+      "omission_first_as_ref": 0.0,
+      "omitted_atoms_first_as_ref": "0/88",
+      "intrusion_first_as_ref": 0.0,
+      "class_error": 0.0,
+      "exact_documents_both_directions": [
+       2,
+       2
+      ]
+     }
+    },
+    "converter_vs_gold_set_records_eval_validation": {
+     "documents": 2,
+     "exact": 2,
+     "text_omission": 0.0,
+     "text_intrusion": 0.0
+    }
+   },
+   "gate_check_on_stored_outputs": {
+    "dev_in_sample": {
+     "G3a.5": "not decisive (CC1): F1 0.0, lower bound 0.0, 8 reference boundaries",
+     "G3a.6": false,
+     "G3a.6b": false,
+     "G3a.9": false,
+     "class_error_0.01": false
+    },
+    "eval_validation": {
+     "G3a.5": "not decisive (CC1): F1 0.0, lower bound 0.0, 0 reference boundaries",
+     "G3a.6": true,
+     "G3a.6b": true,
+     "G3a.9": true,
+     "class_error_0.01": true
+    }
+   },
+   "process_rule_2_3": {
+    "omission_limit": 0.002,
+    "blind_XY_omission": 0.0,
+    "atoms": "0/754",
+    "conflict": false,
+    "exact_rate_limit": 0.8,
+    "blind_XY_exact": [
+     22,
+     22
+    ],
+    "documents": 23
+   },
+   "final_set_estimate_28_documents": {
+    "basis": "pooled dev and eval rates of the claimed documents (no test content read)",
+    "claimed_documents_of_28": 12,
+    "reference_boundaries": 1.1,
+    "g3a5_lower_bound_possible": false,
+    "exact_documents_for_0.80": 10,
+    "jeffreys_lower_all_exact": 0.8549,
+    "jeffreys_lower_at_0.80_point": 0.61
+   },
+   "usefulness": "The most conservative operation point: about 27 % of the reference text is a sure claim. Sufficient for a full-text search on the main text.",
+   "risks": [
+    "High perception risk: always show L0 to L10 together.",
+    "The band width 3 was not tuned; another value changes coverage and error.",
+    "About 12 claimed documents on 28 test documents: 12 of 12 exact gives a Jeffreys lower bound of 0.85 only."
+   ]
+  },
+  {
+   "id": "L8",
+   "name": "Author sequence at the block unit",
+   "parent": "L4",
+   "path": "block path",
+   "dimensions": [
+    "unit",
+    "abstention (frame extent)"
+   ],
+   "change_against_parent": "Unit block instead of atom, with the classes of L2 and the scope rule of L4. The converter keeps each atom without a fixed answer as text and claims no frame decision; the L3 zones do not apply.",
+   "reduction_or_limit_change": "reduction: coarser unit and abstention on the frame extent",
+   "source_proposals": {
+    "canonical": [
+     "ERR-L3",
+     "ERR-L4"
+    ],
+    "merged": [
+     "U4 (scope signal)"
+    ],
+    "variants": [
+     "L8v_ERR_L3_no_scope",
+     "L8v_ERR_L4_s1_scope"
+    ]
+   },
+   "collapse_map": {
+    "title": "none",
+    "short_title": "none",
+    "submitted": "submitted",
+    "reasoning": "submitted",
+    "response": "response",
+    "recommendation": "response",
+    "summary": "summary",
+    "committee_recommendation": "committee_recommendation",
+    "speech": "speech",
+    "proposition": "proposition",
+    "vote": "vote",
+    "none": "none",
+    "furniture": "furniture"
+   },
+   "collapse_map_id": "SLOT_NOTITLE",
+   "classes": {
+    "submitted": "Submission.texts (I95:145-158, I95:645-654)",
+    "response": "ResponseStep.texts (I95:188-199, I95:645-654)",
+    "summary": "texts of the step of its author (the answer does not give the step; E20 chapter 2)",
+    "committee_recommendation": "CommitteeDecision.text (I95:289-302)",
+    "speech": "Speech.text (I95:389-400)",
+    "proposition": "Proposition.text (I95:374-387)",
+    "vote": "Vote.text (I95:338-362)",
+    "none": "no text field; the printed heading atoms are also none: Affair.title comes from the source record (export fields title_de, title_fr, title_it, title_rm)",
+    "furniture": "page furniture (fixed rules R1, R4, R5 only)"
+   },
+   "title_source": "source record",
+   "unit_rule": {
+    "id": "block",
+    "definition": "A block is a maximal run of one coarse text answer over the text atoms of a document; non-text atoms between two runs of the same answer do not split it (E20 chapter 4). The converter claims the class sequence, the boundary positions and the existence of each block. It does not claim the extent: it keeps each atom without a fixed answer as text (S3 all text) and does not isolate the title (S4 not used). Method output: daten/iso/ladder/scratch/err_recompose_nos4_<split>.json (script err_recompose3.py)."
+   },
+   "scope_rule": {
+    "definition": "The converter claims a document only if two converter signals both give an author role (proposal, response or combined): (1) m03_sub_common.role_of over the families of the text answers of the converter, (2) the S1 combined role of the document. Else the converter abstains on the whole document, and the document leaves the measurement.",
+    "inputs": [
+     "converter answers of the document (13 answers per atom, before the collapse map)",
+     "S1 combined role: daten/iso/sub/s1_role/combined_<split>.json, field role (S1 rule; Apertus-v1.5-8B only for the rule id R1)"
+    ],
+    "code": "ladder_impl.written_affair",
+    "reads_reference": false,
+    "chosen_on": "dev (in-sample): the intersection of the U4 signal and the ERR-L4 signal gave the highest exact rate at the atom unit (53 of 146) and at the block unit (108 of 147), and the fewest documents with block intrusion (11 and 15). Script ladder_scope_check.py.",
+    "id": "written_affair"
+   },
+   "abstention_rule": {
+    "zones": [],
+    "masking": "none",
+    "reads_reference": false
+   },
+   "method_output": "err_recompose_nos4_<split>.json (S3 all text, S4 not used)",
+   "metrics": {
+    "unit": "block",
+    "decisive_candidates": [
+     "G3a.6 (atom omission)",
+     "G3a.9 with block intrusion in the exact rule (CC2)",
+     "coverage floor (CC4)",
+     "trivial check (CC5)"
+    ],
+    "reported": [
+     "labelled_boundary_f1 with lower bound",
+     "text_omission",
+     "documents_with_omission",
+     "text_intrusion",
+     "text_class_error",
+     "exact rate with Jeffreys lower bound",
+     "coverage_documents",
+     "coverage_ref_text",
+     "unsure_share",
+     "trivial_role_same_scope",
+     "block_omission",
+     "block_intrusion"
+    ],
+    "note": "",
+    "exact_rule": "exact_block"
+   },
+   "ech_output": "Affair.title from the source record. One TextBlock for each block in Submission.texts or ResponseStep.texts. The text of a block includes the frame lines between its start and its end; each TextBlock gets the value status unsure for its extent. The fixed rules remove the page furniture.",
+   "standard_grounding": "A TextBlock (I95:402-416) has one text and one text_type; I95 says nothing about lines. E20 chapter 4 joins two runs of one answer into one block. Rule F and C2, C3, C7, C11 are project rules that this isolation level does not claim. The fixed answers stay, because the challenge asks for the cleanup of page furniture.",
+   "values": {
+    "dev_in_sample": {
+     "documents": 147,
+     "documents_all": 183,
+     "coverage_documents": 0.8033,
+     "coverage_ref_text": 0.9139,
+     "unsure_share_of_claimed_atoms": 0.0,
+     "boundaries_ref": 42,
+     "boundaries_hyp": 31,
+     "correct": 22,
+     "labelled_f1": 0.6027,
+     "labelled_f1_lower": 0.4675,
+     "text_omission": 0.0,
+     "documents_with_omission": 0,
+     "text_intrusion": 0.3157,
+     "text_class_error": 0.1243,
+     "block_intrusion": 15,
+     "documents_with_block_intrusion": 15,
+     "exact": 108,
+     "exact_rate": 0.7347,
+     "exact_lower": 0.6717,
+     "claimed_by_language": {
+      "de": "107/140",
+      "fr": "27/29",
+      "it": "12/13",
+      "unbestimmt": "1/1"
+     },
+     "trivial_role_same_scope_exact": "82/147"
+    },
+    "eval_validation": {
+     "documents": 19,
+     "documents_all": 22,
+     "coverage_documents": 0.8636,
+     "coverage_ref_text": 0.8096,
+     "unsure_share_of_claimed_atoms": 0.0,
+     "boundaries_ref": 6,
+     "boundaries_hyp": 4,
+     "correct": 4,
+     "labelled_f1": 0.8,
+     "labelled_f1_lower": 0.4442,
+     "text_omission": 0.0,
+     "documents_with_omission": 0,
+     "text_intrusion": 0.2269,
+     "text_class_error": 0.0369,
+     "block_intrusion": 0,
+     "documents_with_block_intrusion": 0,
+     "exact": 17,
+     "exact_rate": 0.8947,
+     "exact_lower": 0.738,
+     "claimed_by_language": {
+      "de": "12/14",
+      "fr": "4/5",
+      "it": "2/2",
+      "rm": "1/1"
+     },
+     "trivial_role_same_scope_exact": "11/19"
+    },
+    "agreement": {
+     "X|Y": {
+      "documents": 34,
+      "boundaries": 8,
+      "f1_sym": 1.0,
+      "omission_first_as_ref": 0.0023,
+      "omitted_atoms_first_as_ref": "4/1764",
+      "intrusion_first_as_ref": 0.0011,
+      "class_error": 0.0,
+      "exact_documents_both_directions": [
+       33,
+       32
+      ]
+     },
+     "X|ref41": {
+      "documents": 34,
+      "boundaries": 8,
+      "f1_sym": 1.0,
+      "omission_first_as_ref": 0.0006,
+      "omitted_atoms_first_as_ref": "1/1764",
+      "intrusion_first_as_ref": 0.0,
+      "class_error": 0.0414,
+      "exact_documents_both_directions": [
+       32,
+       33
+      ]
+     },
+     "Y|ref41": {
+      "documents": 34,
+      "boundaries": 8,
+      "f1_sym": 1.0,
+      "omission_first_as_ref": 0.0011,
+      "omitted_atoms_first_as_ref": "2/1762",
+      "intrusion_first_as_ref": 0.0017,
+      "class_error": 0.0415,
+      "exact_documents_both_directions": [
+       32,
+       32
+      ]
+     },
+     "gold|ref41": {
+      "documents": 4,
+      "boundaries": 1,
+      "f1_sym": 1.0,
+      "omission_first_as_ref": 0.0048,
+      "omitted_atoms_first_as_ref": "1/208",
+      "intrusion_first_as_ref": 0.0,
+      "class_error": 0.0,
+      "exact_documents_both_directions": [
+       3,
+       4
+      ]
+     }
+    },
+    "converter_vs_gold_set_records_eval_validation": {
+     "documents": 2,
+     "exact": 2,
+     "text_omission": 0.0,
+     "text_intrusion": 0.1974
+    }
+   },
+   "gate_check_on_stored_outputs": {
+    "dev_in_sample": {
+     "G3a.5": "not decisive (CC1): F1 0.6027, lower bound 0.4675, 42 reference boundaries",
+     "G3a.6": true,
+     "block_intrusion_0": false,
+     "G3a.9": false
+    },
+    "eval_validation": {
+     "G3a.5": "not decisive (CC1): F1 0.8, lower bound 0.4442, 6 reference boundaries",
+     "G3a.6": true,
+     "block_intrusion_0": true,
+     "G3a.9": true
+    }
+   },
+   "process_rule_2_3": {
+    "omission_limit": 0.002,
+    "blind_XY_omission": 0.0023,
+    "atoms": "4/1764",
+    "conflict": true,
+    "exact_rate_limit": 0.8,
+    "blind_XY_exact": [
+     33,
+     32
+    ],
+    "documents": 34
+   },
+   "final_set_estimate_28_documents": {
+    "basis": "pooled dev and eval rates of the claimed documents (no test content read)",
+    "claimed_documents_of_28": 23,
+    "reference_boundaries": 6.7,
+    "g3a5_lower_bound_possible": false,
+    "exact_documents_for_0.80": 19,
+    "jeffreys_lower_all_exact": 0.9207,
+    "jeffreys_lower_at_0.80_point": 0.6704
+   },
+   "usefulness": "Medium: the record has the correct slots and authors and the switch positions. The texts carry frame lines (dev 32 %, eval 23 % of the claimed lines).",
+   "risks": [
+    "A user can take the frame lines for text; the value status unsure must be visible.",
+    "Atom intrusion leaves the decision (CC2); a jury can read it as a lower target. It is a change of the task, written before the measurement.",
+    "The trivial converter 'role only' gets 82 of 147 dev and 11 of 19 eval documents: the method adds the switch points of combined documents and the S2 start."
+   ]
+  },
+  {
+   "id": "L9",
+   "name": "Author sequence at the block unit with role agreement",
+   "parent": "L8",
+   "path": "block path",
+   "dimensions": [
+    "abstention (document)"
+   ],
+   "change_against_parent": "Scope rule role_agreement on the block unit (combination of ERR-L3 and U5).",
+   "reduction_or_limit_change": "reduction: abstention on whole documents",
+   "source_proposals": {
+    "canonical": [
+     "combination of ERR-L3 and U5 (this step)"
+    ],
+    "merged": [],
+    "variants": []
+   },
+   "collapse_map": {
+    "title": "none",
+    "short_title": "none",
+    "submitted": "submitted",
+    "reasoning": "submitted",
+    "response": "response",
+    "recommendation": "response",
+    "summary": "summary",
+    "committee_recommendation": "committee_recommendation",
+    "speech": "speech",
+    "proposition": "proposition",
+    "vote": "vote",
+    "none": "none",
+    "furniture": "furniture"
+   },
+   "collapse_map_id": "SLOT_NOTITLE",
+   "classes": {
+    "submitted": "Submission.texts (I95:145-158, I95:645-654)",
+    "response": "ResponseStep.texts (I95:188-199, I95:645-654)",
+    "summary": "texts of the step of its author (the answer does not give the step; E20 chapter 2)",
+    "committee_recommendation": "CommitteeDecision.text (I95:289-302)",
+    "speech": "Speech.text (I95:389-400)",
+    "proposition": "Proposition.text (I95:374-387)",
+    "vote": "Vote.text (I95:338-362)",
+    "none": "no text field; the printed heading atoms are also none: Affair.title comes from the source record (export fields title_de, title_fr, title_it, title_rm)",
+    "furniture": "page furniture (fixed rules R1, R4, R5 only)"
+   },
+   "title_source": "source record",
+   "unit_rule": {
+    "id": "block",
+    "definition": "A block is a maximal run of one coarse text answer over the text atoms of a document; non-text atoms between two runs of the same answer do not split it (E20 chapter 4). The converter claims the class sequence, the boundary positions and the existence of each block. It does not claim the extent: it keeps each atom without a fixed answer as text (S3 all text) and does not isolate the title (S4 not used). Method output: daten/iso/ladder/scratch/err_recompose_nos4_<split>.json (script err_recompose3.py)."
+   },
+   "scope_rule": {
+    "definition": "written_affair, and the role of the converter answers is equal to the S1 rule role. Else the converter abstains on the whole document with the reason 'role disagreement'.",
+    "inputs": [
+     "converter answers of the document",
+     "S1 combined role (field role)",
+     "S1 rule role: daten/iso/sub/s1_role/rule_<split>.json, field role. The S1 rule reads the atoms and the export fields category_de, category_harmonized and name_klasse of the same document."
+    ],
+    "code": "ladder_impl.role_agreement",
+    "reads_reference": false,
+    "id": "role_agreement"
+   },
+   "abstention_rule": {
+    "zones": [],
+    "masking": "none",
+    "reads_reference": false
+   },
+   "method_output": "err_recompose_nos4_<split>.json",
+   "metrics": {
+    "unit": "block",
+    "decisive_candidates": [
+     "G3a.6 (atom omission)",
+     "G3a.9 with block intrusion in the exact rule (CC2)",
+     "coverage floor (CC4)",
+     "trivial check (CC5)"
+    ],
+    "reported": [
+     "labelled_boundary_f1 with lower bound",
+     "text_omission",
+     "documents_with_omission",
+     "text_intrusion",
+     "text_class_error",
+     "exact rate with Jeffreys lower bound",
+     "coverage_documents",
+     "coverage_ref_text",
+     "unsure_share",
+     "trivial_role_same_scope",
+     "block_omission",
+     "block_intrusion"
+    ],
+    "note": "",
+    "exact_rule": "exact_block"
+   },
+   "ech_output": "As L8 for claimed documents. Documents with role disagreement get only the metadata values and the reason in the side file.",
+   "standard_grounding": "As L8 and L5.",
+   "values": {
+    "dev_in_sample": {
+     "documents": 124,
+     "documents_all": 183,
+     "coverage_documents": 0.6776,
+     "coverage_ref_text": 0.7437,
+     "unsure_share_of_claimed_atoms": 0.0,
+     "boundaries_ref": 33,
+     "boundaries_hyp": 25,
+     "correct": 19,
+     "labelled_f1": 0.6552,
+     "labelled_f1_lower": 0.504,
+     "text_omission": 0.0,
+     "documents_with_omission": 0,
+     "text_intrusion": 0.3121,
+     "text_class_error": 0.1171,
+     "block_intrusion": 8,
+     "documents_with_block_intrusion": 8,
+     "exact": 99,
+     "exact_rate": 0.7984,
+     "exact_lower": 0.7343,
+     "claimed_by_language": {
+      "de": "88/140",
+      "fr": "25/29",
+      "it": "10/13",
+      "unbestimmt": "1/1"
+     },
+     "trivial_role_same_scope_exact": "80/124"
+    },
+    "eval_validation": {
+     "documents": 15,
+     "documents_all": 22,
+     "coverage_documents": 0.6818,
+     "coverage_ref_text": 0.6776,
+     "unsure_share_of_claimed_atoms": 0.0,
+     "boundaries_ref": 4,
+     "boundaries_hyp": 4,
+     "correct": 4,
+     "labelled_f1": 1.0,
+     "labelled_f1_lower": 0.6375,
+     "text_omission": 0.0,
+     "documents_with_omission": 0,
+     "text_intrusion": 0.2021,
+     "text_class_error": 0.0,
+     "block_intrusion": 0,
+     "documents_with_block_intrusion": 0,
+     "exact": 15,
+     "exact_rate": 1.0,
+     "exact_lower": 0.8817,
+     "claimed_by_language": {
+      "de": "10/14",
+      "fr": "2/5",
+      "it": "2/2",
+      "rm": "1/1"
+     },
+     "trivial_role_same_scope_exact": "11/15"
+    },
+    "agreement": {
+     "X|Y": {
+      "documents": 30,
+      "boundaries": 6,
+      "f1_sym": 1.0,
+      "omission_first_as_ref": 0.0025,
+      "omitted_atoms_first_as_ref": "4/1574",
+      "intrusion_first_as_ref": 0.0006,
+      "class_error": 0.0,
+      "exact_documents_both_directions": [
+       29,
+       29
+      ]
+     },
+     "X|ref41": {
+      "documents": 30,
+      "boundaries": 6,
+      "f1_sym": 1.0,
+      "omission_first_as_ref": 0.0006,
+      "omitted_atoms_first_as_ref": "1/1574",
+      "intrusion_first_as_ref": 0.0,
+      "class_error": 0.0464,
+      "exact_documents_both_directions": [
+       28,
+       29
+      ]
+     },
+     "Y|ref41": {
+      "documents": 30,
+      "boundaries": 6,
+      "f1_sym": 1.0,
+      "omission_first_as_ref": 0.0006,
+      "omitted_atoms_first_as_ref": "1/1571",
+      "intrusion_first_as_ref": 0.0019,
+      "class_error": 0.0465,
+      "exact_documents_both_directions": [
+       29,
+       28
+      ]
+     },
+     "gold|ref41": {
+      "documents": 4,
+      "boundaries": 1,
+      "f1_sym": 1.0,
+      "omission_first_as_ref": 0.0048,
+      "omitted_atoms_first_as_ref": "1/208",
+      "intrusion_first_as_ref": 0.0,
+      "class_error": 0.0,
+      "exact_documents_both_directions": [
+       3,
+       4
+      ]
+     }
+    },
+    "converter_vs_gold_set_records_eval_validation": {
+     "documents": 2,
+     "exact": 2,
+     "text_omission": 0.0,
+     "text_intrusion": 0.1974
+    }
+   },
+   "gate_check_on_stored_outputs": {
+    "dev_in_sample": {
+     "G3a.5": "not decisive (CC1): F1 0.6552, lower bound 0.504, 33 reference boundaries",
+     "G3a.6": true,
+     "block_intrusion_0": false,
+     "G3a.9": false
+    },
+    "eval_validation": {
+     "G3a.5": "not decisive (CC1): F1 1.0, lower bound 0.6375, 4 reference boundaries",
+     "G3a.6": true,
+     "block_intrusion_0": true,
+     "G3a.9": true
+    }
+   },
+   "process_rule_2_3": {
+    "omission_limit": 0.002,
+    "blind_XY_omission": 0.0025,
+    "atoms": "4/1574",
+    "conflict": true,
+    "exact_rate_limit": 0.8,
+    "blind_XY_exact": [
+     29,
+     29
+    ],
+    "documents": 30
+   },
+   "final_set_estimate_28_documents": {
+    "basis": "pooled dev and eval rates of the claimed documents (no test content read)",
+    "claimed_documents_of_28": 19,
+    "reference_boundaries": 5.1,
+    "g3a5_lower_bound_possible": false,
+    "exact_documents_for_0.80": 16,
+    "jeffreys_lower_all_exact": 0.9051,
+    "jeffreys_lower_at_0.80_point": 0.6718
+   },
+   "usefulness": "Medium: about two thirds of the documents get the author structure with unsure extents; the rest goes to review.",
+   "risks": [
+    "Same frame-line risk as L8.",
+    "The dev exact rate (in-sample) is at the limit; the method needs work on dev before a final measurement.",
+    "Process rule 2.3 conflict on G3a.6: X|Y omission 0.0025 (4 of 1,574 atoms).",
+    "Breadth: eval French documents 2 of 5; dev German documents 88 of 140."
+   ]
+  },
+  {
+   "id": "L10",
+   "name": "Document unit: the set of I95 steps that hold text",
+   "parent": "L8",
+   "path": "document unit (terminal)",
+   "dimensions": [
+    "unit"
+   ],
+   "change_against_parent": "Unit document: the converter claims only the set of coarse text classes for each document. All extents and positions are unsure.",
+   "reduction_or_limit_change": "reduction: coarser unit (ends the isolation in the sense of E20)",
+   "source_proposals": {
+    "canonical": [
+     "STD6"
+    ],
+    "merged": [
+     "ERR-L5 (same claim at the block unit, see removed R3)"
+    ],
+    "variants": [
+     "L10v_STD6_no_scope",
+     "L10v_role_agreement",
+     "L10v_ERR_L5_block"
+    ]
+   },
+   "collapse_map": {
+    "title": "none",
+    "short_title": "none",
+    "submitted": "submitted",
+    "reasoning": "submitted",
+    "response": "response",
+    "recommendation": "response",
+    "summary": "summary",
+    "committee_recommendation": "committee_recommendation",
+    "speech": "speech",
+    "proposition": "proposition",
+    "vote": "vote",
+    "none": "none",
+    "furniture": "furniture"
+   },
+   "collapse_map_id": "SLOT_NOTITLE",
+   "classes": {
+    "submitted": "Submission.texts (I95:145-158, I95:645-654)",
+    "response": "ResponseStep.texts (I95:188-199, I95:645-654)",
+    "summary": "texts of the step of its author (the answer does not give the step; E20 chapter 2)",
+    "committee_recommendation": "CommitteeDecision.text (I95:289-302)",
+    "speech": "Speech.text (I95:389-400)",
+    "proposition": "Proposition.text (I95:374-387)",
+    "vote": "Vote.text (I95:338-362)",
+    "none": "no text field; the printed heading atoms are also none: Affair.title comes from the source record (export fields title_de, title_fr, title_it, title_rm)",
+    "furniture": "page furniture (fixed rules R1, R4, R5 only)"
+   },
+   "title_source": "source record",
+   "unit_rule": {
+    "id": "document",
+    "definition": "The converter claims, for each document, the set of coarse text classes in its answers. It claims no extent and no position."
+   },
+   "scope_rule": {
+    "definition": "The converter claims a document only if two converter signals both give an author role (proposal, response or combined): (1) m03_sub_common.role_of over the families of the text answers of the converter, (2) the S1 combined role of the document. Else the converter abstains on the whole document, and the document leaves the measurement.",
+    "inputs": [
+     "converter answers of the document (13 answers per atom, before the collapse map)",
+     "S1 combined role: daten/iso/sub/s1_role/combined_<split>.json, field role (S1 rule; Apertus-v1.5-8B only for the rule id R1)"
+    ],
+    "code": "ladder_impl.written_affair",
+    "reads_reference": false,
+    "chosen_on": "dev (in-sample): the intersection of the U4 signal and the ERR-L4 signal gave the highest exact rate at the atom unit (53 of 146) and at the block unit (108 of 147), and the fewest documents with block intrusion (11 and 15). Script ladder_scope_check.py.",
+    "id": "written_affair"
+   },
+   "abstention_rule": {
+    "zones": [],
+    "masking": "none",
+    "reads_reference": false
+   },
+   "method_output": "hyp_assembled_<split>",
+   "metrics": {
+    "unit": "document",
+    "decisive_candidates": [
+     "G3a.9 as a set criterion",
+     "coverage floor (CC4)",
+     "trivial check (CC5)"
+    ],
+    "reported": [
+     "exact rate with Jeffreys lower bound",
+     "coverage_documents",
+     "trivial_role_same_scope"
+    ],
+    "note": "At the document unit the atom values in 'values' are information on the converter answers; the converter does not claim them.",
+    "exact_rule": "exact_document"
+   },
+   "ech_output": "The record holds the step objects that the document fills, with the status certain. Each TextBlock text has the status unsure, or it is only in the provenance. This is the classification of a whole document (proposal E25), not an isolation.",
+   "standard_grounding": "The record unit is the Affair in the Container (I95:41-78). Each step class with texts is an I95 structure.",
+   "values": {
+    "dev_in_sample": {
+     "documents": 146,
+     "documents_all": 183,
+     "coverage_documents": 0.7978,
+     "coverage_ref_text": 0.9139,
+     "unsure_share_of_claimed_atoms": 0.0,
+     "boundaries_ref": 42,
+     "boundaries_hyp": 31,
+     "correct": 21,
+     "labelled_f1": 0.5753,
+     "labelled_f1_lower": 0.4402,
+     "text_omission": 0.0161,
+     "documents_with_omission": 55,
+     "text_intrusion": 0.1567,
+     "text_class_error": 0.1223,
+     "block_intrusion": 15,
+     "documents_with_block_intrusion": 15,
+     "exact": 115,
+     "exact_rate": 0.7877,
+     "exact_lower": 0.7281,
+     "claimed_by_language": {
+      "de": "106/140",
+      "fr": "27/29",
+      "it": "12/13",
+      "unbestimmt": "1/1"
+     },
+     "trivial_role_same_scope_exact": "82/146"
+    },
+    "eval_validation": {
+     "documents": 19,
+     "documents_all": 22,
+     "coverage_documents": 0.8636,
+     "coverage_ref_text": 0.8096,
+     "unsure_share_of_claimed_atoms": 0.0,
+     "boundaries_ref": 6,
+     "boundaries_hyp": 4,
+     "correct": 4,
+     "labelled_f1": 0.8,
+     "labelled_f1_lower": 0.4442,
+     "text_omission": 0.0189,
+     "documents_with_omission": 10,
+     "text_intrusion": 0.079,
+     "text_class_error": 0.035,
+     "block_intrusion": 0,
+     "documents_with_block_intrusion": 0,
+     "exact": 17,
+     "exact_rate": 0.8947,
+     "exact_lower": 0.738,
+     "claimed_by_language": {
+      "de": "12/14",
+      "fr": "4/5",
+      "it": "2/2",
+      "rm": "1/1"
+     },
+     "trivial_role_same_scope_exact": "11/19"
+    },
+    "agreement": {
+     "X|Y": {
+      "documents": 34,
+      "boundaries": 8,
+      "f1_sym": 1.0,
+      "omission_first_as_ref": 0.0023,
+      "omitted_atoms_first_as_ref": "4/1764",
+      "intrusion_first_as_ref": 0.0011,
+      "class_error": 0.0,
+      "exact_documents_both_directions": [
+       34,
+       34
+      ]
+     },
+     "X|ref41": {
+      "documents": 34,
+      "boundaries": 8,
+      "f1_sym": 1.0,
+      "omission_first_as_ref": 0.0006,
+      "omitted_atoms_first_as_ref": "1/1764",
+      "intrusion_first_as_ref": 0.0,
+      "class_error": 0.0414,
+      "exact_documents_both_directions": [
+       33,
+       33
+      ]
+     },
+     "Y|ref41": {
+      "documents": 34,
+      "boundaries": 8,
+      "f1_sym": 1.0,
+      "omission_first_as_ref": 0.0011,
+      "omitted_atoms_first_as_ref": "2/1762",
+      "intrusion_first_as_ref": 0.0017,
+      "class_error": 0.0415,
+      "exact_documents_both_directions": [
+       33,
+       33
+      ]
+     },
+     "gold|ref41": {
+      "documents": 4,
+      "boundaries": 1,
+      "f1_sym": 1.0,
+      "omission_first_as_ref": 0.0048,
+      "omitted_atoms_first_as_ref": "1/208",
+      "intrusion_first_as_ref": 0.0,
+      "class_error": 0.0,
+      "exact_documents_both_directions": [
+       4,
+       4
+      ]
+     }
+    },
+    "converter_vs_gold_set_records_eval_validation": {
+     "documents": 2,
+     "exact": 2,
+     "text_omission": 0.0492,
+     "text_intrusion": 0.0333
+    }
+   },
+   "gate_check_on_stored_outputs": {
+    "dev_in_sample": {
+     "G3a.5": "not applicable (document unit)",
+     "G3a.9": false
+    },
+    "eval_validation": {
+     "G3a.5": "not applicable (document unit)",
+     "G3a.9": true
+    }
+   },
+   "process_rule_2_3": {
+    "omission_limit": 0.002,
+    "blind_XY_omission": 0.0023,
+    "atoms": "4/1764",
+    "conflict": true,
+    "exact_rate_limit": 0.8,
+    "blind_XY_exact": [
+     34,
+     34
+    ],
+    "documents": 34
+   },
+   "final_set_estimate_28_documents": {
+    "basis": "pooled dev and eval rates of the claimed documents (no test content read)",
+    "claimed_documents_of_28": 23,
+    "reference_boundaries": 6.7,
+    "g3a5_lower_bound_possible": false,
+    "exact_documents_for_0.80": 19,
+    "jeffreys_lower_all_exact": 0.9207,
+    "jeffreys_lower_at_0.80_point": 0.6704
+   },
+   "usefulness": "Very low for the isolation: no text of the record is certain. It supports the evidence of the classification (E25).",
+   "risks": [
+    "Process rule 5.3 stays unmet: the labeling needs the isolation gate, and this isolation level is a classification.",
+    "Set agreement of X and Y is high (34 of 34) because the claim is small."
+   ]
+  }
+ ],
+ "variants": {
+  "L1v_STD1_plenary_merged": {
+   "params": {
+    "map": "SLOT_PLENARY",
+    "scope": "all",
+    "zones": [],
+    "unit": "atom",
+    "conv": "assembled"
+   },
+   "dev_in_sample": {
+    "documents": 183,
+    "documents_all": 183,
+    "coverage_documents": 1.0,
+    "coverage_ref_text": 1.0,
+    "unsure_share_of_claimed_atoms": 0.0,
+    "boundaries_ref": 215,
+    "boundaries_hyp": 200,
+    "correct": 142,
+    "labelled_f1": 0.6843,
+    "labelled_f1_lower": 0.6296,
+    "text_omission": 0.0191,
+    "documents_with_omission": 74,
+    "text_intrusion": 0.2268,
+    "text_class_error": 0.1362,
+    "block_intrusion": 115,
+    "documents_with_block_intrusion": 100,
+    "exact": 9,
+    "exact_rate": 0.0492,
+    "exact_lower": 0.0279,
+    "claimed_by_language": {
+     "de": "140/140",
+     "fr": "29/29",
+     "it": "13/13",
+     "unbestimmt": "1/1"
+    },
+    "trivial_role_same_scope_exact": "0/183"
+   },
+   "eval_validation": {
+    "documents": 22,
+    "documents_all": 22,
+    "coverage_documents": 1.0,
+    "coverage_ref_text": 1.0,
+    "unsure_share_of_claimed_atoms": 0.0,
+    "boundaries_ref": 29,
+    "boundaries_hyp": 23,
+    "correct": 15,
+    "labelled_f1": 0.5769,
+    "labelled_f1_lower": 0.4172,
+    "text_omission": 0.0241,
+    "documents_with_omission": 11,
+    "text_intrusion": 0.2924,
+    "text_class_error": 0.0535,
+    "block_intrusion": 12,
+    "documents_with_block_intrusion": 11,
+    "exact": 2,
+    "exact_rate": 0.0909,
+    "exact_lower": 0.0266,
+    "claimed_by_language": {
+     "de": "14/14",
+     "fr": "5/5",
+     "it": "2/2",
+     "rm": "1/1"
+    },
+    "trivial_role_same_scope_exact": "0/22"
+   },
+   "agreement_XY": {
+    "documents": 41,
+    "boundaries": 52,
+    "f1_sym": 0.9808,
+    "omission_first_as_ref": 0.0024,
+    "omitted_atoms_first_as_ref": "7/2895",
+    "intrusion_first_as_ref": 0.0007,
+    "class_error": 0.0,
+    "exact_documents_both_directions": [
+     35,
+     35
+    ]
+   }
+  },
+  "L3v_U2U3_atom_bands": {
+   "params": {
+    "map": "SLOT_NOTITLE",
+    "scope": "all",
+    "zones": [
+     "frame_band_3",
+     "head_band_3"
+    ],
+    "unit": "atom",
+    "conv": "assembled"
+   },
+   "dev_in_sample": {
+    "documents": 183,
+    "documents_all": 183,
+    "coverage_documents": 1.0,
+    "coverage_ref_text": 0.9646,
+    "unsure_share_of_claimed_atoms": 0.1185,
+    "boundaries_ref": 51,
+    "boundaries_hyp": 39,
+    "correct": 26,
+    "labelled_f1": 0.5778,
+    "labelled_f1_lower": 0.4558,
+    "text_omission": 0.003,
+    "documents_with_omission": 9,
+    "text_intrusion": 0.2196,
+    "text_class_error": 0.1373,
+    "block_intrusion": 27,
+    "documents_with_block_intrusion": 26,
+    "exact": 51,
+    "exact_rate": 0.2787,
+    "exact_lower": 0.227,
+    "claimed_by_language": {
+     "de": "140/140",
+     "fr": "29/29",
+     "it": "13/13",
+     "unbestimmt": "1/1"
+    },
+    "trivial_role_same_scope_exact": "7/183"
+   },
+   "eval_validation": {
+    "documents": 22,
+    "documents_all": 22,
+    "coverage_documents": 1.0,
+    "coverage_ref_text": 0.9569,
+    "unsure_share_of_claimed_atoms": 0.1025,
+    "boundaries_ref": 8,
+    "boundaries_hyp": 5,
+    "correct": 5,
+    "labelled_f1": 0.7692,
+    "labelled_f1_lower": 0.459,
+    "text_omission": 0.0007,
+    "documents_with_omission": 1,
+    "text_intrusion": 0.2976,
+    "text_class_error": 0.0334,
+    "block_intrusion": 1,
+    "documents_with_block_intrusion": 1,
+    "exact": 10,
+    "exact_rate": 0.4545,
+    "exact_lower": 0.2911,
+    "claimed_by_language": {
+     "de": "14/14",
+     "fr": "5/5",
+     "it": "2/2",
+     "rm": "1/1"
+    },
+    "trivial_role_same_scope_exact": "1/22"
+   },
+   "agreement_XY": {
+    "documents": 41,
+    "boundaries": 14,
+    "f1_sym": 1.0,
+    "omission_first_as_ref": 0.0015,
+    "omitted_atoms_first_as_ref": "4/2647",
+    "intrusion_first_as_ref": 0.0008,
+    "class_error": 0.0,
+    "exact_documents_both_directions": [
+     38,
+     38
+    ]
+   }
+  },
+  "L3v_edge_blocks_2": {
+   "params": {
+    "map": "SLOT_NOTITLE",
+    "scope": "all",
+    "zones": [
+     "interior",
+     "edge_blocks_2"
+    ],
+    "unit": "atom",
+    "conv": "assembled"
+   },
+   "dev_in_sample": {
+    "documents": 183,
+    "documents_all": 183,
+    "coverage_documents": 1.0,
+    "coverage_ref_text": 0.8601,
+    "unsure_share_of_claimed_atoms": 0.2887,
+    "boundaries_ref": 41,
+    "boundaries_hyp": 30,
+    "correct": 23,
+    "labelled_f1": 0.6479,
+    "labelled_f1_lower": 0.5115,
+    "text_omission": 0.0018,
+    "documents_with_omission": 3,
+    "text_intrusion": 0.2204,
+    "text_class_error": 0.1437,
+    "block_intrusion": 24,
+    "documents_with_block_intrusion": 24,
+    "exact": 71,
+    "exact_rate": 0.388,
+    "exact_lower": 0.3303,
+    "claimed_by_language": {
+     "de": "140/140",
+     "fr": "29/29",
+     "it": "13/13",
+     "unbestimmt": "1/1"
+    },
+    "trivial_role_same_scope_exact": "16/183"
+   },
+   "eval_validation": {
+    "documents": 22,
+    "documents_all": 22,
+    "coverage_documents": 1.0,
+    "coverage_ref_text": 0.8381,
+    "unsure_share_of_claimed_atoms": 0.3129,
+    "boundaries_ref": 8,
+    "boundaries_hyp": 5,
+    "correct": 5,
+    "labelled_f1": 0.7692,
+    "labelled_f1_lower": 0.459,
+    "text_omission": 0.0,
+    "documents_with_omission": 0,
+    "text_intrusion": 0.3175,
+    "text_class_error": 0.0398,
+    "block_intrusion": 1,
+    "documents_with_block_intrusion": 1,
+    "exact": 12,
+    "exact_rate": 0.5455,
+    "exact_lower": 0.3737,
+    "claimed_by_language": {
+     "de": "14/14",
+     "fr": "5/5",
+     "it": "2/2",
+     "rm": "1/1"
+    },
+    "trivial_role_same_scope_exact": "3/22"
+   },
+   "agreement_XY": {
+    "documents": 41,
+    "boundaries": 9,
+    "f1_sym": 1.0,
+    "omission_first_as_ref": 0.0004,
+    "omitted_atoms_first_as_ref": "1/2246",
+    "intrusion_first_as_ref": 0.0009,
+    "class_error": 0.0,
+    "exact_documents_both_directions": [
+     38,
+     38
+    ]
+   }
+  },
+  "L4v_U4_composite_role": {
+   "params": {
+    "map": "SLOT_NOTITLE",
+    "scope": "u4_composite_role",
+    "zones": [
+     "interior",
+     "edge_blocks_1"
+    ],
+    "unit": "atom",
+    "conv": "assembled"
+   },
+   "dev_in_sample": {
+    "documents": 167,
+    "documents_all": 183,
+    "coverage_documents": 0.9126,
+    "coverage_ref_text": 0.8893,
+    "unsure_share_of_claimed_atoms": 0.222,
+    "boundaries_ref": 42,
+    "boundaries_hyp": 30,
+    "correct": 23,
+    "labelled_f1": 0.6389,
+    "labelled_f1_lower": 0.5034,
+    "text_omission": 0.0021,
+    "documents_with_omission": 5,
+    "text_intrusion": 0.2133,
+    "text_class_error": 0.1288,
+    "block_intrusion": 23,
+    "documents_with_block_intrusion": 23,
+    "exact": 55,
+    "exact_rate": 0.3293,
+    "exact_lower": 0.272,
+    "claimed_by_language": {
+     "de": "126/140",
+     "fr": "28/29",
+     "it": "12/13",
+     "unbestimmt": "1/1"
+    },
+    "trivial_role_same_scope_exact": "4/167"
+   },
+   "eval_validation": {
+    "documents": 20,
+    "documents_all": 22,
+    "coverage_documents": 0.9091,
+    "coverage_ref_text": 0.9048,
+    "unsure_share_of_claimed_atoms": 0.2249,
+    "boundaries_ref": 8,
+    "boundaries_hyp": 5,
+    "correct": 5,
+    "labelled_f1": 0.7692,
+    "labelled_f1_lower": 0.459,
+    "text_omission": 0.0,
+    "documents_with_omission": 0,
+    "text_intrusion": 0.0552,
+    "text_class_error": 0.0369,
+    "block_intrusion": 0,
+    "documents_with_block_intrusion": 0,
+    "exact": 10,
+    "exact_rate": 0.5,
+    "exact_lower": 0.3242,
+    "claimed_by_language": {
+     "de": "13/14",
+     "fr": "4/5",
+     "it": "2/2",
+     "rm": "1/1"
+    },
+    "trivial_role_same_scope_exact": "2/20"
+   },
+   "agreement_XY": {
+    "documents": 37,
+    "boundaries": 9,
+    "f1_sym": 1.0,
+    "omission_first_as_ref": 0.0022,
+    "omitted_atoms_first_as_ref": "4/1816",
+    "intrusion_first_as_ref": 0.0011,
+    "class_error": 0.0,
+    "exact_documents_both_directions": [
+     34,
+     34
+    ]
+   }
+  },
+  "L4v_ERR_L4_s1_role": {
+   "params": {
+    "map": "SLOT_NOTITLE",
+    "scope": "s1_written_affair",
+    "zones": [
+     "interior",
+     "edge_blocks_1"
+    ],
+    "unit": "atom",
+    "conv": "assembled"
+   },
+   "dev_in_sample": {
+    "documents": 154,
+    "documents_all": 183,
+    "coverage_documents": 0.8415,
+    "coverage_ref_text": 0.8903,
+    "unsure_share_of_claimed_atoms": 0.2182,
+    "boundaries_ref": 42,
+    "boundaries_hyp": 32,
+    "correct": 24,
+    "labelled_f1": 0.6486,
+    "labelled_f1_lower": 0.5149,
+    "text_omission": 0.0021,
+    "documents_with_omission": 5,
+    "text_intrusion": 0.1358,
+    "text_class_error": 0.1343,
+    "block_intrusion": 12,
+    "documents_with_block_intrusion": 12,
+    "exact": 55,
+    "exact_rate": 0.3571,
+    "exact_lower": 0.296,
+    "claimed_by_language": {
+     "de": "113/140",
+     "fr": "27/29",
+     "it": "13/13",
+     "unbestimmt": "1/1"
+    },
+    "trivial_role_same_scope_exact": "6/154"
+   },
+   "eval_validation": {
+    "documents": 21,
+    "documents_all": 22,
+    "coverage_documents": 0.9545,
+    "coverage_ref_text": 0.7255,
+    "unsure_share_of_claimed_atoms": 0.2202,
+    "boundaries_ref": 6,
+    "boundaries_hyp": 4,
+    "correct": 4,
+    "labelled_f1": 0.8,
+    "labelled_f1_lower": 0.4442,
+    "text_omission": 0.0,
+    "documents_with_omission": 0,
+    "text_intrusion": 0.3499,
+    "text_class_error": 0.0383,
+    "block_intrusion": 1,
+    "documents_with_block_intrusion": 1,
+    "exact": 11,
+    "exact_rate": 0.5238,
+    "exact_lower": 0.3498,
+    "claimed_by_language": {
+     "de": "13/14",
+     "fr": "5/5",
+     "it": "2/2",
+     "rm": "1/1"
+    },
+    "trivial_role_same_scope_exact": "2/21"
+   },
+   "agreement_XY": {
+    "documents": 38,
+    "boundaries": 8,
+    "f1_sym": 1.0,
+    "omission_first_as_ref": 0.0023,
+    "omitted_atoms_first_as_ref": "5/2186",
+    "intrusion_first_as_ref": 0.0009,
+    "class_error": 0.0,
+    "exact_documents_both_directions": [
+     34,
+     34
+    ]
+   }
+  },
+  "L4v_STD4_s1_sure": {
+   "params": {
+    "map": "SLOT_NOTITLE",
+    "scope": "s1_sure_not_other",
+    "zones": [
+     "interior",
+     "edge_blocks_1"
+    ],
+    "unit": "atom",
+    "conv": "assembled"
+   },
+   "dev_in_sample": {
+    "documents": 162,
+    "documents_all": 183,
+    "coverage_documents": 0.8852,
+    "coverage_ref_text": 0.9021,
+    "unsure_share_of_claimed_atoms": 0.2207,
+    "boundaries_ref": 44,
+    "boundaries_hyp": 32,
+    "correct": 24,
+    "labelled_f1": 0.6316,
+    "labelled_f1_lower": 0.4995,
+    "text_omission": 0.0021,
+    "documents_with_omission": 5,
+    "text_intrusion": 0.1637,
+    "text_class_error": 0.1299,
+    "block_intrusion": 14,
+    "documents_with_block_intrusion": 14,
+    "exact": 56,
+    "exact_rate": 0.3457,
+    "exact_lower": 0.2866,
+    "claimed_by_language": {
+     "de": "123/140",
+     "fr": "26/29",
+     "it": "13/13",
+     "unbestimmt": "0/1"
+    },
+    "trivial_role_same_scope_exact": "6/162"
+   },
+   "eval_validation": {
+    "documents": 21,
+    "documents_all": 22,
+    "coverage_documents": 0.9545,
+    "coverage_ref_text": 0.8575,
+    "unsure_share_of_claimed_atoms": 0.2461,
+    "boundaries_ref": 8,
+    "boundaries_hyp": 5,
+    "correct": 5,
+    "labelled_f1": 0.7692,
+    "labelled_f1_lower": 0.459,
+    "text_omission": 0.0,
+    "documents_with_omission": 0,
+    "text_intrusion": 0.3179,
+    "text_class_error": 0.0389,
+    "block_intrusion": 1,
+    "documents_with_block_intrusion": 1,
+    "exact": 11,
+    "exact_rate": 0.5238,
+    "exact_lower": 0.3498,
+    "claimed_by_language": {
+     "de": "13/14",
+     "fr": "5/5",
+     "it": "2/2",
+     "rm": "1/1"
+    },
+    "trivial_role_same_scope_exact": "2/21"
+   },
+   "agreement_XY": {
+    "documents": 37,
+    "boundaries": 10,
+    "f1_sym": 1.0,
+    "omission_first_as_ref": 0.0022,
+    "omitted_atoms_first_as_ref": "5/2322",
+    "intrusion_first_as_ref": 0.0009,
+    "class_error": 0.0,
+    "exact_documents_both_directions": [
+     33,
+     33
+    ]
+   }
+  },
+  "L5v_U5": {
+   "params": {
+    "map": "SLOT_NOTITLE",
+    "scope": "u5_role_agreement",
+    "zones": [
+     "interior",
+     "edge_blocks_1"
+    ],
+    "unit": "atom",
+    "conv": "assembled"
+   },
+   "dev_in_sample": {
+    "documents": 124,
+    "documents_all": 183,
+    "coverage_documents": 0.6776,
+    "coverage_ref_text": 0.6927,
+    "unsure_share_of_claimed_atoms": 0.2068,
+    "boundaries_ref": 31,
+    "boundaries_hyp": 24,
+    "correct": 19,
+    "labelled_f1": 0.6909,
+    "labelled_f1_lower": 0.537,
+    "text_omission": 0.0027,
+    "documents_with_omission": 5,
+    "text_intrusion": 0.1444,
+    "text_class_error": 0.1156,
+    "block_intrusion": 8,
+    "documents_with_block_intrusion": 8,
+    "exact": 47,
+    "exact_rate": 0.379,
+    "exact_lower": 0.3099,
+    "claimed_by_language": {
+     "de": "88/140",
+     "fr": "25/29",
+     "it": "10/13",
+     "unbestimmt": "1/1"
+    },
+    "trivial_role_same_scope_exact": "4/124"
+   },
+   "eval_validation": {
+    "documents": 15,
+    "documents_all": 22,
+    "coverage_documents": 0.6818,
+    "coverage_ref_text": 0.6067,
+    "unsure_share_of_claimed_atoms": 0.1858,
+    "boundaries_ref": 4,
+    "boundaries_hyp": 4,
+    "correct": 4,
+    "labelled_f1": 1.0,
+    "labelled_f1_lower": 0.6375,
+    "text_omission": 0.0,
+    "documents_with_omission": 0,
+    "text_intrusion": 0.0158,
+    "text_class_error": 0.0,
+    "block_intrusion": 0,
+    "documents_with_block_intrusion": 0,
+    "exact": 9,
+    "exact_rate": 0.6,
+    "exact_lower": 0.3906,
+    "claimed_by_language": {
+     "de": "10/14",
+     "fr": "2/5",
+     "it": "2/2",
+     "rm": "1/1"
+    },
+    "trivial_role_same_scope_exact": "2/15"
+   },
+   "agreement_XY": {
+    "documents": 30,
+    "boundaries": 5,
+    "f1_sym": 1.0,
+    "omission_first_as_ref": 0.0029,
+    "omitted_atoms_first_as_ref": "4/1387",
+    "intrusion_first_as_ref": 0.0007,
+    "class_error": 0.0,
+    "exact_documents_both_directions": [
+     28,
+     28
+    ]
+   }
+  },
+  "L7v_U7_atom_bands": {
+   "params": {
+    "map": "SLOT_NOTITLE",
+    "scope": "u6_single_author",
+    "zones": [
+     "frame_band_3",
+     "head_band_3",
+     "run_band_3"
+    ],
+    "unit": "atom",
+    "conv": "assembled"
+   },
+   "dev_in_sample": {
+    "documents": 80,
+    "documents_all": 183,
+    "coverage_documents": 0.4372,
+    "coverage_ref_text": 0.2763,
+    "unsure_share_of_claimed_atoms": 0.2973,
+    "boundaries_ref": 8,
+    "boundaries_hyp": 0,
+    "correct": 0,
+    "labelled_f1": 0.0,
+    "labelled_f1_lower": 0.0,
+    "text_omission": 0.0055,
+    "documents_with_omission": 4,
+    "text_intrusion": 0.0238,
+    "text_class_error": 0.1016,
+    "block_intrusion": 0,
+    "documents_with_block_intrusion": 0,
+    "exact": 55,
+    "exact_rate": 0.6875,
+    "exact_lower": 0.5982,
+    "claimed_by_language": {
+     "de": "59/140",
+     "fr": "11/29",
+     "it": "9/13",
+     "unbestimmt": "1/1"
+    },
+    "trivial_role_same_scope_exact": "10/80"
+   },
+   "eval_validation": {
+    "documents": 11,
+    "documents_all": 22,
+    "coverage_documents": 0.5,
+    "coverage_ref_text": 0.2808,
+    "unsure_share_of_claimed_atoms": 0.2782,
+    "boundaries_ref": 0,
+    "boundaries_hyp": 0,
+    "correct": 0,
+    "labelled_f1": 0.0,
+    "labelled_f1_lower": 0.0,
+    "text_omission": 0.0025,
+    "documents_with_omission": 1,
+    "text_intrusion": 0.0049,
+    "text_class_error": 0.0,
+    "block_intrusion": 0,
+    "documents_with_block_intrusion": 0,
+    "exact": 9,
+    "exact_rate": 0.8182,
+    "exact_lower": 0.581,
+    "claimed_by_language": {
+     "de": "8/14",
+     "fr": "1/5",
+     "it": "1/2",
+     "rm": "1/1"
+    },
+    "trivial_role_same_scope_exact": "2/11"
+   },
+   "agreement_XY": {
+    "documents": 23,
+    "boundaries": 0,
+    "f1_sym": 0.0,
+    "omission_first_as_ref": 0.0,
+    "omitted_atoms_first_as_ref": "0/775",
+    "intrusion_first_as_ref": 0.0013,
+    "class_error": 0.0,
+    "exact_documents_both_directions": [
+     22,
+     22
+    ]
+   }
+  },
+  "L8v_ERR_L3_no_scope": {
+   "params": {
+    "map": "SLOT_NOTITLE",
+    "scope": "all",
+    "zones": [],
+    "unit": "block",
+    "conv": "nos4"
+   },
+   "dev_in_sample": {
+    "documents": 183,
+    "documents_all": 183,
+    "coverage_documents": 1.0,
+    "coverage_ref_text": 1.0,
+    "unsure_share_of_claimed_atoms": 0.0,
+    "boundaries_ref": 53,
+    "boundaries_hyp": 41,
+    "correct": 27,
+    "labelled_f1": 0.5745,
+    "labelled_f1_lower": 0.4551,
+    "text_omission": 0.0,
+    "documents_with_omission": 0,
+    "text_intrusion": 0.3865,
+    "text_class_error": 0.1394,
+    "block_intrusion": 33,
+    "documents_with_block_intrusion": 32,
+    "exact": 116,
+    "exact_rate": 0.6339,
+    "exact_lower": 0.574,
+    "claimed_by_language": {
+     "de": "140/140",
+     "fr": "29/29",
+     "it": "13/13",
+     "unbestimmt": "1/1"
+    },
+    "trivial_role_same_scope_exact": "91/183"
+   },
+   "eval_validation": {
+    "documents": 22,
+    "documents_all": 22,
+    "coverage_documents": 1.0,
+    "coverage_ref_text": 1.0,
+    "unsure_share_of_claimed_atoms": 0.0,
+    "boundaries_ref": 8,
+    "boundaries_hyp": 5,
+    "correct": 5,
+    "labelled_f1": 0.7692,
+    "labelled_f1_lower": 0.459,
+    "text_omission": 0.0,
+    "documents_with_omission": 0,
+    "text_intrusion": 0.4524,
+    "text_class_error": 0.0368,
+    "block_intrusion": 1,
+    "documents_with_block_intrusion": 1,
+    "exact": 18,
+    "exact_rate": 0.8182,
+    "exact_lower": 0.6572,
+    "claimed_by_language": {
+     "de": "14/14",
+     "fr": "5/5",
+     "it": "2/2",
+     "rm": "1/1"
+    },
+    "trivial_role_same_scope_exact": "11/22"
+   },
+   "agreement_XY": {
+    "documents": 41,
+    "boundaries": 14,
+    "f1_sym": 1.0,
+    "omission_first_as_ref": 0.0018,
+    "omitted_atoms_first_as_ref": "5/2797",
+    "intrusion_first_as_ref": 0.0007,
+    "class_error": 0.0,
+    "exact_documents_both_directions": [
+     39,
+     39
+    ]
+   }
+  },
+  "L8v_ERR_L4_s1_scope": {
+   "params": {
+    "map": "SLOT_NOTITLE",
+    "scope": "s1_written_affair",
+    "zones": [],
+    "unit": "block",
+    "conv": "nos4"
+   },
+   "dev_in_sample": {
+    "documents": 154,
+    "documents_all": 183,
+    "coverage_documents": 0.8415,
+    "coverage_ref_text": 0.9542,
+    "unsure_share_of_claimed_atoms": 0.0,
+    "boundaries_ref": 49,
+    "boundaries_hyp": 39,
+    "correct": 26,
+    "labelled_f1": 0.5909,
+    "labelled_f1_lower": 0.4674,
+    "text_omission": 0.0,
+    "documents_with_omission": 0,
+    "text_intrusion": 0.3138,
+    "text_class_error": 0.1349,
+    "block_intrusion": 19,
+    "documents_with_block_intrusion": 18,
+    "exact": 108,
+    "exact_rate": 0.7013,
+    "exact_lower": 0.6382,
+    "claimed_by_language": {
+     "de": "113/140",
+     "fr": "27/29",
+     "it": "13/13",
+     "unbestimmt": "1/1"
+    },
+    "trivial_role_same_scope_exact": "84/154"
+   },
+   "eval_validation": {
+    "documents": 21,
+    "documents_all": 22,
+    "coverage_documents": 0.9545,
+    "coverage_ref_text": 0.8117,
+    "unsure_share_of_claimed_atoms": 0.0,
+    "boundaries_ref": 6,
+    "boundaries_hyp": 4,
+    "correct": 4,
+    "labelled_f1": 0.8,
+    "labelled_f1_lower": 0.4442,
+    "text_omission": 0.0,
+    "documents_with_omission": 0,
+    "text_intrusion": 0.4841,
+    "text_class_error": 0.0368,
+    "block_intrusion": 1,
+    "documents_with_block_intrusion": 1,
+    "exact": 18,
+    "exact_rate": 0.8571,
+    "exact_lower": 0.6996,
+    "claimed_by_language": {
+     "de": "13/14",
+     "fr": "5/5",
+     "it": "2/2",
+     "rm": "1/1"
+    },
+    "trivial_role_same_scope_exact": "11/21"
+   },
+   "agreement_XY": {
+    "documents": 38,
+    "boundaries": 12,
+    "f1_sym": 1.0,
+    "omission_first_as_ref": 0.002,
+    "omitted_atoms_first_as_ref": "5/2526",
+    "intrusion_first_as_ref": 0.0008,
+    "class_error": 0.0,
+    "exact_documents_both_directions": [
+     36,
+     36
+    ]
+   }
+  },
+  "L10v_STD6_no_scope": {
+   "params": {
+    "map": "SLOT_NOTITLE",
+    "scope": "all",
+    "zones": [],
+    "unit": "document",
+    "conv": "assembled"
+   },
+   "dev_in_sample": {
+    "documents": 183,
+    "documents_all": 183,
+    "coverage_documents": 1.0,
+    "coverage_ref_text": 1.0,
+    "unsure_share_of_claimed_atoms": 0.0,
+    "boundaries_ref": 53,
+    "boundaries_hyp": 40,
+    "correct": 25,
+    "labelled_f1": 0.5376,
+    "labelled_f1_lower": 0.4183,
+    "text_omission": 0.0182,
+    "documents_with_omission": 70,
+    "text_intrusion": 0.2349,
+    "text_class_error": 0.137,
+    "block_intrusion": 32,
+    "documents_with_block_intrusion": 31,
+    "exact": 126,
+    "exact_rate": 0.6885,
+    "exact_lower": 0.6303,
+    "claimed_by_language": {
+     "de": "140/140",
+     "fr": "29/29",
+     "it": "13/13",
+     "unbestimmt": "1/1"
+    },
+    "trivial_role_same_scope_exact": "91/183"
+   },
+   "eval_validation": {
+    "documents": 22,
+    "documents_all": 22,
+    "coverage_documents": 1.0,
+    "coverage_ref_text": 1.0,
+    "unsure_share_of_claimed_atoms": 0.0,
+    "boundaries_ref": 8,
+    "boundaries_hyp": 5,
+    "correct": 5,
+    "labelled_f1": 0.7692,
+    "labelled_f1_lower": 0.459,
+    "text_omission": 0.0229,
+    "documents_with_omission": 12,
+    "text_intrusion": 0.3057,
+    "text_class_error": 0.0341,
+    "block_intrusion": 1,
+    "documents_with_block_intrusion": 1,
+    "exact": 19,
+    "exact_rate": 0.8636,
+    "exact_lower": 0.7118,
+    "claimed_by_language": {
+     "de": "14/14",
+     "fr": "5/5",
+     "it": "2/2",
+     "rm": "1/1"
+    },
+    "trivial_role_same_scope_exact": "11/22"
+   },
+   "agreement_XY": {
+    "documents": 41,
+    "boundaries": 14,
+    "f1_sym": 1.0,
+    "omission_first_as_ref": 0.0018,
+    "omitted_atoms_first_as_ref": "5/2797",
+    "intrusion_first_as_ref": 0.0007,
+    "class_error": 0.0,
+    "exact_documents_both_directions": [
+     41,
+     41
+    ]
+   }
+  },
+  "L10v_ERR_L5_block": {
+   "params": {
+    "map": "SLOT_NOTITLE",
+    "scope": "s1_written_affair",
+    "zones": [],
+    "unit": "block",
+    "conv": "nos4",
+    "merge_if_s1_combined": true
+   },
+   "dev_in_sample": {
+    "documents": 154,
+    "documents_all": 183,
+    "coverage_documents": 0.8415,
+    "coverage_ref_text": 0.9542,
+    "unsure_share_of_claimed_atoms": 0.0,
+    "boundaries_ref": 25,
+    "boundaries_hyp": 16,
+    "correct": 11,
+    "labelled_f1": 0.5366,
+    "labelled_f1_lower": 0.3604,
+    "text_omission": 0.0,
+    "documents_with_omission": 0,
+    "text_intrusion": 0.3138,
+    "text_class_error": 0.0938,
+    "block_intrusion": 23,
+    "documents_with_block_intrusion": 21,
+    "exact": 114,
+    "exact_rate": 0.7403,
+    "exact_lower": 0.6791,
+    "claimed_by_language": {
+     "de": "113/140",
+     "fr": "27/29",
+     "it": "13/13",
+     "unbestimmt": "1/1"
+    },
+    "trivial_role_same_scope_exact": "113/154"
+   },
+   "eval_validation": {
+    "documents": 21,
+    "documents_all": 22,
+    "coverage_documents": 0.9545,
+    "coverage_ref_text": 0.8117,
+    "unsure_share_of_claimed_atoms": 0.0,
+    "boundaries_ref": 1,
+    "boundaries_hyp": 3,
+    "correct": 1,
+    "labelled_f1": 0.5,
+    "labelled_f1_lower": 0.098,
+    "text_omission": 0.0,
+    "documents_with_omission": 0,
+    "text_intrusion": 0.4841,
+    "text_class_error": 0.0026,
+    "block_intrusion": 1,
+    "documents_with_block_intrusion": 1,
+    "exact": 19,
+    "exact_rate": 0.9048,
+    "exact_lower": 0.7605,
+    "claimed_by_language": {
+     "de": "13/14",
+     "fr": "5/5",
+     "it": "2/2",
+     "rm": "1/1"
+    },
+    "trivial_role_same_scope_exact": "17/21"
+   },
+   "agreement_XY": {
+    "documents": 38,
+    "boundaries": 12,
+    "f1_sym": 1.0,
+    "omission_first_as_ref": 0.002,
+    "omitted_atoms_first_as_ref": "5/2526",
+    "intrusion_first_as_ref": 0.0008,
+    "class_error": 0.0,
+    "exact_documents_both_directions": [
+     36,
+     36
+    ]
+   }
+  },
+  "L10v_role_agreement": {
+   "params": {
+    "map": "SLOT_NOTITLE",
+    "scope": "role_agreement",
+    "zones": [],
+    "unit": "document",
+    "conv": "assembled"
+   },
+   "dev_in_sample": {
+    "documents": 124,
+    "documents_all": 183,
+    "coverage_documents": 0.6776,
+    "coverage_ref_text": 0.7437,
+    "unsure_share_of_claimed_atoms": 0.0,
+    "boundaries_ref": 33,
+    "boundaries_hyp": 25,
+    "correct": 18,
+    "labelled_f1": 0.6207,
+    "labelled_f1_lower": 0.469,
+    "text_omission": 0.0171,
+    "documents_with_omission": 49,
+    "text_intrusion": 0.1618,
+    "text_class_error": 0.1143,
+    "block_intrusion": 10,
+    "documents_with_block_intrusion": 10,
+    "exact": 103,
+    "exact_rate": 0.8306,
+    "exact_lower": 0.7698,
+    "claimed_by_language": {
+     "de": "88/140",
+     "fr": "25/29",
+     "it": "10/13",
+     "unbestimmt": "1/1"
+    },
+    "trivial_role_same_scope_exact": "80/124"
+   },
+   "eval_validation": {
+    "documents": 15,
+    "documents_all": 22,
+    "coverage_documents": 0.6818,
+    "coverage_ref_text": 0.6776,
+    "unsure_share_of_claimed_atoms": 0.0,
+    "boundaries_ref": 4,
+    "boundaries_hyp": 4,
+    "correct": 4,
+    "labelled_f1": 1.0,
+    "labelled_f1_lower": 0.6375,
+    "text_omission": 0.0174,
+    "documents_with_omission": 7,
+    "text_intrusion": 0.041,
+    "text_class_error": 0.0,
+    "block_intrusion": 0,
+    "documents_with_block_intrusion": 0,
+    "exact": 15,
+    "exact_rate": 1.0,
+    "exact_lower": 0.8817,
+    "claimed_by_language": {
+     "de": "10/14",
+     "fr": "2/5",
+     "it": "2/2",
+     "rm": "1/1"
+    },
+    "trivial_role_same_scope_exact": "11/15"
+   },
+   "agreement_XY": {
+    "documents": 30,
+    "boundaries": 6,
+    "f1_sym": 1.0,
+    "omission_first_as_ref": 0.0025,
+    "omitted_atoms_first_as_ref": "4/1574",
+    "intrusion_first_as_ref": 0.0006,
+    "class_error": 0.0,
+    "exact_documents_both_directions": [
+     30,
+     30
+    ]
+   }
+  },
+  "X1_ERR_L6_step_merged_block": {
+   "params": {
+    "map": "STEP_NOTITLE",
+    "scope": "s1_written_affair",
+    "zones": [],
+    "unit": "block",
+    "conv": "nos4"
+   },
+   "dev_in_sample": {
+    "documents": 154,
+    "documents_all": 183,
+    "coverage_documents": 0.8415,
+    "coverage_ref_text": 0.9542,
+    "unsure_share_of_claimed_atoms": 0.0,
+    "boundaries_ref": 23,
+    "boundaries_hyp": 21,
+    "correct": 16,
+    "labelled_f1": 0.7273,
+    "labelled_f1_lower": 0.5558,
+    "text_omission": 0.0,
+    "documents_with_omission": 0,
+    "text_intrusion": 0.3138,
+    "text_class_error": 0.0101,
+    "block_intrusion": 31,
+    "documents_with_block_intrusion": 27,
+    "exact": 117,
+    "exact_rate": 0.7597,
+    "exact_lower": 0.6998,
+    "claimed_by_language": {
+     "de": "113/140",
+     "fr": "27/29",
+     "it": "13/13",
+     "unbestimmt": "1/1"
+    },
+    "trivial_role_same_scope_exact": "119/154"
+   },
+   "eval_validation": {
+    "documents": 21,
+    "documents_all": 22,
+    "coverage_documents": 0.9545,
+    "coverage_ref_text": 0.8117,
+    "unsure_share_of_claimed_atoms": 0.0,
+    "boundaries_ref": 1,
+    "boundaries_hyp": 3,
+    "correct": 1,
+    "labelled_f1": 0.5,
+    "labelled_f1_lower": 0.098,
+    "text_omission": 0.0,
+    "documents_with_omission": 0,
+    "text_intrusion": 0.4841,
+    "text_class_error": 0.0026,
+    "block_intrusion": 1,
+    "documents_with_block_intrusion": 1,
+    "exact": 19,
+    "exact_rate": 0.9048,
+    "exact_lower": 0.7605,
+    "claimed_by_language": {
+     "de": "13/14",
+     "fr": "5/5",
+     "it": "2/2",
+     "rm": "1/1"
+    },
+    "trivial_role_same_scope_exact": "18/21"
+   },
+   "agreement_XY": {
+    "documents": 38,
+    "boundaries": 5,
+    "f1_sym": 1.0,
+    "omission_first_as_ref": 0.002,
+    "omitted_atoms_first_as_ref": "5/2526",
+    "intrusion_first_as_ref": 0.0008,
+    "class_error": 0.0,
+    "exact_documents_both_directions": [
+     36,
+     36
+    ]
+   }
+  },
+  "X2_block_single_author": {
+   "params": {
+    "map": "SLOT_NOTITLE",
+    "scope": "single_author_agreement",
+    "zones": [],
+    "unit": "block",
+    "conv": "nos4"
+   },
+   "dev_in_sample": {
+    "documents": 80,
+    "documents_all": 183,
+    "coverage_documents": 0.4372,
+    "coverage_ref_text": 0.3644,
+    "unsure_share_of_claimed_atoms": 0.0,
+    "boundaries_ref": 8,
+    "boundaries_hyp": 0,
+    "correct": 0,
+    "labelled_f1": 0.0,
+    "labelled_f1_lower": 0.0,
+    "text_omission": 0.0,
+    "documents_with_omission": 0,
+    "text_intrusion": 0.2832,
+    "text_class_error": 0.11,
+    "block_intrusion": 2,
+    "documents_with_block_intrusion": 2,
+    "exact": 69,
+    "exact_rate": 0.8625,
+    "exact_lower": 0.7899,
+    "claimed_by_language": {
+     "de": "59/140",
+     "fr": "11/29",
+     "it": "9/13",
+     "unbestimmt": "1/1"
+    },
+    "trivial_role_same_scope_exact": "69/80"
+   },
+   "eval_validation": {
+    "documents": 11,
+    "documents_all": 22,
+    "coverage_documents": 0.5,
+    "coverage_ref_text": 0.3683,
+    "unsure_share_of_claimed_atoms": 0.0,
+    "boundaries_ref": 0,
+    "boundaries_hyp": 0,
+    "correct": 0,
+    "labelled_f1": 0.0,
+    "labelled_f1_lower": 0.0,
+    "text_omission": 0.0,
+    "documents_with_omission": 0,
+    "text_intrusion": 0.2598,
+    "text_class_error": 0.0,
+    "block_intrusion": 0,
+    "documents_with_block_intrusion": 0,
+    "exact": 11,
+    "exact_rate": 1.0,
+    "exact_lower": 0.8431,
+    "claimed_by_language": {
+     "de": "8/14",
+     "fr": "1/5",
+     "it": "1/2",
+     "rm": "1/1"
+    },
+    "trivial_role_same_scope_exact": "11/11"
+   },
+   "agreement_XY": {
+    "documents": 23,
+    "boundaries": 0,
+    "f1_sym": 0.0,
+    "omission_first_as_ref": 0.0,
+    "omitted_atoms_first_as_ref": "0/1001",
+    "intrusion_first_as_ref": 0.001,
+    "class_error": 0.0,
+    "exact_documents_both_directions": [
+     23,
+     22
+    ]
+   }
+  },
+  "X3_STD5_one_text_class_atom": {
+   "params": {
+    "map": "TEXT_NOTITLE",
+    "scope": "all",
+    "zones": [
+     "interior",
+     "edge_blocks_1"
+    ],
+    "unit": "atom",
+    "conv": "assembled"
+   },
+   "dev_in_sample": {
+    "documents": 183,
+    "documents_all": 183,
+    "coverage_documents": 1.0,
+    "coverage_ref_text": 0.9418,
+    "unsure_share_of_claimed_atoms": 0.218,
+    "boundaries_ref": 9,
+    "boundaries_hyp": 4,
+    "correct": 2,
+    "labelled_f1": 0.3077,
+    "labelled_f1_lower": 0.0957,
+    "text_omission": 0.002,
+    "documents_with_omission": 5,
+    "text_intrusion": 0.2181,
+    "text_class_error": 0.0077,
+    "block_intrusion": 24,
+    "documents_with_block_intrusion": 24,
+    "exact": 61,
+    "exact_rate": 0.3333,
+    "exact_lower": 0.2782,
+    "claimed_by_language": {
+     "de": "140/140",
+     "fr": "29/29",
+     "it": "13/13",
+     "unbestimmt": "1/1"
+    },
+    "trivial_role_same_scope_exact": "9/183"
+   },
+   "eval_validation": {
+    "documents": 22,
+    "documents_all": 22,
+    "coverage_documents": 1.0,
+    "coverage_ref_text": 0.9048,
+    "unsure_share_of_claimed_atoms": 0.2504,
+    "boundaries_ref": 2,
+    "boundaries_hyp": 1,
+    "correct": 1,
+    "labelled_f1": 0.6667,
+    "labelled_f1_lower": 0.1365,
+    "text_omission": 0.0,
+    "documents_with_omission": 0,
+    "text_intrusion": 0.3089,
+    "text_class_error": 0.0061,
+    "block_intrusion": 1,
+    "documents_with_block_intrusion": 1,
+    "exact": 11,
+    "exact_rate": 0.5,
+    "exact_lower": 0.3317,
+    "claimed_by_language": {
+     "de": "14/14",
+     "fr": "5/5",
+     "it": "2/2",
+     "rm": "1/1"
+    },
+    "trivial_role_same_scope_exact": "2/22"
+   },
+   "agreement_XY": {
+    "documents": 41,
+    "boundaries": 2,
+    "f1_sym": 1.0,
+    "omission_first_as_ref": 0.002,
+    "omitted_atoms_first_as_ref": "5/2474",
+    "intrusion_first_as_ref": 0.0004,
+    "class_error": 0.0,
+    "exact_documents_both_directions": [
+     38,
+     38
+    ]
+   }
+  }
+ },
+ "removed": [
+  {
+   "id": "R1",
+   "proposals": [
+    "ERR-L6",
+    "STD5 at the block unit"
+   ],
+   "name": "Step kind abstained in all documents (block unit)",
+   "reason": "Degenerate. A trivial converter (each atom without a fixed answer gets one class) gets 119 of 154 dev documents exact (method 117) and 18 of 21 eval documents (method 19). The value then measures only the scope rule and the fixed rules, not an isolation decision. A passed gate is worth nothing here (purpose of the integrity conditions; check CC5).",
+   "values": "variant X1_ERR_L6_step_merged_block in ladder_values.json"
+  },
+  {
+   "id": "R2",
+   "proposals": [
+    "combination ERR-L3 x U6 (considered in this step)"
+   ],
+   "name": "Block unit on single-author documents",
+   "reason": "Degenerate. The trivial converter 'role only' gets the method values on the same documents: dev 69 of 80 (method 69), eval 11 of 11 (method 11).",
+   "values": "variant X2_block_single_author"
+  },
+  {
+   "id": "R3",
+   "proposals": [
+    "ERR-L5"
+   ],
+   "name": "Step split abstained in combined documents (block unit)",
+   "reason": "Near degenerate and a duplicate of L10. The trivial converter 'role only' gets 113 of 154 dev documents (method 114) and 17 of 21 eval documents (method 19). The claim is the S1 classification of the document; L10 states this claim openly. Kept as variant L10v_ERR_L5_block.",
+   "values": "variant L10v_ERR_L5_block"
+  },
+  {
+   "id": "R4",
+   "proposals": [
+    "STD5 at the atom unit"
+   ],
+   "name": "Affair text or no text (one text class) with the L3 zones",
+   "reason": "Duplicate of L3 for the gate: the binding errors (intrusion and the exact rate) do not change (eval exact 11 of 22 in both; dev 61 against 58). It removes the author, which is the main value of the record.",
+   "values": "variant X3_STD5_one_text_class_atom"
+  }
+ ],
+ "merged_duplicates": [
+  {
+   "level": "L1",
+   "same": [
+    "STD1",
+    "ERR-L1",
+    "U1"
+   ],
+   "note": "STD1 also merges speech and proposition into vote; kept as variant."
+  },
+  {
+   "level": "L2",
+   "same": [
+    "STD2",
+    "ERR-L2",
+    "U3 (title class part)"
+   ],
+   "note": "STD2 values use the plenary merge of STD1."
+  },
+  {
+   "level": "L3",
+   "same": [
+    "STD3",
+    "U2",
+    "U3 (head band)"
+   ],
+   "note": "U2 and U3 bands kept as variant L3v_U2U3_atom_bands."
+  },
+  {
+   "level": "L4",
+   "same": [
+    "U4",
+    "ERR-L4",
+    "STD4"
+   ],
+   "note": "Canonical signal: both U4 and ERR-L4 (chosen on dev)."
+  },
+  {
+   "level": "L5",
+   "same": [
+    "U5"
+   ],
+   "note": ""
+  },
+  {
+   "level": "L6",
+   "same": [
+    "U6"
+   ],
+   "note": ""
+  },
+  {
+   "level": "L7",
+   "same": [
+    "U7"
+   ],
+   "note": "U7 bands kept as variant L7v_U7_atom_bands."
+  },
+  {
+   "level": "L8",
+   "same": [
+    "ERR-L3",
+    "ERR-L4"
+   ],
+   "note": "ERR-L3 without scope kept as variant L8v_ERR_L3_no_scope."
+  },
+  {
+   "level": "L10",
+   "same": [
+    "STD6",
+    "ERR-L5"
+   ],
+   "note": "See removed R3."
+  }
+ ],
+ "limit_changes": [
+  {
+   "id": "LC1",
+   "proposals": [
+    "LIM1",
+    "ERR-LC point 2"
+   ],
+   "type": "limit change (task unchanged)",
+   "item": "G3a.6 omission limit 0.002",
+   "reason": "Process rule 2.3. Blind X|Y omission with X as the reference: 0.0024 (7 of 2,895 atoms, 41 group documents with triage PASS) at L0 and L1; 0.0026 on all 48 group documents. With the converter zones and scope: L4 0.0026, L5 0.0029, L8 0.0023, L9 0.0025, L10 0.0023. A limit of 0.003 agrees with rule 2.3.",
+   "applies_to": [
+    "L0",
+    "L1",
+    "L4",
+    "L5",
+    "L8",
+    "L9",
+    "L10"
+   ],
+   "note": "No conflict at L2 (0.0018), L3 (0.0020), L6 and L7 (0.0). Jonathan decides before the measurement (process rule 1.5)."
+  }
+ ],
+ "criterion_changes": [
+  {
+   "id": "CC1",
+   "proposals": [
+    "ERR-LC point 1",
+    "U3",
+    "STD notes item 4"
+   ],
+   "type": "criterion change of a new gate (follows from the task change)",
+   "item": "G3a.5 labelled boundary F1 as a decisive criterion",
+   "reason": "A Jeffreys lower bound of 0.90 needs 18 or more reference boundaries with 0 errors (gate-3a draft, chapter 6.1). From L2 on, the expected count on 28 test documents is below 18. Keep F1 as a reported value and decide on G3a.9 with its Jeffreys lower bound.",
+   "applies_to": [
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6",
+    "L7",
+    "L8",
+    "L9",
+    "L10"
+   ]
+  },
+  {
+   "id": "CC2",
+   "proposals": [
+    "ERR-LC point 3"
+   ],
+   "type": "criterion change of a new gate",
+   "item": "G3a.6b text intrusion at the block unit",
+   "reason": "At the block unit the converter does not claim the extent, so atom intrusion has no object. Block intrusion = 0 goes into the exact rule; atom intrusion stays a reported value (share of frame lines in the claimed text).",
+   "applies_to": [
+    "L8",
+    "L9"
+   ]
+  },
+  {
+   "id": "CC3",
+   "proposals": [
+    "U6"
+   ],
+   "type": "criterion change of a new gate (stricter)",
+   "item": "text class error <= 0.01",
+   "reason": "Without boundaries, an author error shows only as class error. The limit is the G3a.6b value.",
+   "applies_to": [
+    "L6",
+    "L7"
+   ]
+  },
+  {
+   "id": "CC4",
+   "proposals": [
+    "U note 10",
+    "STD3 risks"
+   ],
+   "type": "criterion change of a new gate",
+   "item": "coverage floor (claimed documents and reference text outside the zones)",
+   "reason": "An abstention on all documents must not pass. Jonathan sets the floor before the measurement.",
+   "applies_to": [
+    "L3",
+    "L4",
+    "L5",
+    "L6",
+    "L7",
+    "L8",
+    "L9",
+    "L10"
+   ]
+  },
+  {
+   "id": "CC5",
+   "proposals": [
+    "this step"
+   ],
+   "type": "criterion change of a new gate",
+   "item": "trivial check",
+   "reason": "The method must have more exact documents than the trivial converter 'role only' on the same claimed documents and atoms. Else the level measures no isolation (removed R1 to R3).",
+   "applies_to": [
+    "L8",
+    "L9",
+    "L10"
+   ]
+  }
+ ],
+ "integrity_check": {
+  "condition_1_reduction_changes_the_task": "Each level L1 to L10 changes classes, unit, scope or abstention. LC1 is the only limit change and is kept apart.",
+  "condition_2_labels_from_ech_0295": "Each coarse class is an I95 slot with the range TextBlock, or none, or furniture. L10 uses sets of these classes.",
+  "condition_3_scope_and_abstention_from_the_document": "Scope and zone functions get the converter answers, the Docling blocks, the fixed answers and the stored converter signals only (ladder_impl.apply). Coverage is reported for each level.",
+  "condition_4_process_rules": "Criteria are not written here (rule 1.5); LC1 and CC1 to CC5 are proposals for Jonathan. Rule 2.3 conflicts are listed for each level.",
+  "condition_5_final_measurement": "No step here read test content, group 7 files or final_* files. The final measurement is in final_measurement.",
+  "trivial_check": "Each level was measured with trivial converters (role only, all text, all none). R1 and R2 failed this check and were removed."
+ },
+ "observations": [
+  "No isolation level meets all criteria on dev with the stored outputs, although dev is in-sample.",
+  "Atom path: intrusion binds on dev at each isolation level (L7: 0.020) and on eval up to L5; omission binds on dev from L4 on; the exact rate binds on dev at each isolation level.",
+  "On eval (validation), L7, L8, L9 and L10 reach the point limit 0.80 of G3a.9.",
+  "L9 is nearest on both splits: dev 99 of 124 = 0.798 (in-sample), eval 15 of 15 (validation). It needs CC1, CC2, CC4, CC5 and a decision on LC1.",
+  "At L8 to L10 the method has 19 to 33 more exact dev documents than the trivial converter 'role only' on the same documents.",
+  "Variant L10v_role_agreement: dev 103 of 124 (0.831, in-sample), eval 15 of 15; it is a classification, not an isolation.",
+  "At each isolation level, method work on dev is necessary before a pass is plausible: frame blocks claimed as text, the start author without a cue, documents without a text field."
+ ],
+ "final_measurement": [
+  "Jonathan selects one isolation level and its variant.",
+  "Write the gate criteria before the measurement (process rule 1.5), with LC1 and CC1 to CC5 decided.",
+  "Get human acceptance of the comparison basis: the gold set records of the test parliaments, reviewed by Jonathan (process rule 2.1).",
+  "Freeze ladder.json, ladder_impl.py and the converter code; record the SHA-256 values in the protocol (process rule 2.7).",
+  "Run the converter once on the test documents (the S1 Apertus signal of L6 and L7 needs CSCS requests in that step).",
+  "Derive the E20 answers of each gold set record (m03_gold_record.derive), apply the collapse map, the scope and the zones, and measure.",
+  "Calculate G3a.3 on the two AI codings of the final documents with the same map, scope and zones.",
+  "Report all levels L0 to L10 in one table from the same frozen run, with the coverage columns and the trivial check."
+ ]
+}

@@ -1,7 +1,7 @@
 {
  "schema": "parlpdfech-sources/1",
- "private_commit": "7efdc54",
- "written": "12.10.2026, 15:30 CEST",
+ "private_commit": "6c7fdee",
+ "written": "14.10.2026 13:45",
  "spdx_line": "# SPDX-License-Identifier: Apache-2.0",
  "files": [
   {
@@ -779,6 +779,1121 @@
      "reason": "the columns doc_id, sprache, sprache_quelle of the 3 samples only"
     }
    ]
+  },
+  {
+   "copy": "src/converter_gj/m11_rules_pdf.py",
+   "copy_sha256": "b230ab46630f7412c14fbc8e3201895ad6b8b0c523c49f5589d6be4c9c5c32a2",
+   "source": "src/m11_rules_pdf.py",
+   "source_sha256": "1ba501786fa361f25c3f2391c952e940c1eb22471fd35682dc9bfe243cf1894e",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      3,
+      3
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5) for the AI",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      97,
+      97
+     ],
+     "new": "ACTOR = \"AI agent (Claude Opus 5.5); no human checked this file\"",
+     "reason": "code string: the internal role names of the AI agents are replaced by \"AI agent\" (the string is a text of a record or a message; the code does not compare it)"
+    },
+    {
+     "lines": [
+      472,
+      472
+     ],
+     "new": "        f\"Actor: AI agent (Claude Opus 5.5). No human checked this file. Status: PROPOSED. Made: {o['made']}.\",",
+     "reason": "code string: the internal role names of the AI agents are replaced by \"AI agent\" (the string is a text of a record or a message; the code does not compare it)"
+    }
+   ],
+   "masked_source_sha256": "78c72d74edd0ad74b3fb4cf50c880b0d74bcb9b4dca22a7b3384690b90615d9d"
+  },
+  {
+   "copy": "src/converter_gj/m11_values_base.py",
+   "copy_sha256": "ac9540f269e1a8bd1044c5f3e21f1af7ad23d6d0f14d41f15243b2ee2e04b815",
+   "source": "src/m11_values_base.py",
+   "source_sha256": "92a75106966ae9170131b8c3e0b4e92aa2d524158fff7a1df34f030b585abb18",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      1,
+      1
+     ],
+     "new": "\"\"\"Plan `crisp-dm/04-modeling/plan-ech-from-pdf.md`, task <id>: the common interface of the value rules that read",
+     "reason": "docstring: the id of an internal workflow run or task is replaced by \"<id>\""
+    },
+    {
+     "lines": [
+      4,
+      4
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5) for the AI",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      19,
+      19
+     ],
+     "new": "                                   `allow_closed=True` is only for the one opening that the AI agent orders.",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      681,
+      681
+     ],
+     "new": "    daten/gj/fullrun_b1s_dev/decisions/<doc>.json. allow_closed=True is only for the one opening that the AI",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      688,
+      688
+     ],
+     "new": "        raise ClosedParliament(f\"{d}: the document is in a closed parliament; the AI agent did not order the opening\")",
+     "reason": "code string: the internal role names of the AI agents are replaced by \"AI agent\" (the string is a text of a record or a message; the code does not compare it)"
+    },
+    {
+     "lines": [
+      984,
+      984
+     ],
+     "new": "    ap = argparse.ArgumentParser(description=\"common interface of the value rules (plan task <id>)\")",
+     "reason": "code string: the id of an internal workflow run or task is replaced by \"<id>\" (the string is a text of a record or a message; the code does not compare it)"
+    }
+   ],
+   "masked_source_sha256": "df08b5b2f7efb8ce1683afc7e20f6e67ac82e1ac15ea12735ee2c2d99b5e1778"
+  },
+  {
+   "copy": "src/converter_gj/m11_value_norm.py",
+   "copy_sha256": "6f9872e7891dd9b73d965a667a26b63813712125a6a277e2def9848292645d80",
+   "source": "src/m11_value_norm.py",
+   "source_sha256": "0966639df3a425c1a9028618e97dae8c4ebdfce8a2bc9cb82a624a4115f8d75c",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": []
+  },
+  {
+   "copy": "src/converter_gj/m11_values_dates_responder.py",
+   "copy_sha256": "f03f5603057dac1c72af185f7d50cff28ec9bd6a316f74972a12bd7bdfe00a35",
+   "source": "src/m11_values_dates_responder.py",
+   "source_sha256": "323406333d390da4b3b4bc1bc7ac2fd8abd0fde729837c534825bf0bdf1ca0cf",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      1,
+      1
+     ],
+     "new": "\"\"\"Plan `crisp-dm/04-modeling/plan-ech-from-pdf.md`, task <id>: the value rules for the submission date, the",
+     "reason": "docstring: the id of an internal workflow run or task is replaced by \"<id>\""
+    },
+    {
+     "lines": [
+      4,
+      4
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5) for the AI",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    }
+   ],
+   "masked_source_sha256": "b85dc5f16ac4aa3c250709d34fda418c9775a7cc34e1cca16e3ac1145ff42a70"
+  },
+  {
+   "copy": "src/converter_gj/m11_values_title.py",
+   "copy_sha256": "7bec55cbf6c9a94ef9e79ccdf8563d035bf792bad35b3e947d24c5647c9a1727",
+   "source": "src/m11_values_title.py",
+   "source_sha256": "e92f86226b8ef4f066e2b5e4b3ddef00c3bb19b8d10b91510d1d3334d73b3a8c",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      1,
+      1
+     ],
+     "new": "\"\"\"Plan `crisp-dm/04-modeling/plan-ech-from-pdf.md`, task <id>: the rule that reads the title of the affair",
+     "reason": "docstring: the id of an internal workflow run or task is replaced by \"<id>\""
+    },
+    {
+     "lines": [
+      4,
+      4
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5) for the AI",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      1956,
+      1956
+     ],
+     "new": "    ap = argparse.ArgumentParser(description=\"rule for the title (plan task <id>)\")",
+     "reason": "code string: the id of an internal workflow run or task is replaced by \"<id>\" (the string is a text of a record or a message; the code does not compare it)"
+    }
+   ],
+   "masked_source_sha256": "8fa4bfcf6b2f43d30fe4c1816f4114d3752e220ba09ccb5d335c240afde76133"
+  },
+  {
+   "copy": "src/converter_gj/m11_values_type_number.py",
+   "copy_sha256": "e9e94346bb0a691b7794c12967a8a6c2a0fc3875bfc206a64a5d71cdc928b25e",
+   "source": "src/m11_values_type_number.py",
+   "source_sha256": "8514d505e40b6de3f2757bad3ee388754b1ca147d5db168661fc2423d566e461",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      1,
+      1
+     ],
+     "new": "\"\"\"Plan `crisp-dm/04-modeling/plan-ech-from-pdf.md`, task <id>: the value rules for the affair type and the affair",
+     "reason": "docstring: the id of an internal workflow run or task is replaced by \"<id>\""
+    },
+    {
+     "lines": [
+      4,
+      4
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5) for the AI",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      1391,
+      1391
+     ],
+     "new": "    ap = argparse.ArgumentParser(description=\"value rules for the affair type and the affair number (task <id>)\")",
+     "reason": "code string: the id of an internal workflow run or task is replaced by \"<id>\" (the string is a text of a record or a message; the code does not compare it)"
+    }
+   ],
+   "masked_source_sha256": "8285f7da7c6a7253a8bda502d800272bd35bebdf2244c9cf9777c1aa50b35eaf"
+  },
+  {
+   "copy": "src/converter_gj/m11_cascade.py",
+   "copy_sha256": "d0b6b9fdb79f479f25a5f93cbfd0a3aa2f98788905ce14483ed0b99d945a4679",
+   "source": "src/m11_cascade.py",
+   "source_sha256": "b4fb41bab7905aff57e2f2938d2fe1e0623b0defc8f799cef176951fd0d896b5",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      4,
+      4
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5) for the AI",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    }
+   ],
+   "masked_source_sha256": "1a74fe6827c7d6e05f1222656bdcf7fb106ff22384db0863cc6e1cbfcde4d4bc"
+  },
+  {
+   "copy": "src/converter_gj/m11_cascade.yaml",
+   "copy_sha256": "75d094b22cd0d92bbd4e9e3002a27c4b3bac2f55afac3871f94ee21609c18828",
+   "source": "src/m11_cascade.yaml",
+   "source_sha256": "ec8f7a51ae8e69ee2f9b6b531ac44f4dacb9c6e2c62853bba3b3376f04b5b5e7",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      3,
+      3
+     ],
+     "new": "# Actor: AI agent (Claude Opus 5.5) for the AI agent, 13.10.2026. No human checked this file.",
+     "reason": "text: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      11,
+      11
+     ],
+     "new": "changed: \"2026-10-13: rule R30 (decision D2 of the AI agent): Submission.sponsorship applies to the kind response\"",
+     "reason": "text: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      660,
+      660
+     ],
+     "new": "    note: \"No rule in the standard: project choice (decision D2 of the AI agent, 13.10.2026). A response document that prints the authors and the date of the proposal in its head states them. Its record has a submission step with the sponsorship and the date and with no text block. Before this decision the rule cut the sponsorship for the kind response.\"",
+     "reason": "text: the internal role names of the AI agents are replaced by \"AI agent\""
+    }
+   ],
+   "masked_source_sha256": "b478498884cdbdd4c5a55e4f962d27d843c401e11072db20d8a5376d0634a0d9"
+  },
+  {
+   "copy": "src/converter_gj/m11_values_cascade.py",
+   "copy_sha256": "be17463db876ff8842de7f8f741a3e5547650087c3a3f0d3f54aab8e7c10dce7",
+   "source": "src/m11_values_cascade.py",
+   "source_sha256": "91aed34f49a7d0d8a5af436d117ccef2b2d81d4dcba31c697d75e06df3485bed",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      3,
+      3
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5) for the AI",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      30,
+      30
+     ],
+     "new": "  V2  NOT IN USE since version 2 of this reader (13.10.2026, decision D2 of the AI agent). V2 was decision (a)",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      41,
+      41
+     ],
+     "new": "  V5  DECISION of the AI agent, 13.10.2026 (version 3 of this reader). The S1 rule id D0 says that no rule of",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    }
+   ],
+   "masked_source_sha256": "9896652d9f5528f81af2a908cbb4fa8ad1a5c90c65d4f44f22bb0d40135f115b"
+  },
+  {
+   "copy": "src/converter_gj/m11_values_combined.py",
+   "copy_sha256": "4c2f49354f082ac8f166d0c50a284b2a50a09cd15c37e80e7fe738bd8fd95883",
+   "source": "src/m11_values_combined.py",
+   "source_sha256": "4de6deaa7fd9ac917be5d2a31a6c66344ece468c41d06aa1a36527b8ea9a0286",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      3,
+      3
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5) for the AI",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    }
+   ],
+   "masked_source_sha256": "c701cb48c5af7c0b791fa6785deae865ecff0c4a9c22b3ae17fa1670fa69c475"
+  },
+  {
+   "copy": "src/converter_gj/m11_writer.py",
+   "copy_sha256": "d8604eb054279878612cf68231607c4361719d144f985ca655202b7436568828",
+   "source": "src/m11_writer.py",
+   "source_sha256": "8a70b0f5574f6781e6415f8eafc86725cc27f89cce51f5f6e12e45dbbda8e6d1",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      2,
+      2
+     ],
+     "new": "\"\"\"Writer of the eCH-0295 record whose head values are read from the PDF (plan `plan-ech-from-pdf.md`, task <id>).",
+     "reason": "docstring: the id of an internal workflow run or task is replaced by \"<id>\""
+    },
+    {
+     "lines": [
+      4,
+      4
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5) for the AI",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    }
+   ],
+   "masked_source_sha256": "2fa23efaf2571e7e8d4ea2238cb4f36eeed9a73bc7e8c19265ed0a0029018ab5"
+  },
+  {
+   "copy": "src/converter_gj/m11_validate.py",
+   "copy_sha256": "36eac021ec24871d931a05fddc82040bcfda1e231b24d7600624d22bcf6953a6",
+   "source": "src/m11_validate.py",
+   "source_sha256": "9a2f3327ecf269479e6e82247d61dfa967243832e4355d6cfb83d0afc0a76d63",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      4,
+      4
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5), task <id>",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\"; the id of an internal workflow run or task is replaced by \"<id>\""
+    },
+    {
+     "lines": [
+      5,
+      5
+     ],
+     "new": "of crisp-dm/04-modeling/plan-ech-from-pdf.md, for the AI agent. Status EXCEPTION (process rule 10), NOT RELEASED.",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      369,
+      369
+     ],
+     "new": "            raise vb.ClosedParliament(f\"{d}: the document is in a closed parliament; the AI agent did not \"",
+     "reason": "code string: the internal role names of the AI agents are replaced by \"AI agent\" (the string is a text of a record or a message; the code does not compare it)"
+    }
+   ],
+   "masked_source_sha256": "5f5fb950c59a02ceccc0df098bb23fcba9eb609aa9e16139e847583059a12c18"
+  },
+  {
+   "copy": "src/converter_gj/m11_value_cal.py",
+   "copy_sha256": "90288805c33e5f7e8f7e15c1ea60944b52c6852bf0c41ec50e99ca70fb993ea9",
+   "source": "src/m11_value_cal.py",
+   "source_sha256": "b71331f89c1bffb845d00fb39a2ccebc02e72d62cedae9bf3267c2e6d8ffc04d",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      2,
+      2
+     ],
+     "new": "\"\"\"Measurement and calibration of the eCH-0295 values that are read from the PDF (plan-ech-from-pdf.md, task <id>).",
+     "reason": "docstring: the id of an internal workflow run or task is replaced by \"<id>\""
+    },
+    {
+     "lines": [
+      450,
+      450
+     ],
+     "new": "    # <id> (13.10.2026): the second calculation names the level of a cell with the key `class` (the word of chapter",
+     "reason": "comment: the id of an internal workflow run or task is replaced by \"<id>\""
+    },
+    {
+     "lines": [
+      822,
+      822
+     ],
+     "new": "                      \"(the AI agent writes it at the one opening; addendum G, chapter 6.5)\")",
+     "reason": "code string: the internal role names of the AI agents are replaced by \"AI agent\" (the string is a text of a record or a message; the code does not compare it)"
+    }
+   ],
+   "masked_source_sha256": "18d970bbdc65833d141c94f5b6c6a9c39dbe603894985f8139390bcf07269a62"
+  },
+  {
+   "copy": "src/converter_gj/m11_prompts_values.py",
+   "copy_sha256": "2e5d9225094c84852eb1a95591c44a740187c611be12e9292ad8d8b2d0af14b4",
+   "source": "src/m11_prompts_values.py",
+   "source_sha256": "c32896531bb8ee6f361171201a33b8336338a16da3d01a20301cc790da5723e9",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      3,
+      3
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5), for the",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      4,
+      4
+     ],
+     "new": "AI agent. No human checked this file. This file does not change an existing file. It does not load a model. It",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    }
+   ],
+   "masked_source_sha256": "b9bdcd3d5783b6e15cb28d19d3e8e8be23792c6fe1f905e68d50fce1234395bb"
+  },
+  {
+   "copy": "src/converter_gj/m11_value_reference.py",
+   "copy_sha256": "d02f2f4953c3440beef977b545329f35446ec52351d29d017a1bac2fa9b8e59a",
+   "source": "src/m11_value_reference.py",
+   "source_sha256": "6c184b6888f16786323c2eaa115e95dc822200f58e4a90b38cf4e717ad128674",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      444,
+      444
+     ],
+     "new": "        \"use_rule\": \"Only the measurement tools read this file. A value reader never reads it. Until the AI agent \"",
+     "reason": "code string: the internal role names of the AI agents are replaced by \"AI agent\" (the string is a text of a record or a message; the code does not compare it)"
+    },
+    {
+     "lines": [
+      480,
+      480
+     ],
+     "new": "               \"actor\": \"AI agent (Claude Opus 5.5), task <id>; no human checked this file\",",
+     "reason": "code string: the internal role names of the AI agents are replaced by \"AI agent\"; the id of an internal workflow run or task is replaced by \"<id>\" (the string is a text of a record or a message; the code does not compare it)"
+    }
+   ],
+   "masked_source_sha256": "f0325b5a061e7b9824c8276339ee6d358ded75971d4b08ee8da3dccc88cdfe3b"
+  },
+  {
+   "copy": "src/converter_gj/m11_label_schema.yaml",
+   "copy_sha256": "e94273247aabd72b43f7b502b431c51607d29910447996f680dbf1cf53152d26",
+   "source": "src/m11_label_schema.yaml",
+   "source_sha256": "ace138c2a0cf90912e1be8f4de329f3e74f12498b5c5930baddf1de6ad76ba95",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      1,
+      1
+     ],
+     "new": "# ParlPDFeCH label schema, version 0.2.0 (plan-ech-from-pdf.md chapter 5, task <id> of wave 1).",
+     "reason": "text: the id of an internal workflow run or task is replaced by \"<id>\""
+    },
+    {
+     "lines": [
+      2,
+      2
+     ],
+     "new": "# Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5),",
+     "reason": "text: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      3,
+      3
+     ],
+     "new": "# for the AI agent. Status: EXCEPTION (process rule 10), NOT RELEASED.",
+     "reason": "text: the internal role names of the AI agents are replaced by \"AI agent\""
+    }
+   ],
+   "masked_source_sha256": "6601e48cce809c35b8ada98d35d33cebce2d692ea707e8de1a5c0345e2946688"
+  },
+  {
+   "copy": "src/converter_gj/m10_guard.py",
+   "copy_sha256": "f551b87cbc443f0f3258241eb451872376428699be671523e925190bfb944071",
+   "source": "src/m10_guard.py",
+   "source_sha256": "1290d740ec49bb5be22303db0147e073501a8014d308f258828c217365f94519",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      3,
+      3
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5), stream B,",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      4,
+      4
+     ],
+     "new": "for the AI agent. This file does not change an existing file. It reads only lists, tables and file names. It",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    }
+   ],
+   "masked_source_sha256": "65c03177122958e157b20986675811f63f2fd64197394d38b3ecb9e030ddae9f"
+  },
+  {
+   "copy": "src/converter_gj/m10_rules.py",
+   "copy_sha256": "f9e05c2ee3e1caefee4a2167e4b277c864f2f70bde6fd271259b2346eefc0732",
+   "source": "src/m10_rules.py",
+   "source_sha256": "9b349f855fd363c071d6559185cb54c07769840c890baa5f09eaaf9a79a6c80f",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      4,
+      4
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5), stream F",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      491,
+      491
+     ],
+     "new": "        \"actor\": \"AI agent (Claude Opus 5.5), stream F of plan gate GJ\",",
+     "reason": "code string: the internal role names of the AI agents are replaced by \"AI agent\" (the string is a text of a record or a message; the code does not compare it)"
+    },
+    {
+     "lines": [
+      580,
+      580
+     ],
+     "new": "               \"finished\": clock(), \"actor\": \"AI agent (Claude Opus 5.5), stream F of plan gate GJ\",",
+     "reason": "code string: the internal role names of the AI agents are replaced by \"AI agent\" (the string is a text of a record or a message; the code does not compare it)"
+    }
+   ],
+   "masked_source_sha256": "6b67fa1f21a57598f7b5dfb510e48eacced29211f5baab4330372b5a2f7a109c"
+  },
+  {
+   "copy": "src/converter_gj/m10_prompts.py",
+   "copy_sha256": "73725f6f5a24aadcbf09ce0054b6732acf8daa9f6abd4f956ae99952b2873ad9",
+   "source": "src/m10_prompts.py",
+   "source_sha256": "afa15e27806eb32dbf92f8e40886193f7cba598684de39e80229edae00c8b6e8",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      3,
+      3
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5), stream B,",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      4,
+      4
+     ],
+     "new": "for the AI agent; the special token check (special_texts(), SpecialFinder, item_special_texts()): stream D of",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      5,
+      5
+     ],
+     "new": "workflow <id> (wave 3). This file does not change an existing file. It writes only under",
+     "reason": "docstring: the id of an internal workflow run or task is replaced by \"<id>\""
+    },
+    {
+     "lines": [
+      18,
+      18
+     ],
+     "new": "            tokens(prefix) + tokens(suffix) equal the ids of the joined text (AI agent, 12.10.2026: with SEP at",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    }
+   ],
+   "masked_source_sha256": "e0dd2271a0615b22925f158d2d4b8dc7a9ff25be407346479fc9b4c8838ff9fe"
+  },
+  {
+   "copy": "src/converter_gj/m10_vm_states.py",
+   "copy_sha256": "fa52615deec0864b2fde925c5d337e6df388c96e0ad5a73475a71f91e4f81d0f",
+   "source": "src/m10_vm_states.py",
+   "source_sha256": "3cd1eb9f1b66034e8c8289ca292adb6663d8a6794a3c6d165656ff3ab5e8c53b",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      3,
+      3
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5), stream C,",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      4,
+      4
+     ],
+     "new": "for the AI agent. No human checked this file. This file does not change an existing file. Status of all outputs:",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    }
+   ],
+   "masked_source_sha256": "e90604182d48b40e19800023922022cdb546d383249be1b759a494c825d67554"
+  },
+  {
+   "copy": "src/converter_gj/m10_calibrate.py",
+   "copy_sha256": "c1aba018bb27fe15e5269fec4424d18d70f3117a0143f2002874685406c994e0",
+   "source": "src/m10_calibrate.py",
+   "source_sha256": "03df26e311c3d31e69fbd3185124944c3b0ca1606f8e79bbe424bdccfb43aa19",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      3,
+      3
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5), stream D of",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      4,
+      4
+     ],
+     "new": "workflow <id>, for the AI agent; the clip of the gaps (chapter 1): stream D of workflow",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\"; the id of an internal workflow run or task is replaced by \"<id>\""
+    },
+    {
+     "lines": [
+      5,
+      5
+     ],
+     "new": "<id> (wave 3). Phase 4 (modeling) and phase 6 (deployment), gate GJ (OPEN). Status:",
+     "reason": "docstring: the id of an internal workflow run or task is replaced by \"<id>\""
+    },
+    {
+     "lines": [
+      165,
+      165
+     ],
+     "new": "ACTOR = \"AI agent (Claude Opus 5.5), stream D of workflow <id>, for the AI agent\"",
+     "reason": "code string: the internal role names of the AI agents are replaced by \"AI agent\"; the id of an internal workflow run or task is replaced by \"<id>\" (the string is a text of a record or a message; the code does not compare it)"
+    }
+   ],
+   "masked_source_sha256": "870391a2f689e2a225366e7dfe546c1dbc4a6ed53d7a5dca64b3469621c84464"
+  },
+  {
+   "copy": "src/converter_gj/m10_cascade.py",
+   "copy_sha256": "f905766b44e4b92f142b82f1f06491828202b41f63782f1cbd9cb4f92fee5a39",
+   "source": "src/m10_cascade.py",
+   "source_sha256": "21cea21a75fb2a1695068841b5158cd19b0b72bcbb8ac206e646402f5cd3cd51",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      3,
+      3
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5), stream D of",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      4,
+      4
+     ],
+     "new": "workflow <id>, for the AI agent; the cascade mode: stream D of workflow <id> (wave 3).",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\"; the id of an internal workflow run or task is replaced by \"<id>\""
+    }
+   ],
+   "masked_source_sha256": "b9157d7dd801a11420f1c5e5fb3025a914e1f21ae6088688d41da24f568e28ae"
+  },
+  {
+   "copy": "src/converter_gj/m10_pipeline.py",
+   "copy_sha256": "4f784aeb4d43e6560859ff71d6b4853f748aa37844c7b0c41c2c5fe969329a0c",
+   "source": "src/m10_pipeline.py",
+   "source_sha256": "329cc6e3778b9a7b95e1b01a9a17f24f632b2806f6ec90fcbdab745af3e21a87",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      5,
+      5
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5), stream D of",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      6,
+      6
+     ],
+     "new": "workflow <id> (wave 3), for the AI agent. Phases 4 and 6, gate GJ (OPEN). Status: EXCEPTION (process",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\"; the id of an internal workflow run or task is replaced by \"<id>\""
+    },
+    {
+     "lines": [
+      97,
+      97
+     ],
+     "new": "ACTOR = \"AI agent (Claude Opus 5.5), stream D of workflow <id>, for the AI agent\"",
+     "reason": "code string: the internal role names of the AI agents are replaced by \"AI agent\"; the id of an internal workflow run or task is replaced by \"<id>\" (the string is a text of a record or a message; the code does not compare it)"
+    }
+   ],
+   "masked_source_sha256": "25dc8d2a00281f0e9132aa1e97fbecc56bd871fb8dbc3bd60676e74adee25adc"
+  },
+  {
+   "copy": "src/converter_gj/m10_design.py",
+   "copy_sha256": "234689e8576d094c1bee5fce96b996ccd442fbffdf44e1c8bbf2a83e43144329",
+   "source": "src/m10_design.py",
+   "source_sha256": "9e6b912ed0ba1f5b773a12c572eef991da24c4788c40875f7889f1de40cf2adb",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      5,
+      5
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5), stream",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      6,
+      6
+     ],
+     "new": "DESIGN of workflow <id>, for the AI agent. No human checked this file. This file does not change an",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\"; the id of an internal workflow run or task is replaced by \"<id>\""
+    },
+    {
+     "lines": [
+      1532,
+      1532
+     ],
+     "new": "        f\"`{design['script']['sha256']}`. Status: EXCEPTION, NOT RELEASED. Actor: AI agent \"",
+     "reason": "code string: the internal role names of the AI agents are replaced by \"AI agent\" (the string is a text of a record or a message; the code does not compare it)"
+    },
+    {
+     "lines": [
+      1533,
+      1533
+     ],
+     "new": "        f\"(Claude Opus 5.5), for the AI agent. No human checked the content of this file.\")",
+     "reason": "code string: the internal role names of the AI agents are replaced by \"AI agent\" (the string is a text of a record or a message; the code does not compare it)"
+    }
+   ],
+   "masked_source_sha256": "ab66d639d172b6dc8df3ecbe409227cbf50c741bba4be71d49c4261e484530e9"
+  },
+  {
+   "copy": "src/converter_gj/m10_docs.py",
+   "copy_sha256": "86171eb4133b2d8cc830354465e3f892d5bbc595dd6f8a5f0bc38aa22feb5239",
+   "source": "src/m10_docs.py",
+   "source_sha256": "80110478861dd41396da6c826bcdbea0042838fbad5dac09621631c99347a142",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      3,
+      3
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5), stream B,",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      4,
+      4
+     ],
+     "new": "for the AI agent. This file does not change an existing file. It writes only under daten/gj/.",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    }
+   ],
+   "masked_source_sha256": "fc3a523287906878d28d3d991665c8d18079a142085d6e91b0f293fddd562853"
+  },
+  {
+   "copy": "src/converter_gj/m10_gaps.py",
+   "copy_sha256": "5f27b102c3e2751fb1d6907220489b167ef7f2795d2e8669c21aebfb652345fe",
+   "source": "src/m10_gaps.py",
+   "source_sha256": "58750027ed407962e44f1a4f1b7fd9672d4ff47563b1d8c2ff8d67bd768ce91d",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      3,
+      3
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5), stream G of",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      4,
+      4
+     ],
+     "new": "wave 4, for the AI agent. Gate GJ (OPEN), status EXCEPTION (process rule 10), NOT RELEASED. No human checked this",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      5,
+      5
+     ],
+     "new": "file. Rules: `crisp-dm/04-modeling/gate-jev-cascade-criteria-addendum-a.md` (a working draft of the AI agent) and",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    }
+   ],
+   "masked_source_sha256": "ff8a37bb1bc2f1e644ec45cfe42eda1ab24705d2d115ba2ec9989f3153bec520"
+  },
+  {
+   "copy": "src/converter_gj/m10_rdf.py",
+   "copy_sha256": "e96ac2a5d096555a52889d5fcb2dc42185deb382d3da98693e00347cabed9df4",
+   "source": "src/m10_rdf.py",
+   "source_sha256": "e61face996fd44cbcfd0101c02ddb873f87b4480a3711715268b34a3ce80c549",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      3,
+      3
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5), stream E,",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      4,
+      4
+     ],
+     "new": "for the AI agent. Gate GJ (OPEN), status EXCEPTION (process rule 10), NOT RELEASED. Plan: chapters 5.2 item 8,",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    }
+   ],
+   "masked_source_sha256": "ee4b8a9daa88cf737dc0bb6ebafa3f1e0bbf3d0e3fbbb118b2f5f1e016f7db3a"
+  },
+  {
+   "copy": "src/converter_gj/m10_validate.py",
+   "copy_sha256": "176735bcd23657c58701133fc1544e5d05213476fb915a1f45d41b35ddfa6efe",
+   "source": "src/m10_validate.py",
+   "source_sha256": "20af9f10b3f7bde59a8e18e0343c09c0dd6f4ff790e384b02d635bd79acfa659",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      3,
+      3
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5), stream E,",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      4,
+      4
+     ],
+     "new": "for the AI agent. Gate GJ (OPEN), status EXCEPTION (process rule 10), NOT RELEASED. Plan: chapter 5.4 of",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    }
+   ],
+   "masked_source_sha256": "839d3e0a1436874c5420db8c8d737c796758f42984bf198d855c1712cedb744c"
+  },
+  {
+   "copy": "src/converter_gj/m10_writer.py",
+   "copy_sha256": "5f547e946c2d3e00c7f0657dcd05ae0e95b56424340620664d5890210d14e8f5",
+   "source": "src/m10_writer.py",
+   "source_sha256": "71830486948ab76daa63ab5a6b2e721805eb13fc08b96c55359fc5e9827c892f",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      3,
+      3
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5), stream E,",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      4,
+      4
+     ],
+     "new": "for the AI agent. Phase 6 (deployment), gate GJ (OPEN). Status: EXCEPTION (process rule 10), NOT RELEASED.",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    }
+   ],
+   "masked_source_sha256": "0b6cc9be86598a4ab642556e0163822fd0790e8a06694ab11dc073b32a7a958e"
+  },
+  {
+   "copy": "src/converter_gj/m10_score.py",
+   "copy_sha256": "570d8940de8f16f73aa28a1cef9182e2cbddcba603e81223e9b7c541dc7b9f11",
+   "source": "src/m10_score.py",
+   "source_sha256": "aca5bd0997b7a5cb7ce7a5fed9d8902a4da79639a686ba5a3f5d43b454bf8bd2",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      4,
+      4
+     ],
+     "new": "Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5), stream F",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      32,
+      32
+     ],
+     "new": "  `score`, plan chapter 2.1 item 3): for 879163, 375917 and 549658 the answers of the review record of the author",
+     "reason": "docstring: the first name of the owner is replaced by \"the author\""
+    },
+    {
+     "lines": [
+      959,
+      959
+     ],
+     "new": "           \"actor\": \"AI agent (Claude Opus 5.5), stream F of plan gate GJ\",",
+     "reason": "code string: the internal role names of the AI agents are replaced by \"AI agent\" (the string is a text of a record or a message; the code does not compare it)"
+    }
+   ],
+   "masked_source_sha256": "10f3b9bade33f2d577cfe6877694dddb5153f453c4bf966c85c319e1d29ca9b7"
+  },
+  {
+   "copy": "src/converter_gj/m10_label_schema.yaml",
+   "copy_sha256": "62eab07f9995f430d36819bfd07f3d31466a6d22274b609f7b96cd11d0896a44",
+   "source": "src/m10_label_schema.yaml",
+   "source_sha256": "07b779a759f55264b2bb426e684e152b5f86117b537255fb71242500fd2ac9e6",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      2,
+      2
+     ],
+     "new": "# Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5),",
+     "reason": "text: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      3,
+      3
+     ],
+     "new": "# stream E, for the AI agent. Status: EXCEPTION (process rule 10), NOT RELEASED.",
+     "reason": "text: the internal role names of the AI agents are replaced by \"AI agent\""
+    }
+   ],
+   "masked_source_sha256": "c978a001cacc84622b1fb369e7a1e666f234b9ebe70266316864b06a425e117e"
+  },
+  {
+   "copy": "src/converter_gj/m03_ech_export_schema.yaml",
+   "copy_sha256": "619f048bada5eb0d1c27af9fa9b974690aab54d055014efc26c73f14685be066",
+   "source": "src/m03_ech_export_schema.yaml",
+   "source_sha256": "69fccc1816c2e66058795c092e9a2c5cda2d9b8df59fb1dfb331650853252474",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": []
+  },
+  {
+   "copy": "src/prompts/gj_values_v1_de/README.txt",
+   "copy_sha256": "7c3d82ce89159a3868878b85917776d617f0dd9e992f607b12ffd70afd86b45f",
+   "source": "daten/gj_values/prompts/gj_values_v1_de/README.txt",
+   "source_sha256": "90cd22e449800aff64107caee527d7ab3f3400d7621f5e3d97426afb207fe32e",
+   "kind": "prompt",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": []
+  },
+  {
+   "copy": "src/prompts/gj_values_v1_de/system.txt",
+   "copy_sha256": "ccaf693cd225980bf20b04db6fc60ddd7d03bcf7927f878aa3a250d0545e57c2",
+   "source": "daten/gj_values/prompts/gj_values_v1_de/system.txt",
+   "source_sha256": "1791a20972be0d8b56ce24bbb1c39b7073caef08a59de2e84f6023c357c37736",
+   "kind": "prompt",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": []
+  },
+  {
+   "copy": "src/prompts/gj_values_v1_de/prefix_format.txt",
+   "copy_sha256": "d2a986da6bcf0267a309b9d2c265a0d446b69c4180c6a45fe161e9180f142a62",
+   "source": "daten/gj_values/prompts/gj_values_v1_de/prefix_format.txt",
+   "source_sha256": "51726e9b38c5f58c90d644077f5ead0641080722236c36ae8c8099dd4ea989b9",
+   "kind": "prompt",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": []
+  },
+  {
+   "copy": "src/prompts/gj_values_v1_de/q0_document_kind.txt",
+   "copy_sha256": "48979bbfe2709f89b276d578092a59b8921b9935f219e487220043814706ee61",
+   "source": "daten/gj_values/prompts/gj_values_v1_de/q0_document_kind.txt",
+   "source_sha256": "3ef2421f237b7734b8fa97e0e6b9d6cd9a0601ce2112ac8d95eddbb2e2a4f64a",
+   "kind": "prompt",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": []
+  },
+  {
+   "copy": "src/prompts/gj_values_v1_de/q1_affair_type.txt",
+   "copy_sha256": "326a5ea40ce74f13a4584392a0f7630d42e3c8ee2a1325225b16992e282cbcee",
+   "source": "daten/gj_values/prompts/gj_values_v1_de/q1_affair_type.txt",
+   "source_sha256": "93dbbc3b33ec8cf2f8de6fa629452e42620195e8f6d207d12326d0c8dbf13731",
+   "kind": "prompt",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": []
+  },
+  {
+   "copy": "src/prompts/gj_values_v1_de/q2_block_values.txt",
+   "copy_sha256": "1003ed436175b0140311ba3e5150c81a7e6b923a83cb20ec8ffc037bb5fdf61e",
+   "source": "daten/gj_values/prompts/gj_values_v1_de/q2_block_values.txt",
+   "source_sha256": "e22c095af34fba03add5d3fc2afd216adb1fa92d1e91c849b7ad737ff1951770",
+   "kind": "prompt",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": []
+  },
+  {
+   "copy": "src/prompts/gj_values_v1_de/template.json",
+   "copy_sha256": "ed0b8972fbc980acdb950aca79b9b161052cb9ed28ed96056e2994f21eebecc7",
+   "source": "daten/gj_values/prompts/gj_values_v1_de/template.json",
+   "source_sha256": "ed0b8972fbc980acdb950aca79b9b161052cb9ed28ed96056e2994f21eebecc7",
+   "kind": "prompt record",
+   "edits": []
+  },
+  {
+   "copy": "app/layout/src/m03_atome.py",
+   "copy_sha256": "e02324e356d83709efcb1921e6070e6b32ee5fbc338bb96cecef03505e1ed6e3",
+   "source": "src/m03_atome.py",
+   "source_sha256": "3988f7ae9bfc172a4f91fe2833a5add17e2e18567d9fe304b64a1c25fee02155",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      63,
+      63
+     ],
+     "new": "  cd <project folder>",
+     "reason": "docstring: a path of the private computer is replaced by a neutral word"
+    }
+   ],
+   "masked_source_sha256": "6b1e15e5c43720481a20802b718ecde7c7a3d5e21a2872c41349e61369b20fe0"
+  },
+  {
+   "copy": "app/layout/src/m03_docling_zerlegen.py",
+   "copy_sha256": "ae279267e2fec087c29cca7d8b03253f9190179c8a00a8bb7ff3ded70b9e0c5f",
+   "source": "src/m03_docling_zerlegen.py",
+   "source_sha256": "b6401f62770275904af036b01319728d21aa0e7822b7101438d8c50ae866a1d9",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      38,
+      38
+     ],
+     "new": "  cd <project folder> && uv run python src/m03_docling_zerlegen.py",
+     "reason": "docstring: a path of the private computer is replaced by a neutral word"
+    }
+   ],
+   "masked_source_sha256": "1d54b7ee6e89e6d5b865a1e15bedf73a21dde10de2cdc322d53c5c18c5006bb0"
+  },
+  {
+   "copy": "app/layout/src/m03_sub_assemble.py",
+   "copy_sha256": "155b12a06cf6b771bced04e4f5b5f3bf1ff9a1e341d031566b50667eaad2d6d9",
+   "source": "src/m03_sub_assemble.py",
+   "source_sha256": "d706d707fdb4a8b811b6ba5b09275792548413e0b3972e64eebadf939ca292b9",
+   "kind": "code",
+   "line_1_added": "# SPDX-License-Identifier: Apache-2.0",
+   "edits": [
+    {
+     "lines": [
+      2,
+      2
+     ],
+     "new": "gate 3a, 08.10.2026). Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent",
+     "reason": "docstring: the internal role names of the AI agents are replaced by \"AI agent\""
+    },
+    {
+     "lines": [
+      45,
+      45
+     ],
+     "new": "ROOT = Path(__file__).resolve().parents[1]",
+     "reason": "code: the absolute path of the private computer is replaced by the folder above src (same folder in the private layout)"
+    }
+   ],
+   "masked_source_sha256": "df5917af6e07c31006c873c111c6e346937ef846896c7b8345c5155f4718b884"
   }
  ]
 }

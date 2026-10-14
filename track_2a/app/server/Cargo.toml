@@ -1,0 +1,38 @@
+[package]
+name = "parlpdfech-server"
+description = "Web server of the ParlPDFeCH package: pages, API and files (CONTRACT.md chapters 2 and 5)."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[lib]
+name = "parlpdfech_server"
+path = "src/lib.rs"
+
+[[bin]]
+name = "parlpdfech-server"
+path = "src/main.rs"
+
+[dependencies]
+axum.workspace = true
+tokio.workspace = true
+tokio-stream.workspace = true
+tower = { workspace = true, features = ["util"] }
+tower-http.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+uuid.workspace = true
+sha2.workspace = true
+hex.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+zip.workspace = true
+# Safe wrapper for the signal to the process group of the worker (already in the lock file through tempfile).
+rustix = { version = "1.1", features = ["process"] }
+
+[dev-dependencies]
+tempfile.workspace = true
+
+[lints.rust]
+unsafe_code = "forbid"

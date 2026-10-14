@@ -1,0 +1,337 @@
+{
+ "schema": "parlpdfech-gj-rules-identity/1",
+ "status": "MET",
+ "run_date": "12.10.2026, 20:02:06 CEST",
+ "finished": "12.10.2026, 20:02:13 CEST",
+ "actor": "workflow sub-agent (Claude Opus 5.5), stream F of plan gate GJ",
+ "gate": "GJ (OPEN); status of the work: EXCEPTION (process rule 10)",
+ "rules": {
+  "path": "src/m10_rules.py",
+  "sha256": "9b349f855fd363c071d6559185cb54c07769840c890baa5f09eaaf9a79a6c80f",
+  "version": "m10-rules-1"
+ },
+ "frozen_runner": {
+  "path": "src/m05_iso_runner.py",
+  "sha256": "352ee843635088bbd67f0cde3277d28c9072c9ddb58942af212dc40000411557",
+  "version": "iso-runner-1"
+ },
+ "stored_identity": {
+  "path": "daten/gold/final_v4/runner_identity.json",
+  "sha256": "ddb903549ae08705701586ffba8696bf6a239ccc2d8dbe3d0f8ba8140d413251"
+ },
+ "frozen_method": {
+  "s1_selection_kind": "sure_ids",
+  "s1_sure_ids": [
+   "A1",
+   "A2",
+   "C1",
+   "D0",
+   "E1",
+   "M1",
+   "O1",
+   "O2",
+   "P1",
+   "P2"
+  ],
+  "s1_prompt_sha": "a458b4258d86",
+  "s1_selection_prompt_sha": "a458b4258d86",
+  "assembly_option": "s4_over_s3+s1_start",
+  "option": {
+   "s4_over_s3": true,
+   "s1_start": true
+  },
+  "L8": {
+   "map": "SLOT_NOTITLE",
+   "scope": "written_affair",
+   "zones": [],
+   "unit": "block"
+  },
+  "L9": {
+   "map": "SLOT_NOTITLE",
+   "scope": "role_agreement",
+   "zones": [],
+   "unit": "block"
+  }
+ },
+ "documents": {
+  "dev": 183,
+  "eval": 22,
+  "total": 205
+ },
+ "cscs_documents": {
+  "m10_needs_apertus": [
+   "183716",
+   "216412",
+   "249082",
+   "300240",
+   "459321",
+   "530011",
+   "699081"
+  ],
+  "stored_runner_identity": [
+   "183716",
+   "216412",
+   "249082",
+   "300240",
+   "459321",
+   "530011",
+   "699081"
+  ],
+  "equal": true
+ },
+ "pass_a_no_cscs": {
+  "comparisons": {
+   "nos4_answers": {
+    "documents": 205,
+    "documents_different": 3,
+    "differences": [
+     "300240: 141 atoms",
+     "459321: 106 atoms",
+     "699081: 19 atoms"
+    ]
+   },
+   "l9_answers": {
+    "documents": 205,
+    "documents_different": 3,
+    "differences": [
+     "300240: 141 atoms",
+     "459321: 106 atoms",
+     "699081: 19 atoms"
+    ]
+   },
+   "claim_L8": {
+    "documents": 205,
+    "documents_different": 2,
+    "differences": [
+     "300240: m10 True, stored False",
+     "459321: m10 True, stored False"
+    ]
+   },
+   "claim_L9": {
+    "documents": 205,
+    "documents_different": 3,
+    "differences": [
+     "300240: m10 True, stored False",
+     "459321: m10 True, stored False",
+     "699081: m10 True, stored False"
+    ]
+   },
+   "s1_rule": {
+    "documents": 205,
+    "documents_different": 0,
+    "differences": []
+   },
+   "s1_combined": {
+    "documents": 205,
+    "documents_different": 7,
+    "differences": [
+     "249082: m10 response (rule_provisional), stored response (apertus)",
+     "216412: m10 response (rule_provisional), stored response (apertus)",
+     "300240: m10 response (rule_provisional), stored other (apertus)",
+     "459321: m10 response (rule_provisional), stored other (apertus)",
+     "530011: m10 response (rule_provisional), stored response (apertus)",
+     "699081: m10 response (rule_provisional), stored proposal (apertus)",
+     "183716: m10 response (rule_provisional), stored response (apertus)"
+    ]
+   },
+   "s2_rule": {
+    "documents": 205,
+    "documents_different": 0,
+    "differences": []
+   },
+   "export_fields": {
+    "documents": 205,
+    "documents_different": 0,
+    "differences": []
+   },
+   "export_record_found": {
+    "documents": 205,
+    "documents_different": 0,
+    "differences": []
+   }
+  },
+  "atoms": {
+   "nos4_atoms": 21739,
+   "nos4_atoms_different": 266,
+   "l9_atoms": 21739,
+   "l9_atoms_different": 266
+  },
+  "differences_total": 18,
+  "documents_with_a_difference": [
+   "183716",
+   "216412",
+   "249082",
+   "300240",
+   "459321",
+   "530011",
+   "699081"
+  ],
+  "differences_outside_r1_documents": [],
+  "seconds": 5.1,
+  "note": "R1 documents use the S1 rule role as a provisional combined role"
+ },
+ "pass_b_stored_apertus_role": {
+  "comparisons": {
+   "nos4_answers": {
+    "documents": 205,
+    "documents_different": 0,
+    "differences": []
+   },
+   "l9_answers": {
+    "documents": 205,
+    "documents_different": 0,
+    "differences": []
+   },
+   "claim_L8": {
+    "documents": 205,
+    "documents_different": 0,
+    "differences": []
+   },
+   "claim_L9": {
+    "documents": 205,
+    "documents_different": 0,
+    "differences": []
+   },
+   "s1_rule": {
+    "documents": 205,
+    "documents_different": 0,
+    "differences": []
+   },
+   "s1_combined": {
+    "documents": 205,
+    "documents_different": 0,
+    "differences": []
+   },
+   "s2_rule": {
+    "documents": 205,
+    "documents_different": 0,
+    "differences": []
+   },
+   "export_fields": {
+    "documents": 205,
+    "documents_different": 0,
+    "differences": []
+   },
+   "export_record_found": {
+    "documents": 205,
+    "documents_different": 0,
+    "differences": []
+   }
+  },
+  "atoms": {
+   "nos4_atoms": 21739,
+   "nos4_atoms_different": 0,
+   "l9_atoms": 21739,
+   "l9_atoms_different": 0
+  },
+  "differences_total": 0,
+  "documents_with_a_difference": [],
+  "note": "R1 documents use the stored Apertus role of daten/iso/sub/s1_role/apertus_<split>.json (no request)"
+ },
+ "r1_documents": {
+  "183716": {
+   "split": "eval",
+   "s1_rule_role": "response",
+   "stored_apertus_role": "response",
+   "nos4_atoms_different_no_cscs": 0,
+   "claim_L9_no_cscs": true,
+   "claim_L9_stored": true,
+   "block_options_different": 0,
+   "by_d1_variants_equal_to_stored": [
+    "B"
+   ]
+  },
+  "216412": {
+   "split": "dev",
+   "s1_rule_role": "response",
+   "stored_apertus_role": "response",
+   "nos4_atoms_different_no_cscs": 0,
+   "claim_L9_no_cscs": true,
+   "claim_L9_stored": true,
+   "block_options_different": 0,
+   "by_d1_variants_equal_to_stored": [
+    "B"
+   ]
+  },
+  "249082": {
+   "split": "dev",
+   "s1_rule_role": "response",
+   "stored_apertus_role": "response",
+   "nos4_atoms_different_no_cscs": 0,
+   "claim_L9_no_cscs": true,
+   "claim_L9_stored": true,
+   "block_options_different": 0,
+   "by_d1_variants_equal_to_stored": [
+    "B"
+   ]
+  },
+  "300240": {
+   "split": "dev",
+   "s1_rule_role": "response",
+   "stored_apertus_role": "other",
+   "nos4_atoms_different_no_cscs": 141,
+   "claim_L9_no_cscs": true,
+   "claim_L9_stored": false,
+   "block_options_different": 94,
+   "by_d1_variants_equal_to_stored": [
+    "A",
+    "C",
+    "D"
+   ]
+  },
+  "459321": {
+   "split": "dev",
+   "s1_rule_role": "response",
+   "stored_apertus_role": "other",
+   "nos4_atoms_different_no_cscs": 106,
+   "claim_L9_no_cscs": true,
+   "claim_L9_stored": false,
+   "block_options_different": 47,
+   "by_d1_variants_equal_to_stored": [
+    "A",
+    "C",
+    "D"
+   ]
+  },
+  "530011": {
+   "split": "dev",
+   "s1_rule_role": "response",
+   "stored_apertus_role": "response",
+   "nos4_atoms_different_no_cscs": 0,
+   "claim_L9_no_cscs": true,
+   "claim_L9_stored": true,
+   "block_options_different": 0,
+   "by_d1_variants_equal_to_stored": [
+    "A",
+    "B",
+    "C"
+   ]
+  },
+  "699081": {
+   "split": "dev",
+   "s1_rule_role": "response",
+   "stored_apertus_role": "proposal",
+   "nos4_atoms_different_no_cscs": 19,
+   "claim_L9_no_cscs": true,
+   "claim_L9_stored": false,
+   "block_options_different": 10,
+   "by_d1_variants_equal_to_stored": [
+    "A",
+    "C",
+    "D"
+   ]
+  }
+ },
+ "outputs_sha256_pass_b": "60323924473a959772dde47f8c81c5505497a5fd038f895a98883a6fd3ebb4be",
+ "stored_runner_outputs_sha256": "60323924473a959772dde47f8c81c5505497a5fd038f895a98883a6fd3ebb4be",
+ "outputs_equal_to_stored_runner_outputs": true,
+ "frozen_files": {
+  "source": "src/m05_gate3a_v4_measure.py",
+  "files": 29,
+  "different": []
+ },
+ "limits": [
+  "Identity is not accuracy: the stored values are the dev in-sample and eval values of the rules.",
+  "No CSCS request, no reference answers in the runner records, no test document."
+ ]
+}

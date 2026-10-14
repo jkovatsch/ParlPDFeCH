@@ -10,7 +10,11 @@ Jonathan Kovatsch publishes this work as a private person.
 | `track_2a/src/`, `track_2a/Makefile` | Apache-2.0 (`LICENSE`, `LICENSES/Apache-2.0.txt`) |
 | `track_2a/src/prompts/` (prompts for Apertus) | Apache-2.0 |
 | `track_2a/results/`, `track_2a/tests/`, `track_2a/SOURCES.json` | Apache-2.0 |
-| `README.md`, `track_2a/README.md`, `track_2a/SOURCES.md`, `track_2a/technical_report.md`, `track_2a/technical_report_numbers.json`, `track_2a/docs/`, the `README.md` files in `track_2a/src/`, `NOTICE` | CC-BY-4.0 (`LICENSES/CC-BY-4.0.txt`) |
+| `README.md`, `track_2a/README.md`, `track_2a/SOURCES.md`, `track_2a/technical_report.md`, `track_2a/technical_report_numbers.json`, `track_2a/numbers.json`, `track_2a/numbers.md`, `track_2a/docs/`, the `README.md` files in `track_2a/src/`, `NOTICE` | CC-BY-4.0 (`LICENSES/CC-BY-4.0.txt`) |
+| `track_2a/app/`: code (server, page, worker, view, contract, container files, `app/layout/src/`) | Apache-2.0. The code files of `track_2a/app/` have no SPDX line. |
+| `track_2a/app/`: texts (the `.md` files, `app/layout/crisp-dm/`) | CC-BY-4.0 |
+| `track_2a/app/data/`, `track_2a/app/layout/daten/`: derived data files (stored Apertus states, head weights, calibration files, records of the 3 samples) | CC-BY-4.0. Source: OpenParlData.ch. The samples also hold texts of 3 documents, their PDF files and one image of each page (chapter 3). |
+| `track_2a/app/layout/quellen/` | Copies of 2 files of the eCH-0295 working draft (chapter 4). Their own terms apply; the licence of the working draft is not clear. |
 | `track_2a/samples/` | Data of OpenParlData under CC BY 4.0, and texts of 3 documents (chapter 3; `track_2a/samples/NOTICE.md`) |
 | `.gitignore`, `track_2a/.gitignore`, `track_2a/.dockerignore`, `track_2a/.env.example` | Apache-2.0 |
 | `track_2a/data/` | Empty. It contains no data. |
@@ -28,7 +32,7 @@ https://github.com/HackApertus/project-template, commit 7f23822, license Apache-
 - Not changed: `LICENSE`, the file names and the places of the folder `track_2a/`.
 - Changed: `README.md` (replaced), `.gitignore` (line `*.pdf` added), `track_2a/.gitignore`, `track_2a/Makefile`, `track_2a/README.md`, `track_2a/technical_report.md`.
 - Removed: `track_1a/`, `track_1b/`, `track_2b/`, `track_2a/src/.gitkeep`.
-- Added: `NOTICE`, `LICENSES/`, `track_2a/.dockerignore`, `track_2a/.env.example`, the files in `track_2a/src/`, `track_2a/docs/`, `track_2a/samples/`, `track_2a/results/`, `track_2a/tests/`, `track_2a/SOURCES.md`, `track_2a/SOURCES.json`.
+- Added: `NOTICE`, `LICENSES/`, `track_2a/.dockerignore`, `track_2a/.env.example`, the files in `track_2a/src/`, `track_2a/docs/`, `track_2a/samples/`, `track_2a/results/`, `track_2a/tests/`, `track_2a/app/`, `track_2a/SOURCES.md`, `track_2a/SOURCES.json`, `track_2a/numbers.json`, `track_2a/numbers.md`.
 
 `track_2a/README.md` quotes the text of the template file `track_2a/README.md`.
 
@@ -40,7 +44,8 @@ The README files and the technical report use facts from the OpenParlData export
 Exports: https://files.openparldata.ch/exports/
 Changes: the project calculated numbers and shares from the exports.
 `track_2a/samples/` contains files for 3 documents. For each document, it has the records of the exports (without the full text field) and the PDF text as Docling output and as atoms. It also has the eCH-0295 output of the converter. The parliaments and executives published the documents. OpenParlData gives copies of them. The API description of OpenParlData (read on 06.10.2026) does not say if CC BY 4.0 applies to these copies. `track_2a/samples/NOTICE.md` gives the details.
-This repository contains no export and no PDF document.
+`track_2a/app/data/samples/` contains the PDF of the same 3 documents (`source.pdf`) and one image of each page (`page-1.png`). The app needs them for the result view. The parliaments and executives published these PDF documents. `track_2a/app/data/samples/index.json` gives the URL of the publisher of each PDF. `track_2a/README.md` (chapter "Samples") also gives the URL of the copy of OpenParlData and the SHA-256. The licence question of the copies above applies to these files also.
+This repository contains no export and no other PDF document.
 The scripts in `track_2a/src/` download the exports and the PDF documents from https://files.openparldata.ch/.
 
 4 eCH-0295
@@ -48,7 +53,7 @@ The scripts in `track_2a/src/` download the exports and the PDF documents from h
 ParlPDFeCH uses the working draft eCH-0295 (version I95) of the expert group "Politische Geschäfte" of the association eCH:
 https://github.com/swiss/political-affairs-ech-group, commit 3cab44d (30.09.2026). eCH-0295 is a working draft. It is not approved.
 ParlPDFeCH is an independent project. It is not a product of the association eCH.
-This repository contains no copy of eCH-0295 files. The code uses the names of fields and values of eCH-0295. `make setup` downloads the two files below and examines their SHA-256.
+`track_2a/app/layout/quellen/` has a copy of the two files below (same SHA-256), because the app validates each record against them. The licence of the working draft is not clear. The code uses the names of fields and values of eCH-0295. For the earlier converter, `make setup` downloads the two files below and examines their SHA-256.
 
 | File | URL | SHA-256 |
 |---|---|---|

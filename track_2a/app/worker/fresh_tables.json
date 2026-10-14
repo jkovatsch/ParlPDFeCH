@@ -1,0 +1,126 @@
+{
+ "schema": "parlpdfech-fresh-tables/1",
+ "status": "EXCEPTION, NOT RELEASED",
+ "note": "Forms with no row. The guards and the measurement tables of the rule chain have no function in the package. The rule functions for one document are the functions of the converter.",
+ "tables": [
+  {
+   "path": "daten/iso/gruppen.csv",
+   "form": "csv_header",
+   "text": "group,doc_id,body_key,split,ebene,sprache,scan,dokumentrolle,seiten,sha256,url\n",
+   "replaces": "the document groups 1 to 7 (m03_iso_mass.GROUPS, m03_sub_common.GROUPS_CSV)",
+   "rows": 0
+  },
+  {
+   "path": "daten/iso/pool.csv",
+   "form": "csv_header",
+   "text": "part,home,doc_id,body_key,ebene,sprache,scan,dokumentrolle,seiten,sha256\n",
+   "replaces": "the pool documents (m03_sub_common.POOL_CSV)",
+   "rows": 0
+  },
+  {
+   "path": "daten/iso/triage.csv",
+   "form": "csv_header",
+   "text": "doc_id,batch,final,verdict_a,categories_a,atoms_a,verdict_b,categories_b,atoms_b,actor,criteria,date\n",
+   "replaces": "the personal-data triage of the documents (m03_sub_common.TRIAGE_CSV)",
+   "rows": 0
+  },
+  {
+   "path": "daten/analyse/synthese/split.csv",
+   "form": "csv_header",
+   "text": "body_key,name_de,ebene,sprache,rolle,begruendung,geschaefte,geschaefte_mit_pdf_text,anteil_scan_verdacht,texts_datei,texts_zu_vorstoessen,pilot_kandidaten,typ_label_pdf,empfehlung_pdf,entscheid_pdf,dok_vorstoss,dok_antwort\n",
+   "replaces": "the roles of the parliaments (m03_sub_common.SPLIT_CSV)",
+   "rows": 0
+  },
+  {
+   "path": "daten/iso/sub/s1_role/rule_dev.json",
+   "form": "json",
+   "value": {
+    "documents": {}
+   },
+   "replaces": "an S1 role file of the ladder signals (m03_ladder._load_signal); no document",
+   "rows": 0
+  },
+  {
+   "path": "daten/iso/sub/s1_role/rule_eval.json",
+   "form": "json",
+   "value": {
+    "documents": {}
+   },
+   "replaces": "an S1 role file of the ladder signals (m03_ladder._load_signal); no document",
+   "rows": 0
+  },
+  {
+   "path": "daten/iso/sub/s1_role/apertus_dev.json",
+   "form": "json",
+   "value": {
+    "documents": {}
+   },
+   "replaces": "an S1 role file of the ladder signals (m03_ladder._load_signal); no document",
+   "rows": 0
+  },
+  {
+   "path": "daten/iso/sub/s1_role/apertus_eval.json",
+   "form": "json",
+   "value": {
+    "documents": {}
+   },
+   "replaces": "an S1 role file of the ladder signals (m03_ladder._load_signal); no document",
+   "rows": 0
+  },
+  {
+   "path": "daten/iso/sub/s1_role/combined_dev.json",
+   "form": "json",
+   "value": {
+    "chosen": {
+     "kind": "sure_ids",
+     "t": null
+    },
+    "sure_ids": [
+     "A1",
+     "A2",
+     "C1",
+     "D0",
+     "E1",
+     "M1",
+     "O1",
+     "O2",
+     "P1",
+     "P2"
+    ],
+    "apertus_prompt_sha256": "a458b4258d86",
+    "documents": {}
+   },
+   "replaces": "the S1 selection file (m05_iso_runner.check_frozen_method reads chosen.kind, sure_ids and apertus_prompt_sha256 and compares them with the constants of the code); no document",
+   "rows": 0
+  },
+  {
+   "path": "daten/iso/sub/s1_role/combined_eval.json",
+   "form": "json",
+   "value": {
+    "documents": {}
+   },
+   "replaces": "an S1 role file of the ladder signals (m03_ladder._load_signal); no document",
+   "rows": 0
+  },
+  {
+   "path": "daten/iso/ladder/scratch/err_recompose_nos4_dev.json",
+   "form": "json",
+   "value": {},
+   "rows": 0,
+   "replaces": "an answer file of the ladder (m03_ladder, method nos4); no document"
+  },
+  {
+   "path": "daten/iso/ladder/scratch/err_recompose_nos4_eval.json",
+   "form": "json",
+   "value": {},
+   "rows": 0,
+   "replaces": "an answer file of the ladder (m03_ladder, method nos4); no document"
+  },
+  {
+   "path": "daten/gold/records/review",
+   "form": "empty_folder",
+   "replaces": "the folder of the review records (m03_sub_common.GOLD_REVIEW); the scratch root gets an empty folder with this name",
+   "rows": 0
+  }
+ ]
+}

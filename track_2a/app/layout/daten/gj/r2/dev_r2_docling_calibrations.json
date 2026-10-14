@@ -1,0 +1,60 @@
+{
+ "calibrations": {
+  "gj1-r2-platt-step0b": {
+   "calibration_method": "platt_scaling",
+   "calibrated_kind": "executive_response",
+   "fit_set_file": "daten/gj/r2/step0b_fitset.json",
+   "fit_set_digest": "2fc96be76182468209b5cd62aa24c8be2248dd796c79a206cbb474d10119e093",
+   "fit_n": 193,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41) with the 3 pilot overrides; R2 yes = 1 or more atoms with the answer response or recommendation (criteria 2.6 item 1)",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "alpha",
+     "parameter_value": 1.082867
+    },
+    {
+     "parameter_name": "beta",
+     "parameter_value": -1.283815
+    },
+    {
+     "parameter_name": "layer",
+     "parameter_value": 16.0
+    },
+    {
+     "parameter_name": "C",
+     "parameter_value": 0.001
+    }
+   ],
+   "measure_sets": [
+    {
+     "set_name": "dev AI-reference documents, out-of-fold map (5 folds of the dev design)",
+     "set_n": 193,
+     "ece": 0.029697,
+     "ece_equal_mass": 0.018335,
+     "classwise_ece": 0.039305,
+     "brier": 0.100316,
+     "nll": 0.16456,
+     "ece_low": 0.018867,
+     "ece_high": 0.061158,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    },
+    {
+     "set_name": "dev AI-reference documents, in-sample (fit set of the map)",
+     "set_n": 193,
+     "ece": 0.032938,
+     "ece_equal_mass": 0.023207,
+     "classwise_ece": 0.048366,
+     "brier": 0.096321,
+     "nll": 0.152964,
+     "ece_low": 0.021508,
+     "ece_high": 0.062637,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ],
+   "calibration_note": "R2 step 0b (criteria 8.4 item 2): Platt map of q(yes) of the frozen head H (layer 16) on the Docling text; fit on the 193 dev AI-reference documents; threshold a by P17 on the out-of-fold values of the map (criteria 8.6 item 4); GJ.14 on validation sets the target status",
+   "certain_threshold": 0.6
+  }
+ }
+}

@@ -26,7 +26,7 @@ build/
 .idea/
 .vscode/
 
-# PDF documents: never in the repository
+# PDF documents: never in the repository, except the 3 sample PDFs (see app/.gitignore)
 *.pdf
 
 # Pipeline data below the default data root (PARLPDFECH_DATA): never in the repository

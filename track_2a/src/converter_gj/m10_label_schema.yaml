@@ -1,0 +1,931 @@
+# SPDX-License-Identifier: Apache-2.0
+# ParlPDFeCH label schema, version 0.1.0 (gate GJ, plan-full-conversion.md chapter 5.6).
+# Written in English to the STE rules (ASD-STE100, Issue 9). Actor: AI agent (Claude Opus 5.5),
+# stream E, for the AI agent. Status: EXCEPTION (process rule 10), NOT RELEASED.
+#
+# The schema imports the provenance profile 0.2.0 (src/m06_ech_profil.yaml) and does not change it. It declares
+# all prefixes of the profile again: the LinkML generators do not take over the prefixes of an imported schema.
+# Run the LinkML tools with the working folder src/, because the generators find an import relative to the
+# working folder.
+#
+# Content of one label file (root class LabelRecord):
+#   - one LabelAssertion for each label of the record (document text parts, slot of each Docling block, author
+#     switch points, response of the executive, wording copies, export values and constants);
+#   - one Calibration for each calibration record that a LabelAssertion names.
+# Class PdfLayout is not in the label file. Script src/m10_rdf.py uses it for the named graph of the PDF atoms.
+
+id: https://schema.parlpdfech.example/labels
+name: parlpdfech-labels
+title: ParlPDFeCH label schema
+description: >-
+  Label assertions with calibrated probabilities for the eCH-0295 records that ParlPDFeCH makes from a PDF
+  document. Each label from the PDF has its probability, its calibration record, its page and its character span.
+annotations:
+  description_de: "Label-Aussagen mit kalibrierten Wahrscheinlichkeiten zu den eCH-0295-Datensätzen aus einem PDF-Dokument."
+  description_fr: "Assertions d'étiquettes avec probabilités calibrées pour les enregistrements eCH-0295 issus d'un document PDF."
+version: 0.1.0
+prefixes:
+  linkml: https://w3id.org/linkml/
+  plb: https://schema.parlpdfech.example/labels/
+  ppx: https://schema.parlpdfech.example/profile/
+  mcm: https://ld.ech.ch/schema/0292/meta-common/
+  prov: http://www.w3.org/ns/prov#
+  oa: http://www.w3.org/ns/oa#
+  dcterms: http://purl.org/dc/terms/
+  schema: http://schema.org/
+  xsd: http://www.w3.org/2001/XMLSchema#
+  skos: http://www.w3.org/2004/02/skos/core#
+  rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+  aff: https://ch.paf.link/schema/affairs/
+default_prefix: plb
+default_range: string
+imports:
+  - linkml:types
+  - m06_ech_profil
+
+# Classes
+# ----------------------------------------------------------------
+
+classes:
+
+  LabelRecord:
+    description: >-
+      The label file of one record (one PDF document and its eCH-0295 delivery). Give this class as the target
+      class to the LinkML tools: the imported profile has the tree root ExtractionRecord.
+    annotations:
+      description_de: "Die Label-Datei eines Datensatzes (ein PDF-Dokument und seine eCH-0295-Lieferung)."
+      description_fr: "Le fichier d'étiquettes d'un enregistrement (un document PDF et sa livraison eCH-0295)."
+    class_uri: prov:Bundle
+    mixins:
+      - HasIdentification
+    slots:
+      - describes_record
+      - ech_delivery
+      - source_document
+      - label_run
+      - label_assertions
+      - calibrations
+    slot_usage:
+      source_document:
+        required: true
+
+  LabelRun:
+    description: The run that made the labels of the record (mode, input files, versions).
+    annotations:
+      description_de: "Der Lauf, der die Labels des Datensatzes erzeugt hat (Modus, Eingabedateien, Versionen)."
+      description_fr: "L'exécution qui a produit les étiquettes de l'enregistrement."
+    class_uri: prov:Activity
+    mixins:
+      - HasIdentification
+    slots:
+      - script_name
+      - run_mode
+      - process_status
+      - input_files
+      - ech_commit
+      - linkml_version
+      - datetime_generated
+
+  InputFile:
+    description: One input file of a run, with its SHA-256.
+    annotations:
+      description_de: "Eine Eingabedatei eines Laufs mit ihrem SHA-256."
+      description_fr: "Un fichier d'entrée d'une exécution, avec son SHA-256."
+    class_uri: prov:Entity
+    slots:
+      - file_role
+      - file_path
+      - file_digest
+
+  LabelAssertion:
+    description: >-
+      One label of the record: the subject, the predicate and the object of the label, the source that decided
+      it and, for a label from the PDF, its calibrated probability, its calibration record, its page and its
+      character span.
+    annotations:
+      description_de: "Ein Label des Datensatzes mit Subjekt, Prädikat, Objekt, Quelle und, für ein Label aus dem PDF, Wahrscheinlichkeit, Kalibrierung, Seite und Zeichenbereich."
+      description_fr: "Une étiquette de l'enregistrement avec sujet, prédicat, objet, source et, pour une étiquette du PDF, probabilité, calibration, page et plage de caractères."
+    class_uri: plb:LabelAssertion
+    close_mappings:
+      - rdf:Statement
+    mixins:
+      - HasIdentification
+    slots:
+      - label_subject
+      - label_predicate
+      - label_object
+      - label_kind
+      - label_source
+      - label_probability
+      - option_probabilities
+      - value_status
+      - calibration
+      - model_run
+      - rule_id
+      - tier
+      - in_sample
+      - page
+      - last_page
+      - span_start
+      - span_end
+      - about_entity
+      - instance_path
+      - label_note
+    rules:
+      - description: >-
+          A label from a rule, from an Apertus head or from a code step (code_step) has a probability, a calibration record,
+          a value status, a page and a character span.
+        preconditions:
+          slot_conditions:
+            label_source:
+              any_of:
+                - equals_string: rule
+                - equals_string: apertus_head
+                - equals_string: code_step
+        postconditions:
+          slot_conditions:
+            label_probability:
+              required: true
+            calibration:
+              required: true
+            value_status:
+              required: true
+            page:
+              required: true
+            span_start:
+              required: true
+            span_end:
+              required: true
+      - description: A label from the export, a constant or a copy has no probability.
+        preconditions:
+          slot_conditions:
+            label_source:
+              any_of:
+                - equals_string: export
+                - equals_string: constant
+                - equals_string: copy
+        postconditions:
+          slot_conditions:
+            label_probability:
+              value_presence: "ABSENT"
+      - description: A label from the export, a constant or a copy has no option probabilities.
+        preconditions:
+          slot_conditions:
+            label_source:
+              any_of:
+                - equals_string: export
+                - equals_string: constant
+                - equals_string: copy
+        postconditions:
+          slot_conditions:
+            option_probabilities:
+              value_presence: "ABSENT"
+      - description: A label from the export, a constant or a copy has no calibration record.
+        preconditions:
+          slot_conditions:
+            label_source:
+              any_of:
+                - equals_string: export
+                - equals_string: constant
+                - equals_string: copy
+        postconditions:
+          slot_conditions:
+            calibration:
+              value_presence: "ABSENT"
+      - description: A label from the export, a constant or a copy has no value status.
+        preconditions:
+          slot_conditions:
+            label_source:
+              any_of:
+                - equals_string: export
+                - equals_string: constant
+                - equals_string: copy
+        postconditions:
+          slot_conditions:
+            value_status:
+              value_presence: "ABSENT"
+
+  OptionProbability:
+    description: The calibrated probability of one option of a decision with fixed options.
+    annotations:
+      description_de: "Die kalibrierte Wahrscheinlichkeit einer Option eines Entscheids mit festen Optionen."
+      description_fr: "La probabilité calibrée d'une option d'une décision à options fixes."
+    class_uri: plb:OptionProbability
+    slots:
+      - option_value
+      - label_probability
+    slot_usage:
+      label_probability:
+        required: true
+
+  Calibration:
+    description: >-
+      A calibration record: the method, the fit set (file and SHA-256), the measure sets with their values, the
+      reference, the in-sample flag and the result against the target.
+    annotations:
+      description_de: "Ein Kalibrierungsdatensatz: Methode, Anpassungsmenge, Messmengen mit Werten, Referenz und Ergebnis gegen das Ziel."
+      description_fr: "Un enregistrement de calibration: méthode, ensemble d'ajustement, ensembles de mesure, référence et résultat."
+    class_uri: prov:Plan
+    mixins:
+      - HasIdentification
+    slots:
+      - calibration_method
+      - calibrated_kind
+      - fit_set_file
+      - fit_set_digest
+      - fit_n
+      - reference_source
+      - in_sample
+      - target_status
+      - certain_threshold
+      - calibration_parameters
+      - measure_sets
+      - calibration_note
+
+  CalibrationParameter:
+    description: One fitted parameter of a calibration (for example the temperature).
+    annotations:
+      description_de: "Ein angepasster Parameter einer Kalibrierung (zum Beispiel die Temperatur)."
+      description_fr: "Un paramètre ajusté d'une calibration (par exemple la température)."
+    class_uri: plb:CalibrationParameter
+    slots:
+      - parameter_name
+      - parameter_value
+
+  MeasureSet:
+    description: The calibration values on one measure set, with their intervals.
+    annotations:
+      description_de: "Die Kalibrierungswerte auf einer Messmenge mit ihren Intervallen."
+      description_fr: "Les valeurs de calibration sur un ensemble de mesure, avec leurs intervalles."
+    class_uri: plb:MeasureSet
+    slots:
+      - set_name
+      - set_n
+      - ece
+      - ece_equal_mass
+      - classwise_ece
+      - brier
+      - nll
+      - ece_low
+      - ece_high
+      - interval_method
+
+  PdfLayout:
+    description: >-
+      The Docling blocks and the atoms of one PDF document in reading order, with page, frame, character range,
+      Docling label, OCR flag and wording. With these values a person can make the PDF content again.
+    annotations:
+      description_de: "Die Docling-Blöcke und Atome eines PDF-Dokuments in Lesereihenfolge mit Seite, Rahmen, Zeichenbereich und Wortlaut."
+      description_fr: "Les blocs Docling et les atomes d'un document PDF dans l'ordre de lecture."
+    class_uri: plb:PdfLayout
+    mixins:
+      - HasIdentification
+    slots:
+      - describes_record
+      - source_document
+      - atom_version
+      - layout_blocks
+
+  PdfBlock:
+    description: One Docling block (identifier B<n>) with its atoms.
+    annotations:
+      description_de: "Ein Docling-Block (Kennung B<n>) mit seinen Atomen."
+      description_fr: "Un bloc Docling (identifiant B<n>) avec ses atomes."
+    class_uri: plb:PdfBlock
+    mixins:
+      - HasIdentification
+    slots:
+      - block_id
+      - block_position
+      - page_number
+      - docling_label
+      - char_start
+      - char_end
+      - block_atoms
+
+  PdfAtom:
+    description: One atom (one line or one table row) of a Docling block.
+    annotations:
+      description_de: "Ein Atom (eine Zeile oder eine Tabellenzeile) eines Docling-Blocks."
+      description_fr: "Un atome (une ligne ou une ligne de tableau) d'un bloc Docling."
+    class_uri: plb:PdfAtom
+    close_mappings:
+      - ppx:AtomEvidence
+    mixins:
+      - HasIdentification
+    slots:
+      - atom_id
+      - page_number
+      - bbox
+      - char_start
+      - char_end
+      - from_ocr
+      - docling_label
+      - atom_text
+      - line_box_source
+
+# Slots
+# ----------------------------------------------------------------
+
+slots:
+
+  describes_record:
+    slot_uri: plb:describesRecord
+    range: uriorcurie
+    required: true
+    description: IRI of the record (one PDF document) that the file describes.
+    annotations:
+      description_de: "IRI des Datensatzes (ein PDF-Dokument), den die Datei beschreibt."
+      description_fr: "IRI de l'enregistrement décrit par le fichier."
+  ech_delivery:
+    slot_uri: plb:echDelivery
+    range: uriorcurie
+    description: IRI of the eCH-0295 container of the record. A record without an eCH graph has no value.
+    annotations:
+      description_de: "IRI des eCH-0295-Containers des Datensatzes."
+      description_fr: "IRI du conteneur eCH-0295 de l'enregistrement."
+  label_run:
+    slot_uri: plb:labelRun
+    range: LabelRun
+    inlined: true
+    required: true
+    description: The run that made the labels.
+    annotations:
+      description_de: "Der Lauf, der die Labels erzeugt hat."
+      description_fr: "L'exécution qui a produit les étiquettes."
+  label_assertions:
+    slot_uri: plb:labelAssertion
+    range: LabelAssertion
+    multivalued: true
+    inlined_as_list: true
+    description: The labels of the record.
+    annotations:
+      description_de: "Die Labels des Datensatzes."
+      description_fr: "Les étiquettes de l'enregistrement."
+  calibrations:
+    slot_uri: plb:hasCalibration
+    range: Calibration
+    multivalued: true
+    inlined_as_list: true
+    description: The calibration records that the labels of the file name.
+    annotations:
+      description_de: "Die Kalibrierungsdatensätze, die die Labels der Datei nennen."
+      description_fr: "Les enregistrements de calibration nommés par les étiquettes du fichier."
+
+  run_mode:
+    slot_uri: plb:runMode
+    range: RunModeEnum
+    required: true
+    description: Mode of the cascade (floor converter without Apertus states, or full cascade).
+    annotations:
+      description_de: "Modus der Kaskade (Grundkonverter ohne Apertus-Zustände oder volle Kaskade)."
+      description_fr: "Mode de la cascade."
+  process_status:
+    slot_uri: plb:processStatus
+    required: true
+    description: Status of the result in the process rules (for example EXCEPTION, NOT RELEASED).
+    annotations:
+      description_de: "Status des Ergebnisses nach den Prozessregeln."
+      description_fr: "Statut du résultat selon les règles de processus."
+  input_files:
+    slot_uri: prov:used
+    range: InputFile
+    multivalued: true
+    inlined_as_list: true
+    description: The input files of the run.
+    annotations:
+      description_de: "Die Eingabedateien des Laufs."
+      description_fr: "Les fichiers d'entrée de l'exécution."
+  file_role:
+    slot_uri: plb:fileRole
+    required: true
+    description: Role of the file in the run (for example decisions, blocks, export record).
+    annotations:
+      description_de: "Rolle der Datei im Lauf."
+      description_fr: "Rôle du fichier dans l'exécution."
+  file_path:
+    slot_uri: plb:filePath
+    required: true
+    description: Path of the file, relative to the project folder.
+    annotations:
+      description_de: "Pfad der Datei relativ zum Projektordner."
+      description_fr: "Chemin du fichier relatif au dossier du projet."
+  file_digest:
+    slot_uri: plb:fileSha256
+    required: true
+    pattern: "^[0-9a-f]{64}$"
+    description: SHA-256 of the file (hexadecimal).
+    annotations:
+      description_de: "SHA-256 der Datei (hexadezimal)."
+      description_fr: "SHA-256 du fichier (hexadécimal)."
+
+  label_subject:
+    slot_uri: rdf:subject
+    range: uriorcurie
+    required: true
+    description: >-
+      IRI of the thing that the label is about: the record, a Docling block, a boundary between two blocks, an
+      author block, or an entity of the eCH-0295 instance.
+    annotations:
+      description_de: "IRI des Objekts, über das das Label etwas aussagt."
+      description_fr: "IRI de l'objet de l'étiquette."
+  label_predicate:
+    slot_uri: rdf:predicate
+    range: uriorcurie
+    required: true
+    description: IRI of the property that the label gives (for example aff:textType).
+    annotations:
+      description_de: "IRI der Eigenschaft, die das Label angibt (zum Beispiel aff:textType)."
+      description_fr: "IRI de la propriété donnée par l'étiquette."
+  label_object:
+    slot_uri: rdf:object
+    required: true
+    description: >-
+      The value of the label. For a block slot it is one of submitted, reasoning, response, recommendation, title
+      and none (none: the block is in no TextBlock). For a copy it is the SHA-256 of the wording.
+    annotations:
+      description_de: "Der Wert des Labels."
+      description_fr: "La valeur de l'étiquette."
+  label_kind:
+    slot_uri: plb:labelKind
+    range: LabelKindEnum
+    required: true
+    description: Kind of the label (plan chapter 2).
+    annotations:
+      description_de: "Art des Labels."
+      description_fr: "Type d'étiquette."
+  label_source:
+    slot_uri: plb:labelSource
+    range: LabelSourceEnum
+    required: true
+    description: The source that decided the label.
+    annotations:
+      description_de: "Die Quelle, die das Label entschieden hat."
+      description_fr: "La source qui a décidé l'étiquette."
+  label_probability:
+    slot_uri: plb:probability
+    range: decimal
+    minimum_value: 0.005
+    maximum_value: 0.995
+    description: >-
+      Calibrated probability that the value agrees with the AI reference (plan chapter 2.1). All probabilities
+      are clipped to the interval from 0.005 to 0.995, because the reference is not perfect.
+    annotations:
+      description_de: "Kalibrierte Wahrscheinlichkeit, dass der Wert mit der KI-Referenz übereinstimmt (begrenzt auf 0.005 bis 0.995)."
+      description_fr: "Probabilité calibrée que la valeur concorde avec la référence IA (limitée à 0.005 à 0.995)."
+  option_probabilities:
+    slot_uri: plb:optionProbability
+    range: OptionProbability
+    multivalued: true
+    inlined_as_list: true
+    description: The calibrated probability of each option of the decision (full distribution before the clip).
+    annotations:
+      description_de: "Die kalibrierte Wahrscheinlichkeit jeder Option des Entscheids."
+      description_fr: "La probabilité calibrée de chaque option de la décision."
+  option_value:
+    slot_uri: plb:option
+    required: true
+    description: One option of the decision.
+    annotations:
+      description_de: "Eine Option des Entscheids."
+      description_fr: "Une option de la décision."
+  value_status:
+    slot_uri: plb:valueStatus
+    range: LabelValueStatusEnum
+    description: Value status of the label (certain if the probability is at the threshold of the calibration record or above, else unsure).
+    annotations:
+      description_de: "Wertstatus des Labels (certain ab der Schwelle des Kalibrierungsdatensatzes, sonst unsure)."
+      description_fr: "Statut de valeur de l'étiquette."
+  calibration:
+    slot_uri: plb:calibration
+    range: Calibration
+    inlined: false
+    description: IRI of the calibration record of the probability.
+    annotations:
+      description_de: "IRI des Kalibrierungsdatensatzes der Wahrscheinlichkeit."
+      description_fr: "IRI de l'enregistrement de calibration de la probabilité."
+  model_run:
+    slot_uri: prov:wasGeneratedBy
+    range: uriorcurie
+    description: IRI of the run that made the label.
+    annotations:
+      description_de: "IRI des Laufs, der das Label erzeugt hat."
+      description_fr: "IRI de l'exécution qui a produit l'étiquette."
+  rule_id:
+    slot_uri: plb:ruleId
+    description: Identifier of the rule that decided the label (for example an S1 rule id).
+    annotations:
+      description_de: "Kennung der Regel, die das Label entschieden hat."
+      description_fr: "Identifiant de la règle qui a décidé l'étiquette."
+  tier:
+    slot_uri: plb:tier
+    description: Rule tier of a block label (plan chapter 2.2).
+    annotations:
+      description_de: "Regelstufe eines Block-Labels."
+      description_fr: "Niveau de règle d'une étiquette de bloc."
+  in_sample:
+    slot_uri: plb:inSample
+    range: boolean
+    description: True if the fit set of the probability holds the document or the documents that the rule was made from.
+    annotations:
+      description_de: "Wahr, wenn die Anpassungsmenge das Dokument oder die Entwurfsdokumente der Regel enthält."
+      description_fr: "Vrai si l'ensemble d'ajustement contient le document."
+  page:
+    slot_uri: plb:page
+    range: integer
+    minimum_value: 1
+    description: First page of the PDF (1-based) of the span of the label.
+    annotations:
+      description_de: "Erste Seite des PDF (ab 1) des Bereichs des Labels."
+      description_fr: "Première page du PDF (à partir de 1) de la plage de l'étiquette."
+  last_page:
+    slot_uri: plb:lastPage
+    range: integer
+    minimum_value: 1
+    description: Last page of the PDF of the span of the label.
+    annotations:
+      description_de: "Letzte Seite des PDF des Bereichs des Labels."
+      description_fr: "Dernière page du PDF de la plage de l'étiquette."
+  span_start:
+    slot_uri: plb:charStart
+    range: integer
+    minimum_value: 0
+    description: Start of the span in the document text of the block file (inclusive; interface 2 of gate GJ).
+    annotations:
+      description_de: "Anfang des Bereichs im Dokumenttext der Blockdatei (einschliesslich)."
+      description_fr: "Début de la plage dans le texte du document (inclus)."
+  span_end:
+    slot_uri: plb:charEnd
+    range: integer
+    minimum_value: 0
+    description: End of the span in the document text of the block file (exclusive).
+    annotations:
+      description_de: "Ende des Bereichs im Dokumenttext der Blockdatei (ausschliesslich)."
+      description_fr: "Fin de la plage dans le texte du document (exclue)."
+  label_note:
+    slot_uri: plb:note
+    description: A short note about the label (for example the rule of a copy).
+    annotations:
+      description_de: "Eine kurze Notiz zum Label."
+      description_fr: "Une courte note sur l'étiquette."
+
+  calibration_method:
+    slot_uri: plb:calibrationMethod
+    range: CalibrationMethodEnum
+    required: true
+    description: Method of the calibration.
+    annotations:
+      description_de: "Methode der Kalibrierung."
+      description_fr: "Méthode de calibration."
+  calibrated_kind:
+    slot_uri: plb:calibratedKind
+    range: LabelKindEnum
+    description: The label kind that the calibration record applies to.
+    annotations:
+      description_de: "Die Label-Art, für die der Kalibrierungsdatensatz gilt."
+      description_fr: "Le type d'étiquette concerné."
+  fit_set_file:
+    slot_uri: plb:fitSetFile
+    description: File of the fit set (relative to the project folder).
+    annotations:
+      description_de: "Datei der Anpassungsmenge."
+      description_fr: "Fichier de l'ensemble d'ajustement."
+  fit_set_digest:
+    slot_uri: plb:fitSetSha256
+    pattern: "^[0-9a-f]{64}$"
+    description: SHA-256 of the file of the fit set.
+    annotations:
+      description_de: "SHA-256 der Datei der Anpassungsmenge."
+      description_fr: "SHA-256 du fichier de l'ensemble d'ajustement."
+  fit_n:
+    slot_uri: plb:fitN
+    range: integer
+    minimum_value: 0
+    description: Number of items in the fit set.
+    annotations:
+      description_de: "Anzahl Elemente der Anpassungsmenge."
+      description_fr: "Nombre d'éléments de l'ensemble d'ajustement."
+  reference_source:
+    slot_uri: plb:reference
+    description: The reference that the probability is about (for example the AI references ref41 and pool_ref41 with the pilot overrides).
+    annotations:
+      description_de: "Die Referenz, auf die sich die Wahrscheinlichkeit bezieht."
+      description_fr: "La référence visée par la probabilité."
+  target_status:
+    slot_uri: plb:targetStatus
+    range: TargetStatusEnum
+    required: true
+    description: Result of the calibration against its pre-registered target.
+    annotations:
+      description_de: "Ergebnis der Kalibrierung gegen ihr vorab festgelegtes Ziel."
+      description_fr: "Résultat de la calibration par rapport à sa cible."
+  certain_threshold:
+    slot_uri: plb:certainThreshold
+    range: decimal
+    minimum_value: 0
+    maximum_value: 1
+    description: Threshold a of the value status (plan chapter 2.3). A record without a threshold gives only the value status unsure.
+    annotations:
+      description_de: "Schwelle a des Wertstatus. Ohne Schwelle ist jeder Wertstatus unsure."
+      description_fr: "Seuil a du statut de valeur."
+  calibration_parameters:
+    slot_uri: plb:parameter
+    range: CalibrationParameter
+    multivalued: true
+    inlined_as_list: true
+    description: The fitted parameters.
+    annotations:
+      description_de: "Die angepassten Parameter."
+      description_fr: "Les paramètres ajustés."
+  parameter_name:
+    slot_uri: plb:parameterName
+    required: true
+    description: Name of the parameter.
+    annotations:
+      description_de: "Name des Parameters."
+      description_fr: "Nom du paramètre."
+  parameter_value:
+    slot_uri: plb:parameterValue
+    range: decimal
+    required: true
+    description: Value of the parameter.
+    annotations:
+      description_de: "Wert des Parameters."
+      description_fr: "Valeur du paramètre."
+  measure_sets:
+    slot_uri: plb:measureSet
+    range: MeasureSet
+    multivalued: true
+    inlined_as_list: true
+    description: The measure sets of the calibration.
+    annotations:
+      description_de: "Die Messmengen der Kalibrierung."
+      description_fr: "Les ensembles de mesure de la calibration."
+  set_name:
+    slot_uri: plb:setName
+    required: true
+    description: Name of the measure set (for example dev OOF, validation, group 7).
+    annotations:
+      description_de: "Name der Messmenge."
+      description_fr: "Nom de l'ensemble de mesure."
+  set_n:
+    slot_uri: plb:setN
+    range: integer
+    minimum_value: 0
+    description: Number of items in the measure set.
+    annotations:
+      description_de: "Anzahl Elemente der Messmenge."
+      description_fr: "Nombre d'éléments de l'ensemble de mesure."
+  ece:
+    slot_uri: plb:ece
+    range: decimal
+    minimum_value: 0
+    maximum_value: 1
+    description: Expected calibration error of the top probability (10 bins of equal width).
+    annotations:
+      description_de: "Erwarteter Kalibrierungsfehler der höchsten Wahrscheinlichkeit (10 gleich breite Klassen)."
+      description_fr: "Erreur de calibration attendue (10 classes de même largeur)."
+  ece_equal_mass:
+    slot_uri: plb:eceEqualMass
+    range: decimal
+    minimum_value: 0
+    maximum_value: 1
+    description: Expected calibration error with 10 bins of equal mass.
+    annotations:
+      description_de: "Erwarteter Kalibrierungsfehler mit 10 gleich grossen Klassen."
+      description_fr: "Erreur de calibration attendue (10 classes de même effectif)."
+  classwise_ece:
+    slot_uri: plb:classwiseEce
+    range: decimal
+    minimum_value: 0
+    maximum_value: 1
+    description: Class-wise expected calibration error.
+    annotations:
+      description_de: "Klassenweiser erwarteter Kalibrierungsfehler."
+      description_fr: "Erreur de calibration attendue par classe."
+  brier:
+    slot_uri: plb:brier
+    range: decimal
+    minimum_value: 0
+    description: Brier score.
+    annotations:
+      description_de: "Brier-Wert."
+      description_fr: "Score de Brier."
+  nll:
+    slot_uri: plb:nll
+    range: decimal
+    minimum_value: 0
+    description: Mean negative log likelihood.
+    annotations:
+      description_de: "Mittlere negative Log-Likelihood."
+      description_fr: "Log-vraisemblance négative moyenne."
+  ece_low:
+    slot_uri: plb:eceLow
+    range: decimal
+    description: Lower bound of the interval of the expected calibration error.
+    annotations:
+      description_de: "Untere Grenze des Intervalls des Kalibrierungsfehlers."
+      description_fr: "Borne inférieure de l'intervalle."
+  ece_high:
+    slot_uri: plb:eceHigh
+    range: decimal
+    description: Upper bound of the interval of the expected calibration error.
+    annotations:
+      description_de: "Obere Grenze des Intervalls des Kalibrierungsfehlers."
+      description_fr: "Borne supérieure de l'intervalle."
+  interval_method:
+    slot_uri: plb:intervalMethod
+    description: Method of the interval (for example doc-cluster bootstrap with 2,000 draws).
+    annotations:
+      description_de: "Methode des Intervalls."
+      description_fr: "Méthode de l'intervalle."
+  calibration_note:
+    slot_uri: plb:calibrationNote
+    description: A short note about the calibration record.
+    annotations:
+      description_de: "Eine kurze Notiz zum Kalibrierungsdatensatz."
+      description_fr: "Une courte note sur l'enregistrement de calibration."
+
+  layout_blocks:
+    slot_uri: plb:block
+    range: PdfBlock
+    multivalued: true
+    inlined_as_list: true
+    description: The Docling blocks in reading order.
+    annotations:
+      description_de: "Die Docling-Blöcke in Lesereihenfolge."
+      description_fr: "Les blocs Docling dans l'ordre de lecture."
+  block_id:
+    slot_uri: plb:blockId
+    required: true
+    pattern: "^B[0-9]+$"
+    description: Identifier of the Docling block (B<n>, as in the atom identifiers).
+    annotations:
+      description_de: "Kennung des Docling-Blocks."
+      description_fr: "Identifiant du bloc Docling."
+  block_position:
+    slot_uri: plb:position
+    range: integer
+    required: true
+    minimum_value: 1
+    description: Position of the block in reading order (1-based).
+    annotations:
+      description_de: "Stelle des Blocks in der Lesereihenfolge (ab 1)."
+      description_fr: "Position du bloc dans l'ordre de lecture."
+  block_atoms:
+    slot_uri: plb:atom
+    range: PdfAtom
+    multivalued: true
+    inlined_as_list: true
+    description: The atoms of the block in reading order.
+    annotations:
+      description_de: "Die Atome des Blocks in Lesereihenfolge."
+      description_fr: "Les atomes du bloc dans l'ordre de lecture."
+  docling_label:
+    slot_uri: plb:doclingLabel
+    description: The Docling label of the block or atom (for example text, section_header, page_header).
+    annotations:
+      description_de: "Das Docling-Label des Blocks oder Atoms."
+      description_fr: "L'étiquette Docling du bloc ou de l'atome."
+  atom_text:
+    slot_uri: plb:atomText
+    description: The wording of the atom (Docling text of the line).
+    annotations:
+      description_de: "Der Wortlaut des Atoms."
+      description_fr: "Le libellé de l'atome."
+  line_box_source:
+    slot_uri: plb:lineBoxSource
+    description: Source of the line frame (text layer or OCR).
+    annotations:
+      description_de: "Herkunft des Zeilenrahmens."
+      description_fr: "Origine du cadre de ligne."
+
+# Enumerations
+# ----------------------------------------------------------------
+
+enums:
+
+  LabelKindEnum:
+    description: Kinds of labels (plan-full-conversion.md chapter 2).
+    annotations:
+      description_de: "Arten von Labels."
+      description_fr: "Types d'étiquettes."
+    permissible_values:
+      document_text_parts:
+        meaning: plb:document_text_parts
+        description: "Step D1: the text parts of the document (A submitted only, B response only, C both, D neither)."
+      block_slot:
+        meaning: plb:block_slot
+        description: Slot and text type of one Docling block.
+      author_switch:
+        meaning: plb:author_switch
+        description: A switch between the Submission family and the Response family after a block.
+      executive_response:
+        meaning: plb:executive_response
+        description: "Step R2: the document holds a response of the executive (final check)."
+      text_wording:
+        meaning: plb:text_wording
+        description: Wording of an author block (a copy of the PDF atoms).
+      export_value:
+        meaning: plb:export_value
+        description: A value from the OpenParlData export.
+      constant_value:
+        meaning: plb:constant_value
+        description: An identifier or a constant of the schema.
+
+  LabelSourceEnum:
+    description: Sources of a label.
+    annotations:
+      description_de: "Quellen eines Labels."
+      description_fr: "Sources d'une étiquette."
+    permissible_values:
+      rule:
+        meaning: plb:rule
+        description: A code rule decided the label. Its probability is the Jeffreys posterior mean of the rule tier, never 1.0.
+      apertus_head:
+        meaning: plb:apertus_head
+        description: A trained head on the hidden states of Apertus decided the label.
+      code_step:
+        meaning: plb:code_step
+        description: >-
+          A code step on calibrated inputs decided the label (for example the sequence step B2). The decisions
+          file (interface 7) gives this source as code.
+      export:
+        meaning: plb:export
+        description: The value comes from the OpenParlData export without a probability.
+      constant:
+        meaning: plb:constant
+        description: The value is an identifier pattern or a constant of the schema.
+      copy:
+        meaning: plb:copy
+        description: The value is a copy of the PDF wording (verbatim check E19).
+
+  LabelValueStatusEnum:
+    description: Value status of a label (glossary). This list has only certain and unsure.
+    annotations:
+      description_de: "Wertstatus eines Labels."
+      description_fr: "Statut de valeur d'une étiquette."
+    permissible_values:
+      certain:
+        meaning: plb:certain
+        description: The probability is at the threshold a of the calibration record or above.
+      unsure:
+        meaning: plb:unsure
+        description: The probability is below the threshold a, or the calibration record has no threshold.
+
+  RunModeEnum:
+    description: Modes of the cascade (interface 7 of gate GJ).
+    annotations:
+      description_de: "Modi der Kaskade."
+      description_fr: "Modes de la cascade."
+    permissible_values:
+      floor:
+        meaning: plb:floor
+        description: Floor converter without Apertus states. Each rule label has its rule-tier probability.
+      cascade:
+        meaning: plb:cascade
+        description: Rules, Apertus heads and code steps as in plan chapter 4.
+
+  CalibrationMethodEnum:
+    description: Methods of calibration.
+    annotations:
+      description_de: "Methoden der Kalibrierung."
+      description_fr: "Méthodes de calibration."
+    permissible_values:
+      temperature_scaling:
+        meaning: plb:temperature_scaling
+        description: One temperature on the logits, fitted on out-of-fold values.
+      platt_scaling:
+        meaning: plb:platt_scaling
+        description: Logistic regression on one score.
+      jeffreys_tier_precision:
+        meaning: plb:jeffreys_tier_precision
+        description: Jeffreys posterior mean of the precision of a rule tier.
+      verifier_platt:
+        meaning: plb:verifier_platt
+        description: Platt scaling of the probability of an Apertus step for the label of a rule.
+      forward_backward_temperature:
+        meaning: plb:forward_backward_temperature
+        description: One temperature on the marginals of the forward-backward step B2.
+      synthetic_test_value:
+        meaning: plb:synthetic_test_value
+        description: "A synthetic value for a code check only. It is not a measurement and must not be in a delivery."
+
+  TargetStatusEnum:
+    description: Result of a calibration against its target.
+    annotations:
+      description_de: "Ergebnis einer Kalibrierung gegen ihr Ziel."
+      description_fr: "Résultat d'une calibration par rapport à sa cible."
+    permissible_values:
+      target_met:
+        meaning: plb:target_met
+        description: The calibration meets its target on the measure set of the criteria file.
+      target_not_met:
+        meaning: plb:target_not_met
+        description: The calibration does not meet its target. The probabilities are written with the measured error.
+      not_met_on_unseen_parliaments:
+        meaning: plb:not_met_on_unseen_parliaments
+        description: The calibration meets its target on validation but not on group 7.
+      not_measured:
+        meaning: plb:not_measured
+        description: No measure set has a value yet.

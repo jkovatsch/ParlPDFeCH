@@ -1,0 +1,5390 @@
+{
+ "schema": "parlpdfech-gj-calibrations/1",
+ "version": "b1s-m10-fullrun2-1",
+ "status": "EXCEPTION (process rule 10); NOT RELEASED",
+ "what": "calibration records of a run of the candidate B1-S (addendum D): the records of its entry variant, floor records without a threshold a (documents with the floor fallback), R2 records",
+ "entry": {
+  "d1": false,
+  "b1_b2": false,
+  "b1_s": true
+ },
+ "sources": {
+  "design_files": {
+   "heads/d1_head.npz": "c583c7aaf79564af87092585f24cc0c3faf1d9df9ea2b7d65a3887f884220bd3",
+   "heads/b1_head.npz": "eea315eef8fa9df77385847b34d307ef2c9e4ad4140ca1b23a3cff5d715a4eb7",
+   "b2_hmm.json": "1a1c1106b6347e94fbca8952aec77158606742202dd0a1142cf5a871debdd73a",
+   "verifiers.json": "638a3b3cc0c5dbc2aa32d842baa57a529fd359a828d9849d45f44c1e78e8a527",
+   "tier_table.json": "49ed195358bbf6b9e0627d6eaec47fc84051cd40240b98fc4722159c4dd545db",
+   "thresholds.json": "b04ef908aa97511094a9c9a5eb50c0caccee96224fcec3b65cff1ee3febcd5aa",
+   "lora_trigger.json": "ea692af4278821aa9b99ffe6c594c9dec50c10a333bc94a0d01f23600f3333dc",
+   "calibration_records.json": "859a7965617b4bd7ce054e78664af9a01fa030e30b1937efd9f32d936057df9e",
+   "design.json": "aae764085e46cabe9a7e10a6862137be4ca4f301b617aa85ba76e67adc58f3b7"
+  },
+  "design_freeze_sha256": "add6fdad843cf24c08c0cf69992d610c0017cb8f77ae7e28f6c1aef0770e5e52",
+  "floor": {
+   "path": "daten/gj/calibration/floor_v1.json",
+   "sha256": "e8ff80df04f6b3a91f2249332f77d111ab5e7788884570570e6808a6b82f37c5",
+   "version": "floor-v1"
+  },
+  "pipeline": {
+   "path": "src/m10_pipeline.py",
+   "sha256": "329cc6e3778b9a7b95e1b01a9a17f24f632b2806f6ec90fcbdab745af3e21a87",
+   "version": "m10-pipeline-1"
+  },
+  "candidate_files": {
+   "daten/gj/design_b1s/design_b1s.json": "3a78badab1cc2b7e3164a670822f1466d0addd3c7f189b24e163b5c13aee0e0f",
+   "daten/gj/design_b1s/calibration_records.json": "efc2b0700d35d78cc03bf6277733046b717f26ecf09a028daf1065b0d437ad25",
+   "daten/gj/design_b1s/oof/b1s_oof.npz": "b594d98493bde7e4f945c5aa07edcac8929bfd51d5734c12d5936ff58ac50073",
+   "daten/gj/design_b1s/design_b1s_dev.md": "15d5cf5cfe598193231e7283250f8d241738314d0b7a50ac819d87b1bbe07f49",
+   "crisp-dm/04-modeling/gate-jev-cascade-criteria-addendum-b.md": "af77c2ac8573ee1c08bba9c75cd7e46739c8850f5988d066b3254a557153d651",
+   "crisp-dm/04-modeling/gate-jev-cascade-criteria-addendum-c.md": "264a3810d7637aa3c6c6e39fbab82068d9c15f59ca4f6b88a820b7cc2cc41d5c",
+   "crisp-dm/04-modeling/gate-jev-cascade-criteria.md": "6f6d15c0562cba2070995c302080a9aaedfe665f8d746ed5b0fdd9248bc20bfe",
+   "crisp-dm/04-modeling/gate-jev-cascade-criteria-addendum-d.md": "43e8414dd3f00fbf9111fa167c22a3c09617651d47540b8c9f1ee187f31bad10"
+  },
+  "fullrun2": {
+   "path": "src/m10_fullrun2.py",
+   "sha256": "97015dff844a6892bab8c60a69c1c39984700fbcc6cc1b0f281f5e33548bf8a6",
+   "version": "m10-fullrun2-1"
+  },
+  "validation_calibrations": {
+   "path": "daten/gj/validation_b1s/decisions_records/calibrations.json",
+   "sha256": "8bb0090f3ac6595558fa57679c14bf7eab4e0f0ba30158b85c628e479d97b678",
+   "ids_in_both_files": 9,
+   "records_with_the_status_of_that_file": [
+    "gj1-b1s-b2-marginal-temperature",
+    "gj1-tier-fixed-R1-none",
+    "gj1-tier-fixed-R3-none",
+    "gj1-tier-fixed-R4-none"
+   ],
+   "target_status": {
+    "gj1-b1s-b2-marginal-temperature": "target_not_met",
+    "gj1-tier-fixed-R1-none": "target_not_met",
+    "gj1-tier-fixed-R3-none": "target_not_met",
+    "gj1-tier-fixed-R4-none": "target_not_met"
+   }
+  }
+ },
+ "calibrations": {
+  "gj1-d1-head-temperature": {
+   "calibration_method": "temperature_scaling",
+   "calibrated_kind": "document_text_parts",
+   "fit_set_file": "daten/gj/design/oof/d1_oof.npz",
+   "fit_set_digest": "2465071fa18d0323594ff7c53cfbb4c1a111b01e672611ae80c92bebb9c1238b",
+   "fit_n": 193,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41, daten/iso/v4/pool_ref41) with the 3 pilot overrides",
+   "in_sample": false,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "temperature",
+     "parameter_value": 1.0312945796996467
+    },
+    {
+     "parameter_name": "layer",
+     "parameter_value": 20.0
+    },
+    {
+     "parameter_name": "C",
+     "parameter_value": 0.01
+    }
+   ],
+   "measure_sets": [
+    {
+     "set_name": "dev out-of-fold",
+     "set_n": 193,
+     "ece": 0.050269,
+     "ece_equal_mass": 0.053139,
+     "classwise_ece": 0.045789,
+     "brier": 0.292988,
+     "nll": 0.493841,
+     "ece_low": 0.045891,
+     "ece_high": 0.11077,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles"
+    }
+   ],
+   "calibration_note": "D1 head (L2 multinomial logistic regression), one temperature on the pooled out-of-fold logits of dev. Variant d1_not_entered; threshold a by P17 on dev",
+   "certain_threshold": 0.9
+  },
+  "gj1-d1-verifier-platt": {
+   "calibration_method": "verifier_platt",
+   "calibrated_kind": "document_text_parts",
+   "fit_set_file": "daten/gj/design/verifiers.json",
+   "fit_set_digest": "638a3b3cc0c5dbc2aa32d842baa57a529fd359a828d9849d45f44c1e78e8a527",
+   "fit_n": 48,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41, daten/iso/v4/pool_ref41) with the 3 pilot overrides",
+   "in_sample": false,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "alpha",
+     "parameter_value": 0.8848284260225239
+    },
+    {
+     "parameter_name": "beta",
+     "parameter_value": 1.040388982867347
+    }
+   ],
+   "measure_sets": [
+    {
+     "set_name": "dev_out_of_design, in-sample",
+     "set_n": 48,
+     "ece": 0.120887,
+     "ece_equal_mass": 0.117203,
+     "brier": 0.163694,
+     "nll": 0.287308
+    }
+   ],
+   "calibration_note": "Platt map of the calibrated D1 probability of the S1 rule option; fit set dev_out_of_design. Variant d1_not_entered; threshold a by P17 on dev",
+   "certain_threshold": 0.9
+  },
+  "gj1-tier-fixed-R1-none": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/design/tier_table.json",
+   "fit_set_digest": "49ed195358bbf6b9e0627d6eaec47fc84051cd40240b98fc4722159c4dd545db",
+   "fit_n": 338,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41, daten/iso/v4/pool_ref41) with the 3 pilot overrides",
+   "in_sample": true,
+   "target_status": "target_not_met",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_mean",
+     "parameter_value": 0.998525
+    },
+    {
+     "parameter_name": "precision",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "blocks",
+     "parameter_value": 338.0
+    },
+    {
+     "parameter_name": "documents",
+     "parameter_value": 111.0
+    }
+   ],
+   "calibration_note": "rule tier fixed:R1 with the option none: Jeffreys posterior mean of the dev precision (criteria chapter 8.7). Variant b12_entered; threshold a by P17 on dev. GJ.13 on validation: NOT MET",
+   "certain_threshold": 0.8,
+   "measure_sets": [
+    {
+     "set_name": "validation (44 documents): written block labels of the variant d1n_b1sy (GJ.13); ECE of p of the written option, Brier score and NLL of the 6 options",
+     "set_n": 2715,
+     "ece": 0.0442,
+     "ece_equal_mass": 0.0481,
+     "classwise_ece": 0.0622,
+     "brier": 0.3125,
+     "nll": 0.5933,
+     "ece_low": 0.0324,
+     "ece_high": 0.1158,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles"
+    }
+   ]
+  },
+  "gj1-tier-fixed-R3-none": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/design/tier_table.json",
+   "fit_set_digest": "49ed195358bbf6b9e0627d6eaec47fc84051cd40240b98fc4722159c4dd545db",
+   "fit_n": 549,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41, daten/iso/v4/pool_ref41) with the 3 pilot overrides",
+   "in_sample": true,
+   "target_status": "target_not_met",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_mean",
+     "parameter_value": 0.999091
+    },
+    {
+     "parameter_name": "precision",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "blocks",
+     "parameter_value": 549.0
+    },
+    {
+     "parameter_name": "documents",
+     "parameter_value": 163.0
+    }
+   ],
+   "calibration_note": "rule tier fixed:R3 with the option none: Jeffreys posterior mean of the dev precision (criteria chapter 8.7). Variant b12_entered; threshold a by P17 on dev. GJ.13 on validation: NOT MET",
+   "certain_threshold": 0.8,
+   "measure_sets": [
+    {
+     "set_name": "validation (44 documents): written block labels of the variant d1n_b1sy (GJ.13); ECE of p of the written option, Brier score and NLL of the 6 options",
+     "set_n": 2715,
+     "ece": 0.0442,
+     "ece_equal_mass": 0.0481,
+     "classwise_ece": 0.0622,
+     "brier": 0.3125,
+     "nll": 0.5933,
+     "ece_low": 0.0324,
+     "ece_high": 0.1158,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles"
+    }
+   ]
+  },
+  "gj1-tier-fixed-R4-none": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/design/tier_table.json",
+   "fit_set_digest": "49ed195358bbf6b9e0627d6eaec47fc84051cd40240b98fc4722159c4dd545db",
+   "fit_n": 625,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41, daten/iso/v4/pool_ref41) with the 3 pilot overrides",
+   "in_sample": true,
+   "target_status": "target_not_met",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_mean",
+     "parameter_value": 0.999201
+    },
+    {
+     "parameter_name": "precision",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "blocks",
+     "parameter_value": 625.0
+    },
+    {
+     "parameter_name": "documents",
+     "parameter_value": 80.0
+    }
+   ],
+   "calibration_note": "rule tier fixed:R4 with the option none: Jeffreys posterior mean of the dev precision (criteria chapter 8.7). Variant b12_entered; threshold a by P17 on dev. GJ.13 on validation: NOT MET",
+   "certain_threshold": 0.8,
+   "measure_sets": [
+    {
+     "set_name": "validation (44 documents): written block labels of the variant d1n_b1sy (GJ.13); ECE of p of the written option, Brier score and NLL of the 6 options",
+     "set_n": 2715,
+     "ece": 0.0442,
+     "ece_equal_mass": 0.0481,
+     "classwise_ece": 0.0622,
+     "brier": 0.3125,
+     "nll": 0.5933,
+     "ece_low": 0.0324,
+     "ece_high": 0.1158,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles"
+    }
+   ]
+  },
+  "gj1-b1s-b2-marginal-temperature": {
+   "calibration_method": "forward_backward_temperature",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/design_b1s/oof/b1s_oof.npz",
+   "fit_set_digest": "b594d98493bde7e4f945c5aa07edcac8929bfd51d5734c12d5936ff58ac50073",
+   "fit_n": 9313,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41, daten/iso/v4/pool_ref41) with the 3 pilot overrides",
+   "in_sample": false,
+   "target_status": "target_not_met",
+   "calibration_parameters": [
+    {
+     "parameter_name": "temperature_b1",
+     "parameter_value": 1.1050075502408903
+    },
+    {
+     "parameter_name": "temperature_b2",
+     "parameter_value": 3.0309360099997904
+    },
+    {
+     "parameter_name": "strength",
+     "parameter_value": 8.0
+    }
+   ],
+   "measure_sets": [
+    {
+     "set_name": "dev out-of-fold",
+     "set_n": 9313,
+     "ece": 0.0526,
+     "ece_equal_mass": 0.051726,
+     "classwise_ece": 0.046117,
+     "brier": 0.266646,
+     "nll": 0.601899,
+     "ece_low": 0.031093,
+     "ece_high": 0.077205,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles"
+    },
+    {
+     "set_name": "validation (44 documents): written block labels of the variant d1n_b1sy (GJ.13); ECE of p of the written option, Brier score and NLL of the 6 options",
+     "set_n": 2715,
+     "ece": 0.0442,
+     "ece_equal_mass": 0.0481,
+     "classwise_ece": 0.0622,
+     "brier": 0.3125,
+     "nll": 0.5933,
+     "ece_low": 0.0324,
+     "ece_high": 0.1158,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles"
+    }
+   ],
+   "calibration_note": "B1-S (addendum D): the frozen B1 head with its frozen temperature; B2 block marginal of the form switch_soft (addendum C) after one B2 temperature. Variant b12_entered; threshold a by P17 on dev. GJ.13 on validation: NOT MET",
+   "certain_threshold": 0.8
+  },
+  "gj1-b1s-b2-verifier-platt": {
+   "calibration_method": "verifier_platt",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/design_b1s/oof/b1s_oof.npz",
+   "fit_set_digest": "b594d98493bde7e4f945c5aa07edcac8929bfd51d5734c12d5936ff58ac50073",
+   "fit_n": 1767,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41, daten/iso/v4/pool_ref41) with the 3 pilot overrides",
+   "in_sample": false,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "alpha",
+     "parameter_value": 0.9045956705056484
+    },
+    {
+     "parameter_name": "beta",
+     "parameter_value": 0.7673544060156579
+    }
+   ],
+   "measure_sets": [
+    {
+     "set_name": "non-certain blocks of dev_out_of_design, in-sample",
+     "set_n": 1767,
+     "ece": 0.054172,
+     "ece_equal_mass": 0.058194,
+     "brier": 0.170783,
+     "nll": 0.31605
+    }
+   ],
+   "calibration_note": "B1-S: Platt map of the B2 marginal of the rule option; fit set: the non-certain blocks of dev_out_of_design. Variant b12_entered; threshold a by P17 on dev",
+   "certain_threshold": 0.8
+  },
+  "gj1-b1s-b2-switch-forward-backward": {
+   "calibration_method": "forward_backward_temperature",
+   "calibrated_kind": "author_switch",
+   "fit_set_file": "daten/gj/design_b1s/oof/b1s_oof.npz",
+   "fit_set_digest": "b594d98493bde7e4f945c5aa07edcac8929bfd51d5734c12d5936ff58ac50073",
+   "fit_n": 9120,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41, daten/iso/v4/pool_ref41) with the 3 pilot overrides",
+   "in_sample": false,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "temperature_b1",
+     "parameter_value": 1.1050075502408903
+    }
+   ],
+   "measure_sets": [
+    {
+     "set_name": "dev out-of-fold, all gaps",
+     "set_n": 9120,
+     "ece": 0.002069,
+     "ece_equal_mass": 0.002996,
+     "classwise_ece": 0.004602,
+     "brier": 0.008361,
+     "nll": 0.024744,
+     "ece_low": 0.001036,
+     "ece_high": 0.003371,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles"
+    }
+   ],
+   "calibration_note": "B1-S: pairwise forward-backward probability of a switch at the gap in the form switch_soft, with the frozen B1 temperature; the B2 temperature is not applied. Variant b12_entered; threshold a by P17 on dev"
+  },
+  "floor-v1.block.fixed.R1.none": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 338,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.998525
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 338.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 338.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 111.0
+    },
+    {
+     "parameter_name": "ood_correct",
+     "parameter_value": 92.0
+    },
+    {
+     "parameter_name": "ood_blocks",
+     "parameter_value": 92.0
+    },
+    {
+     "parameter_name": "certain_pair",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 1.0
+    }
+   ],
+   "calibration_note": "rule tier fixed:R1, rule option none: Jeffreys posterior mean of the dev precision (criteria 8.7 item 5); certain pair (criteria 8.7 item 2): yes. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.fixed.R1_R4.none": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 10,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.954545
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 10.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 10.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 6.0
+    },
+    {
+     "parameter_name": "ood_correct",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "ood_blocks",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "certain_pair",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 1.0
+    }
+   ],
+   "calibration_note": "rule tier fixed:R1+R4, rule option none: Jeffreys posterior mean of the dev precision (criteria 8.7 item 5); certain pair (criteria 8.7 item 2): no. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.fixed.R3.none": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 549,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.999091
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 549.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 549.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 163.0
+    },
+    {
+     "parameter_name": "ood_correct",
+     "parameter_value": 119.0
+    },
+    {
+     "parameter_name": "ood_blocks",
+     "parameter_value": 119.0
+    },
+    {
+     "parameter_name": "certain_pair",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 1.0
+    }
+   ],
+   "calibration_note": "rule tier fixed:R3, rule option none: Jeffreys posterior mean of the dev precision (criteria 8.7 item 5); certain pair (criteria 8.7 item 2): yes. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.fixed.R4.none": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 625,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.999201
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 625.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 625.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 80.0
+    },
+    {
+     "parameter_name": "ood_correct",
+     "parameter_value": 93.0
+    },
+    {
+     "parameter_name": "ood_blocks",
+     "parameter_value": 93.0
+    },
+    {
+     "parameter_name": "certain_pair",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 1.0
+    }
+   ],
+   "calibration_note": "rule tier fixed:R4, rule option none: Jeffreys posterior mean of the dev precision (criteria 8.7 item 5); certain pair (criteria 8.7 item 2): yes. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.fixed.R5.none": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 24,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.98
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 24.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 24.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 16.0
+    },
+    {
+     "parameter_name": "ood_correct",
+     "parameter_value": 5.0
+    },
+    {
+     "parameter_name": "ood_blocks",
+     "parameter_value": 5.0
+    },
+    {
+     "parameter_name": "certain_pair",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 1.0
+    }
+   ],
+   "calibration_note": "rule tier fixed:R5, rule option none: Jeffreys posterior mean of the dev precision (criteria 8.7 item 5); certain pair (criteria 8.7 item 2): no. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.s1_start.A2.recommendation": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 15,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.21875
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 3.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 15.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 2.0
+    },
+    {
+     "parameter_name": "ood_correct",
+     "parameter_value": 2.0
+    },
+    {
+     "parameter_name": "ood_blocks",
+     "parameter_value": 9.0
+    },
+    {
+     "parameter_name": "certain_pair",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 2.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 4.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 9.0
+    }
+   ],
+   "calibration_note": "rule tier s1_start:A2, rule option recommendation: Jeffreys posterior mean of the dev precision (criteria 8.7 item 5); certain pair (criteria 8.7 item 2): no. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.s1_start.A2.response": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 332,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.490991
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 163.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 332.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 10.0
+    },
+    {
+     "parameter_name": "ood_correct",
+     "parameter_value": 62.0
+    },
+    {
+     "parameter_name": "ood_blocks",
+     "parameter_value": 122.0
+    },
+    {
+     "parameter_name": "certain_pair",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 11.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 12.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 149.0
+    }
+   ],
+   "calibration_note": "rule tier s1_start:A2, rule option response: Jeffreys posterior mean of the dev precision (criteria 8.7 item 5); certain pair (criteria 8.7 item 2): no. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.s1_start.C1.none": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 97,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.882653
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 86.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 97.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 4.0
+    },
+    {
+     "parameter_name": "ood_correct",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "ood_blocks",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "certain_pair",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 4.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 3.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 7.0
+    }
+   ],
+   "calibration_note": "rule tier s1_start:C1, rule option none: Jeffreys posterior mean of the dev precision (criteria 8.7 item 5); certain pair (criteria 8.7 item 2): no. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.s1_start.M1.none": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 22,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.934783
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 21.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 22.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "ood_correct",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "ood_blocks",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "certain_pair",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 2.0
+    }
+   ],
+   "calibration_note": "rule tier s1_start:M1, rule option none: Jeffreys posterior mean of the dev precision (criteria 8.7 item 5); certain pair (criteria 8.7 item 2): no. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.s1_start.R1.recommendation": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 7,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.0625
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 7.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "ood_correct",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "ood_blocks",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "certain_pair",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 8.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 1.0
+    }
+   ],
+   "calibration_note": "rule tier s1_start:R1, rule option recommendation: Jeffreys posterior mean of the dev precision (criteria 8.7 item 5); certain pair (criteria 8.7 item 2): no. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.s1_start.R1.response": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 288,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.17128
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 49.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 288.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 6.0
+    },
+    {
+     "parameter_name": "ood_correct",
+     "parameter_value": 49.0
+    },
+    {
+     "parameter_name": "ood_blocks",
+     "parameter_value": 85.0
+    },
+    {
+     "parameter_name": "certain_pair",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 33.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 22.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 11.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 177.0
+    }
+   ],
+   "calibration_note": "rule tier s1_start:R1, rule option response: Jeffreys posterior mean of the dev precision (criteria 8.7 item 5); certain pair (criteria 8.7 item 2): no. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.s2_start_cue.answer_announce.recommendation": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 8,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.055556
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 8.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "ood_correct",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "ood_blocks",
+     "parameter_value": 8.0
+    },
+    {
+     "parameter_name": "certain_pair",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 9.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 1.0
+    }
+   ],
+   "calibration_note": "rule tier s2_start_cue:answer_announce, rule option recommendation: Jeffreys posterior mean of the dev precision (criteria 8.7 item 5); certain pair (criteria 8.7 item 2): no. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.s2_start_cue.answer_announce.response": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 380,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.400262
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 152.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 380.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 10.0
+    },
+    {
+     "parameter_name": "ood_correct",
+     "parameter_value": 66.0
+    },
+    {
+     "parameter_name": "ood_blocks",
+     "parameter_value": 108.0
+    },
+    {
+     "parameter_name": "certain_pair",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 4.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 16.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 211.0
+    }
+   ],
+   "calibration_note": "rule tier s2_start_cue:answer_announce, rule option response: Jeffreys posterior mean of the dev precision (criteria 8.7 item 5); certain pair (criteria 8.7 item 2): no. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.s2_start_cue.answer_label.recommendation": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 57,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.353448
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 20.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 57.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 10.0
+    },
+    {
+     "parameter_name": "ood_correct",
+     "parameter_value": 6.0
+    },
+    {
+     "parameter_name": "ood_blocks",
+     "parameter_value": 18.0
+    },
+    {
+     "parameter_name": "certain_pair",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 4.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 3.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 33.0
+    }
+   ],
+   "calibration_note": "rule tier s2_start_cue:answer_label, rule option recommendation: Jeffreys posterior mean of the dev precision (criteria 8.7 item 5); certain pair (criteria 8.7 item 2): no. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.s2_start_cue.answer_label.response": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 1075,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.52277
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 562.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 1075.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 27.0
+    },
+    {
+     "parameter_name": "ood_correct",
+     "parameter_value": 164.0
+    },
+    {
+     "parameter_name": "ood_blocks",
+     "parameter_value": 270.0
+    },
+    {
+     "parameter_name": "certain_pair",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 4.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 2.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 44.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 467.0
+    }
+   ],
+   "calibration_note": "rule tier s2_start_cue:answer_label, rule option response: Jeffreys posterior mean of the dev precision (criteria 8.7 item 5); certain pair (criteria 8.7 item 2): no. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.s2_start_cue.decision.none": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 14,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.9
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 13.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 14.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "ood_correct",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "ood_blocks",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "certain_pair",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 2.0
+    }
+   ],
+   "calibration_note": "rule tier s2_start_cue:decision, rule option none: Jeffreys posterior mean of the dev precision (criteria 8.7 item 5); certain pair (criteria 8.7 item 2): no. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.s2_start_default.reasoning": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 494,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.267677
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 132.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 494.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 26.0
+    },
+    {
+     "parameter_name": "ood_correct",
+     "parameter_value": 70.0
+    },
+    {
+     "parameter_name": "ood_blocks",
+     "parameter_value": 241.0
+    },
+    {
+     "parameter_name": "certain_pair",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 3.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 26.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 336.0
+    }
+   ],
+   "calibration_note": "rule tier s2_start_default, rule option reasoning: Jeffreys posterior mean of the dev precision (criteria 8.7 item 5); certain pair (criteria 8.7 item 2): no. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.s2_start_default.submitted": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 2458,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.236885
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 582.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 2458.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 88.0
+    },
+    {
+     "parameter_name": "ood_correct",
+     "parameter_value": 151.0
+    },
+    {
+     "parameter_name": "ood_blocks",
+     "parameter_value": 397.0
+    },
+    {
+     "parameter_name": "certain_pair",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 40.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 95.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 21.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 121.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 1604.0
+    }
+   ],
+   "calibration_note": "rule tier s2_start_default, rule option submitted: Jeffreys posterior mean of the dev precision (criteria 8.7 item 5); certain pair (criteria 8.7 item 2): no. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.s2_start_sponsor_evidence.reasoning": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 136,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.70438
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 96.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 136.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 17.0
+    },
+    {
+     "parameter_name": "ood_correct",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "ood_blocks",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "certain_pair",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 7.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 20.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 2.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 15.0
+    }
+   ],
+   "calibration_note": "rule tier s2_start_sponsor_evidence, rule option reasoning: Jeffreys posterior mean of the dev precision (criteria 8.7 item 5); certain pair (criteria 8.7 item 2): no. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.s2_start_sponsor_evidence.submitted": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 1151,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.304253
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 350.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 1151.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 46.0
+    },
+    {
+     "parameter_name": "ood_correct",
+     "parameter_value": 54.0
+    },
+    {
+     "parameter_name": "ood_blocks",
+     "parameter_value": 314.0
+    },
+    {
+     "parameter_name": "certain_pair",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 4.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 291.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 67.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 443.0
+    }
+   ],
+   "calibration_note": "rule tier s2_start_sponsor_evidence, rule option submitted: Jeffreys posterior mean of the dev precision (criteria 8.7 item 5); certain pair (criteria 8.7 item 2): no. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.s2_switch.answer_announce.recommendation": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 1,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.75
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "ood_correct",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "ood_blocks",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "certain_pair",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 1.0
+    }
+   ],
+   "calibration_note": "rule tier s2_switch:answer_announce, rule option recommendation: Jeffreys posterior mean of the dev precision (criteria 8.7 item 5); certain pair (criteria 8.7 item 2): no. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.s2_switch.answer_announce.response": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 346,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.79683
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 276.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 346.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 10.0
+    },
+    {
+     "parameter_name": "ood_correct",
+     "parameter_value": 40.0
+    },
+    {
+     "parameter_name": "ood_blocks",
+     "parameter_value": 57.0
+    },
+    {
+     "parameter_name": "certain_pair",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 71.0
+    }
+   ],
+   "calibration_note": "rule tier s2_switch:answer_announce, rule option response: Jeffreys posterior mean of the dev precision (criteria 8.7 item 5); certain pair (criteria 8.7 item 2): no. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.s2_switch.answer_label.recommendation": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 16,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.558824
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 9.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 16.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 7.0
+    },
+    {
+     "parameter_name": "ood_correct",
+     "parameter_value": 2.0
+    },
+    {
+     "parameter_name": "ood_blocks",
+     "parameter_value": 5.0
+    },
+    {
+     "parameter_name": "certain_pair",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 8.0
+    }
+   ],
+   "calibration_note": "rule tier s2_switch:answer_label, rule option recommendation: Jeffreys posterior mean of the dev precision (criteria 8.7 item 5); certain pair (criteria 8.7 item 2): no. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.s2_switch.answer_label.response": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 785,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.784351
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 616.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 785.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 26.0
+    },
+    {
+     "parameter_name": "ood_correct",
+     "parameter_value": 114.0
+    },
+    {
+     "parameter_name": "ood_blocks",
+     "parameter_value": 127.0
+    },
+    {
+     "parameter_name": "certain_pair",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 4.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 7.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 161.0
+    }
+   ],
+   "calibration_note": "rule tier s2_switch:answer_label, rule option response: Jeffreys posterior mean of the dev precision (criteria 8.7 item 5); certain pair (criteria 8.7 item 2): no. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.s2_switch.speaker.none": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 61,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.959677
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 59.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 61.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 4.0
+    },
+    {
+     "parameter_name": "ood_correct",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "ood_blocks",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "certain_pair",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 3.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 1.0
+    }
+   ],
+   "calibration_note": "rule tier s2_switch:speaker, rule option none: Jeffreys posterior mean of the dev precision (criteria 8.7 item 5); certain pair (criteria 8.7 item 2): no. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.s2_switch.speaker.response": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 23,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.9375
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 22.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 23.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 2.0
+    },
+    {
+     "parameter_name": "ood_correct",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "ood_blocks",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "certain_pair",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 2.0
+    }
+   ],
+   "calibration_note": "rule tier s2_switch:speaker, rule option response: Jeffreys posterior mean of the dev precision (criteria 8.7 item 5); certain pair (criteria 8.7 item 2): no. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.s2_switch.sponsor_label.submitted": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 1,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.25
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "ood_correct",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "ood_blocks",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "certain_pair",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 2.0
+    }
+   ],
+   "calibration_note": "rule tier s2_switch:sponsor_label, rule option submitted: Jeffreys posterior mean of the dev precision (criteria 8.7 item 5); certain pair (criteria 8.7 item 2): no. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.backoff.tier_kind.fixed.none": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 1546,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.999677
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 1546.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 1546.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 177.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 1.0
+    }
+   ],
+   "calibration_note": "backoff tier_kind fixed/none: only for a pair without a dev block; never certain. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.backoff.tier_kind.s1_start.none": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 119,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.895833
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 107.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 119.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 5.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 4.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 3.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 8.0
+    }
+   ],
+   "calibration_note": "backoff tier_kind s1_start/none: only for a pair without a dev block; never certain. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.backoff.tier_kind.s1_start.recommendation": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 22,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.152174
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 3.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 22.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 3.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 8.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 2.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 4.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 9.0
+    }
+   ],
+   "calibration_note": "backoff tier_kind s1_start/recommendation: only for a pair without a dev block; never certain. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.backoff.tier_kind.s1_start.response": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 620,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.34219
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 212.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 620.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 16.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 43.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 22.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 22.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 325.0
+    }
+   ],
+   "calibration_note": "backoff tier_kind s1_start/response: only for a pair without a dev block; never certain. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.backoff.tier_kind.s2_start_cue.none": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 14,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.9
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 13.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 14.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 2.0
+    }
+   ],
+   "calibration_note": "backoff tier_kind s2_start_cue/none: only for a pair without a dev block; never certain. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.backoff.tier_kind.s2_start_cue.recommendation": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 65,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.310606
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 20.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 65.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 11.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 12.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 3.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 33.0
+    }
+   ],
+   "calibration_note": "backoff tier_kind s2_start_cue/recommendation: only for a pair without a dev block; never certain. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.backoff.tier_kind.s2_start_cue.response": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 1455,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.490728
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 714.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 1455.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 37.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 4.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 5.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 59.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 677.0
+    }
+   ],
+   "calibration_note": "backoff tier_kind s2_start_cue/response: only for a pair without a dev block; never certain. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.backoff.tier_kind.s2_start_default.reasoning": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 494,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.267677
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 132.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 494.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 26.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 3.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 26.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 336.0
+    }
+   ],
+   "calibration_note": "backoff tier_kind s2_start_default/reasoning: only for a pair without a dev block; never certain. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.backoff.tier_kind.s2_start_default.submitted": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 2458,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.236885
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 582.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 2458.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 88.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 40.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 95.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 21.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 121.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 1604.0
+    }
+   ],
+   "calibration_note": "backoff tier_kind s2_start_default/submitted: only for a pair without a dev block; never certain. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.backoff.tier_kind.s2_start_sponsor_evidence.reasoning": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 136,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.70438
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 96.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 136.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 17.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 7.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 20.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 2.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 15.0
+    }
+   ],
+   "calibration_note": "backoff tier_kind s2_start_sponsor_evidence/reasoning: only for a pair without a dev block; never certain. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.backoff.tier_kind.s2_start_sponsor_evidence.submitted": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 1151,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.304253
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 350.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 1151.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 46.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 4.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 291.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 67.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 443.0
+    }
+   ],
+   "calibration_note": "backoff tier_kind s2_start_sponsor_evidence/submitted: only for a pair without a dev block; never certain. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.backoff.tier_kind.s2_switch.none": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 61,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.959677
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 59.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 61.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 4.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 3.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 1.0
+    }
+   ],
+   "calibration_note": "backoff tier_kind s2_switch/none: only for a pair without a dev block; never certain. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.backoff.tier_kind.s2_switch.recommendation": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 17,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.583333
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 10.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 17.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 8.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 8.0
+    }
+   ],
+   "calibration_note": "backoff tier_kind s2_switch/recommendation: only for a pair without a dev block; never certain. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.backoff.tier_kind.s2_switch.response": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 1154,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.791775
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 914.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 1154.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 37.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 4.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 7.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 232.0
+    }
+   ],
+   "calibration_note": "backoff tier_kind s2_switch/response: only for a pair without a dev block; never certain. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.backoff.tier_kind.s2_switch.submitted": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 1,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.25
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 2.0
+    }
+   ],
+   "calibration_note": "backoff tier_kind s2_switch/submitted: only for a pair without a dev block; never certain. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.backoff.option.none": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 1740,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.991097
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 1725.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 1740.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 177.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 6.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 3.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 9.0
+    }
+   ],
+   "calibration_note": "backoff option none: only for a pair without a dev block; never certain. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.backoff.option.reasoning": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 630,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.362124
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 228.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 630.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 43.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 9.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 45.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 2.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 350.0
+    }
+   ],
+   "calibration_note": "backoff option reasoning: only for a pair without a dev block; never certain. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.backoff.option.recommendation": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 104,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.319048
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 33.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 104.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 22.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 8.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 13.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 6.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 48.0
+    }
+   ],
+   "calibration_note": "backoff option recommendation: only for a pair without a dev block; never certain. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.backoff.option.response": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 3229,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.569814
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 1840.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 3229.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 90.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 46.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 29.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 86.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 1232.0
+    }
+   ],
+   "calibration_note": "backoff option response: only for a pair without a dev block; never certain. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.backoff.option.submitted": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 3610,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.258239
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 932.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 3610.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 134.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 43.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 385.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 21.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 187.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 2047.0
+    }
+   ],
+   "calibration_note": "backoff option submitted: only for a pair without a dev block; never certain. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.block.backoff.all": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 9313,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.510898
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 4758.0
+    },
+    {
+     "parameter_name": "dev_blocks",
+     "parameter_value": 9313.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 193.0
+    },
+    {
+     "parameter_name": "weight_submitted",
+     "parameter_value": 998.0
+    },
+    {
+     "parameter_name": "weight_reasoning",
+     "parameter_value": 273.0
+    },
+    {
+     "parameter_name": "weight_response",
+     "parameter_value": 2281.0
+    },
+    {
+     "parameter_name": "weight_recommendation",
+     "parameter_value": 82.0
+    },
+    {
+     "parameter_name": "weight_title",
+     "parameter_value": 286.0
+    },
+    {
+     "parameter_name": "weight_none",
+     "parameter_value": 5399.0
+    }
+   ],
+   "calibration_note": "backoff all (all dev blocks): only for a pair without a dev block; never certain. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "set_n": 9313,
+     "ece": 0.004061,
+     "ece_equal_mass": 0.039994,
+     "classwise_ece": 0.003107,
+     "brier": 0.424473,
+     "nll": 0.763962,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.d1.s1.A1": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "document_text_parts",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 38,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.679487
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 26.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 38.0
+    },
+    {
+     "parameter_name": "confusion_A",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "confusion_B",
+     "parameter_value": 8.0
+    },
+    {
+     "parameter_name": "confusion_C",
+     "parameter_value": 26.0
+    },
+    {
+     "parameter_name": "confusion_D",
+     "parameter_value": 4.0
+    }
+   ],
+   "calibration_note": "S1 rule id A1: D1 option of the S1 rule role (map P3); Jeffreys posterior mean of the dev precision against the reference D1. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): D1 labels of the floor F1",
+     "set_n": 193,
+     "ece": 0.010448,
+     "ece_equal_mass": 0.073694,
+     "classwise_ece": 0.016395,
+     "brier": 0.412239,
+     "nll": 0.780439,
+     "ece_low": 0.021427,
+     "ece_high": 0.082425,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.d1.s1.A2": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "document_text_parts",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 35,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.791667
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 28.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 35.0
+    },
+    {
+     "parameter_name": "confusion_A",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "confusion_B",
+     "parameter_value": 28.0
+    },
+    {
+     "parameter_name": "confusion_C",
+     "parameter_value": 4.0
+    },
+    {
+     "parameter_name": "confusion_D",
+     "parameter_value": 2.0
+    }
+   ],
+   "calibration_note": "S1 rule id A2: D1 option of the S1 rule role (map P3); Jeffreys posterior mean of the dev precision against the reference D1. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): D1 labels of the floor F1",
+     "set_n": 193,
+     "ece": 0.010448,
+     "ece_equal_mass": 0.073694,
+     "classwise_ece": 0.016395,
+     "brier": 0.412239,
+     "nll": 0.780439,
+     "ece_low": 0.021427,
+     "ece_high": 0.082425,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.d1.s1.C1": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "document_text_parts",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 9,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.55
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 5.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 9.0
+    },
+    {
+     "parameter_name": "confusion_A",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "confusion_B",
+     "parameter_value": 3.0
+    },
+    {
+     "parameter_name": "confusion_C",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "confusion_D",
+     "parameter_value": 5.0
+    }
+   ],
+   "calibration_note": "S1 rule id C1: D1 option of the S1 rule role (map P3); Jeffreys posterior mean of the dev precision against the reference D1. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): D1 labels of the floor F1",
+     "set_n": 193,
+     "ece": 0.010448,
+     "ece_equal_mass": 0.073694,
+     "classwise_ece": 0.016395,
+     "brier": 0.412239,
+     "nll": 0.780439,
+     "ece_low": 0.021427,
+     "ece_high": 0.082425,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.d1.s1.D0": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "document_text_parts",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 9,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.85
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 8.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 9.0
+    },
+    {
+     "parameter_name": "confusion_A",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "confusion_B",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "confusion_C",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "confusion_D",
+     "parameter_value": 8.0
+    }
+   ],
+   "calibration_note": "S1 rule id D0: D1 option of the S1 rule role (map P3); Jeffreys posterior mean of the dev precision against the reference D1. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): D1 labels of the floor F1",
+     "set_n": 193,
+     "ece": 0.010448,
+     "ece_equal_mass": 0.073694,
+     "classwise_ece": 0.016395,
+     "brier": 0.412239,
+     "nll": 0.780439,
+     "ece_low": 0.021427,
+     "ece_high": 0.082425,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.d1.s1.E1": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "document_text_parts",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 4,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.5
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 2.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 4.0
+    },
+    {
+     "parameter_name": "confusion_A",
+     "parameter_value": 2.0
+    },
+    {
+     "parameter_name": "confusion_B",
+     "parameter_value": 2.0
+    },
+    {
+     "parameter_name": "confusion_C",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "confusion_D",
+     "parameter_value": 0.0
+    }
+   ],
+   "calibration_note": "S1 rule id E1: D1 option of the S1 rule role (map P3); Jeffreys posterior mean of the dev precision against the reference D1. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): D1 labels of the floor F1",
+     "set_n": 193,
+     "ece": 0.010448,
+     "ece_equal_mass": 0.073694,
+     "classwise_ece": 0.016395,
+     "brier": 0.412239,
+     "nll": 0.780439,
+     "ece_low": 0.021427,
+     "ece_high": 0.082425,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.d1.s1.M1": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "document_text_parts",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 4,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.5
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 2.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 4.0
+    },
+    {
+     "parameter_name": "confusion_A",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "confusion_B",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "confusion_C",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "confusion_D",
+     "parameter_value": 2.0
+    }
+   ],
+   "calibration_note": "S1 rule id M1: D1 option of the S1 rule role (map P3); Jeffreys posterior mean of the dev precision against the reference D1. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): D1 labels of the floor F1",
+     "set_n": 193,
+     "ece": 0.010448,
+     "ece_equal_mass": 0.073694,
+     "classwise_ece": 0.016395,
+     "brier": 0.412239,
+     "nll": 0.780439,
+     "ece_low": 0.021427,
+     "ece_high": 0.082425,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.d1.s1.O1": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "document_text_parts",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 4,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.9
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 4.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 4.0
+    },
+    {
+     "parameter_name": "confusion_A",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "confusion_B",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "confusion_C",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "confusion_D",
+     "parameter_value": 4.0
+    }
+   ],
+   "calibration_note": "S1 rule id O1: D1 option of the S1 rule role (map P3); Jeffreys posterior mean of the dev precision against the reference D1. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): D1 labels of the floor F1",
+     "set_n": 193,
+     "ece": 0.010448,
+     "ece_equal_mass": 0.073694,
+     "classwise_ece": 0.016395,
+     "brier": 0.412239,
+     "nll": 0.780439,
+     "ece_low": 0.021427,
+     "ece_high": 0.082425,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.d1.s1.O2": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "document_text_parts",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 2,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.833333
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 2.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 2.0
+    },
+    {
+     "parameter_name": "confusion_A",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "confusion_B",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "confusion_C",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "confusion_D",
+     "parameter_value": 2.0
+    }
+   ],
+   "calibration_note": "S1 rule id O2: D1 option of the S1 rule role (map P3); Jeffreys posterior mean of the dev precision against the reference D1. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): D1 labels of the floor F1",
+     "set_n": 193,
+     "ece": 0.010448,
+     "ece_equal_mass": 0.073694,
+     "classwise_ece": 0.016395,
+     "brier": 0.412239,
+     "nll": 0.780439,
+     "ece_low": 0.021427,
+     "ece_high": 0.082425,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.d1.s1.P1": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "document_text_parts",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 71,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.756944
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 54.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 71.0
+    },
+    {
+     "parameter_name": "confusion_A",
+     "parameter_value": 54.0
+    },
+    {
+     "parameter_name": "confusion_B",
+     "parameter_value": 6.0
+    },
+    {
+     "parameter_name": "confusion_C",
+     "parameter_value": 8.0
+    },
+    {
+     "parameter_name": "confusion_D",
+     "parameter_value": 3.0
+    }
+   ],
+   "calibration_note": "S1 rule id P1: D1 option of the S1 rule role (map P3); Jeffreys posterior mean of the dev precision against the reference D1. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): D1 labels of the floor F1",
+     "set_n": 193,
+     "ece": 0.010448,
+     "ece_equal_mass": 0.073694,
+     "classwise_ece": 0.016395,
+     "brier": 0.412239,
+     "nll": 0.780439,
+     "ece_low": 0.021427,
+     "ece_high": 0.082425,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.d1.s1.P2": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "document_text_parts",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 10,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.590909
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 6.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 10.0
+    },
+    {
+     "parameter_name": "confusion_A",
+     "parameter_value": 6.0
+    },
+    {
+     "parameter_name": "confusion_B",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "confusion_C",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "confusion_D",
+     "parameter_value": 4.0
+    }
+   ],
+   "calibration_note": "S1 rule id P2: D1 option of the S1 rule role (map P3); Jeffreys posterior mean of the dev precision against the reference D1. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): D1 labels of the floor F1",
+     "set_n": 193,
+     "ece": 0.010448,
+     "ece_equal_mass": 0.073694,
+     "classwise_ece": 0.016395,
+     "brier": 0.412239,
+     "nll": 0.780439,
+     "ece_low": 0.021427,
+     "ece_high": 0.082425,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.d1.s1.R1": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "document_text_parts",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 7,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.5625
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 4.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 7.0
+    },
+    {
+     "parameter_name": "confusion_A",
+     "parameter_value": 2.0
+    },
+    {
+     "parameter_name": "confusion_B",
+     "parameter_value": 4.0
+    },
+    {
+     "parameter_name": "confusion_C",
+     "parameter_value": 0.0
+    },
+    {
+     "parameter_name": "confusion_D",
+     "parameter_value": 1.0
+    }
+   ],
+   "calibration_note": "S1 rule id R1: D1 option of the S1 rule role (map P3); Jeffreys posterior mean of the dev precision against the reference D1; the rule id R1 needs the D1 step: in floor mode the provisional rule role decides and the value status is always unsure (no threshold a). In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): D1 labels of the floor F1",
+     "set_n": 193,
+     "ece": 0.010448,
+     "ece_equal_mass": 0.073694,
+     "classwise_ece": 0.016395,
+     "brier": 0.412239,
+     "nll": 0.780439,
+     "ece_low": 0.021427,
+     "ece_high": 0.082425,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.d1.s1.backoff.all": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "document_text_parts",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 193,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.729381
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 141.0
+    },
+    {
+     "parameter_name": "dev_documents",
+     "parameter_value": 193.0
+    }
+   ],
+   "calibration_note": "backoff: S1 rule id without a dev document; pooled value of all dev documents. In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): D1 labels of the floor F1",
+     "set_n": 193,
+     "ece": 0.010448,
+     "ece_equal_mass": 0.073694,
+     "classwise_ece": 0.016395,
+     "brier": 0.412239,
+     "nll": 0.780439,
+     "ece_low": 0.021427,
+     "ece_high": 0.082425,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "floor-v1.switch.rule_path": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "author_switch",
+   "fit_set_file": "daten/gj/calibration/floor_v1_fitset.json",
+   "fit_set_digest": "1fc170ef65ea8ba8095962a26f06588bb13a06fb0b505bd7f1e27152652b5250",
+   "fit_n": 38,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41, mapped to the options of criteria 2.2) with the pilot overrides of 879163, 375917 and 549658",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_posterior_mean",
+     "parameter_value": 0.5
+    },
+    {
+     "parameter_name": "dev_correct",
+     "parameter_value": 19.0
+    },
+    {
+     "parameter_name": "dev_rule_switch_boundaries",
+     "parameter_value": 38.0
+    },
+    {
+     "parameter_name": "p_gap_without_label",
+     "parameter_value": 0.002367
+    },
+    {
+     "parameter_name": "dev_gaps",
+     "parameter_value": 9120.0
+    }
+   ],
+   "calibration_note": "switch boundary of the rule block path (criteria 2.5): Jeffreys posterior mean of the precision on the dev reference switch boundaries; a gap without a switch label has the switch probability p_gap_without_label in the measures (criteria 6.2 item 11). In a cascade run this record is used only for a document without states (criteria chapter 4 item 7): it has no threshold a, so each label of such a document is unsure.",
+   "measure_sets": [
+    {
+     "set_name": "dev in-sample (193 documents): all gaps between two blocks, switch probability of the floor F1",
+     "set_n": 9120,
+     "ece": 5.5e-05,
+     "ece_equal_mass": 0.001435,
+     "classwise_ece": 5.5e-05,
+     "brier": 0.006678,
+     "nll": 0.019165,
+     "ece_low": 0.000158,
+     "ece_high": 0.001308,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ]
+  },
+  "gj1-r2-platt-step0b": {
+   "calibration_method": "platt_scaling",
+   "calibrated_kind": "executive_response",
+   "fit_set_file": "daten/gj/r2/step0b_fitset.json",
+   "fit_set_digest": "2fc96be76182468209b5cd62aa24c8be2248dd796c79a206cbb474d10119e093",
+   "fit_n": 193,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41) with the 3 pilot overrides; R2 yes = 1 or more atoms with the answer response or recommendation (criteria 2.6 item 1)",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "alpha",
+     "parameter_value": 1.082867
+    },
+    {
+     "parameter_name": "beta",
+     "parameter_value": -1.283815
+    },
+    {
+     "parameter_name": "layer",
+     "parameter_value": 16.0
+    },
+    {
+     "parameter_name": "C",
+     "parameter_value": 0.001
+    }
+   ],
+   "measure_sets": [
+    {
+     "set_name": "dev AI-reference documents, out-of-fold map (5 folds of the dev design)",
+     "set_n": 193,
+     "ece": 0.029697,
+     "ece_equal_mass": 0.018335,
+     "classwise_ece": 0.039305,
+     "brier": 0.100316,
+     "nll": 0.16456,
+     "ece_low": 0.018867,
+     "ece_high": 0.061158,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    },
+    {
+     "set_name": "dev AI-reference documents, in-sample (fit set of the map)",
+     "set_n": 193,
+     "ece": 0.032938,
+     "ece_equal_mass": 0.023207,
+     "classwise_ece": 0.048366,
+     "brier": 0.096321,
+     "nll": 0.152964,
+     "ece_low": 0.021508,
+     "ece_high": 0.062637,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)"
+    }
+   ],
+   "calibration_note": "R2 step 0b (criteria 8.4 item 2): Platt map of q(yes) of the frozen head H (layer 16) on the Docling text; fit on the 193 dev AI-reference documents; threshold a by P17 on the out-of-fold values of the map (criteria 8.6 item 4); GJ.14 on validation sets the target status",
+   "certain_threshold": 0.6
+  }
+ },
+ "floor_lookup": {
+  "version": "floor-v1",
+  "block": {
+   "pairs": {
+    "fixed:R1|none": {
+     "calibration": "floor-v1.block.fixed.R1.none",
+     "p": 0.998525,
+     "k": 338,
+     "n": 338,
+     "weights": {
+      "submitted": 1,
+      "reasoning": 1,
+      "response": 1,
+      "recommendation": 1,
+      "title": 1,
+      "none": 339
+     },
+     "certain": true
+    },
+    "fixed:R1+R4|none": {
+     "calibration": "floor-v1.block.fixed.R1_R4.none",
+     "p": 0.954545,
+     "k": 10,
+     "n": 10,
+     "weights": {
+      "submitted": 1,
+      "reasoning": 1,
+      "response": 1,
+      "recommendation": 1,
+      "title": 1,
+      "none": 11
+     },
+     "certain": false
+    },
+    "fixed:R3|none": {
+     "calibration": "floor-v1.block.fixed.R3.none",
+     "p": 0.999091,
+     "k": 549,
+     "n": 549,
+     "weights": {
+      "submitted": 1,
+      "reasoning": 1,
+      "response": 1,
+      "recommendation": 1,
+      "title": 1,
+      "none": 550
+     },
+     "certain": true
+    },
+    "fixed:R4|none": {
+     "calibration": "floor-v1.block.fixed.R4.none",
+     "p": 0.999201,
+     "k": 625,
+     "n": 625,
+     "weights": {
+      "submitted": 1,
+      "reasoning": 1,
+      "response": 1,
+      "recommendation": 1,
+      "title": 1,
+      "none": 626
+     },
+     "certain": true
+    },
+    "fixed:R5|none": {
+     "calibration": "floor-v1.block.fixed.R5.none",
+     "p": 0.98,
+     "k": 24,
+     "n": 24,
+     "weights": {
+      "submitted": 1,
+      "reasoning": 1,
+      "response": 1,
+      "recommendation": 1,
+      "title": 1,
+      "none": 25
+     },
+     "certain": false
+    },
+    "s1_start:A2|recommendation": {
+     "calibration": "floor-v1.block.s1_start.A2.recommendation",
+     "p": 0.21875,
+     "k": 3,
+     "n": 15,
+     "weights": {
+      "submitted": 1,
+      "reasoning": 1,
+      "response": 2,
+      "recommendation": 4,
+      "title": 4,
+      "none": 9
+     },
+     "certain": false
+    },
+    "s1_start:A2|response": {
+     "calibration": "floor-v1.block.s1_start.A2.response",
+     "p": 0.490991,
+     "k": 163,
+     "n": 332,
+     "weights": {
+      "submitted": 11,
+      "reasoning": 1,
+      "response": 164,
+      "recommendation": 1,
+      "title": 12,
+      "none": 149
+     },
+     "certain": false
+    },
+    "s1_start:C1|none": {
+     "calibration": "floor-v1.block.s1_start.C1.none",
+     "p": 0.882653,
+     "k": 86,
+     "n": 97,
+     "weights": {
+      "submitted": 4,
+      "reasoning": 3,
+      "response": 1,
+      "recommendation": 1,
+      "title": 7,
+      "none": 87
+     },
+     "certain": false
+    },
+    "s1_start:M1|none": {
+     "calibration": "floor-v1.block.s1_start.M1.none",
+     "p": 0.934783,
+     "k": 21,
+     "n": 22,
+     "weights": {
+      "submitted": 1,
+      "reasoning": 1,
+      "response": 1,
+      "recommendation": 1,
+      "title": 2,
+      "none": 22
+     },
+     "certain": false
+    },
+    "s1_start:R1|recommendation": {
+     "calibration": "floor-v1.block.s1_start.R1.recommendation",
+     "p": 0.0625,
+     "k": 0,
+     "n": 7,
+     "weights": {
+      "submitted": 8,
+      "reasoning": 1,
+      "response": 1,
+      "recommendation": 1,
+      "title": 1,
+      "none": 1
+     },
+     "certain": false
+    },
+    "s1_start:R1|response": {
+     "calibration": "floor-v1.block.s1_start.R1.response",
+     "p": 0.17128,
+     "k": 49,
+     "n": 288,
+     "weights": {
+      "submitted": 33,
+      "reasoning": 1,
+      "response": 50,
+      "recommendation": 22,
+      "title": 11,
+      "none": 177
+     },
+     "certain": false
+    },
+    "s2_start_cue:answer_announce|recommendation": {
+     "calibration": "floor-v1.block.s2_start_cue.answer_announce.recommendation",
+     "p": 0.055556,
+     "k": 0,
+     "n": 8,
+     "weights": {
+      "submitted": 1,
+      "reasoning": 1,
+      "response": 9,
+      "recommendation": 1,
+      "title": 1,
+      "none": 1
+     },
+     "certain": false
+    },
+    "s2_start_cue:answer_announce|response": {
+     "calibration": "floor-v1.block.s2_start_cue.answer_announce.response",
+     "p": 0.400262,
+     "k": 152,
+     "n": 380,
+     "weights": {
+      "submitted": 1,
+      "reasoning": 1,
+      "response": 153,
+      "recommendation": 4,
+      "title": 16,
+      "none": 211
+     },
+     "certain": false
+    },
+    "s2_start_cue:answer_label|recommendation": {
+     "calibration": "floor-v1.block.s2_start_cue.answer_label.recommendation",
+     "p": 0.353448,
+     "k": 20,
+     "n": 57,
+     "weights": {
+      "submitted": 1,
+      "reasoning": 1,
+      "response": 4,
+      "recommendation": 21,
+      "title": 3,
+      "none": 33
+     },
+     "certain": false
+    },
+    "s2_start_cue:answer_label|response": {
+     "calibration": "floor-v1.block.s2_start_cue.answer_label.response",
+     "p": 0.52277,
+     "k": 562,
+     "n": 1075,
+     "weights": {
+      "submitted": 4,
+      "reasoning": 1,
+      "response": 563,
+      "recommendation": 2,
+      "title": 44,
+      "none": 467
+     },
+     "certain": false
+    },
+    "s2_start_cue:decision|none": {
+     "calibration": "floor-v1.block.s2_start_cue.decision.none",
+     "p": 0.9,
+     "k": 13,
+     "n": 14,
+     "weights": {
+      "submitted": 1,
+      "reasoning": 1,
+      "response": 1,
+      "recommendation": 1,
+      "title": 2,
+      "none": 14
+     },
+     "certain": false
+    },
+    "s2_start_default|reasoning": {
+     "calibration": "floor-v1.block.s2_start_default.reasoning",
+     "p": 0.267677,
+     "k": 132,
+     "n": 494,
+     "weights": {
+      "submitted": 3,
+      "reasoning": 133,
+      "response": 26,
+      "recommendation": 1,
+      "title": 1,
+      "none": 336
+     },
+     "certain": false
+    },
+    "s2_start_default|submitted": {
+     "calibration": "floor-v1.block.s2_start_default.submitted",
+     "p": 0.236885,
+     "k": 582,
+     "n": 2458,
+     "weights": {
+      "submitted": 583,
+      "reasoning": 40,
+      "response": 95,
+      "recommendation": 21,
+      "title": 121,
+      "none": 1604
+     },
+     "certain": false
+    },
+    "s2_start_sponsor_evidence|reasoning": {
+     "calibration": "floor-v1.block.s2_start_sponsor_evidence.reasoning",
+     "p": 0.70438,
+     "k": 96,
+     "n": 136,
+     "weights": {
+      "submitted": 7,
+      "reasoning": 97,
+      "response": 20,
+      "recommendation": 1,
+      "title": 2,
+      "none": 15
+     },
+     "certain": false
+    },
+    "s2_start_sponsor_evidence|submitted": {
+     "calibration": "floor-v1.block.s2_start_sponsor_evidence.submitted",
+     "p": 0.304253,
+     "k": 350,
+     "n": 1151,
+     "weights": {
+      "submitted": 351,
+      "reasoning": 4,
+      "response": 291,
+      "recommendation": 1,
+      "title": 67,
+      "none": 443
+     },
+     "certain": false
+    },
+    "s2_switch:answer_announce|recommendation": {
+     "calibration": "floor-v1.block.s2_switch.answer_announce.recommendation",
+     "p": 0.75,
+     "k": 1,
+     "n": 1,
+     "weights": {
+      "submitted": 1,
+      "reasoning": 1,
+      "response": 1,
+      "recommendation": 2,
+      "title": 1,
+      "none": 1
+     },
+     "certain": false
+    },
+    "s2_switch:answer_announce|response": {
+     "calibration": "floor-v1.block.s2_switch.answer_announce.response",
+     "p": 0.79683,
+     "k": 276,
+     "n": 346,
+     "weights": {
+      "submitted": 1,
+      "reasoning": 1,
+      "response": 277,
+      "recommendation": 1,
+      "title": 1,
+      "none": 71
+     },
+     "certain": false
+    },
+    "s2_switch:answer_label|recommendation": {
+     "calibration": "floor-v1.block.s2_switch.answer_label.recommendation",
+     "p": 0.558824,
+     "k": 9,
+     "n": 16,
+     "weights": {
+      "submitted": 1,
+      "reasoning": 1,
+      "response": 1,
+      "recommendation": 10,
+      "title": 1,
+      "none": 8
+     },
+     "certain": false
+    },
+    "s2_switch:answer_label|response": {
+     "calibration": "floor-v1.block.s2_switch.answer_label.response",
+     "p": 0.784351,
+     "k": 616,
+     "n": 785,
+     "weights": {
+      "submitted": 1,
+      "reasoning": 1,
+      "response": 617,
+      "recommendation": 4,
+      "title": 7,
+      "none": 161
+     },
+     "certain": false
+    },
+    "s2_switch:speaker|none": {
+     "calibration": "floor-v1.block.s2_switch.speaker.none",
+     "p": 0.959677,
+     "k": 59,
+     "n": 61,
+     "weights": {
+      "submitted": 3,
+      "reasoning": 1,
+      "response": 1,
+      "recommendation": 1,
+      "title": 1,
+      "none": 60
+     },
+     "certain": false
+    },
+    "s2_switch:speaker|response": {
+     "calibration": "floor-v1.block.s2_switch.speaker.response",
+     "p": 0.9375,
+     "k": 22,
+     "n": 23,
+     "weights": {
+      "submitted": 1,
+      "reasoning": 1,
+      "response": 23,
+      "recommendation": 1,
+      "title": 1,
+      "none": 2
+     },
+     "certain": false
+    },
+    "s2_switch:sponsor_label|submitted": {
+     "calibration": "floor-v1.block.s2_switch.sponsor_label.submitted",
+     "p": 0.25,
+     "k": 0,
+     "n": 1,
+     "weights": {
+      "submitted": 1,
+      "reasoning": 1,
+      "response": 1,
+      "recommendation": 1,
+      "title": 1,
+      "none": 2
+     },
+     "certain": false
+    }
+   },
+   "kinds": {
+    "fixed|none": {
+     "calibration": "floor-v1.block.backoff.tier_kind.fixed.none",
+     "p": 0.999677,
+     "k": 1546,
+     "n": 1546,
+     "weights": {
+      "submitted": 1,
+      "reasoning": 1,
+      "response": 1,
+      "recommendation": 1,
+      "title": 1,
+      "none": 1547
+     },
+     "certain": false
+    },
+    "s1_start|none": {
+     "calibration": "floor-v1.block.backoff.tier_kind.s1_start.none",
+     "p": 0.895833,
+     "k": 107,
+     "n": 119,
+     "weights": {
+      "submitted": 4,
+      "reasoning": 3,
+      "response": 1,
+      "recommendation": 1,
+      "title": 8,
+      "none": 108
+     },
+     "certain": false
+    },
+    "s1_start|recommendation": {
+     "calibration": "floor-v1.block.backoff.tier_kind.s1_start.recommendation",
+     "p": 0.152174,
+     "k": 3,
+     "n": 22,
+     "weights": {
+      "submitted": 8,
+      "reasoning": 1,
+      "response": 2,
+      "recommendation": 4,
+      "title": 4,
+      "none": 9
+     },
+     "certain": false
+    },
+    "s1_start|response": {
+     "calibration": "floor-v1.block.backoff.tier_kind.s1_start.response",
+     "p": 0.34219,
+     "k": 212,
+     "n": 620,
+     "weights": {
+      "submitted": 43,
+      "reasoning": 1,
+      "response": 213,
+      "recommendation": 22,
+      "title": 22,
+      "none": 325
+     },
+     "certain": false
+    },
+    "s2_start_cue|none": {
+     "calibration": "floor-v1.block.backoff.tier_kind.s2_start_cue.none",
+     "p": 0.9,
+     "k": 13,
+     "n": 14,
+     "weights": {
+      "submitted": 1,
+      "reasoning": 1,
+      "response": 1,
+      "recommendation": 1,
+      "title": 2,
+      "none": 14
+     },
+     "certain": false
+    },
+    "s2_start_cue|recommendation": {
+     "calibration": "floor-v1.block.backoff.tier_kind.s2_start_cue.recommendation",
+     "p": 0.310606,
+     "k": 20,
+     "n": 65,
+     "weights": {
+      "submitted": 1,
+      "reasoning": 1,
+      "response": 12,
+      "recommendation": 21,
+      "title": 3,
+      "none": 33
+     },
+     "certain": false
+    },
+    "s2_start_cue|response": {
+     "calibration": "floor-v1.block.backoff.tier_kind.s2_start_cue.response",
+     "p": 0.490728,
+     "k": 714,
+     "n": 1455,
+     "weights": {
+      "submitted": 4,
+      "reasoning": 1,
+      "response": 715,
+      "recommendation": 5,
+      "title": 59,
+      "none": 677
+     },
+     "certain": false
+    },
+    "s2_start_default|reasoning": {
+     "calibration": "floor-v1.block.backoff.tier_kind.s2_start_default.reasoning",
+     "p": 0.267677,
+     "k": 132,
+     "n": 494,
+     "weights": {
+      "submitted": 3,
+      "reasoning": 133,
+      "response": 26,
+      "recommendation": 1,
+      "title": 1,
+      "none": 336
+     },
+     "certain": false
+    },
+    "s2_start_default|submitted": {
+     "calibration": "floor-v1.block.backoff.tier_kind.s2_start_default.submitted",
+     "p": 0.236885,
+     "k": 582,
+     "n": 2458,
+     "weights": {
+      "submitted": 583,
+      "reasoning": 40,
+      "response": 95,
+      "recommendation": 21,
+      "title": 121,
+      "none": 1604
+     },
+     "certain": false
+    },
+    "s2_start_sponsor_evidence|reasoning": {
+     "calibration": "floor-v1.block.backoff.tier_kind.s2_start_sponsor_evidence.reasoning",
+     "p": 0.70438,
+     "k": 96,
+     "n": 136,
+     "weights": {
+      "submitted": 7,
+      "reasoning": 97,
+      "response": 20,
+      "recommendation": 1,
+      "title": 2,
+      "none": 15
+     },
+     "certain": false
+    },
+    "s2_start_sponsor_evidence|submitted": {
+     "calibration": "floor-v1.block.backoff.tier_kind.s2_start_sponsor_evidence.submitted",
+     "p": 0.304253,
+     "k": 350,
+     "n": 1151,
+     "weights": {
+      "submitted": 351,
+      "reasoning": 4,
+      "response": 291,
+      "recommendation": 1,
+      "title": 67,
+      "none": 443
+     },
+     "certain": false
+    },
+    "s2_switch|none": {
+     "calibration": "floor-v1.block.backoff.tier_kind.s2_switch.none",
+     "p": 0.959677,
+     "k": 59,
+     "n": 61,
+     "weights": {
+      "submitted": 3,
+      "reasoning": 1,
+      "response": 1,
+      "recommendation": 1,
+      "title": 1,
+      "none": 60
+     },
+     "certain": false
+    },
+    "s2_switch|recommendation": {
+     "calibration": "floor-v1.block.backoff.tier_kind.s2_switch.recommendation",
+     "p": 0.583333,
+     "k": 10,
+     "n": 17,
+     "weights": {
+      "submitted": 1,
+      "reasoning": 1,
+      "response": 1,
+      "recommendation": 11,
+      "title": 1,
+      "none": 8
+     },
+     "certain": false
+    },
+    "s2_switch|response": {
+     "calibration": "floor-v1.block.backoff.tier_kind.s2_switch.response",
+     "p": 0.791775,
+     "k": 914,
+     "n": 1154,
+     "weights": {
+      "submitted": 1,
+      "reasoning": 1,
+      "response": 915,
+      "recommendation": 4,
+      "title": 7,
+      "none": 232
+     },
+     "certain": false
+    },
+    "s2_switch|submitted": {
+     "calibration": "floor-v1.block.backoff.tier_kind.s2_switch.submitted",
+     "p": 0.25,
+     "k": 0,
+     "n": 1,
+     "weights": {
+      "submitted": 1,
+      "reasoning": 1,
+      "response": 1,
+      "recommendation": 1,
+      "title": 1,
+      "none": 2
+     },
+     "certain": false
+    }
+   },
+   "options": {
+    "none": {
+     "calibration": "floor-v1.block.backoff.option.none",
+     "p": 0.991097,
+     "k": 1725,
+     "n": 1740,
+     "weights": {
+      "submitted": 6,
+      "reasoning": 3,
+      "response": 1,
+      "recommendation": 1,
+      "title": 9,
+      "none": 1726
+     },
+     "certain": false
+    },
+    "reasoning": {
+     "calibration": "floor-v1.block.backoff.option.reasoning",
+     "p": 0.362124,
+     "k": 228,
+     "n": 630,
+     "weights": {
+      "submitted": 9,
+      "reasoning": 229,
+      "response": 45,
+      "recommendation": 1,
+      "title": 2,
+      "none": 350
+     },
+     "certain": false
+    },
+    "recommendation": {
+     "calibration": "floor-v1.block.backoff.option.recommendation",
+     "p": 0.319048,
+     "k": 33,
+     "n": 104,
+     "weights": {
+      "submitted": 8,
+      "reasoning": 1,
+      "response": 13,
+      "recommendation": 34,
+      "title": 6,
+      "none": 48
+     },
+     "certain": false
+    },
+    "response": {
+     "calibration": "floor-v1.block.backoff.option.response",
+     "p": 0.569814,
+     "k": 1840,
+     "n": 3229,
+     "weights": {
+      "submitted": 46,
+      "reasoning": 1,
+      "response": 1841,
+      "recommendation": 29,
+      "title": 86,
+      "none": 1232
+     },
+     "certain": false
+    },
+    "submitted": {
+     "calibration": "floor-v1.block.backoff.option.submitted",
+     "p": 0.258239,
+     "k": 932,
+     "n": 3610,
+     "weights": {
+      "submitted": 933,
+      "reasoning": 43,
+      "response": 385,
+      "recommendation": 21,
+      "title": 187,
+      "none": 2047
+     },
+     "certain": false
+    }
+   },
+   "all": {
+    "calibration": "floor-v1.block.backoff.all",
+    "p": 0.510898,
+    "k": 4758,
+    "n": 9313,
+    "weights": {
+     "submitted": 998,
+     "reasoning": 273,
+     "response": 2281,
+     "recommendation": 82,
+     "title": 286,
+     "none": 5399
+    },
+    "certain": false
+   }
+  },
+  "d1": {
+   "rule_ids": {
+    "A1": {
+     "calibration": "floor-v1.d1.s1.A1",
+     "p": 0.679487,
+     "k": 26,
+     "n": 38,
+     "weights": {
+      "A": 1,
+      "B": 9,
+      "C": 27,
+      "D": 5
+     },
+     "certain": false
+    },
+    "A2": {
+     "calibration": "floor-v1.d1.s1.A2",
+     "p": 0.791667,
+     "k": 28,
+     "n": 35,
+     "weights": {
+      "A": 2,
+      "B": 29,
+      "C": 5,
+      "D": 3
+     },
+     "certain": false
+    },
+    "C1": {
+     "calibration": "floor-v1.d1.s1.C1",
+     "p": 0.55,
+     "k": 5,
+     "n": 9,
+     "weights": {
+      "A": 2,
+      "B": 4,
+      "C": 1,
+      "D": 6
+     },
+     "certain": false
+    },
+    "D0": {
+     "calibration": "floor-v1.d1.s1.D0",
+     "p": 0.85,
+     "k": 8,
+     "n": 9,
+     "weights": {
+      "A": 2,
+      "B": 1,
+      "C": 1,
+      "D": 9
+     },
+     "certain": false
+    },
+    "E1": {
+     "calibration": "floor-v1.d1.s1.E1",
+     "p": 0.5,
+     "k": 2,
+     "n": 4,
+     "weights": {
+      "A": 3,
+      "B": 3,
+      "C": 1,
+      "D": 1
+     },
+     "certain": false
+    },
+    "M1": {
+     "calibration": "floor-v1.d1.s1.M1",
+     "p": 0.5,
+     "k": 2,
+     "n": 4,
+     "weights": {
+      "A": 1,
+      "B": 2,
+      "C": 2,
+      "D": 3
+     },
+     "certain": false
+    },
+    "O1": {
+     "calibration": "floor-v1.d1.s1.O1",
+     "p": 0.9,
+     "k": 4,
+     "n": 4,
+     "weights": {
+      "A": 1,
+      "B": 1,
+      "C": 1,
+      "D": 5
+     },
+     "certain": false
+    },
+    "O2": {
+     "calibration": "floor-v1.d1.s1.O2",
+     "p": 0.833333,
+     "k": 2,
+     "n": 2,
+     "weights": {
+      "A": 1,
+      "B": 1,
+      "C": 1,
+      "D": 3
+     },
+     "certain": false
+    },
+    "P1": {
+     "calibration": "floor-v1.d1.s1.P1",
+     "p": 0.756944,
+     "k": 54,
+     "n": 71,
+     "weights": {
+      "A": 55,
+      "B": 7,
+      "C": 9,
+      "D": 4
+     },
+     "certain": false
+    },
+    "P2": {
+     "calibration": "floor-v1.d1.s1.P2",
+     "p": 0.590909,
+     "k": 6,
+     "n": 10,
+     "weights": {
+      "A": 7,
+      "B": 1,
+      "C": 1,
+      "D": 5
+     },
+     "certain": false
+    },
+    "R1": {
+     "calibration": "floor-v1.d1.s1.R1",
+     "p": 0.5625,
+     "k": 4,
+     "n": 7,
+     "weights": {
+      "A": 3,
+      "B": 5,
+      "C": 1,
+      "D": 2
+     },
+     "certain": false
+    }
+   },
+   "all": {
+    "calibration": "floor-v1.d1.s1.backoff.all",
+    "p": 0.729381,
+    "k": 141,
+    "n": 193,
+    "weights": {
+     "A": 68,
+     "B": 53,
+     "C": 40,
+     "D": 36
+    },
+    "certain": false
+   },
+   "unsure_rule_ids": [
+    "R1"
+   ]
+  },
+  "switch": {
+   "calibration": "floor-v1.switch.rule_path",
+   "p": 0.5,
+   "k": 19,
+   "n": 38,
+   "p_gap_without_label": 0.002367
+  },
+  "distribution": "p for the rule option; 1 - p for the other options in proportion to the dev confusion counts plus 1 (add-one); clip to [0.005, 0.995]; 4 decimals"
+ },
+ "candidate": "B1-S (addendum D)"
+}

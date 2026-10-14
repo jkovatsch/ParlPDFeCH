@@ -1,0 +1,2856 @@
+{
+ "schema": "parlpdfech-site-view/3",
+ "record_id": "u-a65aa6a9501429d5",
+ "doc_id": null,
+ "run": {
+  "origin": "new",
+  "mode": "auto",
+  "converter_mode": "floor",
+  "apertus": "none",
+  "profile": "native",
+  "status": "EXCEPTION, NOT RELEASED",
+  "record_status": "EXCEPTION (process rule 10); NOT RELEASED",
+  "human_checked": false,
+  "in_sample": null,
+  "valid": true,
+  "generated_at": "2026-10-13T19:27:05Z",
+  "seconds": {
+   "read_pdf": 5.266,
+   "lines": 0.042,
+   "rules": 0.003,
+   "apertus": 0,
+   "write": 2.016,
+   "check": 0.541,
+   "total": 7.87
+  },
+  "candidate": null,
+  "model": null
+ },
+ "notices": [
+  {
+   "code": "proposal",
+   "params": {}
+  },
+  {
+   "code": "no_human_check",
+   "params": {}
+  },
+  {
+   "code": "no_apertus",
+   "params": {}
+  },
+  {
+   "code": "values_from_pdf_no_check",
+   "params": {}
+  },
+  {
+   "code": "values_measured",
+   "params": {}
+  },
+  {
+   "code": "cascade_selection",
+   "params": {}
+  },
+  {
+   "code": "addressee_candidate",
+   "params": {}
+  },
+  {
+   "code": "chosen_not_top",
+   "params": {
+    "n": 2
+   }
+  },
+  {
+   "code": "not_a_sample",
+   "params": {}
+  },
+  {
+   "code": "not_examined_pipeline",
+   "params": {}
+  },
+  {
+   "code": "ocr_apple",
+   "params": {}
+  },
+  {
+   "code": "shacl_not_run",
+   "params": {}
+  }
+ ],
+ "head_values": {
+  "source": "pdf",
+  "state": "pdf",
+  "cross_check": false,
+  "probabilities_measured": true,
+  "document_kind": "proposal",
+  "cascade": {
+   "version": "m11-cascade-2",
+   "reader": "m11-values-cascade-4",
+   "kind": "proposal",
+   "kind_from": "rule_chain",
+   "kind_rule": "R2",
+   "rule_chain_id": "P1",
+   "kind_facts": null,
+   "affair_type": "postulate",
+   "steps": [
+    {
+     "step": "submission",
+     "applies": true,
+     "rules": [
+      "R18",
+      "R25"
+     ]
+    },
+    {
+     "step": "response",
+     "applies": false,
+     "rules": [
+      "R18",
+      "R25",
+      "R31"
+     ]
+    }
+   ],
+   "entries": [
+    {
+     "field": "affair_type",
+     "slot": "Affair.affair_type",
+     "group": "affair",
+     "state": "read_from_pdf",
+     "searched": true,
+     "rules": [
+      "R3",
+      "R4",
+      "R5",
+      "R6"
+     ],
+     "reason": "value_read",
+     "label_id": "pdf-affair_type"
+    },
+    {
+     "field": "title",
+     "slot": "Affair.title",
+     "group": "affair",
+     "state": "read_from_pdf",
+     "searched": true,
+     "rules": [
+      "R43"
+     ],
+     "reason": "value_read",
+     "label_id": "pdf-title"
+    },
+    {
+     "field": "affair_number",
+     "slot": "Affair.affair_number",
+     "group": "affair",
+     "state": "read_from_pdf",
+     "searched": true,
+     "rules": [
+      "R26",
+      "R6"
+     ],
+     "reason": "value_read",
+     "label_id": "pdf-affair_number"
+    },
+    {
+     "field": "submission_date",
+     "slot": "Submission.submission_date",
+     "group": "submission",
+     "state": "read_from_pdf",
+     "searched": true,
+     "rules": [
+      "R18",
+      "R25",
+      "R39"
+     ],
+     "reason": "value_read",
+     "label_id": "pdf-submission_date"
+    },
+    {
+     "field": "sponsor",
+     "slot": "Submission.sponsorship",
+     "group": "submission",
+     "state": "read_from_pdf",
+     "searched": true,
+     "rules": [
+      "R18",
+      "R25",
+      "R30",
+      "R38"
+     ],
+     "reason": "value_read",
+     "label_id": "pdf-sponsor"
+    },
+    {
+     "field": "response_date",
+     "slot": "ResponseStep.date_end_actual",
+     "group": "response",
+     "state": "not_searched",
+     "searched": false,
+     "rules": [
+      "R18",
+      "R25",
+      "R31"
+     ],
+     "reason": "not_in_this_document_type",
+     "label_id": null
+    },
+    {
+     "field": "responder",
+     "slot": "ResponseStep.responder",
+     "group": "response",
+     "state": "addressee_candidate",
+     "searched": false,
+     "rules": [
+      "R18",
+      "R25",
+      "R31",
+      "V3"
+     ],
+     "reason": "not_in_this_document_type",
+     "label_id": "candidate-responder"
+    }
+   ],
+   "texts": [
+    {
+     "step": "submission",
+     "slot": "Submission.texts",
+     "applies": true,
+     "cut": false,
+     "rules": [
+      "R18",
+      "R25",
+      "R30",
+      "R43"
+     ],
+     "blocks": 1,
+     "not_written": 0
+    },
+    {
+     "step": "response",
+     "slot": "ResponseStep.texts",
+     "applies": false,
+     "cut": true,
+     "rules": [
+      "R18",
+      "R25",
+      "R31"
+     ],
+     "blocks": 0,
+     "not_written": 0
+    }
+   ],
+   "text_blocks_not_written": 0,
+   "register_only": 16
+  },
+  "floor": {
+   "threshold": 0.5,
+   "not_written": []
+  },
+  "addressee_candidates": [
+   "responder"
+  ],
+  "response_signs": {
+   "responder_candidates": 0,
+   "responder_tiers": [],
+   "text_blocks": 0
+  },
+  "i95_gaps": [],
+  "fields_not_read": [],
+  "counts": {
+   "fields": 7,
+   "read_from_pdf": 5,
+   "not_found_in_pdf": 0,
+   "not_in_this_document_type": 2,
+   "weak_candidates": 0,
+   "addressee_candidates": 1,
+   "certain": 1,
+   "unsure": 4,
+   "export_check": {
+    "equal_to_export": 0,
+    "differs_from_export": 0,
+    "no_export_value": 0,
+    "not_compared": 5
+   }
+  },
+  "slot_counts": {
+   "read_from_pdf": 7,
+   "not_found_in_pdf": 21,
+   "not_in_this_document_type": 8,
+   "register_only": 16
+  }
+ },
+ "values": [
+  {
+   "field": "affair_number",
+   "slot": "Affair.affair_number",
+   "name_key": "value.affair_number",
+   "written": true,
+   "candidate": null,
+   "value_printed": "2023/88",
+   "value": "2023/88",
+   "value_form": "printed",
+   "differs_from_printed": false,
+   "comparison_value": "2023/88",
+   "probability": 0.9219,
+   "value_status": "unsure",
+   "measured": true,
+   "tier_probability": 0.921875,
+   "probability_source": "all_folds",
+   "in_sample": null,
+   "tier": "number_type_adjacent",
+   "rule_id": "m11_values_type_number.read_affair_number",
+   "normalisation_rule": "norm_text",
+   "page": 1,
+   "last_page": 1,
+   "char_start": 9,
+   "char_end": 16,
+   "block_id": "B1",
+   "atom_ids": [
+    "B1.1"
+   ],
+   "spans": [
+    {
+     "atom_id": "B1.1",
+     "start": 9,
+     "end": 16
+    }
+   ],
+   "export_check": "not_compared",
+   "export_value": null,
+   "export_match": null,
+   "label_id": "pdf-affair_number",
+   "calibration_id": "value.affair_number.number_type_adjacent",
+   "instance_path": "affairs[0].affair_number"
+  },
+  {
+   "field": "affair_type",
+   "slot": "Affair.affair_type",
+   "name_key": "value.affair_type",
+   "written": true,
+   "candidate": null,
+   "value_printed": "Postulat",
+   "value": "postulate",
+   "value_form": "list_value",
+   "differs_from_printed": true,
+   "comparison_value": "postulate",
+   "probability": 0.9644,
+   "value_status": "certain",
+   "measured": true,
+   "tier_probability": 0.964372,
+   "probability_source": "all_folds",
+   "in_sample": null,
+   "tier": "type_line_start",
+   "rule_id": "m11_values_type_number.read_affair_type",
+   "normalisation_rule": "type_word_to_list_value",
+   "page": 1,
+   "last_page": 1,
+   "char_start": 0,
+   "char_end": 8,
+   "block_id": "B1",
+   "atom_ids": [
+    "B1.1"
+   ],
+   "spans": [
+    {
+     "atom_id": "B1.1",
+     "start": 0,
+     "end": 8
+    }
+   ],
+   "export_check": "not_compared",
+   "export_value": null,
+   "export_match": null,
+   "label_id": "pdf-affair_type",
+   "calibration_id": "value.affair_type.type_line_start",
+   "instance_path": "affairs[0].affair_type"
+  },
+  {
+   "field": "title",
+   "slot": "Affair.title",
+   "name_key": "value.title",
+   "written": true,
+   "candidate": null,
+   "value_printed": "Mehr Sitzbänke im Stadtpark",
+   "value": "Mehr Sitzbänke im Stadtpark",
+   "value_form": "printed",
+   "differs_from_printed": false,
+   "comparison_value": "Mehr Sitzbänke im Stadtpark",
+   "probability": 0.8956,
+   "value_status": "unsure",
+   "measured": true,
+   "tier_probability": 0.895556,
+   "probability_source": "all_folds",
+   "in_sample": null,
+   "tier": "after_type_heading",
+   "rule_id": "m11_values_title.read_title",
+   "normalisation_rule": "norm_text_one_line",
+   "page": 1,
+   "last_page": 1,
+   "char_start": 17,
+   "char_end": 44,
+   "block_id": "B1",
+   "atom_ids": [
+    "B1.2"
+   ],
+   "spans": [
+    {
+     "atom_id": "B1.2",
+     "start": 0,
+     "end": 27
+    }
+   ],
+   "export_check": "not_compared",
+   "export_value": null,
+   "export_match": null,
+   "label_id": "pdf-title",
+   "calibration_id": "value.title.after_type_heading",
+   "instance_path": "affairs[0].title[0].text"
+  },
+  {
+   "field": "submission_date",
+   "slot": "Submission.submission_date",
+   "name_key": "value.submission_date",
+   "written": true,
+   "candidate": null,
+   "value_printed": "12. Juni 2023",
+   "value": "2023-06-12",
+   "value_form": "iso_day",
+   "differs_from_printed": true,
+   "comparison_value": "2023-06-12",
+   "probability": 0.7823,
+   "value_status": "unsure",
+   "measured": true,
+   "tier_probability": 0.782258,
+   "probability_source": "all_folds",
+   "in_sample": null,
+   "tier": "sub_label_cue",
+   "rule_id": "m11_values_dates_responder.read_submission_date",
+   "normalisation_rule": "date_to_iso_day",
+   "page": 1,
+   "last_page": 1,
+   "char_start": 61,
+   "char_end": 74,
+   "block_id": "B2",
+   "atom_ids": [
+    "B2.1"
+   ],
+   "spans": [
+    {
+     "atom_id": "B2.1",
+     "start": 15,
+     "end": 28
+    }
+   ],
+   "export_check": "not_compared",
+   "export_value": null,
+   "export_match": null,
+   "label_id": "pdf-submission_date",
+   "calibration_id": "value.submission_date.sub_label_cue",
+   "instance_path": "affairs[0].submission.submission_date"
+  },
+  {
+   "field": "sponsor",
+   "slot": "Submission.sponsorship",
+   "name_key": "value.sponsor",
+   "written": true,
+   "candidate": null,
+   "value_printed": "Regula Beispielmann",
+   "value": "Regula Beispielmann",
+   "value_form": "printed",
+   "differs_from_printed": false,
+   "comparison_value": "beispielmann",
+   "probability": 0.8648,
+   "value_status": "unsure",
+   "measured": true,
+   "tier_probability": 0.864754,
+   "probability_source": "all_folds",
+   "in_sample": null,
+   "tier": "label_same_line",
+   "rule_id": "m11_values_sponsor.read_sponsor",
+   "normalisation_rule": "printed_wording_one_line",
+   "page": 1,
+   "last_page": 1,
+   "char_start": 79,
+   "char_end": 98,
+   "block_id": "B2",
+   "atom_ids": [
+    "B2.1"
+   ],
+   "spans": [
+    {
+     "atom_id": "B2.1",
+     "start": 33,
+     "end": 52
+    }
+   ],
+   "export_check": "not_compared",
+   "export_value": null,
+   "export_match": null,
+   "label_id": "pdf-sponsor",
+   "calibration_id": "value.first_author.label_same_line",
+   "instance_path": "affairs[0].submission.sponsorship[0].actor.name[0].text"
+  },
+  {
+   "field": "responder",
+   "slot": "ResponseStep.responder",
+   "name_key": "value.responder",
+   "written": false,
+   "candidate": "addressee",
+   "value_printed": "Stadtrat",
+   "value": "Stadtrat",
+   "value_form": "printed",
+   "differs_from_printed": false,
+   "comparison_value": "Stadtrat",
+   "probability": 0.7727,
+   "value_status": "unsure",
+   "measured": true,
+   "tier_probability": 0.772727,
+   "probability_source": null,
+   "in_sample": null,
+   "tier": "rsp_addressee_cue",
+   "rule_id": "m11_values_dates_responder.read_responder",
+   "normalisation_rule": "printed_wording_one_line",
+   "page": 1,
+   "last_page": 1,
+   "char_start": 194,
+   "char_end": 202,
+   "block_id": "B2",
+   "atom_ids": [
+    "B2.3"
+   ],
+   "spans": [
+    {
+     "atom_id": "B2.3",
+     "start": 4,
+     "end": 12
+    }
+   ],
+   "export_check": "not_compared",
+   "export_value": null,
+   "export_match": null,
+   "label_id": "candidate-responder",
+   "calibration_id": "value.responder_name.rsp_addressee_cue",
+   "instance_path": null
+  }
+ ],
+ "slots": [
+  {
+   "slot": "Affair.affair_number",
+   "state": "read_from_pdf",
+   "reason": "value_read",
+   "field": "affair_number",
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": "pdf-affair_number",
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.affair_number"
+  },
+  {
+   "slot": "Affair.affair_type",
+   "state": "read_from_pdf",
+   "reason": "value_read",
+   "field": "affair_type",
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": "pdf-affair_type",
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.affair_type"
+  },
+  {
+   "slot": "Affair.title",
+   "state": "read_from_pdf",
+   "reason": "value_read",
+   "field": "title",
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": "pdf-title",
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.title"
+  },
+  {
+   "slot": "Affair.linked_affairs",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.linked_affairs"
+  },
+  {
+   "slot": "Affair.submission",
+   "state": "read_from_pdf",
+   "reason": "step_written",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.submission"
+  },
+  {
+   "slot": "Affair.submission_validation_steps",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.submission_validation_steps"
+  },
+  {
+   "slot": "Affair.assignment_steps",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.assignment_steps"
+  },
+  {
+   "slot": "Affair.response_steps",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": null,
+   "result": "not_searched",
+   "kind": "proposal",
+   "cascade_rules": [
+    "R18",
+    "R25",
+    "R31"
+   ],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.response_steps"
+  },
+  {
+   "slot": "Affair.committee_deliberation_steps",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.committee_deliberation_steps"
+  },
+  {
+   "slot": "Affair.plenary_debates",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.plenary_debates"
+  },
+  {
+   "slot": "Affair.lifecycle_flags",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.lifecycle_flags"
+  },
+  {
+   "slot": "Affair.current_state",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.current_state"
+  },
+  {
+   "slot": "Affair.procedure_states",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.procedure_states"
+  },
+  {
+   "slot": "Affair.local_id",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.local_id"
+  },
+  {
+   "slot": "Affair.global_uri",
+   "state": "register_only",
+   "reason": "minted_iri",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.global_uri"
+  },
+  {
+   "slot": "Affair.wikidata_uri",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.wikidata_uri"
+  },
+  {
+   "slot": "Affair.date_created",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.date_created"
+  },
+  {
+   "slot": "Affair.datetime_created",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.datetime_created"
+  },
+  {
+   "slot": "Affair.date_modified",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.date_modified"
+  },
+  {
+   "slot": "Affair.datetime_modified",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.datetime_modified"
+  },
+  {
+   "slot": "Submission.submission_date",
+   "state": "read_from_pdf",
+   "reason": "value_read",
+   "field": "submission_date",
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": "pdf-submission_date",
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.submission_date"
+  },
+  {
+   "slot": "Submission.sponsorship",
+   "state": "read_from_pdf",
+   "reason": "value_read",
+   "field": "sponsor",
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": "pdf-sponsor",
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.sponsorship"
+  },
+  {
+   "slot": "Submission.texts",
+   "state": "read_from_pdf",
+   "reason": "text_blocks",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.texts"
+  },
+  {
+   "slot": "Submission.withdrawn_date",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.withdrawn_date"
+  },
+  {
+   "slot": "Submission.reasoning_in_council",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.reasoning_in_council"
+  },
+  {
+   "slot": "Submission.local_id",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.local_id"
+  },
+  {
+   "slot": "Submission.global_uri",
+   "state": "register_only",
+   "reason": "minted_iri",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.global_uri"
+  },
+  {
+   "slot": "Submission.wikidata_uri",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.wikidata_uri"
+  },
+  {
+   "slot": "Submission.date_begin_actual",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.date_begin_actual"
+  },
+  {
+   "slot": "Submission.datetime_begin_actual",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.datetime_begin_actual"
+  },
+  {
+   "slot": "Submission.date_begin_planned",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.date_begin_planned"
+  },
+  {
+   "slot": "Submission.datetime_begin_planned",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.datetime_begin_planned"
+  },
+  {
+   "slot": "Submission.date_end_actual",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.date_end_actual"
+  },
+  {
+   "slot": "Submission.datetime_end_actual",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.datetime_end_actual"
+  },
+  {
+   "slot": "Submission.date_end_planned",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.date_end_planned"
+  },
+  {
+   "slot": "Submission.datetime_end_planned",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.datetime_end_planned"
+  },
+  {
+   "slot": "Submission.remark",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.remark"
+  },
+  {
+   "slot": "ResponseStep.responder",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": "responder",
+   "result": "not_searched",
+   "kind": "proposal",
+   "cascade_rules": [
+    "R18",
+    "R25",
+    "R31",
+    "V3"
+   ],
+   "label_id": "candidate-responder",
+   "gap_id": "responder",
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.responder"
+  },
+  {
+   "slot": "ResponseStep.recommendation",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.recommendation"
+  },
+  {
+   "slot": "ResponseStep.texts",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": null,
+   "result": "not_searched",
+   "kind": "proposal",
+   "cascade_rules": [
+    "R18",
+    "R25",
+    "R31"
+   ],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.texts"
+  },
+  {
+   "slot": "ResponseStep.local_id",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.local_id"
+  },
+  {
+   "slot": "ResponseStep.global_uri",
+   "state": "register_only",
+   "reason": "minted_iri",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.global_uri"
+  },
+  {
+   "slot": "ResponseStep.wikidata_uri",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.wikidata_uri"
+  },
+  {
+   "slot": "ResponseStep.date_begin_actual",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.date_begin_actual"
+  },
+  {
+   "slot": "ResponseStep.datetime_begin_actual",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.datetime_begin_actual"
+  },
+  {
+   "slot": "ResponseStep.date_begin_planned",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.date_begin_planned"
+  },
+  {
+   "slot": "ResponseStep.datetime_begin_planned",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.datetime_begin_planned"
+  },
+  {
+   "slot": "ResponseStep.date_end_actual",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": "response_date",
+   "result": "not_searched",
+   "kind": "proposal",
+   "cascade_rules": [
+    "R18",
+    "R25",
+    "R31"
+   ],
+   "label_id": null,
+   "gap_id": "response_date",
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.date_end_actual"
+  },
+  {
+   "slot": "ResponseStep.datetime_end_actual",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.datetime_end_actual"
+  },
+  {
+   "slot": "ResponseStep.date_end_planned",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.date_end_planned"
+  },
+  {
+   "slot": "ResponseStep.datetime_end_planned",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.datetime_end_planned"
+  },
+  {
+   "slot": "ResponseStep.remark",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.remark"
+  }
+ ],
+ "document": {
+  "source_iri": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af",
+  "record_iri": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record",
+  "container_iri": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/i95",
+  "named_graphs": {
+   "ech-0295": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/ech-0295",
+   "provenance": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/provenance",
+   "atoms": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/atoms",
+   "labels": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/labels"
+  },
+  "pdf_sha256": "a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af",
+  "page_count": 1,
+  "language": "de",
+  "parliament": null,
+  "parliament_name": null,
+  "title": "Mehr Sitzbänke im Stadtpark",
+  "affair_number": "2023/88",
+  "affair_type": "postulate",
+  "has_export": false,
+  "conformance": "i95",
+  "head": [
+   {
+    "instance_path": "global_uri",
+    "ech_slot": "Container.global_uri",
+    "value": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/i95",
+    "derivation": "identifier_minted",
+    "origin": "identifier",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": "value-global_uri"
+   },
+   {
+    "instance_path": "affairs[0].global_uri",
+    "ech_slot": "Postulate.global_uri",
+    "value": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/affair",
+    "derivation": "identifier_minted",
+    "origin": "identifier",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": "value-affairs-0-global_uri"
+   },
+   {
+    "instance_path": "affairs[0].affair_number",
+    "ech_slot": "Postulate.affair_number",
+    "value": "2023/88",
+    "derivation": "extracted_from_pdf_by_rule",
+    "origin": "pdf_rule",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [
+     "B1.1"
+    ],
+    "label_id": "pdf-affair_number"
+   },
+   {
+    "instance_path": "affairs[0].affair_type",
+    "ech_slot": "Postulate.affair_type",
+    "value": "postulate",
+    "derivation": "extracted_from_pdf_by_rule",
+    "origin": "pdf_rule",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "exact",
+    "atom_ids": [
+     "B1.1"
+    ],
+    "label_id": "pdf-affair_type"
+   },
+   {
+    "instance_path": "affairs[0].title[0].text",
+    "ech_slot": "Postulate.title.text",
+    "value": "Mehr Sitzbänke im Stadtpark",
+    "derivation": "extracted_from_pdf_by_rule",
+    "origin": "pdf_rule",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [
+     "B1.2"
+    ],
+    "label_id": "pdf-title"
+   },
+   {
+    "instance_path": "affairs[0].title[0].text_language",
+    "ech_slot": "Postulate.title.text_language",
+    "value": "de",
+    "derivation": "detected_by_rule",
+    "origin": "code_rule",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": null
+   },
+   {
+    "instance_path": "affairs[0].title[0].text_type",
+    "ech_slot": "Postulate.title.text_type",
+    "value": "title",
+    "derivation": "fixed_by_schema",
+    "origin": "schema",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": "value-affairs-0-title-0-text_type"
+   },
+   {
+    "instance_path": "affairs[0].submission.global_uri",
+    "ech_slot": "Submission.global_uri",
+    "value": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/affair/step/submission",
+    "derivation": "identifier_minted",
+    "origin": "identifier",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": "value-affairs-0-submission-global_uri"
+   },
+   {
+    "instance_path": "affairs[0].submission.submission_date",
+    "ech_slot": "Submission.submission_date",
+    "value": "2023-06-12",
+    "derivation": "extracted_from_pdf_by_rule",
+    "origin": "pdf_rule",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [
+     "B2.1"
+    ],
+    "label_id": "pdf-submission_date"
+   },
+   {
+    "instance_path": "affairs[0].submission.sponsorship[0].actor.global_uri",
+    "ech_slot": "Actor.global_uri",
+    "value": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/actor/sponsor-1",
+    "derivation": "identifier_minted",
+    "origin": "identifier",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": "value-affairs-0-submission-sponsorship-0-actor-global_uri"
+   },
+   {
+    "instance_path": "affairs[0].submission.sponsorship[0].actor.name[0].text",
+    "ech_slot": "Actor.name.text",
+    "value": "Regula Beispielmann",
+    "derivation": "extracted_from_pdf_by_rule",
+    "origin": "pdf_rule",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [
+     "B2.1"
+    ],
+    "label_id": "pdf-sponsor"
+   },
+   {
+    "instance_path": "affairs[0].submission.sponsorship[0].actor.name[0].text_language",
+    "ech_slot": "Actor.name.text_language",
+    "value": "de",
+    "derivation": "detected_by_rule",
+    "origin": "code_rule",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": null
+   },
+   {
+    "instance_path": "affairs[0].submission.sponsorship[0].sponsor_role",
+    "ech_slot": "Submission.sponsorship.sponsor_role",
+    "value": "sponsor",
+    "derivation": "fixed_by_schema",
+    "origin": "schema",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": "value-affairs-0-submission-sponsorship-0-sponsor_role"
+   },
+   {
+    "instance_path": "affairs[0].submission.texts[0].text",
+    "ech_slot": "Submission.texts.text",
+    "value": "<h2>Postulat 2023/88 Mehr Sitzbänke im Stadtpark</h2><p>Eingereicht am 12. Juni 2023 von Regula Beispielmann Im Stadtpark fehlen Sitzbänke. Ältere Menschen können sich auf dem Rundweg nicht ausruhen. Der Stadtrat wird gebeten zu prüfen, ob entlang des Rundwegs zwölf Sitzbänke aufgestellt werden können. Die Bänke sollen aus Holz aus dem Stadtwald sein. Regula Beispielmann</p>",
+    "derivation": "extracted_from_pdf",
+    "origin": "pdf_copy",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": null
+   },
+   {
+    "instance_path": "affairs[0].submission.texts[0].text_language",
+    "ech_slot": "Submission.texts.text_language",
+    "value": "de",
+    "derivation": "detected_by_rule",
+    "origin": "code_rule",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": null
+   },
+   {
+    "instance_path": "affairs[0].submission.texts[0].text_type",
+    "ech_slot": "Submission.texts.text_type",
+    "value": "submitted",
+    "derivation": "fixed_by_schema",
+    "origin": "schema",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": null
+   }
+  ],
+  "text_blocks": [
+   {
+    "id": "textblock-1",
+    "iri": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/textblock/1",
+    "ech_slot": "Submission.texts",
+    "text_type": "submitted",
+    "instance_path": "affairs[0].submission.texts[0]",
+    "block_ids": [
+     "B1",
+     "B2"
+    ],
+    "atom_ids": [
+     "B1.1",
+     "B1.2",
+     "B2.1",
+     "B2.2",
+     "B2.3",
+     "B2.4",
+     "B2.5"
+    ],
+    "char_count": 377,
+    "extent_value_status": "unsure",
+    "label_id": null
+   }
+  ]
+ },
+ "pages": [
+  {
+   "number": 1,
+   "width": 595.0,
+   "height": 842.0,
+   "text_source": "pdf",
+   "lines": [
+    {
+     "atom_id": "B1.1",
+     "block_id": "B1",
+     "frame": [
+      72.0,
+      51.95,
+      177.07,
+      64.9
+     ],
+     "frame_source": "text_layer",
+     "text": "Postulat 2023/88",
+     "char_start": 0,
+     "char_end": 16,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B1.2",
+     "block_id": "B1",
+     "frame": [
+      72.0,
+      73.95,
+      251.73,
+      86.9
+     ],
+     "frame_source": "text_layer",
+     "text": "Mehr Sitzbänke im Stadtpark",
+     "char_start": 17,
+     "char_end": 44,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B2.1",
+     "block_id": "B2",
+     "frame": [
+      72.0,
+      98.1,
+      342.24,
+      108.28
+     ],
+     "frame_source": "text_layer",
+     "text": "Eingereicht am 12. Juni 2023 von Regula Beispielmann",
+     "char_start": 46,
+     "char_end": 98,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B2.2",
+     "block_id": "B2",
+     "frame": [
+      72.0,
+      115.1,
+      539.73,
+      125.28
+     ],
+     "frame_source": "text_layer",
+     "text": "Im Stadtpark fehlen Sitzbänke. Ältere Menschen können sich auf dem Rundweg nicht ausruhen.",
+     "char_start": 99,
+     "char_end": 189,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B2.3",
+     "block_id": "B2",
+     "frame": [
+      72.0,
+      132.1,
+      593.54,
+      142.28
+     ],
+     "frame_source": "text_layer",
+     "text": "Der Stadtrat wird gebeten zu prüfen, ob entlang des Rundwegs zwölf Sitzbänke aufgestellt werden können.",
+     "char_start": 190,
+     "char_end": 293,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B2.4",
+     "block_id": "B2",
+     "frame": [
+      72.0,
+      149.1,
+      323.27,
+      159.28
+     ],
+     "frame_source": "text_layer",
+     "text": "Die Bänke sollen aus Holz aus dem Stadtwald sein.",
+     "char_start": 294,
+     "char_end": 343,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B2.5",
+     "block_id": "B2",
+     "frame": [
+      72.0,
+      166.1,
+      175.93,
+      176.28
+     ],
+     "frame_source": "text_layer",
+     "text": "Regula Beispielmann",
+     "char_start": 344,
+     "char_end": 363,
+     "from_ocr": false
+    }
+   ]
+  }
+ ],
+ "blocks": [
+  {
+   "id": "B1",
+   "page": 1,
+   "docling_label": "section_header",
+   "char_start": 0,
+   "char_end": 44,
+   "atom_ids": [
+    "B1.1",
+    "B1.2"
+   ],
+   "text": "Postulat 2023/88\nMehr Sitzbänke im Stadtpark",
+   "label_id": "B1-slot"
+  },
+  {
+   "id": "B2",
+   "page": 1,
+   "docling_label": "text",
+   "char_start": 46,
+   "char_end": 363,
+   "atom_ids": [
+    "B2.1",
+    "B2.2",
+    "B2.3",
+    "B2.4",
+    "B2.5"
+   ],
+   "text": "Eingereicht am 12. Juni 2023 von Regula Beispielmann\nIm Stadtpark fehlen Sitzbänke. Ältere Menschen können sich auf dem Rundweg nicht ausruhen.\nDer Stadtrat wird gebeten zu prüfen, ob entlang des Rundwegs zwölf Sitzbänke aufgestellt werden können.\nDie Bänke sollen aus Holz aus dem Stadtwald sein.\nRegula Beispielmann",
+   "label_id": "B2-slot"
+  }
+ ],
+ "labels": [
+  {
+   "id": "d1",
+   "iri": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/label/d1",
+   "kind": "document_text_parts",
+   "slot": "documentTextParts",
+   "predicate": "https://schema.parlpdfech.example/labels/documentTextParts",
+   "subject": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af",
+   "target": {
+    "type": "document",
+    "block_id": null,
+    "atom_ids": [],
+    "page": 1,
+    "last_page": 1,
+    "char_start": 0,
+    "char_end": 363,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "A",
+   "options": [
+    {
+     "value": "A",
+     "probability": 0.7569
+    },
+    {
+     "value": "B",
+     "probability": 0.0851
+    },
+    {
+     "value": "C",
+     "probability": 0.1094
+    },
+    {
+     "value": "D",
+     "probability": 0.0486
+    }
+   ],
+   "probability": 0.7569,
+   "value_status": "unsure",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "rule",
+    "group": "rule",
+    "tier": null,
+    "rule_id": "P1",
+    "head": null
+   },
+   "calibration_id": "floor-v1.d1.s1.P1",
+   "in_sample": null,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B1-slot",
+   "iri": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/label/B1-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/block/B1",
+   "target": {
+    "type": "block",
+    "block_id": "B1",
+    "atom_ids": [
+     "B1.1",
+     "B1.2"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 0,
+    "char_end": 44,
+    "instance_path": "affairs[0].submission.texts[0]",
+    "about_entity": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/affair/step/submission"
+   },
+   "value": "submitted",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.2369
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.0162
+    },
+    {
+     "value": "response",
+     "probability": 0.0385
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.0085
+    },
+    {
+     "value": "title",
+     "probability": 0.0491
+    },
+    {
+     "value": "none",
+     "probability": 0.6507
+    }
+   ],
+   "probability": 0.2369,
+   "value_status": "unsure",
+   "chosen_is_top": false,
+   "top_option": {
+    "value": "none",
+    "probability": 0.6507
+   },
+   "source": {
+    "kind": "rule",
+    "group": "rule",
+    "tier": "s2_start_default",
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": "floor-v1.block.s2_start_default.submitted",
+   "in_sample": null,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B2-slot",
+   "iri": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/label/B2-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/block/B2",
+   "target": {
+    "type": "block",
+    "block_id": "B2",
+    "atom_ids": [
+     "B2.1",
+     "B2.2",
+     "B2.3",
+     "B2.4",
+     "B2.5"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 46,
+    "char_end": 363,
+    "instance_path": "affairs[0].submission.texts[0]",
+    "about_entity": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/affair/step/submission"
+   },
+   "value": "submitted",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.2369
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.0162
+    },
+    {
+     "value": "response",
+     "probability": 0.0385
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.0085
+    },
+    {
+     "value": "title",
+     "probability": 0.0491
+    },
+    {
+     "value": "none",
+     "probability": 0.6507
+    }
+   ],
+   "probability": 0.2369,
+   "value_status": "unsure",
+   "chosen_is_top": false,
+   "top_option": {
+    "value": "none",
+    "probability": 0.6507
+   },
+   "source": {
+    "kind": "rule",
+    "group": "rule",
+    "tier": "s2_start_default",
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": "floor-v1.block.s2_start_default.submitted",
+   "in_sample": null,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "value-global_uri",
+   "iri": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/label/value-global_uri",
+   "kind": "constant_value",
+   "slot": "globalURI",
+   "predicate": "https://ld.ech.ch/schema/0292/meta-common/globalURI",
+   "subject": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/i95",
+   "target": {
+    "type": "value",
+    "block_id": null,
+    "atom_ids": [],
+    "page": null,
+    "last_page": null,
+    "char_start": null,
+    "char_end": null,
+    "instance_path": "global_uri",
+    "about_entity": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/i95"
+   },
+   "value": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/i95",
+   "options": [],
+   "probability": null,
+   "value_status": "none",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "constant",
+    "group": "constant",
+    "tier": null,
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": null,
+   "in_sample": null,
+   "note_code": "value_derivation",
+   "note_params": {
+    "derivation": "identifier_minted"
+   },
+   "note": null
+  },
+  {
+   "id": "value-affairs-0-global_uri",
+   "iri": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/label/value-affairs-0-global_uri",
+   "kind": "constant_value",
+   "slot": "globalURI",
+   "predicate": "https://ld.ech.ch/schema/0292/meta-common/globalURI",
+   "subject": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/affair",
+   "target": {
+    "type": "value",
+    "block_id": null,
+    "atom_ids": [],
+    "page": null,
+    "last_page": null,
+    "char_start": null,
+    "char_end": null,
+    "instance_path": "affairs[0].global_uri",
+    "about_entity": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/affair"
+   },
+   "value": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/affair",
+   "options": [],
+   "probability": null,
+   "value_status": "none",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "constant",
+    "group": "constant",
+    "tier": null,
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": null,
+   "in_sample": null,
+   "note_code": "value_derivation",
+   "note_params": {
+    "derivation": "identifier_minted"
+   },
+   "note": null
+  },
+  {
+   "id": "pdf-affair_number",
+   "iri": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/label/pdf-affair_number",
+   "kind": "pdf_value",
+   "slot": "affairNumber",
+   "predicate": "https://ch.paf.link/schema/affairs/affairNumber",
+   "subject": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/affair",
+   "target": {
+    "type": "value",
+    "block_id": "B1",
+    "atom_ids": [
+     "B1.1"
+    ],
+    "page": 1,
+    "last_page": 1,
+    "char_start": 9,
+    "char_end": 16,
+    "instance_path": "affairs[0].affair_number",
+    "about_entity": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/affair"
+   },
+   "value": "2023/88",
+   "options": [],
+   "probability": 0.9219,
+   "value_status": "unsure",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "rule",
+    "group": "rule",
+    "tier": "number_type_adjacent",
+    "rule_id": "m11_values_type_number.read_affair_number",
+    "head": null
+   },
+   "calibration_id": "value.affair_number.number_type_adjacent",
+   "in_sample": null,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "pdf-affair_type",
+   "iri": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/label/pdf-affair_type",
+   "kind": "pdf_value",
+   "slot": "affairType",
+   "predicate": "https://ch.paf.link/schema/affairs/affairType",
+   "subject": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/affair",
+   "target": {
+    "type": "value",
+    "block_id": "B1",
+    "atom_ids": [
+     "B1.1"
+    ],
+    "page": 1,
+    "last_page": 1,
+    "char_start": 0,
+    "char_end": 8,
+    "instance_path": "affairs[0].affair_type",
+    "about_entity": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/affair"
+   },
+   "value": "postulate",
+   "options": [],
+   "probability": 0.9644,
+   "value_status": "certain",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "rule",
+    "group": "rule",
+    "tier": "type_line_start",
+    "rule_id": "m11_values_type_number.read_affair_type",
+    "head": null
+   },
+   "calibration_id": "value.affair_type.type_line_start",
+   "in_sample": null,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "pdf-title",
+   "iri": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/label/pdf-title",
+   "kind": "pdf_value",
+   "slot": "title",
+   "predicate": "https://ch.paf.link/schema/affairs/title",
+   "subject": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/affair",
+   "target": {
+    "type": "value",
+    "block_id": "B1",
+    "atom_ids": [
+     "B1.2"
+    ],
+    "page": 1,
+    "last_page": 1,
+    "char_start": 17,
+    "char_end": 44,
+    "instance_path": "affairs[0].title[0].text",
+    "about_entity": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/affair"
+   },
+   "value": "Mehr Sitzbänke im Stadtpark",
+   "options": [],
+   "probability": 0.8956,
+   "value_status": "unsure",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "rule",
+    "group": "rule",
+    "tier": "after_type_heading",
+    "rule_id": "m11_values_title.read_title",
+    "head": null
+   },
+   "calibration_id": "value.title.after_type_heading",
+   "in_sample": null,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "value-affairs-0-title-0-text_type",
+   "iri": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/label/value-affairs-0-title-0-text_type",
+   "kind": "constant_value",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/affair",
+   "target": {
+    "type": "value",
+    "block_id": null,
+    "atom_ids": [],
+    "page": null,
+    "last_page": null,
+    "char_start": null,
+    "char_end": null,
+    "instance_path": "affairs[0].title[0].text_type",
+    "about_entity": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/affair"
+   },
+   "value": "title",
+   "options": [],
+   "probability": null,
+   "value_status": "none",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "constant",
+    "group": "constant",
+    "tier": null,
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": null,
+   "in_sample": null,
+   "note_code": "value_derivation",
+   "note_params": {
+    "derivation": "fixed_by_schema"
+   },
+   "note": null
+  },
+  {
+   "id": "value-affairs-0-submission-global_uri",
+   "iri": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/label/value-affairs-0-submission-global_uri",
+   "kind": "constant_value",
+   "slot": "globalURI",
+   "predicate": "https://ld.ech.ch/schema/0292/meta-common/globalURI",
+   "subject": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/affair/step/submission",
+   "target": {
+    "type": "value",
+    "block_id": null,
+    "atom_ids": [],
+    "page": null,
+    "last_page": null,
+    "char_start": null,
+    "char_end": null,
+    "instance_path": "affairs[0].submission.global_uri",
+    "about_entity": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/affair/step/submission"
+   },
+   "value": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/affair/step/submission",
+   "options": [],
+   "probability": null,
+   "value_status": "none",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "constant",
+    "group": "constant",
+    "tier": null,
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": null,
+   "in_sample": null,
+   "note_code": "value_derivation",
+   "note_params": {
+    "derivation": "identifier_minted"
+   },
+   "note": null
+  },
+  {
+   "id": "pdf-submission_date",
+   "iri": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/label/pdf-submission_date",
+   "kind": "pdf_value",
+   "slot": "submissionDate",
+   "predicate": "https://ch.paf.link/schema/affairs/submissionDate",
+   "subject": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/affair/step/submission",
+   "target": {
+    "type": "value",
+    "block_id": "B2",
+    "atom_ids": [
+     "B2.1"
+    ],
+    "page": 1,
+    "last_page": 1,
+    "char_start": 61,
+    "char_end": 74,
+    "instance_path": "affairs[0].submission.submission_date",
+    "about_entity": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/affair/step/submission"
+   },
+   "value": "2023-06-12",
+   "options": [],
+   "probability": 0.7823,
+   "value_status": "unsure",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "rule",
+    "group": "rule",
+    "tier": "sub_label_cue",
+    "rule_id": "m11_values_dates_responder.read_submission_date",
+    "head": null
+   },
+   "calibration_id": "value.submission_date.sub_label_cue",
+   "in_sample": null,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "value-affairs-0-submission-sponsorship-0-actor-global_uri",
+   "iri": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/label/value-affairs-0-submission-sponsorship-0-actor-global_uri",
+   "kind": "constant_value",
+   "slot": "globalURI",
+   "predicate": "https://ld.ech.ch/schema/0292/meta-common/globalURI",
+   "subject": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/actor/sponsor-1",
+   "target": {
+    "type": "value",
+    "block_id": null,
+    "atom_ids": [],
+    "page": null,
+    "last_page": null,
+    "char_start": null,
+    "char_end": null,
+    "instance_path": "affairs[0].submission.sponsorship[0].actor.global_uri",
+    "about_entity": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/actor/sponsor-1"
+   },
+   "value": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/actor/sponsor-1",
+   "options": [],
+   "probability": null,
+   "value_status": "none",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "constant",
+    "group": "constant",
+    "tier": null,
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": null,
+   "in_sample": null,
+   "note_code": "value_derivation",
+   "note_params": {
+    "derivation": "identifier_minted"
+   },
+   "note": null
+  },
+  {
+   "id": "pdf-sponsor",
+   "iri": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/label/pdf-sponsor",
+   "kind": "pdf_value",
+   "slot": "sponsorship",
+   "predicate": "https://ch.paf.link/schema/affairs/sponsorship",
+   "subject": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/affair/step/submission",
+   "target": {
+    "type": "value",
+    "block_id": "B2",
+    "atom_ids": [
+     "B2.1"
+    ],
+    "page": 1,
+    "last_page": 1,
+    "char_start": 79,
+    "char_end": 98,
+    "instance_path": "affairs[0].submission.sponsorship[0].actor.name[0].text",
+    "about_entity": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/actor/sponsor-1"
+   },
+   "value": "Regula Beispielmann",
+   "options": [],
+   "probability": 0.8648,
+   "value_status": "unsure",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "rule",
+    "group": "rule",
+    "tier": "label_same_line",
+    "rule_id": "m11_values_sponsor.read_sponsor",
+    "head": null
+   },
+   "calibration_id": "value.first_author.label_same_line",
+   "in_sample": null,
+   "note_code": "comparison_value",
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "value-affairs-0-submission-sponsorship-0-sponsor_role",
+   "iri": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/label/value-affairs-0-submission-sponsorship-0-sponsor_role",
+   "kind": "constant_value",
+   "slot": "sponsorRole",
+   "predicate": "https://ch.paf.link/schema/affairs/sponsorRole",
+   "subject": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/affair/step/submission",
+   "target": {
+    "type": "value",
+    "block_id": null,
+    "atom_ids": [],
+    "page": null,
+    "last_page": null,
+    "char_start": null,
+    "char_end": null,
+    "instance_path": "affairs[0].submission.sponsorship[0].sponsor_role",
+    "about_entity": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/affair/step/submission"
+   },
+   "value": "sponsor",
+   "options": [],
+   "probability": null,
+   "value_status": "none",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "constant",
+    "group": "constant",
+    "tier": null,
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": null,
+   "in_sample": null,
+   "note_code": "value_derivation",
+   "note_params": {
+    "derivation": "fixed_by_schema"
+   },
+   "note": null
+  },
+  {
+   "id": "textblock-1-text",
+   "iri": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/label/textblock-1-text",
+   "kind": "text_wording",
+   "slot": "text",
+   "predicate": "https://ch.paf.link/schema/affairs/text",
+   "subject": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/textblock/1",
+   "target": {
+    "type": "text_block",
+    "block_id": null,
+    "atom_ids": [
+     "B1.1",
+     "B1.2",
+     "B2.1",
+     "B2.2",
+     "B2.3",
+     "B2.4",
+     "B2.5"
+    ],
+    "page": 1,
+    "last_page": 1,
+    "char_start": 0,
+    "char_end": 363,
+    "instance_path": "affairs[0].submission.texts[0].text",
+    "about_entity": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/affair/step/submission"
+   },
+   "value": "sha256:bf867772ed09293c6baab88587b4af4c6b4b55f9e2cfb92120d77c997d127fd1",
+   "options": [],
+   "probability": null,
+   "value_status": "none",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "copy",
+    "group": "copy",
+    "tier": null,
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": null,
+   "in_sample": null,
+   "note_code": null,
+   "note_params": {},
+   "note": "verbatim copy of the lines of the author block (check […]); the text changes are in the TextBlockRecord"
+  },
+  {
+   "id": "candidate-responder",
+   "iri": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record/label/candidate-responder",
+   "kind": "pdf_value",
+   "slot": "responder",
+   "predicate": "https://ch.paf.link/schema/affairs/responder",
+   "subject": "urn:parlpdfech:local:sha256:a65aa6a9501429d54d768223a69c5ea5ad480d412e02c99dbc38c485c22986af/record",
+   "target": {
+    "type": "value",
+    "block_id": "B2",
+    "atom_ids": [
+     "B2.3"
+    ],
+    "page": 1,
+    "last_page": 1,
+    "char_start": 194,
+    "char_end": 202,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "Stadtrat",
+   "options": [],
+   "probability": 0.7727,
+   "value_status": "unsure",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "rule",
+    "group": "rule",
+    "tier": "rsp_addressee_cue",
+    "rule_id": "m11_values_dates_responder.read_responder",
+    "head": null
+   },
+   "calibration_id": "value.responder_name.rsp_addressee_cue",
+   "in_sample": null,
+   "note_code": "addressee_candidate",
+   "note_params": {},
+   "note": null
+  }
+ ],
+ "calibrations": [
+  {
+   "id": "floor-v1.block.s2_start_default.submitted",
+   "iri": "https://parlpdfech.ansv.ch/id/calibration/floor-v1.block.s2_start_default.submitted",
+   "method": "jeffreys_tier_precision",
+   "kind": "block_slot",
+   "fit_n": 2458,
+   "in_sample": null,
+   "target_status": "not_measured",
+   "certain_threshold": null,
+   "basis": {
+    "n": 2458,
+    "agreed": 582,
+    "documents": 88
+   },
+   "reference_code": "model_labels_not_human_checked",
+   "measure_sets": [
+    {
+     "name": "dev in-sample (193 documents): all block labels of the floor F1",
+     "n": 9313,
+     "ece": 0.004061,
+     "ece_low": 0.015004,
+     "ece_high": 0.053247,
+     "brier": 0.424473,
+     "nll": 0.763962
+    }
+   ],
+   "note": "rule tier s2_start_default, rule option submitted: Jeffreys posterior mean of the dev precision (criteria 8.7 item 5); certain pair (criteria 8.7 item 2): no",
+   "tier": null,
+   "measured": true
+  },
+  {
+   "id": "floor-v1.d1.s1.P1",
+   "iri": "https://parlpdfech.ansv.ch/id/calibration/floor-v1.d1.s1.P1",
+   "method": "jeffreys_tier_precision",
+   "kind": "document_text_parts",
+   "fit_n": 71,
+   "in_sample": null,
+   "target_status": "not_measured",
+   "certain_threshold": null,
+   "basis": {
+    "n": null,
+    "agreed": 54,
+    "documents": 71
+   },
+   "reference_code": "model_labels_not_human_checked",
+   "measure_sets": [
+    {
+     "name": "dev in-sample (193 documents): D1 labels of the floor F1",
+     "n": 193,
+     "ece": 0.010448,
+     "ece_low": 0.021427,
+     "ece_high": 0.082425,
+     "brier": 0.412239,
+     "nll": 0.780439
+    }
+   ],
+   "note": "S1 rule id P1: D1 option of the S1 rule role (map P3); Jeffreys posterior mean of the dev precision against the reference D1",
+   "tier": null,
+   "measured": true
+  },
+  {
+   "id": "value.affair_number.number_type_adjacent",
+   "iri": "https://parlpdfech.ansv.ch/id/calibration/value.affair_number.number_type_adjacent",
+   "method": "jeffreys_tier_precision",
+   "kind": "pdf_value",
+   "fit_n": 31,
+   "in_sample": null,
+   "target_status": "not_measured",
+   "certain_threshold": null,
+   "basis": {
+    "n": 31,
+    "agreed": 29,
+    "documents": 31
+   },
+   "reference_code": "export_register_value",
+   "measure_sets": [
+    {
+     "name": "dev, open part, fold values, all tiers of the field affair_number",
+     "n": 772,
+     "ece": 0.167552,
+     "ece_low": null,
+     "ece_high": null,
+     "brier": 0.203841,
+     "nll": null
+    }
+   ],
+   "note": null,
+   "tier": "number_type_adjacent",
+   "measured": true
+  },
+  {
+   "id": "value.affair_type.type_line_start",
+   "iri": "https://parlpdfech.ansv.ch/id/calibration/value.affair_type.type_line_start",
+   "method": "jeffreys_tier_precision",
+   "kind": "pdf_value",
+   "fit_n": 827,
+   "in_sample": null,
+   "target_status": "not_measured",
+   "certain_threshold": 0.6,
+   "basis": {
+    "n": 827,
+    "agreed": 798,
+    "documents": 827
+   },
+   "reference_code": "export_register_value",
+   "measure_sets": [
+    {
+     "name": "dev, open part, fold values, all tiers of the field affair_type",
+     "n": 1429,
+     "ece": 0.013088,
+     "ece_low": null,
+     "ece_high": null,
+     "brier": 0.042333,
+     "nll": null
+    }
+   ],
+   "note": null,
+   "tier": "type_line_start",
+   "measured": true
+  },
+  {
+   "id": "value.first_author.label_same_line",
+   "iri": "https://parlpdfech.ansv.ch/id/calibration/value.first_author.label_same_line",
+   "method": "jeffreys_tier_precision",
+   "kind": "pdf_value",
+   "fit_n": 121,
+   "in_sample": null,
+   "target_status": "not_measured",
+   "certain_threshold": null,
+   "basis": {
+    "n": 121,
+    "agreed": 105,
+    "documents": 121
+   },
+   "reference_code": "export_register_value",
+   "measure_sets": [
+    {
+     "name": "dev, open part, fold values, all tiers of the field first_author",
+     "n": 988,
+     "ece": 0.079149,
+     "ece_low": null,
+     "ece_high": null,
+     "brier": 0.120307,
+     "nll": null
+    }
+   ],
+   "note": null,
+   "tier": "label_same_line",
+   "measured": true
+  },
+  {
+   "id": "value.responder_name.rsp_addressee_cue",
+   "iri": "https://parlpdfech.ansv.ch/id/calibration/value.responder_name.rsp_addressee_cue",
+   "method": "jeffreys_tier_precision",
+   "kind": "pdf_value",
+   "fit_n": 10,
+   "in_sample": null,
+   "target_status": "not_measured",
+   "certain_threshold": null,
+   "basis": {
+    "n": 10,
+    "agreed": 8,
+    "documents": 10
+   },
+   "reference_code": "export_register_value",
+   "measure_sets": [
+    {
+     "name": "dev, open part, fold values, all tiers of the field responder_name",
+     "n": 387,
+     "ece": 0.023114,
+     "ece_low": null,
+     "ece_high": null,
+     "brier": 0.022672,
+     "nll": null
+    }
+   ],
+   "note": null,
+   "tier": "rsp_addressee_cue",
+   "measured": true
+  },
+  {
+   "id": "value.submission_date.sub_label_cue",
+   "iri": "https://parlpdfech.ansv.ch/id/calibration/value.submission_date.sub_label_cue",
+   "method": "jeffreys_tier_precision",
+   "kind": "pdf_value",
+   "fit_n": 185,
+   "in_sample": null,
+   "target_status": "not_measured",
+   "certain_threshold": null,
+   "basis": {
+    "n": 185,
+    "agreed": 145,
+    "documents": 185
+   },
+   "reference_code": "export_register_value",
+   "measure_sets": [
+    {
+     "name": "dev, open part, fold values, all tiers of the field submission_date",
+     "n": 1156,
+     "ece": 0.153234,
+     "ece_low": null,
+     "ece_high": null,
+     "brier": 0.263573,
+     "nll": null
+    }
+   ],
+   "note": null,
+   "tier": "sub_label_cue",
+   "measured": true
+  },
+  {
+   "id": "value.title.after_type_heading",
+   "iri": "https://parlpdfech.ansv.ch/id/calibration/value.title.after_type_heading",
+   "method": "jeffreys_tier_precision",
+   "kind": "pdf_value",
+   "fit_n": 224,
+   "in_sample": null,
+   "target_status": "not_measured",
+   "certain_threshold": null,
+   "basis": {
+    "n": 224,
+    "agreed": 201,
+    "documents": 224
+   },
+   "reference_code": "export_register_value",
+   "measure_sets": [
+    {
+     "name": "dev, open part, fold values, all tiers of the field title",
+     "n": 1592,
+     "ece": 0.100299,
+     "ece_low": null,
+     "ece_high": null,
+     "brier": 0.175553,
+     "nll": null
+    }
+   ],
+   "note": null,
+   "tier": "after_type_heading",
+   "measured": true
+  }
+ ],
+ "counts": {
+  "pages": 1,
+  "lines": 7,
+  "blocks": 2,
+  "labels": {
+   "total": 16,
+   "with_probability": 9,
+   "certain": 1,
+   "unsure": 8,
+   "none": 7,
+   "chosen_not_top": 2,
+   "by_source": {
+    "rule": 9,
+    "constant": 6,
+    "copy": 1
+   },
+   "by_group": {
+    "rule": 9,
+    "constant": 6,
+    "copy": 1
+   },
+   "by_kind": {
+    "document_text_parts": 1,
+    "block_slot": 2,
+    "constant_value": 6,
+    "pdf_value": 6,
+    "text_wording": 1
+   }
+  },
+  "triples": {
+   "ech-0295": 27,
+   "provenance": 407,
+   "atoms": 132,
+   "labels": 699,
+   "union": 1265
+  },
+  "record": {
+   "blocks": 2,
+   "block_options": {
+    "submitted": 2
+   },
+   "author_blocks": 1,
+   "textblocks_by_slot": {
+    "submission": 1,
+    "response": 0
+   },
+   "textblock_records_profile_only": 0,
+   "path_switch_points": 0,
+   "path_switch_points_without_boundary_label": 0,
+   "boundary_labels": 0,
+   "label_assertions": 16,
+   "label_assertions_by_source": {
+    "constant": 6,
+    "copy": 1,
+    "rule": 9
+   },
+   "label_assertions_by_kind": {
+    "block_slot": 2,
+    "constant_value": 6,
+    "document_text_parts": 1,
+    "pdf_value": 6,
+    "text_wording": 1
+   },
+   "pdf_value_gaps": 2,
+   "certain_labels": 1,
+   "unsure_labels": 8,
+   "r2_agrees_with_block_path": null,
+   "d1_option": "A",
+   "leaf_values": 16,
+   "value_records": 16,
+   "e19": {
+    "text_blocks": 1,
+    "characters": 310,
+    "hyphens_removed": 0,
+    "list_markers_removed": 0,
+    "problems": 0
+   },
+   "metadata_check": {
+    "values_checked": 0,
+    "problems": 0,
+    "leaves_without_provenance": 0
+   },
+   "slots": {
+    "read_from_pdf": 7,
+    "not_found_in_pdf": 21,
+    "not_in_this_document_type": 8,
+    "register_only": 16
+   },
+   "slots_no_rule_searched": 21,
+   "values": {
+    "fields": 7,
+    "read_from_pdf": 5,
+    "not_found_in_pdf": 0,
+    "not_in_this_document_type": 2,
+    "weak_candidates": 0,
+    "addressee_candidates": 1,
+    "certain": 1,
+    "unsure": 4,
+    "export_check": {
+     "equal_to_export": 0,
+     "differs_from_export": 0,
+     "no_export_value": 0,
+     "not_compared": 5
+    }
+   }
+  }
+ },
+ "checks": [
+  {
+   "id": "writer_check",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C1_linkml",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C2_parse",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C3_isomorphism",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C4_parts",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C5_leaf_values",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C6_iri_scheme",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C7_C8_labels",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C9_e19",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C11_wording_at_span",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C12_one_label_for_each_pdf_value",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C13_no_export_value_in_the_record",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C14_cross_check",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C15_slot_states",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C16_probability_and_calibration",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C17_recorded_gaps",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C18_minted_iris",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C19_value_forms",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C20_value_follows_from_wording",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C21_floor",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C22_values_from_the_readers",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C10_shacl",
+   "state": "skipped",
+   "reason": "shacl_tool_absent"
+  }
+ ],
+ "files": [
+  {
+   "name": "local.gesamt.trig",
+   "role": "gesamt_trig",
+   "media_type": "application/trig",
+   "bytes": 75359,
+   "sha256": "2cbddc71ea0d055456640b1c3d3d27edd90067f5039e9b035025af09880c75ed",
+   "url": "/api/records/u-a65aa6a9501429d5/files/local.gesamt.trig"
+  },
+  {
+   "name": "local.ech.ttl",
+   "role": "ech_ttl",
+   "media_type": "text/turtle",
+   "bytes": 2053,
+   "sha256": "5c28f256302c4a838f29bda9b9f68ac9ab38c249e9028f8175ee3348c7859407",
+   "url": "/api/records/u-a65aa6a9501429d5/files/local.ech.ttl"
+  },
+  {
+   "name": "local.gesamt.rdf.xml",
+   "role": "gesamt_rdfxml",
+   "media_type": "application/rdf+xml",
+   "bytes": 123566,
+   "sha256": "6e0052c54f564be78a53a92e30f4070f726a9cc3732496c1a7210947f3bde439",
+   "url": "/api/records/u-a65aa6a9501429d5/files/local.gesamt.rdf.xml"
+  },
+  {
+   "name": "local.ech.rdf.xml",
+   "role": "ech_rdfxml",
+   "media_type": "application/rdf+xml",
+   "bytes": 2753,
+   "sha256": "71abd1ee2a8ccaf886196149c6768be6f94fcaee096c82547eaa3eb80752cf62",
+   "url": "/api/records/u-a65aa6a9501429d5/files/local.ech.rdf.xml"
+  },
+  {
+   "name": "local.ech.yaml",
+   "role": "ech_yaml",
+   "media_type": "application/yaml",
+   "bytes": 1578,
+   "sha256": "2b9b82bfce53e9ceace48cf8d8f02a53993ae655129391c79b2be94fa47a9ba2",
+   "url": "/api/records/u-a65aa6a9501429d5/files/local.ech.yaml"
+  },
+  {
+   "name": "local.labels.yaml",
+   "role": "labels_yaml",
+   "media_type": "application/yaml",
+   "bytes": 32996,
+   "sha256": "87895e610755ec6eab02c07f463b1d7531c798857338f488211cbe0ccf78bd73",
+   "url": "/api/records/u-a65aa6a9501429d5/files/local.labels.yaml"
+  },
+  {
+   "name": "local.provenance.yaml",
+   "role": "provenance_yaml",
+   "media_type": "application/yaml",
+   "bytes": 15928,
+   "sha256": "bb72bc42258c1a0e90b6c1ea0fbd35d5882266874a90d81700571a46baaf5d26",
+   "url": "/api/records/u-a65aa6a9501429d5/files/local.provenance.yaml"
+  },
+  {
+   "name": "manifest.json",
+   "role": "manifest",
+   "media_type": "application/json",
+   "bytes": 27274,
+   "sha256": "ed590bc0cb6dc1fe1e4a6dd8e659ac6bc7dc40b1f9b9d1c724f5d6e06b3a90ec",
+   "url": "/api/records/u-a65aa6a9501429d5/files/manifest.json"
+  },
+  {
+   "name": "validation.json",
+   "role": "validation",
+   "media_type": "application/json",
+   "bytes": 16562,
+   "sha256": "a72bcb2a86ff9d374fb2e78c4eb8112038ba61b7a5c2a48b2d36f48c4c6a6204",
+   "url": "/api/records/u-a65aa6a9501429d5/files/validation.json"
+  }
+ ]
+}

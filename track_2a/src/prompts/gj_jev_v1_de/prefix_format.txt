@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: Apache-2.0
+chat_head = "<s><|system_start|>{system}<|system_end|><|developer_start|>Deliberation: disabled\nTool Capabilities: disabled<|developer_end|><|user_start|>"
+line = "[B<n> | S.<page> | <Docling label>] <block text>"
+line_join = "\n"
+line_rules = "block text: Docling text, line breaks replaced by one space, lines stripped, empty lines left out; a block without text gives the marker only; furniture stays in; nothing is cut"
+suffix = "question + chat_tail + answer_prefix"
+suffix_start = "Frage: "
+chat_tail = "<|user_end|><|assistant_start|>"
+suffix_order = "D1, then one B1 suffix for each block in reading order"
+tokenization = "ids = tokens(prefix, add_special_tokens=False) + tokens(suffix, add_special_tokens=False)"
+chat_template_file = "daten/modelle/apertus-v1.5-8b-text-bf16/chat_template.jinja"
+chat_template_sha256 = "d23af2850029e9df88bb017e06e0c14a0462604588f1dbe4f519cdfac3e260e0"
+chat_template_call = "apply_chat_template(add_generation_prompt=True, enable_thinking=False)"
+first_words = 12
+no_text = "(ohne Text)"
+d1_option_of_letter = {"A": "A", "B": "B", "C": "C", "D": "D"}
+b1_option_of_letter = {"A": "submitted", "B": "reasoning", "C": "response", "D": "recommendation", "E": "title", "F": "none"}

@@ -1,0 +1,92 @@
+{
+ "template_id": "gj_jev_v1_de",
+ "sha256": "72d2eafcc54c0e07d3abeb23c649988c93ccd32147cad14f65c63bc06c3ae70c",
+ "system_text_source": {
+  "file": "src/m05_cls_apertus.py",
+  "file_sha256": "f3677338ec95a2c53ad0254655cc4438d15ac722e3b446769f5ff3498191a8a2",
+  "constants": "SYSTEM, DOC_HEAD, SEP, LETTERS_DE['prefix'] (R2 path, frozen template r2_v1_de)",
+  "system": "Du liest ein Dokument aus einem Schweizer Parlament und beantwortest eine Frage dazu.",
+  "doc_head": "Dokument:\n",
+  "sep": "\n\n",
+  "answer_prefix": "Antwort:"
+ },
+ "prefix_format": {
+  "chat_head": "<s><|system_start|>Du liest ein Dokument aus einem Schweizer Parlament und beantwortest eine Frage dazu.<|system_end|><|developer_start|>Deliberation: disabled\nTool Capabilities: disabled<|developer_end|><|user_start|>",
+  "doc_head": "Dokument:\n",
+  "line": "[B<n> | S.<page> | <Docling label>] <block text>",
+  "line_join": "\n",
+  "line_rules": "block text: Docling text, line breaks replaced by one space, lines stripped, empty lines left out; a block without text gives the marker only; furniture stays in; nothing is cut",
+  "prefix_end": "\n\n",
+  "suffix": "question + chat_tail + answer_prefix",
+  "suffix_start": "Frage: ",
+  "chat_tail": "<|user_end|><|assistant_start|>",
+  "answer_prefix": "Antwort:",
+  "suffix_order": "D1, then one B1 suffix for each block in reading order",
+  "tokenization": "ids = tokens(prefix, add_special_tokens=False) + tokens(suffix, add_special_tokens=False)",
+  "chat_template": {
+   "file": "daten/modelle/apertus-v1.5-8b-text-bf16/chat_template.jinja",
+   "sha256": "d23af2850029e9df88bb017e06e0c14a0462604588f1dbe4f519cdfac3e260e0",
+   "call": "apply_chat_template(add_generation_prompt=True, enable_thinking=False)"
+  }
+ },
+ "d1_question": "Frage: Welche Textteile nach eCH-0295 enthält das Dokument?\nA = nur den eingereichten Text (mit oder ohne Begründung)\nB = nur die Antwort der Exekutive (mit oder ohne Antrag)\nC = beides\nD = keinen dieser Textteile\nAntworte nur mit dem Buchstaben.",
+ "b1_question": "Frage: Zu welchem Teil nach eCH-0295 gehört Block [{block}] auf Seite {page}, der mit «{first_words}» beginnt?\nA = eingereichter Text\nB = Begründung\nC = Antwort der Exekutive\nD = Antrag der Exekutive\nE = Titel\nF = kein Textteil\nAntworte nur mit dem Buchstaben.",
+ "options": {
+  "d1": [
+   {
+    "letter": "A",
+    "option": "A",
+    "text": "nur den eingereichten Text (mit oder ohne Begründung)"
+   },
+   {
+    "letter": "B",
+    "option": "B",
+    "text": "nur die Antwort der Exekutive (mit oder ohne Antrag)"
+   },
+   {
+    "letter": "C",
+    "option": "C",
+    "text": "beides"
+   },
+   {
+    "letter": "D",
+    "option": "D",
+    "text": "keinen dieser Textteile"
+   }
+  ],
+  "b1": [
+   {
+    "letter": "A",
+    "option": "submitted",
+    "text": "eingereichter Text"
+   },
+   {
+    "letter": "B",
+    "option": "reasoning",
+    "text": "Begründung"
+   },
+   {
+    "letter": "C",
+    "option": "response",
+    "text": "Antwort der Exekutive"
+   },
+   {
+    "letter": "D",
+    "option": "recommendation",
+    "text": "Antrag der Exekutive"
+   },
+   {
+    "letter": "E",
+    "option": "title",
+    "text": "Titel"
+   },
+   {
+    "letter": "F",
+    "option": "none",
+    "text": "kein Textteil"
+   }
+  ],
+  "first_words": 12,
+  "no_text": "(ohne Text)"
+ }
+}

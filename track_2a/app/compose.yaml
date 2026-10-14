@@ -1,0 +1,41 @@
+# One service: the ParlPDFeCH web server with its worker.
+# STATE: written and read; 'docker compose config' and a build were not run. See container/BUILD-NOTES.md.
+#
+# Variables (all optional; container/env.example lists them):
+#   PARLPDFECH_PORT           port on this computer (default 8080)
+#   PARLPDFECH_TARGET         image target: slim (default) or full
+#   PARLPDFECH_COMMIT         text for /api/health (default unknown)
+#
+# This is the file of the self-contained source tree: the code layout is the folder layout/ of the
+# build context.
+name: parlpdfech
+
+services:
+  parlpdfech:
+    image: parlpdfech:${PARLPDFECH_TARGET:-slim}
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: ${PARLPDFECH_TARGET:-slim}
+      args:
+        PARLPDFECH_COMMIT: ${PARLPDFECH_COMMIT:-unknown}
+    # Only this computer can reach the port.
+    ports:
+      - "127.0.0.1:${PARLPDFECH_PORT:-8080}:8080"
+    # The root file system is read-only. Results go to memory and are lost at 'make stop'.
+    read_only: true
+    tmpfs:
+      - /tmp:size=256m,mode=1777,nosuid,nodev
+      - /work:size=256m,mode=1777,nosuid,nodev
+    user: "10001:10001"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    # A small init process passes the stop signal to the server.
+    init: true
+    stop_grace_period: 5s
+    restart: "no"
+    # Memory limit: not set. The memory use of the worker in a container is not measured.
+    # Estimate for the target slim: less than 1 GB. To set a limit, remove the mark of the next line.
+    # mem_limit: 2g

@@ -1,0 +1,18 @@
+{
+ "schema": "parlpdfech-sample-r2/1",
+ "doc_id": "879163",
+ "value": {
+  "p": 0.8314,
+  "calibration": "gj1-r2-platt-step0b",
+  "in_sample": true
+ },
+ "source": {
+  "path": "daten/gj/r2/dev_r2_docling.json",
+  "sha256": "cdf5712f41423c4a252248d8cde77df0ecfab1d6292899443fa431aee546ca76",
+  "sha256_now": "cdf5712f41423c4a252248d8cde77df0ecfab1d6292899443fa431aee546ca76"
+ },
+ "calibrations": {
+  "path": "daten/gj/r2/dev_r2_docling_calibrations.json",
+  "sha256": "677edb1e37dfc35535dac2b6a1271fd75af92c55bed9ca0812faa5dc20edd611"
+ }
+}

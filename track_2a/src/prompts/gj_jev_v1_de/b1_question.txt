@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+Frage: Zu welchem Teil nach eCH-0295 gehört Block [{block}] auf Seite {page}, der mit «{first_words}» beginnt?
+A = eingereichter Text
+B = Begründung
+C = Antwort der Exekutive
+D = Antrag der Exekutive
+E = Titel
+F = kein Textteil
+Antworte nur mit dem Buchstaben.

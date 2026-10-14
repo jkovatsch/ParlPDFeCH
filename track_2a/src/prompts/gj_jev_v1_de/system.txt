@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+system = "Du liest ein Dokument aus einem Schweizer Parlament und beantwortest eine Frage dazu."
+doc_head = "Dokument:\n"
+sep = "\n\n"
+answer_prefix = "Antwort:"
+source_file = "src/m05_cls_apertus.py"
+source_file_sha256 = "f3677338ec95a2c53ad0254655cc4438d15ac722e3b446769f5ff3498191a8a2"
+source_constants = "SYSTEM, DOC_HEAD, SEP, LETTERS_DE['prefix'] (R2 path, frozen template r2_v1_de)"

@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: Apache-2.0
+Frage: Welche dieser Angaben zum Geschäft nennt Block [{block}] auf Seite {page}, der mit «{first_words}» beginnt? Mehrere sind möglich.
+A = Geschäftsnummer
+B = Titel des Geschäfts
+C = Datum der Einreichung
+D = Name der Person oder Gruppe, die das Geschäft einreicht
+E = Datum der Antwort oder des Beschlusses der Exekutive
+F = Name der antwortenden Stelle
+G = Antrag oder Empfehlung der Exekutive (annehmen, ablehnen usw.)
+H = keine dieser Angaben
+Antworte mit den Buchstaben aller Angaben, die der Block nennt.<|user_end|><|assistant_start|>Antwort:

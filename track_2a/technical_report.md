@@ -3,259 +3,255 @@
 - **Track:** Track 2A — Extracting Parliamentary Affairs from PDFs into One Common Structure (OpenParlData)
 - **Event:** Online
 - **Team:** ParlPDFeCH — 1 member (the author)
-- **Demo:** no demo. Repository: <https://github.com/jkovatsch/ParlPDFeCH>, folder `track_2a/`, command `make run`.
-- **Version:** 12.10.2026. Both gates of the project are OPEN. This report gives no gate measurement. For test documents, it gives counts only, no value of a single document.
+- **Demo:** no hosted demo. The app runs on your computer (`make run-native`). Repository: <https://github.com/jkovatsch/ParlPDFeCH>, folder `track_2a/`.
+- **Version:** 14.10.2026, text version 3. It replaces the earlier text on block labels.
+- **Status of each value:** EXCEPTION, NOT RELEASED. This means: no person accepted the written plan of the run or these numbers.
 
-Each number has a source tag, for example [S7]. The table "Sources of the numbers" at the end gives the file and its SHA-256. The file `technical_report_numbers.json` (in the same folder) gives each number with its source.
+A name in square brackets, for example [`sets.docling.all`], is the id of a number in `numbers.json` in the same folder. The end of this report gives the short forms of the ids and the source files.
 
 ## 1. Summary
 
-The OpenParlData exports of 04.10.2026 hold the metadata of 325,599 parliamentary affairs from 89 parliaments [S1]. The challenge says that much content is only in PDF documents [S14]. In a pilot sample of 5 records of development documents, 65 % of the values came from the export and 23 % needed the PDF [S2]. ParlPDFeCH converts these PDF documents into the working draft eCH-0295 (version I95). Apertus writes no text. Each text value is the wording of the PDF, with its page and its position.
+Question: can one method read the head values of a Swiss parliament PDF into an eCH-0295 record, with a probability for each value?
 
-The project has two paths. Path 1 is a converter with rules at the isolation level L9. It divides a document into blocks of the submitted text and of the response of the executive. It takes the other values from the export record. Path 2 is an Apertus classification. A trained head on the hidden states of Apertus-v1.5-8B (bf16) decides if a document holds a response of the executive (task R2). Balanced accuracy on 920 validation documents: 0.919 for the head, 0.899 for the zero-shot readout of Apertus, 0.932 for the best rule [S9]. Without the K7 categories (714 documents), the head has 0.980 and the best rule 0.965 [S9]. The task R1 (recommendation of the executive) stopped with a negative result. The converter ran once on 40 test documents, and the head ran once on 1,523 test documents [S7]. The steps of the human reference did not end before the submission. Thus both gates are OPEN, and the two sealed runs have no gate measurement. After the freeze, the project scored both paths against the records of the 26 test documents that the author reviewed (chapter 5.5). This is information, with n = 26, outside the gate criteria. Path 2 ran on these documents on the instruction of the author, as a deviation from its criteria [S7]. R2: the head was correct for 24 of 26 documents, the better rule for 20 [S17]. The 2 errors of the head are the 2 documents with an empty export text [S17]. Path 1: 19 of the 26 claimed documents were exact; a converter that gives only the role got 17 [S18].
+A PDF of a Swiss parliament goes in. An eCH-0295 record comes out. Each value of the record is read from the PDF and has a probability. Each value also has a page and a text span, except an affair type from an Apertus head. The OpenParlData export is the reference of the measurement. On development documents it also gives the fit labels of the Apertus heads. At run time no export value goes into a record.
+
+Method. Docling gives the text blocks. Code rules give the role of the document and of each block. The cascade of eCH-0295 selects the slots that a document can state. Rule readers read 7 head values, and a calibration gives each value a probability. A writer makes the record, and a validator checks it. Apertus-v1.5-8B gives values for 2 of the 7 fields (affair type, first author), from stored hidden states. The other values come from the rules. A dropped PDF gets the rules only.
+
+Result. The one fixed run of 13.10.2026 compared the values of 872 [`R.documents`] documents of 26 [`P.all`] parliaments with the export, one time. With rules only, a share of 0.9431 [`R.affair_type.precision`] of the given affair types is equal to the export value. For the responder this share is 0.9756 [`R.responder_name.precision`]. The share correct is the share of documents with a reference that get the export value. With rules only it is 0.7923 [`R.affair_type.share_correct`] for the affair type and 0.2214 [`R.affair_number.share_correct`] for the affair number. For the affair number, the 2 dates, the title and the first author it is less than 0.5 (table 2).
+
+AI agents did all work and all examination, and no human checked a value. No pass limit was fixed before the run. Chapter 6 gives the limits. No value of this report comes from a test document.
 
 ## 2. Architecture
 
-| Stage | Path 1: converter (rules, isolation level L9) | Path 2: classification (Apertus head) |
-|:-----------|:----------------------------------------------|:----------------------------------------------|
-| Input | The PDF and the export record of the same affair. | The text of the whole document (`docs.text` of the export). No metadata field. |
-| 1 | Docling converts the PDF into blocks with page, frame and text. `ocrmac` reads scanned pages. | The prompt holds the whole document first and the question last. |
-| 2 | Code divides the blocks into atoms: one line of a block or one row of a table, with page, frame and character range. | One forward pass of Apertus-v1.5-8B in bf16 through all 32 decoder layers. Prefill in chunks of 2,048 tokens. |
-| 3 | Fixed rules mark the page furniture. Five sub-task rules give the role (S1), the author switch points (S2), frame or text (S3), the title (S4) and the type (S5). The rule composite is the method `nos4`. | Code reads the state of decoder layer 16 at the last prompt token. |
-| 4 | The claim rule: the converter claims a document only if it is a written affair and its rule role agrees with its blocks. Else it abstains. | A regression head with an L2 penalty gives q(`yes`). Decision threshold 0.5, acceptance threshold 0.6. |
-| Output | An eCH-0295 instance (I95, LinkML) with a provenance profile. The title comes from the export record. The extent of each block has the value status `unsure`. | `yes` or `no` with q. While the gate is OPEN, the converter writes no R2 value. |
+![The pipeline from a PDF to a validated eCH-0295 record. The file type of each output is below its box.](docs/fig1-pipeline.svg)
 
-At L9, the converter claims the order of the author blocks and the switch points of each claimed document. An author block is a submitted text or a response of the executive. The converter does not claim which lines are body text, and it gives no text type inside a block [S6]. Apertus-v1.5-8B gives the role (S1) only for documents with the S1 rule id R1. All other decisions of path 1 come from rules.
+Input: one PDF. Output: one eCH-0295 record in Turtle and YAML, a label file and one validation result. The numbers below are the boxes of figure 1.
 
-A document with more than 32,768 text tokens gets no R2 output and counts as wrong [S9].
+1. **Text blocks.** Docling gives blocks with page, frame and text. `ocrmac` reads scanned pages.
+2. **Rule files.** A rule chain gives the rule role of the document, for example `proposal`, `response` or `combined`, and the role of each block. In the run, the rule files came from the PDF alone, with empty export fields.
+3. **Cascade.** The cascade of eCH-0295 has 5 [`cascade.stages`] stages. The kind of the document (7 [`cascade.kinds`] options) and the affair type select the slots that a document can state. A field outside these slots is not searched. Rule V5 gives a kind where the rule chain gives none. In the run it changed the kind of 46 [`C.kind.v5.changed`] documents.
+4. **Rule readers.** Rule readers read 7 head values: affair type, title, affair number, submission date, response date, responder and first author. Each value comes from one rule tier, with its page and its character span.
+5. **Calibration.** On 1,793 [`D.documents`] development documents, each pair of field and tier gets a probability: the Jeffreys mean over the folds of a cross-validation. A tier gets the status certain if its precision there is 0.95 [`F.addendum_g.certain_tier_precision`] or more. Each other tier gives the status unsure. A value with a probability below 0.5 [`F.writer_floor`] goes into the label file only, not into a slot.
+6. **Apertus heads.** Chapter 3. Two head tiers give a value where the rules find none, or where the rule value has a probability below 0.5. In the run, the first-author tier replaced 6 [`C.tier.apertus_q2_sponsor_hi.replaced_rule_values`] such rule values.
+7. **Writer and validator.** The writer makes the record. The label file has the probability, status, page and span of each value. A validator checks the record and its labels.
+8. **App.** A browser page shows the records. It gives the 7 values from the rules only. For 3 [`pkg.samples.count`] samples it gives block labels from stored Apertus states. It does not apply the 2 Apertus value tiers of the run. A dropped PDF gets the rules only, with no GPU.
+
+Why rules first: a rule value has a page, a span and a reason that a reader can examine, and it needs no GPU.
 
 ## 3. Use of Apertus
 
-- **Model:** `swiss-ai/Apertus-v1.5-8B`, bf16, no quantization, no merge.
-- **How it is used:** readout of fixed answer tokens after a forward pass (Jev-style readout); a trained head on the hidden states; LoRA fine-tuning as a comparison (information only). Apertus generates no text.
-- **Where it runs:** a local Mac (MLX), a virtual machine with one H100 GPU at Phoeniqs, and the CSCS inference API. CSCS was for development trials and for the S1 role questions of path 1.
+- **Model:** `swiss-ai/Apertus-v1.5-8B` (form value `8B v1.5`), bf16, no quantization. The value questions use the unchanged model weights.
+- **How it is used:** read-out of hidden states after a forward pass. Apertus generates no token. A linear head reads the hidden state of layer 20 [`F.addendum_i.layer_of_each_head`] at the last token of a question.
+- **Where it runs:** a virtual machine with one H100 GPU at Phoeniqs made the states. A Mac applied the heads to stored states.
+- **Part of the result:** values for 2 of the 7 fields. In the run the 2 tiers gave 59 and 79 values with a reference (table 4).
 
-### 3.1 Prompts and head
+**Prefix and questions.** The prompt is German. The prefix has a system text and the whole document, one line for each block: `[B<n> | S.<page> | <Docling label>] <block text>`. The model reads the prefix one time. Each question then has its own suffix, and after each suffix the cache goes back to the prefix. Thus each question sees the whole document and no other question. The value template `gj_values_v1_de` has the questions `Q0` (kind of the document), `Q1` (affair type) and `Q2` (which head values a block states). Its files are in `track_2a/src/prompts/gj_values_v1_de/`. It uses the prefix of the block-role template in `track_2a/src/prompts/gj_jev_v1_de/`.
 
-The prompt files are in `track_2a/src/prompts/` under Apache-2.0. Path 1 uses only the S1 role question (`s1_role.txt`). The R2 question (variant `r2_v1_de`) is in `track_2a/src/apertus_head/m05_cls_apertus.py`. It asks in German, also for French documents [S8]. The zero-shot readout of iteration 1 reads the probabilities of the answer tokens of this prompt [S8]. The head reads the hidden states of the same prompt [S9].
+**Block roles: measured, not in the run.** Apertus can also give each text block a role, for example submitted text or response text. 2 variants were measured on 44 [`sets.reference.validation.documents`] labelled validation documents, against labels from an AI agent. No certain rule decides 2,325 [`rules.val.non_certain_blocks`] of their blocks. On these blocks, B1-S (a frozen head and a sequence step) gave the AI label for a share of 0.7372 [`val.b1s.acc_noncertain`]. B1-L gave 0.7200 [`val.b1l.acc_noncertain`], and the rules gave 0.4748 [`rules.val.acc_noncertain`]. B1-L adds a LoRA adapter to Apertus. The adapter is not published. The readers of the one fixed run used the block roles of the rule chain.
 
-Iteration 2 trained a head on the hidden states. The design used `dev` documents only, with one parliament held out at a time: 48 variants for R2 [S9]. The choice was layer 16 and a regression with C = 0.001. The frozen head trained on 800 `dev` documents of 13 parliaments: 400 `yes` and 400 `no` [S9].
+**Value questions.** The entry decisions of the written plan of the run used development documents only:
 
-Two more candidates were made and not chosen (information only):
+1. `Q0` (kind) did not enter. On 140 [`H.entry.q0.documents`] documents it gave 106 [`H.entry.q0.head_correct`] correct kinds, as many as the rules [`H.entry.q0.rule_correct`].
+2. `Q1` gives the affair type where the rules find none. It entered (table 4). A type from `Q1` has no page and no span.
+3. Of `Q2`, only the first author with a high head probability entered (table 4). For the affair number, the title and the submission date, the `Q2` tiers were wrong more often than correct.
 
-1. LoRA L: LoRA on all 32 layers with a classification head, on the Phoeniqs H100, in bf16, 1.73 GPU hours [S7]. On `dev` (partition P, out of fold), the R2 value was 0.979 for L and 0.996 for the head [S9]. The selection rule, fixed before the values, chose the head.
-2. Cascade C: rule answers with a precision of 0.99 or more decide first, and the head decides the rest. On `dev`, the best rule answer had a precision of 0.985 [S9]. Thus C gives the decision of the head for each document.
+**Limits of the use.** Apertus values exist only for documents with stored states. The variables `LLM_NAME`, `LLM_BASE_URL` and `LLM_API_KEY` are not read: the method needs hidden states. The repository has no Apertus weights.
 
-### 3.2 Infrastructure
-
-| Place | Hardware and software | Use |
-|:------------|:-----------------------------------------|:------------------------------------|
-| Local Mac | Apple M4, 32 GB memory [S16]; MLX 0.32.3, mlx-lm 0.32.0, Docling 2.133.0, ocrmac 1.0.1 [S15]; Apertus in bf16 | Hidden states of `dev` and validation documents; zero-shot readouts; Docling and the converter |
-| Phoeniqs (Swiss cloud, Basel; capacity at no cost for Hack Apertus) | Virtual machine with one H100 SXM5 80 GB (GPU passthrough), 4 vCPU, CentOS Stream 9; PyTorch 2.11.0 with CUDA 12.8, transformers 5.19.0 [S7] | LoRA L; the equality check; the R2 final run; the hidden states of H7k and the scores after the freeze (chapter 5.5) |
-| CSCS inference API (development only) | Apertus-v1.5-8B and Apertus-v1.5-70B. Only documents with a personal-data triage PASS. | Development trials; the S1 role questions of path 1 |
-
-Equality check, with a rule fixed before the check: 10 R1 and 10 R2 `dev` documents. The frozen heads read the hidden states of the Mac and of the virtual machine. PASS needs the same decision for 10 of 10 documents and a largest difference of q of 0.02 or less. Result: R1 10 of 10, largest difference 0.000056; R2 10 of 10, largest difference 0.011279. Both PASS [S12]. A second run on 10 long R2 `dev` documents (7,793 to 17,249 prompt tokens) gave 10 of 10 equal decisions, largest difference 0.01297 [S7]. For the 8B on CSCS, the mean difference to the local bf16 model was 0.032, against a bf16 noise of 0.034 [S13]. `make run` does not need CSCS.
-
-### 3.3 Models other than Apertus (track rule)
-
-| Model | Open weights | Role |
-|:-----------------------|:-----|:-------------------------------------------------------------|
-| Apertus-v1.5-70B (CSCS) | yes | Development trials of an in-context readout. No number in this report comes from it. |
-| Docling layout and table models | yes | PDF to blocks in the converter. |
-| Apple Vision OCR (`ocrmac`) | no | Text of scanned pages in the converter. It runs only on macOS. |
-| Claude Opus 5.5 (AI agents) | no | Code, rules, analysis, measurement scripts, proposals of the gold set records (2 coders and 1 adjudicator for each record), verification, the text of this report. |
-| Claude Haiku 5.5 (AI agents) | no | A second look at the text blocks of the 26 records of test documents. |
-
-### 3.4 Apertus use policy
-
-1. The repository holds no Apertus weights. The project publishes no merged and no quantized Apertus. Each user downloads Apertus with an own account.
-2. The project publishes no head weights and no adapter, also not on Hugging Face.
-3. The user of Apertus is responsible for personal data in the output. The Swiss AI Initiative gives a hash list as an output filter. The converter does not apply this list, because Apertus writes no text: each text value is the wording of a public PDF. Persons are in the output only with a public role.
+| Model other than Apertus | Open weights | Role |
+|:-------------------------|:----------|:---------------------------------------------------------|
+| Docling layout and table models | yes | PDF to blocks. |
+| Apple Vision OCR (`ocrmac`) | no | Text of scanned pages. It runs only on macOS. |
+| Claude Opus 5.5 (AI agents) | no | Code, rules, the AI labels of the block roles, measurement scripts, audits, the check by eye, this text. |
 
 ## 4. Data
 
-- **Source:** the OpenParlData exports of 04.10.2026 and the PDF copies on <https://files.openparldata.ch>. License of the data: CC BY 4.0, "Source: OpenParlData.ch". The API description does not say if this license applies to the PDF copies.
-- **Schema:** eCH-0295, working draft at commit `3cab44d` (30.09.2026) of <https://github.com/swiss/political-affairs-ech-group>. It is not approved. The repository holds no copy of it.
-- **Split:** by parliament, into development (`dev`), validation and test parliaments. No parliament with a development document is in the test set. The test set has no document of the Confederation, no document in Romansh and no Italian-speaking canton [S13].
-- **Personal data:** the documents hold names of persons. A triage of personal data comes before each call to CSCS [S13]. The repository holds no PDF, no text of a test document and no record of a test document. The samples come from development documents and show persons only with a public role.
+- **Source:** the OpenParlData exports of 04.10.2026 and the PDF copies on <https://files.openparldata.ch>. Licence of the data: CC BY 4.0, "Source: OpenParlData.ch".
+- **Schema:** eCH-0295, working draft at commit `3cab44d` of <https://github.com/swiss/political-affairs-ech-group> (version I95). It is not a released standard.
+- **Split:** by parliament. No parliament of the run is a development parliament.
+- **Reference:** the export value of each field after the normalisation of addendum G. For the affair type it is the eCH type that a project map gives for the local type name of the export. No human examined a reference value.
+- **Personal data:** the documents hold names of persons with a public role. The repository has the PDF of the 3 samples only, and no text of a validation, group-7 or test document.
 
-Path 1. A script with a fixed seed selected 40 test documents of 13 parliaments: German 21, French 17, Italian 2 [S5, S7]. For each of the 26 claimed documents, two AI coders and one AI adjudicator made a complete eCH-0295 record, without the converter answers [S5, S7]. The author examined each record on the PDF in a local review tool, in 2 batches of 13 records. The active review time was 81.2 and 18.1 minutes [S7]. The author examined the parts with evidence in the PDF. A program compared the values that come only from the export with the export record [S7]. A second look by AI agents examined 229 findings: 223 refuted, 5 confirmed in 4 records, 1 not decided [S7]. The author decided all 6 notes. None changes a block order, a switch point or the existence of a block at L9 [S7].
+Table 1: sets. Tags: `sets.docling.<set>`, `D.parliaments`, `P.<set>`, `sets.test_set.<key>` (protocol only). The run has 26 [`P.all`] parliaments: 18 [`P.validation`] validation parliaments and 8 [`P.group7`] more parliaments (group 7). AI agents had read each group-7 document before the run.
 
-Path 2. The source label of R2 is the role of the local document category in the export (a silver label). K7 removes the documents whose local category is only the name of an affair type [S10]. Sets: 800 `dev` documents; 920 validation documents (a stratified sample of 2,328) [S8]; for R1, 287 validation documents [S8]. The R2 final list has 1,523 documents of the test parliaments, from a population of 9,502 [S7]. Before any text was read, 61 documents of the lists of test documents of path 1 left the list. The list has 0 exact copies and 0 near copies of a `dev` or validation text. By the source label, 1,265 are `yes` and 258 are `no` [S7].
+| Set | Documents | Parliaments | Use |
+|:-----------|-------:|-------:|:--------------------------------------------|
+| development | 1,793 | 44 | design of the value rules, fit of the heads, calibration |
+| validation | 804 | 18 | the one fixed run |
+| group 7 | 68 | 8 | the one fixed run |
+| test set | 40 selected; 26 records | 13 | not used in the one fixed run. The earlier converter of 12.10.2026 was scored on the 26 records. |
+
+Languages of the 2,665 [`sets.docling.all`] documents: German 1,699, French 676, Italian 268, English 1, none 21 [`sets.language.all.<code>`].
 
 ## 5. Evaluation
 
-### 5.1 Path 1: development values
+**The one fixed run.** On 13.10.2026 at 21:30, 2 readers gave values for the 872 documents: the reader with rules only and the combined reader. A tool compared each value with the export, one time. The rules, thresholds, heads and entry decisions were fixed before the run. No change after the run is known.
 
-The feasibility check compared each rule with a constrained question to Apertus-v1.5-8B on 22 `eval` documents of development parliaments [S3]. The rules were written on `dev`.
+**Reference.** The challenge asks for an evaluation against a hand-checked gold set. The one fixed run has none: its reference is the export, and no human examined a reference value. A separate gold set has 26 records of test documents (table 1). AI agents proposed them, and the author reviewed their text blocks. He accepted the export values of the head fields after a program check. The earlier converter of 12.10.2026 was scored on them. The one fixed run did not use them.
 
-| Sub-task (22 `eval` documents) | Metric | Apertus question (baseline) | Rule (ours) |
-|:-----------------------------|:---------------------|:------------|:------------|
-| S1 role | accuracy | 0.591 | 0.773 |
-| S2 author switch points | labelled F1 | 0.658 | 0.845 |
-| S3 frame or text | accuracy | 0.616 | 0.757 |
-| S4 exact title | documents | 4 of 22 | 8 of 22 |
-| S5 type splits | labelled F1 | 0.194 | 0.875 |
+**Measures.** A value is correct if it is equal to the export value after the normalisation of addendum G. Else it is wrong. Precision is correct / (correct + wrong). Found rate is (correct + wrong) / documents with a reference. Share correct is correct / documents with a reference: the product of precision and found rate. Each interval is a 90 % interval of a bootstrap by parliament. The 2 response fields count only documents with the rule role `response` or `combined`. The measure counts each value of a reader, also a value below the floor of 0.5 that the writer does not put into the record.
 
-At L9 with `nos4`, 99 of 124 claimed `dev` documents were exact (in sample) and 15 of 15 claimed `eval` documents [S4]. AI references were the comparison basis of these values, not human records. On `dev`, 80 of 86 documents with one author block were exact, and the role alone gives the same 80 [S4]. Only the documents with an author switch examine the isolation: 19 of 30 were exact [S4]. Apertus gave the role of 3 of 124 claimed `dev` documents and 1 of 15 claimed `eval` documents [S5].
+Table 2: reader with rules only. Run: all 872 documents, stem `R` (keys `precision`, `found_rate`, `share_correct`, each interval `.bootstrap_low5` to `.bootstrap_high95`; `correct`, `with_reference`). Development: round 4, 1,793 documents, stem `D` (keys `precision`, `found_rate`, `recall`), mark "after the opening". Reference: the export. No human checked a value. Status EXCEPTION, NOT RELEASED.
 
-Gate 3a on the full task (one of 12 answers for each atom) is NOT MET (06.10.2026). A LoRA isolation got a labelled boundary F1 of 0.455 on a final group of 8 documents, against a limit of 0.95 [S14].
+| Field | Precision, run (interval) | Found rate, run | Share correct, run (interval) | Correct / with reference, run | Precision, dev. | Found rate, dev. | Share correct, dev. |
+|:--------------|:-------------------|-----:|:-------------------|------:|-----:|-----:|-----:|
+| affair type | 0.9431 (0.9139 to 0.9660) | 0.8402 | 0.7923 (0.7213 to 0.8581) | 580 / 732 | 0.9580 | 0.8624 | 0.8262 |
+| title | 0.5179 (0.4272 to 0.5972) | 0.9053 | 0.4688 (0.3772 to 0.5573) | 406 / 866 | 0.7607 | 0.8984 | 0.6834 |
+| affair number | 0.5275 (0.3493 to 0.6890) | 0.4197 | 0.2214 (0.1358 to 0.3207) | 182 / 822 | 0.7591 | 0.4719 | 0.3582 |
+| submission date | 0.5289 (0.4003 to 0.6855) | 0.5161 | 0.2729 (0.2027 to 0.3603) | 238 / 872 | 0.6609 | 0.6527 | 0.4314 |
+| response date | 0.5116 (0.3673 to 0.7143) | 0.4057 | 0.2075 (0.1119 to 0.3636) | 22 / 106 | 0.8402 | 0.9238 | 0.7762 |
+| responder | 0.9756 (0.9272 to 1.0000) | 0.9152 | 0.8929 (0.7974 to 0.9610) | 200 / 224 | 0.9819 | 0.9651 | 0.9476 |
+| first author | 0.8125 (0.7454 to 0.8879) | 0.5607 | 0.4556 (0.3690 to 0.5611) | 195 / 428 | 0.8806 | 0.8488 | 0.7474 |
 
-### 5.2 Path 2: task R2 (the document holds a response of the executive)
+Table 3: combined reader (rules and the 2 Apertus tiers that entered). The other 5 fields are equal to table 2. Run stem `C`, with the keys of table 2; development stem `H.<field>.combined` (keys `precision`, `found_rate`, `share_correct`), mark "after the design values of addendum I". Reference: the export. No human checked a value. Status EXCEPTION, NOT RELEASED.
 
-Metric: balanced accuracy. Baseline: the two rules `heading` and `s1_answer`, and the zero-shot readout of Apertus (iteration 1).
+| Field | Precision, run (interval) | Found rate, run | Share correct, run (interval) | Correct / with reference, run | Precision, dev. | Found rate, dev. | Share correct, dev. |
+|:--------------|:-------------------|-----:|:-------------------|------:|-----:|-----:|-----:|
+| affair type | 0.9421 (0.9168 to 0.9642) | 0.9208 | 0.8675 (0.8249 to 0.9039) | 635 / 732 | 0.9562 | 0.9228 | 0.8823 |
+| first author | 0.8243 (0.7597 to 0.8885) | 0.7313 | 0.6028 (0.5195 to 0.6984) | 258 / 428 | 0.8756 | 0.8634 | 0.7560 |
 
-| Method | `dev`, one parliament held out (800) | Validation (920) | Validation without K7 (714) |
-|:--------------------------------|:-------------|:-------------|:-------------|
-| Rule `heading` (baseline) | 0.718 | 0.732 | 0.733 |
-| Rule `s1_answer` (baseline) | 0.845 | 0.932 | 0.965 |
-| Zero-shot readout of Apertus, iteration 1 (baseline) | 0.986 | 0.899 | 0.953 |
-| Head on the hidden states (ours) | 0.996 | 0.919 | 0.980 |
+The 2 tiers raise the found rate of the affair type from 0.8402 [`R.affair_type.found_rate`] to 0.9208 [`C.affair_type.found_rate`]. For the first author it goes from 0.5607 [`R.first_author.found_rate`] to 0.7313 [`C.first_author.found_rate`]. The precision stays near that of the rules.
 
-Sources: [S9], chapters 5.2 and 6.2. The validation values are information: the validation set is the set of iteration 1, and the choices of iteration 2 came after its values.
+Table 4: the 2 Apertus tiers. Run stem `C.tier.<tier>` (keys `correct`, `units`, `precision`, `stored_probability`); development stem `H.tier.<tier>` (keys `equal`, `different`, `precision`), the entry data of addendum I. Reference: the export. Status EXCEPTION, NOT RELEASED.
 
-1. Head minus the better rule, with the 5 % bound of 10,000 paired bootstrap resamples: all validation documents −0.012 (−0.025); without K7 +0.015 (+0.003) [S9].
-2. Head minus the zero-shot readout: +0.021 (+0.014) [S9]. LoRA L got 0.923 on validation [S11].
-3. 78 of the 93 wrong decisions of the head are `no` documents of one parliament with a K7 category. A critic of iteration 1 found label noise there [S9].
-4. Control: a French text with no content got `yes` with q 0.784 from the head. The zero-shot readout of the same pass gave `no` [S9].
+| Tier | Correct / units, run | Precision, run | Equal / different, development | Precision, development | Probability from the calibration |
+|:-------------------------|------:|------:|------:|------:|------:|
+| `apertus_q1` (affair type) | 55 / 59 | 0.9322 | 93 / 7 | 0.9300 | 0.9257 |
+| `apertus_q2_sponsor_hi` (first author) | 67 / 79 | 0.8481 | 15 / 9 | 0.6250 | 0.6200 |
 
-### 5.3 Path 2: task R1, negative result
+**Values with the status certain.** The status certain exists for 2 fields (table 5). The 5 other fields have 0 certain values [`R.title.certain.values`].
 
-R1 asks for the formal recommendation of the executive on a motion or a postulate. On all 287 validation documents, the head had 250 correct decisions, the zero-shot readout 196 and the better rule 186 [S9]. The gain came from one parliament. There, a guard designed on `dev` only found no stated recommendation in 110 of 174 documents [S9]. With this guard, the method was correct for 146 of 287 documents [S9]. On the documents with the form of the decisive set, the head was below the rules: 98 against 104 of 115 date-linked documents, and 79 against 94 of 94 letters of one parliament [S9]. LoRA L got 148 of 287 [S11]. The author stopped R1 on 12.10.2026 [S7]. Causes [S9]:
+Table 5: values with the status certain, reader with rules only. Run stem `R.<field>.certain` (keys `values`, `correct`, `with_reference`, `precision`); development stem `D.<field>.certain.precision`. Reference: the export. Status EXCEPTION, NOT RELEASED.
 
-1. Label source. In one parliament, the label comes from the title of the source document. A rule can read the same title in the text.
-2. Reasons before formula. The head follows the reasons of a letter more than the formula of the recommendation.
-3. Training data. No `dev` document with a stated recommendation is in French or from that parliament.
-4. No option `none`. The head gives a confident value to a document without a recommendation.
+| Field | Certain values, run | Correct / with reference, run | Precision, run | Precision, development |
+|:----------------|------:|------:|------:|------:|
+| affair type | 460 | 426 / 446 | 0.9552 | 0.9699 |
+| responder | 175 | 170 / 175 | 0.9714 | 0.9932 |
 
-### 5.4 Status of the gates
+**Check by eye (information).** 2 AI examiners read the same random sample of 50 [`E.documents`] documents of the run. Each sheet must have the lines of the document and the values of the combined reader, and no export value (plan of the run). Nobody checked the sheets for this rule. An examiner read the first lines, the last lines and the lines near each value, not the full document. The 2 examiners gave a different judgement in 13 [`E.pairs_that_differ`] of 350 [`E.pairs`] pairs of document and field. The check changes no outcome.
 
-The table gives the state of both gates on 12.10.2026 and the steps that did not take place.
+Table 6: check by eye. Status EXCEPTION, NOT RELEASED. Stem `E.<a|b>.<field>` (keys `C`, `given`, `M`), mark "reading check"; precision `C.<field>.precision`. "Not given" means: the lines read print the value, and the reader gave none. The 2 columns are different measures on different samples: 50 documents against 872.
 
-| Item | Gate 3a version 4 (path 1) | Gate of the Apertus classification, R2 (path 2) |
-|:--------------------|:-------------------------------------|:-------------------------------------|
-| Criteria | Fixed on 09.10.2026, before the converter run [S7] | Accepted by the author (GC.1) on 12.10.2026, after the validation values [S7] |
-| Frozen run on test documents | 09.10.2026: 40 selected, 26 claimed at L9; answers sealed [S7] | 12.10.2026: 1,523 of 1,523 documents with an output; outputs sealed, not opened [S7] |
-| Human reference | 26 records examined by the author [S7] | 26 values drawn for a blind check [S7] |
-| Not done | Blind repetition of 4 records (G3a.16); acceptance of the reference (G3a.2); measurement | Blind check of the 26 values; acceptance of the reference (GC.2); measurement |
-| Decisive limits | Exact documents at least 0.80 × n of n claimed; claimed share 0.50 or more [S5] | Recalls min(0.80, A − 0.05) or more; gain 0.05 or more over the better rule [S10] |
-| Status | OPEN | OPEN |
-
-Why: on 12.10.2026, the project chose to submit a minimum version on 13.10.2026, because of time [S7]. The steps that need the author did not take place. Without them, the criteria permit no measurement. Nobody opened the sealed outputs of the R2 final run. On validation without K7, the gain of the head over `s1_answer` was 0.015; GC.16 asks for 0.05 [S9, S10].
-
-Statements of the criteria of gate 3a version 4 [S5]: (1) Gate 3a on the full task is NOT MET, and this result does not change. (4) At the block unit, the converter claims the author sequence and the switch points; it does not claim which lines are body text. (8) The converter does not isolate debate and committee texts, although eCH-0295 holds them.
-
-Two deviations of path 2 [S7]: (a) the protocol did not hold the SHA-256 of the criteria before the first value of the head; two run logs and a git commit hold it before the first value (GC.23). (b) The author accepted the criteria after the validation values.
-
-### 5.5 Scores after the freeze on the 26 reviewed test documents (information)
-
-These values are not a gate measurement. Both gates stay OPEN, because G3a.2, G3a.16 and GC.2 did not take place [S7, S18]. The reference is the 26 records of one human reviewer, the author, with no second review [S17]. The 26 documents are the claimed set of path 1, not a random sample of the test set. They come from 11 parliaments; one parliament has 6 of them [S17]. The R2 final list left out the lists of test documents of path 1 (chapter 4). Thus these 26 documents are not the 26 values of the R2 blind check (chapter 5.4) [S7]. Path 2 ran on these documents on the instruction of the author. This is a deviation from criteria v2, chapter 2.1, item 1 [S7]. No model, head, template or rule of H, L3, L, the zero-shot readout and the two rules changed for these scores. No design choice can use them [S17]. An independent check calculated all R2 scores again with its own code [S20]. A second check calculated values of each H7k table again with its own code [S21]. For path 1, the first check calculated 5 values again with the functions of the gate script: exact documents, switch documents, claimed documents, coder pair and role only. The other path-1 values have no independent check [S20]. Both checks found 0 FAIL [S20, S21].
-
-R2 truth: `yes` if the record holds a text block of the response of the executive with content. Counts: `yes` 15, `no` 11 [S17]. A document without a value counts as wrong. H7k is a new head: the frozen recipe of H, trained on the 7,000 `dev` rows of L3 instead of 800 rows. Only the training rows change, and nobody chose a variant on its values [S19, S21]. L3 is a LoRA model of iteration 3 on the same 7,000 rows [S7].
-
-| R2, 26 documents | Correct of 26 | Balanced accuracy | Recall `yes` | Recall `no` | McNemar p against `s1_answer` |
-|:--------------------------------|:-----|:------|:------|:------|:----------|
-| Head H (800 `dev` rows, frozen) | 24 | 0.933 | 0.867 | 1.000 | 0.125 |
-| Head H7k (7,000 `dev` rows) | 24 | 0.933 | 0.867 | 1.000 | 0.125 |
-| LoRA L3 (7,000 `dev` rows), LoRA L | 24 | 0.933 | 0.867 | 1.000 | 0.125 |
-| Zero-shot readout, iteration 1 | 23 | 0.888 | 0.867 | 0.909 | 0.375 |
-| Rule `s1_answer` (baseline) | 20 | 0.800 | 0.600 | 1.000 | – |
-| Rule `heading` (baseline) | 18 | 0.733 | 0.467 | 1.000 | – |
-
-Sources: [S17, S19]. The Wilson 95 % interval of 24 of 26 is 0.759 to 0.979 [S17].
-
-1. 2 documents have an empty export text, and their truth is `yes`. No method has a value for them. They are the 2 errors of H, H7k, L3 and L [S17, S19].
-2. H, H7k, L3 and L give the same decision on each of the 26 documents [S19].
-3. H is correct on 4 documents where `s1_answer` is wrong, and `s1_answer` on 0 where H is wrong. With n = 26, the exact two-sided McNemar p is 0.125. This difference is not statistically significant at 0.05 [S17].
-
-H7k against H [S19]. The H100 made the hidden states of the 7,000 rows (GPU lock held 129.82 minutes). `dev`, partition P, out of fold: 0.996250 for both. Validation: 0.917 against 0.919; without K7: 0.979 against 0.980. H7k minus H on validation: −0.0026, 5 % bound −0.0076. The decisions differ on 0 of 800 rows of partition P and on 5 of 920 validation documents. Thus, more training rows did not change the decisions of the head on partition P and on the 26 documents.
-
-Path 1 [S18]: the frozen converter output at L9 against the same 26 records. A script used the functions of the gate script, but not the gate command. Thus there is no gate result.
-
-| Path 1, L9 with `nos4` | Value |
-|:--------------------------------------------------------|:------------------------------|
-| Claimed of the 40 selected test documents | 26 of 40 |
-| Exact documents (`exact_block`) | 19 of 26, Jeffreys lower bound 0.574 |
-| Exact documents of a converter that gives only the role | 17 of 26 |
-| Documents with one reference block: exact (role only) | 17 of 18 (17 of 18) |
-| Documents with an author switch: exact (role only) | 2 of 7 (0 of 7) |
-| Labelled boundary F1 | 0.308 |
-| Block omission (reference blocks without a converter text atom) | 0 |
-| Atom intrusion (frame atoms in the converter text) | 676 atoms, rate 0.305 |
-| Agreement of the two AI coder proposals: exact documents, worse direction | 22 of 26 |
-
-Apertus gave the S1 role of 1 of the 26 claimed documents [S18].
+| Field | Correct as printed / given: examiner A, B | Not given: A, B | Precision against the export, combined reader, 872 documents |
+|:----------------|:--------------|------:|------:|
+| affair type | 31, 33 of 40 | 8, 8 | 0.9421 |
+| title | 20, 20 of 45 | 3, 3 | 0.5179 |
+| affair number | 12, 12 of 15 | 14, 14 | 0.5275 |
+| submission date | 18, 18 of 21 | 15, 15 | 0.5289 |
+| response date | 3, 3 of 7 | 7, 8 | 0.5116 |
+| responder | 17, 17 of 17 | 3, 4 | 0.9756 |
+| first author | 25, 25 of 31 | 13, 10 | 0.8243 |
 
 ## 6. Limitations
 
-1. No value in this report is a gate measurement. The values of chapter 5.5 come after the freeze, from n = 26 records of one human reviewer. These 26 documents are the claimed set of path 1, not a random sample. All other values of path 2 come from `dev` and validation parliaments.
-2. The path-1 development values use AI references. The records of the test documents are AI proposals that one person examined. The blind repetition did not take place.
-3. The R2 labels are silver labels from the export categories.
-4. The head gave a confident `yes` to a French text with no content (chapter 5.2).
-5. Path 1 is a rule stage. It claims 26 of 40 selected test documents. It gives no text type inside a block, and the extent of each block is `unsure`.
-6. The test set has no document of the Confederation, no document in Romansh and no Italian-speaking canton.
-7. `ocrmac` runs only on macOS. A converter run on Linux needs another OCR engine, and its text can differ.
-8. AI agents (Claude Opus 5.5) wrote the code, the rules, the measurement scripts and this report.
+1. With rules only, the share correct is low for the affair number, the submission date and the response date: about 1 of 4 or 5. For the title and the first author it is less than 1 of 2 (table 2). With the combined reader the first author has 0.6028 [`C.first_author.share_correct`].
+2. The authors of the value rules read none of the 26 parliaments of the run. For the title, the affair number and the 2 dates the precision is lower there than on the development documents. The found rate also goes down: response date 0.4057 [`R.response_date.found_rate`] against 0.9238 [`D.response_date.found_rate`], first author 0.5607 against 0.8488 [`D.first_author.found_rate`].
+3. In the check by eye, each AI examiner named 12 [`E.kind_looks_wrong`] of 50 documents with a kind that looks wrong. For such a document the cascade does not search some fields. The run did not measure the kind.
+4. AI agents read 116 [`K.read_by_ai_agents.lower_limit`] or more of the 872 documents in earlier work: 48 [`K.kind1.validation`] validation documents and all 68 [`K.kind1.group7`] group-7 documents. For 300 [`K.s4.all`] of the 872 documents, an audit found a sign of earlier contact: text or values next to the id, or the id in a list of earlier work. For the other 572 [`K.s3.all`] it found no such sign; this is no proof of no contact.
+5. The older rule chain makes the rule files of the run. AI agents designed it on a list with 38 [`KD.validation`] documents of the run, of 9 [`KD.validation_parliaments`] of the 18 validation parliaments. For this part the run is not a measure on new parliaments.
+6. AI agents of one model family did all work and all examination. No human checked a value, a tool or a number.
+7. The reference is a register. A value can be correct as printed and differ from the register. Table 6 compares the check by eye with the precision against the export. For the affair number and the submission date the share correct as printed is more. For the affair type it is less. The cause is not examined.
+8. No pass limit was fixed before the run. Thus this report does not say that a field passes. It gives the numbers and their plain meaning.
+9. The development values are design values. The authors of the value rules read all 44 development parliaments. These values are optimistic.
+10. The reference of the affair type is a project map of the export type. The same value is the fit target of the `Q1` head.
+11. Group 7 has 68 documents of 8 parliaments, so its intervals are wide. There the responder has 5 [`G7.responder_name.wrong`] wrong values of 25 [`G7.responder_name.given`], all of 1 parliament. The 21 certain responder values there have a precision of 0.7619 [`G7.responder_name.certain.precision`].
+12. Each time comes from one laptop clock, and no outside time stamp exists. Each value has the status EXCEPTION, NOT RELEASED.
+Items 13 to 15 are notes on the method. [docs/limits.md](docs/limits.md) gives the 12 limits of the result.
+
+13. The share correct, the comparison in table 6 and table 7 were not planned measures of the plan of the run.
+14. A second tool and a third calculation, each by AI agents, gave the same counts of the run from the same files. This does not show that a value is true.
+15. When this text was written, no container image of `app/` was built, and the app did not run on Linux.
+
+Table 7: criterion Breadth, reader with rules only, by set and by parliament. Share correct: stems `V` and `G7` (key `share_correct`). Spread: stem `S.<field>` (keys `parliaments_that_count`, `lowest_precision`, `median_precision`, `highest_precision`), information made after the run. A parliament counts with 5 or more given values with a reference. Status EXCEPTION, NOT RELEASED.
+
+| Field | Share correct, validation (18 parliaments) | Share correct, group 7 (8 parliaments) | Parliaments that count | Precision of a parliament: lowest / median / highest |
+|:----------------|------:|------:|------:|:--------------------|
+| affair type | 0.8109 | 0.5636 | 21 | 0.4286 / 0.9841 / 1.0000 |
+| title | 0.4682 | 0.4769 | 25 | 0.0328 / 0.5714 / 1.0000 |
+| affair number | 0.2149 | 0.2941 | 18 | 0.0000 / 0.5228 / 1.0000 |
+| submission date | 0.2637 | 0.3824 | 21 | 0.0000 / 0.8000 / 1.0000 |
+| response date | 0.1505 | 0.6154 | 2 | 0.2500 / 0.2750 / 0.3000 |
+| responder | 0.9091 | 0.7692 | 15 | 0.0000 / 1.0000 / 1.0000 |
+| first author | 0.4474 | 0.5088 | 17 | 0.2000 / 0.9091 / 1.0000 |
+
+Breadth: 26 parliaments in the run and 44 in development. Chapter 4 gives the languages of all 2,665 documents, with 268 [`sets.language.all.it`] in Italian. This report has no count of the 872 documents by language or by type of government (federal, canton, municipality). The cascade has 7 kinds of documents, and it searches each head value only for some kinds.
+
+Table 8: criterion Insight, the head values against eCH-0295. Tags: `cascade.<key>` (read), `gaps.affair_type.all` (protocol only), `sets.docling.all`, table 7. Status EXCEPTION, NOT RELEASED.
+
+| Question | Answer |
+|:------------------------------|:---------------------------------------------------------------|
+| Does eCH-0295 say which slots a document can state? | The working draft states no condition by affair type. The cascade has 53 rules: 24 come from eCH-0295, 7 come from other files of the project, and 22 are choices of the cascade with no rule in the standard. |
+| How many slots can one document state? | The kind of the document selects 18 to 61 of 87 slots. 12 slots only a register can give. |
+| Which head values can one reader take from PDFs of many parliaments? | For 6 of the 7 fields the precision differs much between parliaments (table 7, information). For the response date only 2 parliaments count. The median of a parliament is 0.9841 for the affair type, 1.0000 for the responder and 0.9091 for the first author. For the title, the affair number and the submission date it is 0.5228 to 0.8000. For each of these 6 fields, one parliament or more is at 0.4286 or less. A pooled value does not describe one parliament. |
+| Where do the PDF and the register differ? | Table 2 gives for each head value how often the PDF value is the export value. Table 6 gives values that are correct as printed and not equal to the export. |
+| Where does the export have a gap? | For 276 of 2,665 documents the export has no affair type of the I95 list. |
+
+Cross-parliament question (development documents, information): in which parliaments does the PDF with the response of the executive also hold the submitted text? The export does not give this answer. With the B1-S block labels, 300 [`xp.written.with_both`] of 719 [`xp.written.with_response`] documents with response text also hold submitted text. The share is 0.417 [`xp.written.share_both`] (0.387 [`xp.written.share_low5`] to 0.448 [`xp.written.share_high95`]). 3 other views of the same labels give 0.503 [`xp.expected_d1.share_both`] to 0.548 [`xp.d1_label.share_both`]. 32 [`xp.parliaments_with_statement`] of 44 [`xp.parliaments`] parliaments get a statement. The share differs between the views, and no label was compared with a human label. This is not a result of the one fixed run.
 
 ## 7. Reproducibility
 
-- **Hardware and runtime:** chapter 3.2. Apertus in bf16 only.
-- **Seeds:** path-1 selection 20261009 [S5]; R2 blind check draw `cls-check-1` [S9]; bootstrap seed 20261013 with 10,000 resamples [S9]; equality check rows in the order of the SHA-256 of `cls-it2-eq|` and the document id [S12].
-- **Frozen files (SHA-256 prefix):** path 1 freeze manifest `440e4247`, sealed answers `1ed2e987` [S7]; R2 head `d6a9667f`, freeze record `9517c31d` [S9]; seal of the R2 final run `312f27da` [S7]; R2 truth of the 26 records `95fda857` [S17].
-- **Commits:** the private project commit `7efdc54` holds S1 to S10, S13 and S15 without a change. S11 and S12 are not in this commit or differ from it. S17 to S21 are data files of the private project; no commit holds them. `technical_report_numbers.json` gives the SHA-256 of each source file. The public commit is the commit of the submission.
-- **Run:** `make run` needs no GPU and no network after the downloads that the README lists.
-- **Limit:** a reader cannot repeat the path-2 values from this repository alone. The head weights, the document lists and the hidden states are not published.
+- **Commands (folder `track_2a/`, file `Makefile`):**
+  - `make setup` downloads Python 3.12, the Python packages and the Rust crates (network). On 14.10.2026 it ran on one Mac in a fresh clone.
+  - `make run` needs Docker. It builds the image of `app/` and starts it on `127.0.0.1:8080`. It did not run. `make stop` stops the container, and `make logs` shows its log.
+  - `make run-native` builds the app with cargo and starts it with no container. On 14.10.2026 it ran on one Mac: the 3 samples in the modes auto and rules gave 6 valid records.
+  - `make test` checks the copied files against `SOURCES.json`, the prompt files, the validator and the file lists of `app/`, with no network. It passed on 14.10.2026. It has no check of the numbers.
+  - `make test-app` runs the tests of `app/`. It passed on 14.10.2026. `make clean` removes the build outputs.
+  - `make run-earlier` runs the earlier converter of 12.10.2026 on the 3 samples. Its metadata values come from the export record, not from the PDF. `make head-selftest` examines the Apertus head code of path 2 (earlier work) with synthetic data.
+- **Code:** `src/converter_gj/` has the code of the method of this report. These files are copies for reading: the code checks the SHA-256 of its own files, and the licence line changes it. `app/` has the app, and `app/layout/src/` has the files that the app runs.
+- **What a reader can repeat:** the app gives the values of 3 development samples from the rules, and block labels from their stored Apertus states. These samples were in the fit. A dropped PDF gets the rules only. The states of the other documents, the fit data of the heads and the export rows are not in the repository.
+- **Hardware:** an Apple M4 for the readers, the measures and the validation. One H100 GPU for the states.
 
 ## 8. Next steps
 
-1. Do the blind repetition, the acceptance and the one measurement of gate 3a version 4 with the frozen script.
-2. Do the blind check of the 26 R2 values, the acceptance and the one measurement of the sealed R2 run.
-3. Use an OCR engine with open weights that runs on Linux.
-4. Add to the profile a value status and an origin `classified` for each Apertus value.
-5. R1: an option `none`, training data in French and from more parliaments, and labels that do not come from the title.
-6. Answer the cross-parliament question "Does the parliament follow the recommendation of the executive?". It needs R1.
+1. A human check of a sample of reference values and of the kind of the document.
+2. A measure of the kind against labels, and value rules for more parliaments, then a run on documents that no agent read.
+3. Apertus states for a dropped PDF, and a container build on Linux.
 
-## License
+## Licence
 
 Copyright 2026 the author (see `NOTICE`). This report and the documentation: CC-BY-4.0. Code and prompt files: Apache-2.0. OpenParlData data: CC BY 4.0. Apertus: Apache-2.0 with the Apertus Acceptable Use Policy v1.5. Hack Apertus terms, chapter 6: <https://hackapertus.ch/terms-and-conditions>
 
 ## References
 
-1. Challenge: <https://hackapertus.notion.site/track-2a-openparldata>
-2. OpenParlData: <https://openparldata.ch>; exports <https://files.openparldata.ch/exports/>
-3. eCH-0295 working draft: <https://github.com/swiss/political-affairs-ech-group> (commit `3cab44d`)
-4. Apertus-v1.5-8B: <https://huggingface.co/swiss-ai/Apertus-v1.5-8B>
-5. Apertus Acceptable Use Policy v1.5: <https://github.com/swiss-ai/apertus-legal/blob/main/apertus_1.5/USAGE_POLICY.pdf>
-6. Docling: <https://github.com/docling-project/docling>
-7. Readout principle (Jev): <https://openjev.com>
-8. ASD-STE100 Simplified Technical English: <https://asd-ste100.org>
+1. Challenge: <https://hackapertus.notion.site/track-2a-openparldata>. OpenParlData: <https://openparldata.ch>
+2. eCH-0295 working draft: <https://github.com/swiss/political-affairs-ech-group> (commit `3cab44d`)
+3. Apertus-v1.5-8B: <https://huggingface.co/swiss-ai/Apertus-v1.5-8B>. Use policy: <https://github.com/swiss-ai/apertus-legal/blob/main/apertus_1.5/USAGE_POLICY.pdf>
+4. Docling: <https://github.com/docling-project/docling>. Read-out principle (Jev): <https://openjev.com>
+5. ASD-STE100 Simplified Technical English: <https://asd-ste100.org>
 
-## Sources of the numbers
+## Ids and sources of the numbers
 
-Paths are files of the private project (not in this repository), except S14. SHA-256 on 12.10.2026; the full values are in `technical_report_numbers.json`.
+Short forms of the ids:
 
-| Tag | File | SHA-256 (prefix) |
-|:----|:----------------------------------------------------------------|:------------|
-| S1 | `crisp-dm/02-data-understanding/abschnitte/korpus.md` | `17a96f629e7b` |
-| S2 | `crisp-dm/02-data-understanding/openparldata-connection-points-2026-10-08.md` | `d72d40ef2d2e` |
-| S3 | `crisp-dm/03-data-preparation/isolation-decomposition-feasibility.md` | `d32e8ef37383` |
-| S4 | `crisp-dm/03-data-preparation/isolation-complexity-ladder.md` | `a419b1533204` |
-| S5 | `crisp-dm/03-data-preparation/gate-3a-criteria-v4.md` | `1db4b2c2a03c` |
-| S6 | `crisp-dm/03-data-preparation/isolation-level-e20.md` | `626a7ae64a78` |
-| S7 | `crisp-dm/00-cross-cutting/protocol.md` (entries of 08.10. to 12.10.2026) | `067da2852c6c` |
-| S8 | `crisp-dm/04-modeling/apertus-classification-r1-r2.md` | `2634431786b7` |
-| S9 | `crisp-dm/04-modeling/apertus-classification-iteration2.md` | `43d4491084d5` |
-| S10 | `crisp-dm/04-modeling/gate-apertus-classification-criteria-v2.md` | `82891c653633` |
-| S11 | `daten/cls/it2_lora/validation_lora.md` | `e4ad39a63c5f` |
-| S12 | `daten/cls/it2/vm_equality/equality.md` | `19d7eaf06038` |
-| S13 | `crisp-dm/00-cross-cutting/decisions.md` (E26, E31, scope of the test set) | `23aa12cf22b6` |
-| S14 | Version 1 of this report: `track_2a/technical_report.md` at commit `eaacef9` of this repository | `5c9cb7ea3018` |
-| S15 | `uv.lock` | `09800a0c2910` |
-| S16 | output of `sysctl -n machdep.cpu.brand_string hw.memsize` | `f0117d88c822` |
-| S17 | `daten/score26/score26_report.md` (R2 on the 26 records) | `d92851113dcb` |
-| S18 | `daten/score26/path1_info.md` (path 1 on the 26 records) | `3078d95f9a77` |
-| S19 | `daten/cls/h7k/h7k_report.md` (head H7k) | `50865daad2c1` |
-| S20 | `daten/score26/verify.md` (independent check of S17 and S18) | `5e87ecdb2b79` |
-| S21 | `daten/cls/h7k/verify.md` (independent check of S19) | `0fe9443f5b84` |
+| Short | Id stem | Short | Id stem |
+|:--|:----------------------------------|:--|:----------------------------------|
+| `R` | `values.last_run.rules_only.all` | `E` | `values.last_run.check_by_eye` |
+| `V` | `values.last_run.rules_only.validation` | `S` | `values.last_run.spread.rules_only` |
+| `G7` | `values.last_run.rules_only.group7` | `K` | `values.last_run.contact` |
+| `C` | `values.last_run.combined.all` | `KD` | `values.last_run.contact.rule_design_list` |
+| `P` | `values.last_run.parliaments` | `D`, `H` | `values.round4`, `values.heads2` |
+| `F` | `design.fixed` | | |
 
-About this report: AI agents (Claude Opus 5.5) wrote it from the records of the private project, in English to the rules of ASD-STE100 (Issue 9). A script compared each number with its source file. No human examined this version.
+A table gives its stems in its caption, and the id of a cell is `<stem>.<field>.<key>`. The field keys are `affair_type`, `title`, `affair_number`, `submission_date`, `response_date`, `responder_name` and `first_author`.
+
+Marks: a value with no mark word is measured: a project script wrote it into a result file. "Derived" is calculated from measured counts, for example each share correct. "Read" and "protocol only" mark a value from a work log, a criteria file, an evidence text or a state file. "Reading check" marks a count of the check by eye. Development values carry the mark of their source file, for example "after the opening": they are design values.
+
+Paths are files of the private project. `numbers.json` gives the SHA-256 of each file.
+
+| Ids | File |
+|:----------------|:----------------------------------------------------------------|
+| `R.*`, `V.*`, `G7.*`, `C.*`, `P.*` | `daten/gj_values/heads2/last/measures_first.json` |
+| `D.*` | `daten/gj_values/round4/measures_dev_all.json` |
+| `H.<field>.*`, `H.tier.*` | `daten/gj_values/heads2/measures_dev.json` |
+| `H.entry.*` | `daten/gj_values/heads2/entry.json` |
+| `E.*` | `daten/gj_values/heads2/last_review/review_counts.json` |
+| `S.*` | `daten/gj_values/heads2/last_subsets/measures_subsets.json` |
+| `K.s3.all`, `K.s4.all` | the line count of 2 id files in `crisp-dm/05-evaluation/evidence/` (no id is published) |
+| `K.*` (other), `KD.*` | `crisp-dm/05-evaluation/`: the contact history and the evidence dossier |
+| `F.*` | addenda G and I of the criteria, `src/m11_writer.py` |
+| `cascade.*` | `src/m11_cascade.yaml` |
+| `rules.val.*`, `val.*` | `daten/gj/validation/result.json`, `validation_b1s/result.json`, `validation_lora/result.json` |
+| `sets.*` (other) | `daten/gj/docs_build.json`, `daten/gj/labels_build.json` |
+| `xp.*` | `daten/gj/crossparl_b1s_dev/crossparl.json` |
+| marks read, protocol only | the work log, the criteria file and the state file of the package |
+
+About this text: AI agents (Claude Opus 5.5) wrote it from the records of the private project, in English to the rules of ASD-STE100 (Issue 9). No human examined this version.

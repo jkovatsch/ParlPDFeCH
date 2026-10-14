@@ -1,0 +1,137 @@
+{
+ "schema": "parlpdfech-sample/1",
+ "doc_id": "26171",
+ "record_id": "s-26171",
+ "pdf_sha256": "f2e5fe4ae6747a886d93bc753795611117fe11b4d23f4ae30d53866fcedb1493",
+ "title": "Der OECD-Steuerreform und den Folgen für den Kanton Basel-Stadt",
+ "kind": "interpellation",
+ "parliament": "BS",
+ "parliament_name": "Basel-Stadt",
+ "language": "de",
+ "pages": 1,
+ "blocks": 13,
+ "lines": 36,
+ "modes": [
+  "auto",
+  "rules"
+ ],
+ "apertus": "stored",
+ "in_sample": true,
+ "source_url": "https://grosserrat.bs.ch/?dnr=19.5497.01",
+ "split": "dev",
+ "sets": [
+  "dev"
+ ],
+ "states_job": "daten/gj/states/gpu1_labelled",
+ "reference_run": "daten/gj/fullrun_b1s_dev",
+ "files": [
+  {
+   "name": "docling.json",
+   "project_path": "daten/iso/docling/26171.json",
+   "modes": [
+    1,
+    2
+   ],
+   "sha256": "febb52f3ac01b861af95a39054d1d069bec26d529d76fe4f617351616efcf026",
+   "bytes": 15817
+  },
+  {
+   "name": "atoms.json",
+   "project_path": "daten/iso/atome/26171.json",
+   "modes": [
+    1,
+    2
+   ],
+   "sha256": "2ad0622a850dc22d2bbcc23f913f175bb55ab867f54ad6b58e117ffa2c0b6c91",
+   "bytes": 37913
+  },
+  {
+   "name": "blocks.json",
+   "project_path": "daten/gj/docs/26171.json",
+   "modes": [
+    1,
+    2
+   ],
+   "sha256": "624e880432eabb4cd5d97a1da5a4bd81a1a9fa9595d27341f746ff7c52e5d49c",
+   "bytes": 4887,
+   "run_record": {
+    "path": "daten/gj/docs_build.json",
+    "sha256_equal": true
+   }
+  },
+  {
+   "name": "rules.json",
+   "project_path": "daten/gj/rules/26171.json",
+   "source_path": "daten/gj/rules_pdf/26171.json",
+   "modes": [
+    1,
+    2
+   ],
+   "sha256": "89ee76727a7ac6f8a34166cb84ef7b241bf2a311a45c76614992a357ce04960c",
+   "bytes": 5573,
+   "run_record": {
+    "path": "daten/gj_values/round4/rules_pdf_build.json",
+    "sha256_equal": true
+   },
+   "no_export_record": true,
+   "keys_that_differ_from_the_stored_rule_file": [
+    "body_key",
+    "export_record"
+   ]
+  },
+  {
+   "name": "export.json",
+   "project_path": "daten/gj/fullrun_b1s_dev/26171/export/26171.json",
+   "modes": [
+    1,
+    2
+   ],
+   "sha256": "fe3103ba9599225e5c0b256b7d0ba83a3da07417030944fbeffaa407a2937635",
+   "bytes": 15376
+  },
+  {
+   "name": "states.npz",
+   "project_path": "daten/gj/states/gpu1_labelled/states/26171.npz",
+   "modes": [
+    2
+   ],
+   "sha256": "9dc7a88a6bb811b59a7b5d3f70a526f685f4d150290dfd46b1ad091e440d377c",
+   "bytes": 820031
+  },
+  {
+   "name": "r2.json",
+   "project_path": null,
+   "modes": [
+    2
+   ],
+   "sha256": "834d843ce493af4b0ce5c65c2863edd04e7b9e59189c746324e555f9721c4595",
+   "bytes": 535,
+   "note": "one entry of daten/gj/r2/dev_r2_docling.json"
+  },
+  {
+   "name": "source.pdf",
+   "project_path": null,
+   "source_path": "daten/pdf/lehrer_stichprobe/26171.pdf",
+   "modes": [
+    1,
+    2
+   ],
+   "role": "source_pdf",
+   "sha256": "f2e5fe4ae6747a886d93bc753795611117fe11b4d23f4ae30d53866fcedb1493",
+   "bytes": 44730
+  },
+  {
+   "name": "page-1.png",
+   "project_path": null,
+   "modes": [
+    1,
+    2
+   ],
+   "role": "page_image",
+   "page": 1,
+   "renderer": "pypdfium2 5.14.0, scale 2.0",
+   "sha256": "f9c2829b6f15d27a9881f48cf3a346a2e3d03cae511c9650a12cba9fccb920ef",
+   "bytes": 358631
+  }
+ ]
+}

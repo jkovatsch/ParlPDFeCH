@@ -1,0 +1,2 @@
+# SPDX-License-Identifier: Apache-2.0
+Du liest ein Dokument aus einem Schweizer Parlament und beantwortest eine Frage dazu.

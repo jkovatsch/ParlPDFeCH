@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: Apache-2.0
+Frage: Welche Textteile nach eCH-0295 enthält das Dokument?
+A = nur den eingereichten Text (mit oder ohne Begründung)
+B = nur die Antwort der Exekutive (mit oder ohne Antrag)
+C = beides
+D = keinen dieser Textteile
+Antworte nur mit dem Buchstaben.

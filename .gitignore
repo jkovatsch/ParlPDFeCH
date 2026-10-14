@@ -26,5 +26,5 @@ build/
 .idea/
 .vscode/
 
-# PDF documents: never in the repository
+# PDF documents: never in the repository, except the 3 sample PDFs (see track_2a/app/.gitignore)
 *.pdf

@@ -1,0 +1,119 @@
+{
+ "schema": "parlpdfech-run-numbers/1",
+ "status": "EXCEPTION, NOT RELEASED",
+ "note": "Display values of numbers.json of the project. Reader with rules only; reference: the OpenParlData export. No human checked a value.",
+ "source": {
+  "file": "public/track_2a/numbers.json",
+  "made": "14.10.2026 12:31 CEST",
+  "sha256": "d0f56230c99aaa3d0a344d95ef390c5ec3db161f7f073e02079760e37abcdbf9"
+ },
+ "run": {
+  "date": "13.10.2026",
+  "documents": "872",
+  "parliaments": "26",
+  "ids": {
+   "documents": "values.last_run.rules_only.all.documents",
+   "parliaments": "values.last_run.parliaments.all"
+  }
+ },
+ "fields": {
+  "affair_type": {
+   "share_correct": "0.7923",
+   "correct": "580",
+   "with_reference": "732",
+   "precision": "0.9431",
+   "given": "615",
+   "ids": {
+    "share_correct": "values.last_run.rules_only.all.affair_type.share_correct",
+    "correct": "values.last_run.rules_only.all.affair_type.correct",
+    "with_reference": "values.last_run.rules_only.all.affair_type.with_reference",
+    "precision": "values.last_run.rules_only.all.affair_type.precision",
+    "given": "values.last_run.rules_only.all.affair_type.given"
+   }
+  },
+  "title": {
+   "share_correct": "0.4688",
+   "correct": "406",
+   "with_reference": "866",
+   "precision": "0.5179",
+   "given": "784",
+   "ids": {
+    "share_correct": "values.last_run.rules_only.all.title.share_correct",
+    "correct": "values.last_run.rules_only.all.title.correct",
+    "with_reference": "values.last_run.rules_only.all.title.with_reference",
+    "precision": "values.last_run.rules_only.all.title.precision",
+    "given": "values.last_run.rules_only.all.title.given"
+   }
+  },
+  "affair_number": {
+   "share_correct": "0.2214",
+   "correct": "182",
+   "with_reference": "822",
+   "precision": "0.5275",
+   "given": "345",
+   "ids": {
+    "share_correct": "values.last_run.rules_only.all.affair_number.share_correct",
+    "correct": "values.last_run.rules_only.all.affair_number.correct",
+    "with_reference": "values.last_run.rules_only.all.affair_number.with_reference",
+    "precision": "values.last_run.rules_only.all.affair_number.precision",
+    "given": "values.last_run.rules_only.all.affair_number.given"
+   }
+  },
+  "submission_date": {
+   "share_correct": "0.2729",
+   "correct": "238",
+   "with_reference": "872",
+   "precision": "0.5289",
+   "given": "450",
+   "ids": {
+    "share_correct": "values.last_run.rules_only.all.submission_date.share_correct",
+    "correct": "values.last_run.rules_only.all.submission_date.correct",
+    "with_reference": "values.last_run.rules_only.all.submission_date.with_reference",
+    "precision": "values.last_run.rules_only.all.submission_date.precision",
+    "given": "values.last_run.rules_only.all.submission_date.given"
+   }
+  },
+  "sponsor": {
+   "share_correct": "0.4556",
+   "correct": "195",
+   "with_reference": "428",
+   "precision": "0.8125",
+   "given": "240",
+   "ids": {
+    "share_correct": "values.last_run.rules_only.all.first_author.share_correct",
+    "correct": "values.last_run.rules_only.all.first_author.correct",
+    "with_reference": "values.last_run.rules_only.all.first_author.with_reference",
+    "precision": "values.last_run.rules_only.all.first_author.precision",
+    "given": "values.last_run.rules_only.all.first_author.given"
+   }
+  },
+  "response_date": {
+   "share_correct": "0.2075",
+   "correct": "22",
+   "with_reference": "106",
+   "precision": "0.5116",
+   "given": "43",
+   "ids": {
+    "share_correct": "values.last_run.rules_only.all.response_date.share_correct",
+    "correct": "values.last_run.rules_only.all.response_date.correct",
+    "with_reference": "values.last_run.rules_only.all.response_date.with_reference",
+    "precision": "values.last_run.rules_only.all.response_date.precision",
+    "given": "values.last_run.rules_only.all.response_date.given"
+   }
+  },
+  "responder": {
+   "share_correct": "0.8929",
+   "correct": "200",
+   "with_reference": "224",
+   "precision": "0.9756",
+   "given": "205",
+   "ids": {
+    "share_correct": "values.last_run.rules_only.all.responder_name.share_correct",
+    "correct": "values.last_run.rules_only.all.responder_name.correct",
+    "with_reference": "values.last_run.rules_only.all.responder_name.with_reference",
+    "precision": "values.last_run.rules_only.all.responder_name.precision",
+    "given": "values.last_run.rules_only.all.responder_name.given"
+   }
+  }
+ }
+}

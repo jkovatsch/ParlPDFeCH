@@ -1,97 +1,73 @@
 # ParlPDFeCH
 
-Target: parliamentary affairs from PDF to eCH-0295, extracted with Apertus by readout, every value with its source.
+A PDF of a Swiss parliament goes in. An eCH-0295 record comes out. Each value of the record is read from the PDF and has a probability, a page and a text span. The OpenParlData export is the reference of the measurement. No export value goes into a record.
 
 - Author: Jonathan Kovatsch, as a private person. Copyright 2026 Jonathan Kovatsch (see `NOTICE`).
 - Challenge: Track 2A (OpenParlData) of the Hack Apertus online hack, "Extracting Parliamentary Affairs from PDFs into One Common Structure". Challenge page: https://hackapertus.notion.site/track-2a-openparldata
-- Project folder for the judges: [track_2a/](track_2a/README.md). Run: `make setup`, then `make run` in `track_2a/`.
-- State of this text: 12.10.2026. It is the version for the submission of 13.10.2026.
+- Project folder for the judges: [track_2a/](track_2a/README.md). It gives the commands, the samples, the method and all results.
+- Technical report: [track_2a/technical_report.md](track_2a/technical_report.md). All limits: [track_2a/docs/limits.md](track_2a/docs/limits.md).
+- State of this text: 14.10.2026. It replaces the text of 12.10.2026.
 
-## What ParlPDFeCH is
+## Result in short
 
-ParlPDFeCH is a converter for PDF documents of parliamentary affairs. The documents come from parliaments of the Swiss Confederation, the cantons, the municipalities and Liechtenstein, through OpenParlData. The output is data to the working draft eCH-0295 (version I95), with a provenance side file.
+The one fixed run of 13.10.2026 compared the values of 872 documents of 26 parliaments with the export, one time. The run has 804 validation documents of 18 parliaments and 68 documents of 8 more parliaments (group 7). AI agents had read each group-7 document before the run. Development: 1,793 documents of 44 other parliaments.
 
-Principles:
+Reader with rules only. Reference: the export. No human checked a value of the one fixed run.
 
-1. The converter writes no text. The text of a value is the wording of the PDF.
-2. Each value has evidence: for a text, the atoms of the PDF with page, frame and character range; for a metadata value, the record and the field of the OpenParlData export.
-3. Docling converts the PDF into blocks. Code divides the blocks into atoms: one line of a block or one row of a table.
-4. Code rules make most decisions. Apertus-v1.5-8B makes a decision by readout: code reads the probabilities of a fixed list of answers, or a trained head reads a hidden state. Apertus writes no text.
-5. Each readout gets the whole document first and the question last.
-6. A value with a low probability gets the value status `unsure`. The converter does not guess.
-7. The project uses Apertus in bf16 and no quantized model. The CSCS inference API does not document its precision ([track_2a/README.md](track_2a/README.md)).
+| Field | Precision | Found rate | Share correct |
+|---|---|---|---|
+| affair type | 0.9431 | 0.8402 | 0.7923 |
+| title | 0.5179 | 0.9053 | 0.4688 |
+| affair number | 0.5275 | 0.4197 | 0.2214 |
+| submission date | 0.5289 | 0.5161 | 0.2729 |
+| response date | 0.5116 | 0.4057 | 0.2075 |
+| responder | 0.9756 | 0.9152 | 0.8929 |
+| first author | 0.8125 | 0.5607 | 0.4556 |
 
-## Current status
+- Precision: correct / (correct + wrong). Found rate: (correct + wrong) / documents with a reference. Share correct: correct / documents with a reference.
+- Correct means equal to the export value after the normalisation of the project.
+- Apertus-v1.5-8B gives values for 2 of the 7 fields: where the rules find none, or where the rule value has a probability below 0.5. With them, the share correct is 0.8675 for the affair type and 0.6028 for the first author. A dropped PDF gets values from the rules only.
+- No person has accepted these numbers. No pass limit was fixed before the run. Thus this text does not say that a field passes.
+- Number ids in [track_2a/numbers.json](track_2a/numbers.json): `values.last_run.rules_only.all.<field>.precision`, `.found_rate`, `.share_correct`; `values.last_run.combined.all.<field>.share_correct`; `values.last_run.parliaments.<all|validation|group7>`; `values.round4.documents`, `values.round4.parliaments`.
 
-Facts on 12.10.2026:
+## The 3 strongest limits
 
-- The repository holds a converter that runs on 3 samples: a rule stage at isolation level L9 and an eCH-0295 writer. `make run` converts the samples from their stored Docling output, validates the output against I95 and the profile, and prints the stored results. It needs no network, no GPU and no model.
-- The output of the 3 samples is valid against I95 and against the profile (`linkml-validate`).
-- Path 1 (the converter): gate 3a version 4 is OPEN. The frozen converter ran once on 40 selected test documents and claimed 26. The author examined the 26 gold set records. The blind repetition and the acceptance of the reference did not take place, so the gate has no measurement.
-- Path 2 (Apertus head, task R2): the gate is OPEN. On the validation set, the head has a balanced accuracy of 0.919, against 0.899 for the zero-shot Apertus readout and 0.932 for the best rule. The final run on the test parliaments is sealed and not measured.
-- Path 2, task R1 (the recommendation of the executive): stopped, with a negative result.
-- Scores after the freeze, on the records of the 26 test documents that the author reviewed: information, not a gate measurement. n = 26, one human reviewer, the claimed set of path 1 (not a random sample), from 11 parliaments.
-  - R2: the head was correct for 24 of 26 documents, the best rule for 20. The 2 errors of the head are the 2 documents with an empty export text.
-  - Path 1: 19 of the 26 claimed documents were exact. A converter that gives only the role got 17 of 26.
-  - A head with 7,000 instead of 800 `dev` training rows gave the same decisions on the 26 documents.
-  - Path 2 ran on these documents on the instruction of the author. This is a deviation from the criteria of its gate. The technical report (chapter 5.5) gives all values with their sources.
-- Gate 3a on the full isolation task (06.10.2026): NOT MET.
+1. Fewer than half of the documents with a reference get the export value. This applies to the affair number, the 2 dates, the title and the first author.
+2. AI agents had read some of the 872 documents before the run: 116 or more (`values.last_run.contact.read_by_ai_agents.lower_limit`), that is 48 validation documents and all 68 group-7 documents (`values.last_run.contact.kind1.<validation|group7>`). The older rule chain was designed on a list with 38 documents of the run (`values.last_run.contact.rule_design_list.validation`).
+3. AI agents of one model family did all work and all examination. No human checked a value of the one fixed run. The reference is a register, not a hand-checked gold set.
 
-[track_2a/README.md](track_2a/README.md) gives all values with their sources and limits. The technical report is [track_2a/technical_report.md](track_2a/technical_report.md).
+[track_2a/docs/limits.md](track_2a/docs/limits.md) gives all 12 limits of the result with their sources. The technical report adds 3 notes on the method (items 13 to 15 of its chapter 6).
 
 ## Deliverables of the challenge
 
-| Deliverable | State on 12.10.2026 |
+| Deliverable | State on 14.10.2026 |
 |---|---|
-| 1 Representation model | eCH-0295 (I95, working draft) and the LinkML profile `track_2a/src/converter/m06_ech_profil.yaml` 0.2.0 for the provenance. The profile changes no eCH-0295 class. |
-| 2 Converter: prompts and code | `track_2a/src/converter/` (rule stage and eCH-0295 writer), `track_2a/src/prompts/` (prompts for Apertus), `track_2a/src/validate_ech.py` (validator), `track_2a/src/apertus_head/` (head of path 2, code only) |
-| 3 Evaluation against a gold set with human acceptance | 26 gold set records examined by the author. No gate measurement: the acceptance of the reference is OPEN. Scores after the freeze on these 26 records, as information: technical report, chapter 5.5. |
-| 3 Cross-parliament question | Not answered. The selected question needed task R1, and R1 stopped. |
+| 1 Representation model | eCH-0295, working draft I95 (commit `3cab44d`), and the cascade of the project. The project uses eCH-0295 because it is the working draft of the Swiss standard for political affairs. The project gives no mapping to Akoma Ntoso, Parla-CLARIN or Popolo. The cascade uses the kind of the document and the affair type to select the slots that a document can state. File: `track_2a/src/converter_gj/m11_cascade.yaml`. The earlier converter adds the LinkML profile `track_2a/src/converter/m06_ech_profil.yaml` 0.2.0 for its provenance. It changes no eCH-0295 class. |
+| 2 Converter: prompts and code | The code of the method of the report: `track_2a/src/converter_gj/`. The prompts for Apertus: `track_2a/src/prompts/gj_values_v1_de/` (value questions) and `track_2a/src/prompts/gj_jev_v1_de/` (block roles). The app: `track_2a/app/`. `make run-native` ran on one Mac. `make run` (Docker) was not run. In the app, the 7 values of a record come from the rules; for the 3 samples, stored Apertus states give the block labels. |
+| 3 Evaluation | The one fixed run of 13.10.2026 against the export (see above). The one fixed run has no hand-checked gold set: no human checked a reference value of the export. The author examined 26 records of test documents for the earlier converter. The method of the report was not scored on them. The run has no count by language or by state level. |
+| 3 Cross-parliament question | In which parliaments does the PDF with the response of the executive also contain the submitted text? The report gives an answer on development documents (chapter 6). It uses block labels from an Apertus head, compared with AI labels only. It is not a result of the one fixed run. |
 
-## What is in this repository
-
-| Path | Content |
-|---|---|
-| `README.md` | This text |
-| `LICENSE` | Apache-2.0, from the Hack Apertus template, not changed |
-| `NOTICE` | Copyright, the licenses of the parts and the attributions |
-| `LICENSES/` | The license texts Apache-2.0 and CC-BY-4.0 |
-| `track_2a/README.md` | How to run, requirements, samples, results, Apertus use, limits |
-| `track_2a/Makefile` | `setup`, `run`, `test`, `head-selftest`, `clean` |
-| `track_2a/src/converter/` | The converter: copies of the frozen code of the private project (`track_2a/SOURCES.md`) |
-| `track_2a/src/prompts/` | The prompts for Apertus |
-| `track_2a/src/apertus_head/` | The code of the head of path 2 (no weights) |
-| `track_2a/src/run_samples.py`, `validate_ech.py`, `fetch_schema.py`, `check_sources.py` | `make run`, the validator, the download of the schema files, the check of the copies |
-| `track_2a/src/` (other files) | The 40 scripts of the first public version (06.10.2026): stages 1 to 3, corpus figures, split, gold set tools (`track_2a/docs/stages-1-3.md`) |
-| `track_2a/samples/` | 3 samples: stored Docling output, atoms, export record, expected output |
-| `track_2a/results/stored_results.json` | The stored results that `make run` prints |
-| `track_2a/tests/` | A known invalid instance for the validator |
-| `track_2a/SOURCES.md`, `SOURCES.json` | The SHA-256 of each source file and of each copy, and the edits |
-| `track_2a/technical_report.md` | Method, values, causes, limits. The PDF of the submission form is made from this file. |
-| `track_2a/technical_report_numbers.json` | Each number of the technical report with its source file and SHA-256, and the steps that make the PDF |
-| `track_2a/.env.example` | The names of the settings, without values |
-| `track_2a/data/` | Empty |
-
-This repository has its own history. It starts with the publication. It is not the history of the private project.
+The public text of 12.10.2026 (commit `2fd48e2`) described an earlier converter, which takes its metadata values from the export. It is still in `track_2a/src/converter/` (command `make run-earlier`). Its scores on 26 records of test documents are not a part of the one fixed run.
 
 ## What is not in this repository, and why
 
 | Item | Reason |
 |---|---|
-| PDF documents and OpenParlData exports | OpenParlData publishes them. The license of the PDF copies is not clear. The samples give the URLs and the SHA-256 of their PDF. |
-| Test documents, the gold set records of the test documents, the sealed outputs | They are the material of the open gates. The repository gives counts only. |
-| AI references and document lists | The AI references have no human acceptance. |
-| Apertus weights | The Apertus use policy has duties for each redistribution. Each user downloads Apertus with an own account. |
-| Weights of the head of path 2, LoRA adapters | The gate of path 2 is OPEN. The project publishes no weights, also not on Hugging Face. |
-| Project notes and the protocol | They contain internal notes. The README files and the technical report give the facts from them, with the SHA-256 of the record files. |
-| Copies of eCH-0295 files | The license version of the working draft is not clear. `make setup` downloads the two files from their pinned URLs. |
+| PDF documents and OpenParlData exports, except the PDF files of the 3 samples | OpenParlData publishes them. The license of the PDF copies is not clear. The app needs the PDF of each sample for its result view: `track_2a/app/data/samples/<doc>/source.pdf`, with the URL of the publisher in `track_2a/app/data/samples/index.json`. |
+| Test documents and their records | They are not a part of the one fixed run. The repository gives counts only. |
+| Hidden states and fit data of documents other than the 3 samples | They are data of the private project. `track_2a/numbers.json` gives the aggregate values with their source files. |
+| Apertus weights, the weights of the value heads, the LoRA adapter | The Apertus use policy has duties for each redistribution. Each user downloads Apertus with an own account. |
+| Project notes and the protocol of the private project | They contain internal notes. The README files and the technical report give the facts from them. The work records of the app are in the repository as a part of its source tree: `track_2a/app/STATE.md`, `EXAMINATION.md` and `CONTRACT.md`. They also contain internal notes of the AI agents, for example process numbers and role names. |
+| Other copies of eCH-0295 files | The license version of the working draft is not clear. `make setup` downloads the two files from their pinned URLs for the earlier converter. Only `track_2a/app/layout/quellen/` has a copy (chapter "eCH-0295"). |
+
+This repository has its own history. It starts with the publication. It is not the history of the private project.
 
 ## eCH-0295
 
 - ParlPDFeCH is an independent project. It is not a product of the association eCH.
 - It uses the working draft eCH-0295 of the eCH expert group "Politische Geschäfte": https://github.com/swiss/political-affairs-ech-group, commit `3cab44d` of 30.09.2026.
 - eCH-0295 is not approved. ParlPDFeCH does not claim conformity with an approved standard.
-- This repository contains no copy of eCH-0295 files. The code uses the names of fields and values of eCH-0295. `make setup` downloads the two files below into `track_2a/.cache/` and examines their SHA-256 (`track_2a/src/fetch_schema.py`).
+- `track_2a/app/layout/quellen/` has the two files below at commit `3cab44d` (same SHA-256), because the app validates each record against them. The licence of the working draft is not clear. The code uses the names of fields and values of eCH-0295. For the earlier converter, `make setup` downloads the two files into `track_2a/.cache/` and examines their SHA-256 (`track_2a/src/fetch_schema.py`).
 
 | File | URL at commit `3cab44d` | SHA-256 |
 |---|---|---|
@@ -105,9 +81,10 @@ Copyright 2026 Jonathan Kovatsch. The file `NOTICE` gives the full table and the
 | Part | License |
 |---|---|
 | Code: `track_2a/src/`, `track_2a/Makefile` | Apache-2.0 (files `LICENSE` and `LICENSES/Apache-2.0.txt`). Each code file has a line `SPDX-License-Identifier: Apache-2.0`. |
-| Prompts for Apertus: `track_2a/src/prompts/` | Apache-2.0. Each prompt text file has the line `SPDX-License-Identifier: Apache-2.0`. The JSON template `r2_v1_de.template.json` has no such line, because JSON has no comment lines. The `NOTICE` table applies to it. |
-| Documentation: `README.md`, `track_2a/README.md`, `track_2a/SOURCES.md`, `track_2a/technical_report.md`, `track_2a/technical_report_numbers.json`, `track_2a/docs/`, `NOTICE`, the `README.md` files in `track_2a/src/` | CC-BY-4.0 (file `LICENSES/CC-BY-4.0.txt`) |
+| Prompts for Apertus: `track_2a/src/prompts/` | Apache-2.0. Each prompt text file has the line `SPDX-License-Identifier: Apache-2.0`. A JSON template has no such line, because JSON has no comment lines. The `NOTICE` table applies to it. |
+| Documentation: `README.md`, `track_2a/README.md`, `track_2a/SOURCES.md`, `track_2a/technical_report.md`, `track_2a/numbers.md`, `track_2a/docs/`, `NOTICE`, the `README.md` files in `track_2a/src/` | CC-BY-4.0 (file `LICENSES/CC-BY-4.0.txt`) |
 | `track_2a/samples/` | Data of OpenParlData under CC BY 4.0 and texts of 3 documents (`track_2a/samples/NOTICE.md`) |
+| `track_2a/app/` | Code: Apache-2.0. Texts and derived data files (stored states, head weights, calibration files): CC-BY-4.0, "Source: OpenParlData.ch". `track_2a/app/layout/quellen/`: copies of 2 eCH-0295 files (chapter "eCH-0295"). `NOTICE` gives the rows. |
 | `track_2a/data/` | Empty |
 
 - Hack Apertus terms, chapter 6, "What you build is open source": https://hackapertus.ch/terms-and-conditions
@@ -121,5 +98,5 @@ Text of the template:
 ## About this text
 
 - Language: English, to the rules of ASD-STE100 (Issue 9).
-- Authoring: AI agents (Claude Opus 5.5) wrote this text for the author on 12.10.2026, from the records of the private project. The private project is the project folder of the author. It is not public.
+- Authors: AI agents (Claude Opus 5.5) wrote this text for the author on 14.10.2026, from the records of the private project. The private project is the project folder of the author. It is not public.
 - No human examined this version of the text.

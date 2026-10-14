@@ -1,0 +1,427 @@
+{
+ "doc_id": "26171",
+ "quelle": "daten/pdf/lehrer_stichprobe/26171.pdf",
+ "sha256": "f2e5fe4ae6747a886d93bc753795611117fe11b4d23f4ae30d53866fcedb1493",
+ "erzeugt_utc": "2026-10-05T13:06:36Z",
+ "skript": "src/m03_docling_zerlegen.py",
+ "lauf": "iso_pool",
+ "werkzeug": {
+  "docling": "2.133.0",
+  "docling-core": "2.99.0",
+  "docling-parse": "7.22.1",
+  "docling-ibm-models": "4.0.3",
+  "torch": "2.14.1",
+  "ocrmac": "1.0.1",
+  "pdftotext": "pdftotext version 26.04.0"
+ },
+ "konfiguration": {
+  "ocr": "auto",
+  "ocr_engine": "ocrmac (Apple Vision, accurate)",
+  "ocr_sprachen": [
+   "de-DE",
+   "fr-FR",
+   "it-IT",
+   "en-US"
+  ],
+  "geraet": "auto",
+  "threads": 4,
+  "tabellen": "genau",
+  "zellabgleich": true,
+  "backend": "docling-parse",
+  "layout_modell": "layout_heron",
+  "document_timeout_s": 900
+ },
+ "koordinaten": "PDF-Punkte, Ursprung oben links, bbox = [links, oben, rechts, unten]",
+ "gesamttext_trenner": "\n\n",
+ "status": "success",
+ "backend": "docling-parse",
+ "einfarbige_seiten_standard_backend": [],
+ "fehler": [],
+ "laufzeit_s": 0.291,
+ "seiten": [
+  {
+   "seite": 1,
+   "breite": 595.22,
+   "hoehe": 842.0,
+   "zellen": 39,
+   "ocr_zellen": 0,
+   "textquelle": "pdf"
+  }
+ ],
+ "bloecke": [
+  {
+   "id": "B1",
+   "docling_ref": "#/texts/0",
+   "label": "section_header",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "text_quelle": "zeilen",
+   "text": "Interpellation Nr. 121 (November 2019)",
+   "seite": 1,
+   "bbox": [
+    65.76,
+    72.96,
+    266.36,
+    83.32
+   ],
+   "ocr_anteil": 0.0,
+   "ocr_konfidenz": null,
+   "zeichen": [
+    0,
+    38
+   ]
+  },
+  {
+   "id": "B2",
+   "docling_ref": "#/texts/1",
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "text_quelle": "zeilen",
+   "text_docling": "betreffend der OECD-Steuerreform und den Folgen für den Kanton BaselStadt",
+   "text": "betreffend der OECD-Steuerreform und den Folgen für den Kanton Basel-\nStadt",
+   "seite": 1,
+   "bbox": [
+    65.76,
+    85.68,
+    425.96,
+    108.76
+   ],
+   "ocr_anteil": 0.0,
+   "ocr_konfidenz": null,
+   "zeichen": [
+    40,
+    115
+   ]
+  },
+  {
+   "id": "B3",
+   "docling_ref": "#/texts/2",
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "text_quelle": "zeilen",
+   "text_docling": "Die OECD plant eine Steuerreform. Teil dieser Reform soll auch eine generelle Neuverteilung der Gewinnsteuern zwischen den Sitzländern der Unternehmen und den Absatzländern sein. Die Besteuerung soll neu auch dort erfolgen, wo der Gewinn erzielt wird. Die OECD und die G20Staaten wollen sich im Januar 2020 auf die Eckwerte einigen, bis Ende des nächsten Jahres soll die Reform zur Gewinnbesteuerung von international tätigen Unternehmen abgeschlossen sein. Verlierer dieser Umverteilung könnten Länder mit starkem Export sein, die zahlreiche Konzernsitze aufweisen, also auch die Schweiz.",
+   "text": "Die OECD plant eine Steuerreform. Teil dieser Reform soll auch eine generelle Neuverteilung der\nGewinnsteuern zwischen den Sitzländern der Unternehmen und den Absatzländern sein. Die\nBesteuerung soll neu auch dort erfolgen, wo der Gewinn erzielt wird. Die OECD und die G20-\nStaaten wollen sich im Januar 2020 auf die Eckwerte einigen, bis Ende des nächsten Jahres soll\ndie Reform zur Gewinnbesteuerung von international tätigen Unternehmen abgeschlossen sein.\nVerlierer dieser Umverteilung könnten Länder mit starkem Export sein, die zahlreiche\nKonzernsitze aufweisen, also auch die Schweiz.",
+   "seite": 1,
+   "bbox": [
+    62.4,
+    114.0,
+    536.36,
+    200.32
+   ],
+   "ocr_anteil": 0.0,
+   "ocr_konfidenz": null,
+   "zeichen": [
+    117,
+    708
+   ]
+  },
+  {
+   "id": "B4",
+   "docling_ref": "#/texts/3",
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "text_quelle": "zeilen",
+   "text_docling": "In unserem Kanton haben einige exportorientierte international bedeutende Firmen ihren Sitz. Deren Steuerzahlungen haben in den letzten Jahren dazu geführt, dass der Kanton zum Teil sehr hohe Überschüsse in seiner Jahresrechnung ausweisen konnte. Eine Neuregelung wie sie offenbar der OECD vorschwebt, könnte gravierende Auswirkungen auf die Steuereinnahmen der Schweiz und besonders auch auf die Steuereinnahmen des Kantons Basel-Stadt haben. Es gilt - im Rahmen der beschränkten Möglichkeiten unseres Kantons - über den Bund Einfluss zu nehmen, um zu verhindern, dass die Steuereinahmen von diesen Firmen in Zukunft geringer ausfallen werden. Die Folgen für Basel-Stadt wären verheerend, das sehr hohe Niveau der staatlichen Leistungen könnte nicht gehalten werden, massive Ausgabenreduktionen müssten erfolgen.",
+   "text": "In unserem Kanton haben einige exportorientierte international bedeutende Firmen ihren Sitz.\nDeren Steuerzahlungen haben in den letzten Jahren dazu geführt, dass der Kanton zum Teil sehr\nhohe Überschüsse in seiner Jahresrechnung ausweisen konnte. Eine Neuregelung wie sie\noffenbar der OECD vorschwebt, könnte gravierende Auswirkungen auf die Steuereinnahmen der\nSchweiz und besonders auch auf die Steuereinnahmen des Kantons Basel-Stadt haben. Es gilt -\nim Rahmen der beschränkten Möglichkeiten unseres Kantons - über den Bund Einfluss zu\nnehmen, um zu verhindern, dass die Steuereinahmen von diesen Firmen in Zukunft geringer\nausfallen werden. Die Folgen für Basel-Stadt wären verheerend, das sehr hohe Niveau der\nstaatlichen Leistungen könnte nicht gehalten werden, massive Ausgabenreduktionen müssten\nerfolgen.",
+   "seite": 1,
+   "bbox": [
+    62.4,
+    208.56,
+    537.08,
+    332.8
+   ],
+   "ocr_anteil": 0.0,
+   "ocr_konfidenz": null,
+   "zeichen": [
+    710,
+    1523
+   ]
+  },
+  {
+   "id": "B5",
+   "docling_ref": "#/texts/4",
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "text_quelle": "zeilen",
+   "text_docling": "In diesem Zusammenhang bitte ich den Regierungsrat um die Beantwortung der folgenden Fragen:",
+   "text": "In diesem Zusammenhang bitte ich den Regierungsrat um die Beantwortung der folgenden\nFragen:",
+   "seite": 1,
+   "bbox": [
+    62.4,
+    341.04,
+    504.62,
+    364.0
+   ],
+   "ocr_anteil": 0.0,
+   "ocr_konfidenz": null,
+   "zeichen": [
+    1525,
+    1617
+   ]
+  },
+  {
+   "id": "B6",
+   "docling_ref": "#/texts/5",
+   "label": "list_item",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": {
+    "ref": "#/groups/0",
+    "label": "list",
+    "gruppe": true
+   },
+   "text_quelle": "zeilen",
+   "text_docling": "1. Teilt der Regierungsrat die Befürchtung, wonach die Umsetzung dieser Ideen zu massiven Steuerausfällen für Basel-Stadt führen wird?",
+   "text_docling_normalisiert": "Teilt der Regierungsrat die Befürchtung, wonach die Umsetzung dieser Ideen zu massiven Steuerausfällen für Basel-Stadt führen wird?",
+   "text": "1. Teilt der Regierungsrat die Befürchtung, wonach die Umsetzung dieser Ideen zu massiven\nSteuerausfällen für Basel-Stadt führen wird?",
+   "liste": {
+    "marker": "1.",
+    "nummeriert": true
+   },
+   "seite": 1,
+   "bbox": [
+    62.4,
+    372.36,
+    531.14,
+    395.32
+   ],
+   "ocr_anteil": 0.0,
+   "ocr_konfidenz": null,
+   "zeichen": [
+    1619,
+    1753
+   ]
+  },
+  {
+   "id": "B7",
+   "docling_ref": "#/texts/6",
+   "label": "list_item",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": {
+    "ref": "#/groups/0",
+    "label": "list",
+    "gruppe": true
+   },
+   "text_quelle": "zeilen",
+   "text_docling_normalisiert": "Hat der Regierungsrat eine Stellungnahme zu den Vorhaben ausgearbeitet?",
+   "text": "2. Hat der Regierungsrat eine Stellungnahme zu den Vorhaben ausgearbeitet?",
+   "liste": {
+    "marker": "2.",
+    "nummeriert": true
+   },
+   "seite": 1,
+   "bbox": [
+    62.4,
+    403.68,
+    462.14,
+    414.04
+   ],
+   "ocr_anteil": 0.0,
+   "ocr_konfidenz": null,
+   "zeichen": [
+    1755,
+    1829
+   ]
+  },
+  {
+   "id": "B8",
+   "docling_ref": "#/texts/7",
+   "label": "list_item",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": {
+    "ref": "#/groups/0",
+    "label": "list",
+    "gruppe": true
+   },
+   "text_quelle": "zeilen",
+   "text_docling": "3. Ist der Regierungsrat beim Bundesrat vorstellig geworden, um die Haltung des Kantons Basel-Stadt gegen solche Änderungen zum Ausdruck zu bringen?",
+   "text_docling_normalisiert": "Ist der Regierungsrat beim Bundesrat vorstellig geworden, um die Haltung des Kantons Basel-Stadt gegen solche Änderungen zum Ausdruck zu bringen?",
+   "text": "3. Ist der Regierungsrat beim Bundesrat vorstellig geworden, um die Haltung des Kantons\nBasel-Stadt gegen solche Änderungen zum Ausdruck zu bringen?",
+   "liste": {
+    "marker": "3.",
+    "nummeriert": true
+   },
+   "seite": 1,
+   "bbox": [
+    62.4,
+    422.28,
+    515.76,
+    445.24
+   ],
+   "ocr_anteil": 0.0,
+   "ocr_konfidenz": null,
+   "zeichen": [
+    1831,
+    1979
+   ]
+  },
+  {
+   "id": "B9",
+   "docling_ref": "#/texts/8",
+   "label": "list_item",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": {
+    "ref": "#/groups/0",
+    "label": "list",
+    "gruppe": true
+   },
+   "text_quelle": "zeilen",
+   "text_docling": "4. Ist der Regierungsrat bereit, in Zusammenarbeit mit den betroffenen Unternehmen im Kanton Basel-Stadt gegenüber dem Bund die Basler Interessen zu vertreten?",
+   "text_docling_normalisiert": "Ist der Regierungsrat bereit, in Zusammenarbeit mit den betroffenen Unternehmen im Kanton Basel-Stadt gegenüber dem Bund die Basler Interessen zu vertreten?",
+   "text": "4. Ist der Regierungsrat bereit, in Zusammenarbeit mit den betroffenen Unternehmen im\nKanton Basel-Stadt gegenüber dem Bund die Basler Interessen zu vertreten?",
+   "liste": {
+    "marker": "4.",
+    "nummeriert": true
+   },
+   "seite": 1,
+   "bbox": [
+    62.4,
+    453.6,
+    506.6,
+    476.56
+   ],
+   "ocr_anteil": 0.0,
+   "ocr_konfidenz": null,
+   "zeichen": [
+    1981,
+    2140
+   ]
+  },
+  {
+   "id": "B10",
+   "docling_ref": "#/texts/9",
+   "label": "list_item",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": {
+    "ref": "#/groups/0",
+    "label": "list",
+    "gruppe": true
+   },
+   "text_quelle": "zeilen",
+   "text_docling": "5. Ist der Regierungsrat bereit, dem Grossen Rat über die Weiterentwicklung des OECDVorhabens und über die Aktivitäten der Schweiz zur Verhinderung von erheblichen Einnahmen-Verlusten zu berichten?",
+   "text_docling_normalisiert": "Ist der Regierungsrat bereit, dem Grossen Rat über die Weiterentwicklung des OECDVorhabens und über die Aktivitäten der Schweiz zur Verhinderung von erheblichen Einnahmen-Verlusten zu berichten?",
+   "text": "5. Ist der Regierungsrat bereit, dem Grossen Rat über die Weiterentwicklung des OECD-\nVorhabens und über die Aktivitäten der Schweiz zur Verhinderung von erheblichen\nEinnahmen-Verlusten zu berichten?",
+   "liste": {
+    "marker": "5.",
+    "nummeriert": true
+   },
+   "seite": 1,
+   "bbox": [
+    62.4,
+    484.92,
+    510.92,
+    520.48
+   ],
+   "ocr_anteil": 0.0,
+   "ocr_konfidenz": null,
+   "zeichen": [
+    2142,
+    2341
+   ]
+  },
+  {
+   "id": "B11",
+   "docling_ref": "#/texts/10",
+   "label": "list_item",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": {
+    "ref": "#/groups/0",
+    "label": "list",
+    "gruppe": true
+   },
+   "text_quelle": "zeilen",
+   "text_docling": "6. Teilt der Regierungsrat die Meinung, dass bei tatsächlich resultierenden SteuereinnahmenVerlusten durch diese Reform die Kantonsausgaben massiv reduziert werden müssten?",
+   "text_docling_normalisiert": "Teilt der Regierungsrat die Meinung, dass bei tatsächlich resultierenden SteuereinnahmenVerlusten durch diese Reform die Kantonsausgaben massiv reduziert werden müssten?",
+   "text": "6. Teilt der Regierungsrat die Meinung, dass bei tatsächlich resultierenden Steuereinnahmen-\nVerlusten durch diese Reform die Kantonsausgaben massiv reduziert werden müssten?",
+   "liste": {
+    "marker": "6.",
+    "nummeriert": true
+   },
+   "seite": 1,
+   "bbox": [
+    62.4,
+    528.84,
+    534.2,
+    551.8
+   ],
+   "ocr_anteil": 0.0,
+   "ocr_konfidenz": null,
+   "zeichen": [
+    2343,
+    2517
+   ]
+  },
+  {
+   "id": "B12",
+   "docling_ref": "#/texts/11",
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "text_quelle": "zeilen",
+   "text": "Patricia von Falkenstein",
+   "seite": 1,
+   "bbox": [
+    119.04,
+    560.16,
+    235.94,
+    570.52
+   ],
+   "ocr_anteil": 0.0,
+   "ocr_konfidenz": null,
+   "zeichen": [
+    2519,
+    2543
+   ]
+  },
+  {
+   "id": "B13",
+   "docling_ref": "#/texts/12",
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "text_quelle": "zeilen",
+   "text": "19.5497.01",
+   "seite": 1,
+   "bbox": [
+    441.48,
+    73.56,
+    496.7,
+    83.92
+   ],
+   "ocr_anteil": 0.0,
+   "ocr_konfidenz": null,
+   "zeichen": [
+    2545,
+    2555
+   ]
+  }
+ ],
+ "text_gesamt": "Interpellation Nr. 121 (November 2019)\n\nbetreffend der OECD-Steuerreform und den Folgen für den Kanton Basel-\nStadt\n\nDie OECD plant eine Steuerreform. Teil dieser Reform soll auch eine generelle Neuverteilung der\nGewinnsteuern zwischen den Sitzländern der Unternehmen und den Absatzländern sein. Die\nBesteuerung soll neu auch dort erfolgen, wo der Gewinn erzielt wird. Die OECD und die G20-\nStaaten wollen sich im Januar 2020 auf die Eckwerte einigen, bis Ende des nächsten Jahres soll\ndie Reform zur Gewinnbesteuerung von international tätigen Unternehmen abgeschlossen sein.\nVerlierer dieser Umverteilung könnten Länder mit starkem Export sein, die zahlreiche\nKonzernsitze aufweisen, also auch die Schweiz.\n\nIn unserem Kanton haben einige exportorientierte international bedeutende Firmen ihren Sitz.\nDeren Steuerzahlungen haben in den letzten Jahren dazu geführt, dass der Kanton zum Teil sehr\nhohe Überschüsse in seiner Jahresrechnung ausweisen konnte. Eine Neuregelung wie sie\noffenbar der OECD vorschwebt, könnte gravierende Auswirkungen auf die Steuereinnahmen der\nSchweiz und besonders auch auf die Steuereinnahmen des Kantons Basel-Stadt haben. Es gilt -\nim Rahmen der beschränkten Möglichkeiten unseres Kantons - über den Bund Einfluss zu\nnehmen, um zu verhindern, dass die Steuereinahmen von diesen Firmen in Zukunft geringer\nausfallen werden. Die Folgen für Basel-Stadt wären verheerend, das sehr hohe Niveau der\nstaatlichen Leistungen könnte nicht gehalten werden, massive Ausgabenreduktionen müssten\nerfolgen.\n\nIn diesem Zusammenhang bitte ich den Regierungsrat um die Beantwortung der folgenden\nFragen:\n\n1. Teilt der Regierungsrat die Befürchtung, wonach die Umsetzung dieser Ideen zu massiven\nSteuerausfällen für Basel-Stadt führen wird?\n\n2. Hat der Regierungsrat eine Stellungnahme zu den Vorhaben ausgearbeitet?\n\n3. Ist der Regierungsrat beim Bundesrat vorstellig geworden, um die Haltung des Kantons\nBasel-Stadt gegen solche Änderungen zum Ausdruck zu bringen?\n\n4. Ist der Regierungsrat bereit, in Zusammenarbeit mit den betroffenen Unternehmen im\nKanton Basel-Stadt gegenüber dem Bund die Basler Interessen zu vertreten?\n\n5. Ist der Regierungsrat bereit, dem Grossen Rat über die Weiterentwicklung des OECD-\nVorhabens und über die Aktivitäten der Schweiz zur Verhinderung von erheblichen\nEinnahmen-Verlusten zu berichten?\n\n6. Teilt der Regierungsrat die Meinung, dass bei tatsächlich resultierenden Steuereinnahmen-\nVerlusten durch diese Reform die Kantonsausgaben massiv reduziert werden müssten?\n\nPatricia von Falkenstein\n\n19.5497.01",
+ "pruefung": {
+  "pdftotext_woerter": 354,
+  "bloecke_woerter": 354,
+  "wiedergefunden": 354,
+  "anteil_pdftotext_in_bloecken": 1.0,
+  "davon_ueber_silbentrennung": 0,
+  "anteil_bloecke_in_pdftotext": 1.0,
+  "wortfolge_aehnlichkeit": 0.9915,
+  "anteil_5gramme_pdftotext_in_bloecken": 0.9963,
+  "fehlend_haeufigste": []
+ }
+}

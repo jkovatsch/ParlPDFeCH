@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-"""make run: convert the samples from their stored input, validate the output, print the stored results.
+"""make run-earlier: convert the samples from their stored input, validate the output, print the stored results.
 
 Written in English to the STE rules (ASD-STE100, Issue 9).
 
@@ -230,7 +230,7 @@ def main() -> int:
     ap.add_argument("--write-expected", action="store_true")
     a = ap.parse_args()
     ids = sample_ids()
-    say(f"ParlPDFeCH, make run: {len(ids)} samples ({', '.join(ids)}); no GPU, no model, no network")
+    say(f"ParlPDFeCH, make run-earlier: {len(ids)} samples ({', '.join(ids)}); no GPU, no model, no network")
     bad = fs.check()
     if bad:
         say("Missing or changed schema files: " + "; ".join(bad) + ". Run `make setup` first.")
@@ -251,7 +251,7 @@ def main() -> int:
     if ok:
         ok = compare(ids, a.write_expected)
     print_results()
-    say(f"\nResult of make run: {'PASS' if ok else 'FAIL'}")
+    say(f"\nResult of make run-earlier: {'PASS' if ok else 'FAIL'}")
     return 0 if ok else 1
 
 

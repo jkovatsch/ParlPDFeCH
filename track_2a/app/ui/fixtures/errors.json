@@ -1,0 +1,138 @@
+{
+ "schema": "parlpdfech-errors/1",
+ "note": "All error codes of the package. The server reads this file at compile time and fills title, text and action of each error object. Placeholders in braces come from the key detail of the error object. The key http is the status code of a direct API answer. The key exits lists the buttons of the case screen: other_pdf, sample, retry, start.",
+ "errors": {
+  "not_pdf": {
+   "http": 415, "source": "server", "exits": ["other_pdf", "sample"],
+   "title": {"en": "This file is not a PDF", "de": "Diese Datei ist kein PDF"},
+   "text": {"en": "The file does not start with the PDF mark. This package reads PDF files only.", "de": "Die Datei beginnt nicht mit der PDF-Kennung. Dieses Paket liest nur PDF-Dateien."},
+   "action": {"en": "Choose a PDF file.", "de": "Wählen Sie eine PDF-Datei."}
+  },
+  "pdf_unreadable": {
+   "http": 422, "source": "worker", "exits": ["other_pdf", "sample"],
+   "title": {"en": "The PDF cannot be read", "de": "Das PDF kann nicht gelesen werden"},
+   "text": {"en": "The file does not open as a PDF, or it has no page. Nothing was saved.", "de": "Die Datei lässt sich nicht als PDF öffnen, oder sie hat keine Seite. Nichts wurde gespeichert."},
+   "action": {"en": "Choose another PDF or try a sample.", "de": "Wählen Sie ein anderes PDF oder sehen Sie ein Beispiel an."}
+  },
+  "protected_pdf": {
+   "http": 422, "source": "worker", "exits": ["other_pdf", "sample"],
+   "title": {"en": "This PDF has a password", "de": "Dieses PDF hat ein Passwort"},
+   "text": {"en": "The PDF is protected. This package cannot open it.", "de": "Das PDF ist geschützt. Dieses Paket kann es nicht öffnen."},
+   "action": {"en": "Choose a PDF with no password.", "de": "Wählen Sie ein PDF ohne Passwort."}
+  },
+  "too_large": {
+   "http": 413, "source": "server", "exits": ["other_pdf", "sample"],
+   "title": {"en": "This file is too large", "de": "Diese Datei ist zu gross"},
+   "text": {"en": "The limit of this package is {max_mb} MB for one file.", "de": "Die Grenze dieses Pakets ist {max_mb} MB für eine Datei."},
+   "action": {"en": "Choose a smaller PDF.", "de": "Wählen Sie ein kleineres PDF."}
+  },
+  "too_long": {
+   "http": 422, "source": "worker", "exits": ["other_pdf", "sample"],
+   "title": {"en": "This PDF has too many pages", "de": "Dieses PDF hat zu viele Seiten"},
+   "text": {"en": "This PDF has {pages} pages. The limit of this package is {max_pages}.", "de": "Dieses PDF hat {pages} Seiten. Die Grenze dieses Pakets ist {max_pages}."},
+   "action": {"en": "Choose a shorter PDF.", "de": "Wählen Sie ein kürzeres PDF."}
+  },
+  "no_text_layer": {
+   "http": 422, "source": "worker", "exits": ["other_pdf", "sample"],
+   "title": {"en": "This PDF is a scan", "de": "Dieses PDF ist ein Scan"},
+   "text": {"en": "This PDF has no text layer (a scan). This package cannot read scans.", "de": "Dieses PDF hat keine Textebene (Scan). Dieses Paket kann keine Scans lesen."},
+   "action": {"en": "Choose a PDF with a text layer.", "de": "Wählen Sie ein PDF mit Textebene."}
+  },
+  "not_in_package": {
+   "http": 422, "source": "worker", "exits": ["sample", "other_pdf"],
+   "title": {"en": "This PDF is not a sample of this package", "de": "Dieses PDF ist kein Beispiel dieses Pakets"},
+   "text": {"en": "This package converts the sample documents only. The dropped PDF is not one of them.", "de": "Dieses Paket wandelt nur die Beispieldokumente um. Das abgelegte PDF gehört nicht dazu."},
+   "action": {"en": "Try a sample.", "de": "Sehen Sie ein Beispiel an."}
+  },
+  "doc_id_unknown": {
+   "http": 422, "source": "worker", "exits": ["other_pdf", "sample"],
+   "title": {"en": "This document number is not in the package", "de": "Diese Dokumentnummer ist nicht im Paket"},
+   "text": {"en": "The package holds no export record for the document number {doc_id}. It holds export records for the samples only.", "de": "Das Paket enthält keinen Export-Datensatz zur Dokumentnummer {doc_id}. Es enthält nur Export-Datensätze der Beispiele."},
+   "action": {"en": "Send the PDF with no document number.", "de": "Senden Sie das PDF ohne Dokumentnummer."}
+  },
+  "pdf_differs_from_doc_id": {
+   "http": 422, "source": "worker", "exits": ["other_pdf", "sample"],
+   "title": {"en": "The PDF is not the file of this document number", "de": "Das PDF ist nicht die Datei dieser Dokumentnummer"},
+   "text": {"en": "The SHA-256 value of the PDF is not the stored value of the document number {doc_id}.", "de": "Der SHA-256-Wert des PDF ist nicht der gespeicherte Wert der Dokumentnummer {doc_id}."},
+   "action": {"en": "Send the PDF with no document number, or choose the correct file.", "de": "Senden Sie das PDF ohne Dokumentnummer oder wählen Sie die richtige Datei."}
+  },
+  "sample_unknown": {
+   "http": 404, "source": "server", "exits": ["sample", "start"],
+   "title": {"en": "This sample is not in the package", "de": "Dieses Beispiel ist nicht im Paket"},
+   "text": {"en": "The package holds no sample with the document number {doc_id}.", "de": "Das Paket enthält kein Beispiel mit der Dokumentnummer {doc_id}."},
+   "action": {"en": "Choose a sample from the list.", "de": "Wählen Sie ein Beispiel aus der Liste."}
+  },
+  "bad_request": {
+   "http": 400, "source": "server", "exits": ["start"],
+   "title": {"en": "The request is not complete", "de": "Die Anfrage ist nicht vollständig"},
+   "text": {"en": "The request needs one PDF file or one sample, and the mode auto or rules. Field: {field}.", "de": "Die Anfrage braucht eine PDF-Datei oder ein Beispiel und den Modus auto oder rules. Feld: {field}."},
+   "action": {"en": "Go back to the start and try again.", "de": "Gehen Sie zum Start zurück und versuchen Sie es erneut."}
+  },
+  "busy": {
+   "http": 409, "source": "server", "exits": ["retry", "sample"],
+   "title": {"en": "One conversion runs now", "de": "Eine Umwandlung läuft gerade"},
+   "text": {"en": "One conversion runs now. This package runs one conversion at a time.", "de": "Eine Umwandlung läuft gerade. Dieses Paket führt eine Umwandlung nach der anderen aus."},
+   "action": {"en": "Try again when it is done.", "de": "Versuchen Sie es danach erneut."}
+  },
+  "timeout": {
+   "http": 504, "source": "server", "exits": ["other_pdf", "sample"],
+   "title": {"en": "The conversion took too long", "de": "Die Umwandlung dauerte zu lange"},
+   "text": {"en": "The converter did not end in {seconds} s. The server stopped it. Nothing was saved.", "de": "Der Konverter endete nicht in {seconds} s. Der Server hat ihn angehalten. Nichts wurde gespeichert."},
+   "action": {"en": "Choose another PDF or try a sample.", "de": "Wählen Sie ein anderes PDF oder sehen Sie ein Beispiel an."}
+  },
+  "converter_stopped": {
+   "http": 500, "source": "worker", "exits": ["other_pdf", "sample"],
+   "title": {"en": "The converter stopped", "de": "Der Konverter hat angehalten"},
+   "text": {"en": "The converter stopped. Nothing was saved. Technical note: {note}.", "de": "Der Konverter hat angehalten. Nichts wurde gespeichert. Technischer Hinweis: {note}."},
+   "action": {"en": "Choose another PDF or try a sample.", "de": "Wählen Sie ein anderes PDF oder sehen Sie ein Beispiel an."}
+  },
+  "job_unknown": {
+   "http": 404, "source": "server", "exits": ["start"],
+   "title": {"en": "This conversion is not known", "de": "Diese Umwandlung ist nicht bekannt"},
+   "text": {"en": "The server has no conversion with this number. The server keeps a conversion until its next start.", "de": "Der Server kennt keine Umwandlung mit dieser Nummer. Der Server behält eine Umwandlung bis zu seinem nächsten Start."},
+   "action": {"en": "Go back to the start.", "de": "Gehen Sie zum Start zurück."}
+  },
+  "record_unknown": {
+   "http": 404, "source": "server", "exits": ["sample", "start"],
+   "title": {"en": "This result is not on this computer", "de": "Dieses Ergebnis ist nicht auf diesem Computer"},
+   "text": {"en": "The server has no result with the name {record_id}. It was deleted, or it was not made.", "de": "Der Server hat kein Ergebnis mit dem Namen {record_id}. Es wurde gelöscht oder nicht erzeugt."},
+   "action": {"en": "Convert the document again.", "de": "Wandeln Sie das Dokument erneut um."}
+  },
+  "file_unknown": {
+   "http": 404, "source": "server", "exits": ["start"],
+   "title": {"en": "This file is not in the result", "de": "Diese Datei ist nicht im Ergebnis"},
+   "text": {"en": "The result {record_id} has no file with the name {name}.", "de": "Das Ergebnis {record_id} hat keine Datei mit dem Namen {name}."},
+   "action": {"en": "Open the result and choose a file from its list.", "de": "Öffnen Sie das Ergebnis und wählen Sie eine Datei aus der Liste."}
+  },
+  "forbidden": {
+   "http": 403, "source": "server", "exits": ["start"],
+   "title": {"en": "This request is not permitted", "de": "Diese Anfrage ist nicht erlaubt"},
+   "text": {"en": "The request did not come from the page of this package on this computer.", "de": "Die Anfrage kam nicht von der Seite dieses Pakets auf diesem Computer."},
+   "action": {"en": "Open the page with the address localhost or 127.0.0.1.", "de": "Öffnen Sie die Seite mit der Adresse localhost oder 127.0.0.1."}
+  },
+  "read_only": {
+   "http": 403, "source": "server", "exits": ["sample", "start"],
+   "title": {"en": "This site shows the samples only", "de": "Diese Seite zeigt nur die Beispiele"},
+   "text": {"en": "This site shows the samples only. It takes no file and deletes no result.", "de": "Diese Seite zeigt nur die Beispiele. Sie nimmt keine Datei an und löscht kein Ergebnis."},
+   "action": {"en": "Open the result of a sample.", "de": "Öffnen Sie das Ergebnis eines Beispiels."}
+  },
+  "sample_runs_off": {
+   "http": 403, "source": "server", "exits": ["sample", "start"],
+   "title": {"en": "The result of this sample is ready", "de": "Das Ergebnis dieses Beispiels ist bereit"},
+   "text": {"en": "The result of this sample is ready. This server starts no new run for it.", "de": "Das Ergebnis dieses Beispiels ist bereit. Dieser Server startet dafür keinen neuen Lauf."},
+   "action": {"en": "Open the result of the sample.", "de": "Öffnen Sie das Ergebnis des Beispiels."}
+  },
+  "not_found": {
+   "http": 404, "source": "server", "exits": ["start"],
+   "title": {"en": "This address is not known", "de": "Diese Adresse ist nicht bekannt"},
+   "text": {"en": "The server has no page and no data at this address.", "de": "Der Server hat an dieser Adresse keine Seite und keine Daten."},
+   "action": {"en": "Go back to the start.", "de": "Gehen Sie zum Start zurück."}
+  },
+  "internal": {
+   "http": 500, "source": "server", "exits": ["start"],
+   "title": {"en": "The server could not do this", "de": "Der Server konnte dies nicht ausführen"},
+   "text": {"en": "The server stopped this request. Technical note: {note}.", "de": "Der Server hat diese Anfrage angehalten. Technischer Hinweis: {note}."},
+   "action": {"en": "Try again. If it occurs again, start the package again.", "de": "Versuchen Sie es erneut. Tritt es wieder auf, starten Sie das Paket neu."}
+  }
+ }
+}

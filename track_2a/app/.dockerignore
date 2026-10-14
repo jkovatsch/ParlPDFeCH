@@ -1,0 +1,31 @@
+# Files that never go into the build context of the image (self-contained source tree).
+
+# Build outputs. The image compiles the server and the WebAssembly bundle again.
+target*/
+**/target*/
+work/
+ui/pkg/
+**/__pycache__/
+**/*.pyc
+
+# Never in an image: PDF documents, model weights, settings with values.
+*.pdf
+**/*.pdf
+# Exception: the PDF files of the 3 samples (public documents of the parliaments; data/samples/index.json gives the source URL of each).
+!data/samples/*/source.pdf
+*.safetensors
+**/*.safetensors
+.env*
+**/.env*
+
+# Not needed in an image: the deploy kit and the manifest of the source tree.
+deploy/
+
+# Version control and editor files.
+.git
+.gitignore
+.gitlab-ci.yml
+.DS_Store
+**/.DS_Store
+.vscode/
+.idea/

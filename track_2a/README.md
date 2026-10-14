@@ -1,63 +1,127 @@
-# ParlPDFeCH: project folder for Track 2A
+# ParlPDFeCH, Track 2A: a parliament PDF goes in, an eCH-0295 record comes out
 
-This folder is the project root for the judges of Hack Apertus. The front page of the repository is [../README.md](../README.md). The technical report is [technical_report.md](technical_report.md). The PDF of the submission form is made from this file ([technical_report_numbers.json](technical_report_numbers.json), key `pdf`).
+What goes in: one PDF of a Swiss parliament. What comes out: one eCH-0295 record in Turtle and YAML, and the result of a validator. Each value of the record is read from the PDF and has a probability, a page and a text span. The OpenParlData export is the reference of the measurement; at run time no export value goes into a record.
 
-ParlPDFeCH converts PDF documents of Swiss parliamentary affairs into the working draft eCH-0295 (version I95). The converter writes no text: each text value is the wording of the PDF. A provenance side file gives the page, the frame and the character range of each line.
+To start the app, use `make run-native` (chapter "Run it"). This is the way that ran on 14.10.2026. `make run`, the Docker way that the template asks for, has not run.
 
-State of this text: 12.10.2026. Both gates of the project are OPEN. No value of this repository is a gate measurement. After the freeze, the project scored both paths against the records of the 26 reviewed test documents, outside the gate criteria. The chapter "Results" and the technical report (chapter 5.5) give these values as counts and rates, with no value of a single document.
+In the one fixed run, Apertus-v1.5-8B gave values for 2 of the 7 fields, the affair type and the first author, from stored hidden states. It gave a value where the rules found none, or where the rule value had a probability below 0.5. The rules gave all other values. A dropped PDF gets values from the rules only. In the app, the 7 values of the record come from the rules in each mode. For its 3 samples, the app uses stored Apertus states for the block labels only.
+
+No person has accepted the numbers of this text. They come from the one fixed run of 13.10.2026. AI agents made and examined them.
+
+Three limits come first. [docs/limits.md](docs/limits.md) gives all 12.
+
+1. Fewer than half of the documents with a reference get the export value. This applies to the affair number, the 2 dates, the title and the first author.
+2. AI agents had read some of the 872 documents before the run: 116 or more, that is 48 validation documents and all 68 group-7 documents. The older rule chain was designed on a list with 38 documents of the run.
+3. AI agents of one model family did all work and all examination. No human checked a value of the one fixed run. The reference is a register, not a hand-checked gold set.
+
+Number ids: `values.last_run.contact.read_by_ai_agents.lower_limit` (116), `values.last_run.contact.kind1.validation` (48), `values.last_run.contact.kind1.group7` (68), `values.last_run.contact.rule_design_list.validation` (38).
+
+Result of the one fixed run of 13.10.2026: 872 documents of 26 parliaments, each value compared one time with the export. The run has 804 validation documents of 18 parliaments and 68 documents of 8 more parliaments (group 7). AI agents had read each group-7 document before the run. Development: 1,793 documents of 44 other parliaments.
+
+Reader with rules only:
+
+| Field | Precision, run | Found rate, run | Share correct, run (correct of documents with a reference) | Precision, development | Share correct, development |
+|---|---|---|---|---|---|
+| affair type | 0.9431 | 0.8402 | 0.7923 (580 of 732) | 0.9580 | 0.8262 |
+| title | 0.5179 | 0.9053 | 0.4688 (406 of 866) | 0.7607 | 0.6834 |
+| affair number | 0.5275 | 0.4197 | 0.2214 (182 of 822) | 0.7591 | 0.3582 |
+| submission date | 0.5289 | 0.5161 | 0.2729 (238 of 872) | 0.6609 | 0.4314 |
+| response date | 0.5116 | 0.4057 | 0.2075 (22 of 106) | 0.8402 | 0.7762 |
+| responder | 0.9756 | 0.9152 | 0.8929 (200 of 224) | 0.9819 | 0.9476 |
+| first author | 0.8125 | 0.5607 | 0.4556 (195 of 428) | 0.8806 | 0.7474 |
+
+Words of the table:
+
+- Correct, wrong: equal or not equal to the export value, against the export, after the normalisation of the project.
+- Precision: correct / (correct + wrong). Found rate: (correct + wrong) / documents with a reference.
+- Share correct: correct / documents with a reference. It is the product of precision and found rate.
+- The 2 response fields count only documents with the rule role response or combined.
+- The measure counts each value of a reader, also a value below the floor of 0.5 that the writer does not put into the record.
+- The development values come from the 1,793 documents that the rule authors read when they made the rules. Thus these values are optimistic.
+- Reference: the OpenParlData export. No human checked a value of the one fixed run.
+- Status: each entry of [numbers.json](numbers.json) has the status EXCEPTION, NOT RELEASED. This means that no person has accepted it.
+
+Number ids (file [numbers.json](numbers.json)):
+
+- Run: `values.last_run.rules_only.all.<field>.precision`, `.found_rate`, `.share_correct`, `.correct`, `.with_reference`.
+- Sets of the run: `values.last_run.rules_only.<all|validation|group7>.documents`, `values.last_run.parliaments.<all|validation|group7>`.
+- Development: `values.round4.<field>.precision` and `.recall` (the share correct); `values.round4.documents`, `values.round4.parliaments`.
+- Field keys: `affair_type`, `title`, `affair_number`, `submission_date`, `response_date`, `responder_name`, `first_author`.
+- `sets.parliaments.validation` (14) and `sets.parliaments.dev` (42) count other sets: the documents with an AI reference of the block roles. They are not the sets of the run.
+
+## What this is
+
+1. A PDF of a Swiss parliament goes in. An eCH-0295 record comes out.
+2. Each value of the record is read from the PDF and has a probability, a page and a text span.
+3. The OpenParlData export is the reference of the measurement. On development documents it also gives the fit labels of the Apertus heads. At run time no export value goes into a record.
+4. The one fixed run of 13.10.2026 compared the values of 872 documents of 26 parliaments with the export, one time.
+5. No pass limit was fixed before the run. Thus this text gives the numbers and their plain meaning, and no statement that a field passes.
+
+This folder is the project root for the judges of Hack Apertus. The front page of the repository is [../README.md](../README.md). The technical report is [technical_report.md](technical_report.md). The long version is [docs/report-long.md](docs/report-long.md). [docs/repository-map.md](docs/repository-map.md) gives each folder and its source.
 
 ## Run it
 
-Requirement: [uv](https://docs.astral.sh/uv/) 0.11 or later. Run the commands in this folder (`track_2a/`).
+Run the commands in this folder (`track_2a/`). [docs/run-locally.md](docs/run-locally.md) gives the 2 ways to start the app in short form.
 
 ```bash
-make setup   # one time, with network: Python 3.12, PyYAML, numpy, scipy, linkml, two eCH-0295 schema files
-make run     # no network, no GPU, no model
-make test    # optional
+make setup        # one time, with network; for make run-native and make test
+make run-native   # the way that ran: no container; needs cargo and Python 3.12; then open http://127.0.0.1:8080/app/
+make run          # needs Docker only, not make setup; not run; then open http://127.0.0.1:8080/app/
+make test         # checks with no network
 ```
 
-`make run` does these steps on the 3 samples in `samples/`:
+### The commands and their state
 
-1. It makes a work folder `build/layout/` with the copied code, the stored input of the samples and the schema files.
-2. Stage 1, rule stage (`src/converter/m05_iso_runner.py`): the frozen method `nos4` at isolation level L9 gives each line (atom) of a document an answer. It then gives the document a claim flag.
-3. Stage 2, eCH-0295 writer (`src/converter/m06_converter.py`): one eCH-0295 instance and one provenance side file for each document. The writer validates both files.
-4. Validator (`src/validate_ech.py`): it validates each output file again with `linkml-validate`.
-5. It compares the output with the stored output in `samples/<doc>/expected/`.
-6. It prints the stored results table (`results/stored_results.json`). These values do not come from the run.
+| Command | What it does | State on 14.10.2026 |
+|---|---|---|
+| `make setup` | One time, with network. It installs Python 3.12 and the Python packages of the app into `.venv/`. It downloads the Rust crates of `app/Cargo.lock` (only if cargo is on the computer; if not, it prints a note), the packages of the earlier converter and the 2 eCH-0295 schema files (pinned commit and SHA-256). `make run` does not need it. | Run on one Mac (Apple silicon, macOS) in a fresh clone. uv and cargo took the packages from the local caches of that Mac. The 2 schema files agreed with the pinned SHA-256. |
+| `make run` | Needs Docker. It builds the image (target `slim`) from `app/` and starts it on `127.0.0.1:8080`. It waits for `/healthz`. Then open `http://127.0.0.1:8080/app/`. The target `slim` converts the 3 samples only. | Not run. The Mac of the project has no Docker. |
+| `make stop`, `make logs` | They stop the container of `make run`, or show its log. | Not run. |
+| `make run-native` | No container. It builds the Rust server and the WebAssembly bundle with cargo. Then it starts the app on `127.0.0.1:8080` (`PORT=` sets another port). Stop it with Ctrl-C. | Run on one Mac (Apple silicon, macOS), with the offline flags of cargo: in this folder (port 8899) and in a fresh clone (port 8898). Each time, the 3 samples in the modes auto and rules gave 6 valid records. The server gave the page, the result data, `<doc>.values.ttl`, `source.pdf` and `page-1.png` with the status 200. |
+| `make test` | Checks with no network and no Rust compiler. It compares each copied file with `SOURCES.json` and checks the prompt files of `gj_jev_v1_de`. It runs the validator on the 6 stored output files of the earlier converter and on `tests/invalid_instance.yaml`, which it must refuse. It checks the file list and the code layout of `app/`. | PASS on one Mac, in this folder and in a fresh clone. It has no check of the numbers: `check_numbers.py` does not exist. |
+| `make test-app` | The checks of `app/`: `cargo test` of the server and of the RDF module, the example view, and a start of the seed script. It needs cargo and the crates of `make setup`. | PASS on one Mac. |
+| `make clean` | It removes `build/` and the build outputs of `app/`. | in the `Makefile` |
+| `make run-earlier` | The earlier converter of 12.10.2026 on the 3 samples. Its metadata values come from the export record, not from the PDF. Before 14.10.2026 this command had the name `make run`. | PASS on one Mac. |
+| `make head-selftest` | A self-check of an earlier Apertus head code on synthetic data (no model). | in the `Makefile` |
 
-The output is in `build/layout/out/`. On a Mac with Apple M4, the run takes less than 15 seconds. It ends with `Result of make run: PASS` and the exit code 0.
+- The template asks that `make run` starts the project in Docker on a clean checkout. This version records no such run. Use `make run-native`.
+- The fresh clone: on 14.10.2026 an AI examiner made a `git clone` of the local repository and added the files of this version. Then the examiner ran `make setup`, `make test` and `make run-native` in it, on one Mac. It was not a clone of GitHub.
+- In an earlier run on a copy of the files, the conversion of an own PDF stopped with the note `pdf_reader_absent` (see below).
 
-`make test` runs these checks:
+### What `make run-native` needs
 
-- `src/check_sources.py`: each copied file is equal to its source file in the private project, without the license line and the recorded edits ([SOURCES.md](SOURCES.md)).
-- The validator accepts the 6 stored output files and rejects `tests/invalid_instance.yaml` (a value that is not in an enumeration of I95).
+- cargo with the target `wasm32-unknown-unknown`, and the command `wasm-bindgen` 0.2.127. With rustup, the file `app/rust-toolchain.toml` adds the target. To install the command: `cargo install wasm-bindgen-cli --version 0.2.127` (network).
+- A Python 3.12 with the packages of `app/container/requirements-slim.txt`. `make setup` makes `.venv/`. Without it, the target uses `python3`, or `APP_PYTHON=<command>`.
+- The 3 samples need nothing more.
+- The conversion of your own PDF needs more: the Python packages `docling` 2.133.0 and `pypdfium2` 5.14.0, the 2 Docling models in the local Hugging Face cache and the command `pdftotext`.
+- `make setup` does not install these packages. `app/container/requirements-full.txt` gives them with their dependencies. Without them, the app stops with the note `pdf_reader_absent`.
+- The server listens on `127.0.0.1`. Its API has no authentication.
 
-`make head-selftest` runs the self-check of the Apertus head code of path 2 on synthetic data (about 5 minutes, no model).
+## What you see
 
-Docker: this version has no container file. `make run` needs uv on the computer. The template asks for a run in Docker.
+The page is `http://127.0.0.1:8080/app/` (`?lang=de` before the hash gives the German texts). It has these routes:
 
-## Requirements
-
-| Item | Requirement |
+| Route | Content |
 |---|---|
-| Runtime of `make run` | uv 0.11 or later; Python 3.12.13 (uv installs it); PyYAML 6.0.3; linkml 1.11.1 (with `uvx`). Tested on macOS (Apple silicon) on 12.10.2026. |
-| Downloads of `make setup` | Python 3.12, PyYAML 6.0.3, numpy 2.5.3 and scipy 1.18.1 into the cache of uv; linkml 1.11.1 into the tool cache of uv; the two eCH-0295 schema files into `.cache/ech-0295/` (`src/fetch_schema.py`, pinned commit and SHA-256). |
-| Hardware of `make run` | A normal computer. No GPU. |
-| API keys | None for `make run`. |
-| Model weights | None for `make run`. A run of Apertus needs the weights of Apertus-v1.5-8B in bf16 (own download, chapter "Use of Apertus"). |
-| Environment variables | `make run` reads none. The template names `LLM_NAME`, `LLM_BASE_URL` and `LLM_API_KEY`. The converter does not use them: the Apertus readouts of this project need token probabilities or hidden states of a local model. |
+| `#/` (start page) | One sentence on what goes in and what comes out. A small picture of the flow: PDF, 7 values with a probability, RDF. The 3 samples as cards that open the result view. The box "How often correct?" gives the share correct of the 7 fields in the one fixed run of 13.10.2026 (code rules only). The button for your own PDF. Each topic has a link to the page "About". |
+| `#/about/<part>` (page "About") | The long texts: `method`, `numbers` (the table of the 7 fields of the fixed run), `limits` (short forms of [docs/limits.md](docs/limits.md)) and `technical`. |
+| `#/samples`, `#/upload`, `#/job/<job_id>` | The sample cards with one button for each mode (stored Apertus states, or code rules only); the form for your own PDF (`make run-native` only, with the packages of the chapter "What `make run-native` needs"); the 6 steps of a running conversion. |
+| `#/view/<record_id>` (result view) | 3 places. The PDF: the image of each page (`page-<n>.png`) with a coloured box on each value and a grey box on each text block. The values: field, value as printed, probability (a bar and the stored decimal), the word certain or unsure, page. A line below each row gives the development documents behind the number and the precision of the field in the fixed run. For a sample, it also gives the comparison with OpenParlData. The RDF: the eCH-0295 record and the file of the values with probabilities (`<doc>.values.ttl`), as Turtle text. A click on a row, a box or a triple marks the same value in the other 2 places. A link opens the technical view. |
+| `#/record/<record_id>` (technical view) | The result page of the earlier steps. The part "What this document can state" gives the kind of the document, the source of the kind and the 7 head values. Then come the 3 tables of the affair and its 2 steps and the page of the PDF with its lines. Each label has a card. Then come the downloads, the checks and the RDF panel. |
+
+Downloads of each result: TriG, Turtle, RDF/XML, and a ZIP file with all files and their SHA-256 values. A record with values from the PDF also has `<doc>.values.ttl`, `source.pdf` (the download has the name `parlpdfech-<record_id>.pdf`) and `page-<n>.png`. `app/README.md`, chapter "What you see", gives the details.
+
+A value can also have one of these states: the rules found no value; the kind of the document has no such entry, so the field is not searched; a weak candidate below the floor of the calibration, which is not written to the record.
 
 ## Samples
 
-The samples are 3 development documents of path 1 (`dev`). Two AI agents examined each of them for personal data of third parties, with the result PASS. The documents name only persons with a public role: members of a parliament or an executive, and officials who sign for an authority.
+The 3 samples are development documents. The rule authors read them, and the heads were fitted on them. Thus the probability of a value of a sample counts the sample itself. Two AI agents examined each sample for personal data of third persons, with the result PASS. The documents name only persons with a public role.
 
-| Document | Parliament | Language | Content | Result of the converter |
-|---|---|---|---|---|
-| 26171 | Grosser Rat Basel-Stadt (canton) | German | Text of an interpellation | Claimed at L9: one TextBlock in `Submission.texts` |
-| 879163 | Conseil général Val de Bagnes (municipality) | French | Statement of the executive on a postulate | Claimed at L9: one TextBlock in `ResponseStep.texts` |
-| 714840 | Basel-Stadt (canton) | German | Resolution of the executive in its own competence | Not claimed: the S1 role is `other`, so the writer gives only the values from the export record |
-
-Sources of the PDF documents:
+| Document | Parliament | Language | Content |
+|---|---|---|---|
+| 26171 | Grosser Rat Basel-Stadt (canton) | German | Text of an interpellation |
+| 879163 | Conseil général Val de Bagnes (municipality) | French | Statement of the executive on a postulate |
+| 714840 | Basel-Stadt (canton) | German | Resolution of the executive in its own competence |
 
 | Document | URL of the publisher | Copy of OpenParlData | SHA-256 of the PDF |
 |---|---|---|---|
@@ -65,153 +129,183 @@ Sources of the PDF documents:
 | 879163 | https://www.valdebagnes.ch/_doc/4552844 | https://files.openparldata.ch/doc/6037/cc7eb17fcc026efde7c970a1e762e7b70538e06787859cbe44f4fb2b3de11a19 | `7b160c11fcf55c0b70d14c5287589c1bbf7e4e7da9d2e791ba715f667f4ba5d5` |
 | 714840 | https://www.bs.ch/api/government-resolutions/document/e159ecf6d8a64510b698e6232b719538-332/5/Dokument | https://files.openparldata.ch/doc/BS/210f283a44ef070a6ac958970636bbf12900f44a6d97f687de9bad9a1b1827bf | `8bb01b408e55d4277550fa7521783392ddae4b8fe881d70165632e36f8391fe2` |
 
-Files of each sample (`samples/<doc>/`):
+Outputs:
 
-| File | Content |
-|---|---|
-| `source.json` | The source URLs, the SHA-256 of the PDF, the Docling versions, the S1 rule id and the claim flag |
-| `input/docling.json` | The stored Docling output of the PDF (Docling 2.133.0, backend `docling-parse`, OCR with Apple Vision) |
-| `input/atoms.json` | The stored atoms: one atom for each line of a block or each row of a table, with page, frame and character range |
-| `input/export.json` | The export record of OpenParlData for the document: document, affair, events, councils, parliament (exports of 04.10.2026) |
-| `expected/instance.yaml` | The eCH-0295 instance (I95, class `Container`) |
-| `expected/provenance.yaml` | The provenance side file (profile 0.2.0, class `ExtractionRecord`) |
-| `expected/runner_core.json` | The answers of the rule stage: one answer for each atom, the L9 answers, the claim flags, the S1 role |
+- App: `app/data/samples/<doc>/` has the stored inputs, the stored Apertus states (`states.npz`), the PDF (`source.pdf`) and one image of each page (`page-1.png`) of each sample. The app makes the record with probability, page and span.
+- Earlier converter: `samples/<doc>/expected/` (eCH-0295 instance, provenance side file, answers of the rule stage). `samples/<doc>/input/` has the stored Docling output, the atoms and the export record.
+- The folder `samples/` has no PDF. The PDF files of the 3 samples are in `app/data/samples/<doc>/source.pdf`, with the SHA-256 of the table above. They are public documents of the parliaments. `app/data/samples/index.json` gives the URL of the publisher of each PDF.
 
-`samples/pdf_index.csv` and `samples/languages.csv` hold the rows of the 3 samples of two tables of the private project: the PDF index (export fields) and the language of the document. The repository holds no PDF.
+## The method
 
-Evidence of a value: in `expected/provenance.yaml`, each TextBlock has a `TextBlockRecord`. It lists the atoms of the block with page, frame (`bbox`) and character range. For example, the TextBlock of document 26171 has 37 atoms on page 1. Each value from the export record has a `ValueRecord` with the export file, the record and the field. Each claimed TextBlock has `extent_value_status: unsure`: the converter does not claim which lines are body text.
+1. Docling gives the text blocks of the PDF, each with its page and position.
+2. A rule chain gives the role of the document and of each block, from the PDF alone.
+3. The cascade of eCH-0295 uses the kind of the document and the affair type. It selects the slots that a document can state. The cascade has 7 kinds of document.
+4. Rule V5 gives a kind where the rule chain gives none.
+5. Rule readers read 7 head values: affair type, title, affair number, submission date, response date, responder and first author. Each reader has tiers.
+6. A calibration on 1,793 development documents of 44 parliaments gives each tier a probability (Jeffreys mean). A tier gets the status certain if its precision on the development documents is 0.95 or more. Each other tier gets the status unsure.
+7. A value of a tier with a probability below 0.5 goes into the label file only, not into a slot.
+8. Apertus-v1.5-8B generates no text. A linear head reads its hidden state at the last token of a question. In the run, these heads give values for the affair type and the first author: where the rules find none, or where the rule value has a probability below 0.5.
+9. A writer makes the record in Turtle and YAML with page and span. A validator checks it.
+10. The app shows the record in a browser page. It gives the 7 values with the rules. For the 3 samples, it can also give block labels from stored Apertus states. A dropped PDF gets the rules only, with no GPU. The result view shows the page image with a box on each value, the values with their probability and the RDF.
 
-## Results
+Number ids: `cascade.kinds` (7), `design.fixed.addendum_g.certain_tier_precision` (0.95), `design.fixed.writer_floor` (0.5). The report ([technical_report.md](technical_report.md), chapter 2) shows the stages as a figure.
 
-`make run` prints these values from `results/stored_results.json`. Each part names its record in the private project and the SHA-256 of the record file. The private project is not public.
+## Where the parts are
 
-Path 1, rule stage at isolation level L9 (method `nos4`): gate 3a version 4 is OPEN. It has no gate measurement.
-
-| Item | Value |
-|---|---|
-| Gate 3a on the full isolation task | NOT MET (06.10.2026). This result does not change. |
-| Selected test documents | 40 of 13 parliaments (German 21, French 17, Italian 2), selected by a script with a fixed seed |
-| Run of the frozen converter on the test documents | One run on 09.10.2026. Answers sealed with SHA-256. Claimed at L9: 26 of 40. |
-| Human reference | The author examined the 26 gold set records (proposals of AI coders) on 11.10.2026. |
-| Gate measurement | None. The blind repetition of 4 records (criterion G3a.16) and the acceptance of the reference (G3a.2) did not take place. |
-| Scores after the freeze on the 26 review records (information) | Exact documents: 19 of 26 (Jeffreys lower bound 0.574). A converter that gives only the role: 17 of 26. Documents with an author switch: 2 of 7 exact. Labelled boundary F1: 0.308. Block omission: 0. Atom intrusion rate: 0.305. Agreement of the two AI coder proposals: 22 of 26. Not a gate measurement (technical report, chapter 5.5). |
-| Development values (information) | `dev`: 124 of 183 documents claimed, 99 of 124 block exact. `eval`: 15 of 22 claimed, 15 of 15 block exact. |
-
-The development values compare the converter with AI references, not with a human reference. On `dev`, they are in-sample: AI agents wrote the rules on these documents. The project measured `eval` several times before. These values are not accuracy.
-
-Path 2, Apertus-v1.5-8B with a trained head, task R2 ("the document holds a response of the executive"): the gate is OPEN.
-
-| Set | Head | Zero-shot Apertus readout | Best rule (`s1_answer`) |
-|---|---|---|---|
-| Validation, 920 documents (balanced accuracy) | 0.919 | 0.899 | 0.932 |
-| Validation without the K7 categories, 714 documents | 0.980 | 0.953 | 0.965 |
-
-- The source label of R2 comes from the local category of the document. The K7 categories are local categories that give only the name of an affair type, for example `Interpellation`. 78 of the 93 wrong decisions on all 920 documents are `no` documents with such a category.
-- The final run on the test parliaments is sealed: 1,523 documents, 12.10.2026. It has no measurement, because the blind check of the reference did not take place.
-- Information: a LoRA adapter on all layers (one H100 GPU) and a cascade of rules and head were tried and not chosen.
-
-Path 2, task R2, scores after the freeze on the 26 reviewed test documents (information, not a gate measurement). The truth comes from the 26 review records: `yes` 15, `no` 11. A document without a value counts as wrong.
-
-| Method | Correct of 26 | Balanced accuracy | McNemar p against `s1_answer` |
-|---|---|---|---|
-| Head H (800 `dev` training rows, frozen) | 24 | 0.933 | 0.125 |
-| Head H7k (the recipe of H, 7,000 `dev` training rows) | 24 | 0.933 | 0.125 |
-| LoRA L3 (7,000 `dev` rows) and LoRA L | 24 each | 0.933 | 0.125 |
-| Zero-shot Apertus readout | 23 | 0.888 | 0.375 |
-| Rule `s1_answer` | 20 | 0.800 | – |
-| Rule `heading` | 18 | 0.733 | – |
-
-- The 2 errors of H, H7k, L3 and L are the 2 documents with an empty export text (no value). Their truth is `yes`.
-- H, H7k, L3 and L give the same decision on each of the 26 documents. Against `s1_answer`: 4 documents only H correct, 0 only the rule correct.
-- n = 26, one human reviewer. The 26 documents are the claimed set of path 1 (not a random sample), from 11 parliaments.
-- Path 2 ran on these documents on the instruction of the author. This is a deviation from criteria v2 of its gate, chapter 2.1, item 1.
-- Head H7k against H: partition P of `dev` 0.996250 and 0.996250; validation 0.917 and 0.919; validation without K7 0.979 and 0.980.
-
-Path 2, task R1 (the recommendation of the executive, for or against): stopped, negative result.
-
-| Set | Head | Best rule | Zero-shot Apertus readout |
-|---|---|---|---|
-| Validation, 287 documents (correct decisions) | 250 | 186 | 196 |
-| Date-linked validation set, 115 documents (correct decisions) | 98 | 104 | 94 |
-
-Causes: the gain on all 287 documents comes from submitted texts without a recommendation. The head follows the reasons of a letter more than its formula. Without the option `none`, a head gives a confident value to a document without a recommendation.
-
-Sources: the report of path 2, iteration 2 (SHA-256 `43d44910…`), chapters 0, 6.1, 6.2 and 12.1; the criteria of gate 3a version 4 (`1db4b2c2…`); the freeze manifest of path 1 (`440e4247…`); the results of the complexity ladder (`7491c0ed…`, isolation level L9, method `nos4`); the protocol of the private project. Scores after the freeze: the R2 score report (`d9285111…`), the path-1 values (`3078d95f…`), the H7k report (`50865daa…`) and their independent checks (`5e87ecdb…`, `0fe9443f…`). `results/stored_results.json` gives the full SHA-256 values and the dates of the protocol entries.
-
-## Converter
-
-Input of the converter: the stored Docling output of a PDF, its atoms and the export record of OpenParlData. The stages before (PDF to Docling output to atoms) are the scripts `src/m03_docling_zerlegen.py` and `src/m03_atome.py` of the first public version ([docs/stages-1-3.md](docs/stages-1-3.md)). `make run` starts from their stored output.
-
-| Stage | Code | What it does |
+| Part | Path | State on 14.10.2026 |
 |---|---|---|
-| Fixed answers | `src/converter/m03_iso_v4.py`, `m03_iso_hilfe.py` | Page furniture and frame lines by fixed rules |
-| S1 role | `src/converter/m03_sub_s1_role.py` | The role of the document from the atoms and three export fields: proposal, response, combined, minutes, committee or other. For the rule id R1 only, Apertus decides the role (prompt `src/prompts/s1_role.txt`). |
-| S2 switch | `src/converter/m03_sub_s2_switch.py` | The points where the author changes (rule) |
-| S5 type and composition | `src/converter/m03_sub_s5_type.py`, `m03_sub_assemble.py`, `m03_sub_common.py` | The answers of the atoms from the sub-task results |
-| Isolation level L9 | `src/converter/m03_ladder.py` | The answers after the map `SLOT_NOTITLE` at the block unit. Scope rule `role_agreement`: the role of the answers and the S1 role must be author roles, and the role of the answers must be the S1 rule role. Else the converter does not claim the document. |
-| Runner | `src/converter/m05_iso_runner.py` | Applies the chain to new documents, with guards, and seals each record with SHA-256 |
-| eCH-0295 writer | `src/converter/m06_converter.py`, `m06_ech_ausgabe.py`, `m02_ech_regeln.py`, `m03_gold_record.py` | The instance and the provenance side file. Metadata values come from the export record. The text of a TextBlock is the wording of its atoms. |
-| Profile | `src/converter/m06_ech_profil.yaml` | LinkML profile 0.2.0 of the provenance side file. It changes no eCH-0295 class. |
-| Method data | `src/converter/method/ladder.json`, `s1_selection.json` | The collapse maps and the isolation levels; the rule ids that keep the rule role |
+| The code of the method of the report: rule chain, cascade, rule readers, combined reader, calibration, writer, validator of the RDF record, the questions to Apertus | [src/converter_gj/](src/converter_gj/README.md) | These files are copies for reading, with the licence line in line 1. The code checks the SHA-256 of its own files, and the licence line changes it. The app runs the files of `app/layout/src/`. |
+| The rule for the first author (`m11_values_sponsor.py`) | `app/layout/src/` | This rule is only in `app/layout/src/`. The copy tool cannot make the edit that its copy in `src/converter_gj/` needs. |
+| Modules that `src/converter_gj/` imports from other folders | `src/converter/` (21 modules and `m06_ech_profil.yaml`), `src/apertus_head/` (5 modules) | The same source SHA-256. |
+| The app: Rust server, page, Python worker, view, contract, container files | [app/](app/DIST.md) | The source tree of the package, copied. `app/layout/src/` has the files that the app runs. 3 of them have a recorded edit: the licence line, a path and a role name. The app has no file of the combined reader. |
+| Stored inputs, Apertus states, PDF files and page images of the 3 samples | `app/data/samples/` | Copied. The 3 PDF files are an addition to the source tree of the package ([SOURCES.md](SOURCES.md)). |
+| Prompts of the value questions `Q0`, `Q1`, `Q2` | [src/prompts/gj_values_v1_de/](src/prompts/gj_values_v1_de/README.txt) | 6 text files with the licence line, and `template.json` (byte-equal). |
+| Prompts of the block roles | [src/prompts/gj_jev_v1_de/](src/prompts/gj_jev_v1_de/README.md) | `src/check_prompts.py` compares them with the template. |
+| Validator of the YAML instance | `src/validate_ech.py` | in this folder |
+| Numbers | [numbers.json](numbers.json), [numbers.md](numbers.md) | in this folder |
+| Limits | [docs/limits.md](docs/limits.md) | in this folder |
+| Map of this folder, and the files that are not in it | [docs/repository-map.md](docs/repository-map.md) | in this folder |
+| Earlier converter of 12.10.2026 | `src/converter/` | in this folder; [SOURCES.md](SOURCES.md) gives the SHA-256 of each copy |
+| Scripts of the first public version (stages 1 to 3) | `src/m0*.py` | in this folder; [docs/stages-1-3.md](docs/stages-1-3.md) |
 
-The code in `src/converter/` is a copy of the frozen code of the private project. [SOURCES.md](SOURCES.md) gives the SHA-256 of each source file and of each copy, and the few edits for publication. On 8 development documents, the copied converter gave the same eCH-0295 instances as the private converter, byte for byte ([SOURCES.md](SOURCES.md)).
+The files [`SOURCES.json`](SOURCES.json) and [`SOURCES.md`](SOURCES.md) give the source file, the SHA-256 and each edit of each copied file. The fit and measurement code of the value heads is not in this repository.
 
-The code has German names and some German comments. Names such as E20, G3a.2 or "process rule 6" refer to the decision list and the gate criteria of the private project. [docs/stages-1-3.md](docs/stages-1-3.md) (chapter "Names in the code") and the technical report explain the main ones.
-
-## Validator
+Validator of the YAML instance:
 
 ```bash
 uv run --offline --no-project --python 3.12 --with pyyaml==6.0.3 python src/validate_ech.py FILE [FILE ...]
 ```
 
-- An instance is validated against I95 (`ech-0295_affairs/input/schema.yaml` of https://github.com/swiss/political-affairs-ech-group, commit `3cab44d`), class `Container`.
-- A provenance side file (a file with the key `describes_delivery`) is validated against the profile `src/converter/m06_ech_profil.yaml`, class `ExtractionRecord`.
-- Tool: `linkml-validate` of linkml 1.11.1. The exit code is 0 only if each file is valid.
-- The schema files are not in this repository. `make setup` downloads them from their pinned URLs and examines their SHA-256 (`src/fetch_schema.py`).
+It validates an instance against eCH-0295 version I95 (`ech-0295_affairs/input/schema.yaml` of https://github.com/swiss/political-affairs-ech-group, commit `3cab44d`), class `Container`, with `linkml-validate` of linkml 1.11.1. The exit code is 0 only if each file is valid.
 
-## Use of Apertus
+## Results
 
-| Item | Path 1 (converter) | Path 2 (head, not in the converter) |
-|---|---|---|
-| Model | Apertus-v1.5-8B on the CSCS inference API. CSCS does not document the precision. A comparison with the local bf16 model on synthetic text found no difference above the bf16 noise (05.10.2026). | Apertus-v1.5-8B, bf16, no quantization, all 32 decoder layers |
-| Task | The S1 role of a document with the S1 rule id R1 | R2: does the document hold a response of the executive (yes or no) |
-| Method | Readout of the token probabilities of a fixed list of answers. Apertus writes no text. | A softmax regression on the hidden state of decoder layer 16 at the last prompt token. The weights of Apertus do not change. |
-| Prompt | `src/prompts/s1_role.txt` | `src/prompts/r2_v1_de.txt` (exact form: `r2_v1_de.template.json`) |
-| Where it ran | CSCS inference API (Swiss National Supercomputing Centre), Hack Apertus access | Locally on a Mac with MLX; the final run in a VM with one H100 GPU of a Swiss provider (free capacity for Hack Apertus). An equality check of the two places gave PASS. |
-| In `make run` | No question: the 3 samples have S1 rule ids that do not need Apertus. A document with the rule id R1 stops the run in the mode `cache-only`. | No. `src/apertus_head/README.md` describes the code. |
+All values: the one fixed run of 13.10.2026, all 872 documents. The reference is the export. No human checked a value. Each interval is a 90 % interval of a bootstrap by parliament (26 parliaments).
 
-In both paths, the whole document comes first and the question comes last. [src/prompts/README.md](src/prompts/README.md) lists the prompts and which method uses them.
+The challenge asks for an evaluation against a hand-checked gold set. The one fixed run has none. Its reference is the export.
+
+Reader with rules only (ids `values.last_run.rules_only.all.<field>.*`):
+
+| Field | Precision (interval) | Found rate (interval) | Correct / documents with a reference | Found rate, development |
+|---|---|---|---|---|
+| affair type | 0.9431 (0.9139 to 0.9660) | 0.8402 (0.7809 to 0.8943) | 580 of 732 | 0.8624 |
+| title | 0.5179 (0.4272 to 0.5972) | 0.9053 (0.8670 to 0.9407) | 406 of 866 | 0.8984 |
+| affair number | 0.5275 (0.3493 to 0.6890) | 0.4197 (0.3135 to 0.5389) | 182 of 822 | 0.4719 |
+| submission date | 0.5289 (0.4003 to 0.6855) | 0.5161 (0.4194 to 0.6308) | 238 of 872 | 0.6527 |
+| response date | 0.5116 (0.3673 to 0.7143) | 0.4057 (0.2598 to 0.6111) | 22 of 106 | 0.9238 |
+| responder | 0.9756 (0.9272 to 1.0000) | 0.9152 (0.8333 to 0.9721) | 200 of 224 | 0.9651 |
+| first author | 0.8125 (0.7454 to 0.8879) | 0.5607 (0.4555 to 0.6713) | 195 of 428 | 0.8488 |
+
+Combined reader: the rules and the 2 Apertus tiers that entered (ids `values.last_run.combined.all.<field>.*`; development `values.heads2.<field>.combined.*`). The other 5 fields have the values of the reader with rules only.
+
+| Field | Precision (interval) | Found rate (interval) | Share correct (correct of documents with a reference) | Precision, development | Found rate, development | Share correct, development |
+|---|---|---|---|---|---|---|
+| affair type | 0.9421 (0.9168 to 0.9642) | 0.9208 (0.8952 to 0.9447) | 0.8675 (635 of 732) | 0.9562 | 0.9228 | 0.8823 |
+| first author | 0.8243 (0.7597 to 0.8885) | 0.7313 (0.6635 to 0.8072) | 0.6028 (258 of 428) | 0.8756 | 0.8634 | 0.7560 |
+
+Values with the status certain (reader with rules only):
+
+- Affair type: 460 certain values, precision 0.9552. Responder: 175 certain values, precision 0.9714.
+- The 5 other fields have 0 certain values.
+
+Spread between the parliaments, reader with rules only (ids `values.last_run.spread.rules_only.<field>.*`). This is information: a tool made it after the run, when the result was known. A parliament counts if it has 5 or more given values with a reference.
+
+| Field | Parliaments that count | Lowest precision | Median precision | Highest precision |
+|---|---|---|---|---|
+| affair type | 21 | 0.4286 | 0.9841 | 1.0000 |
+| title | 25 | 0.0328 | 0.5714 | 1.0000 |
+| affair number | 18 | 0.0000 | 0.5228 | 1.0000 |
+| submission date | 21 | 0.0000 | 0.8000 | 1.0000 |
+| response date | 2 | 0.2500 | 0.2750 | 0.3000 |
+| responder | 15 | 0.0000 | 1.0000 | 1.0000 |
+| first author | 17 | 0.2000 | 0.9091 | 1.0000 |
+
+Plain meaning:
+
+- For the affair type and the responder, the median precision of a parliament is 0.9841 and 1.0000. For the title, the affair number and the submission date it is 0.5228 to 0.8000, and the lowest parliament is at 0.0328 or less.
+- For the title, the affair number and the 2 dates, about half of the given values are the export value. Fewer than half of the documents with a reference get the export value.
+- The precision of the title, the affair number and the 2 dates is lower in the run than on the development documents.
+- The found rate of the response date and of the first author is lower in the run than on the development documents: 0.4057 against 0.9238, and 0.5607 against 0.8488.
+- The 2 Apertus tiers add found values for the affair type and the first author, at a precision near that of the rules.
+- A pooled value does not describe one parliament. For the title, the affair number and the 2 dates, the precision of the parliaments is far apart.
+
+Cross-parliament question of the challenge: the report ([technical_report.md](technical_report.md), chapter 6) gives one answer on development documents, with block labels from an Apertus head. These labels were compared with labels from an AI, not with human labels. The answer is not a result of the one fixed run.
+
+Limits of these results (short form; [docs/limits.md](docs/limits.md) gives each with its source and its number ids):
+
+1. Fewer than half of the documents with a reference get the export value. This applies to the affair number, the 2 dates, the title and the first author. The share correct is 0.2214, 0.2729, 0.2075, 0.4688 and 0.4556 (L1).
+2. The authors of the value rules read none of the 26 parliaments of the run. The precision of the title, the affair number and the 2 dates is lower there than on the development documents (L2).
+3. In the check by eye, each of the 2 AI examiners named 12 of the 50 documents with a kind that looks wrong. Then the cascade does not search some fields. The run did not measure the kind (L3).
+4. AI agents had read 116 or more of the 872 documents before the run: 48 validation documents and all 68 group-7 documents. An audit of the work records found a sign of earlier contact for 300 of them. For the other 572 it found none; this is no proof of no contact (L4).
+5. The older rule chain makes the rule files of the run. AI agents designed it on a list with 38 documents of the run, of 9 of the 18 validation parliaments (L5).
+6. AI agents of one model family did all work and all examination. No human checked a value, a tool or a number (L6).
+7. The reference is a register. A value can be correct as printed and differ from the register. The check by eye found differences in both directions (L7).
+8. No pass limit was fixed before the run. Thus this text does not say that a field passes (L8).
+9. The development values are design values. The rule authors read all 44 development parliaments. These values are optimistic (L9).
+10. The reference of the affair type is a project map of the export type. The same value is the fit target of the `Q1` head (L10).
+11. Group 7 has 68 documents of 8 parliaments, so its intervals are wide. There the responder has 5 wrong values of 25, all of 1 parliament (L11).
+12. Each time comes from one laptop clock, and no outside time stamp exists (L12).
+
+Ids of items 9 to 11: `values.round4.parliaments`, `values.last_run.rules_only.group7.documents`, `values.last_run.parliaments.group7`, `values.last_run.rules_only.group7.responder_name.wrong` and `.given`.
+
+## One source of numbers
+
+1. Each number of the report, of the README files and of the website comes from [numbers.json](numbers.json). [numbers.md](numbers.md) has the same content as a table for a human reader.
+2. An entry has an id, the value as a string, a display form, the unit, the set and n. It also has the reference, the status, the mark and the source file with its SHA-256 and key.
+3. A value is a string, so that no tool rounds it again. The tables of this text use the display form.
+4. A tool of the private project makes the file from aggregate result files only. Paths that start with `daten/` or `crisp-dm/` are files of the private project. They are not in this repository.
+5. No script finds each number of a text in `numbers.json`. The planned script `check_numbers.py` does not exist.
+
+## Requirements
+
+| Item | Requirement |
+|---|---|
+| `make run` | Docker with Compose. The build of the image needs the network. It does not need `make setup`. |
+| `make run-native` | cargo with the target `wasm32-unknown-unknown`, `wasm-bindgen` 0.2.127, Python 3.12 with the packages of `app/container/requirements-slim.txt`. For your own PDF also: the Python packages `docling` 2.133.0 and `pypdfium2` 5.14.0 (not installed by `make setup`), the 2 Docling models in the local Hugging Face cache and `pdftotext`. |
+| `make test`, `make run-earlier` | uv 0.11 or later; Python 3.12 (uv installs it); PyYAML 6.0.3; linkml 1.11.1 (with `uvx`); a `python3` command for the checks of `app/`. |
+| `make test-app` | cargo and the Rust crates of `make setup`. |
+| Hardware | A normal computer. No GPU. |
+| API keys | None. |
+| Model weights | No Apertus weights. The app has the weights of 2 linear heads of the block labels (`app/layout/daten/gj/design/heads/`) and the stored Apertus states of the 3 samples. |
+| Environment variables | The template names `LLM_NAME`, `LLM_BASE_URL` and `LLM_API_KEY`. No command reads them: the heads of this project need the hidden states of a local model, not the text of an API. |
+
+## Use of Apertus and of other models
+
+1. Apertus-v1.5-8B in bf16 generates no token. A linear head reads the hidden state of layer 20 at the last token of a question (`design.fixed.addendum_i.layer_of_each_head`).
+2. In the run, Apertus gives values for 2 of the 7 fields: the affair type and the first author. It gives a value where the rules find none, or where the rule value has a probability below 0.5. In the run, the first-author tier replaced 6 such rule values (`values.last_run.combined.all.tier.apertus_q2_sponsor_hi.replaced_rule_values`). The rules give each other value.
+3. Value questions ([src/prompts/gj_values_v1_de/](src/prompts/gj_values_v1_de/README.txt)): `Q0` (the kind of the document) did not enter the reader. `Q1` (the affair type where the rules find none) entered. Of `Q2`, only the first author with a high head probability entered.
+4. In the run the 2 tiers gave 59 and 79 values with a reference, with precision 0.9322 and 0.8481. A type from `Q1` has no page and no span. Ids: `values.last_run.combined.all.tier.apertus_q1.*`, `values.last_run.combined.all.tier.apertus_q2_sponsor_hi.*`.
+5. Apertus can also give each text block a role, for example submitted text or response of the executive. 2 variants of this were measured on 44 validation documents against labels from an AI. The run did not use them; it used the block roles of the rule chain.
+6. One of these 2 variants adds a LoRA adapter to Apertus. The adapter is not published, and it did not enter the run. The value questions use the unchanged model with linear heads.
+7. The states were made on one H100 GPU before the run. The app runs no language model on your computer.
+8. The app does not apply the 2 tiers of item 4. Its 7 head values come from the rules ([app/README.md](app/README.md), chapter "The modes"). For the 3 samples, 2 linear heads and a sequence step give block labels from the stored states.
 
 Model weights:
 
-- This repository contains no Apertus weights and no weights of the head.
+- This repository contains no Apertus weights.
+- `app/layout/daten/gj/design/heads/` has the weights of the 2 linear heads `D1` and `B1` of the block labels. The weights of the value heads and the LoRA adapter are not published.
 - Get access to the weights on https://huggingface.co/swiss-ai/Apertus-v1.5-8B with your own account. Agree to the license (Apache-2.0) and to the Apertus Acceptable Use Policy v1.5.
 - The Apertus Acceptable Use Policy v1.5 has duties for each user: indemnity for ETH Zurich and EPFL; the role of an independent controller for personal data in the model output; the output filter of hash values of the Swiss National AI Institute (the policy advises to apply it every six months); the policy goes with each copy of Apertus.
 
-Other models in the project: AI agents (Claude Opus 5.5) wrote the code, the rules and the proposals of the gold set records, and they checked texts. AI agents (Claude Haiku 5.5) gave a second look at the text blocks of the 26 records of test documents. Docling uses its own layout and table models (layout model `layout_heron`). The OCR engine of the stored Docling output is Apple Vision (`ocrmac`, macOS only). Sample 879163 is a scan: 43 of its 45 atoms come from OCR, and the side file marks them with `from_ocr: true`. The technical report describes the role of each model.
+Other models:
 
-## Limits
+- AI agents (Claude Opus 5.5) wrote the code, the rules, the measures, the audits and the texts. AI agents of the same family examined them. No human checked a value of the one fixed run.
+- Docling uses its own layout and table models. The OCR engine of the stored Docling output of the samples is Apple Vision (macOS only).
+- The reference of the block roles on validation documents is an AI reference: labels that a language model gave. No human checked it.
 
-1. Both gates are OPEN. No value of this repository is a gate measurement. The scores on the 26 reviewed test documents come after the freeze, from one human reviewer, with n = 26.
-2. The converter isolates written affairs only. It does not isolate debate and committee texts, although eCH-0295 holds them.
-3. At the block unit, the converter claims the author sequence and the switch points. It does not claim which lines are body text (`extent_value_status: unsure`).
-4. The converter claims only a part of the documents. On `dev`, it claimed 124 of 183 documents.
-5. The converter writes no value of path 2 (R1, R2), because neither task has an ACCEPTED gate.
-6. The 3 samples are development documents. AI agents wrote the rules on these documents.
-7. `make run` starts from the stored Docling output. A new PDF needs Docling first (`src/m03_docling_zerlegen.py`, `src/m03_atome.py`).
-8. The runner needs the files of the private layout. `make run` makes this layout from the files of this repository, with guard files that hold no rows.
-9. No container file. `make run` is tested on macOS only.
+## The earlier converter (12.10.2026)
 
-## Other code in `src/`
+The folder `src/converter/` has the earlier rule converter. It gives each line of a document a role and writes an eCH-0295 instance with a provenance side file. Its metadata values come from the export record, not from the PDF. The command `make run-earlier` runs it. `results/stored_results.json` has its values of 12.10.2026 as the earlier state. They are not results of the one fixed run. [docs/stages-1-3.md](docs/stages-1-3.md) and [SOURCES.md](SOURCES.md) describe it.
 
-The 40 scripts at the top of `src/` are the first public version of 06.10.2026. They make the stages 1 to 3: Docling, atoms, and the isolation with a LoRA adapter. Other scripts give the corpus figures, the eCH-0295 comparison, the split and the tools of the gold set. [docs/stages-1-3.md](docs/stages-1-3.md) describes them, with their settings and their known limits.
+The public text of 12.10.2026 (commit `2fd48e2`) described this converter and an earlier Apertus head. It gave scores on 26 records of test documents that the author examined. These scores are not a part of the one fixed run, and this text does not use them.
 
-## License
+## Licence
 
-- Code in `src/`, the `Makefile` and the prompts in `src/prompts/`: Apache-2.0 (`../LICENSE`). Each code file and each prompt text file has the line `SPDX-License-Identifier: Apache-2.0`. The JSON template `src/prompts/r2_v1_de.template.json` has no such line, because JSON has no comment lines. The `NOTICE` table applies to it.
-- This text, `SOURCES.md`, the technical report, `technical_report_numbers.json` and `docs/`: CC-BY-4.0 (`../LICENSES/CC-BY-4.0.txt`).
+- Code in `src/`, the `Makefile` and the prompts in `src/prompts/`: Apache-2.0 (`../LICENSE`). Each code file and each prompt text file has the line `SPDX-License-Identifier: Apache-2.0`. A JSON template has no such line, because JSON has no comment lines; the `NOTICE` table applies to it.
+- This text, `SOURCES.md`, the technical report, `numbers.json`, `numbers.md` and `docs/`: CC-BY-4.0 (`../LICENSES/CC-BY-4.0.txt`).
 - `samples/`: data of OpenParlData under CC BY 4.0, and texts of the documents. See `samples/NOTICE.md`.
-- Copyright 2026 Jonathan Kovatsch. The full table and the attributions are in `../NOTICE`.
+- `app/`: code under Apache-2.0; texts and derived data files (stored states, head weights, calibration files) under CC-BY-4.0, "Source: OpenParlData.ch". `app/layout/quellen/` has copies of 2 files of the eCH-0295 working draft; their licence is not clear. `../NOTICE` gives the rows.
+- The full table and the attributions are in `../NOTICE`.
 - Hack Apertus terms, chapter 6: https://hackapertus.ch/terms-and-conditions
 
 ## Text of the template
@@ -281,8 +375,9 @@ The text below is the text of the file `track_2a/README.md` of the Hack Apertus 
 > ## Contact
 > 💬 In case you have questions, join the conversation on Discord or send an email to “hello@hackapertus.ch”
 
+
 ## About this text
 
 - Language: English, to the rules of ASD-STE100 (Issue 9).
-- Authoring: AI agents (Claude Opus 5.5) wrote this text for the author on 12.10.2026, from the records and the code of the private project. The private project is the project folder of the author. It is not public.
+- AI agents (Claude Opus 5.5) wrote this text on 14.10.2026, from the records of the private project. An AI agent changed the chapter "Run it" in the afternoon of the same day. The private project is the project folder of the author. It is not public.
 - No human examined this version of the text.

@@ -1,0 +1,22 @@
+{
+ "schema": "parlpdfech-job/1",
+ "job_id": "0b7c1c0e-5a3f-4d0e-9b1a-2f6c8f1d7e42",
+ "state": "done",
+ "input": {"kind": "sample", "doc_id": "26171", "file_name": null, "bytes": null, "pdf_sha256": "f2e5fe4ae6747a886d93bc753795611117fe11b4d23f4ae30d53866fcedb1493"},
+ "mode": "auto",
+ "stages": [
+  {"id": "read_pdf", "state": "done", "origin": "stored", "seconds": 0.004, "counts": {"pages": 1}, "reason": null},
+  {"id": "lines", "state": "done", "origin": "stored", "seconds": 0.003, "counts": {"lines": 36, "blocks": 13}, "reason": null},
+  {"id": "rules", "state": "done", "origin": "stored", "seconds": 0.002, "counts": {"blocks": 13}, "reason": null},
+  {"id": "apertus", "state": "done", "origin": "stored", "seconds": 0.007, "counts": {"labels": 14}, "reason": null},
+  {"id": "write", "state": "done", "origin": "new", "seconds": 0.391, "counts": {"labels": 33, "triples": 2577}, "reason": null},
+  {"id": "check", "state": "done", "origin": "new", "seconds": 0.566, "counts": {"passed": 9, "total": 10, "skipped": 1}, "reason": null}
+ ],
+ "elapsed_seconds": 2.9,
+ "record_id": "s-26171",
+ "valid": true,
+ "apertus": "stored",
+ "error": null,
+ "events": "/api/jobs/0b7c1c0e-5a3f-4d0e-9b1a-2f6c8f1d7e42/events",
+ "status": "/api/jobs/0b7c1c0e-5a3f-4d0e-9b1a-2f6c8f1d7e42"
+}

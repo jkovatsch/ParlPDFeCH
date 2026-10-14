@@ -1,0 +1,672 @@
+{
+ "doc_id": "879163",
+ "quelle": "daten/pdf/lehrer_stichprobe/879163.pdf",
+ "sha256": "7b160c11fcf55c0b70d14c5287589c1bbf7e4e7da9d2e791ba715f667f4ba5d5",
+ "erzeugt_utc": "2026-10-05T12:36:28Z",
+ "skript": "src/m03_docling_zerlegen.py",
+ "lauf": "iso_gruppen",
+ "werkzeug": {
+  "docling": "2.133.0",
+  "docling-core": "2.99.0",
+  "docling-parse": "7.22.1",
+  "docling-ibm-models": "4.0.3",
+  "torch": "2.14.1",
+  "ocrmac": "1.0.1",
+  "pdftotext": "pdftotext version 26.04.0"
+ },
+ "konfiguration": {
+  "ocr": "auto",
+  "ocr_engine": "ocrmac (Apple Vision, accurate)",
+  "ocr_sprachen": [
+   "de-DE",
+   "fr-FR",
+   "it-IT",
+   "en-US"
+  ],
+  "geraet": "auto",
+  "threads": 4,
+  "tabellen": "genau",
+  "zellabgleich": true,
+  "backend": "docling-parse",
+  "layout_modell": "layout_heron",
+  "document_timeout_s": 900
+ },
+ "koordinaten": "PDF-Punkte, Ursprung oben links, bbox = [links, oben, rechts, unten]",
+ "gesamttext_trenner": "\n\n",
+ "status": "success",
+ "backend": "docling-parse",
+ "einfarbige_seiten_standard_backend": [],
+ "fehler": [],
+ "laufzeit_s": 1.057,
+ "seiten": [
+  {
+   "seite": 1,
+   "breite": 595.0,
+   "hoehe": 842.0,
+   "zellen": 47,
+   "ocr_zellen": 47,
+   "textquelle": "ocr"
+  }
+ ],
+ "bloecke": [
+  {
+   "id": "B1",
+   "docling_ref": "#/pictures/0",
+   "label": "picture",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "text_quelle": "docling",
+   "text": "",
+   "seite": 1,
+   "bbox": [
+    43.21,
+    22.96,
+    203.57,
+    82.45
+   ],
+   "ocr_anteil": 1.0,
+   "ocr_konfidenz": 1.0,
+   "zeichen": [
+    0,
+    0
+   ]
+  },
+  {
+   "id": "B2",
+   "docling_ref": "#/texts/0",
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": {
+    "ref": "#/pictures/0",
+    "label": "picture",
+    "gruppe": false
+   },
+   "text_quelle": "zeilen",
+   "text": "COMMUNE DE",
+   "seite": 1,
+   "bbox": [
+    101.33,
+    30.0,
+    202.67,
+    40.67
+   ],
+   "ocr_anteil": 1.0,
+   "ocr_konfidenz": 1.0,
+   "zeichen": [
+    0,
+    10
+   ]
+  },
+  {
+   "id": "B3",
+   "docling_ref": "#/texts/1",
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": {
+    "ref": "#/pictures/0",
+    "label": "picture",
+    "gruppe": false
+   },
+   "text_quelle": "zeilen",
+   "text": "VAL DE BAGNES",
+   "seite": 1,
+   "bbox": [
+    101.33,
+    42.67,
+    202.67,
+    54.67
+   ],
+   "ocr_anteil": 1.0,
+   "ocr_konfidenz": 1.0,
+   "zeichen": [
+    12,
+    25
+   ]
+  },
+  {
+   "id": "B4",
+   "docling_ref": "#/texts/2",
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "text_quelle": "zeilen",
+   "text_docling": "Autorités communales Conseil municipal",
+   "text": "Autorités communales\nConseil municipal",
+   "seite": 1,
+   "bbox": [
+    102.0,
+    95.33,
+    188.67,
+    115.33
+   ],
+   "ocr_anteil": 1.0,
+   "ocr_konfidenz": 1.0,
+   "zeichen": [
+    27,
+    65
+   ]
+  },
+  {
+   "id": "B5",
+   "docling_ref": "#/texts/3",
+   "label": "section_header",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "text_quelle": "zeilen",
+   "text": "PREAVIS DU CONSEIL MUNICIPAL SUR LE POSTULAT",
+   "seite": 1,
+   "bbox": [
+    220.92,
+    146.33,
+    536.01,
+    156.33
+   ],
+   "ocr_anteil": 1.0,
+   "ocr_konfidenz": 1.0,
+   "zeichen": [
+    67,
+    111
+   ]
+  },
+  {
+   "id": "B6",
+   "docling_ref": "#/texts/4",
+   "label": "section_header",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "text_quelle": "zeilen",
+   "text": "de Mme Tristan et Mme Heinis du 30.03.2023",
+   "seite": 1,
+   "bbox": [
+    282.15,
+    168.37,
+    535.39,
+    180.62
+   ],
+   "ocr_anteil": 1.0,
+   "ocr_konfidenz": 1.0,
+   "zeichen": [
+    113,
+    155
+   ]
+  },
+  {
+   "id": "B7",
+   "docling_ref": "#/texts/5",
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "text_quelle": "zeilen",
+   "text": "intitulé « Fonds d'aide au maintien des petits commerces et cafés du villages»",
+   "seite": 1,
+   "bbox": [
+    119.66,
+    189.0,
+    535.34,
+    201.0
+   ],
+   "ocr_anteil": 1.0,
+   "ocr_konfidenz": 1.0,
+   "zeichen": [
+    157,
+    235
+   ]
+  },
+  {
+   "id": "B8",
+   "docling_ref": "#/texts/6",
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "text_quelle": "zeilen",
+   "text_docling": "En séance du 18 avril, le Conseil municipal a pris connaissance du postulat déposé auprès du bureau par Mme Tristan et Mme. Heinis concernant la constitution d'un fonds d'aide au maintien des petits commerces et cafés dans les villages.",
+   "text": "En séance du 18 avril, le Conseil municipal a pris connaissance du postulat déposé auprès\ndu bureau par Mme Tristan et Mme. Heinis concernant la constitution d'un fonds d'aide au\nmaintien des petits commerces et cafés dans les villages.",
+   "seite": 1,
+   "bbox": [
+    101.33,
+    234.0,
+    537.33,
+    272.0
+   ],
+   "ocr_anteil": 1.0,
+   "ocr_konfidenz": 1.0,
+   "zeichen": [
+    237,
+    473
+   ]
+  },
+  {
+   "id": "B9",
+   "docling_ref": "#/texts/7",
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "text_quelle": "zeilen",
+   "text_docling": "Le Conseil a demandé à la commission « Finances et gestion » de préaviser le dossier pour s'assurer de la faisabilité juridique, financière et opérationnelle des démarches proposées. En amont de l'entrée en matière, le Conseil municipal porte à la connaissance des membres du Conseil général",
+   "text": "Le Conseil a demandé à la commission « Finances et gestion » de préaviser le dossier\npour s'assurer de la faisabilité juridique, financière et opérationnelle des démarches\nproposées. En amont de l'entrée en matière, le Conseil municipal porte à la connaissance\ndes membres du Conseil général",
+   "seite": 1,
+   "bbox": [
+    101.27,
+    284.09,
+    538.06,
+    337.33
+   ],
+   "ocr_anteil": 1.0,
+   "ocr_konfidenz": 1.0,
+   "zeichen": [
+    475,
+    766
+   ]
+  },
+  {
+   "id": "B10",
+   "docling_ref": "#/texts/8",
+   "label": "section_header",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "text_quelle": "zeilen",
+   "text": "Commerces de proximité",
+   "seite": 1,
+   "bbox": [
+    101.33,
+    352.0,
+    233.33,
+    363.33
+   ],
+   "ocr_anteil": 1.0,
+   "ocr_konfidenz": 1.0,
+   "zeichen": [
+    768,
+    790
+   ]
+  },
+  {
+   "id": "B11",
+   "docling_ref": "#/texts/9",
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "text_quelle": "zeilen",
+   "text_docling": "L'importance du maintien des commerces de proximité dans les villages de montagne ne relève d'aucune contestation. Les magasins sont des lieux d'échanges de produits et surtout d'échanges humains indéniables. Ils jouent ainsi un rôle social avéré.",
+   "text": "L'importance du maintien des commerces de proximité dans les villages de montagne ne\nrelève d'aucune contestation. Les magasins sont des lieux d'échanges de produits et\nsurtout d'échanges humains indéniables. Ils jouent ainsi un rôle social avéré.",
+   "seite": 1,
+   "bbox": [
+    100.67,
+    363.28,
+    538.67,
+    402.67
+   ],
+   "ocr_anteil": 1.0,
+   "ocr_konfidenz": 1.0,
+   "zeichen": [
+    792,
+    1039
+   ]
+  },
+  {
+   "id": "B12",
+   "docling_ref": "#/texts/10",
+   "label": "section_header",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "text_quelle": "zeilen",
+   "text": "Bases légales",
+   "seite": 1,
+   "bbox": [
+    101.33,
+    417.33,
+    174.67,
+    428.67
+   ],
+   "ocr_anteil": 1.0,
+   "ocr_konfidenz": 1.0,
+   "zeichen": [
+    1041,
+    1054
+   ]
+  },
+  {
+   "id": "B13",
+   "docling_ref": "#/texts/11",
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "text_quelle": "zeilen",
+   "text_docling": "Ces dernières années, la Commune a été approchée à quelques reprises pour des demandes de soutiens financiers. Malheureusement, sans bases légales, il n'est pas possible d'octroyer des aides qui les justifieraient. L'interrogation réside dans les limites du champ d'application de ces aides. Aussi, pourquoi tels secteurs privés devraient être soutenus par la Commune et pas d'autres ?",
+   "text": "Ces dernières années, la Commune a été approchée à quelques reprises pour des\ndemandes de soutiens financiers. Malheureusement, sans bases légales, il n'est pas\npossible d'octroyer des aides qui les justifieraient. L'interrogation réside dans les limites du\nchamp d'application de ces aides. Aussi, pourquoi tels secteurs privés devraient être\nsoutenus par la Commune et pas d'autres ?",
+   "seite": 1,
+   "bbox": [
+    100.63,
+    430.0,
+    537.33,
+    494.0
+   ],
+   "ocr_anteil": 1.0,
+   "ocr_konfidenz": 1.0,
+   "zeichen": [
+    1056,
+    1441
+   ]
+  },
+  {
+   "id": "B14",
+   "docling_ref": "#/texts/12",
+   "label": "section_header",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "text_quelle": "zeilen",
+   "text": "Prochaines étapes",
+   "seite": 1,
+   "bbox": [
+    101.33,
+    508.0,
+    199.33,
+    520.0
+   ],
+   "ocr_anteil": 1.0,
+   "ocr_konfidenz": 1.0,
+   "zeichen": [
+    1443,
+    1460
+   ]
+  },
+  {
+   "id": "B15",
+   "docling_ref": "#/texts/13",
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "text_quelle": "zeilen",
+   "text_docling": "La création d'un fonds nécessiterait donc un nouveau règlement. Avant d'en arriver là, et pour respecter la volonté des dépositaires du postulat - s'il est accepté par le Conseil général - l'Administration devrait mandater un bureau pour l'accompagner dans la réflexion avec l'appui du nouveau délégué à la promotion économique. L'étude qui résulterait du postulat permettrait de se doter d'un éventuel règlement.",
+   "text": "La création d'un fonds nécessiterait donc un nouveau règlement. Avant d'en arriver là, et\npour respecter la volonté des dépositaires du postulat - s'il est accepté par le Conseil\ngénéral - l'Administration devrait mandater un bureau pour l'accompagner dans la réflexion\navec l'appui du nouveau délégué à la promotion économique. L'étude qui résulterait du\npostulat permettrait de se doter d'un éventuel règlement.",
+   "seite": 1,
+   "bbox": [
+    101.3,
+    520.67,
+    538.0,
+    585.33
+   ],
+   "ocr_anteil": 1.0,
+   "ocr_konfidenz": 1.0,
+   "zeichen": [
+    1462,
+    1875
+   ]
+  },
+  {
+   "id": "B16",
+   "docling_ref": "#/texts/14",
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "text_quelle": "zeilen",
+   "text_docling": "Saluant la démarche proposée, le Conseil municipal préavise favorablement ce postulat et recommande aux membres du Conseil général de l'approuver.",
+   "text": "Saluant la démarche proposée, le Conseil municipal préavise favorablement ce postulat et\nrecommande aux membres du Conseil général de l'approuver.",
+   "seite": 1,
+   "bbox": [
+    100.67,
+    599.33,
+    537.33,
+    624.67
+   ],
+   "ocr_anteil": 1.0,
+   "ocr_konfidenz": 1.0,
+   "zeichen": [
+    1877,
+    2023
+   ]
+  },
+  {
+   "id": "B17",
+   "docling_ref": "#/texts/15",
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "text_quelle": "zeilen",
+   "text": "Approuvé en séance du Conseil municipal du 20 juin 2023",
+   "seite": 1,
+   "bbox": [
+    100.67,
+    640.67,
+    385.33,
+    652.0
+   ],
+   "ocr_anteil": 1.0,
+   "ocr_konfidenz": 1.0,
+   "zeichen": [
+    2025,
+    2080
+   ]
+  },
+  {
+   "id": "B18",
+   "docling_ref": "#/texts/16",
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": {
+    "ref": "#/groups/0",
+    "label": "key_value_area",
+    "gruppe": true
+   },
+   "text_quelle": "zeilen",
+   "text": "Pour le Conseil municipal",
+   "seite": 1,
+   "bbox": [
+    101.32,
+    684.33,
+    237.19,
+    695.67
+   ],
+   "ocr_anteil": 1.0,
+   "ocr_konfidenz": 1.0,
+   "zeichen": [
+    2082,
+    2107
+   ]
+  },
+  {
+   "id": "B19",
+   "docling_ref": "#/pictures/1",
+   "label": "picture",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": {
+    "ref": "#/groups/0",
+    "label": "key_value_area",
+    "gruppe": true
+   },
+   "text_quelle": "docling",
+   "text": "",
+   "seite": 1,
+   "bbox": [
+    162.56,
+    691.3,
+    246.17,
+    752.34
+   ],
+   "ocr_anteil": null,
+   "ocr_konfidenz": null,
+   "zeichen": [
+    2107,
+    2107
+   ]
+  },
+  {
+   "id": "B20",
+   "docling_ref": "#/texts/17",
+   "label": "caption",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": {
+    "ref": "#/pictures/1",
+    "label": "picture",
+    "gruppe": false
+   },
+   "text_quelle": "zeilen",
+   "text_docling": "Christophe Maret Président",
+   "text": "Christophe Maret\nPrésident",
+   "seite": 1,
+   "bbox": [
+    101.29,
+    727.67,
+    189.23,
+    752.47
+   ],
+   "ocr_anteil": 1.0,
+   "ocr_konfidenz": 1.0,
+   "zeichen": [
+    2109,
+    2135
+   ]
+  },
+  {
+   "id": "B21",
+   "docling_ref": "#/pictures/2",
+   "label": "picture",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": {
+    "ref": "#/groups/0",
+    "label": "key_value_area",
+    "gruppe": true
+   },
+   "text_quelle": "docling",
+   "text": "",
+   "seite": 1,
+   "bbox": [
+    328.43,
+    687.91,
+    408.19,
+    723.13
+   ],
+   "ocr_anteil": null,
+   "ocr_konfidenz": null,
+   "zeichen": [
+    2135,
+    2135
+   ]
+  },
+  {
+   "id": "B22",
+   "docling_ref": "#/texts/18",
+   "label": "caption",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": {
+    "ref": "#/pictures/2",
+    "label": "picture",
+    "gruppe": false
+   },
+   "text_quelle": "zeilen",
+   "text_docling": "Pierre-Martin Moulin Secrétaire général",
+   "text": "Pierre-Martin Moulin\nSecrétaire général",
+   "seite": 1,
+   "bbox": [
+    313.11,
+    728.33,
+    413.01,
+    754.33
+   ],
+   "ocr_anteil": 1.0,
+   "ocr_konfidenz": 1.0,
+   "zeichen": [
+    2137,
+    2176
+   ]
+  },
+  {
+   "id": "B23",
+   "docling_ref": "#/texts/19",
+   "label": "caption",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "text_quelle": "zeilen",
+   "text_docling": "Autorités communales - Conseil municipal Route de Clouchèvre 44, 1934 Le Châble VS Tel. 027 777 11 00 - etat-major@valdebagnes.ch",
+   "text": "Autorités communales - Conseil municipal\nRoute de Clouchèvre 44, 1934 Le Châble VS\nTel. 027 777 11 00 - etat-major@valdebagnes.ch",
+   "seite": 1,
+   "bbox": [
+    99.99,
+    782.75,
+    277.15,
+    810.33
+   ],
+   "ocr_anteil": 1.0,
+   "ocr_konfidenz": 0.833,
+   "zeichen": [
+    2178,
+    2307
+   ]
+  },
+  {
+   "id": "B24",
+   "docling_ref": "#/texts/20",
+   "label": "page_footer",
+   "schicht": "furniture",
+   "kopf_fuss": "fuss",
+   "eltern": null,
+   "text_quelle": "zeilen",
+   "text": "www.valdebagnes.ch",
+   "seite": 1,
+   "bbox": [
+    453.3,
+    801.89,
+    535.03,
+    811.11
+   ],
+   "ocr_anteil": 1.0,
+   "ocr_konfidenz": 1.0,
+   "zeichen": [
+    2309,
+    2327
+   ]
+  }
+ ],
+ "text_gesamt": "COMMUNE DE\n\nVAL DE BAGNES\n\nAutorités communales\nConseil municipal\n\nPREAVIS DU CONSEIL MUNICIPAL SUR LE POSTULAT\n\nde Mme Tristan et Mme Heinis du 30.03.2023\n\nintitulé « Fonds d'aide au maintien des petits commerces et cafés du villages»\n\nEn séance du 18 avril, le Conseil municipal a pris connaissance du postulat déposé auprès\ndu bureau par Mme Tristan et Mme. Heinis concernant la constitution d'un fonds d'aide au\nmaintien des petits commerces et cafés dans les villages.\n\nLe Conseil a demandé à la commission « Finances et gestion » de préaviser le dossier\npour s'assurer de la faisabilité juridique, financière et opérationnelle des démarches\nproposées. En amont de l'entrée en matière, le Conseil municipal porte à la connaissance\ndes membres du Conseil général\n\nCommerces de proximité\n\nL'importance du maintien des commerces de proximité dans les villages de montagne ne\nrelève d'aucune contestation. Les magasins sont des lieux d'échanges de produits et\nsurtout d'échanges humains indéniables. Ils jouent ainsi un rôle social avéré.\n\nBases légales\n\nCes dernières années, la Commune a été approchée à quelques reprises pour des\ndemandes de soutiens financiers. Malheureusement, sans bases légales, il n'est pas\npossible d'octroyer des aides qui les justifieraient. L'interrogation réside dans les limites du\nchamp d'application de ces aides. Aussi, pourquoi tels secteurs privés devraient être\nsoutenus par la Commune et pas d'autres ?\n\nProchaines étapes\n\nLa création d'un fonds nécessiterait donc un nouveau règlement. Avant d'en arriver là, et\npour respecter la volonté des dépositaires du postulat - s'il est accepté par le Conseil\ngénéral - l'Administration devrait mandater un bureau pour l'accompagner dans la réflexion\navec l'appui du nouveau délégué à la promotion économique. L'étude qui résulterait du\npostulat permettrait de se doter d'un éventuel règlement.\n\nSaluant la démarche proposée, le Conseil municipal préavise favorablement ce postulat et\nrecommande aux membres du Conseil général de l'approuver.\n\nApprouvé en séance du Conseil municipal du 20 juin 2023\n\nPour le Conseil municipal\n\nChristophe Maret\nPrésident\n\nPierre-Martin Moulin\nSecrétaire général\n\nAutorités communales - Conseil municipal\nRoute de Clouchèvre 44, 1934 Le Châble VS\nTel. 027 777 11 00 - etat-major@valdebagnes.ch\n\nwww.valdebagnes.ch",
+ "pruefung": {
+  "pdftotext_woerter": 367,
+  "bloecke_woerter": 369,
+  "wiedergefunden": 363,
+  "anteil_pdftotext_in_bloecken": 0.9891,
+  "davon_ueber_silbentrennung": 0,
+  "anteil_bloecke_in_pdftotext": 0.9837,
+  "wortfolge_aehnlichkeit": 0.9837,
+  "anteil_5gramme_pdftotext_in_bloecken": 0.9207,
+  "fehlend_haeufigste": [
+   [
+    "18avril",
+    1
+   ],
+   [
+    "rnnicipal",
+    1
+   ],
+   [
+    "tél",
+    1
+   ],
+   [
+    "majorvaldebagnes",
+    1
+   ]
+  ]
+ }
+}

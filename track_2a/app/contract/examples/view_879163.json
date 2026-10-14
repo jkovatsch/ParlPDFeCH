@@ -1,0 +1,5219 @@
+{
+ "schema": "parlpdfech-site-view/3",
+ "record_id": "s-879163",
+ "doc_id": "879163",
+ "run": {
+  "origin": "stored",
+  "mode": "auto",
+  "converter_mode": "cascade",
+  "apertus": "stored",
+  "profile": "native",
+  "status": "EXCEPTION, NOT RELEASED",
+  "record_status": "EXCEPTION (process rule 10); NOT RELEASED",
+  "human_checked": false,
+  "in_sample": true,
+  "valid": true,
+  "generated_at": "2026-10-13T19:26:12Z",
+  "seconds": {
+   "read_pdf": 0,
+   "lines": 0,
+   "rules": 0.03,
+   "apertus": 0.153,
+   "write": 2.686,
+   "check": 0.839,
+   "total": 3.742
+  },
+  "candidate": "B1-S (addendum D)",
+  "model": "apertus-v1.5-8b-text-bf16:c10cd28db5bd3adf6043a5047a1435dedc5c3e55c45d5abc2ca82baf2a7786c3"
+ },
+ "notices": [
+  {
+   "code": "proposal",
+   "params": {}
+  },
+  {
+   "code": "no_human_check",
+   "params": {}
+  },
+  {
+   "code": "in_sample_heads",
+   "params": {}
+  },
+  {
+   "code": "stored_apertus",
+   "params": {}
+  },
+  {
+   "code": "values_from_pdf",
+   "params": {}
+  },
+  {
+   "code": "values_measured",
+   "params": {}
+  },
+  {
+   "code": "cascade_selection",
+   "params": {}
+  },
+  {
+   "code": "recorded_gaps",
+   "params": {
+    "n": 1
+   }
+  },
+  {
+   "code": "shacl_not_run",
+   "params": {}
+  }
+ ],
+ "head_values": {
+  "source": "pdf",
+  "state": "pdf",
+  "cross_check": true,
+  "probabilities_measured": true,
+  "document_kind": "response",
+  "cascade": {
+   "version": "m11-cascade-2",
+   "reader": "m11-values-cascade-4",
+   "kind": "response",
+   "kind_from": "rule_chain",
+   "kind_rule": "R2",
+   "rule_chain_id": "A2",
+   "kind_facts": null,
+   "affair_type": "postulate",
+   "steps": [
+    {
+     "step": "submission",
+     "applies": true,
+     "rules": [
+      "R19",
+      "R25"
+     ]
+    },
+    {
+     "step": "response",
+     "applies": true,
+     "rules": [
+      "R19",
+      "R25"
+     ]
+    }
+   ],
+   "entries": [
+    {
+     "field": "affair_type",
+     "slot": "Affair.affair_type",
+     "group": "affair",
+     "state": "read_from_pdf",
+     "searched": true,
+     "rules": [
+      "R3",
+      "R4",
+      "R5",
+      "R6"
+     ],
+     "reason": "value_read",
+     "label_id": "pdf-affair_type"
+    },
+    {
+     "field": "title",
+     "slot": "Affair.title",
+     "group": "affair",
+     "state": "read_from_pdf",
+     "searched": true,
+     "rules": [
+      "R43"
+     ],
+     "reason": "value_read",
+     "label_id": "pdf-title"
+    },
+    {
+     "field": "affair_number",
+     "slot": "Affair.affair_number",
+     "group": "affair",
+     "state": "not_found_in_pdf",
+     "searched": true,
+     "rules": [
+      "R26",
+      "R6"
+     ],
+     "reason": "no_candidate",
+     "label_id": null
+    },
+    {
+     "field": "submission_date",
+     "slot": "Submission.submission_date",
+     "group": "submission",
+     "state": "not_found_in_pdf",
+     "searched": true,
+     "rules": [
+      "R19",
+      "R25",
+      "R39"
+     ],
+     "reason": "no_candidate",
+     "label_id": null
+    },
+    {
+     "field": "sponsor",
+     "slot": "Submission.sponsorship",
+     "group": "submission",
+     "state": "read_from_pdf",
+     "searched": true,
+     "rules": [
+      "R19",
+      "R25",
+      "R30",
+      "R38"
+     ],
+     "reason": "value_read",
+     "label_id": "pdf-sponsor"
+    },
+    {
+     "field": "response_date",
+     "slot": "ResponseStep.date_end_actual",
+     "group": "response",
+     "state": "not_found_in_pdf",
+     "searched": true,
+     "rules": [
+      "R19",
+      "R25",
+      "R31",
+      "R32"
+     ],
+     "reason": "no_candidate",
+     "label_id": null
+    },
+    {
+     "field": "responder",
+     "slot": "ResponseStep.responder",
+     "group": "response",
+     "state": "read_from_pdf",
+     "searched": true,
+     "rules": [
+      "R19",
+      "R25",
+      "R31"
+     ],
+     "reason": "value_read",
+     "label_id": "pdf-responder"
+    }
+   ],
+   "texts": [
+    {
+     "step": "submission",
+     "slot": "Submission.texts",
+     "applies": false,
+     "cut": true,
+     "rules": [
+      "R30",
+      "R43"
+     ],
+     "blocks": 0,
+     "not_written": 0
+    },
+    {
+     "step": "response",
+     "slot": "ResponseStep.texts",
+     "applies": true,
+     "cut": false,
+     "rules": [
+      "R19",
+      "R25",
+      "R43"
+     ],
+     "blocks": 2,
+     "not_written": 0
+    }
+   ],
+   "text_blocks_not_written": 0,
+   "register_only": 16
+  },
+  "floor": {
+   "threshold": 0.5,
+   "not_written": []
+  },
+  "addressee_candidates": [],
+  "response_signs": null,
+  "i95_gaps": [
+   "affair_number"
+  ],
+  "fields_not_read": [],
+  "counts": {
+   "fields": 7,
+   "read_from_pdf": 4,
+   "not_found_in_pdf": 3,
+   "not_in_this_document_type": 0,
+   "weak_candidates": 0,
+   "addressee_candidates": 0,
+   "certain": 1,
+   "unsure": 3,
+   "export_check": {
+    "equal_to_export": 2,
+    "differs_from_export": 0,
+    "no_export_value": 1,
+    "not_compared": 1
+   }
+  },
+  "slot_counts": {
+   "read_from_pdf": 7,
+   "not_found_in_pdf": 24,
+   "not_in_this_document_type": 5,
+   "register_only": 16
+  }
+ },
+ "values": [
+  {
+   "field": "affair_type",
+   "slot": "Affair.affair_type",
+   "name_key": "value.affair_type",
+   "written": true,
+   "candidate": null,
+   "value_printed": "POSTULAT",
+   "value": "postulate",
+   "value_form": "list_value",
+   "differs_from_printed": true,
+   "comparison_value": "postulate",
+   "probability": 0.6333,
+   "value_status": "unsure",
+   "measured": true,
+   "tier_probability": 0.633333,
+   "probability_source": "all_folds",
+   "in_sample": true,
+   "tier": "type_head_inline_gov",
+   "rule_id": "m11_values_type_number.read_affair_type",
+   "normalisation_rule": "type_word_to_list_value",
+   "page": 1,
+   "last_page": 1,
+   "char_start": 103,
+   "char_end": 111,
+   "block_id": "B5",
+   "atom_ids": [
+    "B5.1"
+   ],
+   "spans": [
+    {
+     "atom_id": "B5.1",
+     "start": 36,
+     "end": 44
+    }
+   ],
+   "export_check": "equal_to_export",
+   "export_value": "postulate",
+   "export_match": "exact",
+   "label_id": "pdf-affair_type",
+   "calibration_id": "value.affair_type.type_head_inline_gov",
+   "instance_path": "affairs[0].affair_type"
+  },
+  {
+   "field": "title",
+   "slot": "Affair.title",
+   "name_key": "value.title",
+   "written": true,
+   "candidate": null,
+   "value_printed": "Fonds d'aide au maintien des petits commerces et cafés du villages",
+   "value": "Fonds d'aide au maintien des petits commerces et cafés du villages",
+   "value_form": "printed",
+   "differs_from_printed": false,
+   "comparison_value": "Fonds d'aide au maintien des petits commerces et cafés du villages",
+   "probability": 0.6333,
+   "value_status": "unsure",
+   "measured": true,
+   "tier_probability": 0.633333,
+   "probability_source": "all_folds",
+   "in_sample": true,
+   "tier": "after_kind_cue",
+   "rule_id": "m11_values_title.read_title",
+   "normalisation_rule": "norm_text_one_line",
+   "page": 1,
+   "last_page": 1,
+   "char_start": 168,
+   "char_end": 234,
+   "block_id": "B7",
+   "atom_ids": [
+    "B7.1"
+   ],
+   "spans": [
+    {
+     "atom_id": "B7.1",
+     "start": 11,
+     "end": 77
+    }
+   ],
+   "export_check": "equal_to_export",
+   "export_value": "Fonds d'aide au maintien des petits commerces et cafés dans les villages",
+   "export_match": "after_normalisation",
+   "label_id": "pdf-title",
+   "calibration_id": "value.title.after_kind_cue",
+   "instance_path": "affairs[0].title[0].text"
+  },
+  {
+   "field": "sponsor",
+   "slot": "Submission.sponsorship",
+   "name_key": "value.sponsor",
+   "written": true,
+   "candidate": null,
+   "value_printed": "Tristan",
+   "value": "Tristan",
+   "value_form": "printed",
+   "differs_from_printed": false,
+   "comparison_value": "tristan",
+   "probability": 0.95,
+   "value_status": "unsure",
+   "measured": true,
+   "tier_probability": 0.95,
+   "probability_source": "all_folds",
+   "in_sample": false,
+   "tier": "response_head_prep_name",
+   "rule_id": "m11_values_sponsor.read_sponsor",
+   "normalisation_rule": "printed_wording_one_line",
+   "page": 1,
+   "last_page": 1,
+   "char_start": 120,
+   "char_end": 127,
+   "block_id": "B6",
+   "atom_ids": [
+    "B6.1"
+   ],
+   "spans": [
+    {
+     "atom_id": "B6.1",
+     "start": 7,
+     "end": 14
+    }
+   ],
+   "export_check": "not_compared",
+   "export_value": null,
+   "export_match": null,
+   "label_id": "pdf-sponsor",
+   "calibration_id": "value.first_author.response_head_prep_name",
+   "instance_path": "affairs[0].submission.sponsorship[0].actor.name[0].text"
+  },
+  {
+   "field": "responder",
+   "slot": "ResponseStep.responder",
+   "name_key": "value.responder",
+   "written": true,
+   "candidate": null,
+   "value_printed": "Conseil municipal",
+   "value": "Conseil municipal",
+   "value_form": "printed",
+   "differs_from_printed": false,
+   "comparison_value": "Conseil municipal",
+   "probability": 0.9912,
+   "value_status": "certain",
+   "measured": true,
+   "tier_probability": 0.991228,
+   "probability_source": "all_folds",
+   "in_sample": false,
+   "tier": "rsp_signature",
+   "rule_id": "m11_values_dates_responder.read_responder",
+   "normalisation_rule": "printed_wording_one_line",
+   "page": 1,
+   "last_page": 1,
+   "char_start": 2090,
+   "char_end": 2107,
+   "block_id": "B18",
+   "atom_ids": [
+    "B18.1"
+   ],
+   "spans": [
+    {
+     "atom_id": "B18.1",
+     "start": 8,
+     "end": 25
+    }
+   ],
+   "export_check": "no_export_value",
+   "export_value": null,
+   "export_match": null,
+   "label_id": "pdf-responder",
+   "calibration_id": "value.responder_name.rsp_signature",
+   "instance_path": "affairs[0].response_steps[0].responder.name[0].text"
+  }
+ ],
+ "slots": [
+  {
+   "slot": "Affair.affair_number",
+   "state": "not_found_in_pdf",
+   "reason": "no_candidate",
+   "field": "affair_number",
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": "affair_number",
+   "export_has_value": true,
+   "name_key": "pslot.Affair.affair_number"
+  },
+  {
+   "slot": "Affair.affair_type",
+   "state": "read_from_pdf",
+   "reason": "value_read",
+   "field": "affair_type",
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": "pdf-affair_type",
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.affair_type"
+  },
+  {
+   "slot": "Affair.title",
+   "state": "read_from_pdf",
+   "reason": "value_read",
+   "field": "title",
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": "pdf-title",
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.title"
+  },
+  {
+   "slot": "Affair.linked_affairs",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.linked_affairs"
+  },
+  {
+   "slot": "Affair.submission",
+   "state": "read_from_pdf",
+   "reason": "step_written",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.submission"
+  },
+  {
+   "slot": "Affair.submission_validation_steps",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.submission_validation_steps"
+  },
+  {
+   "slot": "Affair.assignment_steps",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.assignment_steps"
+  },
+  {
+   "slot": "Affair.response_steps",
+   "state": "read_from_pdf",
+   "reason": "step_written",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.response_steps"
+  },
+  {
+   "slot": "Affair.committee_deliberation_steps",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.committee_deliberation_steps"
+  },
+  {
+   "slot": "Affair.plenary_debates",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.plenary_debates"
+  },
+  {
+   "slot": "Affair.lifecycle_flags",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.lifecycle_flags"
+  },
+  {
+   "slot": "Affair.current_state",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.current_state"
+  },
+  {
+   "slot": "Affair.procedure_states",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.procedure_states"
+  },
+  {
+   "slot": "Affair.local_id",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.local_id"
+  },
+  {
+   "slot": "Affair.global_uri",
+   "state": "register_only",
+   "reason": "minted_iri",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.global_uri"
+  },
+  {
+   "slot": "Affair.wikidata_uri",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.wikidata_uri"
+  },
+  {
+   "slot": "Affair.date_created",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.date_created"
+  },
+  {
+   "slot": "Affair.datetime_created",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.datetime_created"
+  },
+  {
+   "slot": "Affair.date_modified",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.date_modified"
+  },
+  {
+   "slot": "Affair.datetime_modified",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.datetime_modified"
+  },
+  {
+   "slot": "Submission.submission_date",
+   "state": "not_found_in_pdf",
+   "reason": "no_candidate",
+   "field": "submission_date",
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": "submission_date",
+   "export_has_value": true,
+   "name_key": "pslot.Submission.submission_date"
+  },
+  {
+   "slot": "Submission.sponsorship",
+   "state": "read_from_pdf",
+   "reason": "value_read",
+   "field": "sponsor",
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": "pdf-sponsor",
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.sponsorship"
+  },
+  {
+   "slot": "Submission.texts",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": null,
+   "result": "not_searched",
+   "kind": "response",
+   "cascade_rules": [
+    "R30",
+    "R43"
+   ],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.texts"
+  },
+  {
+   "slot": "Submission.withdrawn_date",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.withdrawn_date"
+  },
+  {
+   "slot": "Submission.reasoning_in_council",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.reasoning_in_council"
+  },
+  {
+   "slot": "Submission.local_id",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.local_id"
+  },
+  {
+   "slot": "Submission.global_uri",
+   "state": "register_only",
+   "reason": "minted_iri",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.global_uri"
+  },
+  {
+   "slot": "Submission.wikidata_uri",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.wikidata_uri"
+  },
+  {
+   "slot": "Submission.date_begin_actual",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.date_begin_actual"
+  },
+  {
+   "slot": "Submission.datetime_begin_actual",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.datetime_begin_actual"
+  },
+  {
+   "slot": "Submission.date_begin_planned",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.date_begin_planned"
+  },
+  {
+   "slot": "Submission.datetime_begin_planned",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.datetime_begin_planned"
+  },
+  {
+   "slot": "Submission.date_end_actual",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.date_end_actual"
+  },
+  {
+   "slot": "Submission.datetime_end_actual",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.datetime_end_actual"
+  },
+  {
+   "slot": "Submission.date_end_planned",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.date_end_planned"
+  },
+  {
+   "slot": "Submission.datetime_end_planned",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.datetime_end_planned"
+  },
+  {
+   "slot": "Submission.remark",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.remark"
+  },
+  {
+   "slot": "ResponseStep.responder",
+   "state": "read_from_pdf",
+   "reason": "value_read",
+   "field": "responder",
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": "pdf-responder",
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.responder"
+  },
+  {
+   "slot": "ResponseStep.recommendation",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.recommendation"
+  },
+  {
+   "slot": "ResponseStep.texts",
+   "state": "read_from_pdf",
+   "reason": "text_blocks",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.texts"
+  },
+  {
+   "slot": "ResponseStep.local_id",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.local_id"
+  },
+  {
+   "slot": "ResponseStep.global_uri",
+   "state": "register_only",
+   "reason": "minted_iri",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.global_uri"
+  },
+  {
+   "slot": "ResponseStep.wikidata_uri",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.wikidata_uri"
+  },
+  {
+   "slot": "ResponseStep.date_begin_actual",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.date_begin_actual"
+  },
+  {
+   "slot": "ResponseStep.datetime_begin_actual",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.datetime_begin_actual"
+  },
+  {
+   "slot": "ResponseStep.date_begin_planned",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.date_begin_planned"
+  },
+  {
+   "slot": "ResponseStep.datetime_begin_planned",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.datetime_begin_planned"
+  },
+  {
+   "slot": "ResponseStep.date_end_actual",
+   "state": "not_found_in_pdf",
+   "reason": "no_candidate",
+   "field": "response_date",
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": "response_date",
+   "export_has_value": false,
+   "name_key": "pslot.ResponseStep.date_end_actual"
+  },
+  {
+   "slot": "ResponseStep.datetime_end_actual",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.datetime_end_actual"
+  },
+  {
+   "slot": "ResponseStep.date_end_planned",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.date_end_planned"
+  },
+  {
+   "slot": "ResponseStep.datetime_end_planned",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.datetime_end_planned"
+  },
+  {
+   "slot": "ResponseStep.remark",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.remark"
+  }
+ ],
+ "document": {
+  "source_iri": "https://api.openparldata.ch/v1/docs/879163",
+  "record_iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163",
+  "container_iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/i95",
+  "named_graphs": {
+   "ech-0295": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/ech-0295",
+   "provenance": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/provenance",
+   "atoms": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/atoms",
+   "labels": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/labels"
+  },
+  "pdf_sha256": "7b160c11fcf55c0b70d14c5287589c1bbf7e4e7da9d2e791ba715f667f4ba5d5",
+  "page_count": 1,
+  "language": "fr",
+  "parliament": "6037",
+  "parliament_name": "Val de Bagnes",
+  "title": "Fonds d'aide au maintien des petits commerces et cafés du villages",
+  "affair_number": null,
+  "affair_type": "postulate",
+  "has_export": true,
+  "conformance": "i95_with_recorded_gaps",
+  "head": [
+   {
+    "instance_path": "global_uri",
+    "ech_slot": "Container.global_uri",
+    "value": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/i95",
+    "derivation": "identifier_minted",
+    "origin": "identifier",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": "value-global_uri"
+   },
+   {
+    "instance_path": "affairs[0].global_uri",
+    "ech_slot": "Postulate.global_uri",
+    "value": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair",
+    "derivation": "identifier_minted",
+    "origin": "identifier",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": "value-affairs-0-global_uri"
+   },
+   {
+    "instance_path": "affairs[0].affair_type",
+    "ech_slot": "Postulate.affair_type",
+    "value": "postulate",
+    "derivation": "extracted_from_pdf_by_rule",
+    "origin": "pdf_rule",
+    "pdf_consistency": "confirmed",
+    "mapping_match": "exact",
+    "atom_ids": [
+     "B5.1"
+    ],
+    "label_id": "pdf-affair_type"
+   },
+   {
+    "instance_path": "affairs[0].title[0].text",
+    "ech_slot": "Postulate.title.text",
+    "value": "Fonds d'aide au maintien des petits commerces et cafés du villages",
+    "derivation": "extracted_from_pdf_by_rule",
+    "origin": "pdf_rule",
+    "pdf_consistency": "confirmed",
+    "mapping_match": "not_applicable",
+    "atom_ids": [
+     "B7.1"
+    ],
+    "label_id": "pdf-title"
+   },
+   {
+    "instance_path": "affairs[0].title[0].text_language",
+    "ech_slot": "Postulate.title.text_language",
+    "value": "fr",
+    "derivation": "detected_by_rule",
+    "origin": "code_rule",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": null
+   },
+   {
+    "instance_path": "affairs[0].title[0].text_type",
+    "ech_slot": "Postulate.title.text_type",
+    "value": "title",
+    "derivation": "fixed_by_schema",
+    "origin": "schema",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": "value-affairs-0-title-0-text_type"
+   },
+   {
+    "instance_path": "affairs[0].submission.global_uri",
+    "ech_slot": "Submission.global_uri",
+    "value": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/submission",
+    "derivation": "identifier_minted",
+    "origin": "identifier",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": "value-affairs-0-submission-global_uri"
+   },
+   {
+    "instance_path": "affairs[0].submission.sponsorship[0].actor.global_uri",
+    "ech_slot": "Actor.global_uri",
+    "value": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/actor/sponsor-1",
+    "derivation": "identifier_minted",
+    "origin": "identifier",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": "value-affairs-0-submission-sponsorship-0-actor-global_uri"
+   },
+   {
+    "instance_path": "affairs[0].submission.sponsorship[0].actor.name[0].text",
+    "ech_slot": "Actor.name.text",
+    "value": "Tristan",
+    "derivation": "extracted_from_pdf_by_rule",
+    "origin": "pdf_rule",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [
+     "B6.1"
+    ],
+    "label_id": "pdf-sponsor"
+   },
+   {
+    "instance_path": "affairs[0].submission.sponsorship[0].actor.name[0].text_language",
+    "ech_slot": "Actor.name.text_language",
+    "value": "fr",
+    "derivation": "detected_by_rule",
+    "origin": "code_rule",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": null
+   },
+   {
+    "instance_path": "affairs[0].submission.sponsorship[0].sponsor_role",
+    "ech_slot": "Submission.sponsorship.sponsor_role",
+    "value": "sponsor",
+    "derivation": "fixed_by_schema",
+    "origin": "schema",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": "value-affairs-0-submission-sponsorship-0-sponsor_role"
+   },
+   {
+    "instance_path": "affairs[0].response_steps[0].global_uri",
+    "ech_slot": "ResponseStep.global_uri",
+    "value": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response",
+    "derivation": "identifier_minted",
+    "origin": "identifier",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": "value-affairs-0-response_steps-0-global_uri"
+   },
+   {
+    "instance_path": "affairs[0].response_steps[0].responder.global_uri",
+    "ech_slot": "Organization.global_uri",
+    "value": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/actor/responder",
+    "derivation": "identifier_minted",
+    "origin": "identifier",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": "value-affairs-0-response_steps-0-responder-global_uri"
+   },
+   {
+    "instance_path": "affairs[0].response_steps[0].responder.name[0].text",
+    "ech_slot": "Organization.name.text",
+    "value": "Conseil municipal",
+    "derivation": "extracted_from_pdf_by_rule",
+    "origin": "pdf_rule",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [
+     "B18.1"
+    ],
+    "label_id": "pdf-responder"
+   },
+   {
+    "instance_path": "affairs[0].response_steps[0].responder.name[0].text_language",
+    "ech_slot": "Organization.name.text_language",
+    "value": "fr",
+    "derivation": "detected_by_rule",
+    "origin": "code_rule",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": null
+   },
+   {
+    "instance_path": "affairs[0].response_steps[0].texts[0].text",
+    "ech_slot": "ResponseStep.texts.text",
+    "value": "<p>En séance du 18 avril, le Conseil municipal a pris connaissance du postulat déposé auprès du bureau par Mme Tristan et Mme. Heinis concernant la constitution d'un fonds d'aide au maintien des petits commerces et cafés dans les villages.</p><p>Le Conseil a demandé à la commission « Finances et gestion » de préaviser le dossier pour s'assurer de la faisabilité juridique, financière et opérationnelle des démarches proposées. En amont de l'entrée en matière, le Conseil municipal porte à la connaissance des membres du Conseil général</p><h2>Commerces de proximité</h2><p>L'importance du maintien des commerces de proximité dans les villages de montagne ne relève d'aucune contestation. Les magasins sont des lieux d'échanges de produits et surtout d'échanges humains indéniables. Ils jouent ainsi un rôle social avéré.</p><h2>Bases légales</h2><p>Ces dernières années, la Commune a été approchée à quelques reprises pour des demandes de soutiens financiers. Malheureusement, sans bases légales, il n'est pas possible d'octroyer des aides qui les justifieraient. L'interrogation réside dans les limites du champ d'application de ces aides. Aussi, pourquoi tels secteurs privés devraient être soutenus par la Commune et pas d'autres ?</p><h2>Prochaines étapes</h2><p>La création d'un fonds nécessiterait donc un nouveau règlement. Avant d'en arriver là, et pour respecter la volonté des dépositaires du postulat - s'il est accepté par le Conseil général - l'Administration devrait mandater un bureau pour l'accompagner dans la réflexion avec l'appui du nouveau délégué à la promotion économique. L'étude qui résulterait du postulat permettrait de se doter d'un éventuel règlement.</p>",
+    "derivation": "extracted_from_pdf",
+    "origin": "pdf_copy",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": null
+   },
+   {
+    "instance_path": "affairs[0].response_steps[0].texts[0].text_language",
+    "ech_slot": "ResponseStep.texts.text_language",
+    "value": "fr",
+    "derivation": "detected_by_rule",
+    "origin": "code_rule",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": null
+   },
+   {
+    "instance_path": "affairs[0].response_steps[0].texts[0].text_type",
+    "ech_slot": "ResponseStep.texts.text_type",
+    "value": "response",
+    "derivation": "fixed_by_schema",
+    "origin": "schema",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": null
+   },
+   {
+    "instance_path": "affairs[0].response_steps[0].texts[1].text",
+    "ech_slot": "ResponseStep.texts.text",
+    "value": "<p>Saluant la démarche proposée, le Conseil municipal préavise favorablement ce postulat et recommande aux membres du Conseil général de l'approuver.</p>",
+    "derivation": "extracted_from_pdf",
+    "origin": "pdf_copy",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": null
+   },
+   {
+    "instance_path": "affairs[0].response_steps[0].texts[1].text_language",
+    "ech_slot": "ResponseStep.texts.text_language",
+    "value": "fr",
+    "derivation": "detected_by_rule",
+    "origin": "code_rule",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": null
+   },
+   {
+    "instance_path": "affairs[0].response_steps[0].texts[1].text_type",
+    "ech_slot": "ResponseStep.texts.text_type",
+    "value": "recommendation",
+    "derivation": "fixed_by_schema",
+    "origin": "schema",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": null
+   }
+  ],
+  "text_blocks": [
+   {
+    "id": "textblock-1",
+    "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/textblock/1",
+    "ech_slot": "ResponseStep.texts",
+    "text_type": "response",
+    "instance_path": "affairs[0].response_steps[0].texts[0]",
+    "block_ids": [
+     "B8",
+     "B9",
+     "B10",
+     "B11",
+     "B12",
+     "B13",
+     "B14",
+     "B15"
+    ],
+    "atom_ids": [
+     "B8.1",
+     "B8.2",
+     "B8.3",
+     "B9.1",
+     "B9.2",
+     "B9.3",
+     "B9.4",
+     "B10.1",
+     "B11.1",
+     "B11.2",
+     "B11.3",
+     "B12.1",
+     "B13.1",
+     "B13.2",
+     "B13.3",
+     "B13.4",
+     "B13.5",
+     "B14.1",
+     "B15.1",
+     "B15.2",
+     "B15.3",
+     "B15.4",
+     "B15.5"
+    ],
+    "char_count": 1686,
+    "extent_value_status": "unsure",
+    "label_id": null
+   },
+   {
+    "id": "textblock-2",
+    "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/textblock/2",
+    "ech_slot": "ResponseStep.texts",
+    "text_type": "recommendation",
+    "instance_path": "affairs[0].response_steps[0].texts[1]",
+    "block_ids": [
+     "B16"
+    ],
+    "atom_ids": [
+     "B16.1",
+     "B16.2"
+    ],
+    "char_count": 153,
+    "extent_value_status": "unsure",
+    "label_id": null
+   }
+  ]
+ },
+ "pages": [
+  {
+   "number": 1,
+   "width": 595.0,
+   "height": 842.0,
+   "text_source": "ocr",
+   "lines": [
+    {
+     "atom_id": "B1.1",
+     "block_id": "B1",
+     "frame": [
+      43.21,
+      22.96,
+      203.57,
+      82.45
+     ],
+     "frame_source": "block",
+     "text": "",
+     "char_start": 0,
+     "char_end": 0,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B2.1",
+     "block_id": "B2",
+     "frame": [
+      101.33,
+      30.0,
+      202.67,
+      40.67
+     ],
+     "frame_source": "estimated",
+     "text": "COMMUNE DE",
+     "char_start": 0,
+     "char_end": 10,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B3.1",
+     "block_id": "B3",
+     "frame": [
+      101.33,
+      42.67,
+      202.67,
+      54.67
+     ],
+     "frame_source": "estimated",
+     "text": "VAL DE BAGNES",
+     "char_start": 12,
+     "char_end": 25,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B4.1",
+     "block_id": "B4",
+     "frame": [
+      102.0,
+      95.33,
+      188.67,
+      105.33
+     ],
+     "frame_source": "estimated",
+     "text": "Autorités communales",
+     "char_start": 27,
+     "char_end": 47,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B4.2",
+     "block_id": "B4",
+     "frame": [
+      102.0,
+      105.33,
+      188.67,
+      115.33
+     ],
+     "frame_source": "estimated",
+     "text": "Conseil municipal",
+     "char_start": 48,
+     "char_end": 65,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B5.1",
+     "block_id": "B5",
+     "frame": [
+      220.92,
+      146.33,
+      536.01,
+      156.33
+     ],
+     "frame_source": "estimated",
+     "text": "PREAVIS DU CONSEIL MUNICIPAL SUR LE POSTULAT",
+     "char_start": 67,
+     "char_end": 111,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B6.1",
+     "block_id": "B6",
+     "frame": [
+      282.15,
+      168.37,
+      535.39,
+      180.62
+     ],
+     "frame_source": "estimated",
+     "text": "de Mme Tristan et Mme Heinis du 30.03.2023",
+     "char_start": 113,
+     "char_end": 155,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B7.1",
+     "block_id": "B7",
+     "frame": [
+      119.66,
+      189.0,
+      535.34,
+      201.0
+     ],
+     "frame_source": "estimated",
+     "text": "intitulé « Fonds d'aide au maintien des petits commerces et cafés du villages»",
+     "char_start": 157,
+     "char_end": 235,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B8.1",
+     "block_id": "B8",
+     "frame": [
+      101.33,
+      234.0,
+      537.33,
+      246.67
+     ],
+     "frame_source": "estimated",
+     "text": "En séance du 18 avril, le Conseil municipal a pris connaissance du postulat déposé auprès",
+     "char_start": 237,
+     "char_end": 326,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B8.2",
+     "block_id": "B8",
+     "frame": [
+      101.33,
+      246.67,
+      537.33,
+      259.33
+     ],
+     "frame_source": "estimated",
+     "text": "du bureau par Mme Tristan et Mme. Heinis concernant la constitution d'un fonds d'aide au",
+     "char_start": 327,
+     "char_end": 415,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B8.3",
+     "block_id": "B8",
+     "frame": [
+      101.33,
+      259.33,
+      537.33,
+      272.0
+     ],
+     "frame_source": "estimated",
+     "text": "maintien des petits commerces et cafés dans les villages.",
+     "char_start": 416,
+     "char_end": 473,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B9.1",
+     "block_id": "B9",
+     "frame": [
+      101.27,
+      284.09,
+      538.06,
+      297.4
+     ],
+     "frame_source": "estimated",
+     "text": "Le Conseil a demandé à la commission « Finances et gestion » de préaviser le dossier",
+     "char_start": 475,
+     "char_end": 559,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B9.2",
+     "block_id": "B9",
+     "frame": [
+      101.27,
+      297.4,
+      538.06,
+      310.71
+     ],
+     "frame_source": "estimated",
+     "text": "pour s'assurer de la faisabilité juridique, financière et opérationnelle des démarches",
+     "char_start": 560,
+     "char_end": 646,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B9.3",
+     "block_id": "B9",
+     "frame": [
+      101.27,
+      310.71,
+      538.06,
+      324.02
+     ],
+     "frame_source": "estimated",
+     "text": "proposées. En amont de l'entrée en matière, le Conseil municipal porte à la connaissance",
+     "char_start": 647,
+     "char_end": 735,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B9.4",
+     "block_id": "B9",
+     "frame": [
+      101.27,
+      324.02,
+      538.06,
+      337.33
+     ],
+     "frame_source": "estimated",
+     "text": "des membres du Conseil général",
+     "char_start": 736,
+     "char_end": 766,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B10.1",
+     "block_id": "B10",
+     "frame": [
+      101.33,
+      352.0,
+      233.33,
+      363.33
+     ],
+     "frame_source": "estimated",
+     "text": "Commerces de proximité",
+     "char_start": 768,
+     "char_end": 790,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B11.1",
+     "block_id": "B11",
+     "frame": [
+      100.67,
+      363.28,
+      538.67,
+      376.41
+     ],
+     "frame_source": "estimated",
+     "text": "L'importance du maintien des commerces de proximité dans les villages de montagne ne",
+     "char_start": 792,
+     "char_end": 876,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B11.2",
+     "block_id": "B11",
+     "frame": [
+      100.67,
+      376.41,
+      538.67,
+      389.54
+     ],
+     "frame_source": "estimated",
+     "text": "relève d'aucune contestation. Les magasins sont des lieux d'échanges de produits et",
+     "char_start": 877,
+     "char_end": 960,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B11.3",
+     "block_id": "B11",
+     "frame": [
+      100.67,
+      389.54,
+      538.67,
+      402.67
+     ],
+     "frame_source": "estimated",
+     "text": "surtout d'échanges humains indéniables. Ils jouent ainsi un rôle social avéré.",
+     "char_start": 961,
+     "char_end": 1039,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B12.1",
+     "block_id": "B12",
+     "frame": [
+      101.33,
+      417.33,
+      174.67,
+      428.67
+     ],
+     "frame_source": "estimated",
+     "text": "Bases légales",
+     "char_start": 1041,
+     "char_end": 1054,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B13.1",
+     "block_id": "B13",
+     "frame": [
+      100.63,
+      430.0,
+      537.33,
+      442.8
+     ],
+     "frame_source": "estimated",
+     "text": "Ces dernières années, la Commune a été approchée à quelques reprises pour des",
+     "char_start": 1056,
+     "char_end": 1133,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B13.2",
+     "block_id": "B13",
+     "frame": [
+      100.63,
+      442.8,
+      537.33,
+      455.6
+     ],
+     "frame_source": "estimated",
+     "text": "demandes de soutiens financiers. Malheureusement, sans bases légales, il n'est pas",
+     "char_start": 1134,
+     "char_end": 1216,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B13.3",
+     "block_id": "B13",
+     "frame": [
+      100.63,
+      455.6,
+      537.33,
+      468.4
+     ],
+     "frame_source": "estimated",
+     "text": "possible d'octroyer des aides qui les justifieraient. L'interrogation réside dans les limites du",
+     "char_start": 1217,
+     "char_end": 1313,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B13.4",
+     "block_id": "B13",
+     "frame": [
+      100.63,
+      468.4,
+      537.33,
+      481.2
+     ],
+     "frame_source": "estimated",
+     "text": "champ d'application de ces aides. Aussi, pourquoi tels secteurs privés devraient être",
+     "char_start": 1314,
+     "char_end": 1399,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B13.5",
+     "block_id": "B13",
+     "frame": [
+      100.63,
+      481.2,
+      537.33,
+      494.0
+     ],
+     "frame_source": "estimated",
+     "text": "soutenus par la Commune et pas d'autres ?",
+     "char_start": 1400,
+     "char_end": 1441,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B14.1",
+     "block_id": "B14",
+     "frame": [
+      101.33,
+      508.0,
+      199.33,
+      520.0
+     ],
+     "frame_source": "estimated",
+     "text": "Prochaines étapes",
+     "char_start": 1443,
+     "char_end": 1460,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B15.1",
+     "block_id": "B15",
+     "frame": [
+      101.3,
+      520.67,
+      538.0,
+      533.6
+     ],
+     "frame_source": "estimated",
+     "text": "La création d'un fonds nécessiterait donc un nouveau règlement. Avant d'en arriver là, et",
+     "char_start": 1462,
+     "char_end": 1551,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B15.2",
+     "block_id": "B15",
+     "frame": [
+      101.3,
+      533.6,
+      538.0,
+      546.53
+     ],
+     "frame_source": "estimated",
+     "text": "pour respecter la volonté des dépositaires du postulat - s'il est accepté par le Conseil",
+     "char_start": 1552,
+     "char_end": 1640,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B15.3",
+     "block_id": "B15",
+     "frame": [
+      101.3,
+      546.53,
+      538.0,
+      559.47
+     ],
+     "frame_source": "estimated",
+     "text": "général - l'Administration devrait mandater un bureau pour l'accompagner dans la réflexion",
+     "char_start": 1641,
+     "char_end": 1731,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B15.4",
+     "block_id": "B15",
+     "frame": [
+      101.3,
+      559.47,
+      538.0,
+      572.4
+     ],
+     "frame_source": "estimated",
+     "text": "avec l'appui du nouveau délégué à la promotion économique. L'étude qui résulterait du",
+     "char_start": 1732,
+     "char_end": 1817,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B15.5",
+     "block_id": "B15",
+     "frame": [
+      101.3,
+      572.4,
+      538.0,
+      585.33
+     ],
+     "frame_source": "estimated",
+     "text": "postulat permettrait de se doter d'un éventuel règlement.",
+     "char_start": 1818,
+     "char_end": 1875,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B16.1",
+     "block_id": "B16",
+     "frame": [
+      100.67,
+      599.33,
+      537.33,
+      612.0
+     ],
+     "frame_source": "estimated",
+     "text": "Saluant la démarche proposée, le Conseil municipal préavise favorablement ce postulat et",
+     "char_start": 1877,
+     "char_end": 1965,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B16.2",
+     "block_id": "B16",
+     "frame": [
+      100.67,
+      612.0,
+      537.33,
+      624.67
+     ],
+     "frame_source": "estimated",
+     "text": "recommande aux membres du Conseil général de l'approuver.",
+     "char_start": 1966,
+     "char_end": 2023,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B17.1",
+     "block_id": "B17",
+     "frame": [
+      100.67,
+      640.67,
+      385.33,
+      652.0
+     ],
+     "frame_source": "estimated",
+     "text": "Approuvé en séance du Conseil municipal du 20 juin 2023",
+     "char_start": 2025,
+     "char_end": 2080,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B18.1",
+     "block_id": "B18",
+     "frame": [
+      101.32,
+      684.33,
+      237.19,
+      695.67
+     ],
+     "frame_source": "estimated",
+     "text": "Pour le Conseil municipal",
+     "char_start": 2082,
+     "char_end": 2107,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B19.1",
+     "block_id": "B19",
+     "frame": [
+      162.56,
+      691.3,
+      246.17,
+      752.34
+     ],
+     "frame_source": "block",
+     "text": "",
+     "char_start": 2107,
+     "char_end": 2107,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B20.1",
+     "block_id": "B20",
+     "frame": [
+      101.29,
+      727.67,
+      189.23,
+      740.07
+     ],
+     "frame_source": "estimated",
+     "text": "Christophe Maret",
+     "char_start": 2109,
+     "char_end": 2125,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B20.2",
+     "block_id": "B20",
+     "frame": [
+      101.29,
+      740.07,
+      189.23,
+      752.47
+     ],
+     "frame_source": "estimated",
+     "text": "Président",
+     "char_start": 2126,
+     "char_end": 2135,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B21.1",
+     "block_id": "B21",
+     "frame": [
+      328.43,
+      687.91,
+      408.19,
+      723.13
+     ],
+     "frame_source": "block",
+     "text": "",
+     "char_start": 2135,
+     "char_end": 2135,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B22.1",
+     "block_id": "B22",
+     "frame": [
+      313.11,
+      728.33,
+      413.01,
+      741.33
+     ],
+     "frame_source": "estimated",
+     "text": "Pierre-Martin Moulin",
+     "char_start": 2137,
+     "char_end": 2157,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B22.2",
+     "block_id": "B22",
+     "frame": [
+      313.11,
+      741.33,
+      413.01,
+      754.33
+     ],
+     "frame_source": "estimated",
+     "text": "Secrétaire général",
+     "char_start": 2158,
+     "char_end": 2176,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B23.1",
+     "block_id": "B23",
+     "frame": [
+      99.99,
+      782.75,
+      277.15,
+      791.94
+     ],
+     "frame_source": "estimated",
+     "text": "Autorités communales - Conseil municipal",
+     "char_start": 2178,
+     "char_end": 2218,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B23.2",
+     "block_id": "B23",
+     "frame": [
+      99.99,
+      791.94,
+      277.15,
+      801.14
+     ],
+     "frame_source": "estimated",
+     "text": "Route de Clouchèvre 44, 1934 Le Châble VS",
+     "char_start": 2219,
+     "char_end": 2260,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B23.3",
+     "block_id": "B23",
+     "frame": [
+      99.99,
+      801.14,
+      277.15,
+      810.33
+     ],
+     "frame_source": "estimated",
+     "text": "Tel. 027 777 11 00 - etat-major@valdebagnes.ch",
+     "char_start": 2261,
+     "char_end": 2307,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B24.1",
+     "block_id": "B24",
+     "frame": [
+      453.3,
+      801.89,
+      535.03,
+      811.11
+     ],
+     "frame_source": "estimated",
+     "text": "www.valdebagnes.ch",
+     "char_start": 2309,
+     "char_end": 2327,
+     "from_ocr": true
+    }
+   ]
+  }
+ ],
+ "blocks": [
+  {
+   "id": "B1",
+   "page": 1,
+   "docling_label": "picture",
+   "char_start": 0,
+   "char_end": 0,
+   "atom_ids": [
+    "B1.1"
+   ],
+   "text": "",
+   "label_id": "B1-slot"
+  },
+  {
+   "id": "B2",
+   "page": 1,
+   "docling_label": "text",
+   "char_start": 0,
+   "char_end": 10,
+   "atom_ids": [
+    "B2.1"
+   ],
+   "text": "COMMUNE DE",
+   "label_id": "B2-slot"
+  },
+  {
+   "id": "B3",
+   "page": 1,
+   "docling_label": "text",
+   "char_start": 12,
+   "char_end": 25,
+   "atom_ids": [
+    "B3.1"
+   ],
+   "text": "VAL DE BAGNES",
+   "label_id": "B3-slot"
+  },
+  {
+   "id": "B4",
+   "page": 1,
+   "docling_label": "text",
+   "char_start": 27,
+   "char_end": 65,
+   "atom_ids": [
+    "B4.1",
+    "B4.2"
+   ],
+   "text": "Autorités communales\nConseil municipal",
+   "label_id": "B4-slot"
+  },
+  {
+   "id": "B5",
+   "page": 1,
+   "docling_label": "section_header",
+   "char_start": 67,
+   "char_end": 111,
+   "atom_ids": [
+    "B5.1"
+   ],
+   "text": "PREAVIS DU CONSEIL MUNICIPAL SUR LE POSTULAT",
+   "label_id": "B5-slot"
+  },
+  {
+   "id": "B6",
+   "page": 1,
+   "docling_label": "section_header",
+   "char_start": 113,
+   "char_end": 155,
+   "atom_ids": [
+    "B6.1"
+   ],
+   "text": "de Mme Tristan et Mme Heinis du 30.03.2023",
+   "label_id": "B6-slot"
+  },
+  {
+   "id": "B7",
+   "page": 1,
+   "docling_label": "text",
+   "char_start": 157,
+   "char_end": 235,
+   "atom_ids": [
+    "B7.1"
+   ],
+   "text": "intitulé « Fonds d'aide au maintien des petits commerces et cafés du villages»",
+   "label_id": "B7-slot"
+  },
+  {
+   "id": "B8",
+   "page": 1,
+   "docling_label": "text",
+   "char_start": 237,
+   "char_end": 473,
+   "atom_ids": [
+    "B8.1",
+    "B8.2",
+    "B8.3"
+   ],
+   "text": "En séance du 18 avril, le Conseil municipal a pris connaissance du postulat déposé auprès\ndu bureau par Mme Tristan et Mme. Heinis concernant la constitution d'un fonds d'aide au\nmaintien des petits commerces et cafés dans les villages.",
+   "label_id": "B8-slot"
+  },
+  {
+   "id": "B9",
+   "page": 1,
+   "docling_label": "text",
+   "char_start": 475,
+   "char_end": 766,
+   "atom_ids": [
+    "B9.1",
+    "B9.2",
+    "B9.3",
+    "B9.4"
+   ],
+   "text": "Le Conseil a demandé à la commission « Finances et gestion » de préaviser le dossier\npour s'assurer de la faisabilité juridique, financière et opérationnelle des démarches\nproposées. En amont de l'entrée en matière, le Conseil municipal porte à la connaissance\ndes membres du Conseil général",
+   "label_id": "B9-slot"
+  },
+  {
+   "id": "B10",
+   "page": 1,
+   "docling_label": "section_header",
+   "char_start": 768,
+   "char_end": 790,
+   "atom_ids": [
+    "B10.1"
+   ],
+   "text": "Commerces de proximité",
+   "label_id": "B10-slot"
+  },
+  {
+   "id": "B11",
+   "page": 1,
+   "docling_label": "text",
+   "char_start": 792,
+   "char_end": 1039,
+   "atom_ids": [
+    "B11.1",
+    "B11.2",
+    "B11.3"
+   ],
+   "text": "L'importance du maintien des commerces de proximité dans les villages de montagne ne\nrelève d'aucune contestation. Les magasins sont des lieux d'échanges de produits et\nsurtout d'échanges humains indéniables. Ils jouent ainsi un rôle social avéré.",
+   "label_id": "B11-slot"
+  },
+  {
+   "id": "B12",
+   "page": 1,
+   "docling_label": "section_header",
+   "char_start": 1041,
+   "char_end": 1054,
+   "atom_ids": [
+    "B12.1"
+   ],
+   "text": "Bases légales",
+   "label_id": "B12-slot"
+  },
+  {
+   "id": "B13",
+   "page": 1,
+   "docling_label": "text",
+   "char_start": 1056,
+   "char_end": 1441,
+   "atom_ids": [
+    "B13.1",
+    "B13.2",
+    "B13.3",
+    "B13.4",
+    "B13.5"
+   ],
+   "text": "Ces dernières années, la Commune a été approchée à quelques reprises pour des\ndemandes de soutiens financiers. Malheureusement, sans bases légales, il n'est pas\npossible d'octroyer des aides qui les justifieraient. L'interrogation réside dans les limites du\nchamp d'application de ces aides. Aussi, pourquoi tels secteurs privés devraient être\nsoutenus par la Commune et pas d'autres ?",
+   "label_id": "B13-slot"
+  },
+  {
+   "id": "B14",
+   "page": 1,
+   "docling_label": "section_header",
+   "char_start": 1443,
+   "char_end": 1460,
+   "atom_ids": [
+    "B14.1"
+   ],
+   "text": "Prochaines étapes",
+   "label_id": "B14-slot"
+  },
+  {
+   "id": "B15",
+   "page": 1,
+   "docling_label": "text",
+   "char_start": 1462,
+   "char_end": 1875,
+   "atom_ids": [
+    "B15.1",
+    "B15.2",
+    "B15.3",
+    "B15.4",
+    "B15.5"
+   ],
+   "text": "La création d'un fonds nécessiterait donc un nouveau règlement. Avant d'en arriver là, et\npour respecter la volonté des dépositaires du postulat - s'il est accepté par le Conseil\ngénéral - l'Administration devrait mandater un bureau pour l'accompagner dans la réflexion\navec l'appui du nouveau délégué à la promotion économique. L'étude qui résulterait du\npostulat permettrait de se doter d'un éventuel règlement.",
+   "label_id": "B15-slot"
+  },
+  {
+   "id": "B16",
+   "page": 1,
+   "docling_label": "text",
+   "char_start": 1877,
+   "char_end": 2023,
+   "atom_ids": [
+    "B16.1",
+    "B16.2"
+   ],
+   "text": "Saluant la démarche proposée, le Conseil municipal préavise favorablement ce postulat et\nrecommande aux membres du Conseil général de l'approuver.",
+   "label_id": "B16-slot"
+  },
+  {
+   "id": "B17",
+   "page": 1,
+   "docling_label": "text",
+   "char_start": 2025,
+   "char_end": 2080,
+   "atom_ids": [
+    "B17.1"
+   ],
+   "text": "Approuvé en séance du Conseil municipal du 20 juin 2023",
+   "label_id": "B17-slot"
+  },
+  {
+   "id": "B18",
+   "page": 1,
+   "docling_label": "text",
+   "char_start": 2082,
+   "char_end": 2107,
+   "atom_ids": [
+    "B18.1"
+   ],
+   "text": "Pour le Conseil municipal",
+   "label_id": "B18-slot"
+  },
+  {
+   "id": "B19",
+   "page": 1,
+   "docling_label": "picture",
+   "char_start": 2107,
+   "char_end": 2107,
+   "atom_ids": [
+    "B19.1"
+   ],
+   "text": "",
+   "label_id": "B19-slot"
+  },
+  {
+   "id": "B20",
+   "page": 1,
+   "docling_label": "caption",
+   "char_start": 2109,
+   "char_end": 2135,
+   "atom_ids": [
+    "B20.1",
+    "B20.2"
+   ],
+   "text": "Christophe Maret\nPrésident",
+   "label_id": "B20-slot"
+  },
+  {
+   "id": "B21",
+   "page": 1,
+   "docling_label": "picture",
+   "char_start": 2135,
+   "char_end": 2135,
+   "atom_ids": [
+    "B21.1"
+   ],
+   "text": "",
+   "label_id": "B21-slot"
+  },
+  {
+   "id": "B22",
+   "page": 1,
+   "docling_label": "caption",
+   "char_start": 2137,
+   "char_end": 2176,
+   "atom_ids": [
+    "B22.1",
+    "B22.2"
+   ],
+   "text": "Pierre-Martin Moulin\nSecrétaire général",
+   "label_id": "B22-slot"
+  },
+  {
+   "id": "B23",
+   "page": 1,
+   "docling_label": "caption",
+   "char_start": 2178,
+   "char_end": 2307,
+   "atom_ids": [
+    "B23.1",
+    "B23.2",
+    "B23.3"
+   ],
+   "text": "Autorités communales - Conseil municipal\nRoute de Clouchèvre 44, 1934 Le Châble VS\nTel. 027 777 11 00 - etat-major@valdebagnes.ch",
+   "label_id": "B23-slot"
+  },
+  {
+   "id": "B24",
+   "page": 1,
+   "docling_label": "page_footer",
+   "char_start": 2309,
+   "char_end": 2327,
+   "atom_ids": [
+    "B24.1"
+   ],
+   "text": "www.valdebagnes.ch",
+   "label_id": "B24-slot"
+  }
+ ],
+ "labels": [
+  {
+   "id": "d1",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/d1",
+   "kind": "document_text_parts",
+   "slot": "documentTextParts",
+   "predicate": "https://schema.parlpdfech.example/labels/documentTextParts",
+   "subject": "https://api.openparldata.ch/v1/docs/879163",
+   "target": {
+    "type": "document",
+    "block_id": null,
+    "atom_ids": [],
+    "page": 1,
+    "last_page": 1,
+    "char_start": 0,
+    "char_end": 2327,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "B",
+   "options": [
+    {
+     "value": "A",
+     "probability": 0.007
+    },
+    {
+     "value": "B",
+     "probability": 0.9572
+    },
+    {
+     "value": "C",
+     "probability": 0.0278
+    },
+    {
+     "value": "D",
+     "probability": 0.008
+    }
+   ],
+   "probability": 0.9572,
+   "value_status": "certain",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "rule",
+    "group": "rule",
+    "tier": null,
+    "rule_id": "A2",
+    "head": "D1"
+   },
+   "calibration_id": "gj1-d1-verifier-platt",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "r2",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/r2",
+   "kind": "executive_response",
+   "slot": "executiveResponse",
+   "predicate": "https://schema.parlpdfech.example/labels/executiveResponse",
+   "subject": "https://api.openparldata.ch/v1/docs/879163",
+   "target": {
+    "type": "document",
+    "block_id": null,
+    "atom_ids": [],
+    "page": 1,
+    "last_page": 1,
+    "char_start": 0,
+    "char_end": 2327,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "yes",
+   "options": [
+    {
+     "value": "yes",
+     "probability": 0.8314
+    },
+    {
+     "value": "no",
+     "probability": 0.1686
+    }
+   ],
+   "probability": 0.8314,
+   "value_status": "certain",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "apertus_head",
+    "group": "apertus_readout",
+    "tier": null,
+    "rule_id": null,
+    "head": "R2"
+   },
+   "calibration_id": "gj1-r2-platt-step0b",
+   "in_sample": true,
+   "note_code": "final_check",
+   "note_params": {
+    "agrees": true
+   },
+   "note": null
+  },
+  {
+   "id": "B1-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B1-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B1",
+   "target": {
+    "type": "block",
+    "block_id": "B1",
+    "atom_ids": [
+     "B1.1"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 0,
+    "char_end": 0,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "none",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.005
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.005
+    },
+    {
+     "value": "response",
+     "probability": 0.005
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.005
+    },
+    {
+     "value": "title",
+     "probability": 0.005
+    },
+    {
+     "value": "none",
+     "probability": 0.995
+    }
+   ],
+   "probability": 0.995,
+   "value_status": "certain",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "rule",
+    "group": "rule",
+    "tier": "fixed:R3",
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": "gj1-tier-fixed-R3-none",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B2-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B2-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B2",
+   "target": {
+    "type": "block",
+    "block_id": "B2",
+    "atom_ids": [
+     "B2.1"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 0,
+    "char_end": 10,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "none",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.005
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.005
+    },
+    {
+     "value": "response",
+     "probability": 0.0058
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.0144
+    },
+    {
+     "value": "title",
+     "probability": 0.226
+    },
+    {
+     "value": "none",
+     "probability": 0.7527
+    }
+   ],
+   "probability": 0.7527,
+   "value_status": "unsure",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s1_start:A2",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B3-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B3-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B3",
+   "target": {
+    "type": "block",
+    "block_id": "B3",
+    "atom_ids": [
+     "B3.1"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 12,
+    "char_end": 25,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "none",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.005
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.005
+    },
+    {
+     "value": "response",
+     "probability": 0.005
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.0115
+    },
+    {
+     "value": "title",
+     "probability": 0.211
+    },
+    {
+     "value": "none",
+     "probability": 0.7733
+    }
+   ],
+   "probability": 0.7733,
+   "value_status": "unsure",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s1_start:A2",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B4-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B4-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B4",
+   "target": {
+    "type": "block",
+    "block_id": "B4",
+    "atom_ids": [
+     "B4.1",
+     "B4.2"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 27,
+    "char_end": 65,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "none",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.005
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.005
+    },
+    {
+     "value": "response",
+     "probability": 0.0082
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.0396
+    },
+    {
+     "value": "title",
+     "probability": 0.2025
+    },
+    {
+     "value": "none",
+     "probability": 0.7485
+    }
+   ],
+   "probability": 0.7485,
+   "value_status": "unsure",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s1_start:A2",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B5-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B5-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B5",
+   "target": {
+    "type": "block",
+    "block_id": "B5",
+    "atom_ids": [
+     "B5.1"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 67,
+    "char_end": 111,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "title",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.005
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.005
+    },
+    {
+     "value": "response",
+     "probability": 0.0068
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.0267
+    },
+    {
+     "value": "title",
+     "probability": 0.8018
+    },
+    {
+     "value": "none",
+     "probability": 0.1629
+    }
+   ],
+   "probability": 0.8018,
+   "value_status": "certain",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s1_start:A2",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B6-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B6-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B6",
+   "target": {
+    "type": "block",
+    "block_id": "B6",
+    "atom_ids": [
+     "B6.1"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 113,
+    "char_end": 155,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "title",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.005
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.005
+    },
+    {
+     "value": "response",
+     "probability": 0.005
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.0117
+    },
+    {
+     "value": "title",
+     "probability": 0.9229
+    },
+    {
+     "value": "none",
+     "probability": 0.0598
+    }
+   ],
+   "probability": 0.9229,
+   "value_status": "certain",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s1_start:A2",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B7-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B7-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B7",
+   "target": {
+    "type": "block",
+    "block_id": "B7",
+    "atom_ids": [
+     "B7.1"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 157,
+    "char_end": 235,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "title",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.0083
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.005
+    },
+    {
+     "value": "response",
+     "probability": 0.0449
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.0308
+    },
+    {
+     "value": "title",
+     "probability": 0.8741
+    },
+    {
+     "value": "none",
+     "probability": 0.0392
+    }
+   ],
+   "probability": 0.8741,
+   "value_status": "certain",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s1_start:A2",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B8-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B8-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B8",
+   "target": {
+    "type": "block",
+    "block_id": "B8",
+    "atom_ids": [
+     "B8.1",
+     "B8.2",
+     "B8.3"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 237,
+    "char_end": 473,
+    "instance_path": "affairs[0].response_steps[0].texts[0]",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response"
+   },
+   "value": "response",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.042
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.0324
+    },
+    {
+     "value": "response",
+     "probability": 0.4416
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.0864
+    },
+    {
+     "value": "title",
+     "probability": 0.1689
+    },
+    {
+     "value": "none",
+     "probability": 0.2288
+    }
+   ],
+   "probability": 0.4416,
+   "value_status": "unsure",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s1_start:A2",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B9-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B9-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B9",
+   "target": {
+    "type": "block",
+    "block_id": "B9",
+    "atom_ids": [
+     "B9.1",
+     "B9.2",
+     "B9.3",
+     "B9.4"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 475,
+    "char_end": 766,
+    "instance_path": "affairs[0].response_steps[0].texts[0]",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response"
+   },
+   "value": "response",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.0542
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.0659
+    },
+    {
+     "value": "response",
+     "probability": 0.6069
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.0601
+    },
+    {
+     "value": "title",
+     "probability": 0.0717
+    },
+    {
+     "value": "none",
+     "probability": 0.1413
+    }
+   ],
+   "probability": 0.6069,
+   "value_status": "unsure",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s1_start:A2",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B10-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B10-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B10",
+   "target": {
+    "type": "block",
+    "block_id": "B10",
+    "atom_ids": [
+     "B10.1"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 768,
+    "char_end": 790,
+    "instance_path": "affairs[0].response_steps[0].texts[0]",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response"
+   },
+   "value": "response",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.0518
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.0784
+    },
+    {
+     "value": "response",
+     "probability": 0.67
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.0368
+    },
+    {
+     "value": "title",
+     "probability": 0.0733
+    },
+    {
+     "value": "none",
+     "probability": 0.0897
+    }
+   ],
+   "probability": 0.67,
+   "value_status": "unsure",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s1_start:A2",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B11-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B11-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B11",
+   "target": {
+    "type": "block",
+    "block_id": "B11",
+    "atom_ids": [
+     "B11.1",
+     "B11.2",
+     "B11.3"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 792,
+    "char_end": 1039,
+    "instance_path": "affairs[0].response_steps[0].texts[0]",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response"
+   },
+   "value": "response",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.0541
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.0921
+    },
+    {
+     "value": "response",
+     "probability": 0.7649
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.0239
+    },
+    {
+     "value": "title",
+     "probability": 0.0183
+    },
+    {
+     "value": "none",
+     "probability": 0.0467
+    }
+   ],
+   "probability": 0.7649,
+   "value_status": "unsure",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s1_start:A2",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B12-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B12-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B12",
+   "target": {
+    "type": "block",
+    "block_id": "B12",
+    "atom_ids": [
+     "B12.1"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 1041,
+    "char_end": 1054,
+    "instance_path": "affairs[0].response_steps[0].texts[0]",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response"
+   },
+   "value": "response",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.0503
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.0875
+    },
+    {
+     "value": "response",
+     "probability": 0.7244
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.0453
+    },
+    {
+     "value": "title",
+     "probability": 0.0199
+    },
+    {
+     "value": "none",
+     "probability": 0.0725
+    }
+   ],
+   "probability": 0.7244,
+   "value_status": "unsure",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s1_start:A2",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B13-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B13-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B13",
+   "target": {
+    "type": "block",
+    "block_id": "B13",
+    "atom_ids": [
+     "B13.1",
+     "B13.2",
+     "B13.3",
+     "B13.4",
+     "B13.5"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 1056,
+    "char_end": 1441,
+    "instance_path": "affairs[0].response_steps[0].texts[0]",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response"
+   },
+   "value": "response",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.0551
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.0897
+    },
+    {
+     "value": "response",
+     "probability": 0.751
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.073
+    },
+    {
+     "value": "title",
+     "probability": 0.0146
+    },
+    {
+     "value": "none",
+     "probability": 0.0166
+    }
+   ],
+   "probability": 0.751,
+   "value_status": "unsure",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s1_start:A2",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B14-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B14-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B14",
+   "target": {
+    "type": "block",
+    "block_id": "B14",
+    "atom_ids": [
+     "B14.1"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 1443,
+    "char_end": 1460,
+    "instance_path": "affairs[0].response_steps[0].texts[0]",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response"
+   },
+   "value": "response",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.0518
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.0562
+    },
+    {
+     "value": "response",
+     "probability": 0.5004
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.2993
+    },
+    {
+     "value": "title",
+     "probability": 0.0283
+    },
+    {
+     "value": "none",
+     "probability": 0.0639
+    }
+   ],
+   "probability": 0.5004,
+   "value_status": "unsure",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s1_start:A2",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B15-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B15-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B15",
+   "target": {
+    "type": "block",
+    "block_id": "B15",
+    "atom_ids": [
+     "B15.1",
+     "B15.2",
+     "B15.3",
+     "B15.4",
+     "B15.5"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 1462,
+    "char_end": 1875,
+    "instance_path": "affairs[0].response_steps[0].texts[0]",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response"
+   },
+   "value": "response",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.0527
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.0506
+    },
+    {
+     "value": "response",
+     "probability": 0.4589
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.3345
+    },
+    {
+     "value": "title",
+     "probability": 0.0251
+    },
+    {
+     "value": "none",
+     "probability": 0.0782
+    }
+   ],
+   "probability": 0.4589,
+   "value_status": "unsure",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s1_start:A2",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B16-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B16-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B16",
+   "target": {
+    "type": "block",
+    "block_id": "B16",
+    "atom_ids": [
+     "B16.1",
+     "B16.2"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 1877,
+    "char_end": 2023,
+    "instance_path": "affairs[0].response_steps[0].texts[1]",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response"
+   },
+   "value": "recommendation",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.0395
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.0163
+    },
+    {
+     "value": "response",
+     "probability": 0.2892
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.4136
+    },
+    {
+     "value": "title",
+     "probability": 0.0189
+    },
+    {
+     "value": "none",
+     "probability": 0.2225
+    }
+   ],
+   "probability": 0.4136,
+   "value_status": "unsure",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s1_start:A2",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B17-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B17-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B17",
+   "target": {
+    "type": "block",
+    "block_id": "B17",
+    "atom_ids": [
+     "B17.1"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 2025,
+    "char_end": 2080,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "none",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.0054
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.005
+    },
+    {
+     "value": "response",
+     "probability": 0.064
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.3587
+    },
+    {
+     "value": "title",
+     "probability": 0.025
+    },
+    {
+     "value": "none",
+     "probability": 0.5445
+    }
+   ],
+   "probability": 0.5445,
+   "value_status": "unsure",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s1_start:A2",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B18-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B18-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B18",
+   "target": {
+    "type": "block",
+    "block_id": "B18",
+    "atom_ids": [
+     "B18.1"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 2082,
+    "char_end": 2107,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "none",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.005
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.005
+    },
+    {
+     "value": "response",
+     "probability": 0.0169
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.2475
+    },
+    {
+     "value": "title",
+     "probability": 0.0142
+    },
+    {
+     "value": "none",
+     "probability": 0.7184
+    }
+   ],
+   "probability": 0.7184,
+   "value_status": "unsure",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s1_start:A2",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B19-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B19-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B19",
+   "target": {
+    "type": "block",
+    "block_id": "B19",
+    "atom_ids": [
+     "B19.1"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 2107,
+    "char_end": 2107,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "none",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.005
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.005
+    },
+    {
+     "value": "response",
+     "probability": 0.005
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.005
+    },
+    {
+     "value": "title",
+     "probability": 0.005
+    },
+    {
+     "value": "none",
+     "probability": 0.995
+    }
+   ],
+   "probability": 0.995,
+   "value_status": "certain",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "rule",
+    "group": "rule",
+    "tier": "fixed:R3",
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": "gj1-tier-fixed-R3-none",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B20-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B20-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B20",
+   "target": {
+    "type": "block",
+    "block_id": "B20",
+    "atom_ids": [
+     "B20.1",
+     "B20.2"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 2109,
+    "char_end": 2135,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "none",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.005
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.005
+    },
+    {
+     "value": "response",
+     "probability": 0.0182
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.0184
+    },
+    {
+     "value": "title",
+     "probability": 0.0089
+    },
+    {
+     "value": "none",
+     "probability": 0.9515
+    }
+   ],
+   "probability": 0.9515,
+   "value_status": "certain",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s1_start:A2",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B21-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B21-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B21",
+   "target": {
+    "type": "block",
+    "block_id": "B21",
+    "atom_ids": [
+     "B21.1"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 2135,
+    "char_end": 2135,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "none",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.005
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.005
+    },
+    {
+     "value": "response",
+     "probability": 0.005
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.005
+    },
+    {
+     "value": "title",
+     "probability": 0.005
+    },
+    {
+     "value": "none",
+     "probability": 0.995
+    }
+   ],
+   "probability": 0.995,
+   "value_status": "certain",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "rule",
+    "group": "rule",
+    "tier": "fixed:R3",
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": "gj1-tier-fixed-R3-none",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B22-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B22-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B22",
+   "target": {
+    "type": "block",
+    "block_id": "B22",
+    "atom_ids": [
+     "B22.1",
+     "B22.2"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 2137,
+    "char_end": 2176,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "none",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.005
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.005
+    },
+    {
+     "value": "response",
+     "probability": 0.022
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.015
+    },
+    {
+     "value": "title",
+     "probability": 0.005
+    },
+    {
+     "value": "none",
+     "probability": 0.955
+    }
+   ],
+   "probability": 0.955,
+   "value_status": "certain",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s1_start:A2",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B23-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B23-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B23",
+   "target": {
+    "type": "block",
+    "block_id": "B23",
+    "atom_ids": [
+     "B23.1",
+     "B23.2",
+     "B23.3"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 2178,
+    "char_end": 2307,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "none",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.005
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.005
+    },
+    {
+     "value": "response",
+     "probability": 0.0463
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.0378
+    },
+    {
+     "value": "title",
+     "probability": 0.0137
+    },
+    {
+     "value": "none",
+     "probability": 0.8965
+    }
+   ],
+   "probability": 0.8965,
+   "value_status": "certain",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s1_start:A2",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B24-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B24-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B24",
+   "target": {
+    "type": "block",
+    "block_id": "B24",
+    "atom_ids": [
+     "B24.1"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 2309,
+    "char_end": 2327,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "none",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.0053
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.005
+    },
+    {
+     "value": "response",
+     "probability": 0.0438
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.0421
+    },
+    {
+     "value": "title",
+     "probability": 0.0199
+    },
+    {
+     "value": "none",
+     "probability": 0.8848
+    }
+   ],
+   "probability": 0.8848,
+   "value_status": "certain",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s1_start:A2",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "value-global_uri",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/value-global_uri",
+   "kind": "constant_value",
+   "slot": "globalURI",
+   "predicate": "https://ld.ech.ch/schema/0292/meta-common/globalURI",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/i95",
+   "target": {
+    "type": "value",
+    "block_id": null,
+    "atom_ids": [],
+    "page": null,
+    "last_page": null,
+    "char_start": null,
+    "char_end": null,
+    "instance_path": "global_uri",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/i95"
+   },
+   "value": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/i95",
+   "options": [],
+   "probability": null,
+   "value_status": "none",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "constant",
+    "group": "constant",
+    "tier": null,
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": null,
+   "in_sample": null,
+   "note_code": "value_derivation",
+   "note_params": {
+    "derivation": "identifier_minted"
+   },
+   "note": null
+  },
+  {
+   "id": "value-affairs-0-global_uri",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/value-affairs-0-global_uri",
+   "kind": "constant_value",
+   "slot": "globalURI",
+   "predicate": "https://ld.ech.ch/schema/0292/meta-common/globalURI",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair",
+   "target": {
+    "type": "value",
+    "block_id": null,
+    "atom_ids": [],
+    "page": null,
+    "last_page": null,
+    "char_start": null,
+    "char_end": null,
+    "instance_path": "affairs[0].global_uri",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair"
+   },
+   "value": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair",
+   "options": [],
+   "probability": null,
+   "value_status": "none",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "constant",
+    "group": "constant",
+    "tier": null,
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": null,
+   "in_sample": null,
+   "note_code": "value_derivation",
+   "note_params": {
+    "derivation": "identifier_minted"
+   },
+   "note": null
+  },
+  {
+   "id": "pdf-affair_type",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/pdf-affair_type",
+   "kind": "pdf_value",
+   "slot": "affairType",
+   "predicate": "https://ch.paf.link/schema/affairs/affairType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair",
+   "target": {
+    "type": "value",
+    "block_id": "B5",
+    "atom_ids": [
+     "B5.1"
+    ],
+    "page": 1,
+    "last_page": 1,
+    "char_start": 103,
+    "char_end": 111,
+    "instance_path": "affairs[0].affair_type",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair"
+   },
+   "value": "postulate",
+   "options": [],
+   "probability": 0.6333,
+   "value_status": "unsure",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "rule",
+    "group": "rule",
+    "tier": "type_head_inline_gov",
+    "rule_id": "m11_values_type_number.read_affair_type",
+    "head": null
+   },
+   "calibration_id": "value.affair_type.type_head_inline_gov",
+   "in_sample": null,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "pdf-title",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/pdf-title",
+   "kind": "pdf_value",
+   "slot": "title",
+   "predicate": "https://ch.paf.link/schema/affairs/title",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair",
+   "target": {
+    "type": "value",
+    "block_id": "B7",
+    "atom_ids": [
+     "B7.1"
+    ],
+    "page": 1,
+    "last_page": 1,
+    "char_start": 168,
+    "char_end": 234,
+    "instance_path": "affairs[0].title[0].text",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair"
+   },
+   "value": "Fonds d'aide au maintien des petits commerces et cafés du villages",
+   "options": [],
+   "probability": 0.6333,
+   "value_status": "unsure",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "rule",
+    "group": "rule",
+    "tier": "after_kind_cue",
+    "rule_id": "m11_values_title.read_title",
+    "head": null
+   },
+   "calibration_id": "value.title.after_kind_cue",
+   "in_sample": null,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "value-affairs-0-title-0-text_type",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/value-affairs-0-title-0-text_type",
+   "kind": "constant_value",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair",
+   "target": {
+    "type": "value",
+    "block_id": null,
+    "atom_ids": [],
+    "page": null,
+    "last_page": null,
+    "char_start": null,
+    "char_end": null,
+    "instance_path": "affairs[0].title[0].text_type",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair"
+   },
+   "value": "title",
+   "options": [],
+   "probability": null,
+   "value_status": "none",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "constant",
+    "group": "constant",
+    "tier": null,
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": null,
+   "in_sample": null,
+   "note_code": "value_derivation",
+   "note_params": {
+    "derivation": "fixed_by_schema"
+   },
+   "note": null
+  },
+  {
+   "id": "value-affairs-0-submission-global_uri",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/value-affairs-0-submission-global_uri",
+   "kind": "constant_value",
+   "slot": "globalURI",
+   "predicate": "https://ld.ech.ch/schema/0292/meta-common/globalURI",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/submission",
+   "target": {
+    "type": "value",
+    "block_id": null,
+    "atom_ids": [],
+    "page": null,
+    "last_page": null,
+    "char_start": null,
+    "char_end": null,
+    "instance_path": "affairs[0].submission.global_uri",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/submission"
+   },
+   "value": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/submission",
+   "options": [],
+   "probability": null,
+   "value_status": "none",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "constant",
+    "group": "constant",
+    "tier": null,
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": null,
+   "in_sample": null,
+   "note_code": "value_derivation",
+   "note_params": {
+    "derivation": "identifier_minted"
+   },
+   "note": null
+  },
+  {
+   "id": "value-affairs-0-submission-sponsorship-0-actor-global_uri",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/value-affairs-0-submission-sponsorship-0-actor-global_uri",
+   "kind": "constant_value",
+   "slot": "globalURI",
+   "predicate": "https://ld.ech.ch/schema/0292/meta-common/globalURI",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/actor/sponsor-1",
+   "target": {
+    "type": "value",
+    "block_id": null,
+    "atom_ids": [],
+    "page": null,
+    "last_page": null,
+    "char_start": null,
+    "char_end": null,
+    "instance_path": "affairs[0].submission.sponsorship[0].actor.global_uri",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/actor/sponsor-1"
+   },
+   "value": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/actor/sponsor-1",
+   "options": [],
+   "probability": null,
+   "value_status": "none",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "constant",
+    "group": "constant",
+    "tier": null,
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": null,
+   "in_sample": null,
+   "note_code": "value_derivation",
+   "note_params": {
+    "derivation": "identifier_minted"
+   },
+   "note": null
+  },
+  {
+   "id": "pdf-sponsor",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/pdf-sponsor",
+   "kind": "pdf_value",
+   "slot": "sponsorship",
+   "predicate": "https://ch.paf.link/schema/affairs/sponsorship",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/submission",
+   "target": {
+    "type": "value",
+    "block_id": "B6",
+    "atom_ids": [
+     "B6.1"
+    ],
+    "page": 1,
+    "last_page": 1,
+    "char_start": 120,
+    "char_end": 127,
+    "instance_path": "affairs[0].submission.sponsorship[0].actor.name[0].text",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/actor/sponsor-1"
+   },
+   "value": "Tristan",
+   "options": [],
+   "probability": 0.95,
+   "value_status": "unsure",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "rule",
+    "group": "rule",
+    "tier": "response_head_prep_name",
+    "rule_id": "m11_values_sponsor.read_sponsor",
+    "head": null
+   },
+   "calibration_id": "value.first_author.response_head_prep_name",
+   "in_sample": null,
+   "note_code": "comparison_value",
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "value-affairs-0-submission-sponsorship-0-sponsor_role",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/value-affairs-0-submission-sponsorship-0-sponsor_role",
+   "kind": "constant_value",
+   "slot": "sponsorRole",
+   "predicate": "https://ch.paf.link/schema/affairs/sponsorRole",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/submission",
+   "target": {
+    "type": "value",
+    "block_id": null,
+    "atom_ids": [],
+    "page": null,
+    "last_page": null,
+    "char_start": null,
+    "char_end": null,
+    "instance_path": "affairs[0].submission.sponsorship[0].sponsor_role",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/submission"
+   },
+   "value": "sponsor",
+   "options": [],
+   "probability": null,
+   "value_status": "none",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "constant",
+    "group": "constant",
+    "tier": null,
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": null,
+   "in_sample": null,
+   "note_code": "value_derivation",
+   "note_params": {
+    "derivation": "fixed_by_schema"
+   },
+   "note": null
+  },
+  {
+   "id": "value-affairs-0-response_steps-0-global_uri",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/value-affairs-0-response_steps-0-global_uri",
+   "kind": "constant_value",
+   "slot": "globalURI",
+   "predicate": "https://ld.ech.ch/schema/0292/meta-common/globalURI",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response",
+   "target": {
+    "type": "value",
+    "block_id": null,
+    "atom_ids": [],
+    "page": null,
+    "last_page": null,
+    "char_start": null,
+    "char_end": null,
+    "instance_path": "affairs[0].response_steps[0].global_uri",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response"
+   },
+   "value": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response",
+   "options": [],
+   "probability": null,
+   "value_status": "none",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "constant",
+    "group": "constant",
+    "tier": null,
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": null,
+   "in_sample": null,
+   "note_code": "value_derivation",
+   "note_params": {
+    "derivation": "identifier_minted"
+   },
+   "note": null
+  },
+  {
+   "id": "value-affairs-0-response_steps-0-responder-global_uri",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/value-affairs-0-response_steps-0-responder-global_uri",
+   "kind": "constant_value",
+   "slot": "globalURI",
+   "predicate": "https://ld.ech.ch/schema/0292/meta-common/globalURI",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/actor/responder",
+   "target": {
+    "type": "value",
+    "block_id": null,
+    "atom_ids": [],
+    "page": null,
+    "last_page": null,
+    "char_start": null,
+    "char_end": null,
+    "instance_path": "affairs[0].response_steps[0].responder.global_uri",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/actor/responder"
+   },
+   "value": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/actor/responder",
+   "options": [],
+   "probability": null,
+   "value_status": "none",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "constant",
+    "group": "constant",
+    "tier": null,
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": null,
+   "in_sample": null,
+   "note_code": "value_derivation",
+   "note_params": {
+    "derivation": "identifier_minted"
+   },
+   "note": null
+  },
+  {
+   "id": "pdf-responder",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/pdf-responder",
+   "kind": "pdf_value",
+   "slot": "responder",
+   "predicate": "https://ch.paf.link/schema/affairs/responder",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response",
+   "target": {
+    "type": "value",
+    "block_id": "B18",
+    "atom_ids": [
+     "B18.1"
+    ],
+    "page": 1,
+    "last_page": 1,
+    "char_start": 2090,
+    "char_end": 2107,
+    "instance_path": "affairs[0].response_steps[0].responder.name[0].text",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/actor/responder"
+   },
+   "value": "Conseil municipal",
+   "options": [],
+   "probability": 0.9912,
+   "value_status": "certain",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "rule",
+    "group": "rule",
+    "tier": "rsp_signature",
+    "rule_id": "m11_values_dates_responder.read_responder",
+    "head": null
+   },
+   "calibration_id": "value.responder_name.rsp_signature",
+   "in_sample": null,
+   "note_code": "comparison_value",
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "textblock-1-text",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/textblock-1-text",
+   "kind": "text_wording",
+   "slot": "text",
+   "predicate": "https://ch.paf.link/schema/affairs/text",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/textblock/1",
+   "target": {
+    "type": "text_block",
+    "block_id": null,
+    "atom_ids": [
+     "B8.1",
+     "B8.2",
+     "B8.3",
+     "B9.1",
+     "B9.2",
+     "B9.3",
+     "B9.4",
+     "B10.1",
+     "B11.1",
+     "B11.2",
+     "B11.3",
+     "B12.1",
+     "B13.1",
+     "B13.2",
+     "B13.3",
+     "B13.4",
+     "B13.5",
+     "B14.1",
+     "B15.1",
+     "B15.2",
+     "B15.3",
+     "B15.4",
+     "B15.5"
+    ],
+    "page": 1,
+    "last_page": 1,
+    "char_start": 237,
+    "char_end": 1875,
+    "instance_path": "affairs[0].response_steps[0].texts[0].text",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response"
+   },
+   "value": "sha256:b75049e06b72304005e5fa3cd564fdc34242fdf826bcc3784fab94ba87b8b749",
+   "options": [],
+   "probability": null,
+   "value_status": "none",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "copy",
+    "group": "copy",
+    "tier": null,
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": null,
+   "in_sample": null,
+   "note_code": null,
+   "note_params": {},
+   "note": "verbatim copy of the lines of the author block (check […]); the text changes are in the TextBlockRecord"
+  },
+  {
+   "id": "textblock-2-text",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/textblock-2-text",
+   "kind": "text_wording",
+   "slot": "text",
+   "predicate": "https://ch.paf.link/schema/affairs/text",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/textblock/2",
+   "target": {
+    "type": "text_block",
+    "block_id": null,
+    "atom_ids": [
+     "B16.1",
+     "B16.2"
+    ],
+    "page": 1,
+    "last_page": 1,
+    "char_start": 1877,
+    "char_end": 2023,
+    "instance_path": "affairs[0].response_steps[0].texts[1].text",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response"
+   },
+   "value": "sha256:c957bc36e146f7ecf4ca9e490d44780b224ce86323dfd5eab3709a389dd9be5e",
+   "options": [],
+   "probability": null,
+   "value_status": "none",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "copy",
+    "group": "copy",
+    "tier": null,
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": null,
+   "in_sample": null,
+   "note_code": null,
+   "note_params": {},
+   "note": "verbatim copy of the lines of the author block (check […]); the text changes are in the TextBlockRecord"
+  }
+ ],
+ "calibrations": [
+  {
+   "id": "gj1-b1s-b2-marginal-temperature",
+   "iri": "https://parlpdfech.ansv.ch/id/calibration/gj1-b1s-b2-marginal-temperature",
+   "method": "forward_backward_temperature",
+   "kind": "block_slot",
+   "fit_n": 9313,
+   "in_sample": false,
+   "target_status": "target_not_met",
+   "certain_threshold": 0.8,
+   "basis": null,
+   "reference_code": "model_labels_not_human_checked",
+   "measure_sets": [
+    {
+     "name": "dev out-of-fold",
+     "n": 9313,
+     "ece": 0.0526,
+     "ece_low": 0.031093,
+     "ece_high": 0.077205,
+     "brier": 0.266646,
+     "nll": 0.601899
+    },
+    {
+     "name": "validation (44 documents): written block labels of the variant d1n_b1sy (GJ.13); ECE of p of the written option, Brier score and NLL of the 6 options",
+     "n": 2715,
+     "ece": 0.0442,
+     "ece_low": 0.0324,
+     "ece_high": 0.1158,
+     "brier": 0.3125,
+     "nll": 0.5933
+    }
+   ],
+   "note": "B1-S (addendum D): the frozen B1 head with its frozen temperature; B2 block marginal of the form switch_soft (addendum C) after one B2 temperature. Variant b12_entered; threshold a by P17 on dev. GJ.13 on validation: NOT MET",
+   "tier": null,
+   "measured": true
+  },
+  {
+   "id": "gj1-d1-verifier-platt",
+   "iri": "https://parlpdfech.ansv.ch/id/calibration/gj1-d1-verifier-platt",
+   "method": "verifier_platt",
+   "kind": "document_text_parts",
+   "fit_n": 48,
+   "in_sample": false,
+   "target_status": "not_measured",
+   "certain_threshold": 0.9,
+   "basis": null,
+   "reference_code": "model_labels_not_human_checked",
+   "measure_sets": [
+    {
+     "name": "dev_out_of_design, in-sample",
+     "n": 48,
+     "ece": 0.120887,
+     "ece_low": null,
+     "ece_high": null,
+     "brier": 0.163694,
+     "nll": 0.287308
+    }
+   ],
+   "note": "Platt map of the calibrated D1 probability of the S1 rule option; fit set dev_out_of_design. Variant d1_not_entered; threshold a by P17 on dev",
+   "tier": null,
+   "measured": true
+  },
+  {
+   "id": "gj1-r2-platt-step0b",
+   "iri": "https://parlpdfech.ansv.ch/id/calibration/gj1-r2-platt-step0b",
+   "method": "platt_scaling",
+   "kind": "executive_response",
+   "fit_n": 193,
+   "in_sample": true,
+   "target_status": "not_measured",
+   "certain_threshold": 0.6,
+   "basis": null,
+   "reference_code": "model_labels_not_human_checked",
+   "measure_sets": [
+    {
+     "name": "dev AI-reference documents, out-of-fold map (5 folds of the dev design)",
+     "n": 193,
+     "ece": 0.029697,
+     "ece_low": 0.018867,
+     "ece_high": 0.061158,
+     "brier": 0.100316,
+     "nll": 0.16456
+    },
+    {
+     "name": "dev AI-reference documents, in-sample (fit set of the map)",
+     "n": 193,
+     "ece": 0.032938,
+     "ece_low": 0.021508,
+     "ece_high": 0.062637,
+     "brier": 0.096321,
+     "nll": 0.152964
+    }
+   ],
+   "note": "R2 step 0b (criteria 8.4 item 2): Platt map of q(yes) of the frozen head H (layer 16) on the Docling text; fit on the 193 dev AI-reference documents; threshold a by P17 on the out-of-fold values of the map (criteria 8.6 item 4); GJ.14 on validation sets the target status",
+   "tier": null,
+   "measured": true
+  },
+  {
+   "id": "gj1-tier-fixed-R3-none",
+   "iri": "https://parlpdfech.ansv.ch/id/calibration/gj1-tier-fixed-R3-none",
+   "method": "jeffreys_tier_precision",
+   "kind": "block_slot",
+   "fit_n": 549,
+   "in_sample": true,
+   "target_status": "target_not_met",
+   "certain_threshold": 0.8,
+   "basis": {
+    "n": 549,
+    "agreed": 549,
+    "documents": 163
+   },
+   "reference_code": "model_labels_not_human_checked",
+   "measure_sets": [
+    {
+     "name": "validation (44 documents): written block labels of the variant d1n_b1sy (GJ.13); ECE of p of the written option, Brier score and NLL of the 6 options",
+     "n": 2715,
+     "ece": 0.0442,
+     "ece_low": 0.0324,
+     "ece_high": 0.1158,
+     "brier": 0.3125,
+     "nll": 0.5933
+    }
+   ],
+   "note": "rule tier fixed:R3 with the option none: Jeffreys posterior mean of the dev precision (criteria chapter 8.7). Variant b12_entered; threshold a by P17 on dev. GJ.13 on validation: NOT MET",
+   "tier": null,
+   "measured": true
+  },
+  {
+   "id": "value.affair_type.type_head_inline_gov",
+   "iri": "https://parlpdfech.ansv.ch/id/calibration/value.affair_type.type_head_inline_gov",
+   "method": "jeffreys_tier_precision",
+   "kind": "pdf_value",
+   "fit_n": 14,
+   "in_sample": true,
+   "target_status": "not_measured",
+   "certain_threshold": null,
+   "basis": {
+    "n": 14,
+    "agreed": 9,
+    "documents": 14
+   },
+   "reference_code": "export_register_value",
+   "measure_sets": [
+    {
+     "name": "dev, open part, fold values, all tiers of the field affair_type",
+     "n": 1429,
+     "ece": 0.013088,
+     "ece_low": null,
+     "ece_high": null,
+     "brier": 0.042333,
+     "nll": null
+    }
+   ],
+   "note": null,
+   "tier": "type_head_inline_gov",
+   "measured": true
+  },
+  {
+   "id": "value.first_author.response_head_prep_name",
+   "iri": "https://parlpdfech.ansv.ch/id/calibration/value.first_author.response_head_prep_name",
+   "method": "jeffreys_tier_precision",
+   "kind": "pdf_value",
+   "fit_n": 69,
+   "in_sample": false,
+   "target_status": "not_measured",
+   "certain_threshold": null,
+   "basis": {
+    "n": 69,
+    "agreed": 66,
+    "documents": 69
+   },
+   "reference_code": "export_register_value",
+   "measure_sets": [
+    {
+     "name": "dev, open part, fold values, all tiers of the field first_author",
+     "n": 988,
+     "ece": 0.079149,
+     "ece_low": null,
+     "ece_high": null,
+     "brier": 0.120307,
+     "nll": null
+    }
+   ],
+   "note": null,
+   "tier": "response_head_prep_name",
+   "measured": true
+  },
+  {
+   "id": "value.responder_name.rsp_signature",
+   "iri": "https://parlpdfech.ansv.ch/id/calibration/value.responder_name.rsp_signature",
+   "method": "jeffreys_tier_precision",
+   "kind": "pdf_value",
+   "fit_n": 56,
+   "in_sample": false,
+   "target_status": "not_measured",
+   "certain_threshold": 0.6,
+   "basis": {
+    "n": 56,
+    "agreed": 56,
+    "documents": 56
+   },
+   "reference_code": "export_register_value",
+   "measure_sets": [
+    {
+     "name": "dev, open part, fold values, all tiers of the field responder_name",
+     "n": 387,
+     "ece": 0.023114,
+     "ece_low": null,
+     "ece_high": null,
+     "brier": 0.022672,
+     "nll": null
+    }
+   ],
+   "note": null,
+   "tier": "rsp_signature",
+   "measured": true
+  },
+  {
+   "id": "value.title.after_kind_cue",
+   "iri": "https://parlpdfech.ansv.ch/id/calibration/value.title.after_kind_cue",
+   "method": "jeffreys_tier_precision",
+   "kind": "pdf_value",
+   "fit_n": 14,
+   "in_sample": true,
+   "target_status": "not_measured",
+   "certain_threshold": null,
+   "basis": {
+    "n": 14,
+    "agreed": 9,
+    "documents": 14
+   },
+   "reference_code": "export_register_value",
+   "measure_sets": [
+    {
+     "name": "dev, open part, fold values, all tiers of the field title",
+     "n": 1592,
+     "ece": 0.100299,
+     "ece_low": null,
+     "ece_high": null,
+     "brier": 0.175553,
+     "nll": null
+    }
+   ],
+   "note": null,
+   "tier": "after_kind_cue",
+   "measured": true
+  }
+ ],
+ "counts": {
+  "pages": 1,
+  "lines": 45,
+  "blocks": 24,
+  "labels": {
+   "total": 40,
+   "with_probability": 30,
+   "certain": 13,
+   "unsure": 17,
+   "none": 10,
+   "chosen_not_top": 0,
+   "by_source": {
+    "rule": 8,
+    "apertus_head": 1,
+    "code_step": 21,
+    "constant": 8,
+    "copy": 2
+   },
+   "by_group": {
+    "rule": 8,
+    "apertus_readout": 22,
+    "constant": 8,
+    "copy": 2
+   },
+   "by_kind": {
+    "document_text_parts": 1,
+    "executive_response": 1,
+    "block_slot": 24,
+    "constant_value": 8,
+    "pdf_value": 4,
+    "text_wording": 2
+   }
+  },
+  "triples": {
+   "ech-0295": 38,
+   "provenance": 782,
+   "atoms": 910,
+   "labels": 1632,
+   "union": 3362
+  },
+  "record": {
+   "blocks": 24,
+   "block_options": {
+    "response": 8,
+    "recommendation": 1,
+    "title": 3,
+    "none": 12
+   },
+   "author_blocks": 2,
+   "textblocks_by_slot": {
+    "submission": 0,
+    "response": 2
+   },
+   "textblock_records_profile_only": 0,
+   "path_switch_points": 0,
+   "path_switch_points_without_boundary_label": 0,
+   "boundary_labels": 0,
+   "label_assertions": 40,
+   "label_assertions_by_source": {
+    "apertus_head": 1,
+    "code_step": 21,
+    "constant": 8,
+    "copy": 2,
+    "rule": 8
+   },
+   "label_assertions_by_kind": {
+    "block_slot": 24,
+    "constant_value": 8,
+    "document_text_parts": 1,
+    "executive_response": 1,
+    "pdf_value": 4,
+    "text_wording": 2
+   },
+   "pdf_value_gaps": 3,
+   "certain_labels": 13,
+   "unsure_labels": 17,
+   "r2_agrees_with_block_path": true,
+   "d1_option": "B",
+   "leaf_values": 21,
+   "value_records": 21,
+   "e19": {
+    "text_blocks": 2,
+    "characters": 1512,
+    "hyphens_removed": 0,
+    "list_markers_removed": 0,
+    "problems": 0
+   },
+   "metadata_check": {
+    "values_checked": 4,
+    "problems": 0,
+    "leaves_without_provenance": 0
+   },
+   "slots": {
+    "read_from_pdf": 7,
+    "not_found_in_pdf": 24,
+    "not_in_this_document_type": 5,
+    "register_only": 16
+   },
+   "slots_no_rule_searched": 21,
+   "values": {
+    "fields": 7,
+    "read_from_pdf": 4,
+    "not_found_in_pdf": 3,
+    "not_in_this_document_type": 0,
+    "weak_candidates": 0,
+    "addressee_candidates": 0,
+    "certain": 1,
+    "unsure": 3,
+    "export_check": {
+     "equal_to_export": 2,
+     "differs_from_export": 0,
+     "no_export_value": 1,
+     "not_compared": 1
+    }
+   }
+  }
+ },
+ "checks": [
+  {
+   "id": "writer_check",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C1_linkml",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C2_parse",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C3_isomorphism",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C4_parts",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C5_leaf_values",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C6_iri_scheme",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C7_C8_labels",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C9_e19",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C11_wording_at_span",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C12_one_label_for_each_pdf_value",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C13_no_export_value_in_the_record",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C14_cross_check",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C15_slot_states",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C16_probability_and_calibration",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C17_recorded_gaps",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C18_minted_iris",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C19_value_forms",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C20_value_follows_from_wording",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C21_floor",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C22_values_from_the_readers",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C10_shacl",
+   "state": "skipped",
+   "reason": "shacl_tool_absent"
+  }
+ ],
+ "files": [
+  {
+   "name": "879163.gesamt.trig",
+   "role": "gesamt_trig",
+   "media_type": "application/trig",
+   "bytes": 153238,
+   "sha256": "f66c618c8e20c9c0be099c96f878d6567a506dc46c03c07aa97c5a8e46803571",
+   "url": "/api/records/s-879163/files/879163.gesamt.trig"
+  },
+  {
+   "name": "879163.ech.ttl",
+   "role": "ech_ttl",
+   "media_type": "text/turtle",
+   "bytes": 3753,
+   "sha256": "68a8a181b798c3d4dc14f537045f254fec24f2320f71654396ed81f9b11b0e4f",
+   "url": "/api/records/s-879163/files/879163.ech.ttl"
+  },
+  {
+   "name": "879163.gesamt.rdf.xml",
+   "role": "gesamt_rdfxml",
+   "media_type": "application/rdf+xml",
+   "bytes": 299227,
+   "sha256": "15fa72fdd068037820609fe49aa788339dc610669e987a2b386961e72188b6d5",
+   "url": "/api/records/s-879163/files/879163.gesamt.rdf.xml"
+  },
+  {
+   "name": "879163.ech.rdf.xml",
+   "role": "ech_rdfxml",
+   "media_type": "application/rdf+xml",
+   "bytes": 4809,
+   "sha256": "79d094e273c5b009b96d1f66d2424efafb636ff87d6f40874d0e9843423bdd4c",
+   "url": "/api/records/s-879163/files/879163.ech.rdf.xml"
+  },
+  {
+   "name": "879163.ech.yaml",
+   "role": "ech_yaml",
+   "media_type": "application/yaml",
+   "bytes": 3200,
+   "sha256": "e39100dc83acc8d8a1f2ae0636e8c117e0459fa67156bd170ac4ea0fc340949f",
+   "url": "/api/records/s-879163/files/879163.ech.yaml"
+  },
+  {
+   "name": "879163.labels.yaml",
+   "role": "labels_yaml",
+   "media_type": "application/yaml",
+   "bytes": 52659,
+   "sha256": "a7d98bce985b47e7f0634ff13f61e97efdd820c89e31a62f104650960a489053",
+   "url": "/api/records/s-879163/files/879163.labels.yaml"
+  },
+  {
+   "name": "879163.provenance.yaml",
+   "role": "provenance_yaml",
+   "media_type": "application/yaml",
+   "bytes": 25216,
+   "sha256": "391fb82b5bb97aca31b9dc94fec32df9a08f396f87efd8b801c12c8ce15634e6",
+   "url": "/api/records/s-879163/files/879163.provenance.yaml"
+  },
+  {
+   "name": "manifest.json",
+   "role": "manifest",
+   "media_type": "application/json",
+   "bytes": 25892,
+   "sha256": "684ce74e04943ce1e6e45fc67f909bd7aa1ff7c910ac0ddec02d4899dbf921db",
+   "url": "/api/records/s-879163/files/manifest.json"
+  },
+  {
+   "name": "validation.json",
+   "role": "validation",
+   "media_type": "application/json",
+   "bytes": 16821,
+   "sha256": "b2e7c62d6d615db0dd6cc26aa09d1a5b244e8c4068268b79a60ba794f707fc30",
+   "url": "/api/records/s-879163/files/validation.json"
+  }
+ ]
+}

@@ -1,0 +1,307 @@
+{
+ "version": "m10-design-1",
+ "synthetic": false,
+ "status": "EXCEPTION (process rule 10, gate GJ); NOT RELEASED",
+ "records": {
+  "gj1-d1-head-temperature": {
+   "calibration_method": "temperature_scaling",
+   "calibrated_kind": "document_text_parts",
+   "fit_set_file": "daten/gj/design/oof/d1_oof.npz",
+   "fit_set_digest": "2465071fa18d0323594ff7c53cfbb4c1a111b01e672611ae80c92bebb9c1238b",
+   "fit_n": 193,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41, daten/iso/v4/pool_ref41) with the 3 pilot overrides",
+   "in_sample": false,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "temperature",
+     "parameter_value": 1.0312945796996467
+    },
+    {
+     "parameter_name": "layer",
+     "parameter_value": 20.0
+    },
+    {
+     "parameter_name": "C",
+     "parameter_value": 0.01
+    }
+   ],
+   "measure_sets": [
+    {
+     "set_name": "dev out-of-fold",
+     "set_n": 193,
+     "ece": 0.050269,
+     "ece_equal_mass": 0.053139,
+     "classwise_ece": 0.045789,
+     "brier": 0.292988,
+     "nll": 0.493841,
+     "ece_low": 0.045891,
+     "ece_high": 0.11077,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles"
+    }
+   ],
+   "calibration_note": "D1 head (L2 multinomial logistic regression), one temperature on the pooled out-of-fold logits of dev"
+  },
+  "gj1-d1-verifier-platt": {
+   "calibration_method": "verifier_platt",
+   "calibrated_kind": "document_text_parts",
+   "fit_set_file": "daten/gj/design/verifiers.json",
+   "fit_set_digest": "638a3b3cc0c5dbc2aa32d842baa57a529fd359a828d9849d45f44c1e78e8a527",
+   "fit_n": 48,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41, daten/iso/v4/pool_ref41) with the 3 pilot overrides",
+   "in_sample": false,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "alpha",
+     "parameter_value": 0.8848284260225239
+    },
+    {
+     "parameter_name": "beta",
+     "parameter_value": 1.040388982867347
+    }
+   ],
+   "measure_sets": [
+    {
+     "set_name": "dev_out_of_design, in-sample",
+     "set_n": 48,
+     "ece": 0.120887,
+     "ece_equal_mass": 0.117203,
+     "brier": 0.163694,
+     "nll": 0.287308
+    }
+   ],
+   "calibration_note": "Platt map of the calibrated D1 probability of the S1 rule option; fit set dev_out_of_design"
+  },
+  "gj1-b2-marginal-temperature": {
+   "calibration_method": "forward_backward_temperature",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/design/oof/b2_oof.npz",
+   "fit_set_digest": "4acaecd27c331b2bf3590747ae0bf87c65ccecbbffe91ad56b1210781353de1b",
+   "fit_n": 9313,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41, daten/iso/v4/pool_ref41) with the 3 pilot overrides",
+   "in_sample": false,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "temperature_b2",
+     "parameter_value": 2.3587225985216405
+    },
+    {
+     "parameter_name": "temperature_b1",
+     "parameter_value": 1.1050075502408903
+    },
+    {
+     "parameter_name": "layer",
+     "parameter_value": 20.0
+    },
+    {
+     "parameter_name": "C",
+     "parameter_value": 0.001
+    }
+   ],
+   "measure_sets": [
+    {
+     "set_name": "dev out-of-fold",
+     "set_n": 9313,
+     "ece": 0.015273,
+     "ece_equal_mass": 0.016613,
+     "classwise_ece": 0.045577,
+     "brier": 0.286529,
+     "nll": 0.597385,
+     "ece_low": 0.01241,
+     "ece_high": 0.03853,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles"
+    }
+   ],
+   "calibration_note": "B2 block marginal of the free form (b2_hmm.json) after the B1 temperature and one B2 temperature"
+  },
+  "gj1-b2-verifier-platt": {
+   "calibration_method": "verifier_platt",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/design/verifiers.json",
+   "fit_set_digest": "638a3b3cc0c5dbc2aa32d842baa57a529fd359a828d9849d45f44c1e78e8a527",
+   "fit_n": 1767,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41, daten/iso/v4/pool_ref41) with the 3 pilot overrides",
+   "in_sample": false,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "alpha",
+     "parameter_value": 0.8595448659266071
+    },
+    {
+     "parameter_name": "beta",
+     "parameter_value": 0.7365653084877033
+    }
+   ],
+   "measure_sets": [
+    {
+     "set_name": "non-certain blocks of dev_out_of_design, in-sample",
+     "set_n": 1767,
+     "ece": 0.029175,
+     "ece_equal_mass": 0.027812,
+     "brier": 0.162503,
+     "nll": 0.279705
+    }
+   ],
+   "calibration_note": "Platt map of the B2 marginal of the rule option; fit set: the non-certain blocks of dev_out_of_design"
+  },
+  "gj1-b2-switch-forward-backward": {
+   "calibration_method": "forward_backward_temperature",
+   "calibrated_kind": "author_switch",
+   "fit_set_file": "daten/gj/design/oof/b2_oof.npz",
+   "fit_set_digest": "4acaecd27c331b2bf3590747ae0bf87c65ccecbbffe91ad56b1210781353de1b",
+   "fit_n": 9120,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41, daten/iso/v4/pool_ref41) with the 3 pilot overrides",
+   "in_sample": false,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "temperature_b1",
+     "parameter_value": 1.1050075502408903
+    }
+   ],
+   "measure_sets": [
+    {
+     "set_name": "dev out-of-fold, all gaps",
+     "set_n": 9120,
+     "ece": 0.003743,
+     "ece_equal_mass": 0.00324,
+     "classwise_ece": 0.006132,
+     "brier": 0.010224,
+     "nll": 0.026302,
+     "ece_low": 0.003121,
+     "ece_high": 0.005214,
+     "interval_method": "document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles"
+    }
+   ],
+   "calibration_note": "pairwise forward-backward probability of a switch at the gap, with the B1 temperature; the B2 temperature is not applied"
+  },
+  "gj1-tier-fixed-R1-none": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/design/tier_table.json",
+   "fit_set_digest": "49ed195358bbf6b9e0627d6eaec47fc84051cd40240b98fc4722159c4dd545db",
+   "fit_n": 338,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41, daten/iso/v4/pool_ref41) with the 3 pilot overrides",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_mean",
+     "parameter_value": 0.998525
+    },
+    {
+     "parameter_name": "precision",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "blocks",
+     "parameter_value": 338.0
+    },
+    {
+     "parameter_name": "documents",
+     "parameter_value": 111.0
+    }
+   ],
+   "calibration_note": "rule tier fixed:R1 with the option none: Jeffreys posterior mean of the dev precision (criteria chapter 8.7)"
+  },
+  "gj1-tier-fixed-R3-none": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/design/tier_table.json",
+   "fit_set_digest": "49ed195358bbf6b9e0627d6eaec47fc84051cd40240b98fc4722159c4dd545db",
+   "fit_n": 549,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41, daten/iso/v4/pool_ref41) with the 3 pilot overrides",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_mean",
+     "parameter_value": 0.999091
+    },
+    {
+     "parameter_name": "precision",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "blocks",
+     "parameter_value": 549.0
+    },
+    {
+     "parameter_name": "documents",
+     "parameter_value": 163.0
+    }
+   ],
+   "calibration_note": "rule tier fixed:R3 with the option none: Jeffreys posterior mean of the dev precision (criteria chapter 8.7)"
+  },
+  "gj1-tier-fixed-R4-none": {
+   "calibration_method": "jeffreys_tier_precision",
+   "calibrated_kind": "block_slot",
+   "fit_set_file": "daten/gj/design/tier_table.json",
+   "fit_set_digest": "49ed195358bbf6b9e0627d6eaec47fc84051cd40240b98fc4722159c4dd545db",
+   "fit_n": 625,
+   "reference_source": "AI reference E20 v4.1 (daten/iso/v4/ref41, daten/iso/v4/pool_ref41) with the 3 pilot overrides",
+   "in_sample": true,
+   "target_status": "not_measured",
+   "calibration_parameters": [
+    {
+     "parameter_name": "jeffreys_mean",
+     "parameter_value": 0.999201
+    },
+    {
+     "parameter_name": "precision",
+     "parameter_value": 1.0
+    },
+    {
+     "parameter_name": "blocks",
+     "parameter_value": 625.0
+    },
+    {
+     "parameter_name": "documents",
+     "parameter_value": 80.0
+    }
+   ],
+   "calibration_note": "rule tier fixed:R4 with the option none: Jeffreys posterior mean of the dev precision (criteria chapter 8.7)"
+  }
+ },
+ "kind_of": {
+  "gj1-d1-head-temperature": "document_text_parts",
+  "gj1-d1-verifier-platt": "document_text_parts",
+  "gj1-b2-marginal-temperature": "block_slot",
+  "gj1-b2-verifier-platt": "block_slot",
+  "gj1-b2-switch-forward-backward": "author_switch",
+  "gj1-tier-fixed-R1-none": "block_slot",
+  "gj1-tier-fixed-R3-none": "block_slot",
+  "gj1-tier-fixed-R4-none": "block_slot"
+ },
+ "thresholds": {
+  "document_text_parts": {
+   "d1_entered": null,
+   "d1_not_entered": 0.9
+  },
+  "block_slot": {
+   "b12_entered": null,
+   "b12_not_entered": null
+  },
+  "author_switch": {
+   "b12_entered": null,
+   "b12_not_entered": null
+  }
+ },
+ "variant_keys": {
+  "document_text_parts": {
+   "yes": "d1_entered",
+   "no": "d1_not_entered"
+  },
+  "block_slot": {
+   "yes": "b12_entered",
+   "no": "b12_not_entered"
+  },
+  "author_switch": {
+   "yes": "b12_entered",
+   "no": "b12_not_entered"
+  }
+ }
+}

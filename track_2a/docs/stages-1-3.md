@@ -40,7 +40,7 @@ Gaps in this order:
 | Runtime | Python 3.12 with uv; Docling 2.133.0; Poppler (`pdftotext`, `pdfinfo`, `pdftoppm`); on macOS MLX 0.32.3 and mlx-lm 0.32.0. For the GPU: PyTorch 2.8.0, transformers 5.18.0, peft 0.21.2 (recorded on 05.10.2026 for the first rented GPU). |
 | System | Two computers at this time. Docling with Apple Vision OCR (`ocrmac`), MLX in step 7 and the tokenizer of `mlx-lm` in step 8 need macOS. The training and the readout need Linux with a CUDA GPU. This repository has no container file. |
 | Hardware | Development: Mac mini M4 with 32 GB memory. Training and readout: rented H100 GPUs with 80 GB memory, one for each run, in European data centers. |
-| API keys | `HF_TOKEN` for the download of Apertus with the Hugging Face tools. No script in this repository reads it. `RUNPOD_API_KEY` for `src/m04_runpod.py` (rented GPU), from the environment or from the file `.env.runpod` in this folder. The current pipeline does not use `LLM_BASE_URL` and `LLM_API_KEY`. `make run` does not read `LLM_NAME`, `LLM_BASE_URL` and `LLM_API_KEY`. |
+| API keys | `HF_TOKEN` for the download of Apertus with the Hugging Face tools. No script in this repository reads it. `RUNPOD_API_KEY` for `src/m04_runpod.py` (rented GPU), from the environment or from the file `.env.runpod` in this folder. The current pipeline does not use `LLM_BASE_URL` and `LLM_API_KEY`. `make run-earlier` does not read `LLM_NAME`, `LLM_BASE_URL` and `LLM_API_KEY`. |
 | Model weights | Apertus-v1.5-8B in bf16. Each user downloads the weights with an own account (see below). No weights are in this repository. |
 
 #### Settings
@@ -81,7 +81,7 @@ The Apertus Acceptable Use Policy v1.5 has these duties for each user:
 - Source: OpenParlData (https://openparldata.ch). API: https://api.openparldata.ch. Exports: https://files.openparldata.ch/exports/. PDF documents: https://files.openparldata.ch/doc/.
 - The project used the exports of 04.10.2026, 13:26 UTC.
 - OpenParlData publishes its data under CC BY 4.0 (API description, read on 06.10.2026). Attribution: "Source: OpenParlData.ch". The API description and the project page do not say if this license applies to the PDF copies.
-- `data/` is empty. This repository contains no PDF document and no export.
+- `data/` is empty. This repository contains no export. The only PDF documents are the 3 samples of the app (`app/data/samples/`).
 - The documents contain names of persons, for example members of a parliament or of an executive. Some documents contain personal data of third parties.
 - Some documents went to a rented GPU (Runpod) or to the CSCS inference API. Before that, two AI agents (Claude Opus 5.5) examined each of these documents for personal data of third parties. Only documents with the verdict PASS from both AI agents went to these services. Of 321 examined documents, 308 had PASS and 13 had FAIL.
 - This examination did not apply to the AI agents (Claude Opus 5.5). Documents of the project went to them without this examination, for example development documents and the 28 test documents of the gold set.
@@ -186,4 +186,4 @@ The code uses names of the private project. E15 to E32 are items of the decision
 ## About this text
 
 - Language: English, to the rules of ASD-STE100 (Issue 9).
-- Authoring: AI agents (Claude Opus 5.5) wrote the text on 06.10.2026 for the author, from the records and the code of the private project. On 12.10.2026, an AI agent moved it into this file. Later on 12.10.2026, an AI agent removed the open notes and changed the references to the technical report.
+- Authoring: AI agents (Claude Opus 5.5) wrote the text on 06.10.2026 for the author, from the records and the code of the private project. On 12.10.2026, an AI agent moved it into this file. Later on 12.10.2026, an AI agent removed the open notes and changed the references to the technical report. On 14.10.2026, an AI agent changed the item on the PDF documents of the repository.

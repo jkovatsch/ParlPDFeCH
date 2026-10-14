@@ -1,0 +1,3 @@
+{"event":"stage","id":"read_pdf","state":"running"}
+{"event":"stage","id":"read_pdf","state":"failed","seconds":0.012,"reason":"not_in_package"}
+{"event":"failed","code":"not_in_package","detail":{"pdf_sha256":"0000000000000000000000000000000000000000000000000000000000000000","profile":"slim"}}

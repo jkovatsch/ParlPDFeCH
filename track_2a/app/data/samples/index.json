@@ -1,0 +1,65 @@
+{
+ "schema": "parlpdfech-samples/1",
+ "samples": [
+  {
+   "doc_id": "714840",
+   "record_id": "s-714840",
+   "pdf_sha256": "8bb01b408e55d4277550fa7521783392ddae4b8fe881d70165632e36f8391fe2",
+   "title": "Swisslos-Fondsbeitrag; Verein MusikRaumBasel; Festival KlangBasel 2014",
+   "kind": "draft_decree",
+   "parliament": "BS",
+   "parliament_name": "Basel-Stadt",
+   "language": "de",
+   "pages": 1,
+   "blocks": 8,
+   "lines": 11,
+   "modes": [
+    "auto",
+    "rules"
+   ],
+   "apertus": "stored",
+   "in_sample": true,
+   "source_url": "https://www.bs.ch/api/government-resolutions/document/e159ecf6d8a64510b698e6232b719538-332/5/Dokument"
+  },
+  {
+   "doc_id": "879163",
+   "record_id": "s-879163",
+   "pdf_sha256": "7b160c11fcf55c0b70d14c5287589c1bbf7e4e7da9d2e791ba715f667f4ba5d5",
+   "title": "Fonds d'aide au maintien des petits commerces et cafés dans les villages",
+   "kind": "postulate",
+   "parliament": "6037",
+   "parliament_name": "Val de Bagnes",
+   "language": "fr",
+   "pages": 1,
+   "blocks": 24,
+   "lines": 45,
+   "modes": [
+    "auto",
+    "rules"
+   ],
+   "apertus": "stored",
+   "in_sample": true,
+   "source_url": "https://www.valdebagnes.ch/_doc/4552844"
+  },
+  {
+   "doc_id": "26171",
+   "record_id": "s-26171",
+   "pdf_sha256": "f2e5fe4ae6747a886d93bc753795611117fe11b4d23f4ae30d53866fcedb1493",
+   "title": "Der OECD-Steuerreform und den Folgen für den Kanton Basel-Stadt",
+   "kind": "interpellation",
+   "parliament": "BS",
+   "parliament_name": "Basel-Stadt",
+   "language": "de",
+   "pages": 1,
+   "blocks": 13,
+   "lines": 36,
+   "modes": [
+    "auto",
+    "rules"
+   ],
+   "apertus": "stored",
+   "in_sample": true,
+   "source_url": "https://grosserrat.bs.ch/?dnr=19.5497.01"
+  }
+ ]
+}

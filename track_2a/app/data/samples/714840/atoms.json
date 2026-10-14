@@ -1,0 +1,810 @@
+{
+ "doc_id": "714840",
+ "zelle": null,
+ "version": "atome-v3",
+ "skript": "src/m03_atome.py",
+ "erzeugt_utc": "2026-10-05T12:37:28+00:00",
+ "quelle": "daten/iso/docling/714840.json",
+ "quelle_sha256": "dfbb63375b3e15bf5e329d91b51a78324b9daf14728b678c1988547fb8aff02b",
+ "docling_lauf": "iso_gruppen",
+ "werkzeug": {
+  "docling": "2.133.0",
+  "docling-core": "2.99.0",
+  "docling-parse": "7.22.1",
+  "docling-ibm-models": "4.0.3",
+  "torch": "2.14.1",
+  "ocrmac": "1.0.1",
+  "pdftotext": "pdftotext version 26.04.0"
+ },
+ "textschicht": {
+  "pdf": "daten/pdf/lehrer_stichprobe/714840.pdf",
+  "pdf_sha256": "8bb01b408e55d4277550fa7521783392ddae4b8fe881d70165632e36f8391fe2",
+  "pdf_gleich_docling": true,
+  "werkzeug": "pdftotext -bbox -cropbox (Poppler)",
+  "version": "pdftotext version 26.04.0"
+ },
+ "parameter": {
+  "satz_ab": 200,
+  "lang_ab": 200,
+  "kurz_bis": 2,
+  "spaltenluecke_pt": 18,
+  "rahmen_toleranz_pt": 3,
+  "satz_ohne_leerzeichen": true
+ },
+ "status": "success",
+ "legende": {
+  "Spalten": "ID | Seite | Hinweise | Text. ID <Block>.<Zeile>, Teil einer Zeile <Block>.<Zeile>.<Teil>.",
+  "Text": "Wortlaut der Zeile unverändert; Tabellenzellen mit ¦ getrennt; (ohne Text) = Bild ohne Text.",
+  "Form": "Docling-Form des Blocks: Überschrift, Listenpunkt, Tabelle, Verzeichnis, Kopfzeile, Fusszeile, Fussnote, Bild, Bildlegende, Kästchen; Feld = Schlüssel-Wert-Bereich, Formular, im Bild; OCR = Texterkennung; ohne Zeilen = Docling-Text ohne Zeilenumbrüche. Ohne Formangabe: Text.",
+  "Teile": "Spaltenteil k/n = Zeile an einer grossen Lücke zwischen Wörtern geteilt (Spalten nebeneinander); Rahmenteil = Zeile über mehrere Rahmen geteilt; Satzteil k/n = an einer Satzgrenze geteilte Zeile (lange Zeile oder Satzende ohne Leerzeichen wie «…Ende.Neuer Satz»); neuer Rahmen = Block läuft hier in einem weiteren Rahmen weiter; lange Zeile = über 200 Zeichen; gedreht = einzeiliger Rahmen höher als breit.",
+  "Lage": "Seitenwechsel (zurück = Lesereihenfolge springt auf frühere Seite); im Block = derselbe Docling-Block läuft weiter; Drittel-Regel verletzt = Teil endet nicht im unteren bzw. beginnt nicht im oberen Seitendrittel, der Block ist vermutlich falsch zusammengefügt; über Vorgänger = Zeile steht auf der Seite über der vorangehenden Zeile derselben Spalte (Lesereihenfolge springt zurück); ausserhalb Rahmen = Zeile liegt laut Textschicht nicht im Rahmen ihres Blocks.",
+  "Marker": "Bezug Frage n (Zu Frage n, Ad n, Réponse à la question n …), Frage n, Aufzählung <Zeichen>, Stichwort <Wort>, Typbezeichnung (Motion, Interpellation, Anfrage …), Einleitung Fragen (folgende Fragen, questions suivantes …), Auftragsformel (wird beauftragt, est chargé …), Einleitung folgt (wie folgt: …), Unterschriftsformel (auch Gruss- und Protokollformel), Ort und Datum, Datum, Verteiler, Seitenzahl, Sperrschrift, Marker im Atom (Antwortmarker mit Doppelpunkt nicht am Atomanfang). Folgenummer n (Zeile beginnt mit der nächsten Nummer nach einer nummerierten Zeile desselben Blocks, z. B. zweite Fussnote im selben Block), Klammerzeile mit Datum, Zitatende (kurze Zeile, die nach einem Satzende mit einem schliessenden Anführungszeichen endet), Zellenzahl wechselt (Tabellenzeile mit anderer Zahl gefüllter Zellen als die vorige). Alles nur Kandidaten.",
+  "Schlüssel-Wert": "Schlüssel→ID = Feldname, Wert im genannten Atom; Wert←ID = Wert zum genannten Feldnamen; Schlüssel ohne Wert; Wert ohne Schlüssel (unter ID = steht unter diesem Wert); Schlüssel: Wert in Zeile."
+ },
+ "werte": {
+  "merkmale": {
+   "form": "{p}",
+   "group": "{p}",
+   "ocr": "OCR",
+   "no_line_breaks": "ohne Zeilen",
+   "table_row": "Tabellenzeile {p}",
+   "no_text": "ohne Text",
+   "column_part": "Spaltenteil {p}",
+   "frame_part": "Rahmenteil",
+   "sentence_part": "Satzteil {p}",
+   "long_line": "lange Zeile",
+   "rotated": "gedreht",
+   "new_frame": "neuer Rahmen",
+   "page_break": "Seitenwechsel",
+   "page_break_back": "Seitenwechsel zurück",
+   "page_break_in_block": "Seitenwechsel im Block",
+   "thirds_rule_violated": "Drittel-Regel verletzt",
+   "above_previous": "über Vorgänger",
+   "outside_frame": "ausserhalb Rahmen",
+   "letterspacing": "Sperrschrift",
+   "page_number": "Seitenzahl",
+   "answer_reference": "Bezug Frage {p}",
+   "question_number": "Frage {p}",
+   "enumeration": "Aufzählung {p}",
+   "keyword": "Stichwort {p}",
+   "affair_type": "Typbezeichnung",
+   "intro_questions": "Einleitung Fragen",
+   "demand_formula": "Auftragsformel",
+   "intro_follows": "Einleitung folgt",
+   "signature_formula": "Unterschriftsformel",
+   "place_date": "Ort und Datum",
+   "date_line": "Datum",
+   "distribution": "Verteiler",
+   "marker_inside": "Marker im Atom",
+   "kv_key": "Schlüssel→{p}",
+   "kv_value": "Wert←{p}",
+   "kv_key_without_value": "Schlüssel ohne Wert",
+   "kv_value_without_key": "Wert ohne Schlüssel{p}",
+   "kv_inline": "Schlüssel: Wert in Zeile",
+   "number_sequence": "Folgenummer {p}",
+   "bracket_date": "Klammerzeile mit Datum",
+   "quote_end": "Zitatende",
+   "table_cells_change": "Zellenzahl wechselt"
+  },
+  "stichworte": {
+   "proposal": "Antrag",
+   "reasoning": "Begründung",
+   "response": "Antwort",
+   "preliminary_remark": "Vorbemerkung",
+   "questions": "Fragen",
+   "demand": "Auftrag",
+   "resolution": "Beschluss",
+   "recall": "Rappel",
+   "sponsorship": "Urheberschaft"
+  },
+  "teilung": {
+   "sentence": "Satzgrenze",
+   "frame": "Rahmengrenze",
+   "column": "Spaltenlücke",
+   "frame_column": "Rahmengrenze und Spaltenlücke",
+   "sentence_no_space": "Satzgrenze ohne Leerzeichen"
+  },
+  "kv_rolle": {
+   "key": "Schlüssel",
+   "value": "Wert",
+   "key_value_inline": "Schlüssel und Wert in einer Zeile"
+  },
+  "zeilenrahmen_quelle": {
+   "text_layer": "Wortrahmen der Textschicht (pdftotext)",
+   "estimated": "geschätzt: Blockrahmen gleichmässig auf seine Zeilen verteilt"
+  },
+  "merkmal_ech": {
+   "keyword:proposal": {
+    "text_type_input": "recommendation",
+    "text_type_kern": null,
+    "bemerkung": "Kern v0.2.0: Antrag als Wert in ExecutiveResponseStep.recommendation (RecommendationEnum), kein eigener Texttyp"
+   },
+   "keyword:reasoning": {
+    "text_type_input": "reasoning",
+    "text_type_kern": "reasoning"
+   },
+   "keyword:response": {
+    "text_type_input": "response",
+    "text_type_kern": "response"
+   },
+   "keyword:preliminary_remark": {
+    "text_type_input": "response",
+    "text_type_kern": "response",
+    "bemerkung": "nur im Antwortteil; in einem Vorstoss submitted bzw. main_text"
+   },
+   "keyword:questions": {
+    "text_type_input": "submitted",
+    "text_type_kern": "main_text"
+   },
+   "keyword:demand": {
+    "text_type_input": "submitted",
+    "text_type_kern": "main_text"
+   },
+   "keyword:resolution": {
+    "text_type_input": null,
+    "text_type_kern": null,
+    "bemerkung": "kein Texttyp für Beschluss oder Dispositiv (eCH-Befund 11)"
+   },
+   "keyword:recall": {
+    "text_type_input": "submitted",
+    "text_type_kern": "main_text",
+    "bemerkung": "zitierter Vorstoss in einer Antwort; nicht doppelt übernehmen, wenn das Original vorliegt"
+   },
+   "keyword:sponsorship": {
+    "text_type_input": null,
+    "text_type_kern": null,
+    "bemerkung": "Beleg für die Urheberschaft (input: Affair.sponsorship), kein Text"
+   },
+   "affair_type": {
+    "text_type_input": "title",
+    "text_type_kern": null,
+    "bemerkung": "Beleg für affair_type; Titelzeile: input TextTypeEnum.title, Kern v0.2.0 Feld Affair.title statt Texttyp"
+   },
+   "question_number": {
+    "text_type_input": "submitted",
+    "text_type_kern": "main_text"
+   },
+   "intro_questions": {
+    "text_type_input": "submitted",
+    "text_type_kern": "main_text"
+   },
+   "demand_formula": {
+    "text_type_input": "submitted",
+    "text_type_kern": "main_text"
+   },
+   "answer_reference": {
+    "text_type_input": "response",
+    "text_type_kern": "response"
+   }
+  }
+ },
+ "pruefung": {
+  "zeichen_gesamt": 342,
+  "zeichen_in_atomen": 329,
+  "zeichen_trenner": 13,
+  "trenner_zwischen_bloecken": 10,
+  "trenner_zeilenumbruch": 2,
+  "trenner_sonst_leerraum": 1,
+  "nichtleer_ausserhalb": 0,
+  "ueberschneidungen": 0,
+  "wortlaut_abweichend": [],
+  "ausserhalb_block": [],
+  "ueber_rahmengrenze": [],
+  "bloecke_ohne_atom": [],
+  "ids_eindeutig": true,
+  "reihenfolge_steigend": true,
+  "vollstaendig": true
+ },
+ "kennzahlen": {
+  "seiten": 1,
+  "bloecke": 8,
+  "bloecke_ohne_text": 2,
+  "atome": 11,
+  "atome_mit_text": 9,
+  "atome_je_block_median": 1,
+  "atome_je_block_max": 3,
+  "zeichen_gesamt": 342,
+  "zeichen_in_atomen": 329,
+  "zeichen_trenner": 13,
+  "trenner_zwischen_bloecken": 10,
+  "trenner_zeilenumbruch": 2,
+  "trenner_sonst_leerraum": 1,
+  "nichtleer_ausserhalb": 0,
+  "ueberschneidungen": 0,
+  "wortlaut_abweichend": 0,
+  "ausserhalb_block": 0,
+  "ueber_rahmengrenze": 0,
+  "vollstaendig": "ja",
+  "laenge_median": 37,
+  "laenge_p90": 70,
+  "laenge_max": 70,
+  "laengstes_atom": "B4.1.1",
+  "atome_lang": 0,
+  "atome_lang_tabelle": 0,
+  "atome_kurz": 0,
+  "prompt_zeichen": 754,
+  "prompt_tokens_schaetzung": 217,
+  "blockformat_tokens_schaetzung": 156,
+  "faktor_atom_zu_block": 1.39,
+  "zeilen_satzgeteilt": 0,
+  "rahmenteilungen": 0,
+  "spaltenteilungen": 1,
+  "seitenwechsel": 0,
+  "seitenwechsel_zurueck": 0,
+  "seitenwechsel_im_block": 0,
+  "drittel_regel_verletzt": 0,
+  "ueber_vorgaenger": 0,
+  "ausserhalb_rahmen": 0,
+  "bezug_frage": 0,
+  "frage_nr": 0,
+  "aufzaehlung": 1,
+  "stichwort": 0,
+  "typbezeichnung": 0,
+  "einleitung_fragen": 0,
+  "auftragsformel": 0,
+  "einleitung_folgt": 0,
+  "unterschriftsformel": 0,
+  "ort_datum": 0,
+  "datumszeile": 0,
+  "verteiler": 0,
+  "seitenzahl": 1,
+  "sperrschrift": 0,
+  "marker_im_atom": 0,
+  "gedreht": 0,
+  "kv_paare": 0,
+  "satzanfaenge_im_atom": 0,
+  "atome_mit_satzanfang": 0,
+  "satzgrenzen_am_atomende": 0,
+  "ts_zeilen": 7,
+  "ts_gefunden": 7,
+  "ts_ausserhalb_rahmen": 0,
+  "ts_typografie": 1,
+  "ts_nicht_gefunden": 0,
+  "zeilenrahmen_textschicht": 8,
+  "zeilenrahmen_geschaetzt": 1,
+  "text_textschicht_abweichend": 1,
+  "zeilen_satz_ohne_leerzeichen": 0,
+  "folgenummer": 0,
+  "klammerzeile_datum": 0,
+  "zitatende": 0,
+  "zellenzahl_wechselt": 0,
+  "kv_schluessel_ohne_wert": 0,
+  "kv_wert_ohne_schluessel": 0,
+  "kv_in_zeile": 0,
+  "gp_atome": 6,
+  "gp_laenge_median": 39,
+  "gp_laenge_p90": 156,
+  "gp_laenge_max": 156,
+  "gp_atome_lang": 0,
+  "gp_marker_gesamt": 0,
+  "gp_marker_isoliert": 0
+ },
+ "atome": [
+  {
+   "id": "B1.1",
+   "block": "B1",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "picture",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    0,
+    0
+   ],
+   "rahmen": [
+    24.94,
+    40.13,
+    45.83,
+    72.05
+   ],
+   "zeilenrahmen": null,
+   "zeilenrahmen_quelle": null,
+   "zellen": null,
+   "text": "",
+   "text_textschicht": null,
+   "satzanfaenge": null,
+   "merkmale": [
+    [
+     "form",
+     "Bild"
+    ],
+    [
+     "no_text",
+     null
+    ]
+   ],
+   "hinweise": [
+    "Bild",
+    "ohne Text"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B2.1",
+   "block": "B2",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "section_header",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    0,
+    37
+   ],
+   "rahmen": [
+    62.4,
+    60.48,
+    269.71,
+    70.84
+   ],
+   "zeilenrahmen": [
+    62.4,
+    60.48,
+    269.71,
+    70.84
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "Regierungsrat des Kantons Basel-Stadt",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Überschrift"
+    ]
+   ],
+   "hinweise": [
+    "Überschrift"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B3.1",
+   "block": "B3",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "section_header",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    39,
+    81
+   ],
+   "rahmen": [
+    63.84,
+    142.22,
+    319.38,
+    153.48
+   ],
+   "zeilenrahmen": [
+    63.84,
+    142.22,
+    319.38,
+    153.48
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "Regierungsratsbeschluss vom 08. April 2014",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Überschrift"
+    ]
+   ],
+   "hinweise": [
+    "Überschrift"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B4.1.1",
+   "block": "B4",
+   "zeile": 1,
+   "teil": 1,
+   "teilung": "column",
+   "seite": 1,
+   "label": "section_header",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": "key_value_area",
+   "zeichen": [
+    83,
+    153
+   ],
+   "rahmen": [
+    63.84,
+    201.74,
+    544.26,
+    213.0
+   ],
+   "zeilenrahmen": [
+    63.84,
+    201.74,
+    464.81,
+    213.0
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "Swisslos-Fondsbeitrag; Verein MusikRaumBasel; Festival KlangBasel 2014",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Überschrift"
+    ],
+    [
+     "group",
+     "Feld"
+    ],
+    [
+     "column_part",
+     "1/2"
+    ]
+   ],
+   "hinweise": [
+    "Überschrift",
+    "Feld",
+    "Spaltenteil 1/2"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B4.1.2",
+   "block": "B4",
+   "zeile": 1,
+   "teil": 2,
+   "teilung": "column",
+   "seite": 1,
+   "label": "section_header",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": "key_value_area",
+   "zeichen": [
+    154,
+    161
+   ],
+   "rahmen": [
+    63.84,
+    201.74,
+    544.26,
+    213.0
+   ],
+   "zeilenrahmen": [
+    496.2,
+    201.74,
+    544.26,
+    213.0
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "P140393",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Überschrift"
+    ],
+    [
+     "group",
+     "Feld"
+    ],
+    [
+     "column_part",
+     "2/2"
+    ]
+   ],
+   "hinweise": [
+    "Überschrift",
+    "Feld",
+    "Spaltenteil 2/2"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B5.1",
+   "block": "B5",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "list_item",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": "list",
+   "zeichen": [
+    163,
+    231
+   ],
+   "rahmen": [
+    63.84,
+    286.1,
+    475.1,
+    324.96
+   ],
+   "zeilenrahmen": [
+    63.84,
+    286.1,
+    475.1,
+    297.36
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "1. Dem Verein MusikRaumBasel wird für das Musikfestival \"KlangBasel\"",
+   "text_textschicht": "1. Dem Verein MusikRaumBasel wird für das Musikfestival „KlangBasel“",
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Listenpunkt"
+    ],
+    [
+     "enumeration",
+     "1."
+    ]
+   ],
+   "hinweise": [
+    "Listenpunkt",
+    "Aufzählung 1."
+   ],
+   "kv": null
+  },
+  {
+   "id": "B5.2",
+   "block": "B5",
+   "zeile": 2,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "list_item",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": "list",
+   "zeichen": [
+    232,
+    296
+   ],
+   "rahmen": [
+    63.84,
+    286.1,
+    475.1,
+    324.96
+   ],
+   "zeilenrahmen": [
+    90.84,
+    299.9,
+    475.02,
+    311.16
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "im September 2014 ein Beitrag aus dem Swisslos-Fonds in Höhe von",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Listenpunkt"
+    ]
+   ],
+   "hinweise": [
+    "Listenpunkt"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B5.3",
+   "block": "B5",
+   "zeile": 3,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "list_item",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": "list",
+   "zeichen": [
+    297,
+    319
+   ],
+   "rahmen": [
+    63.84,
+    286.1,
+    475.1,
+    324.96
+   ],
+   "zeilenrahmen": [
+    90.84,
+    313.7,
+    200.48,
+    324.96
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "Fr. 250'000 bewilligt.",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Listenpunkt"
+    ]
+   ],
+   "hinweise": [
+    "Listenpunkt"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B6.1",
+   "block": "B6",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "picture",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": null,
+   "zeichen": [
+    319,
+    319
+   ],
+   "rahmen": [
+    338.95,
+    330.77,
+    446.93,
+    438.9
+   ],
+   "zeilenrahmen": null,
+   "zeilenrahmen_quelle": null,
+   "zellen": null,
+   "text": "",
+   "text_textschicht": null,
+   "satzanfaenge": null,
+   "merkmale": [
+    [
+     "form",
+     "Bild"
+    ],
+    [
+     "ocr",
+     null
+    ],
+    [
+     "no_text",
+     null
+    ]
+   ],
+   "hinweise": [
+    "Bild",
+    "OCR",
+    "ohne Text"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B7.1",
+   "block": "B7",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "text",
+   "schicht": "body",
+   "kopf_fuss": null,
+   "eltern": "picture",
+   "zeichen": [
+    321,
+    331
+   ],
+   "rahmen": [
+    353.86,
+    402.26,
+    431.92,
+    430.91
+   ],
+   "zeilenrahmen": [
+    353.86,
+    402.26,
+    431.92,
+    430.91
+   ],
+   "zeilenrahmen_quelle": "estimated",
+   "zellen": null,
+   "text": "0V18 19500",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "group",
+     "im Bild"
+    ],
+    [
+     "ocr",
+     null
+    ]
+   ],
+   "hinweise": [
+    "im Bild",
+    "OCR"
+   ],
+   "kv": null
+  },
+  {
+   "id": "B8.1",
+   "block": "B8",
+   "zeile": 1,
+   "teil": null,
+   "teilung": null,
+   "seite": 1,
+   "label": "page_footer",
+   "schicht": "furniture",
+   "kopf_fuss": "fuss",
+   "eltern": null,
+   "zeichen": [
+    333,
+    342
+   ],
+   "rahmen": [
+    503.16,
+    791.33,
+    538.76,
+    799.77
+   ],
+   "zeilenrahmen": [
+    503.16,
+    791.33,
+    538.76,
+    799.77
+   ],
+   "zeilenrahmen_quelle": "text_layer",
+   "zellen": null,
+   "text": "Seite 1/1",
+   "text_textschicht": null,
+   "satzanfaenge": [],
+   "merkmale": [
+    [
+     "form",
+     "Fusszeile"
+    ],
+    [
+     "page_number",
+     null
+    ]
+   ],
+   "hinweise": [
+    "Fusszeile",
+    "Seitenzahl"
+   ],
+   "kv": null
+  }
+ ],
+ "prompt": [
+  "B1.1 | 1 | Bild, ohne Text | (ohne Text)",
+  "B2.1 | 1 | Überschrift | Regierungsrat des Kantons Basel-Stadt",
+  "B3.1 | 1 | Überschrift | Regierungsratsbeschluss vom 08. April 2014",
+  "B4.1.1 | 1 | Überschrift, Feld, Spaltenteil 1/2 | Swisslos-Fondsbeitrag; Verein MusikRaumBasel; Festival KlangBasel 2014",
+  "B4.1.2 | 1 | Überschrift, Feld, Spaltenteil 2/2 | P140393",
+  "B5.1 | 1 | Listenpunkt, Aufzählung 1. | 1. Dem Verein MusikRaumBasel wird für das Musikfestival \"KlangBasel\"",
+  "B5.2 | 1 | Listenpunkt | im September 2014 ein Beitrag aus dem Swisslos-Fonds in Höhe von",
+  "B5.3 | 1 | Listenpunkt | Fr. 250'000 bewilligt.",
+  "B6.1 | 1 | Bild, OCR, ohne Text | (ohne Text)",
+  "B7.1 | 1 | im Bild, OCR | 0V18 19500",
+  "B8.1 | 1 | Fusszeile, Seitenzahl | Seite 1/1"
+ ]
+}

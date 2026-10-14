@@ -2,7 +2,7 @@
 
 A PDF of a Swiss parliament goes in. An eCH-0295 record in RDF comes out.
 
-![From a PDF to an eCH-0295 record](docs/img/flow.svg)
+![How it works in four pictures: 1 the page becomes lines, 2 code rules decide first, 3 Apertus writes no text, 4 data with its source](docs/img/how-it-works.png)
 
 ![The result view of the app for sample 26171](docs/img/result-view.png)
 

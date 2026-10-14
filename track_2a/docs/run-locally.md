@@ -14,7 +14,7 @@ make run
 - The command builds the image (target `slim`) from `app/` and starts it on `127.0.0.1:8080`.
 - Open `http://127.0.0.1:8080/app/`. `make stop` stops the container. `make logs` shows its log.
 - This image converts the 3 samples only. It does not convert your own PDF.
-- State on 14.10.2026: not run. The Mac of the project has no Docker.
+- State on 14.10.2026: not run. Docker Desktop on the Mac of the project did not start: it waits for a password in a system dialog. On the same day a private build pipeline on Linux built a container image from the source tree of the package. Nobody started this image.
 
 ## Way 2: no container (`make run-native`)
 

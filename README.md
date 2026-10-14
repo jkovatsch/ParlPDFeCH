@@ -1,6 +1,6 @@
 # ParlPDFeCH
 
-A PDF of a Swiss parliament goes in. An eCH-0295 record comes out. Each value of the record is read from the PDF and has a probability, a page and a text span. The OpenParlData export is the reference of the measurement. No export value goes into a record.
+A PDF of a Swiss parliament goes in. An eCH-0295 record comes out. Each of the 7 head values of the record is read from the PDF and has a probability. A value from the rules also has a page and a text span. Identifiers and constants of the record have no probability. The OpenParlData export is the reference of the measurement. No export value goes into a record.
 
 - Author: Jonathan Kovatsch, as a private person. Copyright 2026 Jonathan Kovatsch (see `NOTICE`).
 - Challenge: Track 2A (OpenParlData) of the Hack Apertus online hack, "Extracting Parliamentary Affairs from PDFs into One Common Structure". Challenge page: https://hackapertus.notion.site/track-2a-openparldata
@@ -26,7 +26,7 @@ Reader with rules only. Reference: the export. No human checked a value of the o
 
 - Precision: correct / (correct + wrong). Found rate: (correct + wrong) / documents with a reference. Share correct: correct / documents with a reference.
 - Correct means equal to the export value after the normalisation of the project.
-- Apertus-v1.5-8B gives values for 2 of the 7 fields: where the rules find none, or where the rule value has a probability below 0.5. With them, the share correct is 0.8675 for the affair type and 0.6028 for the first author. A dropped PDF gets values from the rules only.
+- Linear heads on the hidden states of Apertus-v1.5-8B give values for 2 of the 7 fields: where the rules find none, or where the rule value has a probability below 0.5. With them, the share correct is 0.8675 for the affair type and 0.6028 for the first author. A dropped PDF gets values from the rules only.
 - No person has accepted these numbers. No pass limit was fixed before the run. Thus this text does not say that a field passes.
 - Number ids in [track_2a/numbers.json](track_2a/numbers.json): `values.last_run.rules_only.all.<field>.precision`, `.found_rate`, `.share_correct`; `values.last_run.combined.all.<field>.share_correct`; `values.last_run.parliaments.<all|validation|group7>`; `values.round4.documents`, `values.round4.parliaments`.
 
@@ -34,7 +34,7 @@ Reader with rules only. Reference: the export. No human checked a value of the o
 
 1. Fewer than half of the documents with a reference get the export value. This applies to the affair number, the 2 dates, the title and the first author.
 2. AI agents had read some of the 872 documents before the run: 116 or more (`values.last_run.contact.read_by_ai_agents.lower_limit`), that is 48 validation documents and all 68 group-7 documents (`values.last_run.contact.kind1.<validation|group7>`). The older rule chain was designed on a list with 38 documents of the run (`values.last_run.contact.rule_design_list.validation`).
-3. AI agents of one model family did all work and all examination. No human checked a value of the one fixed run. The reference is a register, not a hand-checked gold set.
+3. AI agents of one model family wrote the rules, the tools and the measures, and examined them. No human checked a value of the one fixed run. The reference is a register, not a hand-checked gold set.
 
 [track_2a/docs/limits.md](track_2a/docs/limits.md) gives all 12 limits of the result with their sources. The technical report adds 3 notes on the method (items 13 to 15 of its chapter 6).
 
@@ -45,7 +45,7 @@ Reader with rules only. Reference: the export. No human checked a value of the o
 | 1 Representation model | eCH-0295, working draft I95 (commit `3cab44d`), and the cascade of the project. The project uses eCH-0295 because it is the working draft of the Swiss standard for political affairs. The project gives no mapping to Akoma Ntoso, Parla-CLARIN or Popolo. The cascade uses the kind of the document and the affair type to select the slots that a document can state. File: `track_2a/src/converter_gj/m11_cascade.yaml`. The earlier converter adds the LinkML profile `track_2a/src/converter/m06_ech_profil.yaml` 0.2.0 for its provenance. It changes no eCH-0295 class. |
 | 2 Converter: prompts and code | The code of the method of the report: `track_2a/src/converter_gj/`. The prompts for Apertus: `track_2a/src/prompts/gj_values_v1_de/` (value questions) and `track_2a/src/prompts/gj_jev_v1_de/` (block roles). The app: `track_2a/app/`. `make run-native` ran on one Mac. `make run` (Docker) was not run. In the app, the 7 values of a record come from the rules; for the 3 samples, stored Apertus states give the block labels. |
 | 3 Evaluation | The one fixed run of 13.10.2026 against the export (see above). The one fixed run has no hand-checked gold set: no human checked a reference value of the export. The author examined 26 records of test documents for the earlier converter. The method of the report was not scored on them. The run has no count by language or by state level. |
-| 3 Cross-parliament question | In which parliaments does the PDF with the response of the executive also contain the submitted text? The report gives an answer on development documents (chapter 6). It uses block labels from an Apertus head, compared with AI labels only. It is not a result of the one fixed run. |
+| 3 Cross-parliament question | In which parliaments does the PDF with the response of the executive also contain the submitted text? The report gives an answer on development documents (chapter 6). It uses block labels from an Apertus head, compared with AI labels only. The documents are a stratified sample of development parliaments; a share is not the share of all documents of a parliament. It is not a result of the one fixed run. |
 
 The public text of 12.10.2026 (commit `2fd48e2`) described an earlier converter, which takes its metadata values from the export. It is still in `track_2a/src/converter/` (command `make run-earlier`). Its scores on 26 records of test documents are not a part of the one fixed run.
 

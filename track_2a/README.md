@@ -1,10 +1,10 @@
 # ParlPDFeCH, Track 2A: a parliament PDF goes in, an eCH-0295 record comes out
 
-What goes in: one PDF of a Swiss parliament. What comes out: one eCH-0295 record in Turtle and YAML, and the result of a validator. Each value of the record is read from the PDF and has a probability, a page and a text span. The OpenParlData export is the reference of the measurement; at run time no export value goes into a record.
+What goes in: one PDF of a Swiss parliament. What comes out: one eCH-0295 record in Turtle and YAML, and the result of a validator. Each of the 7 head values of the record is read from the PDF and has a probability. A value from the rules also has a page and a text span. Identifiers and constants of the record have no probability. The OpenParlData export is the reference of the measurement; at run time no export value goes into a record.
 
 To start the app, use `make run-native` (chapter "Run it"). This is the way that ran on 14.10.2026. `make run`, the Docker way that the template asks for, has not run.
 
-In the one fixed run, Apertus-v1.5-8B gave values for 2 of the 7 fields, the affair type and the first author, from stored hidden states. It gave a value where the rules found none, or where the rule value had a probability below 0.5. The rules gave all other values. A dropped PDF gets values from the rules only. In the app, the 7 values of the record come from the rules in each mode. For its 3 samples, the app uses stored Apertus states for the block labels only.
+In the one fixed run, linear heads on stored hidden states of Apertus-v1.5-8B gave values for 2 of the 7 fields. These fields are the affair type and the first author. A head tier gave a value where the rules found none, or where the rule value had a probability below 0.5. The rules gave all other values. A dropped PDF gets values from the rules only. In the app, the 7 values of the record come from the rules in each mode. For its 3 samples, the app uses stored Apertus states for the block labels only.
 
 No person has accepted the numbers of this text. They come from the one fixed run of 13.10.2026. AI agents made and examined them.
 
@@ -12,7 +12,7 @@ Three limits come first. [docs/limits.md](docs/limits.md) gives all 12.
 
 1. Fewer than half of the documents with a reference get the export value. This applies to the affair number, the 2 dates, the title and the first author.
 2. AI agents had read some of the 872 documents before the run: 116 or more, that is 48 validation documents and all 68 group-7 documents. The older rule chain was designed on a list with 38 documents of the run.
-3. AI agents of one model family did all work and all examination. No human checked a value of the one fixed run. The reference is a register, not a hand-checked gold set.
+3. AI agents of one model family wrote the rules, the tools and the measures, and examined them. No human checked a value of the one fixed run. The reference is a register, not a hand-checked gold set.
 
 Number ids: `values.last_run.contact.read_by_ai_agents.lower_limit` (116), `values.last_run.contact.kind1.validation` (48), `values.last_run.contact.kind1.group7` (68), `values.last_run.contact.rule_design_list.validation` (38).
 
@@ -52,7 +52,7 @@ Number ids (file [numbers.json](numbers.json)):
 ## What this is
 
 1. A PDF of a Swiss parliament goes in. An eCH-0295 record comes out.
-2. Each value of the record is read from the PDF and has a probability, a page and a text span.
+2. Each of the 7 head values of the record is read from the PDF and has a probability. A value from the rules also has a page and a text span. Identifiers and constants of the record have no probability.
 3. The OpenParlData export is the reference of the measurement. On development documents it also gives the fit labels of the Apertus heads. At run time no export value goes into a record.
 4. The one fixed run of 13.10.2026 compared the values of 872 documents of 26 parliaments with the export, one time.
 5. No pass limit was fixed before the run. Thus this text gives the numbers and their plain meaning, and no statement that a field passes.
@@ -75,7 +75,7 @@ make test         # checks with no network
 | Command | What it does | State on 14.10.2026 |
 |---|---|---|
 | `make setup` | One time, with network. It installs Python 3.12 with uv (uv can also put the command `python3.12` into `~/.local/bin`) and the Python packages of the app into `.venv/`. It downloads the Rust crates of `app/Cargo.lock` (only if cargo is on the computer; if not, it prints a note), the packages of the earlier converter and the 2 eCH-0295 schema files (pinned commit and SHA-256). `make run` does not need it. | Run on one Mac (Apple silicon, macOS) in a fresh clone. uv and cargo took the packages from the local caches of that Mac. The 2 schema files agreed with the pinned SHA-256. |
-| `make run` | Needs Docker. It builds the image (target `slim`) from `app/` and starts it on `127.0.0.1:8080`. It waits for `/healthz`. Then open `http://127.0.0.1:8080/app/`. The target `slim` converts the 3 samples only. | Not run. The Mac of the project has no Docker. |
+| `make run` | Needs Docker. It builds the image (target `slim`) from `app/` and starts it on `127.0.0.1:8080`. It waits for `/healthz`. Then open `http://127.0.0.1:8080/app/`. The target `slim` converts the 3 samples only. | Not run. Docker Desktop on the Mac of the project did not start: it waits for a password in a system dialog. On 14.10.2026 a private build pipeline on Linux built a container image from the source tree of the package. Nobody started this image. |
 | `make stop`, `make logs` | They stop the container of `make run`, or show its log. | Not run. |
 | `make run-native` | No container. It builds the Rust server and the WebAssembly bundle with cargo. Then it starts the app on `127.0.0.1:8080` (`PORT=` sets another port). Stop it with Ctrl-C. | Run on one Mac (Apple silicon, macOS), with the offline flags of cargo: in this folder (port 8899) and in a fresh clone (port 8898). Each time, the 3 samples in the modes auto and rules gave 6 valid records. The server gave the page, the result data, `<doc>.values.ttl`, `source.pdf` and `page-1.png` with the status 200. |
 | `make test` | Checks with no network and no Rust compiler. It compares each copied file with `SOURCES.json` and checks the prompt files of `gj_jev_v1_de`. It runs the validator on the 6 stored output files of the earlier converter and on `tests/invalid_instance.yaml`, which it must refuse. It checks the file list and the code layout of `app/`. | PASS on one Mac, in this folder and in a fresh clone. It has no check of the numbers: `check_numbers.py` does not exist. |
@@ -115,7 +115,7 @@ A value can also have one of these states: the rules found no value; the kind of
 
 ## Samples
 
-The 3 samples are development documents. The rule authors read them, and the heads were fitted on them. Thus the probability of a value of a sample counts the sample itself. Two AI agents examined each sample for personal data of third persons, with the result PASS. The documents name only persons with a public role.
+The 3 samples are development documents. The rule authors read them, and the heads were fitted on them. Thus the probability of a value of a sample counts the sample itself. Two AI agents examined each sample for personal data of third persons, with the result PASS: they found only persons with a public role. No human checked this.
 
 | Document | Parliament | Language | Content |
 |---|---|---|---|
@@ -180,7 +180,7 @@ It validates an instance against eCH-0295 version I95 (`ech-0295_affairs/input/s
 
 ## Results
 
-All values: the one fixed run of 13.10.2026, all 872 documents. The reference is the export. No human checked a value. Each interval is a 90 % interval of a bootstrap by parliament (26 parliaments).
+All values: the one fixed run of 13.10.2026, all 872 documents. The reference is the export. No human checked a value of the run. Each interval is a 90 % interval of a bootstrap by parliament (26 parliaments).
 
 The challenge asks for an evaluation against a hand-checked gold set. The one fixed run has none. Its reference is the export.
 
@@ -229,16 +229,16 @@ Plain meaning:
 - The 2 Apertus tiers add found values for the affair type and the first author, at a precision near that of the rules.
 - A pooled value does not describe one parliament. For the title, the affair number and the 2 dates, the precision of the parliaments is far apart.
 
-Cross-parliament question of the challenge: the report ([technical_report.md](technical_report.md), chapter 6) gives one answer on development documents, with block labels from an Apertus head. These labels were compared with labels from an AI, not with human labels. The answer is not a result of the one fixed run.
+Cross-parliament question of the challenge: the report ([technical_report.md](technical_report.md), chapter 6) gives one answer on development documents, with block labels from an Apertus head. These labels were compared with labels from an AI, not with human labels. The documents are a stratified sample of development parliaments; a share is not the share of all documents of a parliament. The answer is not a result of the one fixed run.
 
 Limits of these results (short form; [docs/limits.md](docs/limits.md) gives each with its source and its number ids):
 
 1. Fewer than half of the documents with a reference get the export value. This applies to the affair number, the 2 dates, the title and the first author. The share correct is 0.2214, 0.2729, 0.2075, 0.4688 and 0.4556 (L1).
-2. The authors of the value rules read none of the 26 parliaments of the run. The precision of the title, the affair number and the 2 dates is lower there than on the development documents (L2).
+2. The authors of the value rules of 13.10.2026 read the 44 development parliaments; the 26 parliaments of the run are other parliaments. Addendum I says that these authors opened no file of the 872 documents; no examination compared this statement with the work records. The precision of the title, the affair number and the 2 dates is lower there than on the development documents (L2).
 3. In the check by eye, each of the 2 AI examiners named 12 of the 50 documents with a kind that looks wrong. Then the cascade does not search some fields. The run did not measure the kind (L3).
 4. AI agents had read 116 or more of the 872 documents before the run: 48 validation documents and all 68 group-7 documents. An audit of the work records found a sign of earlier contact for 300 of them. For the other 572 it found none; this is no proof of no contact (L4).
 5. The older rule chain makes the rule files of the run. AI agents designed it on a list with 38 documents of the run, of 9 of the 18 validation parliaments (L5).
-6. AI agents of one model family did all work and all examination. No human checked a value, a tool or a number (L6).
+6. AI agents of one model family (Claude Opus 5.5) wrote the rules, the tools, the measures and the audits. AI agents of the same family examined them. No human checked a value of the one fixed run, a tool or a number (L6).
 7. The reference is a register. A value can be correct as printed and differ from the register. The check by eye found differences in both directions (L7).
 8. No pass limit was fixed before the run. Thus this text does not say that a field passes (L8).
 9. The development values are design values. The rule authors read all 44 development parliaments. These values are optimistic (L9).
@@ -272,10 +272,10 @@ Ids of items 9 to 11: `values.round4.parliaments`, `values.last_run.rules_only.g
 ## Use of Apertus and of other models
 
 1. Apertus-v1.5-8B in bf16 generates no token. A linear head reads the hidden state of layer 20 at the last token of a question (`design.fixed.addendum_i.layer_of_each_head`).
-2. In the run, Apertus gives values for 2 of the 7 fields: the affair type and the first author. It gives a value where the rules find none, or where the rule value has a probability below 0.5. In the run, the first-author tier replaced 6 such rule values (`values.last_run.combined.all.tier.apertus_q2_sponsor_hi.replaced_rule_values`). The rules give each other value.
+2. In the run, the Apertus heads give values for 2 of the 7 fields: the affair type and the first author. A head tier gives a value where the rules find none, or where the rule value has a probability below 0.5. In the run, the first-author tier replaced 6 such rule values (`values.last_run.combined.all.tier.apertus_q2_sponsor_hi.replaced_rule_values`). The rules give each other value.
 3. Value questions ([src/prompts/gj_values_v1_de/](src/prompts/gj_values_v1_de/README.txt)): `Q0` (the kind of the document) did not enter the reader. `Q1` (the affair type where the rules find none) entered. Of `Q2`, only the first author with a high head probability entered.
 4. In the run the 2 tiers gave 59 and 79 values with a reference, with precision 0.9322 and 0.8481. A type from `Q1` has no page and no span. Ids: `values.last_run.combined.all.tier.apertus_q1.*`, `values.last_run.combined.all.tier.apertus_q2_sponsor_hi.*`.
-5. Apertus can also give each text block a role, for example submitted text or response of the executive. 2 variants of this were measured on 44 validation documents against labels from an AI. The run did not use them; it used the block roles of the rule chain.
+5. Apertus can also give each text block a role, for example submitted text or response of the executive. 2 variants of this were measured on 44 validation documents against labels from an AI. The 2 variants (B1-S and B1-L) were the second and third runs on the same 44 documents. B1-S was designed after the result of the first run was known. Thus their values are information, not values of one planned run. The rules saw 42 of the 44 documents during their design. The run did not use the 2 variants; it used the block roles of the rule chain.
 6. One of these 2 variants adds a LoRA adapter to Apertus. The adapter is not published, and it did not enter the run. The value questions use the unchanged model with linear heads.
 7. The states were made on one H100 GPU before the run. The app runs no language model on your computer.
 8. The app does not apply the 2 tiers of item 4. Its 7 head values come from the rules ([app/README.md](app/README.md), chapter "The modes"). For the 3 samples, 2 linear heads and a sequence step give block labels from the stored states.

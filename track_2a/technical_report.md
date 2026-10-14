@@ -5,7 +5,7 @@
 - **Team:** ParlPDFeCH — 1 member (the author)
 - **Demo:** no hosted demo. The app runs on your computer (`make run-native`). Repository: <https://github.com/jkovatsch/ParlPDFeCH>, folder `track_2a/`.
 - **Version:** 14.10.2026, text version 3. It replaces the earlier text on block labels.
-- **Status of each value:** EXCEPTION, NOT RELEASED. This means: no person accepted the written plan of the run or these numbers.
+- **Status of each value:** EXCEPTION, NOT RELEASED: no person accepted the plan of the run or these numbers.
 
 A name in square brackets, for example [`sets.docling.all`], is the id of a number in `numbers.json` in the same folder. The end of this report gives the short forms of the ids and the source files.
 
@@ -13,13 +13,13 @@ A name in square brackets, for example [`sets.docling.all`], is the id of a numb
 
 Question: can one method read the head values of a Swiss parliament PDF into an eCH-0295 record, with a probability for each value?
 
-A PDF of a Swiss parliament goes in. An eCH-0295 record comes out. Each value of the record is read from the PDF and has a probability. Each value also has a page and a text span, except an affair type from an Apertus head. The OpenParlData export is the reference of the measurement. On development documents it also gives the fit labels of the Apertus heads. At run time no export value goes into a record.
+A PDF of a Swiss parliament goes in. An eCH-0295 record comes out. Each of the 7 head values of the record is read from the PDF and has a probability. Each such value also has a page and a text span, except an affair type from an Apertus head. Identifiers and constants of the record have no probability. The OpenParlData export is the reference of the measurement. On development documents it also gives the fit labels of the Apertus heads. At run time no export value goes into a record.
 
-Method. Docling gives the text blocks. Code rules give the role of the document and of each block. The cascade of eCH-0295 selects the slots that a document can state. Rule readers read 7 head values, and a calibration gives each value a probability. A writer makes the record, and a validator checks it. Apertus-v1.5-8B gives values for 2 of the 7 fields (affair type, first author), from stored hidden states. The other values come from the rules. A dropped PDF gets the rules only.
+Method. Docling gives the text blocks. Code rules give the role of the document and of each block. The cascade of eCH-0295 selects the slots that a document can state. Rule readers read 7 head values, and a calibration gives each value a probability. A writer makes the record, and a validator checks it. Linear heads on stored hidden states of Apertus-v1.5-8B give values for 2 of the 7 fields (affair type, first author). The other values come from the rules. A dropped PDF gets the rules only.
 
 Result. The one fixed run of 13.10.2026 compared the values of 872 [`R.documents`] documents of 26 [`P.all`] parliaments with the export, one time. With rules only, a share of 0.9431 [`R.affair_type.precision`] of the given affair types is equal to the export value. For the responder this share is 0.9756 [`R.responder_name.precision`]. The share correct is the share of documents with a reference that get the export value. With rules only it is 0.7923 [`R.affair_type.share_correct`] for the affair type and 0.2214 [`R.affair_number.share_correct`] for the affair number. For the affair number, the 2 dates, the title and the first author it is less than 0.5 (table 2).
 
-AI agents did all work and all examination, and no human checked a value. No pass limit was fixed before the run. Chapter 6 gives the limits. No value of this report comes from a test document.
+AI agents wrote the method and examined it, and no human checked a value of the one fixed run. No pass limit was fixed before the run. Chapter 6 gives the limits. No value of this report comes from a test document.
 
 ## 2. Architecture
 
@@ -42,12 +42,12 @@ Why rules first: a rule value has a page, a span and a reason that a reader can 
 
 - **Model:** `swiss-ai/Apertus-v1.5-8B` (form value `8B v1.5`), bf16, no quantization. The value questions use the unchanged model weights.
 - **How it is used:** read-out of hidden states after a forward pass. Apertus generates no token. A linear head reads the hidden state of layer 20 [`F.addendum_i.layer_of_each_head`] at the last token of a question.
-- **Where it runs:** a virtual machine with one H100 GPU at Phoeniqs made the states. A Mac applied the heads to stored states.
+- **Where it runs:** a virtual machine with one H100 GPU at Phoeniqs made the states. Then a Mac applied the heads.
 - **Part of the result:** values for 2 of the 7 fields. In the run the 2 tiers gave 59 and 79 values with a reference (table 4).
 
 **Prefix and questions.** The prompt is German. The prefix has a system text and the whole document, one line for each block: `[B<n> | S.<page> | <Docling label>] <block text>`. The model reads the prefix one time. Each question then has its own suffix, and after each suffix the cache goes back to the prefix. Thus each question sees the whole document and no other question. The value template `gj_values_v1_de` has the questions `Q0` (kind of the document), `Q1` (affair type) and `Q2` (which head values a block states). Its files are in `track_2a/src/prompts/gj_values_v1_de/`. It uses the prefix of the block-role template in `track_2a/src/prompts/gj_jev_v1_de/`.
 
-**Block roles: measured, not in the run.** Apertus can also give each text block a role, for example submitted text or response text. 2 variants were measured on 44 [`sets.reference.validation.documents`] labelled validation documents, against labels from an AI agent. No certain rule decides 2,325 [`rules.val.non_certain_blocks`] of their blocks. On these blocks, B1-S (a frozen head and a sequence step) gave the AI label for a share of 0.7372 [`val.b1s.acc_noncertain`]. B1-L gave 0.7200 [`val.b1l.acc_noncertain`], and the rules gave 0.4748 [`rules.val.acc_noncertain`]. B1-L adds a LoRA adapter to Apertus. The adapter is not published. The readers of the one fixed run used the block roles of the rule chain.
+**Block roles: measured, not in the run.** Apertus can also give each text block a role, for example submitted text or response text. 2 variants were measured on 44 [`sets.reference.validation.documents`] labelled validation documents, against labels from an AI agent. No certain rule decides 2,325 [`rules.val.non_certain_blocks`] of their blocks. On these blocks, B1-S (a frozen head and a sequence step) gave the AI label for a share of 0.7372 [`val.b1s.acc_noncertain`]. B1-L gave 0.7200 [`val.b1l.acc_noncertain`], and the rules gave 0.4748 [`rules.val.acc_noncertain`]. The 2 variants were the second and third runs on the same 44 documents. B1-S was designed after the result of the first run was known. Thus these values are information, not values of one planned run. The rules saw 42 of the 44 documents during their design. B1-L adds a LoRA adapter to Apertus. The adapter is not published. The readers of the one fixed run used the block roles of the rule chain.
 
 **Value questions.** The entry decisions of the written plan of the run used development documents only:
 
@@ -55,7 +55,7 @@ Why rules first: a rule value has a page, a span and a reason that a reader can 
 2. `Q1` gives the affair type where the rules find none. It entered (table 4). A type from `Q1` has no page and no span.
 3. Of `Q2`, only the first author with a high head probability entered (table 4). For the affair number, the title and the submission date, the `Q2` tiers were wrong more often than correct.
 
-**Limits of the use.** Apertus values exist only for documents with stored states. The variables `LLM_NAME`, `LLM_BASE_URL` and `LLM_API_KEY` are not read: the method needs hidden states. The repository has no Apertus weights.
+**Limits of the use.** Head tier values exist only for documents with stored states. No code reads `LLM_NAME`, `LLM_BASE_URL` and `LLM_API_KEY`: the method needs hidden states. The repository has no Apertus weights.
 
 | Model other than Apertus | Open weights | Role |
 |:-------------------------|:----------|:---------------------------------------------------------|
@@ -86,9 +86,9 @@ Languages of the 2,665 [`sets.docling.all`] documents: German 1,699, French 676,
 
 **The one fixed run.** On 13.10.2026 at 21:30, 2 readers gave values for the 872 documents: the reader with rules only and the combined reader. A tool compared each value with the export, one time. The rules, thresholds, heads and entry decisions were fixed before the run. No change after the run is known.
 
-**Reference.** The challenge asks for an evaluation against a hand-checked gold set. The one fixed run has none: its reference is the export, and no human examined a reference value. A separate gold set has 26 records of test documents (table 1). AI agents proposed them, and the author reviewed their text blocks. He accepted the export values of the head fields after a program check. The earlier converter of 12.10.2026 was scored on them. The one fixed run did not use them.
+**Reference.** The challenge asks for an evaluation against a hand-checked gold set. The one fixed run has none: its reference is the export, and no human examined a reference value. A separate set has 26 records of test documents (table 1). AI agents proposed them. The author examined each record on the PDF, and a program compared the values that come only from the export with the export record. The acceptance of this reference (step G3a.2) did not take place. The earlier converter of 12.10.2026 was scored on these records. The one fixed run did not use them.
 
-**Measures.** A value is correct if it is equal to the export value after the normalisation of addendum G. Else it is wrong. Precision is correct / (correct + wrong). Found rate is (correct + wrong) / documents with a reference. Share correct is correct / documents with a reference: the product of precision and found rate. Each interval is a 90 % interval of a bootstrap by parliament. The 2 response fields count only documents with the rule role `response` or `combined`. The measure counts each value of a reader, also a value below the floor of 0.5 that the writer does not put into the record.
+**Measures.** A value is correct if it is equal to the export value after the normalisation of addendum G. Else it is wrong. Precision is correct / (correct + wrong). Found rate is (correct + wrong) / documents with a reference. Share correct is correct / documents with a reference: the product of precision and found rate. Each interval is a 90 % interval of a bootstrap by parliament. The 2 response fields count only documents with the rule role `response` or `combined`. The measure counts each value, also a value below the floor of 0.5 that the writer does not put into the record.
 
 Table 2: reader with rules only. Run: all 872 documents, stem `R` (keys `precision`, `found_rate`, `share_correct`, each interval `.bootstrap_low5` to `.bootstrap_high95`; `correct`, `with_reference`). Development: round 4, 1,793 documents, stem `D` (keys `precision`, `found_rate`, `recall`), mark "after the opening". Reference: the export. No human checked a value. Status EXCEPTION, NOT RELEASED.
 
@@ -144,11 +144,11 @@ Table 6: check by eye. Status EXCEPTION, NOT RELEASED. Stem `E.<a|b>.<field>` (k
 ## 6. Limitations
 
 1. With rules only, the share correct is low for the affair number, the submission date and the response date: about 1 of 4 or 5. For the title and the first author it is less than 1 of 2 (table 2). With the combined reader the first author has 0.6028 [`C.first_author.share_correct`].
-2. The authors of the value rules read none of the 26 parliaments of the run. For the title, the affair number and the 2 dates the precision is lower there than on the development documents. The found rate also goes down: response date 0.4057 [`R.response_date.found_rate`] against 0.9238 [`D.response_date.found_rate`], first author 0.5607 against 0.8488 [`D.first_author.found_rate`].
+2. The authors of the value rules of 13.10.2026 read the 44 development parliaments; the 26 parliaments of the run are other parliaments. Addendum I says that these authors opened no file of the 872 documents; no examination compared this statement with the work records. For the title, the affair number and the 2 dates the precision is lower there than on the development documents. The found rate also goes down: response date 0.4057 [`R.response_date.found_rate`] against 0.9238 [`D.response_date.found_rate`], first author 0.5607 against 0.8488 [`D.first_author.found_rate`].
 3. In the check by eye, each AI examiner named 12 [`E.kind_looks_wrong`] of 50 documents with a kind that looks wrong. For such a document the cascade does not search some fields. The run did not measure the kind.
 4. AI agents read 116 [`K.read_by_ai_agents.lower_limit`] or more of the 872 documents in earlier work: 48 [`K.kind1.validation`] validation documents and all 68 [`K.kind1.group7`] group-7 documents. For 300 [`K.s4.all`] of the 872 documents, an audit found a sign of earlier contact: text or values next to the id, or the id in a list of earlier work. For the other 572 [`K.s3.all`] it found no such sign; this is no proof of no contact.
 5. The older rule chain makes the rule files of the run. AI agents designed it on a list with 38 [`KD.validation`] documents of the run, of 9 [`KD.validation_parliaments`] of the 18 validation parliaments. For this part the run is not a measure on new parliaments.
-6. AI agents of one model family did all work and all examination. No human checked a value, a tool or a number.
+6. AI agents of one model family (Claude Opus 5.5) wrote the rules, the tools, the measures and the audits. AI agents of the same family examined them. No human checked a value of the one fixed run, a tool or a number.
 7. The reference is a register. A value can be correct as printed and differ from the register. Table 6 compares the check by eye with the precision against the export. For the affair number and the submission date the share correct as printed is more. For the affair type it is less. The cause is not examined.
 8. No pass limit was fixed before the run. Thus this report does not say that a field passes. It gives the numbers and their plain meaning.
 9. The development values are design values. The authors of the value rules read all 44 development parliaments. These values are optimistic.
@@ -185,25 +185,25 @@ Table 8: criterion Insight, the head values against eCH-0295. Tags: `cascade.<ke
 | Where do the PDF and the register differ? | Table 2 gives for each head value how often the PDF value is the export value. Table 6 gives values that are correct as printed and not equal to the export. |
 | Where does the export have a gap? | For 276 of 2,665 documents the export has no affair type of the I95 list. |
 
-Cross-parliament question (development documents, information): in which parliaments does the PDF with the response of the executive also hold the submitted text? The export does not give this answer. With the B1-S block labels, 300 [`xp.written.with_both`] of 719 [`xp.written.with_response`] documents with response text also hold submitted text. The share is 0.417 [`xp.written.share_both`] (0.387 [`xp.written.share_low5`] to 0.448 [`xp.written.share_high95`]). 3 other views of the same labels give 0.503 [`xp.expected_d1.share_both`] to 0.548 [`xp.d1_label.share_both`]. 32 [`xp.parliaments_with_statement`] of 44 [`xp.parliaments`] parliaments get a statement. The share differs between the views, and no label was compared with a human label. This is not a result of the one fixed run.
+Cross-parliament question (development documents, information): in which parliaments does the PDF with the response of the executive also hold the submitted text? The export does not give this answer. With the B1-S block labels, 300 [`xp.written.with_both`] of 719 [`xp.written.with_response`] documents with response text also hold submitted text. The share is 0.417 [`xp.written.share_both`], with the 5 % to 95 % quantile of a document bootstrap from 0.387 [`xp.written.share_low5`] to 0.448 [`xp.written.share_high95`]. The 1,793 documents are a sample that is stratified by export role. A share is not the share of all documents of a parliament. The labels of the 193 labelled documents are in-sample. 3 other views of the same labels give 0.503 [`xp.expected_d1.share_both`] to 0.548 [`xp.d1_label.share_both`]. 32 [`xp.parliaments_with_statement`] of 44 [`xp.parliaments`] parliaments get a statement. The share differs between the views, and no label was compared with a human label. This is not a result of the one fixed run.
 
 ## 7. Reproducibility
 
 - **Commands (folder `track_2a/`, file `Makefile`):**
-  - `make setup` downloads Python 3.12, the Python packages and the Rust crates (network). On 14.10.2026 it ran on one Mac in a fresh clone.
+  - `make setup` downloads Python 3.12, the Python packages and the Rust crates (network). On 14.10.2026 it ran on one Mac in a fresh clone; uv and cargo took the packages from the local caches of that Mac.
   - `make run` needs Docker. It builds the image of `app/` and starts it on `127.0.0.1:8080`. It did not run. `make stop` stops the container, and `make logs` shows its log.
   - `make run-native` builds the app with cargo and starts it with no container. On 14.10.2026 it ran on one Mac: the 3 samples in the modes auto and rules gave 6 valid records.
   - `make test` checks the copied files against `SOURCES.json`, the prompt files, the validator and the file lists of `app/`, with no network. It passed on 14.10.2026. It has no check of the numbers.
   - `make test-app` runs the tests of `app/`. It passed on 14.10.2026. `make clean` removes the build outputs.
   - `make run-earlier` runs the earlier converter of 12.10.2026 on the 3 samples. Its metadata values come from the export record, not from the PDF. `make head-selftest` examines the Apertus head code of path 2 (earlier work) with synthetic data.
-- **Code:** `src/converter_gj/` has the code of the method of this report. These files are copies for reading: the code checks the SHA-256 of its own files, and the licence line changes it. `app/` has the app, and `app/layout/src/` has the files that the app runs.
+- **Code:** `src/converter_gj/` has the code of the method. These files are copies for reading: the code checks the SHA-256 of its own files, and the licence line changes it. `app/layout/src/` has the files that the app runs.
 - **What a reader can repeat:** the app gives the values of 3 development samples from the rules, and block labels from their stored Apertus states. These samples were in the fit. A dropped PDF gets the rules only. The states of the other documents, the fit data of the heads and the export rows are not in the repository.
 - **Hardware:** an Apple M4 for the readers, the measures and the validation. One H100 GPU for the states.
 
 ## 8. Next steps
 
 1. A human check of a sample of reference values and of the kind of the document.
-2. A measure of the kind against labels, and value rules for more parliaments, then a run on documents that no agent read.
+2. A measure of the kind against labels; value rules for more parliaments; a run on documents that no agent read.
 3. Apertus states for a dropped PDF, and a start of the container image on Linux.
 
 ## Licence
@@ -228,12 +228,11 @@ Short forms of the ids:
 | `V` | `values.last_run.rules_only.validation` | `S` | `values.last_run.spread.rules_only` |
 | `G7` | `values.last_run.rules_only.group7` | `K` | `values.last_run.contact` |
 | `C` | `values.last_run.combined.all` | `KD` | `values.last_run.contact.rule_design_list` |
-| `P` | `values.last_run.parliaments` | `D`, `H` | `values.round4`, `values.heads2` |
-| `F` | `design.fixed` | | |
+| `P`, `F` | `values.last_run.parliaments`, `design.fixed` | `D`, `H` | `values.round4`, `values.heads2` |
 
 A table gives its stems in its caption, and the id of a cell is `<stem>.<field>.<key>`. The field keys are `affair_type`, `title`, `affair_number`, `submission_date`, `response_date`, `responder_name` and `first_author`.
 
-Marks: a value with no mark word is measured: a project script wrote it into a result file. "Derived" is calculated from measured counts, for example each share correct. "Read" and "protocol only" mark a value from a work log, a criteria file, an evidence text or a state file. "Reading check" marks a count of the check by eye. Development values carry the mark of their source file, for example "after the opening": they are design values.
+Marks: no mark word means measured: a project script wrote the value into a result file. "Derived": calculated from measured counts, for example each share correct. "Read" and "protocol only": from a work log, a criteria file, an evidence text or a state file. "Reading check": a count of the check by eye. Development values carry the mark of their source file, for example "after the opening": they are design values.
 
 Paths are files of the private project. `numbers.json` gives the SHA-256 of each file.
 
@@ -241,17 +240,14 @@ Paths are files of the private project. `numbers.json` gives the SHA-256 of each
 |:----------------|:----------------------------------------------------------------|
 | `R.*`, `V.*`, `G7.*`, `C.*`, `P.*` | `daten/gj_values/heads2/last/measures_first.json` |
 | `D.*` | `daten/gj_values/round4/measures_dev_all.json` |
-| `H.<field>.*`, `H.tier.*` | `daten/gj_values/heads2/measures_dev.json` |
-| `H.entry.*` | `daten/gj_values/heads2/entry.json` |
+| `H.*` | `daten/gj_values/heads2/measures_dev.json`; `H.entry.*`: `entry.json` |
 | `E.*` | `daten/gj_values/heads2/last_review/review_counts.json` |
 | `S.*` | `daten/gj_values/heads2/last_subsets/measures_subsets.json` |
 | `K.s3.all`, `K.s4.all` | the line count of 2 id files in `crisp-dm/05-evaluation/evidence/` (no id is published) |
 | `K.*` (other), `KD.*` | `crisp-dm/05-evaluation/`: the contact history and the evidence dossier |
-| `F.*` | addenda G and I of the criteria, `src/m11_writer.py` |
-| `cascade.*` | `src/m11_cascade.yaml` |
+| `F.*`, `cascade.*` | addenda G and I of the criteria, `src/m11_writer.py`; `src/m11_cascade.yaml` |
 | `rules.val.*`, `val.*` | `daten/gj/validation/result.json`, `validation_b1s/result.json`, `validation_lora/result.json` |
 | `sets.*` (other) | `daten/gj/docs_build.json`, `daten/gj/labels_build.json` |
 | `xp.*` | `daten/gj/crossparl_b1s_dev/crossparl.json` |
-| marks read, protocol only | the work log, the criteria file and the state file of the package |
 
 About this text: AI agents (Claude Opus 5.5) wrote it from the records of the private project, in English to the rules of ASD-STE100 (Issue 9). No human examined this version.

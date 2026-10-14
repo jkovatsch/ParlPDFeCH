@@ -2,7 +2,7 @@
 
 This file gives all limits of the result in one place. Each text of the submission that reports a result uses these sentences in full or in a short form.
 
-No person has accepted these limits or the numbers of the run. No human checked a value, a tool or a number.
+No person has accepted these limits or the numbers of the run. No human checked a value of the run, a tool or a number.
 
 ## Words of this file
 
@@ -30,11 +30,11 @@ Numbers: each number of this file is an entry of [../numbers.json](../numbers.js
 | No. | Limit | Source | Number ids |
 |---|---|---|---|
 | L1 | Fewer than half of the documents with a reference get the export value. This applies to the affair number, the 2 dates, the title and the first author. Affair number: 182 of 822 documents with a reference (0.2214). Submission date: 238 of 872 (0.2729). Response date: 22 of 106 (0.2075). Title: 406 of 866 (0.4688). First author: 195 of 428 (0.4556). | dossier, chapter 5.9, item 3 | `R.correct`, `R.with_reference`, `R.share_correct` |
-| L2 | The authors of the value rules read none of the 26 parliaments of the run. For the title, the affair number and the 2 dates, the precision of the run is lower than on the development documents. The found rate of the response date is 0.4057 in the run and 0.9238 on the development documents. For the first author it is 0.5607 and 0.8488. | dossier, chapters 5.5 and 5.9, items 1 and 3 | `R.precision`, `R.found_rate`, `values.round4.<field>.precision`, `values.round4.<field>.found_rate` |
+| L2 | The authors of the value rules of 13.10.2026 read the 44 development parliaments; the 26 parliaments of the run are other parliaments. Addendum I says that these authors opened no file of the 872 documents; no examination compared this statement with the work records. For the title, the affair number and the 2 dates, the precision of the run is lower than on the development documents. The found rate of the response date is 0.4057 in the run and 0.9238 on the development documents. For the first author it is 0.5607 and 0.8488. | dossier, chapters 5.5 and 5.9, items 1 and 3 | `R.precision`, `R.found_rate`, `values.round4.<field>.precision`, `values.round4.<field>.found_rate` |
 | L3 | In the check by eye, each of the 2 AI examiners named 12 of the 50 documents with a kind that looks wrong. Where the kind is wrong, the cascade does not search some fields. The run did not measure the kind. | dossier, chapter 5.7, items 6 and 7; chapter 5.9, item 10 | `E.documents`, `E.kind_looks_wrong` (protocol only) |
 | L4 | AI agents had read some of the 872 documents before the run: 116 or more, that is 48 validation documents and all 68 group-7 documents. 116 is a lower limit from id lists. For 300 documents, an audit of the work records found a sign of earlier contact: text or values next to the id, or the id in an earlier list. For the other 572 it found no such sign. This is no proof of no contact. | dossier, chapters 1.3 and 4.2 | `K.read_by_ai_agents.lower_limit`, `K.kind1.validation`, `K.kind1.group7`, `K.s4.all`, `K.s3.all` |
 | L5 | The older rule chain gives the rule role and the block roles of each document. AI agents designed it on a list with 38 validation documents of the run. These are of 9 of the 18 validation parliaments. For this part of the pipeline, the run is not a measure on new parliaments. | dossier, chapter 1.3, item 24; chapter 5.9, item 1 | `K.rule_design_list.validation`, `K.rule_design_list.validation_parliaments`, `values.last_run.parliaments.validation` |
-| L6 | AI agents of one model family (Claude Opus 5.5) did all work and all examination. No human checked a value, a tool or a number. | dossier, chapter 1.6, items 33 and 34 | none |
+| L6 | AI agents of one model family (Claude Opus 5.5) wrote the rules, the tools, the measures and the audits. AI agents of the same family examined them. No human checked a value of the one fixed run, a tool or a number. | dossier, chapter 1.6, items 33 and 34 | none |
 | L7 | The reference is a register. A value can be correct as printed and differ from the register. In the check by eye, the AI examiners found 12 of 15 given affair numbers and 18 of 21 given submission dates correct as printed. The precision against the export is 0.5275 and 0.5289. For the affair type they found fewer: 31 and 33 of 40, against a precision of 0.9421. The cause is not examined. The 2 numbers are different measures on different samples: 50 documents against all 872. | dossier, chapter 5.9, items 5 to 7 | `E.a.<field>.C`, `E.b.<field>.C`, `E.a.<field>.given`, `C.precision` |
 | L8 | No pass limit was fixed before the run. Thus no text of the submission says that a field passes. The texts give the numbers and their plain meaning. | dossier, chapter 1.6, item 37 | none |
 | L9 | The development values are design values with the mark "after the opening". The authors of the value rules read all 44 development parliaments. These values are optimistic. | dossier, chapter 5.5 | `values.round4.mark`, `values.round4.parliaments` |
@@ -54,7 +54,7 @@ Numbers: each number of this file is an entry of [../numbers.json](../numbers.js
 3. A wrong value against the export is not always a wrong value of the PDF (L7). The run has no count of such cases.
 4. The run as a whole is not a measure on documents that no AI agent read, and not a measure on new parliaments (L4, L5).
 5. The challenge asks for an evaluation against a hand-checked gold set. The one fixed run has none. Its reference is the export.
-6. Nothing in this repository is the approval of a person.
+6. No person accepted the criteria of the run, a number or a limit of this repository.
 
 ## About this text
 

@@ -1,6 +1,6 @@
 # Numbers of ParlPDFeCH, track 2A
 
-Made: 14.10.2026 15:20 CEST (time from the clock). Tool: `src/m11_numbers.py` of the private project.
+Made: 14.10.2026 21:39 CEST (time from the clock). Tool: `src/m11_numbers.py` of the private project.
 
 Status of each value: EXCEPTION, NOT RELEASED. No human checked a value of this file.
 
@@ -3309,7 +3309,7 @@ Entries with the status `not measured yet`: 0. Entries with the mark of a run af
 | `job_lorax` | `daten/gj/jobs/lora_b1x/manifest.json` | `0f6dce1a690e8b7c32420bdda85545bd61e160f780d05f279d77678f98345273` | 2026-10-13T05:48:49+02:00 | key made |
 | `crit` | `crisp-dm/04-modeling/gate-jev-cascade-criteria.md` | `6f6d15c0562cba2070995c302080a9aaedfe665f8d746ed5b0fdd9248bc20bfe` | 2026-10-12T20:26:40+02:00 | file modification time |
 | `addf` | `crisp-dm/04-modeling/gate-jev-cascade-criteria-addendum-f.md` | `bb04a27aa09641f88605803f30362ffbeaed63d2bcf76f9ce66ecdecc0307483` | 2026-10-13T10:34:01+02:00 | file modification time |
-| `prot` | `crisp-dm/00-cross-cutting/protocol.md` | `704b049c01ab34ad5bd6091bd59b66912f7d984dfac5aa9aa8947c948b61c72c` | 2026-10-14T15:19:13+02:00 | file modification time |
+| `prot` | `crisp-dm/00-cross-cutting/protocol.md` | `50c8f5fd49388370357e5e6a4f99254a021190fc23f695e594c4bf1a9501e1ec` | 2026-10-14T21:38:55+02:00 | file modification time |
 | `state` | `package/STATE.md` | `44eff4de8dc1ab0e422e452bec035d56455e2fa6c00f1c14fde0036b2553fcef` | 2026-10-14T12:55:07+02:00 | file modification time |
 | `vm_open` | `daten/gj_values/measures_open.json` | `cc03bf8a9d148f5eccfdd866c639040cc414abb398256e1f659d067bbc685294` | 2026-10-13T14:30:37+0200 | key made |
 | `vs_open` | `daten/gj_values/second_open.json` | `4ca5150a4dc6b1f2368dc6414ec5d0adf73b0bf7f7163840d9f62cc23d16b997` | 2026-10-13T14:30:45+02:00 | key made |
@@ -3358,7 +3358,7 @@ For a value from these files, `numbers.json` holds the SHA-256 of the one line w
 4. The validation values of B1-S and B1-L come from run 2 and run 3 on the same 44 documents.
 5. The tool knows no record of a second calculation for the head design of 12.10.
 6. The second calculation of the B1-L design compared the design record of 10:36. The validation run used the record of 10:53.
-7. The values of the package are from one run each on one Mac. No container was built.
+7. The values of the package are from one run each on one Mac, with no container.
 8. A value with the mark protocol only has no aggregate file that this tool can read.
 9. The reference of the group Values from the PDF is the OpenParlData export. An export value can be wrong or can have another form than the printed text.
 10. The Jeffreys interval of a value from the PDF does not include the effect of the parliaments.
@@ -3379,12 +3379,12 @@ This file replaces `track_2a/technical_report_numbers.json` of 12.10.2026. The k
 |---|---|
 | File | track_2a/technical_report.pdf (the file of form field 12; git ignores *.pdf, so it is not in the repository) |
 | Pages | 6 |
-| SHA-256 of the PDF | `ad02ba943d183aa58befadab5a83d532debf21bdfc7823d73571475f24ea2681` |
-| SHA-256 of the Markdown source | `2d792d0282636a017921ad9d9c5f3870a8ad2e4478fe2b7e5cd362a34d2a6b39` |
+| SHA-256 of the PDF | `7d25be096acb2e189e5e7259ba1048e631beef5aa806888ad4ed693007ecc447` |
+| SHA-256 of the Markdown source | `a152aae3d269a1e1618f3e8501368be0fa17e72ba815193db0c86bdedb42b83d` |
 | Tool `pandoc` | `pandoc 3.8.1` |
 | Tool `xelatex` | `XeTeX 3.141592653-2.6-0.999997 (TeX Live 2025)` |
 | Tool `fonts` | `HelveticaNeue, HelveticaNeue-Bold, Menlo-Bold, Menlo-Regular, [none]` |
-| Build record (private project) | crisp-dm/06-deployment/report_pdf_build.json, `8665e950be95ffeecb63cb2ec372da30eecdfca67e5cd50742f760b400d36240` |
+| Build record (private project) | crisp-dm/06-deployment/report_pdf_build.json, `9067a96424aeca944d08316f20ce9cd8ad05dc30626a040410d592ed8f119805` |
 | SHA-256 of the earlier numbers file | `f29ae6cf3daca3e8618a6db92553c36e2b9eb80ab427c36552a938cf7a9cf5f6` |
 
 The build steps and the header file of the PDF are in the key `pdf` of `numbers.json`.

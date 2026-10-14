@@ -1,7 +1,7 @@
 {
  "schema": "parlpdfech-stored-results/1",
  "state_date": "12.10.2026",
- "note": "Values copied from the records of the private project. make run prints them; it does not calculate them. The private records are not public; each part names its record and the SHA-256 of the record file.",
+ "note": "Values copied from the records of the private project. make run-earlier prints them; it does not calculate them. The private records are not public; each part names its record and the SHA-256 of the record file.",
  "parts": [
   {
    "title": "Path 1: rule stage at isolation level L9 (method nos4), gate 3a version 4",

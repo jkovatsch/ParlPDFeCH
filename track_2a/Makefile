@@ -12,7 +12,7 @@
 #                       the app with the Python of .venv/ (or APP_PYTHON=<command>) on 127.0.0.1:$(PORT)
 #                       (default 8080). Needs cargo with the target wasm32-unknown-unknown and the command
 #                       wasm-bindgen 0.2.127 (cargo install wasm-bindgen-cli --version 0.2.127). Stop it with
-#                       Ctrl-C. This is the way that ran on 14.10.2026; 'make run' did not run
+#                       Ctrl-C. On 14.10.2026 'make run' and 'make run-native' ran on one Mac
 #   make test           checks with no network and no Rust compiler, after one 'make setup' (it needs the 2 schema
 #                       files of 'make setup'): the copied files against SOURCES.json, the prompt files, the
 #                       validator, the file list and the code layout of app/

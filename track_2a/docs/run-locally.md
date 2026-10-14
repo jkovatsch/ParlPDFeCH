@@ -1,6 +1,6 @@
 # Run the app on your computer
 
-The app converts a PDF of a Swiss parliament into an eCH-0295 record. It runs on your computer and uses no GPU. Run the commands in the folder `track_2a/`. Way 2 (`make run-native`) ran on 14.10.2026. Way 1 (`make run`) did not run.
+The app converts a PDF of a Swiss parliament into an eCH-0295 record. It runs on your computer and uses no GPU. Run the commands in the folder `track_2a/`. Both ways ran on one Mac on 14.10.2026.
 
 Status: EXCEPTION, NOT RELEASED. No human examined this file.
 
@@ -14,7 +14,7 @@ make run
 - The command builds the image (target `slim`) from `app/` and starts it on `127.0.0.1:8080`.
 - Open `http://127.0.0.1:8080/app/`. `make stop` stops the container. `make logs` shows its log.
 - This image converts the 3 samples only. It does not convert your own PDF.
-- State on 14.10.2026: not run. Docker Desktop on the Mac of the project did not start: it waits for a password in a system dialog. On the same day a private build pipeline on Linux built a container image from the source tree of the package. Nobody started this image.
+- State on 14.10.2026: run one time on one Mac (Apple silicon, Docker server 29.2.1), in a clone of GitHub at commit `10e07b4`. A second check used port 8080, so the command was `make run PARLPDFECH_PORT=8082`. The 3 samples in the modes auto and rules gave 6 valid records. Not run: `make stop`, `make logs`, and the targets `run-full` and `check-offline` of `app/Makefile`. On the same day a private build pipeline on Linux built a container image from the source tree of the package. Nobody started this image.
 
 ## Way 2: no container (`make run-native`)
 
@@ -48,4 +48,4 @@ make run-native
 ## About this text
 
 - Language: English, to the rules of ASD-STE100 (Issue 9).
-- Authoring: an AI agent (Claude Opus 5.5) wrote this text on 14.10.2026 and changed the state lines in the afternoon of the same day. No human examined it.
+- Authoring: an AI agent (Claude Opus 5.5) wrote this text on 14.10.2026 and changed the state lines in the afternoon and evening of that day. No human examined it.

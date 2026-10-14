@@ -159,7 +159,7 @@ Items 13 to 15 are notes on the method. [docs/limits.md](docs/limits.md) gives t
 
 13. The share correct, the comparison in table 6 and table 7 were not planned measures of the plan of the run.
 14. A second tool and a third calculation, each by AI agents, gave the same counts of the run from the same files. This does not show that a value is true.
-15. On 14.10.2026 a private build pipeline on Linux built a container image from the source tree of the package, which `app/` copies. In that build the converter made the 6 sample records, and each was valid. The image was not started, and `make run` did not run.
+15. On 14.10.2026 a private build pipeline on Linux built a container image from the source tree of the package, which `app/` copies. In that build the converter made the 6 sample records, and each was valid. The image was not started. `make run` ran on one Mac (chapter 7).
 
 Table 7: criterion Breadth, reader with rules only, by set and by parliament. Share correct: stems `V` and `G7` (key `share_correct`). Spread: stem `S.<field>` (keys `parliaments_that_count`, `lowest_precision`, `median_precision`, `highest_precision`), information made after the run. A parliament counts with 5 or more given values with a reference. Status EXCEPTION, NOT RELEASED.
 
@@ -191,7 +191,7 @@ Cross-parliament question (development documents, information): in which parliam
 
 - **Commands (folder `track_2a/`, file `Makefile`):**
   - `make setup` downloads Python 3.12, the Python packages and the Rust crates (network). On 14.10.2026 it ran on one Mac in a fresh clone; uv and cargo took the packages from the local caches of that Mac.
-  - `make run` needs Docker. It builds the image of `app/` and starts it on `127.0.0.1:8080`. It did not run. `make stop` stops the container, and `make logs` shows its log.
+  - `make run` needs Docker. It builds the image of `app/` and starts it on `127.0.0.1:8080`. It ran on one Mac on 14.10.2026 (commit `10e07b4`, port 8082, 3 samples only). `make stop` and `make logs` stop it or show its log.
   - `make run-native` builds the app with cargo and starts it with no container. On 14.10.2026 it ran on one Mac: the 3 samples in the modes auto and rules gave 6 valid records.
   - `make test` checks the copied files against `SOURCES.json`, the prompt files, the validator and the file lists of `app/`, with no network. It passed on 14.10.2026. It has no check of the numbers.
   - `make test-app` runs the tests of `app/`. It passed on 14.10.2026. `make clean` removes the build outputs.

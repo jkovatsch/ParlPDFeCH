@@ -43,8 +43,8 @@ Status: EXCEPTION, NOT RELEASED. No human examined this file.
 | Command | What it does |
 |---|---|
 | `make setup` | Downloads (network): Python 3.12, the Python packages of the app into `.venv/`, the packages and schema files of the earlier converter. If cargo is on the computer, it also downloads the Rust crates. `make run` does not need it. |
-| `make run` | Needs Docker. Builds the image of `app/` and starts it on `127.0.0.1:8080`. Then open `http://127.0.0.1:8080/app/`. It did not run on 14.10.2026. |
-| `make run-native` | Builds the server and the WebAssembly bundle with cargo. Starts the app with no container on `127.0.0.1:8080` (`PORT=` sets the port). This is the way that ran on 14.10.2026. |
+| `make run` | Needs Docker. Builds the image of `app/` and starts it on `127.0.0.1:8080`. Then open `http://127.0.0.1:8080/app/`. On 14.10.2026 it ran one time on one Mac (commit `10e07b4`), with the 3 samples only. |
+| `make run-native` | Builds the server and the WebAssembly bundle with cargo. Starts the app with no container on `127.0.0.1:8080` (`PORT=` sets the port). It ran on one Mac on 14.10.2026. |
 | `make test` | Examines the copied files, the prompt files, the validator, the file list and the code layout of `app/`. No network, no Rust compiler. |
 | `make test-app` | The cargo tests of the 2 crates of `app/`, the example view and a start of the seed script. |
 | `make run-earlier` | The earlier converter of 12.10.2026 on the 3 samples. Before 14.10.2026 this command had the name `make run`. |
@@ -52,4 +52,4 @@ Status: EXCEPTION, NOT RELEASED. No human examined this file.
 ## About this text
 
 - Language: English, to the rules of ASD-STE100 (Issue 9).
-- Authoring: an AI agent (Claude Opus 5.5) wrote this text on 14.10.2026. In the afternoon of the same day, it changed the rows of `app/`, the PDF row and the commands. No human examined it.
+- Authoring: an AI agent (Claude Opus 5.5) wrote this text on 14.10.2026. In the afternoon of the same day, it changed the rows of `app/`, the PDF row and the commands. In the evening, an AI agent changed the states of `make run` and `make run-native`. No human examined it.

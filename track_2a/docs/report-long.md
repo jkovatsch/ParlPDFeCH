@@ -114,7 +114,7 @@ Status: each value has the status EXCEPTION, NOT RELEASED. AI agents wrote the m
 | Test set | 40 [`sets.test_set.selected`] selected documents, 26 [`sets.test_set.records`] reviewed records (protocol only) | not used in this report |
 | Separate set (no accepted reference) | 26 records of test documents; the author examined each record on the PDF; the acceptance step G3a.2 did not take place | not used in the one fixed run; its reference is the export |
 | A dropped PDF | any PDF | the rules only; no Apertus value |
-| `make run` in a container | the app | this text has no record of a run in a container |
+| `make run` in a container | the app | one run on one Mac, with the 3 samples only (chapter 7.1) |
 
 ## 2. Architecture
 
@@ -790,7 +790,7 @@ Two more facts:
 5. The work log and the dossier have no explicit yes of the owner to the one fixed run in his own words. No person accepted the criteria of the run, a number or a limit of this repository.
 6. 2 design files and the result files of the run do not carry each mark that the addenda ask for (dossier, chapter 6.1).
 7. A dropped PDF gets the rules only. The app of this repository has no file of the value heads.
-8. This text has no record of a run of `make run` in a container.
+8. `make run` ran one time, on one Mac, with the 3 samples only (target `slim`). The targets `run-full` and `check-offline` of `app/Makefile` did not run.
 9. The block-role candidates were measured against an AI reference on validation documents only, before the run. They did not enter the run.
 
 ### 6.3 The criterion insight
@@ -829,7 +829,7 @@ The commands are in the folder `track_2a/`. The states are those of 14.10.2026, 
 | Command | What it does | State |
 |:---|:---|:---|
 | `make setup` | downloads Python 3.12, the Python packages of the app and the Rust crates (network) | ran on one Mac in a fresh clone; uv and cargo used the local caches |
-| `make run` | builds the image of `app/` with Docker and starts the app on 127.0.0.1:8080 | not run: Docker Desktop on the Mac did not start (it waits for a password in a system dialog); a private build pipeline on Linux built a container image from the source tree of the package, and nobody started it |
+| `make run` | builds the image of `app/` with Docker and starts the app on 127.0.0.1:8080 | ran one time on one Mac (Docker server 29.2.1), in a clone of GitHub at commit `10e07b4`, as `make run PARLPDFECH_PORT=8082` (a second check used port 8080); the 3 samples in the modes auto and rules gave 6 valid records; a private build pipeline on Linux built a container image from the source tree of the package, and nobody started it |
 | `make run-native` | builds the Rust server and the browser bundle with cargo, then starts the app with no container | ran on one Mac, also in a fresh clone; the 3 samples in the modes auto and rules gave 6 valid records |
 | `make test` | checks with no network: the copies against `SOURCES.json`, the prompt files, the validator and the samples, and the file list and code layout of `app/` | PASS, also in a fresh clone |
 | `make test-app` | the checks of `app/`: the cargo checks of the 2 crates, the example view and a start of the seed script | PASS |
@@ -976,4 +976,4 @@ Copyright 2026 the author (see `NOTICE`). This report and the documentation: CC-
 ## About this text
 
 - Language: English, to the rules of ASD-STE100 (Issue 9).
-- AI agents (Claude Opus 5.5) wrote this text on 14.10.2026, from the evidence dossier of the run, the criteria, the cascade file and `numbers.json`. In the afternoon of the same day, an AI agent changed the states of chapter 7.1. No human examined this version.
+- AI agents (Claude Opus 5.5) wrote this text on 14.10.2026, from the evidence dossier of the run, the criteria, the cascade file and `numbers.json`. In the afternoon of the same day, an AI agent changed the states of chapter 7.1. In the evening, an AI agent changed the states of `make run` (chapters 1.4, 6.2 and 7.1). No human examined this version.

@@ -19,7 +19,7 @@ make setup
 make run-native
 ```
 
-Then open http://127.0.0.1:8080/app/. `make run-native` ran on one Mac. `make run` (Docker) did not run. Details: [run-locally.md](track_2a/docs/run-locally.md).
+Then open http://127.0.0.1:8080/app/. `make run-native` and `make run` (Docker, 3 samples only) ran on one Mac. Details: [run-locally.md](track_2a/docs/run-locally.md).
 
 ## More
 

@@ -2,7 +2,7 @@
 
 What goes in: one PDF of a Swiss parliament. What comes out: one eCH-0295 record in Turtle and YAML, and the result of a validator. Each of the 7 head values of the record is read from the PDF and has a probability. A value from the rules also has a page and a text span. Identifiers and constants of the record have no probability. The OpenParlData export is the reference of the measurement; at run time no export value goes into a record.
 
-To start the app, use `make run-native` (chapter "Run it"). This is the way that ran on 14.10.2026. `make run`, the Docker way that the template asks for, has not run.
+To start the app, use `make run-native` (chapter "Run it"), or `make run`, the Docker way that the template asks for. Both ran on one Mac on 14.10.2026. `make run` converts the 3 samples only.
 
 In the one fixed run, linear heads on stored hidden states of Apertus-v1.5-8B gave values for 2 of the 7 fields. These fields are the affair type and the first author. A head tier gave a value where the rules found none, or where the rule value had a probability below 0.5. The rules gave all other values. A dropped PDF gets values from the rules only. In the app, the 7 values of the record come from the rules in each mode. For its 3 samples, the app uses stored Apertus states for the block labels only.
 
@@ -65,8 +65,8 @@ Run the commands in this folder (`track_2a/`). [docs/run-locally.md](docs/run-lo
 
 ```bash
 make setup        # one time, with network; for make run-native and make test
-make run-native   # the way that ran: no container; needs cargo and Python 3.12; then open http://127.0.0.1:8080/app/
-make run          # needs Docker only, not make setup; not run; then open http://127.0.0.1:8080/app/
+make run-native   # no container; needs cargo and Python 3.12; ran on one Mac; then open http://127.0.0.1:8080/app/
+make run          # needs Docker only, not make setup; ran on one Mac (port 8082); then open http://127.0.0.1:8080/app/
 make test         # checks with no network
 ```
 
@@ -75,7 +75,7 @@ make test         # checks with no network
 | Command | What it does | State on 14.10.2026 |
 |---|---|---|
 | `make setup` | One time, with network. It installs Python 3.12 with uv (uv can also put the command `python3.12` into `~/.local/bin`) and the Python packages of the app into `.venv/`. It downloads the Rust crates of `app/Cargo.lock` (only if cargo is on the computer; if not, it prints a note), the packages of the earlier converter and the 2 eCH-0295 schema files (pinned commit and SHA-256). `make run` does not need it. | Run on one Mac (Apple silicon, macOS) in a fresh clone. uv and cargo took the packages from the local caches of that Mac. The 2 schema files agreed with the pinned SHA-256. |
-| `make run` | Needs Docker. It builds the image (target `slim`) from `app/` and starts it on `127.0.0.1:8080`. It waits for `/healthz`. Then open `http://127.0.0.1:8080/app/`. The target `slim` converts the 3 samples only. | Not run. Docker Desktop on the Mac of the project did not start: it waits for a password in a system dialog. On 14.10.2026 a private build pipeline on Linux built a container image from the source tree of the package. Nobody started this image. |
+| `make run` | Needs Docker. It builds the image (target `slim`) from `app/` and starts it on `127.0.0.1:8080`. It waits for `/healthz`. Then open `http://127.0.0.1:8080/app/`. The target `slim` converts the 3 samples only. | Run one time on one Mac (Apple silicon, Docker server 29.2.1), in a clone of GitHub at commit `10e07b4`. The command was `make run PARLPDFECH_PORT=8082`, because a second check used port 8080. The 3 samples in the modes auto and rules gave 6 valid records. Not run: `run-full` and `check-offline` of `app/Makefile`. On 14.10.2026 a private build pipeline on Linux built a container image from the source tree of the package. Nobody started this image. |
 | `make stop`, `make logs` | They stop the container of `make run`, or show its log. | Not run. |
 | `make run-native` | No container. It builds the Rust server and the WebAssembly bundle with cargo. Then it starts the app on `127.0.0.1:8080` (`PORT=` sets another port). Stop it with Ctrl-C. | Run on one Mac (Apple silicon, macOS), with the offline flags of cargo: in this folder (port 8899) and in a fresh clone (port 8898). Each time, the 3 samples in the modes auto and rules gave 6 valid records. The server gave the page, the result data, `<doc>.values.ttl`, `source.pdf` and `page-1.png` with the status 200. |
 | `make test` | Checks with no network and no Rust compiler. It compares each copied file with `SOURCES.json` and checks the prompt files of `gj_jev_v1_de`. It runs the validator on the 6 stored output files of the earlier converter and on `tests/invalid_instance.yaml`, which it must refuse. It checks the file list and the code layout of `app/`. | PASS on one Mac, in this folder and in a fresh clone. It has no check of the numbers: `check_numbers.py` does not exist. |
@@ -84,8 +84,10 @@ make test         # checks with no network
 | `make run-earlier` | The earlier converter of 12.10.2026 on the 3 samples. Its metadata values come from the export record, not from the PDF. Before 14.10.2026 this command had the name `make run`. | PASS on one Mac. |
 | `make head-selftest` | A self-check of an earlier Apertus head code on synthetic data (no model). | in the `Makefile` |
 
-- The template asks that `make run` starts the project in Docker on a clean checkout. This version records no such run. Use `make run-native`.
+- The template asks that `make run` starts the project in Docker on a clean checkout. This text records one such run, on commit `10e07b4` (next item). For your own PDF, use `make run-native`.
+- The 2 clones of GitHub: on 14.10.2026, 2 AI agents each made a `git clone` of commit `10e07b4` from GitHub, on one Mac. In clone 1, `make run PARLPDFECH_PORT=8082` ran. In clone 2, `make setup`, `make test` (PASS), `make run-earlier` (PASS) and `make run-native PORT=8080` ran. In each clone, the 3 samples in the modes auto and rules gave 6 valid records.
 - The fresh clone: on 14.10.2026 an AI examiner made a `git clone` of the local repository and added the files of this version. Then the examiner ran `make setup`, `make test` and `make run-native` in it, on one Mac. It was not a clone of GitHub.
+- The state lines in the files of `app/` (for example `DIST.md`, `README.md`, `STATE.md`, `Makefile` and `container/BUILD-NOTES.md`) are older than these runs. In this version, the files of `app/` are as in commit `10e07b4`. `make test` compares them with the list `DIST-MANIFEST.json`.
 - In an earlier run on a copy of the files, the conversion of an own PDF stopped with the note `pdf_reader_absent` (see below).
 
 ### What `make run-native` needs
@@ -379,5 +381,5 @@ The text below is the text of the file `track_2a/README.md` of the Hack Apertus 
 ## About this text
 
 - Language: English, to the rules of ASD-STE100 (Issue 9).
-- AI agents (Claude Opus 5.5) wrote this text on 14.10.2026, from the records of the private project. An AI agent changed the chapter "Run it" in the afternoon of the same day. The private project is the project folder of the author. It is not public.
+- AI agents (Claude Opus 5.5) wrote this text on 14.10.2026, from the records of the private project. An AI agent changed the chapter "Run it" in the afternoon of the same day. In the evening, an AI agent changed the states of `make run` and `make run-native`. The private project is the project folder of the author. It is not public.
 - No human examined this version of the text.

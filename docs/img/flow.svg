@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 290" width="1000" height="290" role="img" aria-labelledby="t d">
+<title id="t">ParlPDFeCH in one picture</title>
+<desc id="d">A PDF goes in. The code rules give up to 7 head values with probability, page and text place. An eCH-0295 record in RDF comes out. In the fixed run, heads on Apertus-v1.5-8B added values for 2 fields.</desc>
+<style>text{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;fill:#1f1f1e}</style>
+<rect x="0" y="0" width="1000" height="290" rx="14" fill="#fcfcfb" stroke="#c9c8c0" stroke-width="2"/>
+<g>
+<rect x="30" y="40" width="210" height="170" rx="10" fill="#ffffff" stroke="#55554f" stroke-width="2.5"/>
+<path d="M95 62 h56 l26 26 v102 h-82 z" fill="#ffffff" stroke="#1f1f1e" stroke-width="3" stroke-linejoin="round"/>
+<path d="M151 62 v26 h26" fill="none" stroke="#1f1f1e" stroke-width="3" stroke-linejoin="round"/>
+<line x1="107" y1="104" x2="165" y2="104" stroke="#9a998f" stroke-width="5"/>
+<line x1="107" y1="118" x2="165" y2="118" stroke="#9a998f" stroke-width="5"/>
+<line x1="107" y1="132" x2="150" y2="132" stroke="#9a998f" stroke-width="5"/>
+<rect x="80" y="146" width="68" height="32" rx="5" fill="#c8312a"/>
+<text x="114" y="170" text-anchor="middle" font-size="22" font-weight="700" style="fill:#ffffff">PDF</text>
+</g>
+<line x1="248" y1="125" x2="298" y2="125" stroke="#55554f" stroke-width="4"/><polygon points="294,114 312,125 294,136" fill="#55554f"/>
+<g>
+<rect x="320" y="40" width="340" height="170" rx="10" fill="#ffffff" stroke="#2a78d6" stroke-width="3"/>
+<text x="490" y="94" text-anchor="middle" font-size="25">Up to 7 head values</text>
+<text x="490" y="128" text-anchor="middle" font-size="25">with probability,</text>
+<text x="490" y="162" text-anchor="middle" font-size="25">page, text place</text>
+</g>
+<line x1="668" y1="125" x2="718" y2="125" stroke="#55554f" stroke-width="4"/><polygon points="714,114 732,125 714,136" fill="#55554f"/>
+<g>
+<rect x="740" y="40" width="230" height="170" rx="10" fill="#ffffff" stroke="#55554f" stroke-width="2.5"/>
+<text x="855" y="112" text-anchor="middle" font-size="25">eCH-0295 record</text>
+<text x="855" y="146" text-anchor="middle" font-size="25">in RDF</text>
+</g>
+<text x="500" y="256" text-anchor="middle" font-size="23" style="fill:#55554f">Code rules read values. Fixed run: Apertus-v1.5-8B added values for 2 fields.</text>
+</svg>

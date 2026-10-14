@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" width="1000" height="600" role="img" aria-labelledby="t d">
+<title id="t">How often the value is correct (fixed run of 13.10.2026, 872 documents, 26 parliaments)</title>
+<desc id="d">Share of the documents with an OpenParlData value where the value of the reader is equal to it, for each of the 7 head fields. values.last_run.rules_only.all.affair_type.share_correct: 0.7923; values.last_run.combined.all.affair_type.share_correct: 0.8675; values.last_run.rules_only.all.title.share_correct: 0.4688; values.last_run.rules_only.all.affair_number.share_correct: 0.2214; values.last_run.rules_only.all.submission_date.share_correct: 0.2729; values.last_run.rules_only.all.response_date.share_correct: 0.2075; values.last_run.rules_only.all.responder_name.share_correct: 0.8929; values.last_run.rules_only.all.first_author.share_correct: 0.4556; values.last_run.combined.all.first_author.share_correct: 0.6028.</desc>
+<style>text{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;fill:#1f1f1e}</style>
+<rect x="0" y="0" width="1000" height="600" rx="14" fill="#fcfcfb" stroke="#c9c8c0" stroke-width="2"/>
+<text x="30" y="46" font-size="27" font-weight="700">How often the value is correct</text>
+<text x="30" y="78" font-size="20" style="fill:#55554f">(fixed run of 13.10.2026, 872 documents, 26 parliaments)</text>
+<rect x="30" y="104" width="22" height="22" rx="3" fill="#2a78d6"/>
+<text x="60" y="122" font-size="19">Code rules only</text>
+<rect x="250" y="104" width="22" height="22" rx="3" fill="#eb6834"/>
+<text x="280" y="122" font-size="19">Code rules with Apertus-v1.5-8B (2 fields)</text>
+<line x1="270.0" y1="150" x2="270.0" y2="492" stroke="#55554f" stroke-width="2"/>
+<text x="270.0" y="516" text-anchor="middle" font-size="16" style="fill:#55554f">0</text>
+<line x1="570.0" y1="150" x2="570.0" y2="492" stroke="#c9c8c0" stroke-width="1"/>
+<text x="570.0" y="516" text-anchor="middle" font-size="16" style="fill:#55554f">0.5</text>
+<line x1="870.0" y1="150" x2="870.0" y2="492" stroke="#c9c8c0" stroke-width="1"/>
+<text x="870.0" y="516" text-anchor="middle" font-size="16" style="fill:#55554f">1</text>
+<text x="256" y="190.5" text-anchor="end" font-size="20">Type of affair</text>
+<rect x="270" y="162" width="475.4" height="20" rx="3" fill="#2a78d6"/>
+<text x="753.4" y="178" font-size="17" style="fill:#55554f">0.7923</text>
+<rect x="270" y="185" width="520.5" height="20" rx="3" fill="#eb6834"/>
+<text x="798.5" y="201" font-size="17" style="fill:#55554f">0.8675</text>
+<text x="256" y="244.0" text-anchor="end" font-size="20">Title</text>
+<rect x="270" y="227" width="281.3" height="20" rx="3" fill="#2a78d6"/>
+<text x="559.3" y="243" font-size="17" style="fill:#55554f">0.4688</text>
+<text x="256" y="286.0" text-anchor="end" font-size="20">Affair number</text>
+<rect x="270" y="269" width="132.8" height="20" rx="3" fill="#2a78d6"/>
+<text x="410.8" y="285" font-size="17" style="fill:#55554f">0.2214</text>
+<text x="256" y="328.0" text-anchor="end" font-size="20">Date of submission</text>
+<rect x="270" y="311" width="163.8" height="20" rx="3" fill="#2a78d6"/>
+<text x="441.8" y="327" font-size="17" style="fill:#55554f">0.2729</text>
+<text x="256" y="370.0" text-anchor="end" font-size="20">Date of the response</text>
+<rect x="270" y="353" width="124.5" height="20" rx="3" fill="#2a78d6"/>
+<text x="402.5" y="369" font-size="17" style="fill:#55554f">0.2075</text>
+<text x="256" y="412.0" text-anchor="end" font-size="20">Responding body</text>
+<rect x="270" y="395" width="535.7" height="20" rx="3" fill="#2a78d6"/>
+<text x="813.7" y="411" font-size="17" style="fill:#55554f">0.8929</text>
+<text x="256" y="465.5" text-anchor="end" font-size="20">First author</text>
+<rect x="270" y="437" width="273.4" height="20" rx="3" fill="#2a78d6"/>
+<text x="551.4" y="453" font-size="17" style="fill:#55554f">0.4556</text>
+<rect x="270" y="460" width="361.7" height="20" rx="3" fill="#eb6834"/>
+<text x="639.7" y="476" font-size="17" style="fill:#55554f">0.6028</text>
+<text x="30" y="550" font-size="18" style="fill:#55554f">Share of the documents with a register value for the field (106 to 872 per field).</text>
+<text x="30" y="578" font-size="18" style="fill:#55554f">Correct = equal to that value after normalisation.</text>
+</svg>

@@ -108,3 +108,7 @@ Text of the template:
 - Language: English, to the rules of ASD-STE100 (Issue 9).
 - Authors: AI agents (Claude Opus 5.5) wrote this text for the author on 14.10.2026, from the records of the private project. The private project is the project folder of the author. It is not public.
 - No human examined this version of the text.
+
+## Results of the fixed run
+
+![How often the value is correct](img/results.svg)

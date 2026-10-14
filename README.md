@@ -8,8 +8,6 @@ A PDF of a Swiss parliament goes in. An eCH-0295 record in RDF comes out.
 
 *The app for one sample: the PDF page with a box for each value, and the values with their probability (output of the app).*
 
-![How often the value is correct](docs/img/results.svg)
-
 No human checked a value of the run. The reference is the OpenParlData register, not a gold set. [All limits](track_2a/docs/limits.md).
 
 ## Try it

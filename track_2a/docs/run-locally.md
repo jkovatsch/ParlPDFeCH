@@ -23,7 +23,7 @@ make setup
 make run-native
 ```
 
-- `make setup` needs the network one time. It installs Python 3.12 and the Python packages of `app/container/requirements-slim.txt` into `.venv/`, and it downloads the Rust crates.
+- `make setup` needs the network one time. It installs Python 3.12 with uv, and uv can also put the command `python3.12` into `~/.local/bin`. It installs the Python packages of `app/container/requirements-slim.txt` into `.venv/`, and it downloads the Rust crates.
 - You need cargo with the target `wasm32-unknown-unknown`, and the command `wasm-bindgen` 0.2.127. With rustup, the file `app/rust-toolchain.toml` adds the target. To install the command: `cargo install wasm-bindgen-cli --version 0.2.127` (network).
 - The command builds the server and the WebAssembly bundle, then starts the app on `127.0.0.1:8080`. `make run-native PORT=9090` sets another port. Stop it with Ctrl-C.
 - Open `http://127.0.0.1:8080/app/`.

@@ -159,7 +159,7 @@ Items 13 to 15 are notes on the method. [docs/limits.md](docs/limits.md) gives t
 
 13. The share correct, the comparison in table 6 and table 7 were not planned measures of the plan of the run.
 14. A second tool and a third calculation, each by AI agents, gave the same counts of the run from the same files. This does not show that a value is true.
-15. When this text was written, no container image of `app/` was built, and the app did not run on Linux.
+15. On 14.10.2026 a private build pipeline on Linux built a container image from the source tree of the package, which `app/` copies. In that build the converter made the 6 sample records, and each was valid. The image was not started, and `make run` did not run.
 
 Table 7: criterion Breadth, reader with rules only, by set and by parliament. Share correct: stems `V` and `G7` (key `share_correct`). Spread: stem `S.<field>` (keys `parliaments_that_count`, `lowest_precision`, `median_precision`, `highest_precision`), information made after the run. A parliament counts with 5 or more given values with a reference. Status EXCEPTION, NOT RELEASED.
 
@@ -204,7 +204,7 @@ Cross-parliament question (development documents, information): in which parliam
 
 1. A human check of a sample of reference values and of the kind of the document.
 2. A measure of the kind against labels, and value rules for more parliaments, then a run on documents that no agent read.
-3. Apertus states for a dropped PDF, and a container build on Linux.
+3. Apertus states for a dropped PDF, and a start of the container image on Linux.
 
 ## Licence
 

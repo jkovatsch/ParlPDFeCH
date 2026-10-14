@@ -13,8 +13,9 @@
 #                       (default 8080). Needs cargo with the target wasm32-unknown-unknown and the command
 #                       wasm-bindgen 0.2.127 (cargo install wasm-bindgen-cli --version 0.2.127). Stop it with
 #                       Ctrl-C. This is the way that ran on 14.10.2026; 'make run' did not run
-#   make test           checks with no network and no Rust compiler: the copied files against SOURCES.json,
-#                       the prompt files, the validator, the file list and the code layout of app/
+#   make test           checks with no network and no Rust compiler, after one 'make setup' (it needs the 2 schema
+#                       files of 'make setup'): the copied files against SOURCES.json, the prompt files, the
+#                       validator, the file list and the code layout of app/
 #   make test-app       the tests of app/ (cargo tests of the 2 crates, the example view, a start of the seed
 #                       script). Needs cargo and the crates of 'make setup'
 #   make clean          removes build/ and the build outputs of app/ (target-server/, target-wasm/, ui/pkg/, work/)

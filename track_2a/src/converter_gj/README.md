@@ -1,6 +1,6 @@
 # The reader of the values from the PDF
 
-This folder holds the code of the method that the technical report measures. A PDF of a Swiss parliament goes in. Each eCH-0295 value of the record is read from the PDF and has a probability, a page and a text span. The export is the reference of the measurement. No export value goes into a record.
+This folder holds the code of the method that the technical report measures. A PDF of a Swiss parliament goes in. Each of the 7 head values of the record is read from the PDF and has a probability. A value from the rules also has a page and a text span. Identifiers and constants of the record have no probability. The export is the reference of the measurement. No export value goes into a record.
 
 Status: EXCEPTION, NOT RELEASED. No human examined the code or this file.
 

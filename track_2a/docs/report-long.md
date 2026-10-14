@@ -2,7 +2,7 @@
 
 - **Track:** Track 2A — Extracting Parliamentary Affairs from PDFs into One Common Structure (OpenParlData)
 - **Version:** 14.10.2026, text version 2. It replaces text version 1 of 13.10.2026, which reported the block labels as the result.
-- **Status:** each value has the status EXCEPTION, NOT RELEASED. No human checked a value, a tool or a number.
+- **Status:** each value has the status EXCEPTION, NOT RELEASED. No human checked a value of the one fixed run, a tool or a number.
 - **Short version:** [`../technical_report.md`](../technical_report.md) (6 pages as a PDF). This file has no page limit.
 - **Limits in one place:** [`limits.md`](limits.md). **Folders of the repository:** [`repository-map.md`](repository-map.md).
 
@@ -66,7 +66,7 @@ Words of this file:
 
 ### 1.1 Goal
 
-A PDF of a Swiss parliament goes in. An eCH-0295 record comes out. Each value of the record is read from the PDF and has a probability, a page and a text span. The OpenParlData export is the reference of the measurement. On development documents it also gives the fit labels of the Apertus heads. At run time no export value goes into a record.
+A PDF of a Swiss parliament goes in. An eCH-0295 record comes out. Each of the 7 head values of the record is read from the PDF and has a probability. Each such value also has a page and a text span, except an affair type from an Apertus head. Identifiers and constants of the record have no probability. The OpenParlData export is the reference of the measurement. On development documents it also gives the fit labels of the Apertus heads. At run time no export value goes into a record.
 
 ### 1.2 Method
 
@@ -99,7 +99,7 @@ The combined reader adds the 2 Apertus tiers. With them, the share correct of th
 
 The block roles of the Apertus candidates B1-S and B1-L did not enter the run. The run used the block roles of the rule chain. A dropped PDF gets the rules only.
 
-Status: each value has the status EXCEPTION, NOT RELEASED. AI agents did all work and all examination. No pass limit was fixed before the run. The main limit concerns 5 fields: the affair number, the 2 dates, the title and the first author. For each of them, fewer than half of the documents with a reference get the export value (chapter 6, L1).
+Status: each value has the status EXCEPTION, NOT RELEASED. AI agents wrote the method and examined it, and no human checked a value of the one fixed run. No pass limit was fixed before the run. The main limit concerns 5 fields: the affair number, the 2 dates, the title and the first author. For each of them, fewer than half of the documents with a reference get the export value (chapter 6, L1).
 
 ### 1.4 What was measured, and what was not
 
@@ -112,7 +112,7 @@ Status: each value has the status EXCEPTION, NOT RELEASED. AI agents did all wor
 | Check by eye | 50 [`L.check_by_eye.documents`] documents of the run | information; 2 AI examiners (chapter 5.7) |
 | Subsets and spread between parliaments | the documents of the run | information, made after the run (chapters 5.8 and 5.9) |
 | Test set | 40 [`sets.test_set.selected`] selected documents, 26 [`sets.test_set.records`] reviewed records (protocol only) | not used in this report |
-| Hand-checked gold set | 26 reviewed records of test documents | not used in the one fixed run; its reference is the export |
+| Separate set (no accepted reference) | 26 records of test documents; the author examined each record on the PDF; the acceptance step G3a.2 did not take place | not used in the one fixed run; its reference is the export |
 | A dropped PDF | any PDF | the rules only; no Apertus value |
 | `make run` in a container | the app | this text has no record of a run in a container |
 
@@ -484,7 +484,7 @@ Limits of the candidates:
 
 - **Source:** the OpenParlData exports of 04.10.2026 and the PDF copies on <https://files.openparldata.ch>. Licence of the data: CC BY 4.0, "Source: OpenParlData.ch".
 - **Schema:** eCH-0295, working draft at commit `3cab44d` of <https://github.com/swiss/political-affairs-ech-group> (version I95). It is not a released standard.
-- **Personal data:** the documents have names of persons with a public role. The repository has the PDF of the 3 samples only, and no text of a validation, group-7 or test document. The samples of the app are development documents.
+- **Personal data:** two AI agents examined each sample and found only persons with a public role. No human checked this. The repository has the PDF of the 3 samples only, and no text of a validation, group-7 or test document. The samples of the app are development documents.
 
 ### 4.2 Sets
 
@@ -758,11 +758,11 @@ Table 23: spread between the parliaments, all documents of the run. Ids: `L.spre
 | No. | Limit | Number ids |
 |:---|:---|:---|
 | L1 | For the affair number, the 2 dates and the title, the share of documents with the export value is low: about 1 of 4 or 5 for the number and the dates, fewer than 1 of 2 for the title. | 0.2214 [`R.affair_number.share_correct`], 0.2729 [`R.submission_date.share_correct`], 0.2075 [`R.response_date.share_correct`], 0.4688 [`R.title.share_correct`] |
-| L2 | The authors of the value rules read none of the 26 parliaments of the run. The precision of these 4 fields is lower there than on the development documents. | table 20 |
+| L2 | The authors of the value rules of 13.10.2026 read the 44 development parliaments; the 26 parliaments of the run are other parliaments. Addendum I says that these authors opened no file of the 872 documents; no examination compared this statement with the work records. In the run, the precision of these 4 fields is lower than on the development documents. | table 20 |
 | L3 | In the check by eye, each AI examiner named 12 of 50 documents with a kind that looks wrong. Then the cascade does not search some fields. The run did not measure the kind. | `L.check_by_eye.kind_looks_wrong`, `L.check_by_eye.documents` |
 | L4 | AI agents read 116 or more of the 872 documents in earlier work. For 300 of the 872 documents, an audit found a sign of earlier contact: text or values next to the id, or the id in a list of earlier work. For the other 572 it found no such sign; this is no proof of no contact. | `L.contact.s4.all`, `L.contact.s3.all` |
 | L5 | The older rule chain was designed on a list with 38 documents of the run, of 9 of the 18 validation parliaments. For this part the run is not a measure on new parliaments. | `L.contact.rule_design_list.validation`, `L.contact.rule_design_list.validation_parliaments`, `L.parliaments.validation` |
-| L6 | AI agents of one model family did all work and all examination. No human checked a value, a tool or a number. | none |
+| L6 | AI agents of one model family (Claude Opus 5.5) wrote the rules, the tools, the measures and the audits. AI agents of the same family examined them. No human checked a value of the one fixed run, a tool or a number. | none |
 | L7 | The reference is a register. A value can be correct as printed and differ from the register: affair number 12 of 15, submission date 18 of 21 in the check by eye. | `L.check_by_eye.a.affair_number.C`, `.given`; `L.check_by_eye.a.submission_date.C`, `.given`; table 22 |
 | L8 | No pass limit was fixed before the run. Thus no text says that a field passes. The text gives the numbers and their plain meaning. | none |
 | L9 | The development values are design values. The authors of the value rules read all 44 development parliaments. These values are optimistic. | `D.mark`, `D.parliaments` |
@@ -787,7 +787,7 @@ Two more facts:
 2. The challenge asks for a hand-checked gold set. The one fixed run has none; its reference is the export.
 3. The kind of the document comes from the rule chain and from rule V5. No kind of the run was compared with a label.
 4. The stored probability of an Apertus tier includes the own fold of a development document. It is optimistic.
-5. The work log and the dossier have no explicit yes of the owner to the one fixed run in his own words. Nothing in this repository is the approval of a person.
+5. The work log and the dossier have no explicit yes of the owner to the one fixed run in his own words. No person accepted the criteria of the run, a number or a limit of this repository.
 6. 2 design files and the result files of the run do not carry each mark that the addenda ask for (dossier, chapter 6.1).
 7. A dropped PDF gets the rules only. The app of this repository has no file of the value heads.
 8. This text has no record of a run of `make run` in a container.
@@ -809,9 +809,9 @@ Cross-parliament question (development documents, information): in which parliam
 
 1. The export does not give this answer.
 2. With the B1-S block labels, 300 [`xp.written.with_both`] of 719 [`xp.written.with_response`] development documents with response text also have submitted text.
-3. The share is 0.417 [`xp.written.share_both`] (0.387 [`xp.written.share_low5`] to 0.448 [`xp.written.share_high95`]). 3 other views of the same labels give 0.503 [`xp.expected_d1.share_both`], 0.512 [`xp.expected_r2.share_both`] and 0.548 [`xp.d1_label.share_both`].
+3. The share is 0.417 [`xp.written.share_both`] (0.387 [`xp.written.share_low5`] to 0.448 [`xp.written.share_high95`]). The interval is the 5 % to 95 % quantile of a document bootstrap. 3 other views of the same labels give 0.503 [`xp.expected_d1.share_both`], 0.512 [`xp.expected_r2.share_both`] and 0.548 [`xp.d1_label.share_both`].
 4. 32 [`xp.parliaments_with_statement`] of 44 [`xp.parliaments`] parliaments get a statement. The first response block is on page 1 for 450 [`xp.first_response.on_page_1`] documents.
-5. Limits: the labels are B1-S labels, measured against an AI reference only. The share differs between the views. It is not a result of the one fixed run.
+5. Limits: the labels are B1-S labels, measured against an AI reference only. The 1,793 documents are a sample that is stratified by export role. A share is not the share of all documents of a parliament. The labels of the 193 labelled documents are in-sample. The share differs between the views. It is not a result of the one fixed run.
 
 ### 6.4 The criterion breadth
 
@@ -829,7 +829,7 @@ The commands are in the folder `track_2a/`. The states are those of 14.10.2026, 
 | Command | What it does | State |
 |:---|:---|:---|
 | `make setup` | downloads Python 3.12, the Python packages of the app and the Rust crates (network) | ran on one Mac in a fresh clone; uv and cargo used the local caches |
-| `make run` | builds the image of `app/` with Docker and starts the app on 127.0.0.1:8080 | not run: the Mac had no Docker |
+| `make run` | builds the image of `app/` with Docker and starts the app on 127.0.0.1:8080 | not run: Docker Desktop on the Mac did not start (it waits for a password in a system dialog); a private build pipeline on Linux built a container image from the source tree of the package, and nobody started it |
 | `make run-native` | builds the Rust server and the browser bundle with cargo, then starts the app with no container | ran on one Mac, also in a fresh clone; the 3 samples in the modes auto and rules gave 6 valid records |
 | `make test` | checks with no network: the copies against `SOURCES.json`, the prompt files, the validator and the samples, and the file list and code layout of `app/` | PASS, also in a fresh clone |
 | `make test-app` | the checks of `app/`: the cargo checks of the 2 crates, the example view and a start of the seed script | PASS |

@@ -1,0 +1,78 @@
+# The values of 26171.ech.ttl with their probability, page and place in the text (form parlpdfech-values-ttl/2).
+# pvl:resource and pvl:property give the statement of the eCH-0295 record. pvl:entity is the actor whose name holds the value.
+# pvl:probability comes from the development documents in which the same rule tier gave a value: (equal to OpenParlData + 0.5) / (documents + 1). No person checked a value.
+# The prefix pvl is a vocabulary of this project. Its domain is a placeholder: the vocabulary is not published.
+@prefix aff: <https://ch.paf.link/schema/affairs/> .
+@prefix pvl: <https://schema.parlpdfech.example/values/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://parlpdfech.ansv.ch/id/gj/record/doc-26171> a pvl:ValueSet ;
+    pvl:document <https://api.openparldata.ch/v1/docs/26171> ;
+    pvl:form "parlpdfech-values-ttl/2" ;
+    pvl:reading <https://parlpdfech.ansv.ch/id/gj/record/doc-26171/value/affair_number>,
+        <https://parlpdfech.ansv.ch/id/gj/record/doc-26171/value/affair_type>,
+        <https://parlpdfech.ansv.ch/id/gj/record/doc-26171/value/sponsor>,
+        <https://parlpdfech.ansv.ch/id/gj/record/doc-26171/value/title> .
+
+<https://parlpdfech.ansv.ch/id/gj/record/doc-26171/value/affair_number> a pvl:ValueReading ;
+    pvl:calibration <https://parlpdfech.ansv.ch/id/calibration/value.affair_number.number_docpart_last_line> ;
+    pvl:charEnd 2552 ;
+    pvl:charStart 2545 ;
+    pvl:field "affair_number" ;
+    pvl:label <https://parlpdfech.ansv.ch/id/gj/record/doc-26171/label/pdf-affair_number> ;
+    pvl:page 1 ;
+    pvl:printed "19.5497" ;
+    pvl:probability 0.875 ;
+    pvl:property aff:affairNumber ;
+    pvl:resource <https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair> ;
+    pvl:status "unsure" ;
+    pvl:tier "number_docpart_last_line" ;
+    pvl:value "19.5497" .
+
+<https://parlpdfech.ansv.ch/id/gj/record/doc-26171/value/affair_type> a pvl:ValueReading ;
+    pvl:calibration <https://parlpdfech.ansv.ch/id/calibration/value.affair_type.type_line_start> ;
+    pvl:charEnd 14 ;
+    pvl:charStart 0 ;
+    pvl:field "affair_type" ;
+    pvl:label <https://parlpdfech.ansv.ch/id/gj/record/doc-26171/label/pdf-affair_type> ;
+    pvl:page 1 ;
+    pvl:printed "Interpellation" ;
+    pvl:probability 0.9644 ;
+    pvl:property aff:affairType ;
+    pvl:resource <https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair> ;
+    pvl:status "certain" ;
+    pvl:tier "type_line_start" ;
+    pvl:value "interpellation" .
+
+<https://parlpdfech.ansv.ch/id/gj/record/doc-26171/value/sponsor> a pvl:ValueReading ;
+    pvl:calibration <https://parlpdfech.ansv.ch/id/calibration/value.first_author.signature_plain> ;
+    pvl:charEnd 2543 ;
+    pvl:charStart 2519 ;
+    pvl:entity <https://parlpdfech.ansv.ch/id/gj/record/doc-26171/actor/sponsor-1> ;
+    pvl:field "sponsor" ;
+    pvl:label <https://parlpdfech.ansv.ch/id/gj/record/doc-26171/label/pdf-sponsor> ;
+    pvl:page 1 ;
+    pvl:printed "Patricia von Falkenstein" ;
+    pvl:probability 0.955 ;
+    pvl:property aff:sponsorship ;
+    pvl:resource <https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair/step/submission> ;
+    pvl:status "unsure" ;
+    pvl:tier "signature_plain" ;
+    pvl:value "Patricia von Falkenstein" .
+
+<https://parlpdfech.ansv.ch/id/gj/record/doc-26171/value/title> a pvl:ValueReading ;
+    pvl:calibration <https://parlpdfech.ansv.ch/id/calibration/value.title.type_cue> ;
+    pvl:charEnd 115 ;
+    pvl:charStart 51 ;
+    pvl:field "title" ;
+    pvl:label <https://parlpdfech.ansv.ch/id/gj/record/doc-26171/label/pdf-title> ;
+    pvl:page 1 ;
+    pvl:printed """der OECD-Steuerreform und den Folgen für den Kanton Basel-
+Stadt""" ;
+    pvl:probability 0.8156 ;
+    pvl:property aff:title ;
+    pvl:resource <https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair> ;
+    pvl:status "unsure" ;
+    pvl:tier "type_cue" ;
+    pvl:value "der OECD-Steuerreform und den Folgen für den Kanton Basel-Stadt" .
+

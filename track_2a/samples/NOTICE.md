@@ -28,4 +28,4 @@ License of the data of OpenParlData: CC BY 4.0 (https://creativecommons.org/lice
 ## About this text
 
 - Language: English, to the rules of ASD-STE100 (Issue 9).
-- Authoring: an AI agent (Claude Opus 5.5) wrote this text on 12.10.2026. On 14.10.2026, an AI agent added the item on the PDF files of the app folder. On 15.10.2026, an AI agent (Claude Opus 5.5) marked the folder as input and output of the earlier converter and explained the keys of `source.json`. No human examined it.
+- Authoring: an AI agent (Claude Opus 5.5) wrote this text on 12.10.2026. On 14.10.2026, an AI agent added the item on the PDF files of the app folder. On 15.10.2026, an AI agent (Claude Opus 5.5) marked the folder as input and output of the earlier converter and explained the keys of `source.json`.

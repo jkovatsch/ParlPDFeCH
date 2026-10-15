@@ -14,6 +14,7 @@ Jonathan Kovatsch publishes this work as a private person.
 | `track_2a/app/`: code (server, page, worker, view, contract, container files, `app/layout/src/`) | Apache-2.0. Of the code files of `track_2a/app/`, only 3 files of `app/layout/src/` have the line `SPDX-License-Identifier: Apache-2.0`. |
 | `track_2a/app/`: texts (the `.md` files, `app/layout/crisp-dm/`) | CC-BY-4.0 |
 | `track_2a/app/data/`, `track_2a/app/layout/daten/`: derived data files (stored Apertus states, head weights, calibration files, records of the 3 samples) | CC-BY-4.0. Source: OpenParlData.ch. The samples also hold texts of 3 documents, their PDF files and one image of each page (chapter 3). |
+| `track_2a/examples/`: derived data files (record files that the app wrote for the 3 samples; the page "Example" of the site shows them) | CC-BY-4.0. Source: OpenParlData.ch. The files also hold texts of the 3 documents; the parliaments and executives published them. The licence question of chapter 3 applies to these texts, and to the page images of `track_2a/app/data/samples/` that the page "Example" also shows. |
 | `track_2a/app/layout/quellen/` | Copies of 2 files of the eCH-0295 working draft (chapter 4). Their own terms apply; the licence of the working draft is not clear. |
 | `track_2a/samples/` | Data of OpenParlData under CC BY 4.0, and texts of 3 documents (chapter 3; `track_2a/samples/NOTICE.md`) |
 | `.gitignore`, `track_2a/.gitignore`, `track_2a/.dockerignore`, `track_2a/.env.example` | Apache-2.0 |

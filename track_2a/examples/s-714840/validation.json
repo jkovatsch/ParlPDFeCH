@@ -1,0 +1,431 @@
+{
+ "doc_id": "714840",
+ "mode": "full_record",
+ "script": {
+  "path": "src/m11_validate.py",
+  "version": "m11-validate-7",
+  "sha256": "9a2f3327ecf269479e6e82247d61dfa967243832e4355d6cfb83d0afc0a76d63"
+ },
+ "tools": {
+  "linkml": "1.11.1",
+  "linkml-runtime": "1.12.0",
+  "rdflib": "7.6.0"
+ },
+ "record_form": "daten/gj_values/record_form.md",
+ "conformance": "i95",
+ "i95_gaps": [],
+ "check_ids": {
+  "C1": {
+   "key": "C1_linkml",
+   "record_form_id": null,
+   "description": "Each YAML file obeys its schema: the eCH-0295 file obeys I95, the provenance file obeys the profile 0.2.0, and the label file and the atom layout obey the label schema 0.2.0."
+  },
+  "C2": {
+   "key": "C2_parse",
+   "record_form_id": null,
+   "description": "A standard RDF library reads each of the 4 RDF files with no error (and the file of the values, if the record has it)."
+  },
+  "C3": {
+   "key": "C3_isomorphism",
+   "record_form_id": null,
+   "description": "The RDF files of one record hold the same statements in each format. The file of the values, if the record has it, gives each value label with its probability, page and span."
+  },
+  "C4": {
+   "key": "C4_parts",
+   "record_form_id": null,
+   "description": "Each named graph is the same as the graph that the YAML files give again."
+  },
+  "C5": {
+   "key": "C5_leaf_values",
+   "record_form_id": null,
+   "description": "Each value of each YAML file is in its graph."
+  },
+  "C6": {
+   "key": "C6_iri_scheme",
+   "record_form_id": null,
+   "description": "Each IRI of the record has a scheme."
+  },
+  "C7": {
+   "key": "C7_C8_labels",
+   "record_form_id": null,
+   "description": "Each label from the PDF has one probability in the permitted range, a calibration record, a value status, a page and a span. Each block has one block label."
+  },
+  "C9": {
+   "key": "C9_e19",
+   "record_form_id": null,
+   "description": "Each text block of the record is the wording of the PDF lines of its blocks."
+  },
+  "C10": {
+   "key": "C10_shacl",
+   "record_form_id": null,
+   "description": "SHACL shapes of the schemas (information only; it does not decide the result)."
+  },
+  "C11": {
+   "key": "C11_wording_at_span",
+   "record_form_id": "V1",
+   "description": "The document text at the page and the span of each value label is exactly the wording that the label gives."
+  },
+  "C12": {
+   "key": "C12_one_label_for_each_pdf_value",
+   "record_form_id": "V2",
+   "description": "Each value that is read from the PDF has exactly one label, and each such label has its value. The label, the record and the provenance file give the same value."
+  },
+  "C13": {
+   "key": "C13_no_export_value_in_the_record",
+   "record_form_id": "V3",
+   "description": "Each value of the eCH-0295 part has one provenance entry. No value comes from the export, and no slot that only the register knows has a value."
+  },
+  "C14": {
+   "key": "C14_cross_check",
+   "record_form_id": "V4",
+   "description": "The comparison with the export is consistent in the label and in the provenance file. With the export record at hand, a second calculation gives the stored result and the stored export value again."
+  },
+  "C15": {
+   "key": "C15_slot_states",
+   "record_form_id": "V5",
+   "description": "The manifest gives one of the 4 states for each slot of Affair, Submission and ResponseStep, and each state agrees with the record. Each of the 7 fields has a label, or a gap record, or an entry in the list of the fields that were not read, and only one of them."
+  },
+  "C16": {
+   "key": "C16_probability_and_calibration",
+   "record_form_id": "V6",
+   "description": "Each value label has a probability from 0.005 to 0.995 and a calibration record for its rule tier. The probability and the value status are the values that the calibration file of the product gives. A record that names another calibration file fails, if the caller of the check did not give that file."
+  },
+  "C17": {
+   "key": "C17_recorded_gaps",
+   "record_form_id": "V7",
+   "description": "A required slot of I95 with no value (affair type, affair number) is a recorded gap: the manifest, the provenance file and the label file each state it, and no other required slot is absent."
+  },
+  "C18": {
+   "key": "C18_minted_iris",
+   "record_form_id": null,
+   "description": "Each IRI of the record is below the record IRI. The address of the affair in the register is not an IRI of the eCH-0295 part and not an IRI of a label."
+  },
+  "C19": {
+   "key": "C19_value_forms",
+   "record_form_id": null,
+   "description": "Each value has the form of its slot: a type of the I95 list, a date that is a calendar day, and a responder that names a body (not only a person). A head value, a step and a text block are in the record only if a document of this kind can state them. A proposal has no response step, and no value that is not searched in this kind of document."
+  },
+  "C20": {
+   "key": "C20_value_follows_from_wording",
+   "record_form_id": "V8",
+   "description": "Each value from the PDF is made again from the document text at its span: the list value of the printed type word, the printed title and number on one line, the day of the printed date, the printed name of the body and of the first author. A value that the PDF does not print at its span fails. This check needs no export record."
+  },
+  "C21": {
+   "key": "C21_floor",
+   "record_form_id": "V9",
+   "description": "No value of a rule tier that is more often different from the reference than equal (stored probability below 0.5) is in the eCH-0295 part. Such a value is a candidate in the label file, with a gap record and the slot state not found in the PDF."
+  },
+  "C22": {
+   "key": "C22_values_from_the_readers",
+   "record_form_id": "V10",
+   "description": "The reading rules run again on the text of the PDF. Each of the 7 entries of the record is what the rules give: the same value, the same place in the PDF, the same rule tier and the same state. A value that the rules do not give, a place that the rules did not select, and a value that is not searched in this kind of document fail. This check needs no export record."
+  }
+ },
+ "inputs": {
+  "block_file": "daten/gj/docs/714840.json",
+  "rule_file": "daten/gj/rules/714840.json",
+  "atom_file": "daten/iso/atome/714840.json",
+  "calibration_file": "daten/gj_values/round4/calibration_dev_all.json",
+  "calibration_source": "the product file",
+  "export_record_at_hand": true
+ },
+ "calibration_file": {
+  "product_file": "daten/gj_values/round4/calibration_dev_all.json",
+  "product_file_at_hand": true,
+  "source": "the product file",
+  "path": "daten/gj_values/round4/calibration_dev_all.json",
+  "sha256": "e48e7a8d8efdd1e10b68071df85275dc0c5b69e004bb8051b2aecd2a1d4229d7",
+  "is_product_file": true,
+  "manifest_names": {
+   "path": "daten/gj_values/round4/calibration_dev_all.json",
+   "sha256": "e48e7a8d8efdd1e10b68071df85275dc0c5b69e004bb8051b2aecd2a1d4229d7"
+  }
+ },
+ "C1_linkml": {
+  "passed": true,
+  "description": "Each YAML file obeys its schema: the eCH-0295 file obeys I95, the provenance file obeys the profile 0.2.0, and the label file and the atom layout obey the label schema 0.2.0.",
+  "results": [
+   {
+    "file": "714840.ech.yaml",
+    "schema": "quellen/political-affairs-ech-group/ech-0295_affairs/input/schema.yaml",
+    "class": "Container",
+    "valid": true,
+    "errors": 0,
+    "messages": []
+   },
+   {
+    "file": "714840.provenance.yaml",
+    "schema": "src/m06_ech_profil.yaml",
+    "class": "ExtractionRecord",
+    "valid": true,
+    "errors": 0,
+    "messages": []
+   },
+   {
+    "file": "714840.labels.yaml",
+    "schema": "src/m11_label_schema.yaml",
+    "class": "LabelRecord",
+    "valid": true,
+    "errors": 0,
+    "messages": []
+   },
+   {
+    "file": "atom layout (in memory)",
+    "schema": "src/m11_label_schema.yaml",
+    "class": "PdfLayout",
+    "valid": true,
+    "errors": 0,
+    "messages": []
+   }
+  ],
+  "problems": []
+ },
+ "C2_parse": {
+  "passed": true,
+  "description": "A standard RDF library reads each of the 4 RDF files with no error (and the file of the values, if the record has it).",
+  "results": [
+   {
+    "file": "714840.gesamt.trig",
+    "parsed": true,
+    "triples": 1304
+   },
+   {
+    "file": "714840.gesamt.rdf.xml",
+    "parsed": true,
+    "triples": 1304
+   },
+   {
+    "file": "714840.ech.ttl",
+    "parsed": true,
+    "triples": 5
+   },
+   {
+    "file": "714840.ech.rdf.xml",
+    "parsed": true,
+    "triples": 5
+   },
+   {
+    "file": "714840.values.ttl",
+    "parsed": true,
+    "triples": 33
+   }
+  ]
+ },
+ "C3_isomorphism": {
+  "passed": true,
+  "description": "The RDF files of one record hold the same statements in each format. The file of the values, if the record has it, gives each value label with its probability, page and span.",
+  "union_equals_gesamt_rdfxml": true,
+  "ech_ttl_equals_ech_rdfxml": true,
+  "ech_ttl_equals_trig_graph": true,
+  "values_ttl_equals_label_file": true
+ },
+ "C4_parts": {
+  "passed": true,
+  "description": "Each named graph is the same as the graph that the YAML files give again.",
+  "graphs": {
+   "ech-0295": true,
+   "provenance": true,
+   "atoms": true,
+   "labels": true
+  },
+  "other_graphs": [],
+  "triples": {
+   "ech-0295": 5,
+   "provenance": 185,
+   "atoms": 240,
+   "labels": 874
+  }
+ },
+ "C5_leaf_values": {
+  "passed": true,
+  "description": "Each value of each YAML file is in its graph.",
+  "missing": {
+   "ech_yaml": [],
+   "provenance_yaml": [],
+   "labels_yaml": [],
+   "atom_layout": []
+  }
+ },
+ "C6_iri_scheme": {
+  "passed": true,
+  "description": "Each IRI of the record has a scheme.",
+  "iris_without_scheme": []
+ },
+ "C7_C8_labels": {
+  "description": "Each label from the PDF has one probability in the permitted range, a calibration record, a value status, a page and a span. Each block has one block label.",
+  "passed": true,
+  "problems": [],
+  "labels": 15,
+  "by_kind": {
+   "block_slot": 8,
+   "pdf_value": 3,
+   "constant_value": 2,
+   "document_text_parts": 1,
+   "executive_response": 1
+  },
+  "pdf_derived_labels": 13,
+  "labels_without_probability": 2,
+  "blocks": 8,
+  "calibration_nodes": 8
+ },
+ "C9_e19": {
+  "description": "Each text block of the record is the wording of the PDF lines of its blocks.",
+  "passed": true,
+  "text_blocks": 0,
+  "characters": 0,
+  "problems": [],
+  "independent_comparison_differences": []
+ },
+ "C10_shacl": {
+  "description": "SHACL shapes of the schemas (information only; it does not decide the result).",
+  "status": "skipped",
+  "reason": "pyshacl is not importable (the command has no --with pyshacl)",
+  "information_only": true
+ },
+ "C11_wording_at_span": {
+  "passed": true,
+  "description": "The document text at the page and the span of each value label is exactly the wording that the label gives.",
+  "record_form_id": "V1",
+  "labels": 3,
+  "pdf_evidence_compared": 2,
+  "problems": []
+ },
+ "C12_one_label_for_each_pdf_value": {
+  "passed": true,
+  "description": "Each value that is read from the PDF has exactly one label, and each such label has its value. The label, the record and the provenance file give the same value.",
+  "record_form_id": "V2",
+  "value_labels": 2,
+  "value_records_by_rule": 2,
+  "problems": []
+ },
+ "C13_no_export_value_in_the_record": {
+  "passed": true,
+  "description": "Each value of the eCH-0295 part has one provenance entry. No value comes from the export, and no slot that only the register knows has a value.",
+  "record_form_id": "V3",
+  "leaves": 4,
+  "value_records": 4,
+  "problems": []
+ },
+ "C14_cross_check": {
+  "passed": true,
+  "description": "The comparison with the export is consistent in the label and in the provenance file. With the export record at hand, a second calculation gives the stored result and the stored export value again.",
+  "record_form_id": "V4",
+  "has_export": true,
+  "recalculated_from_the_export_record": true,
+  "compared_with_m11_writer_cross_check": true,
+  "problems": []
+ },
+ "C15_slot_states": {
+  "passed": true,
+  "description": "The manifest gives one of the 4 states for each slot of Affair, Submission and ResponseStep, and each state agrees with the record. Each of the 7 fields has a label, or a gap record, or an entry in the list of the fields that were not read, and only one of them.",
+  "record_form_id": "V5",
+  "slots": 52,
+  "by_state": {
+   "read_from_pdf": 2,
+   "not_found_in_pdf": 22,
+   "not_in_this_document_type": 12,
+   "register_only": 16
+  },
+  "gap_records": 5,
+  "problems": []
+ },
+ "C16_probability_and_calibration": {
+  "passed": true,
+  "description": "Each value label has a probability from 0.005 to 0.995 and a calibration record for its rule tier. The probability and the value status are the values that the calibration file of the product gives. A record that names another calibration file fails, if the caller of the check did not give that file.",
+  "record_form_id": "V6",
+  "labels": 3,
+  "calibration_file_at_hand": true,
+  "calibration_file": {
+   "product_file": "daten/gj_values/round4/calibration_dev_all.json",
+   "product_file_at_hand": true,
+   "source": "the product file",
+   "path": "daten/gj_values/round4/calibration_dev_all.json",
+   "sha256": "e48e7a8d8efdd1e10b68071df85275dc0c5b69e004bb8051b2aecd2a1d4229d7",
+   "is_product_file": true,
+   "manifest_names": {
+    "path": "daten/gj_values/round4/calibration_dev_all.json",
+    "sha256": "e48e7a8d8efdd1e10b68071df85275dc0c5b69e004bb8051b2aecd2a1d4229d7"
+   }
+  },
+  "probability_from": "all folds",
+  "problems": []
+ },
+ "C17_recorded_gaps": {
+  "passed": true,
+  "description": "A required slot of I95 with no value (affair type, affair number) is a recorded gap: the manifest, the provenance file and the label file each state it, and no other required slot is absent.",
+  "record_form_id": "V7",
+  "conformance": "i95",
+  "i95_gaps": [],
+  "i95_messages_with_no_change": 0,
+  "i95_messages_with_the_gap_slots_not_required": null,
+  "absent_required": [],
+  "problems": []
+ },
+ "C18_minted_iris": {
+  "passed": true,
+  "description": "Each IRI of the record is below the record IRI. The address of the affair in the register is not an IRI of the eCH-0295 part and not an IRI of a label.",
+  "record_iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840",
+  "known_document": true,
+  "problems": []
+ },
+ "C19_value_forms": {
+  "passed": true,
+  "description": "Each value has the form of its slot: a type of the I95 list, a date that is a calendar day, and a responder that names a body (not only a person). A head value, a step and a text block are in the record only if a document of this kind can state them. A proposal has no response step, and no value that is not searched in this kind of document.",
+  "information": [],
+  "kind": "other",
+  "problems": []
+ },
+ "C20_value_follows_from_wording": {
+  "passed": true,
+  "description": "Each value from the PDF is made again from the document text at its span: the list value of the printed type word, the printed title and number on one line, the day of the printed date, the printed name of the body and of the first author. A value that the PDF does not print at its span fails. This check needs no export record.",
+  "record_form_id": "V8",
+  "values_made_again": 3,
+  "export_record_used": false,
+  "problems": []
+ },
+ "C21_floor": {
+  "passed": true,
+  "description": "No value of a rule tier that is more often different from the reference than equal (stored probability below 0.5) is in the eCH-0295 part. Such a value is a candidate in the label file, with a gap record and the slot state not found in the PDF.",
+  "record_form_id": "V9",
+  "threshold": 0.5,
+  "candidates": [
+   "title"
+  ],
+  "addressee_candidates": [],
+  "calibration_file_at_hand": true,
+  "problems": []
+ },
+ "C22_values_from_the_readers": {
+  "passed": true,
+  "description": "The reading rules run again on the text of the PDF. Each of the 7 entries of the record is what the rules give: the same value, the same place in the PDF, the same rule tier and the same state. A value that the rules do not give, a place that the rules did not select, and a value that is not searched in this kind of document fail. This check needs no export record.",
+  "record_form_id": "V10",
+  "kind": "other",
+  "kind_from": "rule chain",
+  "kind_source": {
+   "from": "rule chain (S1 rule role and rule id)",
+   "s1_role": "other",
+   "s1_rule_id": "O1",
+   "s1_export_condition": false,
+   "rule": "R2"
+  },
+  "rule_file_at_hand": true,
+  "affair_type_of_the_cascade": "draft_decree",
+  "readers": {
+   "affair_type": "found (type_government_head)",
+   "title": "found (weak_first_heading)",
+   "affair_number": "found (number_letter_code_line)",
+   "submission_date": "not searched",
+   "response_date": "not searched",
+   "responder": "not searched",
+   "sponsor": "not searched"
+  },
+  "information": [],
+  "export_record_used": false,
+  "problems": []
+ },
+ "passed": true,
+ "checks_failed": [],
+ "checks_not_run": [],
+ "shacl_information_only": true,
+ "seconds": 0.856
+}

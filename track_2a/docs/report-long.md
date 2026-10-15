@@ -2,7 +2,6 @@
 
 - **Track:** Track 2A — Extracting Parliamentary Affairs from PDFs into One Common Structure (OpenParlData)
 - **Version:** 15.10.2026. It replaces the texts of 13.10.2026 (block labels as the result) and 14.10.2026. The public report of 12.10.2026 was on the earlier converter.
-- **Status:** each value has the status EXCEPTION, NOT RELEASED. No human checked a value of the one fixed run, a tool or a number.
 - **Short version:** [`../technical_report.md`](../technical_report.md) (6 pages as a PDF). This file has no page limit.
 - **Limits in one place:** [`limits.md`](limits.md). **Folders of the repository:** [`repository-map.md`](repository-map.md).
 
@@ -83,7 +82,7 @@ A PDF of a Swiss parliament goes in. An eCH-0295 record comes out. Each head val
 
 The one fixed run of 13.10.2026 compared the values of 872 [`R.documents`] documents of 26 [`L.parliaments.all`] parliaments with the export, one time. The documents are 804 [`L.documents.validation`] validation documents of 18 [`L.parliaments.validation`] parliaments and 68 [`L.documents.group7`] documents of 8 [`L.parliaments.group7`] more parliaments (group 7). AI agents had read each group-7 document before the run.
 
-Table 1: the reader with rules only, all documents of the run. Ids: `R.<field>.precision`, `R.<field>.found_rate`, `R.<field>.share_correct`. Reference: the export. No human checked a value. Status EXCEPTION, NOT RELEASED.
+Table 1: the reader with rules only, all documents of the run. Ids: `R.<field>.precision`, `R.<field>.found_rate`, `R.<field>.share_correct`. Reference: the export.
 
 | Field | Precision | Found rate | Share correct |
 |:---|---:|---:|---:|
@@ -99,7 +98,7 @@ The combined reader adds the 2 Apertus tiers. With them, the share correct of th
 
 The block roles of the Apertus candidates B1-S and B1-L did not enter the run. The run used the block roles of the rule chain. In the app, the rules give each value. An own PDF needs `make setup-pdf` and `make run-native` (chapter 7.1).
 
-Status: each value has the status EXCEPTION, NOT RELEASED. AI agents wrote the method and examined it, and no human checked a value of the one fixed run. No pass limit was fixed before the run. The main limit concerns 5 fields: the affair number, the 2 dates, the title and the first author. For each of them, fewer than half of the documents with a reference get the export value (chapter 6, L1).
+AI agents wrote the method and examined it. No pass limit was fixed before the run. The main limit concerns 5 fields: the affair number, the 2 dates, the title and the first author. For each of them, fewer than half of the documents with a reference get the export value (chapter 6, L1).
 
 ### 1.4 What was measured, and what was not
 
@@ -111,7 +110,7 @@ Status: each value has the status EXCEPTION, NOT RELEASED. AI agents wrote the m
 | Kind of the document | the documents of the run | not measured: no label of the kind was opened |
 | Check by eye | 50 [`L.check_by_eye.documents`] documents of the run | information; 2 AI examiners (chapter 5.7) |
 | Subsets and spread between parliaments | the documents of the run | information, made after the run (chapters 5.8 and 5.9) |
-| Test set | 40 [`sets.test_set.selected`] selected documents; 26 [`sets.test_set.records`] records of them (protocol only). The author examined each record on the PDF. No person accepted this reference. | not used in the one fixed run or in another value of this report; the earlier converter of 12.10.2026 was scored on the 26 records |
+| Test set | 40 [`sets.test_set.selected`] selected documents; 26 [`sets.test_set.records`] records of them (protocol only). The author examined each record on the PDF. | not used in the one fixed run or in another value of this report; the earlier converter of 12.10.2026 was scored on the 26 records |
 | An own PDF | a PDF with a text layer | the rules only, no Apertus value. Only with `make setup-pdf` and `make run-native`. Recorded: synthetic PDFs and the 3 sample PDFs (`app/README.md`, chapter "The modes"), and on 15.10.2026 2 changed copies of samples (chapter 7.1) |
 | `make run` in a container | the app | one run on one Mac (chapter 7.1). The image converts the 3 samples only |
 
@@ -206,7 +205,7 @@ What the standard does not state, and where the cascade has a project rule or a 
 5. A tier is weak if its stored probability is below 0.5 [`design.fixed.combined_reader_weak_below`] (read).
 6. The writer puts no value of a tier with a stored probability below 0.5 [`design.fixed.writer_floor`] (read) into a slot. Such a value goes into the label file only.
 
-Table 3: the rule tiers and the calibration of round 4. Development documents, reader with rules only. Ids: `D.<field>.<key>`; the keys `tiers` and `certain_tiers` are derived. Mark "after the opening". Status EXCEPTION, NOT RELEASED.
+Table 3: the rule tiers and the calibration of round 4. Development documents, reader with rules only. Ids: `D.<field>.<key>`; the keys `tiers` and `certain_tiers` are derived. Mark "after the opening".
 
 | Field | Documents of the primary set | With a reference | Correct / wrong / not found | Rule tiers | Tiers that can give certain | Threshold a | Mean probability | Brier score | Calibration error |
 |:---|---:|---:|:---|---:|---:|:---|---:|---:|---:|
@@ -232,7 +231,7 @@ Table 3: the rule tiers and the calibration of round 4. Development documents, r
 
 On the development documents (round 4, mark "after the opening"): 280 [`D.kind.v5.rule_id_d0`] documents had no decision of the rule chain. Rule V5 changed the kind of 104 [`D.kind.v5.changed`] of them: 62 [`D.kind.v5.to_proposal`] to `proposal`, 41 [`D.kind.v5.to_combined`] to `combined` and 1 [`D.kind.v5.to_response`] to `response`. It changed nothing for 176 [`D.kind.v5.no_change`].
 
-Table 4: rule V5 in the one fixed run, combined reader. Ids: `C.kind.<key>`, `CV.kind.<key>`, `CG.kind.<key>`; `v5.changed` is derived. Status EXCEPTION, NOT RELEASED.
+Table 4: rule V5 in the one fixed run, combined reader. Ids: `C.kind.<key>`, `CV.kind.<key>`, `CG.kind.<key>`; `v5.changed` is derived.
 
 | Set | To `proposal` | To `combined` | To `response` | Changed | Kind `response` or `combined` outside the primary set | Kind changed by the `Q0` head |
 |:---|---:|---:|---:|---:|---:|---:|
@@ -247,7 +246,7 @@ Limits of rule V5:
 3. The response cue can also be a heading of a report or a decree of the executive. Then the record states a response step that the PDF does not state.
 4. A decree of the executive can name an earlier motion. With a signature or a minutes cue, it then gets the kind `combined`.
 5. A type word in a document that only names a proposal gives the kind `proposal`. Then the text of a notice can go into the submitted text.
-6. A skeptic agent read a sample of the documents with a kind of rule V5. Nobody read the other documents.
+6. A skeptic agent read a sample of the documents with a kind of rule V5. The other documents were not read for this check.
 
 ## 3. Use of Apertus
 
@@ -307,13 +306,13 @@ Entry rules (addendum I, read):
 4. The `Q0` head enters with 3 conditions. Lowest accuracy and lowest number of documents: 0.90 and 50 [`design.fixed.addendum_i.q0_lowest_accuracy_and_documents`]. The head must also be correct as often as the rules.
 5. A tier that does not meet its entry rule does not enter. No limit was changed to make a tier enter.
 
-Table 5: the entry of the `Q0` head. Ids: `H.entry.q0.<key>`. Development documents with an AI label of the kind. Status EXCEPTION, NOT RELEASED.
+Table 5: the entry of the `Q0` head. Ids: `H.entry.q0.<key>`. Development documents with an AI label of the kind.
 
 | Documents compared | Head correct | Rules correct | Condition a (documents) | Condition b (accuracy) | Condition c (head against rules) | Entered |
 |---:|---:|---:|:---|:---|:---|:---|
 | 140 | 106 | 106 | yes | no | yes | no |
 
-Table 6: the entry of the `Q1` tier. Ids: `H.entry.q1.<key>`. The design set has the development documents where the rules found no affair type. Status EXCEPTION, NOT RELEASED.
+Table 6: the entry of the `Q1` tier. Ids: `H.entry.q1.<key>`. The design set has the development documents where the rules found no affair type.
 
 | Design set | Units equal | Units different | Types with no reference | Entered |
 |---:|---:|---:|---:|:---|
@@ -321,7 +320,7 @@ Table 6: the entry of the `Q1` tier. Ids: `H.entry.q1.<key>`. The design set has
 
 Information: 1,657 [`H.entry.q1.all.documents`] development documents have a reference type. For 1,439 [`H.entry.q1.all.correct`] of them the top class of the `Q1` head is the reference type (0.8684 [`H.entry.q1.all.accuracy`]). This value is not a value of the entry decision.
 
-Table 7: the entry of the `Q2` tiers. Ids: `H.entry.q2.<field>.<key>` and `H.entry.q2.<field>.<tier>.<key>`. The design set has the development documents where the rules found no value or gave a value of a weak tier. Status EXCEPTION, NOT RELEASED.
+Table 7: the entry of the `Q2` tiers. Ids: `H.entry.q2.<field>.<key>` and `H.entry.q2.<field>.<tier>.<key>`. The design set has the development documents where the rules found no value or gave a value of a weak tier.
 
 | Field | Design set: rules found no value | Design set: weak rule tier | Tier | Equal | Different | Entered |
 |:---|---:|---:|:---|---:|---:|:---|
@@ -350,7 +349,7 @@ Table 7: the entry of the `Q2` tiers. Ids: `H.entry.q2.<field>.<key>` and `H.ent
 6. A field that the cascade does not search gets no Apertus value.
 7. A type from the `Q1` head has no printed wording. Its record has no page and no span. Its evidence says: answer of the model to question `Q1` on the whole document.
 
-Table 8: the 2 readers on the development documents. Ids: `H.<field>.rules.<key>` and `H.<field>.combined.<key>`; `share_correct` is derived. Marks "after the opening" and "after the design values of addendum I". Reference: the export. Status EXCEPTION, NOT RELEASED.
+Table 8: the 2 readers on the development documents. Ids: `H.<field>.rules.<key>` and `H.<field>.combined.<key>`; `share_correct` is derived. Marks "after the opening" and "after the design values of addendum I". Reference: the export.
 
 | Field | Reader | Correct / wrong / not found / no reference | Precision | Found rate | Share correct |
 |:---|:---|:---|---:|---:|---:|
@@ -368,7 +367,7 @@ Table 8: the 2 readers on the development documents. Ids: `H.<field>.rules.<key>
 
 ### 3.7 The 2 Apertus tiers in the one fixed run
 
-Table 9: the 2 tiers in the run. Ids: `C.tier.<tier>.<key>`, `CV.tier.<tier>.<key>`, `CG.tier.<tier>.<key>`. Reference: the export. The measures file has no interval for a tier. Status EXCEPTION, NOT RELEASED.
+Table 9: the 2 tiers in the run. Ids: `C.tier.<tier>.<key>`, `CV.tier.<tier>.<key>`, `CG.tier.<tier>.<key>`. Reference: the export. The measures file has no interval for a tier.
 
 | Tier | Set | Units | Correct | Precision | Stored probability |
 |:---|:---|---:|---:|---:|---:|
@@ -385,7 +384,7 @@ Table 9: the 2 tiers in the run. Ids: `C.tier.<tier>.<key>`, `CV.tier.<tier>.<ke
 
 The `Q0` head in the run (information). The head did not enter, so it changed the kind of 0 [`C.kind.changed`] documents. Its classes were recorded as a cross-check.
 
-Table 10: the classes of the `Q0` head in the run. Ids: `L.heads.<set>.q0_class.<class>` and `L.heads.<set>.documents_with_no_states_file`. Information. Status EXCEPTION, NOT RELEASED.
+Table 10: the classes of the `Q0` head in the run. Ids: `L.heads.<set>.q0_class.<class>` and `L.heads.<set>.documents_with_no_states_file`. Information.
 
 | Set | A | B | C | D | Not given | No head answer | No states file |
 |:---|---:|---:|---:|---:|---:|---:|---:|
@@ -405,7 +404,7 @@ The 3 methods:
 2. B1-S: the frozen B1 head and a new form of the sequence step, `switch_soft` with the strength 8.0 [`dev.b1s.strength`]. No Apertus weight changes. Run 2.
 3. B1-L: a LoRA adapter on Apertus and a linear head, trained on the development documents. It is the LoRA-trained candidate. Run 3.
 
-Table 11: the block-role candidates. Development: 7,801 [`rules.dev.non_certain_blocks`] blocks that no certain rule decides. Validation: the blocks above. Ids: `rules.dev.acc_noncertain`, `heads.dev.b12.acc_noncertain`, `dev.<b1s|b1l>.acc_noncertain`; `rules.val.<key>`, `heads.val.b12.<key>`, `val.<b1s|b1l>.<key>`. Exact block paths: of 44 [`sets.reference.validation.documents`] documents. Exact switch documents: of 10 [`sets.reference.validation.switch_documents`] switch documents. Reference: AI reference. Status EXCEPTION, NOT RELEASED.
+Table 11: the block-role candidates. Development: 7,801 [`rules.dev.non_certain_blocks`] blocks that no certain rule decides. Validation: the blocks above. Ids: `rules.dev.acc_noncertain`, `heads.dev.b12.acc_noncertain`, `dev.<b1s|b1l>.acc_noncertain`; `rules.val.<key>`, `heads.val.b12.<key>`, `val.<b1s|b1l>.<key>`. Exact block paths: of 44 [`sets.reference.validation.documents`] documents. Exact switch documents: of 10 [`sets.reference.validation.switch_documents`] switch documents. Reference: AI reference.
 
 | Method | Development accuracy, out-of-fold | Validation accuracy | Gain over the rules (5 % bound) | Exact block paths | Exact switch documents | Enters |
 |:---|---:|---:|:---|---:|---:|:---|
@@ -428,9 +427,8 @@ The account of the 2 candidates:
 6. The choice rule E3 of addendum E uses the development value. It gives B1-L [`dev.b1l.choice.result`].
 7. The cause of the larger difference of B1-L between development and validation is not known.
 8. The app, the conversion of the development documents and the cross-parliament analysis use B1-S.
-9. The owner did not decide the candidate.
 
-Table 12: calibration of the written block labels on validation (criterion GJ.13). Ids: `val.gj13.<variant>.<key>`, `dev.<b1s|b1l>.threshold_a`, `val.status.<variant>.block_certain`, `val.<b1s|b1l>.certain.decided.<key>`. Limits of GJ.13: ECE 0.05 [`val.gj13.limit_ece`] and 95 % bound 0.08 [`val.gj13.limit_ece_high95`] (read). Reference: AI reference. Status EXCEPTION, NOT RELEASED.
+Table 12: calibration of the written block labels on validation (criterion GJ.13). Ids: `val.gj13.<variant>.<key>`, `dev.<b1s|b1l>.threshold_a`, `val.status.<variant>.block_certain`, `val.<b1s|b1l>.certain.decided.<key>`. Limits of GJ.13: ECE 0.05 [`val.gj13.limit_ece`] and 95 % bound 0.08 [`val.gj13.limit_ece_high95`] (read). Reference: AI reference.
 
 | Variant | Written accuracy | ECE | 95 % bound of the ECE | GJ.13 | Threshold a | Labels certain | Of these, decided by the candidate: labels, accuracy |
 |:---|---:|---:|---:|:---|:---|---:|:---|
@@ -441,7 +439,7 @@ Table 12: calibration of the written block labels on validation (criterion GJ.13
 1. The threshold of B1-L comes from addendum F. Addendum F was written after the development values of B1-L were known and before a validation value of B1-L was known.
 2. On development documents the certain labels of the candidate alone had 0.9379 [`dev.b1s.certain_decided.accuracy`] (B1-S, protocol only) and 0.9376 [`dev.b1l.certain_decided.accuracy`] (B1-L, read). Thus this report does not say that a certain block label has the accuracy of the limit.
 
-Table 13: the paired difference B1-L minus B1-S on the validation blocks that no certain rule decides. Ids: `val.pair.<key>`. Status EXCEPTION, NOT RELEASED.
+Table 13: the paired difference B1-L minus B1-S on the validation blocks that no certain rule decides. Ids: `val.pair.<key>`.
 
 | Item | Value |
 |:---|:---|
@@ -485,11 +483,11 @@ Limits of the candidates:
 
 - **Source:** the OpenParlData exports of 04.10.2026 and the PDF copies on <https://files.openparldata.ch>. Licence of the data: CC BY 4.0, "Source: OpenParlData.ch".
 - **Schema:** eCH-0295, working draft at commit `3cab44d` of <https://github.com/swiss/political-affairs-ech-group> (version I95). It is not a released standard.
-- **Personal data:** two AI agents examined each sample and found only persons with a public role. No human checked this. The repository has the PDF of the 3 samples only, and no text of a validation, group-7 or test document. The samples of the app are development documents.
+- **Personal data:** two AI agents examined each sample and found only persons with a public role. The repository has the PDF of the 3 samples only, and no text of a validation, group-7 or test document. The samples of the app are development documents.
 
 ### 4.2 Sets
 
-Table 14: sets. Status EXCEPTION, NOT RELEASED.
+Table 14: sets.
 
 | Set | Documents | Parliaments | Use in this report |
 |:---|---:|---:|:---|
@@ -515,7 +513,7 @@ Languages of the 2,665 documents: German 1,699 [`sets.language.all.de`], French 
 
 1. The reference of a field is the export value after the normalisation of addendum G.
 2. For the affair type it is the eCH type that a project map gives for the local type name of the export. The same value is the fit target of the `Q1` head.
-3. No human of the project examined a reference value. The outcome wrong can include a value that is correct in the PDF.
+3. The reference is a register. The outcome wrong can include a value that is correct in the PDF.
 4. For 276 [`gaps.affair_type.all`] documents the export has no affair type of the I95 list (protocol only): development 136 [`gaps.affair_type.dev`], validation 127 [`gaps.affair_type.validation`], group 7 13 [`gaps.affair_type.group7`].
 5. The challenge asks for an evaluation against a hand-checked gold set. The one fixed run has none. Its reference is the export.
 
@@ -542,7 +540,7 @@ Measures:
 
 ### 5.2 The reader with rules only
 
-Table 15: reader with rules only, all documents of the run. Ids: `R.<field>.<key>` with the keys `correct`, `wrong`, `not_found`, `no_reference`, `precision`, `found_rate`, `share_correct` (derived) and `<measure>.bootstrap_low5`, `<measure>.bootstrap_high95`. Reference: the export. No human checked a value. Status EXCEPTION, NOT RELEASED.
+Table 15: reader with rules only, all documents of the run. Ids: `R.<field>.<key>` with the keys `correct`, `wrong`, `not_found`, `no_reference`, `precision`, `found_rate`, `share_correct` (derived) and `<measure>.bootstrap_low5`, `<measure>.bootstrap_high95`. Reference: the export.
 
 | Field | Correct / wrong / not found / no reference | Precision (interval) | Found rate (interval) | Share correct (interval) |
 |:---|:---|:---|:---|:---|
@@ -554,7 +552,7 @@ Table 15: reader with rules only, all documents of the run. Ids: `R.<field>.<key
 | `responder_name` | 200 / 5 / 19 / 0 | 0.9756 (0.9272 to 1.0000) | 0.9152 (0.8333 to 0.9721) | 0.8929 (0.7974 to 0.9610) |
 | `first_author` | 195 / 45 / 188 / 444 | 0.8125 (0.7454 to 0.8879) | 0.5607 (0.4555 to 0.6713) | 0.4556 (0.3690 to 0.5611) |
 
-Table 16: reader with rules only, validation documents. Ids: `RV.<field>.<key>`, the keys of table 15. Status EXCEPTION, NOT RELEASED.
+Table 16: reader with rules only, validation documents. Ids: `RV.<field>.<key>`, the keys of table 15.
 
 | Field | Correct / wrong / not found / no reference | Precision (interval) | Found rate (interval) | Share correct (interval) |
 |:---|:---|:---|:---|:---|
@@ -566,7 +564,7 @@ Table 16: reader with rules only, validation documents. Ids: `RV.<field>.<key>`,
 | `responder_name` | 180 / 0 / 18 / 0 | 1.0000 (1.0000 to 1.0000) | 0.9091 (0.8216 to 0.9722) | 0.9091 (0.8216 to 0.9722) |
 | `first_author` | 166 / 38 / 167 / 433 | 0.8137 (0.7432 to 0.8983) | 0.5499 (0.4342 to 0.6834) | 0.4474 (0.3529 to 0.5740) |
 
-Table 17: reader with rules only, group 7. Ids: `RG.<field>.<key>`, the keys of table 15. Status EXCEPTION, NOT RELEASED.
+Table 17: reader with rules only, group 7. Ids: `RG.<field>.<key>`, the keys of table 15.
 
 | Field | Correct / wrong / not found / no reference | Precision (interval) | Found rate (interval) | Share correct (interval) |
 |:---|:---|:---|:---|:---|
@@ -587,7 +585,7 @@ Table 17: reader with rules only, group 7. Ids: `RG.<field>.<key>`, the keys of 
 
 The combined reader has the counts of the reader with rules only for 5 fields. No Apertus tier entered for them.
 
-Table 18: combined reader, the 2 fields with an Apertus tier. Ids: `C.<field>.<key>`, `CV.<field>.<key>`, `CG.<field>.<key>`, the keys of table 15. Reference: the export. Status EXCEPTION, NOT RELEASED.
+Table 18: combined reader, the 2 fields with an Apertus tier. Ids: `C.<field>.<key>`, `CV.<field>.<key>`, `CG.<field>.<key>`, the keys of table 15. Reference: the export.
 
 | Field | Set | Correct / wrong / not found / no reference | Precision (interval) | Found rate (interval) | Share correct (interval) |
 |:---|:---|:---|:---|:---|:---|
@@ -602,7 +600,7 @@ The 2 tiers raise the found rate of the affair type from 0.8402 [`R.affair_type.
 
 ### 5.4 Values with the status certain
 
-Table 19: values with the status certain, reader with rules only. Ids: `R.<field>.certain.<key>`, `RV.<field>.certain.<key>`, `RG.<field>.certain.<key>`. Reference: the export. The measures file has no interval for these values. Status EXCEPTION, NOT RELEASED.
+Table 19: values with the status certain, reader with rules only. Ids: `R.<field>.certain.<key>`, `RV.<field>.certain.<key>`, `RG.<field>.certain.<key>`. Reference: the export. The measures file has no interval for these values.
 
 | Field | Set | Given values | Certain values | Certain with a reference | Certain and correct | Precision of the certain values |
 |:---|:---|---:|---:|---:|---:|---:|
@@ -623,7 +621,7 @@ Table 19: values with the status certain, reader with rules only. Ids: `R.<field
 
 The development values are design values with the mark "after the opening" [`D.mark`]. The authors of the value rules read all 44 [`D.parliaments`] development parliaments. The run values are those of tables 15 and 18.
 
-Table 20: development against run. Ids: development `D.<field>.precision`, `D.<field>.found_rate`, `D.<field>.recall` (share correct); combined reader `H.<field>.combined.<key>`. Run: `R.<field>.<key>` and `C.<field>.<key>`. Reference: the export. Status EXCEPTION, NOT RELEASED.
+Table 20: development against run. Ids: development `D.<field>.precision`, `D.<field>.found_rate`, `D.<field>.recall` (share correct); combined reader `H.<field>.combined.<key>`. Run: `R.<field>.<key>` and `C.<field>.<key>`. Reference: the export.
 
 | Field | Precision: development | Precision: run | Found rate: development | Found rate: run | Share correct: development | Share correct: run |
 |:---|---:|---:|---:|---:|---:|---:|
@@ -660,13 +658,13 @@ The 2 Apertus tiers add found values at about the same precision. The share corr
 ### 5.7 The check by eye (information)
 
 1. The sample has 50 [`L.check_by_eye.documents`] documents of the run (protocol only). A tool drew them with a fixed seed from the sorted ids.
-2. 2 AI examiners each read the same sheets. A sheet has the lines of the document and the values of the combined reader, and no export value. Nobody checked the sheets for this rule.
+2. 2 AI examiners each read the same sheets. A sheet has the lines of the document and the values of the combined reader, and no export value. The content of the sheets was not examined for this rule.
 3. An examiner read the first lines, the last lines and the lines near each value, not the full document.
-4. The check is information. It changes no outcome, and no human made it. The 2 examiners are AI agents of one model with one order.
+4. The check is information. It changes no outcome. The 2 examiners are AI agents of one model with one order.
 
 Codes of a judgement: C correct as printed; P partly correct; W wrong; M not found, but the lines read print the value; N not found and not printed in the lines read; X the field does not apply to this kind of document. "Given" is C + P + W.
 
-Table 21: the check by eye by field. Ids: `L.check_by_eye.<a|b>.<field>.<code>`, `.given` (derived) and `L.check_by_eye.pairs_that_differ.<field>`. Mark: reading check. Status EXCEPTION, NOT RELEASED.
+Table 21: the check by eye by field. Ids: `L.check_by_eye.<a|b>.<field>.<code>`, `.given` (derived) and `L.check_by_eye.pairs_that_differ.<field>`. Mark: reading check.
 
 | Field | Given values (A, B) | C (A, B) | P (A, B) | W (A, B) | M (A, B) | N (A, B) | X (A, B) | Pairs that differ |
 |:---|:---|:---|:---|:---|:---|:---|:---|---:|
@@ -680,7 +678,7 @@ Table 21: the check by eye by field. Ids: `L.check_by_eye.<a|b>.<field>.<code>`,
 
 The check by eye has 350 [`L.check_by_eye.pairs`] pairs of document and field. The 2 examiners differ in 13 [`L.check_by_eye.pairs_that_differ`] of them.
 
-Table 22: the check by eye beside the precision against the export. The 2 numbers are different measures on different samples. This comparison was not planned before the run. Ids: as table 21; `C.<field>.precision`. Status EXCEPTION, NOT RELEASED.
+Table 22: the check by eye beside the precision against the export. The 2 numbers are different measures on different samples. This comparison was not planned before the run. Ids: as table 21; `C.<field>.precision`.
 
 | Field | Correct as printed / given: examiner A | Correct as printed / given: examiner B | Precision against the export, combined reader, all documents of the run |
 |:---|:---|:---|---:|
@@ -724,7 +722,7 @@ The subsets come from the contact history of the documents (chapter 9.3). Ids: `
 
 A parliament counts for a field with 5 or more given values with a reference. The same tool as in chapter 5.8 made these numbers after the run.
 
-Table 23: spread between the parliaments, all documents of the run. Ids: `L.spread.<rules_only|combined>.<field>.<key>`. Information. Status EXCEPTION, NOT RELEASED.
+Table 23: spread between the parliaments, all documents of the run. Ids: `L.spread.<rules_only|combined>.<field>.<key>`. Information.
 
 | Field | Reader | Parliaments that count | Given values that count | Lowest | Median | Highest | Parliaments at 1.0000 | Parliaments below 0.9 | Pooled precision |
 |:---|:---|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -749,7 +747,7 @@ Table 23: spread between the parliaments, all documents of the run. Ids: `L.spre
 2. A third calculation in the check tool of the evidence made the counts again for the 2 readers, the 3 sets and the 7 fields. No number differs.
 3. The 3 calculations use the same 3 files. An error that is common to the reader output or to the reference file is in each of them.
 4. Thus the agreement does not show that a value is true.
-5. AI agents wrote each of the 3 calculations. No human compared the code.
+5. AI agents wrote each of the 3 calculations.
 6. Round 4 also has a second calculation: 363 [`D.second.cells_compared`] cells compared, 0 [`D.second.differences`] different.
 
 ## 6. Limitations
@@ -760,16 +758,16 @@ Table 23: spread between the parliaments, all documents of the run. Ids: `L.spre
 |:---|:---|:---|
 | L1 | Fewer than half of the documents with a reference get the export value. This applies to the affair number, the 2 dates, the title and the first author. Affair number: 182 of 822 documents with a reference (0.2214). Submission date: 238 of 872 (0.2729). Response date: 22 of 106 (0.2075). Title: 406 of 866 (0.4688). First author: 195 of 428 (0.4556). | `R.<field>.correct`, `R.<field>.with_reference`, `R.<field>.share_correct` (table 15), for example 0.4556 [`R.first_author.share_correct`] |
 | L2 | The authors of the value rules of 13.10.2026 read the 44 development parliaments; the 26 parliaments of the run are other parliaments. Addendum I says that these authors opened no file of the 872 documents; no examination compared this statement with the work records. For the title, the affair number and the 2 dates, the precision of the run is lower than on the development documents. The found rate of the response date is 0.4057 in the run and 0.9238 on the development documents. For the first author it is 0.5607 and 0.8488. | `R.<field>.precision`, `R.<field>.found_rate`, `D.<field>.precision`, `D.<field>.found_rate` (table 20) |
-| L3 | In the check by eye, each AI examiner named 12 of 50 documents with a kind that looks wrong. Then the cascade does not search some fields. The run did not measure the kind. | `L.check_by_eye.kind_looks_wrong`, `L.check_by_eye.documents` |
+| L3 | In the check by eye, each AI examiner named 12 of 50 documents with a kind that looks wrong. Where the kind is wrong, the cascade does not search some fields. The run did not measure the kind. | `L.check_by_eye.kind_looks_wrong`, `L.check_by_eye.documents` |
 | L4 | AI agents read 116 or more of the 872 documents in earlier work. For 300 of the 872 documents, an audit found a sign of earlier contact: text or values next to the id, or the id in a list of earlier work. For the other 572 it found no such sign; this is no proof of no contact. | `L.contact.s4.all`, `L.contact.s3.all` |
 | L5 | The older rule chain is from the earlier converter. It was designed on a list with 38 documents of the run, of 9 of the 18 validation parliaments. For this part the run is not a measure on new parliaments. | `L.contact.rule_design_list.validation`, `L.contact.rule_design_list.validation_parliaments`, `L.parliaments.validation` |
-| L6 | AI agents of one model family (Claude Opus 5.5) wrote the rules, the tools, the measures and the audits. AI agents of the same family examined them. No human checked a value of the one fixed run, a tool or a number. | none |
+| L6 | AI agents of one model family (Claude Opus 5.5) wrote the rules, the tools, the measures and the audits. AI agents of the same family examined them. | none |
 | L7 | The reference is a register. A value can be correct as printed and differ from the register: affair number 12 of 15, submission date 18 of 21 in the check by eye. | `L.check_by_eye.a.affair_number.C`, `.given`; `L.check_by_eye.a.submission_date.C`, `.given`; table 22 |
 | L8 | No pass limit was fixed before the run. Thus no text says that a field passes. The text gives the numbers and their plain meaning. | none |
 | L9 | The development values are design values. The authors of the value rules read all 44 development parliaments. These values are optimistic. | `D.mark`, `D.parliaments` |
 | L10 | The reference of the affair type is a project map of the export type. The same value is the fit target of the `Q1` head. | none |
 | L11 | Group 7 has 68 documents of 8 parliaments, so its intervals are wide. There the certain responder values have 5 wrong values, all of 1 parliament. | `L.documents.group7`, `L.parliaments.group7`, `RG.responder_name.certain.with_reference`, `RG.responder_name.certain.correct` |
-| L12 | Each time comes from one laptop clock, and no outside time stamp exists. Each value has the status EXCEPTION, NOT RELEASED. | none |
+| L12 | Each time comes from one laptop clock, and no outside time stamp exists. | none |
 
 Plain forms of 3 limits:
 
@@ -788,15 +786,14 @@ Two more facts:
 2. The challenge asks for a hand-checked gold set. The one fixed run has none; its reference is the export.
 3. The kind of the document comes from the rule chain and from rule V5. No kind of the run was compared with a label.
 4. The stored probability of an Apertus tier includes the own fold of a development document. It is optimistic.
-5. The work log and the dossier have no explicit yes of the owner to the one fixed run in his own words. No person accepted the criteria of the run, a number or a limit of this repository.
-6. 2 design files and the result files of the run do not carry each mark that the addenda ask for (dossier, chapter 6.1).
-7. The app gives each value from the rules. It has no file of the value heads. On 15.10.2026, with `make setup-pdf`, it converted 2 changed copies of samples. Earlier runs used synthetic PDFs and the 3 sample PDFs (`app/README.md`, chapter "The modes"). No other PDF of a parliament is recorded.
-8. `make run` ran one time, on one Mac, with the 3 samples only (target `slim`). The targets `run-full` and `check-offline` of `app/Makefile` did not run.
-9. The block-role candidates were measured against an AI reference on validation documents only, before the run. They did not enter the run.
+5. 2 design files and the result files of the run do not carry each mark that the addenda ask for (dossier, chapter 6.1).
+6. The app gives each value from the rules. It has no file of the value heads. On 15.10.2026, with `make setup-pdf`, it converted 2 changed copies of samples. Earlier runs used synthetic PDFs and the 3 sample PDFs (`app/README.md`, chapter "The modes"). No other PDF of a parliament is recorded.
+7. `make run` ran one time, on one Mac, with the 3 samples only (target `slim`). The targets `run-full` and `check-offline` of `app/Makefile` did not run.
+8. The block-role candidates were measured against an AI reference on validation documents only, before the run. They did not enter the run.
 
 ### 6.3 The criterion insight
 
-Table 24: criterion Insight, the head values against eCH-0295. Status EXCEPTION, NOT RELEASED.
+Table 24: criterion Insight, the head values against eCH-0295.
 
 | Question | Answer |
 |:---|:---|
@@ -855,7 +852,7 @@ The commands are in the folder `track_2a/`. The states are those of 14.10.2026 (
 
 ## 8. Next steps
 
-1. A human check of a sample of reference values and of the kind of the document.
+1. A hand-checked gold set: a sample of reference values and of the kind of the document.
 2. A measure of the kind against labels, and value rules for more parliaments. Then a run on documents that no agent read.
 3. Apertus states for an own PDF, and the value heads in the app.
 4. A start of the container image on Linux, with an open OCR engine.
@@ -865,7 +862,7 @@ The commands are in the folder `track_2a/`. The states are those of 14.10.2026 (
 ### 9.1 The dossier
 
 1. The dossier of the run is the file `crisp-dm/05-evaluation/last-run-evidence.md` of the private project. It is not in this repository.
-2. Its version 2 has the date 13.10.2026, 23:22. One item was added on 14.10.2026. AI agents wrote it; no human checked it.
+2. Its version 2 has the date 13.10.2026, 23:22. One item was added on 14.10.2026. AI agents wrote it.
 3. It names a source for each fact: a file, a git commit or a line of a transcript. 2 skeptic agents examined version 1. No agent compared version 2 with the files.
 4. `numbers.json` gives the SHA-256 of the dossier file of 14.10.2026, 10:29, in the source of the id `L.contact.rule_design_list.validation_parliaments`.
 
@@ -885,7 +882,7 @@ The commands are in the folder `track_2a/`. The states are those of 14.10.2026 (
 
 ### 9.3 The contact history
 
-Ids: `L.contact.<key>.<set>` (read; counts from id lists of the contact history; no human checked them). A count from an id list is a lower limit of the contact.
+Ids: `L.contact.<key>.<set>` (read; counts from id lists of the contact history). A count from an id list is a lower limit of the contact.
 
 | Kind of contact | All | Validation | Group 7 |
 |:---|---:|---:|---:|
@@ -909,9 +906,8 @@ Ids: `L.contact.<key>.<set>` (read; counts from id lists of the contact history;
 3. That the documents of the run were new to the authors. They were not (chapter 9.3).
 4. Which files the command of the 2 readers opened at run time.
 5. That a reference value is true, or that a value of a reader is the value that the PDF prints.
-6. That the sheets of the check by eye had no export value. Nobody examined their content for this rule.
-7. That a human permitted or checked the run. The sources have no explicit yes of the owner to the run in his own words.
-8. The check tool of the dossier gives FAIL for the marks of some design files and result files (chapter 6.2, item 6).
+6. That the sheets of the check by eye had no export value. Their content was not examined for this rule.
+7. The check tool of the dossier gives FAIL for the marks of some design files and result files (chapter 6.2, item 5).
 
 ### 9.5 What a reader of this repository can check
 
@@ -978,4 +974,4 @@ Copyright 2026 the author (see `NOTICE`). This report and the documentation: CC-
 ## About this text
 
 - Language: English, to the rules of ASD-STE100 (Issue 9).
-- AI agents (Claude Opus 5.5) wrote this text on 14.10.2026, from the evidence dossier of the run, the criteria, the cascade file and `numbers.json`. In the afternoon of the same day, an AI agent changed the states of chapter 7.1. In the evening, an AI agent changed the states of `make run` (chapters 1.4, 6.2 and 7.1). On 15.10.2026 an AI agent added `<doc>.values.ttl`, `make setup-pdf` and the full limits L1 and L2, and narrowed other sentences, after an audit of the submission. No human examined this version.
+- AI agents (Claude Opus 5.5) wrote this text on 14.10.2026, from the evidence dossier of the run, the criteria, the cascade file and `numbers.json`. In the afternoon of the same day, an AI agent changed the states of chapter 7.1. In the evening, an AI agent changed the states of `make run` (chapters 1.4, 6.2 and 7.1). On 15.10.2026 an AI agent added `<doc>.values.ttl`, `make setup-pdf` and the full limits L1 and L2, and narrowed other sentences, after an audit of the submission. In the evening of 15.10.2026, an AI agent shortened some sentences.

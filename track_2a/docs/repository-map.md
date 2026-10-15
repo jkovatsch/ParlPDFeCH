@@ -2,8 +2,6 @@
 
 This table gives each folder of `track_2a/`, what it holds, its source in the private project and its state on 14.10.2026. `SOURCES.json` and `SOURCES.md` give the source and the SHA-256 of each copied file and each edit.
 
-Status: EXCEPTION, NOT RELEASED. No human examined this file.
-
 ## Folders
 
 | Folder | What it holds | Source in the private project | State |
@@ -53,4 +51,4 @@ Status: EXCEPTION, NOT RELEASED. No human examined this file.
 ## About this text
 
 - Language: English, to the rules of ASD-STE100 (Issue 9).
-- Authoring: an AI agent (Claude Opus 5.5) wrote this text on 14.10.2026. In the afternoon of the same day, it changed the rows of `app/`, the PDF row and the commands. In the evening, an AI agent changed the states of `make run` and `make run-native`. On 15.10.2026 an AI agent added `make setup-pdf` and corrected rows after an audit. No human examined it.
+- Authoring: an AI agent (Claude Opus 5.5) wrote this text on 14.10.2026. In the afternoon of the same day, it changed the rows of `app/`, the PDF row and the commands. In the evening, an AI agent changed the states of `make run` and `make run-native`. On 15.10.2026 an AI agent added `make setup-pdf` and corrected rows after an audit. In the evening, an AI agent shortened the start of the file.

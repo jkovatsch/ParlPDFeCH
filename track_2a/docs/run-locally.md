@@ -1,8 +1,6 @@
 # Run the app on your computer
 
-The app converts a PDF of a Swiss parliament into an eCH-0295 record. It runs on your computer and uses no GPU. Run the commands in the folder `track_2a/`. Both ways ran on one Mac on 14.10.2026.
-
-Status: EXCEPTION, NOT RELEASED. No human examined this file.
+The app converts a PDF of a Swiss parliament into an eCH-0295 record. It runs on your computer and uses no GPU. Run the commands in the folder `track_2a/`. Ways 1 and 2 ran on one Mac on 14.10.2026, way 3 on 15.10.2026.
 
 ## Way 1: container (`make run`)
 
@@ -41,9 +39,47 @@ make run-native
 - Times of that check: the first start of `make run-native` in the fresh clone took 49 s, most of it for the 2 cargo builds. The first PDF took 53 s, of which 45.6 s for the start of Docling. The second PDF took 18 s.
 - Not tested: Windows, Linux, x86_64, and the line for Debian or Ubuntu that `make setup-pdf` gives.
 
+## Way 3: own PDFs in the terminal (`make convert`)
+
+```bash
+make setup
+make setup-pdf                   # one time, as in way 2
+make convert PDF=<file or URL>   # one PDF
+make convert DIR=<folder>        # each *.pdf of the folder, no subfolder
+make convert LIST=<file>         # one path or http(s) URL in each line; a line that starts with # is a comment
+make list                        # the IDs as a table
+make view ID=0002                # on request: this one result in the browser; Ctrl-C stops it
+```
+
+- Limits first. Your PDF gets the code rules only (no language model, no GPU). It needs a text layer. As in the app, the limits are 25 pages and 20 MB, and the first 1024 bytes must have the mark `%PDF-`.
+- Not run: Windows, Linux, Ctrl-C typed in a terminal, the full time limit of 600 s and a PDF with a password. The downloads came only from GitHub and from servers on the same computer. No PDF gave a record with valid no.
+- You need `make setup` and `make setup-pdf` of way 2, the commands jq and `pdftotext`, and curl for a URL. `make view` also needs cargo and `wasm-bindgen` 0.2.127, as way 2.
+- A URL must be http or https. A download has a limit of 20 MB and 120 s. The result keeps the source (path or URL) and the SHA-256 of the PDF.
+- A relative path of `PDF=` or `DIR=` starts in `track_2a/`. A relative path in a `LIST` file starts in the folder of that file. `~/` is expanded.
+- The worker of the app converts each PDF in the mode rules, with the arguments and the environment of the server. Its time limit is 600 s for each PDF. No file below `app/` changes.
+- Each PDF gets an ID: `0001`, `0002`, and so on. The same PDF (same SHA-256) keeps its ID.
+- A PDF that the app refuses also gets an ID, with valid `failed:<code>` (for example `failed:too_long` for more than 25 pages). A missing file, a file that is not a PDF, a file of more than 20 MB and a failed download get no ID.
+- A PDF with a stored result is not converted again. The terminal shows the stored result. `AGAIN=1` converts it again. If that conversion fails, the old result stays.
+- For each PDF the terminal shows the ID, valid yes or no, and each value with its probability and status (certain or unsure). It also gives the fields with no value and the folder `out/<ID>/`.
+- `make list` shows the IDs as a table: ID, valid, time, affair type, title, source and SHA-256. The file `out/catalog.tsv` has all columns.
+- `make view ID=0002` (also `ID=2` or `ID=ID-0002`) starts the server of the app for this one result. The server is read-only and listens on `127.0.0.1`.
+- The port is 8080 or the next free port up to 8179. `PORT=<n>` sets it. The command opens `http://127.0.0.1:<port>/app/#/view/<record_id>` in the browser. `OPEN=no` shows the address only.
+- `make view` does the build steps of way 2 first. cargo builds only the parts that changed. It shows a copy of the record, made at its start. The online website does not have this view.
+- Only one `make convert` can run at a time.
+- State on 15.10.2026: way 3 ran on one Mac (Apple silicon, macOS). The run used a clone of the local repository at commit `e42d62d`, with the files of `make convert` added.
+- In that clone, 3 samples (a copy, a URL of GitHub, a folder) and 5 development PDFs of 5 parliaments gave 8 valid records. The 5 PDFs are in German, French and Italian, with 4 to 14 pages. The rule authors read the development documents.
+- The values of the 8 records were equal to those of an upload of the same PDFs to the app (mode rules). After changes to `tools/convert.sh`, a second run gave the same values. `make test` gave PASS.
+- Bad inputs stopped with a message, and the next input continued: no PDF, more than 20 MB, more than 25 pages, no text layer, a damaged PDF, a URL with the status 404.
+- An earlier version of the script converted 5 other development PDFs, with 5 valid records.
+- `make view` ran each time with `OPEN=no`. The server gave the page and each file of the record with the status 200. It refused an upload and a delete (403), and a record of another ID (404).
+- A headless Chrome showed the values with the probabilities of the terminal. A signal from a script stopped the server. Not run: the start of the browser by the command.
+- Times on one Mac: a development PDF took 18 to 35 s. After a new setup, the first PDF that Docling read took 64 s or 67 s. A copy of a sample took 4 to 11 s.
+- The first `make view` built the server in about 23 s and the WebAssembly bundle in about 25 s.
+
 ## What the app does with your PDF
 
-- On the start page, click "Convert your own PDF" (or "Own PDF" at the top). Drop the PDF on the box, or click "Choose a PDF". Then click "Convert".
+- Way 2: on the start page, click "Convert your own PDF" (or "Own PDF" at the top). Drop the PDF on the box, or click "Choose a PDF". Then click "Convert".
+- Way 3: `make convert` gives the PDF to the same worker of the app, in the mode rules.
 - Your PDF gets the code rules only. The app runs no language model and uses no GPU.
 - Only the 3 samples have block labels from stored Apertus states.
 - The record has no comparison with a register.
@@ -54,12 +90,14 @@ make run-native
 
 ## Where you see the result
 
-- After the conversion, the page opens the result view: `/app/#/view/<record_id>`.
+- Way 2: after the conversion, the page opens the result view: `/app/#/view/<record_id>`.
+- Way 3: `make view ID=<n>` opens the same result view for one result of `make convert`.
 - The result view has 3 places. The PDF: the image of each page with a box on each value. The values: each value with its probability. The RDF: the eCH-0295 record (no probabilities) and the file of the values with probabilities `<doc>.values.ttl`, each with a download link.
 - A link in the result view opens the technical view: `/app/#/record/<record_id>`. Its downloads include one TriG file with all parts, labels and probabilities.
 - With `make run-native`, each result is in the folder `app/work/records/<record_id>/`.
+- With `make convert`, each result is in the folder `out/<ID>/record/`. git ignores the folder `out/`.
 
 ## About this text
 
 - Language: English, to the rules of ASD-STE100 (Issue 9).
-- Authoring: an AI agent (Claude Opus 5.5) wrote this text on 14.10.2026 and changed the state lines in the afternoon and evening of that day. On 15.10.2026 an AI agent added `make setup-pdf`, and later corrected sentences after an audit. No human examined it.
+- Authoring: an AI agent (Claude Opus 5.5) wrote this text on 14.10.2026 and changed the state lines in the afternoon and evening of that day. On 15.10.2026 an AI agent added `make setup-pdf`, and later corrected sentences after an audit. In the evening of 15.10.2026, an AI agent added way 3 and shortened the start of the file.

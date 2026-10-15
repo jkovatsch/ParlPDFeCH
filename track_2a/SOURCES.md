@@ -186,4 +186,4 @@ The other files of `app/` come from the package of the private project, commit `
 ## About this text
 
 - Language: English, to the rules of ASD-STE100 (Issue 9).
-- Authoring: an AI agent (Claude Opus 5.5) made this file and `SOURCES.json` with a script, on 12.10.2026. An AI agent made them again on 14.10.2026 and wrote the paragraph on the other files of `app/`. On 15.10.2026, an AI agent (Claude Opus 5.5) marked the earlier converter and the earlier R2 head as history, in the text outside the tables. No human examined it.
+- Authoring: an AI agent (Claude Opus 5.5) made this file and `SOURCES.json` with a script, on 12.10.2026. An AI agent made them again on 14.10.2026 and wrote the paragraph on the other files of `app/`. On 15.10.2026, an AI agent (Claude Opus 5.5) marked the earlier converter and the earlier R2 head as history, in the text outside the tables.

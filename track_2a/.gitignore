@@ -35,3 +35,6 @@ data/*
 
 # Downloads of make setup (eCH-0295 schema files): never in the repository
 .cache/
+
+# Results of make convert (own PDFs, the catalog of the IDs): never in the repository
+/out/

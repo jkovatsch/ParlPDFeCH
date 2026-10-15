@@ -13,7 +13,7 @@ License: Apache-2.0. Line 1 of each text file is `# SPDX-License-Identifier: Apa
 
 ## Value questions: folder `gj_values_v1_de/`
 
-These are the value questions `Q0`, `Q1` and `Q2` of the method of the technical report. They use the prefix of `gj_jev_v1_de`. Status of each result: EXCEPTION, NOT RELEASED.
+These are the value questions `Q0`, `Q1` and `Q2` of the method of the technical report. They use the prefix of `gj_jev_v1_de`.
 
 | File | Content |
 |---|---|
@@ -26,8 +26,6 @@ These are the value questions `Q0`, `Q1` and `Q2` of the method of the technical
 | `gj_values_v1_de/template.json` | The full template record with the source of each option (byte-equal copy). |
 
 ## Block-role questions: folder `gj_jev_v1_de/`
-
-Status of each result: EXCEPTION, NOT RELEASED.
 
 | File | Content |
 |---|---|
@@ -69,7 +67,7 @@ Notes:
 ## About this text
 
 - Language: English, to the rules of ASD-STE100 (Issue 9).
-- Authoring: an AI agent (Claude Opus 5.5) wrote this text on 12.10.2026. No human examined it.
-- The part for the folder `gj_jev_v1_de/`: an AI agent (Claude Opus 5.5) wrote it on 13.10.2026. No human examined it.
-- The part for the folder `gj_values_v1_de/`: an AI agent (Claude Opus 5.5) wrote it on 14.10.2026. No human examined it.
-- On 15.10.2026, an AI agent (Claude Opus 5.5) put the prompts of the current method first and marked the earlier prompts as history. No human examined it.
+- Authoring: an AI agent (Claude Opus 5.5) wrote this text on 12.10.2026.
+- The part for the folder `gj_jev_v1_de/`: an AI agent (Claude Opus 5.5) wrote it on 13.10.2026.
+- The part for the folder `gj_values_v1_de/`: an AI agent (Claude Opus 5.5) wrote it on 14.10.2026.
+- On 15.10.2026, an AI agent (Claude Opus 5.5) put the prompts of the current method first and marked the earlier prompts as history.

@@ -2,17 +2,17 @@
 
 What goes in: one PDF of a Swiss parliament. What comes out: one eCH-0295 record in Turtle and YAML, a second RDF file `<doc>.values.ttl` with the probability of each value, and the result of a validator. Each head value of the record (up to 7) is read from the PDF and has a probability. A value from the rules also has a page and a text span. Identifiers and constants of the record have no probability. The OpenParlData export is the reference of the measurement; at run time no export value goes into a record.
 
-To start the app, use `make run`, the Docker way that the template asks for. It converts the 3 samples only. For your own PDF, run `make setup-pdf` one time, then `make run-native` (no container, chapter "Run it"). Both ways ran on one Mac on 14.10.2026.
+To start the app, use `make run`, the Docker way that the template asks for. It converts the 3 samples only. For your own PDF, run `make setup` and `make setup-pdf` one time. Then use `make convert` in the terminal, or `make run-native` and the page of the app (chapter "Run it"). `make run` and `make run-native` ran on one Mac on 14.10.2026, `make convert` on 15.10.2026.
 
 In the one fixed run, linear heads on stored hidden states of Apertus-v1.5-8B gave values for 2 of the 7 fields. These fields are the affair type and the first author. A head tier gave a value where the rules found none, or where the rule value had a probability below 0.5. The rules gave all other values. In the app, the rules give each value of the record, in each mode. For its 3 samples, the app uses stored Apertus states for the block labels only.
 
-No person has accepted the numbers of this text. The numbers of the run come from the one fixed run of 13.10.2026. The development numbers come from the documents that the rule authors read. AI agents made and examined them.
+The numbers of the run come from the one fixed run of 13.10.2026. The development numbers come from the documents that the rule authors read. AI agents made and examined them.
 
 Three limits come first. [docs/limits.md](docs/limits.md) gives all 12.
 
 1. Fewer than half of the documents with a reference get the export value. This applies to the affair number, the 2 dates, the title and the first author.
 2. AI agents had read some of the 872 documents before the run: 116 or more, that is 48 validation documents and all 68 group-7 documents. The rule chain of the roles, from the earlier converter of 12.10.2026, was designed on a list with 38 documents of the run.
-3. AI agents of one model family wrote the rules, the tools and the measures, and examined them. No human checked a value of the one fixed run. The reference is a register, not a hand-checked gold set.
+3. AI agents of one model family wrote the rules, the tools and the measures, and examined them. The reference is a register, not a hand-checked gold set.
 
 Number ids: `values.last_run.contact.read_by_ai_agents.lower_limit` (116), `values.last_run.contact.kind1.validation` (48), `values.last_run.contact.kind1.group7` (68), `values.last_run.contact.rule_design_list.validation` (38).
 
@@ -38,8 +38,7 @@ Words of the table:
 - The 2 response fields count only documents with the rule role response or combined.
 - The measure counts each value of a reader, also a value below the floor of 0.5 that the writer does not put into the record.
 - The development values come from the 1,793 documents that the rule authors read when they made the rules. Thus these values are optimistic.
-- Reference: the OpenParlData export. No human checked a value of the one fixed run.
-- Status: each entry of [numbers.json](numbers.json) has the status EXCEPTION, NOT RELEASED. This means that no person has accepted it.
+- Reference: the OpenParlData export, a register. It is not a hand-checked gold set.
 
 Number ids (file [numbers.json](numbers.json)):
 
@@ -61,36 +60,42 @@ This folder is the project root for the judges of Hack Apertus. The front page o
 
 ## Run it
 
-Run the commands in this folder (`track_2a/`). [docs/run-locally.md](docs/run-locally.md) gives the 2 ways to start the app in short form.
+Run the commands in this folder (`track_2a/`). [docs/run-locally.md](docs/run-locally.md) gives the 3 ways to run the app in short form.
 
 ```bash
 make run          # needs Docker only, not make setup; ran on one Mac on 14.10.2026; then open http://127.0.0.1:8080/app/
 make setup        # one time, with network; for make run-native and make test
 make setup-pdf    # one time, with network; only for your own PDF with make run-native; needs pdftotext
 make run-native   # no container; needs cargo and Python 3.12; ran on one Mac; then open http://127.0.0.1:8080/app/
+make convert PDF=<file or URL>   # own PDF in the terminal, code rules only; also DIR=<folder> or LIST=<file>
+make list         # the IDs of make convert as a table
+make view ID=0001 # on request: one result of make convert in the browser; Ctrl-C stops it
 make test         # checks with no network
 ```
 
 ### The commands and their state
 
-| Command | What it does | State on 14.10.2026 (`make setup-pdf`: 15.10.2026) |
+| Command | What it does | State on 14.10.2026 (`make setup-pdf`, `make convert`, `make list`, `make view`: 15.10.2026) |
 |---|---|---|
 | `make setup` | One time, with network. It installs Python 3.12 with uv (uv can also put the command `python3.12` into `~/.local/bin`) and the Python packages of the app into `.venv/`. It downloads the Rust crates of `app/Cargo.lock` (only if cargo is on the computer; if not, it prints a note), the packages of the earlier converter and the 2 eCH-0295 schema files (pinned commit and SHA-256). `make run` does not need it. | Run on one Mac (Apple silicon, macOS) in a fresh clone. uv and cargo took the packages from the local caches of that Mac. The 2 schema files agreed with the pinned SHA-256. |
 | `make setup-pdf` | One time, with network, after `make setup`. Only for your own PDF with `make run-native`. It stops if the command `pdftotext` is absent and gives the install command. It installs the packages of `app/container/requirements-full.txt` (`docling` 2.133.0, `pypdfium2` 5.14.0, torch) into `.venv/`. It downloads the 2 Docling models into the Hugging Face cache if they are absent. It installs no text recognition (OCR). | Run on one Mac (Apple silicon, macOS) on 15.10.2026, in a fresh clone of GitHub at commit `3eff351`. The target `setup-pdf` was added to the clone as a patch. The packages came from the uv cache of that Mac. The 2 models came from its Hugging Face cache, and in 2 more runs with an empty cache from huggingface.co. Then `make run-native` converted 2 PDFs that are not in the sample index (copies of 2 samples with one added comment line), with 2 valid records. `make test` gave PASS. |
 | `make run` | Needs Docker. It builds the image (target `slim`) from `app/` and starts it on `127.0.0.1:8080`. It waits for `/healthz`. Then open `http://127.0.0.1:8080/app/`. The target `slim` converts the 3 samples only. | Run one time on one Mac (Apple silicon, Docker server 29.2.1), in a clone of GitHub at commit `10e07b4`. The command was `make run PARLPDFECH_PORT=8082`, because a second check used port 8080. The 3 samples in the modes auto and rules gave 6 valid records. Not run: `run-full` and `check-offline` of `app/Makefile`. On 14.10.2026 a private build pipeline on Linux built a container image from the source tree of the package. Nobody started this image. |
 | `make stop`, `make logs` | They stop the container of `make run`, or show its log. | Not run. |
 | `make run-native` | No container. It builds the Rust server and the WebAssembly bundle with cargo. Then it starts the app on `127.0.0.1:8080` (`PORT=` sets another port). Stop it with Ctrl-C. | Run on one Mac (Apple silicon, macOS), with the offline flags of cargo: in this folder (port 8899) and in a fresh clone (port 8898). Each time, the 3 samples in the modes auto and rules gave 6 valid records. The server gave the page, the result data, `<doc>.values.ttl`, `source.pdf` and `page-1.png` with the status 200. |
+| `make convert` | Own PDFs in the terminal, with the code rules only, as for an upload in the app. It needs `make setup`, `make setup-pdf`, the commands jq and `pdftotext`, and curl for a URL. `PDF=<file or URL>` takes one PDF. `DIR=<folder>` takes each `*.pdf` of the folder (no subfolder). `LIST=<file>` takes one path or http(s) URL in each line. As in the app, the limits are 25 pages and 20 MB, and the first 1024 bytes must have the mark `%PDF-`. A download also has a limit of 120 s. Each PDF gets an ID (`0001`, `0002`, ...), and the same PDF (same SHA-256) keeps its ID. The terminal shows the ID, valid yes or no, and the values with their probability and status. The results go to `out/<ID>/` (git ignores `out/`). A PDF with a stored result is not converted again. `AGAIN=1` converts it again. | Run on one Mac (Apple silicon, macOS) on 15.10.2026. The run used a clone of the local repository at commit `e42d62d`, with the files of `make convert` added. 3 samples (a copy, a URL of GitHub, a folder) and 5 development PDFs of 5 parliaments (German, French, Italian; 4 to 14 pages) gave 8 valid records. Their values were equal to those of an upload of the same PDFs to the app (mode rules). After changes to `tools/convert.sh`, a second run gave the same values. Bad inputs stopped with a message, and the next input continued: no PDF, more than 20 MB, more than 25 pages, no text layer, a damaged PDF, a URL with the status 404. An earlier version of the script converted 5 other development PDFs, with 5 valid records. |
+| `make list` | It shows the IDs of `make convert` as a table: ID, valid, time, affair type, title, source and SHA-256. The data of an ID are in `out/<ID>/source.txt`. The file `out/catalog.tsv` has all columns. | Run on one Mac on 15.10.2026, in the same clone. |
+| `make view ID=<n>` | Only on request. It shows one result of `make convert` in the result view of the app (`#/view/<record_id>`). It needs cargo and `wasm-bindgen` 0.2.127, and it does the build steps of `make run-native`. Then it starts the server of the app for this one result: read-only, on `127.0.0.1`, port 8080 or the next free port (`PORT=` sets it). It opens the page in the browser (`OPEN=no` shows the address only). Ctrl-C stops the server. The online website does not have this view. | Run on one Mac on 15.10.2026, in the same clone, each time with `OPEN=no`. The server gave the page and each file of the record with the status 200. It refused an upload and a delete (403), and a record of another ID (404). A headless Chrome showed the values with the probabilities of the terminal. A signal from a script stopped the server, not Ctrl-C typed in a terminal. Not run: the start of the browser by the command. |
 | `make test` | Checks with no network and no Rust compiler. It compares each copied file with `SOURCES.json` and checks the prompt files of `gj_jev_v1_de`. It runs the validator on the 6 stored output files of the earlier converter and on `tests/invalid_instance.yaml`, which it must refuse. It checks the file list and the code layout of `app/`. | PASS on one Mac, in this folder and in a fresh clone. It does not compare the numbers of the texts with `numbers.json`. |
 | `make test-app` | The checks of `app/`: `cargo test` of the server and of the RDF module, the example view, and a start of the seed script. It needs cargo and the crates of `make setup`. | PASS on one Mac. |
 | `make clean` | It removes `build/` and the build outputs of `app/`. | in the `Makefile` |
 | `make run-earlier` | The earlier converter of 12.10.2026 on the 3 samples. Its metadata values come from the export record, not from the PDF. Before 14.10.2026 this command had the name `make run`. | PASS on one Mac. |
 | `make head-selftest` | A self-check of an earlier Apertus head code on synthetic data (no model). | in the `Makefile` |
 
-- The template asks that `make run` starts the project in Docker on a clean checkout. This text records one such run, on commit `10e07b4` (next item). For your own PDF, use `make setup-pdf` one time, then `make run-native`.
+- The template asks that `make run` starts the project in Docker on a clean checkout. This text records one such run, on commit `10e07b4` (next item). For your own PDF, use `make setup-pdf` one time, then `make convert` or `make run-native`.
 - The 2 clones of GitHub: on 14.10.2026, 2 AI agents each made a `git clone` of commit `10e07b4` from GitHub, on one Mac. In clone 1, `make run PARLPDFECH_PORT=8082` ran. In clone 2, `make setup`, `make test` (PASS), `make run-earlier` (PASS) and `make run-native PORT=8080` ran. In each clone, the 3 samples in the modes auto and rules gave 6 valid records.
 - The fresh clone: on 14.10.2026 an AI examiner made a `git clone` of the local repository and added the files of this version. Then the examiner ran `make setup`, `make test` and `make run-native` in it, on one Mac. It was not a clone of GitHub.
 - On 15.10.2026 the state lines and some page texts in the files of `app/` were changed to agree with these runs. No program code and no file of `app/layout/` changed. `app/STATE.md` stays the work record of 13.10. and 14.10.2026. `make test` compares the files of `app/` with the list `DIST-MANIFEST.json`.
-- An own PDF: `app/README.md` (chapter "The modes") records runs with synthetic PDF files and with the 3 sample PDF files. These ran on one Mac, with no container. The row `make setup-pdf` records 2 changed copies of samples on 15.10.2026. No other parliament PDF is recorded.
+- An own PDF: `app/README.md` (chapter "The modes") records runs with synthetic PDF files and with the 3 sample PDF files. These ran on one Mac, with no container. The row `make setup-pdf` records 2 changed copies of samples on 15.10.2026. The row `make convert` records 10 development PDFs of 10 parliaments on 15.10.2026. No other parliament PDF is recorded.
 - In an earlier run on a copy of the files, the conversion of an own PDF stopped with the note `pdf_reader_absent`. `make setup-pdf` installs the absent packages (next chapter).
 
 ### What `make run-native` needs
@@ -105,9 +110,20 @@ make test         # checks with no network
 - An unchanged PDF of a sample gives the stored result of that sample. Docling does not run for it.
 - The server listens on `127.0.0.1`. Its API has no authentication.
 
+### What `make convert` and `make view` need
+
+- Limits first. `make convert` uses the code rules only (no language model, no GPU). The PDF needs a text layer, because `make setup-pdf` installs no text recognition (OCR).
+- Not run: Windows, Linux, Ctrl-C typed in a terminal, the full time limit of 600 s and a PDF with a password. The downloads came only from GitHub and from servers on the same computer. No PDF gave a record with valid no.
+- `make convert` needs `make setup` and `make setup-pdf` (see above), the commands jq and `pdftotext`, and curl for a URL.
+- `make view` needs cargo with the target `wasm32-unknown-unknown` and `wasm-bindgen` 0.2.127, as `make run-native`. cargo builds only the parts that changed.
+- The worker of the app (`app/worker/serve_convert.py`) converts each PDF, with the arguments and the environment that the server of the app gives it. Its time limit is 600 s for each PDF. No file below `app/` changes.
+- Only one `make convert` can run at a time.
+- `out/<ID>/` holds `record/` (the record files, as the app writes them), `source.txt` (source, SHA-256, time, valid) and the log of the worker.
+- `make view` shows a copy of the record, made at its start. After `AGAIN=1`, start `make view` again.
+
 ## What you see
 
-The page is `http://127.0.0.1:8080/app/` (`?lang=de` before the hash gives the German texts). It has these routes:
+The page is `http://127.0.0.1:8080/app/` (`?lang=de` before the hash gives the German texts). `make view ID=<n>` opens the result view of one result of `make convert`, on another port if 8080 is in use. The page has these routes:
 
 | Route | Content |
 |---|---|
@@ -123,7 +139,7 @@ A value can also have one of these states: the rules found no value; the kind of
 
 ## Samples
 
-The 3 samples are development documents. The rule authors read them, and the heads were fitted on them. Thus the probability of a value of a sample counts the sample itself. Two AI agents examined each sample for personal data of third persons, with the result PASS: they found only persons with a public role. No human checked this.
+The 3 samples are development documents. The rule authors read them, and the heads were fitted on them. Thus the probability of a value of a sample counts the sample itself. Two AI agents examined each sample for personal data of third persons, with the result PASS: they found only persons with a public role.
 
 | Document | Parliament | Language | Content of the PDF | Affair type on the sample card (key) |
 |---|---|---|---|---|
@@ -156,7 +172,7 @@ Outputs:
 7. A value of a tier with a probability below 0.5 goes into the label file only, not into a slot.
 8. Apertus-v1.5-8B generates no text. A linear head reads its hidden state at the last token of a question. In the run, these heads give values for the affair type and the first author: where the rules find none, or where the rule value has a probability below 0.5.
 9. A writer makes the record in Turtle and YAML, a label file and `<doc>.values.ttl`. The label file and `<doc>.values.ttl` give the probability, status, page and span of each value. A validator checks the 3 files.
-10. The app shows the record in a browser page. It gives each head value with the rules. For the 3 samples, it can also give block labels from stored Apertus states. A dropped PDF needs `make setup-pdf` and `make run-native`, and no GPU. The result view shows the page image with a box on each value, the values with their probability and the RDF.
+10. The app shows the record in a browser page. It gives each head value with the rules. For the 3 samples, it can also give block labels from stored Apertus states. An own PDF needs `make setup-pdf`, then `make convert` or `make run-native`, and no GPU. The result view shows the page image with a box on each value, the values with their probability and the RDF.
 
 Number ids: `cascade.kinds` (7), `design.fixed.addendum_g.certain_tier_units` (30), `design.fixed.addendum_g.certain_tier_precision` (0.95), `values.round4.<field>.calibration.threshold_a` (0.60 for `affair_type` and `responder_name`; no value for the other fields), `design.fixed.writer_floor` (0.5). The report ([technical_report.md](technical_report.md), chapter 2) shows the stages as a figure.
 
@@ -190,7 +206,7 @@ It validates an instance against eCH-0295 version I95 (`ech-0295_affairs/input/s
 
 ## Results
 
-All values: the one fixed run of 13.10.2026, all 872 documents. The reference is the export. No human checked a value of the run. Each interval is a 90 % interval of a bootstrap by parliament (26 parliaments).
+All values: the one fixed run of 13.10.2026, all 872 documents. The reference is the export. Each interval is a 90 % interval of a bootstrap by parliament (26 parliaments).
 
 The challenge asks for an evaluation against a hand-checked gold set. The one fixed run has none. Its reference is the export.
 
@@ -245,10 +261,10 @@ Limits of these results (short form; [docs/limits.md](docs/limits.md) gives each
 
 1. Fewer than half of the documents with a reference get the export value. This applies to the affair number, the 2 dates, the title and the first author. The share correct is 0.2214, 0.2729, 0.2075, 0.4688 and 0.4556 (L1).
 2. The authors of the value rules of 13.10.2026 read the 44 development parliaments; the 26 parliaments of the run are other parliaments. Addendum I says that these authors opened no file of the 872 documents; no examination compared this statement with the work records. The precision of the title, the affair number and the 2 dates is lower in the run than on the development documents (L2).
-3. In the check by eye, each of the 2 AI examiners named 12 of the 50 documents with a kind that looks wrong. Then the cascade does not search some fields. The run did not measure the kind (L3).
+3. In the check by eye, each of the 2 AI examiners named 12 of the 50 documents with a kind that looks wrong. Where the kind is wrong, the cascade does not search some fields. The run did not measure the kind (L3).
 4. AI agents had read 116 or more of the 872 documents before the run: 48 validation documents and all 68 group-7 documents. An audit of the work records found a sign of earlier contact for 300 of them. For the other 572 it found none; this is no proof of no contact (L4).
 5. The older rule chain, from the earlier converter of 12.10.2026, makes the rule files of the run. AI agents designed it on a list with 38 documents of the run, of 9 of the 18 validation parliaments (L5).
-6. AI agents of one model family (Claude Opus 5.5) wrote the rules, the tools, the measures and the audits. AI agents of the same family examined them. No human checked a value of the one fixed run, a tool or a number (L6).
+6. AI agents of one model family (Claude Opus 5.5) wrote the rules, the tools, the measures and the audits. AI agents of the same family examined them (L6).
 7. The reference is a register. A value can be correct as printed and differ from the register. The check by eye found differences in both directions (L7).
 8. No pass limit was fixed before the run. Thus this text does not say that a field passes (L8).
 9. The development values are design values. The rule authors read all 44 development parliaments. These values are optimistic (L9).
@@ -273,6 +289,9 @@ Ids of items 9 to 11: `values.round4.parliaments`, `values.last_run.rules_only.g
 | `make run` | Docker with Compose. The build of the image needs the network. It does not need `make setup`. |
 | `make run-native` | cargo with the target `wasm32-unknown-unknown`, `wasm-bindgen` 0.2.127, Python 3.12 with the packages of `app/container/requirements-slim.txt`. For your own PDF also: the Python packages `docling` 2.133.0 and `pypdfium2` 5.14.0 and the 2 Docling models in the local Hugging Face cache (`make setup-pdf` installs them), and `pdftotext`. |
 | `make setup-pdf` | `make setup` before, the command `pdftotext`, the network. |
+| `make convert` | `make setup` and `make setup-pdf` before, the commands jq and `pdftotext`, curl for a URL. |
+| `make list` | The command jq. |
+| `make view` | An ID of `make convert`, cargo with the target `wasm32-unknown-unknown`, `wasm-bindgen` 0.2.127, jq, curl. |
 | `make test`, `make run-earlier` | uv 0.11 or later; Python 3.12 (uv installs it); PyYAML 6.0.3; linkml 1.11.1 (with `uvx`); a `python3` command for the checks of `app/`. |
 | `make test-app` | cargo and the Rust crates of `make setup`. |
 | Hardware | A normal computer. No GPU. |
@@ -300,9 +319,9 @@ Model weights:
 
 Other models:
 
-- AI agents (Claude Opus 5.5) wrote the code, the rules, the measures, the audits and the texts. AI agents of the same family examined them. No human checked a value of the one fixed run.
+- AI agents (Claude Opus 5.5) wrote the code, the rules, the measures, the audits and the texts. AI agents of the same family examined them.
 - Docling uses its own layout and table models. The OCR engine of the stored Docling output of the samples is Apple Vision (macOS only).
-- The reference of the block roles on validation documents is an AI reference: labels that a language model gave. No human checked it.
+- The reference of the block roles on validation documents is an AI reference: labels that a language model gave.
 
 ## The earlier converter (12.10.2026)
 
@@ -390,5 +409,4 @@ The text below is the text of the file `track_2a/README.md` of the Hack Apertus 
 ## About this text
 
 - Language: English, to the rules of ASD-STE100 (Issue 9).
-- AI agents (Claude Opus 5.5) wrote this text on 14.10.2026, from the records of the private project. An AI agent changed the chapter "Run it" in the afternoon of the same day. In the evening, an AI agent changed the states of `make run` and `make run-native`. On 15.10.2026 an AI agent added `make setup-pdf`. Later on 15.10.2026, an AI agent corrected sentences after an audit. The private project is the project folder of the author. It is not public.
-- No human examined this version of the text.
+- AI agents (Claude Opus 5.5) wrote this text on 14.10.2026, from the records of the private project. An AI agent changed the chapter "Run it" in the afternoon of the same day. In the evening, an AI agent changed the states of `make run` and `make run-native`. On 15.10.2026 an AI agent added `make setup-pdf`. Later on 15.10.2026, an AI agent corrected sentences after an audit. In the evening of 15.10.2026, an AI agent added `make convert`, `make list` and `make view`, and later shortened some sentences. The private project is the project folder of the author. It is not public.

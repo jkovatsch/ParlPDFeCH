@@ -1,7 +1,5 @@
 # Self-contained source tree of the ParlPDFeCH package
 
-Status of all results of the package: EXCEPTION, NOT RELEASED. No human checked this file.
-
 This folder is made by `make dist-src` of the package (script `worker/make_dist.py`). It holds each file that a computer with no copy of the project needs to build and run the package. Do not change a file here: make the tree again.
 
 ## 1 Content

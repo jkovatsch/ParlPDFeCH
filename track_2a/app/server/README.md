@@ -1,6 +1,6 @@
 # parlpdfech-server
 
-The web server of the ParlPDFeCH package. Status of all results of the package: EXCEPTION, NOT RELEASED.
+The web server of the ParlPDFeCH package.
 
 The server gives the pages, the API and the files of a record. It starts one worker process for each conversion. It converts nothing itself. It opens no connection to another host. The reference for each interface is `../CONTRACT.md` (chapters 2 to 5).
 

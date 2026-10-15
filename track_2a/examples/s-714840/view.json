@@ -1,0 +1,2847 @@
+{
+ "schema": "parlpdfech-site-view/3",
+ "record_id": "s-714840",
+ "doc_id": "714840",
+ "run": {
+  "origin": "stored",
+  "mode": "auto",
+  "converter_mode": "cascade",
+  "apertus": "stored",
+  "profile": "native",
+  "status": "EXCEPTION, NOT RELEASED",
+  "record_status": "EXCEPTION (process rule 10); NOT RELEASED",
+  "human_checked": false,
+  "in_sample": true,
+  "valid": true,
+  "generated_at": "2026-10-15T17:35:03Z",
+  "seconds": {
+   "read_pdf": 0,
+   "lines": 0,
+   "rules": 0.196,
+   "apertus": 0.694,
+   "write": 3.337,
+   "check": 0.887,
+   "total": 5.18
+  },
+  "candidate": "B1-S (addendum D)",
+  "model": "apertus-v1.5-8b-text-bf16:c10cd28db5bd3adf6043a5047a1435dedc5c3e55c45d5abc2ca82baf2a7786c3"
+ },
+ "notices": [
+  {
+   "code": "proposal",
+   "params": {}
+  },
+  {
+   "code": "no_human_check",
+   "params": {}
+  },
+  {
+   "code": "in_sample_heads",
+   "params": {}
+  },
+  {
+   "code": "stored_apertus",
+   "params": {}
+  },
+  {
+   "code": "values_from_pdf",
+   "params": {}
+  },
+  {
+   "code": "values_measured",
+   "params": {}
+  },
+  {
+   "code": "cascade_selection",
+   "params": {}
+  },
+  {
+   "code": "weak_candidates",
+   "params": {
+    "n": 1
+   }
+  },
+  {
+   "code": "chosen_not_top",
+   "params": {
+    "n": 1
+   }
+  },
+  {
+   "code": "no_text_block",
+   "params": {}
+  },
+  {
+   "code": "shacl_not_run",
+   "params": {}
+  }
+ ],
+ "head_values": {
+  "source": "pdf",
+  "state": "pdf",
+  "cross_check": true,
+  "probabilities_measured": true,
+  "document_kind": "other",
+  "cascade": {
+   "version": "m11-cascade-2",
+   "reader": "m11-values-cascade-4",
+   "kind": "other",
+   "kind_from": "rule_chain",
+   "kind_rule": "R2",
+   "rule_chain_id": "O1",
+   "kind_facts": null,
+   "affair_type": "draft_decree",
+   "steps": [
+    {
+     "step": "submission",
+     "applies": false,
+     "rules": [
+      "R24",
+      "R25"
+     ]
+    },
+    {
+     "step": "response",
+     "applies": false,
+     "rules": [
+      "R24",
+      "R25",
+      "R31"
+     ]
+    }
+   ],
+   "entries": [
+    {
+     "field": "affair_type",
+     "slot": "Affair.affair_type",
+     "group": "affair",
+     "state": "read_from_pdf",
+     "searched": true,
+     "rules": [
+      "R3",
+      "R4",
+      "R5",
+      "R6"
+     ],
+     "reason": "value_read",
+     "label_id": "pdf-affair_type"
+    },
+    {
+     "field": "title",
+     "slot": "Affair.title",
+     "group": "affair",
+     "state": "weak_candidate",
+     "searched": true,
+     "rules": [
+      "R43"
+     ],
+     "reason": "weak_candidate_only",
+     "label_id": "candidate-title"
+    },
+    {
+     "field": "affair_number",
+     "slot": "Affair.affair_number",
+     "group": "affair",
+     "state": "read_from_pdf",
+     "searched": true,
+     "rules": [
+      "R26",
+      "R6"
+     ],
+     "reason": "value_read",
+     "label_id": "pdf-affair_number"
+    },
+    {
+     "field": "submission_date",
+     "slot": "Submission.submission_date",
+     "group": "submission",
+     "state": "not_searched",
+     "searched": false,
+     "rules": [
+      "R24",
+      "R25"
+     ],
+     "reason": "not_in_this_document_type",
+     "label_id": null
+    },
+    {
+     "field": "sponsor",
+     "slot": "Submission.sponsorship",
+     "group": "submission",
+     "state": "not_searched",
+     "searched": false,
+     "rules": [
+      "R24",
+      "R25"
+     ],
+     "reason": "not_in_this_document_type",
+     "label_id": null
+    },
+    {
+     "field": "response_date",
+     "slot": "ResponseStep.date_end_actual",
+     "group": "response",
+     "state": "not_searched",
+     "searched": false,
+     "rules": [
+      "R24",
+      "R25",
+      "R31"
+     ],
+     "reason": "not_in_this_document_type",
+     "label_id": null
+    },
+    {
+     "field": "responder",
+     "slot": "ResponseStep.responder",
+     "group": "response",
+     "state": "not_searched",
+     "searched": false,
+     "rules": [
+      "R24",
+      "R25",
+      "R31"
+     ],
+     "reason": "not_in_this_document_type",
+     "label_id": null
+    }
+   ],
+   "texts": [
+    {
+     "step": "submission",
+     "slot": "Submission.texts",
+     "applies": false,
+     "cut": true,
+     "rules": [
+      "R24",
+      "R25"
+     ],
+     "blocks": 0,
+     "not_written": 0
+    },
+    {
+     "step": "response",
+     "slot": "ResponseStep.texts",
+     "applies": false,
+     "cut": true,
+     "rules": [
+      "R24",
+      "R25",
+      "R31"
+     ],
+     "blocks": 0,
+     "not_written": 0
+    }
+   ],
+   "text_blocks_not_written": 0,
+   "register_only": 16
+  },
+  "floor": {
+   "threshold": 0.5,
+   "not_written": [
+    "title"
+   ]
+  },
+  "addressee_candidates": [],
+  "response_signs": null,
+  "i95_gaps": [],
+  "fields_not_read": [],
+  "counts": {
+   "fields": 7,
+   "read_from_pdf": 2,
+   "not_found_in_pdf": 1,
+   "not_in_this_document_type": 4,
+   "weak_candidates": 1,
+   "addressee_candidates": 0,
+   "certain": 1,
+   "unsure": 1,
+   "export_check": {
+    "equal_to_export": 2,
+    "differs_from_export": 0,
+    "no_export_value": 0,
+    "not_compared": 0
+   }
+  },
+  "slot_counts": {
+   "read_from_pdf": 2,
+   "not_found_in_pdf": 22,
+   "not_in_this_document_type": 12,
+   "register_only": 16
+  }
+ },
+ "values": [
+  {
+   "field": "affair_number",
+   "slot": "Affair.affair_number",
+   "name_key": "value.affair_number",
+   "written": true,
+   "candidate": null,
+   "value_printed": "P140393",
+   "value": "P140393",
+   "value_form": "printed",
+   "differs_from_printed": false,
+   "comparison_value": "P140393",
+   "probability": 0.9706,
+   "value_status": "unsure",
+   "measured": true,
+   "tier_probability": 0.970588,
+   "probability_source": "all_folds",
+   "in_sample": true,
+   "tier": "number_letter_code_line",
+   "rule_id": "m11_values_type_number.read_affair_number",
+   "normalisation_rule": "norm_text",
+   "page": 1,
+   "last_page": 1,
+   "char_start": 154,
+   "char_end": 161,
+   "block_id": "B4",
+   "atom_ids": [
+    "B4.1.2"
+   ],
+   "spans": [
+    {
+     "atom_id": "B4.1.2",
+     "start": 0,
+     "end": 7
+    }
+   ],
+   "export_check": "equal_to_export",
+   "export_value": "P140393",
+   "export_match": "exact",
+   "label_id": "pdf-affair_number",
+   "calibration_id": "value.affair_number.number_letter_code_line",
+   "instance_path": "affairs[0].affair_number"
+  },
+  {
+   "field": "affair_type",
+   "slot": "Affair.affair_type",
+   "name_key": "value.affair_type",
+   "written": true,
+   "candidate": null,
+   "value_printed": "Regierungsratsbeschluss",
+   "value": "draft_decree",
+   "value_form": "list_value",
+   "differs_from_printed": true,
+   "comparison_value": "draft_decree",
+   "probability": 0.9568,
+   "value_status": "certain",
+   "measured": true,
+   "tier_probability": 0.95679,
+   "probability_source": "all_folds",
+   "in_sample": true,
+   "tier": "type_government_head",
+   "rule_id": "m11_values_type_number.read_affair_type",
+   "normalisation_rule": "type_word_to_list_value",
+   "page": 1,
+   "last_page": 1,
+   "char_start": 39,
+   "char_end": 62,
+   "block_id": "B3",
+   "atom_ids": [
+    "B3.1"
+   ],
+   "spans": [
+    {
+     "atom_id": "B3.1",
+     "start": 0,
+     "end": 23
+    }
+   ],
+   "export_check": "equal_to_export",
+   "export_value": "draft_decree",
+   "export_match": "exact",
+   "label_id": "pdf-affair_type",
+   "calibration_id": "value.affair_type.type_government_head",
+   "instance_path": "affairs[0].affair_type"
+  },
+  {
+   "field": "title",
+   "slot": "Affair.title",
+   "name_key": "value.title",
+   "written": false,
+   "candidate": "weak",
+   "value_printed": "Swisslos-Fondsbeitrag; Verein MusikRaumBasel; Festival KlangBasel 2014 P140393",
+   "value": "Swisslos-Fondsbeitrag; Verein MusikRaumBasel; Festival KlangBasel 2014 P140393",
+   "value_form": "printed",
+   "differs_from_printed": false,
+   "comparison_value": "Swisslos-Fondsbeitrag; Verein MusikRaumBasel; Festival KlangBasel 2014 P140393",
+   "probability": 0.1473,
+   "value_status": "unsure",
+   "measured": true,
+   "tier_probability": 0.147321,
+   "probability_source": null,
+   "in_sample": true,
+   "tier": "weak_first_heading",
+   "rule_id": "m11_values_title.read_title",
+   "normalisation_rule": "norm_text_one_line",
+   "page": 1,
+   "last_page": 1,
+   "char_start": 83,
+   "char_end": 161,
+   "block_id": "B4",
+   "atom_ids": [
+    "B4.1.1",
+    "B4.1.2"
+   ],
+   "spans": [
+    {
+     "atom_id": "B4.1.1",
+     "start": 0,
+     "end": 70
+    },
+    {
+     "atom_id": "B4.1.2",
+     "start": 0,
+     "end": 7
+    }
+   ],
+   "export_check": "not_compared",
+   "export_value": null,
+   "export_match": null,
+   "label_id": "candidate-title",
+   "calibration_id": "value.title.weak_first_heading",
+   "instance_path": null
+  }
+ ],
+ "slots": [
+  {
+   "slot": "Affair.affair_number",
+   "state": "read_from_pdf",
+   "reason": "value_read",
+   "field": "affair_number",
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": "pdf-affair_number",
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.affair_number"
+  },
+  {
+   "slot": "Affair.affair_type",
+   "state": "read_from_pdf",
+   "reason": "value_read",
+   "field": "affair_type",
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": "pdf-affair_type",
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.affair_type"
+  },
+  {
+   "slot": "Affair.title",
+   "state": "not_found_in_pdf",
+   "reason": "weak_candidate_only",
+   "field": "title",
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": "candidate-title",
+   "gap_id": "title",
+   "export_has_value": true,
+   "name_key": "pslot.Affair.title"
+  },
+  {
+   "slot": "Affair.linked_affairs",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.linked_affairs"
+  },
+  {
+   "slot": "Affair.submission",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": null,
+   "result": "not_searched",
+   "kind": "other",
+   "cascade_rules": [
+    "R24",
+    "R25"
+   ],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.submission"
+  },
+  {
+   "slot": "Affair.submission_validation_steps",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.submission_validation_steps"
+  },
+  {
+   "slot": "Affair.assignment_steps",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.assignment_steps"
+  },
+  {
+   "slot": "Affair.response_steps",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": null,
+   "result": "not_searched",
+   "kind": "other",
+   "cascade_rules": [
+    "R24",
+    "R25",
+    "R31"
+   ],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.response_steps"
+  },
+  {
+   "slot": "Affair.committee_deliberation_steps",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.committee_deliberation_steps"
+  },
+  {
+   "slot": "Affair.plenary_debates",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.plenary_debates"
+  },
+  {
+   "slot": "Affair.lifecycle_flags",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.lifecycle_flags"
+  },
+  {
+   "slot": "Affair.current_state",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.current_state"
+  },
+  {
+   "slot": "Affair.procedure_states",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.procedure_states"
+  },
+  {
+   "slot": "Affair.local_id",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.local_id"
+  },
+  {
+   "slot": "Affair.global_uri",
+   "state": "register_only",
+   "reason": "minted_iri",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.global_uri"
+  },
+  {
+   "slot": "Affair.wikidata_uri",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.wikidata_uri"
+  },
+  {
+   "slot": "Affair.date_created",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.date_created"
+  },
+  {
+   "slot": "Affair.datetime_created",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.datetime_created"
+  },
+  {
+   "slot": "Affair.date_modified",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.date_modified"
+  },
+  {
+   "slot": "Affair.datetime_modified",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.datetime_modified"
+  },
+  {
+   "slot": "Submission.submission_date",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": "submission_date",
+   "result": "not_searched",
+   "kind": "other",
+   "cascade_rules": [
+    "R24",
+    "R25"
+   ],
+   "label_id": null,
+   "gap_id": "submission_date",
+   "export_has_value": true,
+   "name_key": "pslot.Submission.submission_date"
+  },
+  {
+   "slot": "Submission.sponsorship",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": "sponsor",
+   "result": "not_searched",
+   "kind": "other",
+   "cascade_rules": [
+    "R24",
+    "R25"
+   ],
+   "label_id": null,
+   "gap_id": "sponsor",
+   "export_has_value": null,
+   "name_key": "pslot.Submission.sponsorship"
+  },
+  {
+   "slot": "Submission.texts",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": null,
+   "result": "not_searched",
+   "kind": "other",
+   "cascade_rules": [
+    "R24",
+    "R25"
+   ],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.texts"
+  },
+  {
+   "slot": "Submission.withdrawn_date",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.withdrawn_date"
+  },
+  {
+   "slot": "Submission.reasoning_in_council",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.reasoning_in_council"
+  },
+  {
+   "slot": "Submission.local_id",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.local_id"
+  },
+  {
+   "slot": "Submission.global_uri",
+   "state": "register_only",
+   "reason": "minted_iri",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.global_uri"
+  },
+  {
+   "slot": "Submission.wikidata_uri",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.wikidata_uri"
+  },
+  {
+   "slot": "Submission.date_begin_actual",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.date_begin_actual"
+  },
+  {
+   "slot": "Submission.datetime_begin_actual",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.datetime_begin_actual"
+  },
+  {
+   "slot": "Submission.date_begin_planned",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.date_begin_planned"
+  },
+  {
+   "slot": "Submission.datetime_begin_planned",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.datetime_begin_planned"
+  },
+  {
+   "slot": "Submission.date_end_actual",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.date_end_actual"
+  },
+  {
+   "slot": "Submission.datetime_end_actual",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.datetime_end_actual"
+  },
+  {
+   "slot": "Submission.date_end_planned",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.date_end_planned"
+  },
+  {
+   "slot": "Submission.datetime_end_planned",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.datetime_end_planned"
+  },
+  {
+   "slot": "Submission.remark",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.remark"
+  },
+  {
+   "slot": "ResponseStep.responder",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": "responder",
+   "result": "not_searched",
+   "kind": "other",
+   "cascade_rules": [
+    "R24",
+    "R25",
+    "R31"
+   ],
+   "label_id": null,
+   "gap_id": "responder",
+   "export_has_value": true,
+   "name_key": "pslot.ResponseStep.responder"
+  },
+  {
+   "slot": "ResponseStep.recommendation",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.recommendation"
+  },
+  {
+   "slot": "ResponseStep.texts",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": null,
+   "result": "not_searched",
+   "kind": "other",
+   "cascade_rules": [
+    "R24",
+    "R25",
+    "R31"
+   ],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.texts"
+  },
+  {
+   "slot": "ResponseStep.local_id",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.local_id"
+  },
+  {
+   "slot": "ResponseStep.global_uri",
+   "state": "register_only",
+   "reason": "minted_iri",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.global_uri"
+  },
+  {
+   "slot": "ResponseStep.wikidata_uri",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.wikidata_uri"
+  },
+  {
+   "slot": "ResponseStep.date_begin_actual",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.date_begin_actual"
+  },
+  {
+   "slot": "ResponseStep.datetime_begin_actual",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.datetime_begin_actual"
+  },
+  {
+   "slot": "ResponseStep.date_begin_planned",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.date_begin_planned"
+  },
+  {
+   "slot": "ResponseStep.datetime_begin_planned",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.datetime_begin_planned"
+  },
+  {
+   "slot": "ResponseStep.date_end_actual",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": "response_date",
+   "result": "not_searched",
+   "kind": "other",
+   "cascade_rules": [
+    "R24",
+    "R25",
+    "R31"
+   ],
+   "label_id": null,
+   "gap_id": "response_date",
+   "export_has_value": false,
+   "name_key": "pslot.ResponseStep.date_end_actual"
+  },
+  {
+   "slot": "ResponseStep.datetime_end_actual",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.datetime_end_actual"
+  },
+  {
+   "slot": "ResponseStep.date_end_planned",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.date_end_planned"
+  },
+  {
+   "slot": "ResponseStep.datetime_end_planned",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.datetime_end_planned"
+  },
+  {
+   "slot": "ResponseStep.remark",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.remark"
+  }
+ ],
+ "document": {
+  "source_iri": "https://api.openparldata.ch/v1/docs/714840",
+  "record_iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840",
+  "container_iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/i95",
+  "named_graphs": {
+   "ech-0295": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/ech-0295",
+   "provenance": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/provenance",
+   "atoms": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/atoms",
+   "labels": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/labels"
+  },
+  "pdf_sha256": "8bb01b408e55d4277550fa7521783392ddae4b8fe881d70165632e36f8391fe2",
+  "page_count": 1,
+  "language": "de",
+  "parliament": "BS",
+  "parliament_name": "Basel-Stadt",
+  "title": null,
+  "affair_number": "P140393",
+  "affair_type": "draft_decree",
+  "has_export": true,
+  "conformance": "i95",
+  "head": [
+   {
+    "instance_path": "global_uri",
+    "ech_slot": "Container.global_uri",
+    "value": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/i95",
+    "derivation": "identifier_minted",
+    "origin": "identifier",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": "value-global_uri"
+   },
+   {
+    "instance_path": "affairs[0].global_uri",
+    "ech_slot": "DraftDecree.global_uri",
+    "value": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/affair",
+    "derivation": "identifier_minted",
+    "origin": "identifier",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": "value-affairs-0-global_uri"
+   },
+   {
+    "instance_path": "affairs[0].affair_number",
+    "ech_slot": "DraftDecree.affair_number",
+    "value": "P140393",
+    "derivation": "extracted_from_pdf_by_rule",
+    "origin": "pdf_rule",
+    "pdf_consistency": "confirmed",
+    "mapping_match": "not_applicable",
+    "atom_ids": [
+     "B4.1.2"
+    ],
+    "label_id": "pdf-affair_number"
+   },
+   {
+    "instance_path": "affairs[0].affair_type",
+    "ech_slot": "DraftDecree.affair_type",
+    "value": "draft_decree",
+    "derivation": "extracted_from_pdf_by_rule",
+    "origin": "pdf_rule",
+    "pdf_consistency": "confirmed",
+    "mapping_match": "exact",
+    "atom_ids": [
+     "B3.1"
+    ],
+    "label_id": "pdf-affair_type"
+   }
+  ],
+  "text_blocks": []
+ },
+ "pages": [
+  {
+   "number": 1,
+   "width": 595.0,
+   "height": 842.0,
+   "text_source": "mixed",
+   "lines": [
+    {
+     "atom_id": "B1.1",
+     "block_id": "B1",
+     "frame": [
+      24.94,
+      40.13,
+      45.83,
+      72.05
+     ],
+     "frame_source": "block",
+     "text": "",
+     "char_start": 0,
+     "char_end": 0,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B2.1",
+     "block_id": "B2",
+     "frame": [
+      62.4,
+      60.48,
+      269.71,
+      70.84
+     ],
+     "frame_source": "text_layer",
+     "text": "Regierungsrat des Kantons Basel-Stadt",
+     "char_start": 0,
+     "char_end": 37,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B3.1",
+     "block_id": "B3",
+     "frame": [
+      63.84,
+      142.22,
+      319.38,
+      153.48
+     ],
+     "frame_source": "text_layer",
+     "text": "Regierungsratsbeschluss vom 08. April 2014",
+     "char_start": 39,
+     "char_end": 81,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B4.1.1",
+     "block_id": "B4",
+     "frame": [
+      63.84,
+      201.74,
+      464.81,
+      213.0
+     ],
+     "frame_source": "text_layer",
+     "text": "Swisslos-Fondsbeitrag; Verein MusikRaumBasel; Festival KlangBasel 2014",
+     "char_start": 83,
+     "char_end": 153,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B4.1.2",
+     "block_id": "B4",
+     "frame": [
+      496.2,
+      201.74,
+      544.26,
+      213.0
+     ],
+     "frame_source": "text_layer",
+     "text": "P140393",
+     "char_start": 154,
+     "char_end": 161,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B5.1",
+     "block_id": "B5",
+     "frame": [
+      63.84,
+      286.1,
+      475.1,
+      297.36
+     ],
+     "frame_source": "text_layer",
+     "text": "1. Dem Verein MusikRaumBasel wird für das Musikfestival \"KlangBasel\"",
+     "char_start": 163,
+     "char_end": 231,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B5.2",
+     "block_id": "B5",
+     "frame": [
+      90.84,
+      299.9,
+      475.02,
+      311.16
+     ],
+     "frame_source": "text_layer",
+     "text": "im September 2014 ein Beitrag aus dem Swisslos-Fonds in Höhe von",
+     "char_start": 232,
+     "char_end": 296,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B5.3",
+     "block_id": "B5",
+     "frame": [
+      90.84,
+      313.7,
+      200.48,
+      324.96
+     ],
+     "frame_source": "text_layer",
+     "text": "Fr. 250'000 bewilligt.",
+     "char_start": 297,
+     "char_end": 319,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B6.1",
+     "block_id": "B6",
+     "frame": [
+      338.95,
+      330.77,
+      446.93,
+      438.9
+     ],
+     "frame_source": "block",
+     "text": "",
+     "char_start": 319,
+     "char_end": 319,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B7.1",
+     "block_id": "B7",
+     "frame": [
+      353.86,
+      402.26,
+      431.92,
+      430.91
+     ],
+     "frame_source": "estimated",
+     "text": "0V18 19500",
+     "char_start": 321,
+     "char_end": 331,
+     "from_ocr": true
+    },
+    {
+     "atom_id": "B8.1",
+     "block_id": "B8",
+     "frame": [
+      503.16,
+      791.33,
+      538.76,
+      799.77
+     ],
+     "frame_source": "text_layer",
+     "text": "Seite 1/1",
+     "char_start": 333,
+     "char_end": 342,
+     "from_ocr": false
+    }
+   ],
+   "image": "/api/records/s-714840/files/page-1.png"
+  }
+ ],
+ "blocks": [
+  {
+   "id": "B1",
+   "page": 1,
+   "docling_label": "picture",
+   "char_start": 0,
+   "char_end": 0,
+   "atom_ids": [
+    "B1.1"
+   ],
+   "text": "",
+   "label_id": "B1-slot"
+  },
+  {
+   "id": "B2",
+   "page": 1,
+   "docling_label": "section_header",
+   "char_start": 0,
+   "char_end": 37,
+   "atom_ids": [
+    "B2.1"
+   ],
+   "text": "Regierungsrat des Kantons Basel-Stadt",
+   "label_id": "B2-slot"
+  },
+  {
+   "id": "B3",
+   "page": 1,
+   "docling_label": "section_header",
+   "char_start": 39,
+   "char_end": 81,
+   "atom_ids": [
+    "B3.1"
+   ],
+   "text": "Regierungsratsbeschluss vom 08. April 2014",
+   "label_id": "B3-slot"
+  },
+  {
+   "id": "B4",
+   "page": 1,
+   "docling_label": "section_header",
+   "char_start": 83,
+   "char_end": 161,
+   "atom_ids": [
+    "B4.1.1",
+    "B4.1.2"
+   ],
+   "text": "Swisslos-Fondsbeitrag; Verein MusikRaumBasel; Festival KlangBasel 2014 P140393",
+   "label_id": "B4-slot"
+  },
+  {
+   "id": "B5",
+   "page": 1,
+   "docling_label": "list_item",
+   "char_start": 163,
+   "char_end": 319,
+   "atom_ids": [
+    "B5.1",
+    "B5.2",
+    "B5.3"
+   ],
+   "text": "1. Dem Verein MusikRaumBasel wird für das Musikfestival \"KlangBasel\"\nim September 2014 ein Beitrag aus dem Swisslos-Fonds in Höhe von\nFr. 250'000 bewilligt.",
+   "label_id": "B5-slot"
+  },
+  {
+   "id": "B6",
+   "page": 1,
+   "docling_label": "picture",
+   "char_start": 319,
+   "char_end": 319,
+   "atom_ids": [
+    "B6.1"
+   ],
+   "text": "",
+   "label_id": "B6-slot"
+  },
+  {
+   "id": "B7",
+   "page": 1,
+   "docling_label": "text",
+   "char_start": 321,
+   "char_end": 331,
+   "atom_ids": [
+    "B7.1"
+   ],
+   "text": "0V18 19500",
+   "label_id": "B7-slot"
+  },
+  {
+   "id": "B8",
+   "page": 1,
+   "docling_label": "page_footer",
+   "char_start": 333,
+   "char_end": 342,
+   "atom_ids": [
+    "B8.1"
+   ],
+   "text": "Seite 1/1",
+   "label_id": "B8-slot"
+  }
+ ],
+ "labels": [
+  {
+   "id": "d1",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/label/d1",
+   "kind": "document_text_parts",
+   "slot": "documentTextParts",
+   "predicate": "https://schema.parlpdfech.example/labels/documentTextParts",
+   "subject": "https://api.openparldata.ch/v1/docs/714840",
+   "target": {
+    "type": "document",
+    "block_id": null,
+    "atom_ids": [],
+    "page": 1,
+    "last_page": 1,
+    "char_start": 0,
+    "char_end": 342,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "D",
+   "options": [
+    {
+     "value": "A",
+     "probability": 0.005
+    },
+    {
+     "value": "B",
+     "probability": 0.005
+    },
+    {
+     "value": "C",
+     "probability": 0.005
+    },
+    {
+     "value": "D",
+     "probability": 0.9917
+    }
+   ],
+   "probability": 0.9917,
+   "value_status": "certain",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "rule",
+    "group": "rule",
+    "tier": null,
+    "rule_id": "O1",
+    "head": "D1"
+   },
+   "calibration_id": "gj1-d1-verifier-platt",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "r2",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/label/r2",
+   "kind": "executive_response",
+   "slot": "executiveResponse",
+   "predicate": "https://schema.parlpdfech.example/labels/executiveResponse",
+   "subject": "https://api.openparldata.ch/v1/docs/714840",
+   "target": {
+    "type": "document",
+    "block_id": null,
+    "atom_ids": [],
+    "page": 1,
+    "last_page": 1,
+    "char_start": 0,
+    "char_end": 342,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "no",
+   "options": [
+    {
+     "value": "yes",
+     "probability": 0.0434
+    },
+    {
+     "value": "no",
+     "probability": 0.9566
+    }
+   ],
+   "probability": 0.9566,
+   "value_status": "certain",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "apertus_head",
+    "group": "apertus_readout",
+    "tier": null,
+    "rule_id": null,
+    "head": "R2"
+   },
+   "calibration_id": "gj1-r2-platt-step0b",
+   "in_sample": true,
+   "note_code": "final_check",
+   "note_params": {
+    "agrees": true
+   },
+   "note": null
+  },
+  {
+   "id": "B1-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/label/B1-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/block/B1",
+   "target": {
+    "type": "block",
+    "block_id": "B1",
+    "atom_ids": [
+     "B1.1"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 0,
+    "char_end": 0,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "none",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.005
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.005
+    },
+    {
+     "value": "response",
+     "probability": 0.005
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.005
+    },
+    {
+     "value": "title",
+     "probability": 0.005
+    },
+    {
+     "value": "none",
+     "probability": 0.995
+    }
+   ],
+   "probability": 0.995,
+   "value_status": "certain",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "rule",
+    "group": "rule",
+    "tier": "fixed:R3",
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": "gj1-tier-fixed-R3-none",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B2-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/label/B2-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/block/B2",
+   "target": {
+    "type": "block",
+    "block_id": "B2",
+    "atom_ids": [
+     "B2.1"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 0,
+    "char_end": 37,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "none",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.0054
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.005
+    },
+    {
+     "value": "response",
+     "probability": 0.006
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.0279
+    },
+    {
+     "value": "title",
+     "probability": 0.3708
+    },
+    {
+     "value": "none",
+     "probability": 0.5874
+    }
+   ],
+   "probability": 0.5874,
+   "value_status": "unsure",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s2_start_default",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B3-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/label/B3-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/block/B3",
+   "target": {
+    "type": "block",
+    "block_id": "B3",
+    "atom_ids": [
+     "B3.1"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 39,
+    "char_end": 81,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "none",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.0082
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.005
+    },
+    {
+     "value": "response",
+     "probability": 0.0061
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.0357
+    },
+    {
+     "value": "title",
+     "probability": 0.4828
+    },
+    {
+     "value": "none",
+     "probability": 0.464
+    }
+   ],
+   "probability": 0.464,
+   "value_status": "unsure",
+   "chosen_is_top": false,
+   "top_option": {
+    "value": "title",
+    "probability": 0.4828
+   },
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s2_start_default",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B4-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/label/B4-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/block/B4",
+   "target": {
+    "type": "block",
+    "block_id": "B4",
+    "atom_ids": [
+     "B4.1.1",
+     "B4.1.2"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 83,
+    "char_end": 161,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "title",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.0491
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.007
+    },
+    {
+     "value": "response",
+     "probability": 0.0136
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.0629
+    },
+    {
+     "value": "title",
+     "probability": 0.729
+    },
+    {
+     "value": "none",
+     "probability": 0.1383
+    }
+   ],
+   "probability": 0.729,
+   "value_status": "unsure",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s2_start_default",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B5-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/label/B5-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/block/B5",
+   "target": {
+    "type": "block",
+    "block_id": "B5",
+    "atom_ids": [
+     "B5.1",
+     "B5.2",
+     "B5.3"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 163,
+    "char_end": 319,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "title",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.1492
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.0138
+    },
+    {
+     "value": "response",
+     "probability": 0.062
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.1257
+    },
+    {
+     "value": "title",
+     "probability": 0.3852
+    },
+    {
+     "value": "none",
+     "probability": 0.264
+    }
+   ],
+   "probability": 0.3852,
+   "value_status": "unsure",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s2_start_default",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B6-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/label/B6-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/block/B6",
+   "target": {
+    "type": "block",
+    "block_id": "B6",
+    "atom_ids": [
+     "B6.1"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 319,
+    "char_end": 319,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "none",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.005
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.005
+    },
+    {
+     "value": "response",
+     "probability": 0.005
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.005
+    },
+    {
+     "value": "title",
+     "probability": 0.005
+    },
+    {
+     "value": "none",
+     "probability": 0.995
+    }
+   ],
+   "probability": 0.995,
+   "value_status": "certain",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "rule",
+    "group": "rule",
+    "tier": "fixed:R3",
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": "gj1-tier-fixed-R3-none",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B7-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/label/B7-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/block/B7",
+   "target": {
+    "type": "block",
+    "block_id": "B7",
+    "atom_ids": [
+     "B7.1"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 321,
+    "char_end": 331,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "none",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.0058
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.006
+    },
+    {
+     "value": "response",
+     "probability": 0.009
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.0225
+    },
+    {
+     "value": "title",
+     "probability": 0.0777
+    },
+    {
+     "value": "none",
+     "probability": 0.8789
+    }
+   ],
+   "probability": 0.8789,
+   "value_status": "certain",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s2_start_default",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B8-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/label/B8-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/block/B8",
+   "target": {
+    "type": "block",
+    "block_id": "B8",
+    "atom_ids": [
+     "B8.1"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 333,
+    "char_end": 342,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "none",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.005
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.005
+    },
+    {
+     "value": "response",
+     "probability": 0.005
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.005
+    },
+    {
+     "value": "title",
+     "probability": 0.005
+    },
+    {
+     "value": "none",
+     "probability": 0.995
+    }
+   ],
+   "probability": 0.995,
+   "value_status": "certain",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "rule",
+    "group": "rule",
+    "tier": "fixed:R1",
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": "gj1-tier-fixed-R1-none",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "value-global_uri",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/label/value-global_uri",
+   "kind": "constant_value",
+   "slot": "globalURI",
+   "predicate": "https://ld.ech.ch/schema/0292/meta-common/globalURI",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/i95",
+   "target": {
+    "type": "value",
+    "block_id": null,
+    "atom_ids": [],
+    "page": null,
+    "last_page": null,
+    "char_start": null,
+    "char_end": null,
+    "instance_path": "global_uri",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/i95"
+   },
+   "value": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/i95",
+   "options": [],
+   "probability": null,
+   "value_status": "none",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "constant",
+    "group": "constant",
+    "tier": null,
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": null,
+   "in_sample": null,
+   "note_code": "value_derivation",
+   "note_params": {
+    "derivation": "identifier_minted"
+   },
+   "note": null
+  },
+  {
+   "id": "value-affairs-0-global_uri",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/label/value-affairs-0-global_uri",
+   "kind": "constant_value",
+   "slot": "globalURI",
+   "predicate": "https://ld.ech.ch/schema/0292/meta-common/globalURI",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/affair",
+   "target": {
+    "type": "value",
+    "block_id": null,
+    "atom_ids": [],
+    "page": null,
+    "last_page": null,
+    "char_start": null,
+    "char_end": null,
+    "instance_path": "affairs[0].global_uri",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/affair"
+   },
+   "value": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/affair",
+   "options": [],
+   "probability": null,
+   "value_status": "none",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "constant",
+    "group": "constant",
+    "tier": null,
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": null,
+   "in_sample": null,
+   "note_code": "value_derivation",
+   "note_params": {
+    "derivation": "identifier_minted"
+   },
+   "note": null
+  },
+  {
+   "id": "pdf-affair_number",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/label/pdf-affair_number",
+   "kind": "pdf_value",
+   "slot": "affairNumber",
+   "predicate": "https://ch.paf.link/schema/affairs/affairNumber",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/affair",
+   "target": {
+    "type": "value",
+    "block_id": "B4",
+    "atom_ids": [
+     "B4.1.2"
+    ],
+    "page": 1,
+    "last_page": 1,
+    "char_start": 154,
+    "char_end": 161,
+    "instance_path": "affairs[0].affair_number",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/affair"
+   },
+   "value": "P140393",
+   "options": [],
+   "probability": 0.9706,
+   "value_status": "unsure",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "rule",
+    "group": "rule",
+    "tier": "number_letter_code_line",
+    "rule_id": "m11_values_type_number.read_affair_number",
+    "head": null
+   },
+   "calibration_id": "value.affair_number.number_letter_code_line",
+   "in_sample": null,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "pdf-affair_type",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/label/pdf-affair_type",
+   "kind": "pdf_value",
+   "slot": "affairType",
+   "predicate": "https://ch.paf.link/schema/affairs/affairType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/affair",
+   "target": {
+    "type": "value",
+    "block_id": "B3",
+    "atom_ids": [
+     "B3.1"
+    ],
+    "page": 1,
+    "last_page": 1,
+    "char_start": 39,
+    "char_end": 62,
+    "instance_path": "affairs[0].affair_type",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/affair"
+   },
+   "value": "draft_decree",
+   "options": [],
+   "probability": 0.9568,
+   "value_status": "certain",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "rule",
+    "group": "rule",
+    "tier": "type_government_head",
+    "rule_id": "m11_values_type_number.read_affair_type",
+    "head": null
+   },
+   "calibration_id": "value.affair_type.type_government_head",
+   "in_sample": null,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "candidate-title",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/label/candidate-title",
+   "kind": "pdf_value",
+   "slot": "title",
+   "predicate": "https://ch.paf.link/schema/affairs/title",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-714840/affair",
+   "target": {
+    "type": "value",
+    "block_id": "B4",
+    "atom_ids": [
+     "B4.1.1",
+     "B4.1.2"
+    ],
+    "page": 1,
+    "last_page": 1,
+    "char_start": 83,
+    "char_end": 161,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "Swisslos-Fondsbeitrag; Verein MusikRaumBasel; Festival KlangBasel 2014 P140393",
+   "options": [],
+   "probability": 0.1473,
+   "value_status": "unsure",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "rule",
+    "group": "rule",
+    "tier": "weak_first_heading",
+    "rule_id": "m11_values_title.read_title",
+    "head": null
+   },
+   "calibration_id": "value.title.weak_first_heading",
+   "in_sample": null,
+   "note_code": "weak_candidate",
+   "note_params": {},
+   "note": null
+  }
+ ],
+ "calibrations": [
+  {
+   "id": "gj1-b1s-b2-marginal-temperature",
+   "iri": "https://parlpdfech.ansv.ch/id/calibration/gj1-b1s-b2-marginal-temperature",
+   "method": "forward_backward_temperature",
+   "kind": "block_slot",
+   "fit_n": 9313,
+   "in_sample": false,
+   "target_status": "target_not_met",
+   "certain_threshold": 0.8,
+   "basis": null,
+   "reference_code": "model_labels_not_human_checked",
+   "measure_sets": [
+    {
+     "name": "dev out-of-fold",
+     "n": 9313,
+     "ece": 0.0526,
+     "ece_low": 0.031093,
+     "ece_high": 0.077205,
+     "brier": 0.266646,
+     "nll": 0.601899
+    },
+    {
+     "name": "validation (44 documents): written block labels of the variant d1n_b1sy (GJ.13); ECE of p of the written option, Brier score and NLL of the 6 options",
+     "n": 2715,
+     "ece": 0.0442,
+     "ece_low": 0.0324,
+     "ece_high": 0.1158,
+     "brier": 0.3125,
+     "nll": 0.5933
+    }
+   ],
+   "note": "B1-S (addendum D): the frozen B1 head with its frozen temperature; B2 block marginal of the form switch_soft (addendum C) after one B2 temperature. Variant b12_entered; threshold a by P17 on dev. GJ.13 on validation: NOT MET",
+   "tier": null,
+   "measured": true
+  },
+  {
+   "id": "gj1-d1-verifier-platt",
+   "iri": "https://parlpdfech.ansv.ch/id/calibration/gj1-d1-verifier-platt",
+   "method": "verifier_platt",
+   "kind": "document_text_parts",
+   "fit_n": 48,
+   "in_sample": false,
+   "target_status": "not_measured",
+   "certain_threshold": 0.9,
+   "basis": null,
+   "reference_code": "model_labels_not_human_checked",
+   "measure_sets": [
+    {
+     "name": "dev_out_of_design, in-sample",
+     "n": 48,
+     "ece": 0.120887,
+     "ece_low": null,
+     "ece_high": null,
+     "brier": 0.163694,
+     "nll": 0.287308
+    }
+   ],
+   "note": "Platt map of the calibrated D1 probability of the S1 rule option; fit set dev_out_of_design. Variant d1_not_entered; threshold a by P17 on dev",
+   "tier": null,
+   "measured": true
+  },
+  {
+   "id": "gj1-r2-platt-step0b",
+   "iri": "https://parlpdfech.ansv.ch/id/calibration/gj1-r2-platt-step0b",
+   "method": "platt_scaling",
+   "kind": "executive_response",
+   "fit_n": 193,
+   "in_sample": true,
+   "target_status": "not_measured",
+   "certain_threshold": 0.6,
+   "basis": null,
+   "reference_code": "model_labels_not_human_checked",
+   "measure_sets": [
+    {
+     "name": "dev AI-reference documents, out-of-fold map (5 folds of the dev design)",
+     "n": 193,
+     "ece": 0.029697,
+     "ece_low": 0.018867,
+     "ece_high": 0.061158,
+     "brier": 0.100316,
+     "nll": 0.16456
+    },
+    {
+     "name": "dev AI-reference documents, in-sample (fit set of the map)",
+     "n": 193,
+     "ece": 0.032938,
+     "ece_low": 0.021508,
+     "ece_high": 0.062637,
+     "brier": 0.096321,
+     "nll": 0.152964
+    }
+   ],
+   "note": "R2 step 0b (criteria 8.4 item 2): Platt map of q(yes) of the frozen head H (layer 16) on the Docling text; fit on the 193 dev AI-reference documents; threshold a by P17 on the out-of-fold values of the map (criteria 8.6 item 4); GJ.14 on validation sets the target status",
+   "tier": null,
+   "measured": true
+  },
+  {
+   "id": "gj1-tier-fixed-R1-none",
+   "iri": "https://parlpdfech.ansv.ch/id/calibration/gj1-tier-fixed-R1-none",
+   "method": "jeffreys_tier_precision",
+   "kind": "block_slot",
+   "fit_n": 338,
+   "in_sample": true,
+   "target_status": "target_not_met",
+   "certain_threshold": 0.8,
+   "basis": {
+    "n": 338,
+    "agreed": 338,
+    "documents": 111
+   },
+   "reference_code": "model_labels_not_human_checked",
+   "measure_sets": [
+    {
+     "name": "validation (44 documents): written block labels of the variant d1n_b1sy (GJ.13); ECE of p of the written option, Brier score and NLL of the 6 options",
+     "n": 2715,
+     "ece": 0.0442,
+     "ece_low": 0.0324,
+     "ece_high": 0.1158,
+     "brier": 0.3125,
+     "nll": 0.5933
+    }
+   ],
+   "note": "rule tier fixed:R1 with the option none: Jeffreys posterior mean of the dev precision (criteria chapter 8.7). Variant b12_entered; threshold a by P17 on dev. GJ.13 on validation: NOT MET",
+   "tier": null,
+   "measured": true
+  },
+  {
+   "id": "gj1-tier-fixed-R3-none",
+   "iri": "https://parlpdfech.ansv.ch/id/calibration/gj1-tier-fixed-R3-none",
+   "method": "jeffreys_tier_precision",
+   "kind": "block_slot",
+   "fit_n": 549,
+   "in_sample": true,
+   "target_status": "target_not_met",
+   "certain_threshold": 0.8,
+   "basis": {
+    "n": 549,
+    "agreed": 549,
+    "documents": 163
+   },
+   "reference_code": "model_labels_not_human_checked",
+   "measure_sets": [
+    {
+     "name": "validation (44 documents): written block labels of the variant d1n_b1sy (GJ.13); ECE of p of the written option, Brier score and NLL of the 6 options",
+     "n": 2715,
+     "ece": 0.0442,
+     "ece_low": 0.0324,
+     "ece_high": 0.1158,
+     "brier": 0.3125,
+     "nll": 0.5933
+    }
+   ],
+   "note": "rule tier fixed:R3 with the option none: Jeffreys posterior mean of the dev precision (criteria chapter 8.7). Variant b12_entered; threshold a by P17 on dev. GJ.13 on validation: NOT MET",
+   "tier": null,
+   "measured": true
+  },
+  {
+   "id": "value.affair_number.number_letter_code_line",
+   "iri": "https://parlpdfech.ansv.ch/id/calibration/value.affair_number.number_letter_code_line",
+   "method": "jeffreys_tier_precision",
+   "kind": "pdf_value",
+   "fit_n": 16,
+   "in_sample": true,
+   "target_status": "not_measured",
+   "certain_threshold": null,
+   "basis": {
+    "n": 16,
+    "agreed": 16,
+    "documents": 16
+   },
+   "reference_code": "export_register_value",
+   "measure_sets": [
+    {
+     "name": "dev, open part, fold values, all tiers of the field affair_number",
+     "n": 772,
+     "ece": 0.167552,
+     "ece_low": null,
+     "ece_high": null,
+     "brier": 0.203841,
+     "nll": null
+    }
+   ],
+   "note": null,
+   "tier": "number_letter_code_line",
+   "measured": true
+  },
+  {
+   "id": "value.affair_type.type_government_head",
+   "iri": "https://parlpdfech.ansv.ch/id/calibration/value.affair_type.type_government_head",
+   "method": "jeffreys_tier_precision",
+   "kind": "pdf_value",
+   "fit_n": 80,
+   "in_sample": true,
+   "target_status": "not_measured",
+   "certain_threshold": 0.6,
+   "basis": {
+    "n": 80,
+    "agreed": 77,
+    "documents": 80
+   },
+   "reference_code": "export_register_value",
+   "measure_sets": [
+    {
+     "name": "dev, open part, fold values, all tiers of the field affair_type",
+     "n": 1429,
+     "ece": 0.013088,
+     "ece_low": null,
+     "ece_high": null,
+     "brier": 0.042333,
+     "nll": null
+    }
+   ],
+   "note": null,
+   "tier": "type_government_head",
+   "measured": true
+  },
+  {
+   "id": "value.title.weak_first_heading",
+   "iri": "https://parlpdfech.ansv.ch/id/calibration/value.title.weak_first_heading",
+   "method": "jeffreys_tier_precision",
+   "kind": "pdf_value",
+   "fit_n": 111,
+   "in_sample": true,
+   "target_status": "not_measured",
+   "certain_threshold": null,
+   "basis": {
+    "n": 111,
+    "agreed": 16,
+    "documents": 111
+   },
+   "reference_code": "export_register_value",
+   "measure_sets": [
+    {
+     "name": "dev, open part, fold values, all tiers of the field title",
+     "n": 1592,
+     "ece": 0.100299,
+     "ece_low": null,
+     "ece_high": null,
+     "brier": 0.175553,
+     "nll": null
+    }
+   ],
+   "note": null,
+   "tier": "weak_first_heading",
+   "measured": true
+  }
+ ],
+ "counts": {
+  "pages": 1,
+  "lines": 11,
+  "blocks": 8,
+  "labels": {
+   "total": 15,
+   "with_probability": 13,
+   "certain": 7,
+   "unsure": 6,
+   "none": 2,
+   "chosen_not_top": 1,
+   "by_source": {
+    "rule": 7,
+    "apertus_head": 1,
+    "code_step": 5,
+    "constant": 2
+   },
+   "by_group": {
+    "rule": 7,
+    "apertus_readout": 6,
+    "constant": 2
+   },
+   "by_kind": {
+    "document_text_parts": 1,
+    "executive_response": 1,
+    "block_slot": 8,
+    "constant_value": 2,
+    "pdf_value": 3
+   }
+  },
+  "triples": {
+   "ech-0295": 5,
+   "provenance": 185,
+   "atoms": 240,
+   "labels": 874,
+   "union": 1304
+  },
+  "record": {
+   "blocks": 8,
+   "block_options": {
+    "title": 2,
+    "none": 6
+   },
+   "author_blocks": 0,
+   "textblocks_by_slot": {
+    "submission": 0,
+    "response": 0
+   },
+   "textblock_records_profile_only": 0,
+   "path_switch_points": 0,
+   "path_switch_points_without_boundary_label": 0,
+   "boundary_labels": 0,
+   "label_assertions": 15,
+   "label_assertions_by_source": {
+    "apertus_head": 1,
+    "code_step": 5,
+    "constant": 2,
+    "rule": 7
+   },
+   "label_assertions_by_kind": {
+    "block_slot": 8,
+    "constant_value": 2,
+    "document_text_parts": 1,
+    "executive_response": 1,
+    "pdf_value": 3
+   },
+   "pdf_value_gaps": 5,
+   "certain_labels": 7,
+   "unsure_labels": 6,
+   "r2_agrees_with_block_path": true,
+   "d1_option": "D",
+   "leaf_values": 4,
+   "value_records": 4,
+   "e19": {
+    "text_blocks": 0,
+    "characters": 0,
+    "hyphens_removed": 0,
+    "list_markers_removed": 0,
+    "problems": 0
+   },
+   "metadata_check": {
+    "values_checked": 3,
+    "problems": 0,
+    "leaves_without_provenance": 0
+   },
+   "slots": {
+    "read_from_pdf": 2,
+    "not_found_in_pdf": 22,
+    "not_in_this_document_type": 12,
+    "register_only": 16
+   },
+   "slots_no_rule_searched": 21,
+   "values": {
+    "fields": 7,
+    "read_from_pdf": 2,
+    "not_found_in_pdf": 1,
+    "not_in_this_document_type": 4,
+    "weak_candidates": 1,
+    "addressee_candidates": 0,
+    "certain": 1,
+    "unsure": 1,
+    "export_check": {
+     "equal_to_export": 2,
+     "differs_from_export": 0,
+     "no_export_value": 0,
+     "not_compared": 0
+    }
+   }
+  }
+ },
+ "checks": [
+  {
+   "id": "writer_check",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C1_linkml",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C2_parse",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C3_isomorphism",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C4_parts",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C5_leaf_values",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C6_iri_scheme",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C7_C8_labels",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C9_e19",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C11_wording_at_span",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C12_one_label_for_each_pdf_value",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C13_no_export_value_in_the_record",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C14_cross_check",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C15_slot_states",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C16_probability_and_calibration",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C17_recorded_gaps",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C18_minted_iris",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C19_value_forms",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C20_value_follows_from_wording",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C21_floor",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C22_values_from_the_readers",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C10_shacl",
+   "state": "skipped",
+   "reason": "shacl_tool_absent"
+  }
+ ],
+ "files": [
+  {
+   "name": "714840.gesamt.trig",
+   "role": "gesamt_trig",
+   "media_type": "application/trig",
+   "bytes": 63248,
+   "sha256": "af96f0d0371041844dca19598decdfb561333e4e4e5aa5f421360ed6e33a702a",
+   "url": "/api/records/s-714840/files/714840.gesamt.trig"
+  },
+  {
+   "name": "714840.ech.ttl",
+   "role": "ech_ttl",
+   "media_type": "text/turtle",
+   "bytes": 352,
+   "sha256": "47355bb72263c860471bbc76a191b62545a45a8856c386f7455fd12a976cc492",
+   "url": "/api/records/s-714840/files/714840.ech.ttl"
+  },
+  {
+   "name": "714840.gesamt.rdf.xml",
+   "role": "gesamt_rdfxml",
+   "media_type": "application/rdf+xml",
+   "bytes": 119698,
+   "sha256": "105321ff737c1753e109cd9b843634372c374d627a5ee5a0a2b5584de2e30a8e",
+   "url": "/api/records/s-714840/files/714840.gesamt.rdf.xml"
+  },
+  {
+   "name": "714840.ech.rdf.xml",
+   "role": "ech_rdfxml",
+   "media_type": "application/rdf+xml",
+   "bytes": 524,
+   "sha256": "2584988491fd4d72d69dfdb075f4a0b85d78f1b8d03ac3e008f04003ca456cb0",
+   "url": "/api/records/s-714840/files/714840.ech.rdf.xml"
+  },
+  {
+   "name": "714840.ech.yaml",
+   "role": "ech_yaml",
+   "media_type": "application/yaml",
+   "bytes": 460,
+   "sha256": "363a67825724f10eb3776369dc271ec55c440c07b0dd812ca891db5f2f41807f",
+   "url": "/api/records/s-714840/files/714840.ech.yaml"
+  },
+  {
+   "name": "714840.labels.yaml",
+   "role": "labels_yaml",
+   "media_type": "application/yaml",
+   "bytes": 30491,
+   "sha256": "6a902a345a9d9dde3c1d908a37ff948ee131fd050440d9fb58ff0ecc673dddfd",
+   "url": "/api/records/s-714840/files/714840.labels.yaml"
+  },
+  {
+   "name": "714840.provenance.yaml",
+   "role": "provenance_yaml",
+   "media_type": "application/yaml",
+   "bytes": 8691,
+   "sha256": "fe104b09cb53cace23e1173357213170c19a25c273e0d46fc45b07b369342fad",
+   "url": "/api/records/s-714840/files/714840.provenance.yaml"
+  },
+  {
+   "name": "manifest.json",
+   "role": "manifest",
+   "media_type": "application/json",
+   "bytes": 27699,
+   "sha256": "9c3f9890a4af8d457f23e71998d36ddf55337ef06f9851ff9b7af330cb99dfc3",
+   "url": "/api/records/s-714840/files/manifest.json"
+  },
+  {
+   "name": "validation.json",
+   "role": "validation",
+   "media_type": "application/json",
+   "bytes": 16934,
+   "sha256": "4871e674dcde08bb17430b53107ad9da2e6a5e770416d869c388df472505da36",
+   "url": "/api/records/s-714840/files/validation.json"
+  },
+  {
+   "name": "714840.values.ttl",
+   "role": "values_ttl",
+   "media_type": "text/turtle",
+   "bytes": 2357,
+   "sha256": "171fc7f63ed7ee8ab5f9cafd3f9965f5c6519ee4f7fa49e0b98d2da3feb4c21d",
+   "url": "/api/records/s-714840/files/714840.values.ttl"
+  },
+  {
+   "name": "source.pdf",
+   "role": "source_pdf",
+   "media_type": "application/pdf",
+   "bytes": 106481,
+   "sha256": "8bb01b408e55d4277550fa7521783392ddae4b8fe881d70165632e36f8391fe2",
+   "url": "/api/records/s-714840/files/source.pdf"
+  },
+  {
+   "name": "page-1.png",
+   "role": "page_image",
+   "media_type": "image/png",
+   "bytes": 145258,
+   "sha256": "bac1341adc8c363770b322ebd920ae1f86f3dc1217ad5bbc80ca965a5fa1734d",
+   "url": "/api/records/s-714840/files/page-1.png"
+  }
+ ]
+}

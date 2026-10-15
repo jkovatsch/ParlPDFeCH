@@ -1,0 +1,34 @@
+# eCH-0295 instance (I95, root class Container), src/m11_writer.py (m11-writer-6), document 879163
+# Head values read from the PDF by code rules; no value of the export. Status EXCEPTION, NOT RELEASED.
+# Side files: 879163.provenance.yaml, 879163.labels.yaml
+global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/i95
+affairs:
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair
+  affair_type: postulate
+  title:
+  - text: Fonds d'aide au maintien des petits commerces et cafés du villages
+    text_language: fr
+    text_type: title
+  submission:
+    global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/submission
+    sponsorship:
+    - actor:
+        global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/actor/sponsor-1
+        name:
+        - text: Tristan
+          text_language: fr
+      sponsor_role: sponsor
+  response_steps:
+  - global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response
+    responder:
+      global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/actor/responder
+      name:
+      - text: Conseil municipal
+        text_language: fr
+    texts:
+    - text: <p>En séance du 18 avril, le Conseil municipal a pris connaissance du postulat déposé auprès du bureau par Mme Tristan et Mme. Heinis concernant la constitution d'un fonds d'aide au maintien des petits commerces et cafés dans les villages.</p><p>Le Conseil a demandé à la commission « Finances et gestion » de préaviser le dossier pour s'assurer de la faisabilité juridique, financière et opérationnelle des démarches proposées. En amont de l'entrée en matière, le Conseil municipal porte à la connaissance des membres du Conseil général</p><h2>Commerces de proximité</h2><p>L'importance du maintien des commerces de proximité dans les villages de montagne ne relève d'aucune contestation. Les magasins sont des lieux d'échanges de produits et surtout d'échanges humains indéniables. Ils jouent ainsi un rôle social avéré.</p><h2>Bases légales</h2><p>Ces dernières années, la Commune a été approchée à quelques reprises pour des demandes de soutiens financiers. Malheureusement, sans bases légales, il n'est pas possible d'octroyer des aides qui les justifieraient. L'interrogation réside dans les limites du champ d'application de ces aides. Aussi, pourquoi tels secteurs privés devraient être soutenus par la Commune et pas d'autres ?</p><h2>Prochaines étapes</h2><p>La création d'un fonds nécessiterait donc un nouveau règlement. Avant d'en arriver là, et pour respecter la volonté des dépositaires du postulat - s'il est accepté par le Conseil général - l'Administration devrait mandater un bureau pour l'accompagner dans la réflexion avec l'appui du nouveau délégué à la promotion économique. L'étude qui résulterait du postulat permettrait de se doter d'un éventuel règlement.</p>
+      text_language: fr
+      text_type: response
+    - text: <p>Saluant la démarche proposée, le Conseil municipal préavise favorablement ce postulat et recommande aux membres du Conseil général de l'approuver.</p>
+      text_language: fr
+      text_type: recommendation

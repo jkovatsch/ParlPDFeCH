@@ -1,0 +1,4200 @@
+{
+ "schema": "parlpdfech-site-view/3",
+ "record_id": "s-26171",
+ "doc_id": "26171",
+ "run": {
+  "origin": "stored",
+  "mode": "auto",
+  "converter_mode": "cascade",
+  "apertus": "stored",
+  "profile": "native",
+  "status": "EXCEPTION, NOT RELEASED",
+  "record_status": "EXCEPTION (process rule 10); NOT RELEASED",
+  "human_checked": false,
+  "in_sample": true,
+  "valid": true,
+  "generated_at": "2026-10-15T16:28:03Z",
+  "seconds": {
+   "read_pdf": 0,
+   "lines": 0,
+   "rules": 0.163,
+   "apertus": 4.679,
+   "write": 7.217,
+   "check": 1.06,
+   "total": 13.167
+  },
+  "candidate": "B1-S (addendum D)",
+  "model": "apertus-v1.5-8b-text-bf16:c10cd28db5bd3adf6043a5047a1435dedc5c3e55c45d5abc2ca82baf2a7786c3"
+ },
+ "notices": [
+  {
+   "code": "proposal",
+   "params": {}
+  },
+  {
+   "code": "no_human_check",
+   "params": {}
+  },
+  {
+   "code": "in_sample_heads",
+   "params": {}
+  },
+  {
+   "code": "stored_apertus",
+   "params": {}
+  },
+  {
+   "code": "values_from_pdf",
+   "params": {}
+  },
+  {
+   "code": "values_measured",
+   "params": {}
+  },
+  {
+   "code": "cascade_selection",
+   "params": {}
+  },
+  {
+   "code": "addressee_candidate",
+   "params": {}
+  },
+  {
+   "code": "shacl_not_run",
+   "params": {}
+  }
+ ],
+ "head_values": {
+  "source": "pdf",
+  "state": "pdf",
+  "cross_check": true,
+  "probabilities_measured": true,
+  "document_kind": "proposal",
+  "cascade": {
+   "version": "m11-cascade-2",
+   "reader": "m11-values-cascade-4",
+   "kind": "proposal",
+   "kind_from": "rule_chain",
+   "kind_rule": "R2",
+   "rule_chain_id": "P1",
+   "kind_facts": null,
+   "affair_type": "interpellation",
+   "steps": [
+    {
+     "step": "submission",
+     "applies": true,
+     "rules": [
+      "R18",
+      "R25"
+     ]
+    },
+    {
+     "step": "response",
+     "applies": false,
+     "rules": [
+      "R18",
+      "R25",
+      "R31"
+     ]
+    }
+   ],
+   "entries": [
+    {
+     "field": "affair_type",
+     "slot": "Affair.affair_type",
+     "group": "affair",
+     "state": "read_from_pdf",
+     "searched": true,
+     "rules": [
+      "R3",
+      "R4",
+      "R5",
+      "R6"
+     ],
+     "reason": "value_read",
+     "label_id": "pdf-affair_type"
+    },
+    {
+     "field": "title",
+     "slot": "Affair.title",
+     "group": "affair",
+     "state": "read_from_pdf",
+     "searched": true,
+     "rules": [
+      "R43"
+     ],
+     "reason": "value_read",
+     "label_id": "pdf-title"
+    },
+    {
+     "field": "affair_number",
+     "slot": "Affair.affair_number",
+     "group": "affair",
+     "state": "read_from_pdf",
+     "searched": true,
+     "rules": [
+      "R26",
+      "R6"
+     ],
+     "reason": "value_read",
+     "label_id": "pdf-affair_number"
+    },
+    {
+     "field": "submission_date",
+     "slot": "Submission.submission_date",
+     "group": "submission",
+     "state": "not_found_in_pdf",
+     "searched": true,
+     "rules": [
+      "R18",
+      "R25",
+      "R39"
+     ],
+     "reason": "no_candidate",
+     "label_id": null
+    },
+    {
+     "field": "sponsor",
+     "slot": "Submission.sponsorship",
+     "group": "submission",
+     "state": "read_from_pdf",
+     "searched": true,
+     "rules": [
+      "R18",
+      "R25",
+      "R30",
+      "R38"
+     ],
+     "reason": "value_read",
+     "label_id": "pdf-sponsor"
+    },
+    {
+     "field": "response_date",
+     "slot": "ResponseStep.date_end_actual",
+     "group": "response",
+     "state": "not_searched",
+     "searched": false,
+     "rules": [
+      "R18",
+      "R25",
+      "R31"
+     ],
+     "reason": "not_in_this_document_type",
+     "label_id": null
+    },
+    {
+     "field": "responder",
+     "slot": "ResponseStep.responder",
+     "group": "response",
+     "state": "addressee_candidate",
+     "searched": false,
+     "rules": [
+      "R18",
+      "R25",
+      "R31",
+      "V3"
+     ],
+     "reason": "not_in_this_document_type",
+     "label_id": "candidate-responder"
+    }
+   ],
+   "texts": [
+    {
+     "step": "submission",
+     "slot": "Submission.texts",
+     "applies": true,
+     "cut": false,
+     "rules": [
+      "R18",
+      "R25",
+      "R30",
+      "R43"
+     ],
+     "blocks": 1,
+     "not_written": 0
+    },
+    {
+     "step": "response",
+     "slot": "ResponseStep.texts",
+     "applies": false,
+     "cut": true,
+     "rules": [
+      "R18",
+      "R25",
+      "R31"
+     ],
+     "blocks": 0,
+     "not_written": 0
+    }
+   ],
+   "text_blocks_not_written": 0,
+   "register_only": 16
+  },
+  "floor": {
+   "threshold": 0.5,
+   "not_written": []
+  },
+  "addressee_candidates": [
+   "responder"
+  ],
+  "response_signs": {
+   "responder_candidates": 0,
+   "responder_tiers": [],
+   "text_blocks": 0
+  },
+  "i95_gaps": [],
+  "fields_not_read": [],
+  "counts": {
+   "fields": 7,
+   "read_from_pdf": 4,
+   "not_found_in_pdf": 1,
+   "not_in_this_document_type": 2,
+   "weak_candidates": 0,
+   "addressee_candidates": 1,
+   "certain": 1,
+   "unsure": 3,
+   "export_check": {
+    "equal_to_export": 3,
+    "differs_from_export": 0,
+    "no_export_value": 0,
+    "not_compared": 1
+   }
+  },
+  "slot_counts": {
+   "read_from_pdf": 6,
+   "not_found_in_pdf": 22,
+   "not_in_this_document_type": 8,
+   "register_only": 16
+  }
+ },
+ "values": [
+  {
+   "field": "affair_number",
+   "slot": "Affair.affair_number",
+   "name_key": "value.affair_number",
+   "written": true,
+   "candidate": null,
+   "value_printed": "19.5497",
+   "value": "19.5497",
+   "value_form": "printed",
+   "differs_from_printed": false,
+   "comparison_value": "19.5497",
+   "probability": 0.875,
+   "value_status": "unsure",
+   "measured": true,
+   "tier_probability": 0.875,
+   "probability_source": "all_folds",
+   "in_sample": true,
+   "tier": "number_docpart_last_line",
+   "rule_id": "m11_values_type_number.read_affair_number",
+   "normalisation_rule": "norm_text",
+   "page": 1,
+   "last_page": 1,
+   "char_start": 2545,
+   "char_end": 2552,
+   "block_id": "B13",
+   "atom_ids": [
+    "B13.1"
+   ],
+   "spans": [
+    {
+     "atom_id": "B13.1",
+     "start": 0,
+     "end": 7
+    }
+   ],
+   "export_check": "equal_to_export",
+   "export_value": "19.5497",
+   "export_match": "exact",
+   "label_id": "pdf-affair_number",
+   "calibration_id": "value.affair_number.number_docpart_last_line",
+   "instance_path": "affairs[0].affair_number"
+  },
+  {
+   "field": "affair_type",
+   "slot": "Affair.affair_type",
+   "name_key": "value.affair_type",
+   "written": true,
+   "candidate": null,
+   "value_printed": "Interpellation",
+   "value": "interpellation",
+   "value_form": "list_value",
+   "differs_from_printed": true,
+   "comparison_value": "interpellation",
+   "probability": 0.9644,
+   "value_status": "certain",
+   "measured": true,
+   "tier_probability": 0.964372,
+   "probability_source": "all_folds",
+   "in_sample": true,
+   "tier": "type_line_start",
+   "rule_id": "m11_values_type_number.read_affair_type",
+   "normalisation_rule": "type_word_to_list_value",
+   "page": 1,
+   "last_page": 1,
+   "char_start": 0,
+   "char_end": 14,
+   "block_id": "B1",
+   "atom_ids": [
+    "B1.1"
+   ],
+   "spans": [
+    {
+     "atom_id": "B1.1",
+     "start": 0,
+     "end": 14
+    }
+   ],
+   "export_check": "equal_to_export",
+   "export_value": "interpellation",
+   "export_match": "exact",
+   "label_id": "pdf-affair_type",
+   "calibration_id": "value.affair_type.type_line_start",
+   "instance_path": "affairs[0].affair_type"
+  },
+  {
+   "field": "title",
+   "slot": "Affair.title",
+   "name_key": "value.title",
+   "written": true,
+   "candidate": null,
+   "value_printed": "der OECD-Steuerreform und den Folgen für den Kanton Basel-\nStadt",
+   "value": "der OECD-Steuerreform und den Folgen für den Kanton Basel-Stadt",
+   "value_form": "printed",
+   "differs_from_printed": true,
+   "comparison_value": "der OECD-Steuerreform und den Folgen für den Kanton Basel- Stadt",
+   "probability": 0.8156,
+   "value_status": "unsure",
+   "measured": true,
+   "tier_probability": 0.815615,
+   "probability_source": "all_folds",
+   "in_sample": true,
+   "tier": "type_cue",
+   "rule_id": "m11_values_title.read_title",
+   "normalisation_rule": "norm_text_one_line",
+   "page": 1,
+   "last_page": 1,
+   "char_start": 51,
+   "char_end": 115,
+   "block_id": "B2",
+   "atom_ids": [
+    "B2.1",
+    "B2.2"
+   ],
+   "spans": [
+    {
+     "atom_id": "B2.1",
+     "start": 11,
+     "end": 69
+    },
+    {
+     "atom_id": "B2.2",
+     "start": 0,
+     "end": 5
+    }
+   ],
+   "export_check": "equal_to_export",
+   "export_value": "Der OECD-Steuerreform und den Folgen für den Kanton Basel-Stadt",
+   "export_match": "after_normalisation",
+   "label_id": "pdf-title",
+   "calibration_id": "value.title.type_cue",
+   "instance_path": "affairs[0].title[0].text"
+  },
+  {
+   "field": "sponsor",
+   "slot": "Submission.sponsorship",
+   "name_key": "value.sponsor",
+   "written": true,
+   "candidate": null,
+   "value_printed": "Patricia von Falkenstein",
+   "value": "Patricia von Falkenstein",
+   "value_form": "printed",
+   "differs_from_printed": false,
+   "comparison_value": "von falkenstein",
+   "probability": 0.955,
+   "value_status": "unsure",
+   "measured": true,
+   "tier_probability": 0.955,
+   "probability_source": "all_folds",
+   "in_sample": true,
+   "tier": "signature_plain",
+   "rule_id": "m11_values_sponsor.read_sponsor",
+   "normalisation_rule": "printed_wording_one_line",
+   "page": 1,
+   "last_page": 1,
+   "char_start": 2519,
+   "char_end": 2543,
+   "block_id": "B12",
+   "atom_ids": [
+    "B12.1"
+   ],
+   "spans": [
+    {
+     "atom_id": "B12.1",
+     "start": 0,
+     "end": 24
+    }
+   ],
+   "export_check": "not_compared",
+   "export_value": null,
+   "export_match": null,
+   "label_id": "pdf-sponsor",
+   "calibration_id": "value.first_author.signature_plain",
+   "instance_path": "affairs[0].submission.sponsorship[0].actor.name[0].text"
+  },
+  {
+   "field": "responder",
+   "slot": "ResponseStep.responder",
+   "name_key": "value.responder",
+   "written": false,
+   "candidate": "addressee",
+   "value_printed": "Regierungsrat",
+   "value": "Regierungsrat",
+   "value_form": "printed",
+   "differs_from_printed": false,
+   "comparison_value": "Regierungsrat",
+   "probability": 0.7727,
+   "value_status": "unsure",
+   "measured": true,
+   "tier_probability": 0.772727,
+   "probability_source": null,
+   "in_sample": false,
+   "tier": "rsp_addressee_cue",
+   "rule_id": "m11_values_dates_responder.read_responder",
+   "normalisation_rule": "printed_wording_one_line",
+   "page": 1,
+   "last_page": 1,
+   "char_start": 1992,
+   "char_end": 2005,
+   "block_id": "B9",
+   "atom_ids": [
+    "B9.1"
+   ],
+   "spans": [
+    {
+     "atom_id": "B9.1",
+     "start": 11,
+     "end": 24
+    }
+   ],
+   "export_check": "not_compared",
+   "export_value": null,
+   "export_match": null,
+   "label_id": "candidate-responder",
+   "calibration_id": "value.responder_name.rsp_addressee_cue",
+   "instance_path": null
+  }
+ ],
+ "slots": [
+  {
+   "slot": "Affair.affair_number",
+   "state": "read_from_pdf",
+   "reason": "value_read",
+   "field": "affair_number",
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": "pdf-affair_number",
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.affair_number"
+  },
+  {
+   "slot": "Affair.affair_type",
+   "state": "read_from_pdf",
+   "reason": "value_read",
+   "field": "affair_type",
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": "pdf-affair_type",
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.affair_type"
+  },
+  {
+   "slot": "Affair.title",
+   "state": "read_from_pdf",
+   "reason": "value_read",
+   "field": "title",
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": "pdf-title",
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.title"
+  },
+  {
+   "slot": "Affair.linked_affairs",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.linked_affairs"
+  },
+  {
+   "slot": "Affair.submission",
+   "state": "read_from_pdf",
+   "reason": "step_written",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.submission"
+  },
+  {
+   "slot": "Affair.submission_validation_steps",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.submission_validation_steps"
+  },
+  {
+   "slot": "Affair.assignment_steps",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.assignment_steps"
+  },
+  {
+   "slot": "Affair.response_steps",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": null,
+   "result": "not_searched",
+   "kind": "proposal",
+   "cascade_rules": [
+    "R18",
+    "R25",
+    "R31"
+   ],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.response_steps"
+  },
+  {
+   "slot": "Affair.committee_deliberation_steps",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.committee_deliberation_steps"
+  },
+  {
+   "slot": "Affair.plenary_debates",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.plenary_debates"
+  },
+  {
+   "slot": "Affair.lifecycle_flags",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.lifecycle_flags"
+  },
+  {
+   "slot": "Affair.current_state",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.current_state"
+  },
+  {
+   "slot": "Affair.procedure_states",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.procedure_states"
+  },
+  {
+   "slot": "Affair.local_id",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.local_id"
+  },
+  {
+   "slot": "Affair.global_uri",
+   "state": "register_only",
+   "reason": "minted_iri",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.global_uri"
+  },
+  {
+   "slot": "Affair.wikidata_uri",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.wikidata_uri"
+  },
+  {
+   "slot": "Affair.date_created",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.date_created"
+  },
+  {
+   "slot": "Affair.datetime_created",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.datetime_created"
+  },
+  {
+   "slot": "Affair.date_modified",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.date_modified"
+  },
+  {
+   "slot": "Affair.datetime_modified",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Affair.datetime_modified"
+  },
+  {
+   "slot": "Submission.submission_date",
+   "state": "not_found_in_pdf",
+   "reason": "no_candidate",
+   "field": "submission_date",
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": "submission_date",
+   "export_has_value": true,
+   "name_key": "pslot.Submission.submission_date"
+  },
+  {
+   "slot": "Submission.sponsorship",
+   "state": "read_from_pdf",
+   "reason": "value_read",
+   "field": "sponsor",
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": "pdf-sponsor",
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.sponsorship"
+  },
+  {
+   "slot": "Submission.texts",
+   "state": "read_from_pdf",
+   "reason": "text_blocks",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.texts"
+  },
+  {
+   "slot": "Submission.withdrawn_date",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.withdrawn_date"
+  },
+  {
+   "slot": "Submission.reasoning_in_council",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.reasoning_in_council"
+  },
+  {
+   "slot": "Submission.local_id",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.local_id"
+  },
+  {
+   "slot": "Submission.global_uri",
+   "state": "register_only",
+   "reason": "minted_iri",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.global_uri"
+  },
+  {
+   "slot": "Submission.wikidata_uri",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.wikidata_uri"
+  },
+  {
+   "slot": "Submission.date_begin_actual",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.date_begin_actual"
+  },
+  {
+   "slot": "Submission.datetime_begin_actual",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.datetime_begin_actual"
+  },
+  {
+   "slot": "Submission.date_begin_planned",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.date_begin_planned"
+  },
+  {
+   "slot": "Submission.datetime_begin_planned",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.datetime_begin_planned"
+  },
+  {
+   "slot": "Submission.date_end_actual",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.date_end_actual"
+  },
+  {
+   "slot": "Submission.datetime_end_actual",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.datetime_end_actual"
+  },
+  {
+   "slot": "Submission.date_end_planned",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.date_end_planned"
+  },
+  {
+   "slot": "Submission.datetime_end_planned",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.datetime_end_planned"
+  },
+  {
+   "slot": "Submission.remark",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.Submission.remark"
+  },
+  {
+   "slot": "ResponseStep.responder",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": "responder",
+   "result": "not_searched",
+   "kind": "proposal",
+   "cascade_rules": [
+    "R18",
+    "R25",
+    "R31",
+    "V3"
+   ],
+   "label_id": "candidate-responder",
+   "gap_id": "responder",
+   "export_has_value": true,
+   "name_key": "pslot.ResponseStep.responder"
+  },
+  {
+   "slot": "ResponseStep.recommendation",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.recommendation"
+  },
+  {
+   "slot": "ResponseStep.texts",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": null,
+   "result": "not_searched",
+   "kind": "proposal",
+   "cascade_rules": [
+    "R18",
+    "R25",
+    "R31"
+   ],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.texts"
+  },
+  {
+   "slot": "ResponseStep.local_id",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.local_id"
+  },
+  {
+   "slot": "ResponseStep.global_uri",
+   "state": "register_only",
+   "reason": "minted_iri",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.global_uri"
+  },
+  {
+   "slot": "ResponseStep.wikidata_uri",
+   "state": "register_only",
+   "reason": "register_only",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.wikidata_uri"
+  },
+  {
+   "slot": "ResponseStep.date_begin_actual",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.date_begin_actual"
+  },
+  {
+   "slot": "ResponseStep.datetime_begin_actual",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.datetime_begin_actual"
+  },
+  {
+   "slot": "ResponseStep.date_begin_planned",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.date_begin_planned"
+  },
+  {
+   "slot": "ResponseStep.datetime_begin_planned",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.datetime_begin_planned"
+  },
+  {
+   "slot": "ResponseStep.date_end_actual",
+   "state": "not_in_this_document_type",
+   "reason": "not_in_this_document_type",
+   "field": "response_date",
+   "result": "not_searched",
+   "kind": "proposal",
+   "cascade_rules": [
+    "R18",
+    "R25",
+    "R31"
+   ],
+   "label_id": null,
+   "gap_id": "response_date",
+   "export_has_value": true,
+   "name_key": "pslot.ResponseStep.date_end_actual"
+  },
+  {
+   "slot": "ResponseStep.datetime_end_actual",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.datetime_end_actual"
+  },
+  {
+   "slot": "ResponseStep.date_end_planned",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.date_end_planned"
+  },
+  {
+   "slot": "ResponseStep.datetime_end_planned",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.datetime_end_planned"
+  },
+  {
+   "slot": "ResponseStep.remark",
+   "state": "not_found_in_pdf",
+   "reason": "no_rule_searched",
+   "field": null,
+   "result": null,
+   "kind": null,
+   "cascade_rules": [],
+   "label_id": null,
+   "gap_id": null,
+   "export_has_value": null,
+   "name_key": "pslot.ResponseStep.remark"
+  }
+ ],
+ "document": {
+  "source_iri": "https://api.openparldata.ch/v1/docs/26171",
+  "record_iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171",
+  "container_iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/i95",
+  "named_graphs": {
+   "ech-0295": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/ech-0295",
+   "provenance": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/provenance",
+   "atoms": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/atoms",
+   "labels": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/labels"
+  },
+  "pdf_sha256": "f2e5fe4ae6747a886d93bc753795611117fe11b4d23f4ae30d53866fcedb1493",
+  "page_count": 1,
+  "language": "de",
+  "parliament": "BS",
+  "parliament_name": "Basel-Stadt",
+  "title": "der OECD-Steuerreform und den Folgen für den Kanton Basel-Stadt",
+  "affair_number": "19.5497",
+  "affair_type": "interpellation",
+  "has_export": true,
+  "conformance": "i95",
+  "head": [
+   {
+    "instance_path": "global_uri",
+    "ech_slot": "Container.global_uri",
+    "value": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/i95",
+    "derivation": "identifier_minted",
+    "origin": "identifier",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": "value-global_uri"
+   },
+   {
+    "instance_path": "affairs[0].global_uri",
+    "ech_slot": "Interpellation.global_uri",
+    "value": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair",
+    "derivation": "identifier_minted",
+    "origin": "identifier",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": "value-affairs-0-global_uri"
+   },
+   {
+    "instance_path": "affairs[0].affair_number",
+    "ech_slot": "Interpellation.affair_number",
+    "value": "19.5497",
+    "derivation": "extracted_from_pdf_by_rule",
+    "origin": "pdf_rule",
+    "pdf_consistency": "confirmed",
+    "mapping_match": "not_applicable",
+    "atom_ids": [
+     "B13.1"
+    ],
+    "label_id": "pdf-affair_number"
+   },
+   {
+    "instance_path": "affairs[0].affair_type",
+    "ech_slot": "Interpellation.affair_type",
+    "value": "interpellation",
+    "derivation": "extracted_from_pdf_by_rule",
+    "origin": "pdf_rule",
+    "pdf_consistency": "confirmed",
+    "mapping_match": "exact",
+    "atom_ids": [
+     "B1.1"
+    ],
+    "label_id": "pdf-affair_type"
+   },
+   {
+    "instance_path": "affairs[0].title[0].text",
+    "ech_slot": "Interpellation.title.text",
+    "value": "der OECD-Steuerreform und den Folgen für den Kanton Basel-Stadt",
+    "derivation": "extracted_from_pdf_by_rule",
+    "origin": "pdf_rule",
+    "pdf_consistency": "confirmed",
+    "mapping_match": "not_applicable",
+    "atom_ids": [
+     "B2.1",
+     "B2.2"
+    ],
+    "label_id": "pdf-title"
+   },
+   {
+    "instance_path": "affairs[0].title[0].text_language",
+    "ech_slot": "Interpellation.title.text_language",
+    "value": "de",
+    "derivation": "detected_by_rule",
+    "origin": "code_rule",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": null
+   },
+   {
+    "instance_path": "affairs[0].title[0].text_type",
+    "ech_slot": "Interpellation.title.text_type",
+    "value": "title",
+    "derivation": "fixed_by_schema",
+    "origin": "schema",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": "value-affairs-0-title-0-text_type"
+   },
+   {
+    "instance_path": "affairs[0].submission.global_uri",
+    "ech_slot": "Submission.global_uri",
+    "value": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair/step/submission",
+    "derivation": "identifier_minted",
+    "origin": "identifier",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": "value-affairs-0-submission-global_uri"
+   },
+   {
+    "instance_path": "affairs[0].submission.sponsorship[0].actor.global_uri",
+    "ech_slot": "Actor.global_uri",
+    "value": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/actor/sponsor-1",
+    "derivation": "identifier_minted",
+    "origin": "identifier",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": "value-affairs-0-submission-sponsorship-0-actor-global_uri"
+   },
+   {
+    "instance_path": "affairs[0].submission.sponsorship[0].actor.name[0].text",
+    "ech_slot": "Actor.name.text",
+    "value": "Patricia von Falkenstein",
+    "derivation": "extracted_from_pdf_by_rule",
+    "origin": "pdf_rule",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [
+     "B12.1"
+    ],
+    "label_id": "pdf-sponsor"
+   },
+   {
+    "instance_path": "affairs[0].submission.sponsorship[0].actor.name[0].text_language",
+    "ech_slot": "Actor.name.text_language",
+    "value": "de",
+    "derivation": "detected_by_rule",
+    "origin": "code_rule",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": null
+   },
+   {
+    "instance_path": "affairs[0].submission.sponsorship[0].sponsor_role",
+    "ech_slot": "Submission.sponsorship.sponsor_role",
+    "value": "sponsor",
+    "derivation": "fixed_by_schema",
+    "origin": "schema",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": "value-affairs-0-submission-sponsorship-0-sponsor_role"
+   },
+   {
+    "instance_path": "affairs[0].submission.texts[0].text",
+    "ech_slot": "Submission.texts.text",
+    "value": "<p>Die OECD plant eine Steuerreform. Teil dieser Reform soll auch eine generelle Neuverteilung der Gewinnsteuern zwischen den Sitzländern der Unternehmen und den Absatzländern sein. Die Besteuerung soll neu auch dort erfolgen, wo der Gewinn erzielt wird. Die OECD und die G20-Staaten wollen sich im Januar 2020 auf die Eckwerte einigen, bis Ende des nächsten Jahres soll die Reform zur Gewinnbesteuerung von international tätigen Unternehmen abgeschlossen sein. Verlierer dieser Umverteilung könnten Länder mit starkem Export sein, die zahlreiche Konzernsitze aufweisen, also auch die Schweiz.</p><p>In unserem Kanton haben einige exportorientierte international bedeutende Firmen ihren Sitz. Deren Steuerzahlungen haben in den letzten Jahren dazu geführt, dass der Kanton zum Teil sehr hohe Überschüsse in seiner Jahresrechnung ausweisen konnte. Eine Neuregelung wie sie offenbar der OECD vorschwebt, könnte gravierende Auswirkungen auf die Steuereinnahmen der Schweiz und besonders auch auf die Steuereinnahmen des Kantons Basel-Stadt haben. Es gilt - im Rahmen der beschränkten Möglichkeiten unseres Kantons - über den Bund Einfluss zu nehmen, um zu verhindern, dass die Steuereinahmen von diesen Firmen in Zukunft geringer ausfallen werden. Die Folgen für Basel-Stadt wären verheerend, das sehr hohe Niveau der staatlichen Leistungen könnte nicht gehalten werden, massive Ausgabenreduktionen müssten erfolgen.</p><p>In diesem Zusammenhang bitte ich den Regierungsrat um die Beantwortung der folgenden Fragen:</p><ol><li>Teilt der Regierungsrat die Befürchtung, wonach die Umsetzung dieser Ideen zu massiven Steuerausfällen für Basel-Stadt führen wird?</li><li>Hat der Regierungsrat eine Stellungnahme zu den Vorhaben ausgearbeitet?</li><li>Ist der Regierungsrat beim Bundesrat vorstellig geworden, um die Haltung des Kantons Basel-Stadt gegen solche Änderungen zum Ausdruck zu bringen?</li><li>Ist der Regierungsrat bereit, in Zusammenarbeit mit den betroffenen Unternehmen im Kanton Basel-Stadt gegenüber dem Bund die Basler Interessen zu vertreten?</li><li>Ist der Regierungsrat bereit, dem Grossen Rat über die Weiterentwicklung des OECD-Vorhabens und über die Aktivitäten der Schweiz zur Verhinderung von erheblichen Einnahmen-Verlusten zu berichten?</li><li>Teilt der Regierungsrat die Meinung, dass bei tatsächlich resultierenden Steuereinnahmen-Verlusten durch diese Reform die Kantonsausgaben massiv reduziert werden müssten?</li></ol>",
+    "derivation": "extracted_from_pdf",
+    "origin": "pdf_copy",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": null
+   },
+   {
+    "instance_path": "affairs[0].submission.texts[0].text_language",
+    "ech_slot": "Submission.texts.text_language",
+    "value": "de",
+    "derivation": "detected_by_rule",
+    "origin": "code_rule",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": null
+   },
+   {
+    "instance_path": "affairs[0].submission.texts[0].text_type",
+    "ech_slot": "Submission.texts.text_type",
+    "value": "submitted",
+    "derivation": "fixed_by_schema",
+    "origin": "schema",
+    "pdf_consistency": "not_checked",
+    "mapping_match": "not_applicable",
+    "atom_ids": [],
+    "label_id": null
+   }
+  ],
+  "text_blocks": [
+   {
+    "id": "textblock-1",
+    "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/textblock/1",
+    "ech_slot": "Submission.texts",
+    "text_type": "submitted",
+    "instance_path": "affairs[0].submission.texts[0]",
+    "block_ids": [
+     "B3",
+     "B4",
+     "B5",
+     "B6",
+     "B7",
+     "B8",
+     "B9",
+     "B10",
+     "B11"
+    ],
+    "atom_ids": [
+     "B3.1",
+     "B3.2",
+     "B3.3",
+     "B3.4",
+     "B3.5",
+     "B3.6",
+     "B3.7",
+     "B4.1",
+     "B4.2",
+     "B4.3",
+     "B4.4",
+     "B4.5",
+     "B4.6",
+     "B4.7",
+     "B4.8",
+     "B4.9",
+     "B4.10",
+     "B5.1",
+     "B5.2",
+     "B6.1",
+     "B6.2",
+     "B7.1",
+     "B8.1",
+     "B8.2",
+     "B9.1",
+     "B9.2",
+     "B10.1",
+     "B10.2",
+     "B10.3",
+     "B11.1",
+     "B11.2"
+    ],
+    "char_count": 2447,
+    "extent_value_status": "unsure",
+    "label_id": null
+   }
+  ]
+ },
+ "pages": [
+  {
+   "number": 1,
+   "width": 595.22,
+   "height": 842.0,
+   "text_source": "pdf",
+   "lines": [
+    {
+     "atom_id": "B1.1",
+     "block_id": "B1",
+     "frame": [
+      65.76,
+      72.96,
+      266.36,
+      83.32
+     ],
+     "frame_source": "text_layer",
+     "text": "Interpellation Nr. 121 (November 2019)",
+     "char_start": 0,
+     "char_end": 38,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B2.1",
+     "block_id": "B2",
+     "frame": [
+      65.76,
+      85.68,
+      425.96,
+      96.04
+     ],
+     "frame_source": "text_layer",
+     "text": "betreffend der OECD-Steuerreform und den Folgen für den Kanton Basel-",
+     "char_start": 40,
+     "char_end": 109,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B2.2",
+     "block_id": "B2",
+     "frame": [
+      65.76,
+      98.4,
+      91.51,
+      108.76
+     ],
+     "frame_source": "text_layer",
+     "text": "Stadt",
+     "char_start": 110,
+     "char_end": 115,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B3.1",
+     "block_id": "B3",
+     "frame": [
+      62.4,
+      114.0,
+      536.36,
+      124.36
+     ],
+     "frame_source": "text_layer",
+     "text": "Die OECD plant eine Steuerreform. Teil dieser Reform soll auch eine generelle Neuverteilung der",
+     "char_start": 117,
+     "char_end": 212,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B3.2",
+     "block_id": "B3",
+     "frame": [
+      62.4,
+      126.6,
+      515.06,
+      136.96
+     ],
+     "frame_source": "text_layer",
+     "text": "Gewinnsteuern zwischen den Sitzländern der Unternehmen und den Absatzländern sein. Die",
+     "char_start": 213,
+     "char_end": 299,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B3.3",
+     "block_id": "B3",
+     "frame": [
+      62.4,
+      139.32,
+      516.8,
+      149.68
+     ],
+     "frame_source": "text_layer",
+     "text": "Besteuerung soll neu auch dort erfolgen, wo der Gewinn erzielt wird. Die OECD und die G20-",
+     "char_start": 300,
+     "char_end": 390,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B3.4",
+     "block_id": "B3",
+     "frame": [
+      62.4,
+      151.92,
+      532.01,
+      162.28
+     ],
+     "frame_source": "text_layer",
+     "text": "Staaten wollen sich im Januar 2020 auf die Eckwerte einigen, bis Ende des nächsten Jahres soll",
+     "char_start": 391,
+     "char_end": 485,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B3.5",
+     "block_id": "B3",
+     "frame": [
+      62.4,
+      164.64,
+      528.43,
+      175.0
+     ],
+     "frame_source": "text_layer",
+     "text": "die Reform zur Gewinnbesteuerung von international tätigen Unternehmen abgeschlossen sein.",
+     "char_start": 486,
+     "char_end": 576,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B3.6",
+     "block_id": "B3",
+     "frame": [
+      62.4,
+      177.24,
+      476.3,
+      187.6
+     ],
+     "frame_source": "text_layer",
+     "text": "Verlierer dieser Umverteilung könnten Länder mit starkem Export sein, die zahlreiche",
+     "char_start": 577,
+     "char_end": 661,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B3.7",
+     "block_id": "B3",
+     "frame": [
+      62.4,
+      189.96,
+      296.47,
+      200.32
+     ],
+     "frame_source": "text_layer",
+     "text": "Konzernsitze aufweisen, also auch die Schweiz.",
+     "char_start": 662,
+     "char_end": 708,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B4.1",
+     "block_id": "B4",
+     "frame": [
+      62.4,
+      208.56,
+      517.39,
+      218.92
+     ],
+     "frame_source": "text_layer",
+     "text": "In unserem Kanton haben einige exportorientierte international bedeutende Firmen ihren Sitz.",
+     "char_start": 710,
+     "char_end": 802,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B4.2",
+     "block_id": "B4",
+     "frame": [
+      62.4,
+      221.16,
+      537.08,
+      231.52
+     ],
+     "frame_source": "text_layer",
+     "text": "Deren Steuerzahlungen haben in den letzten Jahren dazu geführt, dass der Kanton zum Teil sehr",
+     "char_start": 803,
+     "char_end": 896,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B4.3",
+     "block_id": "B4",
+     "frame": [
+      62.4,
+      233.88,
+      502.7,
+      244.24
+     ],
+     "frame_source": "text_layer",
+     "text": "hohe Überschüsse in seiner Jahresrechnung ausweisen konnte. Eine Neuregelung wie sie",
+     "char_start": 897,
+     "char_end": 981,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B4.4",
+     "block_id": "B4",
+     "frame": [
+      62.4,
+      246.48,
+      532.64,
+      256.84
+     ],
+     "frame_source": "text_layer",
+     "text": "offenbar der OECD vorschwebt, könnte gravierende Auswirkungen auf die Steuereinnahmen der",
+     "char_start": 982,
+     "char_end": 1071,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B4.5",
+     "block_id": "B4",
+     "frame": [
+      62.4,
+      259.2,
+      532.76,
+      269.56
+     ],
+     "frame_source": "text_layer",
+     "text": "Schweiz und besonders auch auf die Steuereinnahmen des Kantons Basel-Stadt haben. Es gilt -",
+     "char_start": 1072,
+     "char_end": 1163,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B4.6",
+     "block_id": "B4",
+     "frame": [
+      62.4,
+      271.8,
+      500.9,
+      282.16
+     ],
+     "frame_source": "text_layer",
+     "text": "im Rahmen der beschränkten Möglichkeiten unseres Kantons - über den Bund Einfluss zu",
+     "char_start": 1164,
+     "char_end": 1248,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B4.7",
+     "block_id": "B4",
+     "frame": [
+      62.4,
+      284.4,
+      512.6,
+      294.76
+     ],
+     "frame_source": "text_layer",
+     "text": "nehmen, um zu verhindern, dass die Steuereinahmen von diesen Firmen in Zukunft geringer",
+     "char_start": 1249,
+     "char_end": 1336,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B4.8",
+     "block_id": "B4",
+     "frame": [
+      62.4,
+      297.12,
+      504.44,
+      307.48
+     ],
+     "frame_source": "text_layer",
+     "text": "ausfallen werden. Die Folgen für Basel-Stadt wären verheerend, das sehr hohe Niveau der",
+     "char_start": 1337,
+     "char_end": 1424,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B4.9",
+     "block_id": "B4",
+     "frame": [
+      62.4,
+      309.72,
+      519.98,
+      320.08
+     ],
+     "frame_source": "text_layer",
+     "text": "staatlichen Leistungen könnte nicht gehalten werden, massive Ausgabenreduktionen müssten",
+     "char_start": 1425,
+     "char_end": 1513,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B4.10",
+     "block_id": "B4",
+     "frame": [
+      62.4,
+      322.44,
+      105.31,
+      332.8
+     ],
+     "frame_source": "text_layer",
+     "text": "erfolgen.",
+     "char_start": 1514,
+     "char_end": 1523,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B5.1",
+     "block_id": "B5",
+     "frame": [
+      62.4,
+      341.04,
+      504.62,
+      351.4
+     ],
+     "frame_source": "text_layer",
+     "text": "In diesem Zusammenhang bitte ich den Regierungsrat um die Beantwortung der folgenden",
+     "char_start": 1525,
+     "char_end": 1609,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B5.2",
+     "block_id": "B5",
+     "frame": [
+      62.4,
+      353.64,
+      100.39,
+      364.0
+     ],
+     "frame_source": "text_layer",
+     "text": "Fragen:",
+     "char_start": 1610,
+     "char_end": 1617,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B6.1",
+     "block_id": "B6",
+     "frame": [
+      62.4,
+      372.36,
+      531.14,
+      382.72
+     ],
+     "frame_source": "text_layer",
+     "text": "1. Teilt der Regierungsrat die Befürchtung, wonach die Umsetzung dieser Ideen zu massiven",
+     "char_start": 1619,
+     "char_end": 1708,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B6.2",
+     "block_id": "B6",
+     "frame": [
+      90.72,
+      384.96,
+      306.62,
+      395.32
+     ],
+     "frame_source": "text_layer",
+     "text": "Steuerausfällen für Basel-Stadt führen wird?",
+     "char_start": 1709,
+     "char_end": 1753,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B7.1",
+     "block_id": "B7",
+     "frame": [
+      62.4,
+      403.68,
+      462.14,
+      414.04
+     ],
+     "frame_source": "text_layer",
+     "text": "2. Hat der Regierungsrat eine Stellungnahme zu den Vorhaben ausgearbeitet?",
+     "char_start": 1755,
+     "char_end": 1829,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B8.1",
+     "block_id": "B8",
+     "frame": [
+      62.4,
+      422.28,
+      515.76,
+      432.64
+     ],
+     "frame_source": "text_layer",
+     "text": "3. Ist der Regierungsrat beim Bundesrat vorstellig geworden, um die Haltung des Kantons",
+     "char_start": 1831,
+     "char_end": 1918,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B8.2",
+     "block_id": "B8",
+     "frame": [
+      90.72,
+      434.88,
+      412.58,
+      445.24
+     ],
+     "frame_source": "text_layer",
+     "text": "Basel-Stadt gegen solche Änderungen zum Ausdruck zu bringen?",
+     "char_start": 1919,
+     "char_end": 1979,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B9.1",
+     "block_id": "B9",
+     "frame": [
+      62.4,
+      453.6,
+      506.6,
+      463.96
+     ],
+     "frame_source": "text_layer",
+     "text": "4. Ist der Regierungsrat bereit, in Zusammenarbeit mit den betroffenen Unternehmen im",
+     "char_start": 1981,
+     "char_end": 2066,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B9.2",
+     "block_id": "B9",
+     "frame": [
+      90.72,
+      466.2,
+      468.02,
+      476.56
+     ],
+     "frame_source": "text_layer",
+     "text": "Kanton Basel-Stadt gegenüber dem Bund die Basler Interessen zu vertreten?",
+     "char_start": 2067,
+     "char_end": 2140,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B10.1",
+     "block_id": "B10",
+     "frame": [
+      62.4,
+      484.92,
+      510.92,
+      495.28
+     ],
+     "frame_source": "text_layer",
+     "text": "5. Ist der Regierungsrat bereit, dem Grossen Rat über die Weiterentwicklung des OECD-",
+     "char_start": 2142,
+     "char_end": 2227,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B10.2",
+     "block_id": "B10",
+     "frame": [
+      90.72,
+      497.52,
+      493.1,
+      507.88
+     ],
+     "frame_source": "text_layer",
+     "text": "Vorhabens und über die Aktivitäten der Schweiz zur Verhinderung von erheblichen",
+     "char_start": 2228,
+     "char_end": 2307,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B10.3",
+     "block_id": "B10",
+     "frame": [
+      90.72,
+      510.12,
+      265.82,
+      520.48
+     ],
+     "frame_source": "text_layer",
+     "text": "Einnahmen-Verlusten zu berichten?",
+     "char_start": 2308,
+     "char_end": 2341,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B11.1",
+     "block_id": "B11",
+     "frame": [
+      62.4,
+      528.84,
+      534.2,
+      539.2
+     ],
+     "frame_source": "text_layer",
+     "text": "6. Teilt der Regierungsrat die Meinung, dass bei tatsächlich resultierenden Steuereinnahmen-",
+     "char_start": 2343,
+     "char_end": 2435,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B11.2",
+     "block_id": "B11",
+     "frame": [
+      90.72,
+      541.44,
+      518.9,
+      551.8
+     ],
+     "frame_source": "text_layer",
+     "text": "Verlusten durch diese Reform die Kantonsausgaben massiv reduziert werden müssten?",
+     "char_start": 2436,
+     "char_end": 2517,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B12.1",
+     "block_id": "B12",
+     "frame": [
+      119.04,
+      560.16,
+      235.94,
+      570.52
+     ],
+     "frame_source": "text_layer",
+     "text": "Patricia von Falkenstein",
+     "char_start": 2519,
+     "char_end": 2543,
+     "from_ocr": false
+    },
+    {
+     "atom_id": "B13.1",
+     "block_id": "B13",
+     "frame": [
+      441.48,
+      73.56,
+      496.7,
+      83.92
+     ],
+     "frame_source": "text_layer",
+     "text": "19.5497.01",
+     "char_start": 2545,
+     "char_end": 2555,
+     "from_ocr": false
+    }
+   ],
+   "image": "/api/records/s-26171/files/page-1.png"
+  }
+ ],
+ "blocks": [
+  {
+   "id": "B1",
+   "page": 1,
+   "docling_label": "section_header",
+   "char_start": 0,
+   "char_end": 38,
+   "atom_ids": [
+    "B1.1"
+   ],
+   "text": "Interpellation Nr. 121 (November 2019)",
+   "label_id": "B1-slot"
+  },
+  {
+   "id": "B2",
+   "page": 1,
+   "docling_label": "text",
+   "char_start": 40,
+   "char_end": 115,
+   "atom_ids": [
+    "B2.1",
+    "B2.2"
+   ],
+   "text": "betreffend der OECD-Steuerreform und den Folgen für den Kanton Basel-\nStadt",
+   "label_id": "B2-slot"
+  },
+  {
+   "id": "B3",
+   "page": 1,
+   "docling_label": "text",
+   "char_start": 117,
+   "char_end": 708,
+   "atom_ids": [
+    "B3.1",
+    "B3.2",
+    "B3.3",
+    "B3.4",
+    "B3.5",
+    "B3.6",
+    "B3.7"
+   ],
+   "text": "Die OECD plant eine Steuerreform. Teil dieser Reform soll auch eine generelle Neuverteilung der\nGewinnsteuern zwischen den Sitzländern der Unternehmen und den Absatzländern sein. Die\nBesteuerung soll neu auch dort erfolgen, wo der Gewinn erzielt wird. Die OECD und die G20-\nStaaten wollen sich im Januar 2020 auf die Eckwerte einigen, bis Ende des nächsten Jahres soll\ndie Reform zur Gewinnbesteuerung von international tätigen Unternehmen abgeschlossen sein.\nVerlierer dieser Umverteilung könnten Länder mit starkem Export sein, die zahlreiche\nKonzernsitze aufweisen, also auch die Schweiz.",
+   "label_id": "B3-slot"
+  },
+  {
+   "id": "B4",
+   "page": 1,
+   "docling_label": "text",
+   "char_start": 710,
+   "char_end": 1523,
+   "atom_ids": [
+    "B4.1",
+    "B4.2",
+    "B4.3",
+    "B4.4",
+    "B4.5",
+    "B4.6",
+    "B4.7",
+    "B4.8",
+    "B4.9",
+    "B4.10"
+   ],
+   "text": "In unserem Kanton haben einige exportorientierte international bedeutende Firmen ihren Sitz.\nDeren Steuerzahlungen haben in den letzten Jahren dazu geführt, dass der Kanton zum Teil sehr\nhohe Überschüsse in seiner Jahresrechnung ausweisen konnte. Eine Neuregelung wie sie\noffenbar der OECD vorschwebt, könnte gravierende Auswirkungen auf die Steuereinnahmen der\nSchweiz und besonders auch auf die Steuereinnahmen des Kantons Basel-Stadt haben. Es gilt -\nim Rahmen der beschränkten Möglichkeiten unseres Kantons - über den Bund Einfluss zu\nnehmen, um zu verhindern, dass die Steuereinahmen von diesen Firmen in Zukunft geringer\nausfallen werden. Die Folgen für Basel-Stadt wären verheerend, das sehr hohe Niveau der\nstaatlichen Leistungen könnte nicht gehalten werden, massive Ausgabenreduktionen müssten\nerfolgen.",
+   "label_id": "B4-slot"
+  },
+  {
+   "id": "B5",
+   "page": 1,
+   "docling_label": "text",
+   "char_start": 1525,
+   "char_end": 1617,
+   "atom_ids": [
+    "B5.1",
+    "B5.2"
+   ],
+   "text": "In diesem Zusammenhang bitte ich den Regierungsrat um die Beantwortung der folgenden\nFragen:",
+   "label_id": "B5-slot"
+  },
+  {
+   "id": "B6",
+   "page": 1,
+   "docling_label": "list_item",
+   "char_start": 1619,
+   "char_end": 1753,
+   "atom_ids": [
+    "B6.1",
+    "B6.2"
+   ],
+   "text": "1. Teilt der Regierungsrat die Befürchtung, wonach die Umsetzung dieser Ideen zu massiven\nSteuerausfällen für Basel-Stadt führen wird?",
+   "label_id": "B6-slot"
+  },
+  {
+   "id": "B7",
+   "page": 1,
+   "docling_label": "list_item",
+   "char_start": 1755,
+   "char_end": 1829,
+   "atom_ids": [
+    "B7.1"
+   ],
+   "text": "2. Hat der Regierungsrat eine Stellungnahme zu den Vorhaben ausgearbeitet?",
+   "label_id": "B7-slot"
+  },
+  {
+   "id": "B8",
+   "page": 1,
+   "docling_label": "list_item",
+   "char_start": 1831,
+   "char_end": 1979,
+   "atom_ids": [
+    "B8.1",
+    "B8.2"
+   ],
+   "text": "3. Ist der Regierungsrat beim Bundesrat vorstellig geworden, um die Haltung des Kantons\nBasel-Stadt gegen solche Änderungen zum Ausdruck zu bringen?",
+   "label_id": "B8-slot"
+  },
+  {
+   "id": "B9",
+   "page": 1,
+   "docling_label": "list_item",
+   "char_start": 1981,
+   "char_end": 2140,
+   "atom_ids": [
+    "B9.1",
+    "B9.2"
+   ],
+   "text": "4. Ist der Regierungsrat bereit, in Zusammenarbeit mit den betroffenen Unternehmen im\nKanton Basel-Stadt gegenüber dem Bund die Basler Interessen zu vertreten?",
+   "label_id": "B9-slot"
+  },
+  {
+   "id": "B10",
+   "page": 1,
+   "docling_label": "list_item",
+   "char_start": 2142,
+   "char_end": 2341,
+   "atom_ids": [
+    "B10.1",
+    "B10.2",
+    "B10.3"
+   ],
+   "text": "5. Ist der Regierungsrat bereit, dem Grossen Rat über die Weiterentwicklung des OECD-\nVorhabens und über die Aktivitäten der Schweiz zur Verhinderung von erheblichen\nEinnahmen-Verlusten zu berichten?",
+   "label_id": "B10-slot"
+  },
+  {
+   "id": "B11",
+   "page": 1,
+   "docling_label": "list_item",
+   "char_start": 2343,
+   "char_end": 2517,
+   "atom_ids": [
+    "B11.1",
+    "B11.2"
+   ],
+   "text": "6. Teilt der Regierungsrat die Meinung, dass bei tatsächlich resultierenden Steuereinnahmen-\nVerlusten durch diese Reform die Kantonsausgaben massiv reduziert werden müssten?",
+   "label_id": "B11-slot"
+  },
+  {
+   "id": "B12",
+   "page": 1,
+   "docling_label": "text",
+   "char_start": 2519,
+   "char_end": 2543,
+   "atom_ids": [
+    "B12.1"
+   ],
+   "text": "Patricia von Falkenstein",
+   "label_id": "B12-slot"
+  },
+  {
+   "id": "B13",
+   "page": 1,
+   "docling_label": "text",
+   "char_start": 2545,
+   "char_end": 2555,
+   "atom_ids": [
+    "B13.1"
+   ],
+   "text": "19.5497.01",
+   "label_id": "B13-slot"
+  }
+ ],
+ "labels": [
+  {
+   "id": "d1",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/label/d1",
+   "kind": "document_text_parts",
+   "slot": "documentTextParts",
+   "predicate": "https://schema.parlpdfech.example/labels/documentTextParts",
+   "subject": "https://api.openparldata.ch/v1/docs/26171",
+   "target": {
+    "type": "document",
+    "block_id": null,
+    "atom_ids": [],
+    "page": 1,
+    "last_page": 1,
+    "char_start": 0,
+    "char_end": 2555,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "A",
+   "options": [
+    {
+     "value": "A",
+     "probability": 0.995
+    },
+    {
+     "value": "B",
+     "probability": 0.005
+    },
+    {
+     "value": "C",
+     "probability": 0.005
+    },
+    {
+     "value": "D",
+     "probability": 0.005
+    }
+   ],
+   "probability": 0.995,
+   "value_status": "certain",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "rule",
+    "group": "rule",
+    "tier": null,
+    "rule_id": "P1",
+    "head": "D1"
+   },
+   "calibration_id": "gj1-d1-verifier-platt",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "r2",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/label/r2",
+   "kind": "executive_response",
+   "slot": "executiveResponse",
+   "predicate": "https://schema.parlpdfech.example/labels/executiveResponse",
+   "subject": "https://api.openparldata.ch/v1/docs/26171",
+   "target": {
+    "type": "document",
+    "block_id": null,
+    "atom_ids": [],
+    "page": 1,
+    "last_page": 1,
+    "char_start": 0,
+    "char_end": 2555,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "no",
+   "options": [
+    {
+     "value": "yes",
+     "probability": 0.005
+    },
+    {
+     "value": "no",
+     "probability": 0.995
+    }
+   ],
+   "probability": 0.995,
+   "value_status": "certain",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "apertus_head",
+    "group": "apertus_readout",
+    "tier": null,
+    "rule_id": null,
+    "head": "R2"
+   },
+   "calibration_id": "gj1-r2-platt-step0b",
+   "in_sample": true,
+   "note_code": "final_check",
+   "note_params": {
+    "agrees": true
+   },
+   "note": null
+  },
+  {
+   "id": "B1-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/label/B1-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/block/B1",
+   "target": {
+    "type": "block",
+    "block_id": "B1",
+    "atom_ids": [
+     "B1.1"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 0,
+    "char_end": 38,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "title",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.0447
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.005
+    },
+    {
+     "value": "response",
+     "probability": 0.005
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.005
+    },
+    {
+     "value": "title",
+     "probability": 0.7064
+    },
+    {
+     "value": "none",
+     "probability": 0.2431
+    }
+   ],
+   "probability": 0.7064,
+   "value_status": "unsure",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s2_start_default",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B2-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/label/B2-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/block/B2",
+   "target": {
+    "type": "block",
+    "block_id": "B2",
+    "atom_ids": [
+     "B2.1",
+     "B2.2"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 40,
+    "char_end": 115,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "title",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.3793
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.0086
+    },
+    {
+     "value": "response",
+     "probability": 0.005
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.005
+    },
+    {
+     "value": "title",
+     "probability": 0.5507
+    },
+    {
+     "value": "none",
+     "probability": 0.06
+    }
+   ],
+   "probability": 0.5507,
+   "value_status": "unsure",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s2_start_default",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B3-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/label/B3-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/block/B3",
+   "target": {
+    "type": "block",
+    "block_id": "B3",
+    "atom_ids": [
+     "B3.1",
+     "B3.2",
+     "B3.3",
+     "B3.4",
+     "B3.5",
+     "B3.6",
+     "B3.7"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 117,
+    "char_end": 708,
+    "instance_path": "affairs[0].submission.texts[0]",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair/step/submission"
+   },
+   "value": "submitted",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.7173
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.0151
+    },
+    {
+     "value": "response",
+     "probability": 0.005
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.005
+    },
+    {
+     "value": "title",
+     "probability": 0.2185
+    },
+    {
+     "value": "none",
+     "probability": 0.0476
+    }
+   ],
+   "probability": 0.7173,
+   "value_status": "unsure",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s2_start_default",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B4-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/label/B4-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/block/B4",
+   "target": {
+    "type": "block",
+    "block_id": "B4",
+    "atom_ids": [
+     "B4.1",
+     "B4.2",
+     "B4.3",
+     "B4.4",
+     "B4.5",
+     "B4.6",
+     "B4.7",
+     "B4.8",
+     "B4.9",
+     "B4.10"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 710,
+    "char_end": 1523,
+    "instance_path": "affairs[0].submission.texts[0]",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair/step/submission"
+   },
+   "value": "submitted",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.9164
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.0195
+    },
+    {
+     "value": "response",
+     "probability": 0.005
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.005
+    },
+    {
+     "value": "title",
+     "probability": 0.0347
+    },
+    {
+     "value": "none",
+     "probability": 0.0288
+    }
+   ],
+   "probability": 0.9164,
+   "value_status": "certain",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s2_start_default",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B5-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/label/B5-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/block/B5",
+   "target": {
+    "type": "block",
+    "block_id": "B5",
+    "atom_ids": [
+     "B5.1",
+     "B5.2"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 1525,
+    "char_end": 1617,
+    "instance_path": "affairs[0].submission.texts[0]",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair/step/submission"
+   },
+   "value": "submitted",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.8912
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.0083
+    },
+    {
+     "value": "response",
+     "probability": 0.005
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.005
+    },
+    {
+     "value": "title",
+     "probability": 0.0312
+    },
+    {
+     "value": "none",
+     "probability": 0.0692
+    }
+   ],
+   "probability": 0.8912,
+   "value_status": "certain",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s2_start_default",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B6-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/label/B6-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/block/B6",
+   "target": {
+    "type": "block",
+    "block_id": "B6",
+    "atom_ids": [
+     "B6.1",
+     "B6.2"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 1619,
+    "char_end": 1753,
+    "instance_path": "affairs[0].submission.texts[0]",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair/step/submission"
+   },
+   "value": "submitted",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.9676
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.0054
+    },
+    {
+     "value": "response",
+     "probability": 0.005
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.005
+    },
+    {
+     "value": "title",
+     "probability": 0.0101
+    },
+    {
+     "value": "none",
+     "probability": 0.0169
+    }
+   ],
+   "probability": 0.9676,
+   "value_status": "certain",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s2_start_default",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B7-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/label/B7-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/block/B7",
+   "target": {
+    "type": "block",
+    "block_id": "B7",
+    "atom_ids": [
+     "B7.1"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 1755,
+    "char_end": 1829,
+    "instance_path": "affairs[0].submission.texts[0]",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair/step/submission"
+   },
+   "value": "submitted",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.9424
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.0088
+    },
+    {
+     "value": "response",
+     "probability": 0.005
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.005
+    },
+    {
+     "value": "title",
+     "probability": 0.0112
+    },
+    {
+     "value": "none",
+     "probability": 0.0376
+    }
+   ],
+   "probability": 0.9424,
+   "value_status": "certain",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s2_start_default",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B8-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/label/B8-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/block/B8",
+   "target": {
+    "type": "block",
+    "block_id": "B8",
+    "atom_ids": [
+     "B8.1",
+     "B8.2"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 1831,
+    "char_end": 1979,
+    "instance_path": "affairs[0].submission.texts[0]",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair/step/submission"
+   },
+   "value": "submitted",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.9291
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.0112
+    },
+    {
+     "value": "response",
+     "probability": 0.005
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.005
+    },
+    {
+     "value": "title",
+     "probability": 0.0112
+    },
+    {
+     "value": "none",
+     "probability": 0.0485
+    }
+   ],
+   "probability": 0.9291,
+   "value_status": "certain",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s2_start_default",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B9-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/label/B9-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/block/B9",
+   "target": {
+    "type": "block",
+    "block_id": "B9",
+    "atom_ids": [
+     "B9.1",
+     "B9.2"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 1981,
+    "char_end": 2140,
+    "instance_path": "affairs[0].submission.texts[0]",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair/step/submission"
+   },
+   "value": "submitted",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.9375
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.0097
+    },
+    {
+     "value": "response",
+     "probability": 0.005
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.005
+    },
+    {
+     "value": "title",
+     "probability": 0.0119
+    },
+    {
+     "value": "none",
+     "probability": 0.0406
+    }
+   ],
+   "probability": 0.9375,
+   "value_status": "certain",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s2_start_default",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B10-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/label/B10-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/block/B10",
+   "target": {
+    "type": "block",
+    "block_id": "B10",
+    "atom_ids": [
+     "B10.1",
+     "B10.2",
+     "B10.3"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 2142,
+    "char_end": 2341,
+    "instance_path": "affairs[0].submission.texts[0]",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair/step/submission"
+   },
+   "value": "submitted",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.9091
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.0111
+    },
+    {
+     "value": "response",
+     "probability": 0.005
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.005
+    },
+    {
+     "value": "title",
+     "probability": 0.0163
+    },
+    {
+     "value": "none",
+     "probability": 0.0621
+    }
+   ],
+   "probability": 0.9091,
+   "value_status": "certain",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s2_start_default",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B11-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/label/B11-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/block/B11",
+   "target": {
+    "type": "block",
+    "block_id": "B11",
+    "atom_ids": [
+     "B11.1",
+     "B11.2"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 2343,
+    "char_end": 2517,
+    "instance_path": "affairs[0].submission.texts[0]",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair/step/submission"
+   },
+   "value": "submitted",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.7472
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.0205
+    },
+    {
+     "value": "response",
+     "probability": 0.005
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.005
+    },
+    {
+     "value": "title",
+     "probability": 0.0335
+    },
+    {
+     "value": "none",
+     "probability": 0.194
+    }
+   ],
+   "probability": 0.7472,
+   "value_status": "unsure",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s2_start_default",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B12-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/label/B12-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/block/B12",
+   "target": {
+    "type": "block",
+    "block_id": "B12",
+    "atom_ids": [
+     "B12.1"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 2519,
+    "char_end": 2543,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "none",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.1817
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.0177
+    },
+    {
+     "value": "response",
+     "probability": 0.005
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.005
+    },
+    {
+     "value": "title",
+     "probability": 0.0483
+    },
+    {
+     "value": "none",
+     "probability": 0.7507
+    }
+   ],
+   "probability": 0.7507,
+   "value_status": "unsure",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s2_start_default",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "B13-slot",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/label/B13-slot",
+   "kind": "block_slot",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/block/B13",
+   "target": {
+    "type": "block",
+    "block_id": "B13",
+    "atom_ids": [
+     "B13.1"
+    ],
+    "page": 1,
+    "last_page": null,
+    "char_start": 2545,
+    "char_end": 2555,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "none",
+   "options": [
+    {
+     "value": "submitted",
+     "probability": 0.1198
+    },
+    {
+     "value": "reasoning",
+     "probability": 0.018
+    },
+    {
+     "value": "response",
+     "probability": 0.005
+    },
+    {
+     "value": "recommendation",
+     "probability": 0.005
+    },
+    {
+     "value": "title",
+     "probability": 0.1222
+    },
+    {
+     "value": "none",
+     "probability": 0.7369
+    }
+   ],
+   "probability": 0.7369,
+   "value_status": "unsure",
+   "chosen_is_top": true,
+   "top_option": null,
+   "source": {
+    "kind": "code_step",
+    "group": "apertus_readout",
+    "tier": "s2_start_default",
+    "rule_id": null,
+    "head": "B1"
+   },
+   "calibration_id": "gj1-b1s-b2-marginal-temperature",
+   "in_sample": true,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "value-global_uri",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/label/value-global_uri",
+   "kind": "constant_value",
+   "slot": "globalURI",
+   "predicate": "https://ld.ech.ch/schema/0292/meta-common/globalURI",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/i95",
+   "target": {
+    "type": "value",
+    "block_id": null,
+    "atom_ids": [],
+    "page": null,
+    "last_page": null,
+    "char_start": null,
+    "char_end": null,
+    "instance_path": "global_uri",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/i95"
+   },
+   "value": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/i95",
+   "options": [],
+   "probability": null,
+   "value_status": "none",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "constant",
+    "group": "constant",
+    "tier": null,
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": null,
+   "in_sample": null,
+   "note_code": "value_derivation",
+   "note_params": {
+    "derivation": "identifier_minted"
+   },
+   "note": null
+  },
+  {
+   "id": "value-affairs-0-global_uri",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/label/value-affairs-0-global_uri",
+   "kind": "constant_value",
+   "slot": "globalURI",
+   "predicate": "https://ld.ech.ch/schema/0292/meta-common/globalURI",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair",
+   "target": {
+    "type": "value",
+    "block_id": null,
+    "atom_ids": [],
+    "page": null,
+    "last_page": null,
+    "char_start": null,
+    "char_end": null,
+    "instance_path": "affairs[0].global_uri",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair"
+   },
+   "value": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair",
+   "options": [],
+   "probability": null,
+   "value_status": "none",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "constant",
+    "group": "constant",
+    "tier": null,
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": null,
+   "in_sample": null,
+   "note_code": "value_derivation",
+   "note_params": {
+    "derivation": "identifier_minted"
+   },
+   "note": null
+  },
+  {
+   "id": "pdf-affair_number",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/label/pdf-affair_number",
+   "kind": "pdf_value",
+   "slot": "affairNumber",
+   "predicate": "https://ch.paf.link/schema/affairs/affairNumber",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair",
+   "target": {
+    "type": "value",
+    "block_id": "B13",
+    "atom_ids": [
+     "B13.1"
+    ],
+    "page": 1,
+    "last_page": 1,
+    "char_start": 2545,
+    "char_end": 2552,
+    "instance_path": "affairs[0].affair_number",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair"
+   },
+   "value": "19.5497",
+   "options": [],
+   "probability": 0.875,
+   "value_status": "unsure",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "rule",
+    "group": "rule",
+    "tier": "number_docpart_last_line",
+    "rule_id": "m11_values_type_number.read_affair_number",
+    "head": null
+   },
+   "calibration_id": "value.affair_number.number_docpart_last_line",
+   "in_sample": null,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "pdf-affair_type",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/label/pdf-affair_type",
+   "kind": "pdf_value",
+   "slot": "affairType",
+   "predicate": "https://ch.paf.link/schema/affairs/affairType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair",
+   "target": {
+    "type": "value",
+    "block_id": "B1",
+    "atom_ids": [
+     "B1.1"
+    ],
+    "page": 1,
+    "last_page": 1,
+    "char_start": 0,
+    "char_end": 14,
+    "instance_path": "affairs[0].affair_type",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair"
+   },
+   "value": "interpellation",
+   "options": [],
+   "probability": 0.9644,
+   "value_status": "certain",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "rule",
+    "group": "rule",
+    "tier": "type_line_start",
+    "rule_id": "m11_values_type_number.read_affair_type",
+    "head": null
+   },
+   "calibration_id": "value.affair_type.type_line_start",
+   "in_sample": null,
+   "note_code": null,
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "pdf-title",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/label/pdf-title",
+   "kind": "pdf_value",
+   "slot": "title",
+   "predicate": "https://ch.paf.link/schema/affairs/title",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair",
+   "target": {
+    "type": "value",
+    "block_id": "B2",
+    "atom_ids": [
+     "B2.1",
+     "B2.2"
+    ],
+    "page": 1,
+    "last_page": 1,
+    "char_start": 51,
+    "char_end": 115,
+    "instance_path": "affairs[0].title[0].text",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair"
+   },
+   "value": "der OECD-Steuerreform und den Folgen für den Kanton Basel-Stadt",
+   "options": [],
+   "probability": 0.8156,
+   "value_status": "unsure",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "rule",
+    "group": "rule",
+    "tier": "type_cue",
+    "rule_id": "m11_values_title.read_title",
+    "head": null
+   },
+   "calibration_id": "value.title.type_cue",
+   "in_sample": null,
+   "note_code": "comparison_value",
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "value-affairs-0-title-0-text_type",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/label/value-affairs-0-title-0-text_type",
+   "kind": "constant_value",
+   "slot": "textType",
+   "predicate": "https://ch.paf.link/schema/affairs/textType",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair",
+   "target": {
+    "type": "value",
+    "block_id": null,
+    "atom_ids": [],
+    "page": null,
+    "last_page": null,
+    "char_start": null,
+    "char_end": null,
+    "instance_path": "affairs[0].title[0].text_type",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair"
+   },
+   "value": "title",
+   "options": [],
+   "probability": null,
+   "value_status": "none",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "constant",
+    "group": "constant",
+    "tier": null,
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": null,
+   "in_sample": null,
+   "note_code": "value_derivation",
+   "note_params": {
+    "derivation": "fixed_by_schema"
+   },
+   "note": null
+  },
+  {
+   "id": "value-affairs-0-submission-global_uri",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/label/value-affairs-0-submission-global_uri",
+   "kind": "constant_value",
+   "slot": "globalURI",
+   "predicate": "https://ld.ech.ch/schema/0292/meta-common/globalURI",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair/step/submission",
+   "target": {
+    "type": "value",
+    "block_id": null,
+    "atom_ids": [],
+    "page": null,
+    "last_page": null,
+    "char_start": null,
+    "char_end": null,
+    "instance_path": "affairs[0].submission.global_uri",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair/step/submission"
+   },
+   "value": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair/step/submission",
+   "options": [],
+   "probability": null,
+   "value_status": "none",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "constant",
+    "group": "constant",
+    "tier": null,
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": null,
+   "in_sample": null,
+   "note_code": "value_derivation",
+   "note_params": {
+    "derivation": "identifier_minted"
+   },
+   "note": null
+  },
+  {
+   "id": "value-affairs-0-submission-sponsorship-0-actor-global_uri",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/label/value-affairs-0-submission-sponsorship-0-actor-global_uri",
+   "kind": "constant_value",
+   "slot": "globalURI",
+   "predicate": "https://ld.ech.ch/schema/0292/meta-common/globalURI",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/actor/sponsor-1",
+   "target": {
+    "type": "value",
+    "block_id": null,
+    "atom_ids": [],
+    "page": null,
+    "last_page": null,
+    "char_start": null,
+    "char_end": null,
+    "instance_path": "affairs[0].submission.sponsorship[0].actor.global_uri",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/actor/sponsor-1"
+   },
+   "value": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/actor/sponsor-1",
+   "options": [],
+   "probability": null,
+   "value_status": "none",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "constant",
+    "group": "constant",
+    "tier": null,
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": null,
+   "in_sample": null,
+   "note_code": "value_derivation",
+   "note_params": {
+    "derivation": "identifier_minted"
+   },
+   "note": null
+  },
+  {
+   "id": "pdf-sponsor",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/label/pdf-sponsor",
+   "kind": "pdf_value",
+   "slot": "sponsorship",
+   "predicate": "https://ch.paf.link/schema/affairs/sponsorship",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair/step/submission",
+   "target": {
+    "type": "value",
+    "block_id": "B12",
+    "atom_ids": [
+     "B12.1"
+    ],
+    "page": 1,
+    "last_page": 1,
+    "char_start": 2519,
+    "char_end": 2543,
+    "instance_path": "affairs[0].submission.sponsorship[0].actor.name[0].text",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/actor/sponsor-1"
+   },
+   "value": "Patricia von Falkenstein",
+   "options": [],
+   "probability": 0.955,
+   "value_status": "unsure",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "rule",
+    "group": "rule",
+    "tier": "signature_plain",
+    "rule_id": "m11_values_sponsor.read_sponsor",
+    "head": null
+   },
+   "calibration_id": "value.first_author.signature_plain",
+   "in_sample": null,
+   "note_code": "comparison_value",
+   "note_params": {},
+   "note": null
+  },
+  {
+   "id": "value-affairs-0-submission-sponsorship-0-sponsor_role",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/label/value-affairs-0-submission-sponsorship-0-sponsor_role",
+   "kind": "constant_value",
+   "slot": "sponsorRole",
+   "predicate": "https://ch.paf.link/schema/affairs/sponsorRole",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair/step/submission",
+   "target": {
+    "type": "value",
+    "block_id": null,
+    "atom_ids": [],
+    "page": null,
+    "last_page": null,
+    "char_start": null,
+    "char_end": null,
+    "instance_path": "affairs[0].submission.sponsorship[0].sponsor_role",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair/step/submission"
+   },
+   "value": "sponsor",
+   "options": [],
+   "probability": null,
+   "value_status": "none",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "constant",
+    "group": "constant",
+    "tier": null,
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": null,
+   "in_sample": null,
+   "note_code": "value_derivation",
+   "note_params": {
+    "derivation": "fixed_by_schema"
+   },
+   "note": null
+  },
+  {
+   "id": "textblock-1-text",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/label/textblock-1-text",
+   "kind": "text_wording",
+   "slot": "text",
+   "predicate": "https://ch.paf.link/schema/affairs/text",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/textblock/1",
+   "target": {
+    "type": "text_block",
+    "block_id": null,
+    "atom_ids": [
+     "B3.1",
+     "B3.2",
+     "B3.3",
+     "B3.4",
+     "B3.5",
+     "B3.6",
+     "B3.7",
+     "B4.1",
+     "B4.2",
+     "B4.3",
+     "B4.4",
+     "B4.5",
+     "B4.6",
+     "B4.7",
+     "B4.8",
+     "B4.9",
+     "B4.10",
+     "B5.1",
+     "B5.2",
+     "B6.1",
+     "B6.2",
+     "B7.1",
+     "B8.1",
+     "B8.2",
+     "B9.1",
+     "B9.2",
+     "B10.1",
+     "B10.2",
+     "B10.3",
+     "B11.1",
+     "B11.2"
+    ],
+    "page": 1,
+    "last_page": 1,
+    "char_start": 117,
+    "char_end": 2517,
+    "instance_path": "affairs[0].submission.texts[0].text",
+    "about_entity": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/affair/step/submission"
+   },
+   "value": "sha256:b244e207fbec37553bc3d0858677dba3d4895473a77e61f3e29b6fb26fa9b152",
+   "options": [],
+   "probability": null,
+   "value_status": "none",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "copy",
+    "group": "copy",
+    "tier": null,
+    "rule_id": null,
+    "head": null
+   },
+   "calibration_id": null,
+   "in_sample": null,
+   "note_code": null,
+   "note_params": {},
+   "note": "verbatim copy of the lines of the author block (check […]); the text changes are in the TextBlockRecord"
+  },
+  {
+   "id": "candidate-responder",
+   "iri": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171/label/candidate-responder",
+   "kind": "pdf_value",
+   "slot": "responder",
+   "predicate": "https://ch.paf.link/schema/affairs/responder",
+   "subject": "https://parlpdfech.ansv.ch/id/gj/record/doc-26171",
+   "target": {
+    "type": "value",
+    "block_id": "B9",
+    "atom_ids": [
+     "B9.1"
+    ],
+    "page": 1,
+    "last_page": 1,
+    "char_start": 1992,
+    "char_end": 2005,
+    "instance_path": null,
+    "about_entity": null
+   },
+   "value": "Regierungsrat",
+   "options": [],
+   "probability": 0.7727,
+   "value_status": "unsure",
+   "chosen_is_top": null,
+   "top_option": null,
+   "source": {
+    "kind": "rule",
+    "group": "rule",
+    "tier": "rsp_addressee_cue",
+    "rule_id": "m11_values_dates_responder.read_responder",
+    "head": null
+   },
+   "calibration_id": "value.responder_name.rsp_addressee_cue",
+   "in_sample": null,
+   "note_code": "addressee_candidate",
+   "note_params": {},
+   "note": null
+  }
+ ],
+ "calibrations": [
+  {
+   "id": "gj1-b1s-b2-marginal-temperature",
+   "iri": "https://parlpdfech.ansv.ch/id/calibration/gj1-b1s-b2-marginal-temperature",
+   "method": "forward_backward_temperature",
+   "kind": "block_slot",
+   "fit_n": 9313,
+   "in_sample": false,
+   "target_status": "target_not_met",
+   "certain_threshold": 0.8,
+   "basis": null,
+   "reference_code": "model_labels_not_human_checked",
+   "measure_sets": [
+    {
+     "name": "dev out-of-fold",
+     "n": 9313,
+     "ece": 0.0526,
+     "ece_low": 0.031093,
+     "ece_high": 0.077205,
+     "brier": 0.266646,
+     "nll": 0.601899
+    },
+    {
+     "name": "validation (44 documents): written block labels of the variant d1n_b1sy (GJ.13); ECE of p of the written option, Brier score and NLL of the 6 options",
+     "n": 2715,
+     "ece": 0.0442,
+     "ece_low": 0.0324,
+     "ece_high": 0.1158,
+     "brier": 0.3125,
+     "nll": 0.5933
+    }
+   ],
+   "note": "B1-S (addendum D): the frozen B1 head with its frozen temperature; B2 block marginal of the form switch_soft (addendum C) after one B2 temperature. Variant b12_entered; threshold a by P17 on dev. GJ.13 on validation: NOT MET",
+   "tier": null,
+   "measured": true
+  },
+  {
+   "id": "gj1-d1-verifier-platt",
+   "iri": "https://parlpdfech.ansv.ch/id/calibration/gj1-d1-verifier-platt",
+   "method": "verifier_platt",
+   "kind": "document_text_parts",
+   "fit_n": 48,
+   "in_sample": false,
+   "target_status": "not_measured",
+   "certain_threshold": 0.9,
+   "basis": null,
+   "reference_code": "model_labels_not_human_checked",
+   "measure_sets": [
+    {
+     "name": "dev_out_of_design, in-sample",
+     "n": 48,
+     "ece": 0.120887,
+     "ece_low": null,
+     "ece_high": null,
+     "brier": 0.163694,
+     "nll": 0.287308
+    }
+   ],
+   "note": "Platt map of the calibrated D1 probability of the S1 rule option; fit set dev_out_of_design. Variant d1_not_entered; threshold a by P17 on dev",
+   "tier": null,
+   "measured": true
+  },
+  {
+   "id": "gj1-r2-platt-step0b",
+   "iri": "https://parlpdfech.ansv.ch/id/calibration/gj1-r2-platt-step0b",
+   "method": "platt_scaling",
+   "kind": "executive_response",
+   "fit_n": 193,
+   "in_sample": true,
+   "target_status": "not_measured",
+   "certain_threshold": 0.6,
+   "basis": null,
+   "reference_code": "model_labels_not_human_checked",
+   "measure_sets": [
+    {
+     "name": "dev AI-reference documents, out-of-fold map (5 folds of the dev design)",
+     "n": 193,
+     "ece": 0.029697,
+     "ece_low": 0.018867,
+     "ece_high": 0.061158,
+     "brier": 0.100316,
+     "nll": 0.16456
+    },
+    {
+     "name": "dev AI-reference documents, in-sample (fit set of the map)",
+     "n": 193,
+     "ece": 0.032938,
+     "ece_low": 0.021508,
+     "ece_high": 0.062637,
+     "brier": 0.096321,
+     "nll": 0.152964
+    }
+   ],
+   "note": "R2 step 0b (criteria 8.4 item 2): Platt map of q(yes) of the frozen head H (layer 16) on the Docling text; fit on the 193 dev AI-reference documents; threshold a by P17 on the out-of-fold values of the map (criteria 8.6 item 4); GJ.14 on validation sets the target status",
+   "tier": null,
+   "measured": true
+  },
+  {
+   "id": "value.affair_number.number_docpart_last_line",
+   "iri": "https://parlpdfech.ansv.ch/id/calibration/value.affair_number.number_docpart_last_line",
+   "method": "jeffreys_tier_precision",
+   "kind": "pdf_value",
+   "fit_n": 3,
+   "in_sample": true,
+   "target_status": "not_measured",
+   "certain_threshold": null,
+   "basis": {
+    "n": 3,
+    "agreed": 3,
+    "documents": 3
+   },
+   "reference_code": "export_register_value",
+   "measure_sets": [
+    {
+     "name": "dev, open part, fold values, all tiers of the field affair_number",
+     "n": 772,
+     "ece": 0.167552,
+     "ece_low": null,
+     "ece_high": null,
+     "brier": 0.203841,
+     "nll": null
+    }
+   ],
+   "note": null,
+   "tier": "number_docpart_last_line",
+   "measured": true
+  },
+  {
+   "id": "value.affair_type.type_line_start",
+   "iri": "https://parlpdfech.ansv.ch/id/calibration/value.affair_type.type_line_start",
+   "method": "jeffreys_tier_precision",
+   "kind": "pdf_value",
+   "fit_n": 827,
+   "in_sample": true,
+   "target_status": "not_measured",
+   "certain_threshold": 0.6,
+   "basis": {
+    "n": 827,
+    "agreed": 798,
+    "documents": 827
+   },
+   "reference_code": "export_register_value",
+   "measure_sets": [
+    {
+     "name": "dev, open part, fold values, all tiers of the field affair_type",
+     "n": 1429,
+     "ece": 0.013088,
+     "ece_low": null,
+     "ece_high": null,
+     "brier": 0.042333,
+     "nll": null
+    }
+   ],
+   "note": null,
+   "tier": "type_line_start",
+   "measured": true
+  },
+  {
+   "id": "value.first_author.signature_plain",
+   "iri": "https://parlpdfech.ansv.ch/id/calibration/value.first_author.signature_plain",
+   "method": "jeffreys_tier_precision",
+   "kind": "pdf_value",
+   "fit_n": 99,
+   "in_sample": true,
+   "target_status": "not_measured",
+   "certain_threshold": null,
+   "basis": {
+    "n": 99,
+    "agreed": 95,
+    "documents": 99
+   },
+   "reference_code": "export_register_value",
+   "measure_sets": [
+    {
+     "name": "dev, open part, fold values, all tiers of the field first_author",
+     "n": 988,
+     "ece": 0.079149,
+     "ece_low": null,
+     "ece_high": null,
+     "brier": 0.120307,
+     "nll": null
+    }
+   ],
+   "note": null,
+   "tier": "signature_plain",
+   "measured": true
+  },
+  {
+   "id": "value.responder_name.rsp_addressee_cue",
+   "iri": "https://parlpdfech.ansv.ch/id/calibration/value.responder_name.rsp_addressee_cue",
+   "method": "jeffreys_tier_precision",
+   "kind": "pdf_value",
+   "fit_n": 10,
+   "in_sample": false,
+   "target_status": "not_measured",
+   "certain_threshold": null,
+   "basis": {
+    "n": 10,
+    "agreed": 8,
+    "documents": 10
+   },
+   "reference_code": "export_register_value",
+   "measure_sets": [
+    {
+     "name": "dev, open part, fold values, all tiers of the field responder_name",
+     "n": 387,
+     "ece": 0.023114,
+     "ece_low": null,
+     "ece_high": null,
+     "brier": 0.022672,
+     "nll": null
+    }
+   ],
+   "note": null,
+   "tier": "rsp_addressee_cue",
+   "measured": true
+  },
+  {
+   "id": "value.title.type_cue",
+   "iri": "https://parlpdfech.ansv.ch/id/calibration/value.title.type_cue",
+   "method": "jeffreys_tier_precision",
+   "kind": "pdf_value",
+   "fit_n": 300,
+   "in_sample": true,
+   "target_status": "not_measured",
+   "certain_threshold": null,
+   "basis": {
+    "n": 300,
+    "agreed": 245,
+    "documents": 300
+   },
+   "reference_code": "export_register_value",
+   "measure_sets": [
+    {
+     "name": "dev, open part, fold values, all tiers of the field title",
+     "n": 1592,
+     "ece": 0.100299,
+     "ece_low": null,
+     "ece_high": null,
+     "brier": 0.175553,
+     "nll": null
+    }
+   ],
+   "note": null,
+   "tier": "type_cue",
+   "measured": true
+  }
+ ],
+ "counts": {
+  "pages": 1,
+  "lines": 36,
+  "blocks": 13,
+  "labels": {
+   "total": 27,
+   "with_probability": 20,
+   "certain": 10,
+   "unsure": 10,
+   "none": 7,
+   "chosen_not_top": 0,
+   "by_source": {
+    "rule": 6,
+    "apertus_head": 1,
+    "code_step": 13,
+    "constant": 6,
+    "copy": 1
+   },
+   "by_group": {
+    "rule": 6,
+    "apertus_readout": 14,
+    "constant": 6,
+    "copy": 1
+   },
+   "by_kind": {
+    "document_text_parts": 1,
+    "executive_response": 1,
+    "block_slot": 13,
+    "constant_value": 6,
+    "pdf_value": 5,
+    "text_wording": 1
+   }
+  },
+  "triples": {
+   "ech-0295": 26,
+   "provenance": 827,
+   "atoms": 684,
+   "labels": 1163,
+   "union": 2700
+  },
+  "record": {
+   "blocks": 13,
+   "block_options": {
+    "submitted": 9,
+    "title": 2,
+    "none": 2
+   },
+   "author_blocks": 1,
+   "textblocks_by_slot": {
+    "submission": 1,
+    "response": 0
+   },
+   "textblock_records_profile_only": 0,
+   "path_switch_points": 0,
+   "path_switch_points_without_boundary_label": 0,
+   "boundary_labels": 0,
+   "label_assertions": 27,
+   "label_assertions_by_source": {
+    "apertus_head": 1,
+    "code_step": 13,
+    "constant": 6,
+    "copy": 1,
+    "rule": 6
+   },
+   "label_assertions_by_kind": {
+    "block_slot": 13,
+    "constant_value": 6,
+    "document_text_parts": 1,
+    "executive_response": 1,
+    "pdf_value": 5,
+    "text_wording": 1
+   },
+   "pdf_value_gaps": 3,
+   "certain_labels": 10,
+   "unsure_labels": 10,
+   "r2_agrees_with_block_path": true,
+   "d1_option": "A",
+   "leaf_values": 15,
+   "value_records": 15,
+   "e19": {
+    "text_blocks": 1,
+    "characters": 2054,
+    "hyphens_removed": 0,
+    "list_markers_removed": 6,
+    "problems": 0
+   },
+   "metadata_check": {
+    "values_checked": 5,
+    "problems": 0,
+    "leaves_without_provenance": 0
+   },
+   "slots": {
+    "read_from_pdf": 6,
+    "not_found_in_pdf": 22,
+    "not_in_this_document_type": 8,
+    "register_only": 16
+   },
+   "slots_no_rule_searched": 21,
+   "values": {
+    "fields": 7,
+    "read_from_pdf": 4,
+    "not_found_in_pdf": 1,
+    "not_in_this_document_type": 2,
+    "weak_candidates": 0,
+    "addressee_candidates": 1,
+    "certain": 1,
+    "unsure": 3,
+    "export_check": {
+     "equal_to_export": 3,
+     "differs_from_export": 0,
+     "no_export_value": 0,
+     "not_compared": 1
+    }
+   }
+  }
+ },
+ "checks": [
+  {
+   "id": "writer_check",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C1_linkml",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C2_parse",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C3_isomorphism",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C4_parts",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C5_leaf_values",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C6_iri_scheme",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C7_C8_labels",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C9_e19",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C11_wording_at_span",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C12_one_label_for_each_pdf_value",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C13_no_export_value_in_the_record",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C14_cross_check",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C15_slot_states",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C16_probability_and_calibration",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C17_recorded_gaps",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C18_minted_iris",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C19_value_forms",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C20_value_follows_from_wording",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C21_floor",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C22_values_from_the_readers",
+   "state": "passed",
+   "reason": null
+  },
+  {
+   "id": "C10_shacl",
+   "state": "skipped",
+   "reason": "shacl_tool_absent"
+  }
+ ],
+ "files": [
+  {
+   "name": "26171.gesamt.trig",
+   "role": "gesamt_trig",
+   "media_type": "application/trig",
+   "bytes": 128639,
+   "sha256": "720d2b485ae9116605105de26dfce1cca41c4464a02bc7db9e9ad4a7d2822340",
+   "url": "/api/records/s-26171/files/26171.gesamt.trig"
+  },
+  {
+   "name": "26171.ech.ttl",
+   "role": "ech_ttl",
+   "media_type": "text/turtle",
+   "bytes": 3739,
+   "sha256": "363f278f8fa960249946686c3a14470ff78afaa4f4cf69d531ed13a51450489a",
+   "url": "/api/records/s-26171/files/26171.ech.ttl"
+  },
+  {
+   "name": "26171.gesamt.rdf.xml",
+   "role": "gesamt_rdfxml",
+   "media_type": "application/rdf+xml",
+   "bytes": 246388,
+   "sha256": "cde4ab185fc4e9546d9e7397688924028157f780feff881f93f8d5ddbba236bf",
+   "url": "/api/records/s-26171/files/26171.gesamt.rdf.xml"
+  },
+  {
+   "name": "26171.ech.rdf.xml",
+   "role": "ech_rdfxml",
+   "media_type": "application/rdf+xml",
+   "bytes": 4479,
+   "sha256": "a7a462e24c15036b95d1d75e57f50068cdf94aedbe8e330156b8139bfd499fc6",
+   "url": "/api/records/s-26171/files/26171.ech.rdf.xml"
+  },
+  {
+   "name": "26171.ech.yaml",
+   "role": "ech_yaml",
+   "media_type": "application/yaml",
+   "bytes": 3466,
+   "sha256": "81295cb75221bbeeaf5791751869f70fc774a293a542265effd37c6a271d7dd7",
+   "url": "/api/records/s-26171/files/26171.ech.yaml"
+  },
+  {
+   "name": "26171.labels.yaml",
+   "role": "labels_yaml",
+   "media_type": "application/yaml",
+   "bytes": 41962,
+   "sha256": "e3b8790ee8f94f61adad58b4025b5087771af760c7b682b327441115c3313dc2",
+   "url": "/api/records/s-26171/files/26171.labels.yaml"
+  },
+  {
+   "name": "26171.provenance.yaml",
+   "role": "provenance_yaml",
+   "media_type": "application/yaml",
+   "bytes": 23573,
+   "sha256": "16b3e94c469b6f511e37895f2059246713eda994beb8932d321ad437c41c9263",
+   "url": "/api/records/s-26171/files/26171.provenance.yaml"
+  },
+  {
+   "name": "manifest.json",
+   "role": "manifest",
+   "media_type": "application/json",
+   "bytes": 27402,
+   "sha256": "b4a7c21bb523387d9abd53316a61d3a90eac4e3e030657cec1b0d1a7ef45b78f",
+   "url": "/api/records/s-26171/files/manifest.json"
+  },
+  {
+   "name": "validation.json",
+   "role": "validation",
+   "media_type": "application/json",
+   "bytes": 16975,
+   "sha256": "cc187aeef12ebcd7dde0a2fadc9b5a335d24d605abff2c99ecff2f4c3ecfec06",
+   "url": "/api/records/s-26171/files/validation.json"
+  },
+  {
+   "name": "26171.values.ttl",
+   "role": "values_ttl",
+   "media_type": "text/turtle",
+   "bytes": 3938,
+   "sha256": "c17641607e6dcef60027205735675e78c13b5ec6ee41769a581a84edba61b134",
+   "url": "/api/records/s-26171/files/26171.values.ttl"
+  },
+  {
+   "name": "source.pdf",
+   "role": "source_pdf",
+   "media_type": "application/pdf",
+   "bytes": 44730,
+   "sha256": "f2e5fe4ae6747a886d93bc753795611117fe11b4d23f4ae30d53866fcedb1493",
+   "url": "/api/records/s-26171/files/source.pdf"
+  },
+  {
+   "name": "page-1.png",
+   "role": "page_image",
+   "media_type": "image/png",
+   "bytes": 358631,
+   "sha256": "f9c2829b6f15d27a9881f48cf3a346a2e3d03cae511c9650a12cba9fccb920ef",
+   "url": "/api/records/s-26171/files/page-1.png"
+  }
+ ]
+}

@@ -1,7 +1,5 @@
 # The browser app of the ParlPDFeCH package
 
-Status of all results of the package: EXCEPTION, NOT RELEASED. No human checked the results.
-
 This folder holds the page that the server shows below `/app/`. The page is plain HTML, CSS and one script. It has no framework, no library and no build step. It loads no file from another host. It sets no cookie and stores nothing in the browser.
 
 The reference for all interfaces is `../CONTRACT.md` (chapters 5, 6, 7, 14 and 15).
@@ -315,7 +313,7 @@ Reason: the readers found that the page gave a probability of 0.97 next to "corr
 
 Reason: an audit of 15.10.2026 found texts of the page that were older than the report and its limits, or wider than their sources. Only texts changed; `index.html`, `app.js` and `app.css` did not change.
 
-- `start.good.limits` and `about.limits.l6`: the short forms of limit L6 of `track_2a/docs/limits.md` (no person checked a value of the one fixed run). `about.limits.l2` and `about.limits.l3`: the short forms of the limits L2 and L5 of the same file (L5: the rule chain gives the rule role and the block roles).
+- `start.good.limits` and `about.limits.l6`: the short forms of limit L6 of `track_2a/docs/limits.md`. `about.limits.l2` and `about.limits.l3`: the short forms of the limits L2 and L5 of the same file (L5: the rule chain gives the rule role and the block roles).
 - `start.title`: "Each head value that the code rules read (up to 7)". `start.flow.text` and `start.flow.values`: "up to 7 head values". A sample record has fewer than 7 values.
 - `start.flow.rdf.note`: the labels of the text parts of the 3 samples can come from stored Apertus results. `start.samples.title`: the title and the affair type on the cards come from OpenParlData.
 - `s1.card.inputs`: the package holds the PDF of each sample, for the page image and the download.
@@ -324,3 +322,15 @@ Reason: an audit of 15.10.2026 found texts of the page that were older than the 
 - `s2.doc_id` (also in `../contract/strings.contract.json`): leave the number empty for your own PDF; no value of the record comes from it.
 - `run_numbers.json`: made again with `tools/make_run_numbers.py` from `numbers.json` of 15.10.2026, 17:01. The values are equal; only the source time and the SHA-256 changed.
 - Checks: `node ui/tools/check_ui.mjs` 0 errors (808 keys). Google Chrome headless on one Mac, with the server of the package on port 8894: the start page in English and German at 1440 px and the page "About" in English show the new texts. Not run: a narrow width, Firefox, Safari, a screen reader.
+
+## Texts of 15.10.2026, evening
+
+Reason: a request of the owner of 15.10.2026 on the texts for the reader. Only texts changed; `index.html`, `app.js` and `app.css` did not change. No key was added or removed.
+
+- `notice.no_human_check` (also in `../contract/strings.contract.json`): the new text is "Each label and each value of a result can be wrong." The key name stays.
+- `words.probability` and `words.reference`: the last sentence is removed.
+- `s4.record.measured` and `notice.values_measured` (also in `../contract/strings.contract.json`): the last sentence is removed.
+- `start.good.limits`: the reference is the OpenParlData export, a register. It is not a hand-checked gold set (`track_2a/docs/limits.md`, L7 and the part "What these limits mean for a reader").
+- `about.limits.l4`: the register is not a hand-checked gold set. `about.limits.l6`: the last sentence is removed.
+- The status line at the top of this file is removed.
+- Checks: `node ui/tools/check_ui.mjs` 0 errors (808 keys).

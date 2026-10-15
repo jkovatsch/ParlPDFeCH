@@ -1,0 +1,78 @@
+# The values of 879163.ech.ttl with their probability, page and place in the text (form parlpdfech-values-ttl/2).
+# pvl:resource and pvl:property give the statement of the eCH-0295 record. pvl:entity is the actor whose name holds the value.
+# pvl:probability comes from the development documents in which the same rule tier gave a value: (equal to OpenParlData + 0.5) / (documents + 1). No person checked a value.
+# The prefix pvl is a vocabulary of this project. Its domain is a placeholder: the vocabulary is not published.
+@prefix aff: <https://ch.paf.link/schema/affairs/> .
+@prefix pvl: <https://schema.parlpdfech.example/values/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://parlpdfech.ansv.ch/id/gj/record/doc-879163> a pvl:ValueSet ;
+    pvl:document <https://api.openparldata.ch/v1/docs/879163> ;
+    pvl:form "parlpdfech-values-ttl/2" ;
+    pvl:reading <https://parlpdfech.ansv.ch/id/gj/record/doc-879163/value/affair_type>,
+        <https://parlpdfech.ansv.ch/id/gj/record/doc-879163/value/responder>,
+        <https://parlpdfech.ansv.ch/id/gj/record/doc-879163/value/sponsor>,
+        <https://parlpdfech.ansv.ch/id/gj/record/doc-879163/value/title> .
+
+<https://parlpdfech.ansv.ch/id/gj/record/doc-879163/value/affair_type> a pvl:ValueReading ;
+    pvl:calibration <https://parlpdfech.ansv.ch/id/calibration/value.affair_type.type_head_inline_gov> ;
+    pvl:charEnd 111 ;
+    pvl:charStart 103 ;
+    pvl:field "affair_type" ;
+    pvl:label <https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/pdf-affair_type> ;
+    pvl:page 1 ;
+    pvl:printed "POSTULAT" ;
+    pvl:probability 0.6333 ;
+    pvl:property aff:affairType ;
+    pvl:resource <https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair> ;
+    pvl:status "unsure" ;
+    pvl:tier "type_head_inline_gov" ;
+    pvl:value "postulate" .
+
+<https://parlpdfech.ansv.ch/id/gj/record/doc-879163/value/responder> a pvl:ValueReading ;
+    pvl:calibration <https://parlpdfech.ansv.ch/id/calibration/value.responder_name.rsp_signature> ;
+    pvl:charEnd 2107 ;
+    pvl:charStart 2090 ;
+    pvl:entity <https://parlpdfech.ansv.ch/id/gj/record/doc-879163/actor/responder> ;
+    pvl:field "responder" ;
+    pvl:label <https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/pdf-responder> ;
+    pvl:page 1 ;
+    pvl:printed "Conseil municipal" ;
+    pvl:probability 0.9912 ;
+    pvl:property aff:responder ;
+    pvl:resource <https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response> ;
+    pvl:status "certain" ;
+    pvl:tier "rsp_signature" ;
+    pvl:value "Conseil municipal" .
+
+<https://parlpdfech.ansv.ch/id/gj/record/doc-879163/value/sponsor> a pvl:ValueReading ;
+    pvl:calibration <https://parlpdfech.ansv.ch/id/calibration/value.first_author.response_head_prep_name> ;
+    pvl:charEnd 127 ;
+    pvl:charStart 120 ;
+    pvl:entity <https://parlpdfech.ansv.ch/id/gj/record/doc-879163/actor/sponsor-1> ;
+    pvl:field "sponsor" ;
+    pvl:label <https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/pdf-sponsor> ;
+    pvl:page 1 ;
+    pvl:printed "Tristan" ;
+    pvl:probability 0.95 ;
+    pvl:property aff:sponsorship ;
+    pvl:resource <https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/submission> ;
+    pvl:status "unsure" ;
+    pvl:tier "response_head_prep_name" ;
+    pvl:value "Tristan" .
+
+<https://parlpdfech.ansv.ch/id/gj/record/doc-879163/value/title> a pvl:ValueReading ;
+    pvl:calibration <https://parlpdfech.ansv.ch/id/calibration/value.title.after_kind_cue> ;
+    pvl:charEnd 234 ;
+    pvl:charStart 168 ;
+    pvl:field "title" ;
+    pvl:label <https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/pdf-title> ;
+    pvl:page 1 ;
+    pvl:printed "Fonds d'aide au maintien des petits commerces et cafés du villages" ;
+    pvl:probability 0.6333 ;
+    pvl:property aff:title ;
+    pvl:resource <https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair> ;
+    pvl:status "unsure" ;
+    pvl:tier "after_kind_cue" ;
+    pvl:value "Fonds d'aide au maintien des petits commerces et cafés du villages" .
+

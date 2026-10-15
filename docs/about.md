@@ -20,7 +20,7 @@ A PDF of a Swiss parliament goes in. An eCH-0295 record comes out. Each head val
 
 The one fixed run of 13.10.2026 compared the values of 872 documents of 26 parliaments with the export, one time. The run has 804 validation documents of 18 parliaments and 68 documents of 8 more parliaments (group 7). AI agents had read each group-7 document before the run. Development: 1,793 documents of 44 other parliaments.
 
-Reader with rules only. Reference: the export. No human checked a value of the one fixed run.
+Reader with rules only. Reference: the export.
 
 | Field | Precision | Found rate | Share correct |
 |---|---|---|---|
@@ -36,7 +36,7 @@ Reader with rules only. Reference: the export. No human checked a value of the o
 - Correct means equal to the export value after the normalisation of the project.
 - In the one fixed run, linear heads on stored hidden states of Apertus-v1.5-8B gave values for 2 of the 7 fields: where the rules found none, or where the rule value had a probability below 0.5. With them, the share correct was 0.8675 for the affair type and 0.6028 for the first author.
 - The app does not use these heads. In the app, the rules give all values, also for the 3 samples. For the 3 samples, stored Apertus states give the block labels only.
-- No person has accepted these numbers. No pass limit was fixed before the run. Thus this text does not say that a field passes.
+- No pass limit was fixed before the run. Thus this text does not say that a field passes.
 - Number ids in [track_2a/numbers.json](../track_2a/numbers.json): `values.last_run.rules_only.all.<field>.precision`, `.found_rate`, `.share_correct`; `values.last_run.combined.all.<field>.share_correct`; `values.last_run.parliaments.<all|validation|group7>`; `values.round4.documents`, `values.round4.parliaments`.
 
 ![How often the value is correct](img/results.svg)
@@ -47,7 +47,7 @@ The bars with Apertus are of the fixed run only. The app uses the rules for all 
 
 1. Fewer than half of the documents with a reference get the export value. This applies to the affair number, the 2 dates, the title and the first author.
 2. AI agents had read some of the 872 documents before the run: 116 or more (`values.last_run.contact.read_by_ai_agents.lower_limit`), that is 48 validation documents and all 68 group-7 documents (`values.last_run.contact.kind1.<validation|group7>`). The rule chain of the roles, from the earlier converter of 12.10.2026, was designed on a list with 38 documents of the run (`values.last_run.contact.rule_design_list.validation`).
-3. AI agents of one model family wrote the rules, the tools and the measures, and examined them. No human checked a value of the one fixed run. The reference is a register, not a hand-checked gold set.
+3. AI agents of one model family wrote the rules, the tools and the measures, and examined them. The reference is a register, not a hand-checked gold set.
 
 [track_2a/docs/limits.md](../track_2a/docs/limits.md) gives all 12 limits of the result with their sources. The technical report adds 3 notes on the method (items 13 to 15 of its chapter 6).
 
@@ -57,7 +57,7 @@ The bars with Apertus are of the fixed run only. The app uses the rules for all 
 |---|---|
 | 1 Representation model | eCH-0295, working draft I95 (commit `3cab44d`), and the cascade of the project. The project uses eCH-0295 because it is the working draft of the Swiss standard for political affairs. The project gives no mapping to Akoma Ntoso, Parla-CLARIN or Popolo. The cascade uses the kind of the document and the affair type to select the slots that a document can state. File: `track_2a/src/converter_gj/m11_cascade.yaml`. The earlier converter adds the LinkML profile `track_2a/src/converter/m06_ech_profil.yaml` 0.2.0 for its provenance. It changes no eCH-0295 class. |
 | 2 Converter: prompts and code | The code of the method of the report: `track_2a/src/converter_gj/`. These files are copies to read. The app runs the files of `track_2a/app/layout/src/`, which also has the rule for the first author. The prompts for Apertus: `track_2a/src/prompts/gj_values_v1_de/` (value questions) and `track_2a/src/prompts/gj_jev_v1_de/` (block roles). The app: `track_2a/app/`. `make run-native` and `make run` (Docker, 3 samples only) ran on one Mac. In the app, each head value of a record comes from the rules; for the 3 samples, stored Apertus states give the block labels. |
-| 3 Evaluation | The one fixed run of 13.10.2026 against the export (see above). The one fixed run has no hand-checked gold set: no human checked a reference value of the export. The author examined 26 records of test documents for the earlier converter. The method of the report was not scored on them. The run has no count by language or by state level. |
+| 3 Evaluation | The one fixed run of 13.10.2026 against the export (see above). The one fixed run has no hand-checked gold set: its reference is the export, a register. The author examined 26 records of test documents for the earlier converter. The method of the report was not scored on them. The run has no count by language or by state level. |
 | 3 Cross-parliament question | In which parliaments does the PDF with the response of the executive also contain the submitted text? The report gives an answer on development documents (chapter 6). It uses block labels from an Apertus head, compared with AI labels only. The documents are a stratified sample of development parliaments; a share is not the share of all documents of a parliament. It is not a result of the one fixed run. |
 
 The public text of 12.10.2026 (commit `2fd48e2`) described an earlier converter, which takes its metadata values from the export. It is still in `track_2a/src/converter/` (command `make run-earlier`). Its scores on 26 records of test documents are not a part of the one fixed run.
@@ -112,5 +112,4 @@ Text of the template:
 
 - Language: English, to the rules of ASD-STE100 (Issue 9).
 - Authors: AI agents (Claude Opus 5.5) wrote this text for the author on 14.10.2026, from the records of the private project. The private project is the project folder of the author. It is not public.
-- On 15.10.2026 an AI agent corrected sentences after an audit and moved the chart into "Result in short".
-- No human examined this version of the text.
+- On 15.10.2026 an AI agent corrected sentences after an audit and moved the chart into "Result in short". In the evening, an AI agent shortened some sentences.

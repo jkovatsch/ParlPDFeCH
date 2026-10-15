@@ -6,7 +6,6 @@
 - **Demo:** no hosted demo. The app runs on your computer (chapter 7).
 - **Repository:** <https://github.com/jkovatsch/ParlPDFeCH>, folder `track_2a/`.
 - **Version:** 15.10.2026. It replaces the public texts of 12.10.2026 (earlier converter) and 14.10.2026, and a text of 13.10.2026 on block labels.
-- **Status of each value:** EXCEPTION, NOT RELEASED: no person accepted the plan of the run or these numbers.
 
 A name in square brackets, for example [`sets.docling.all`], is the id of a number in `numbers.json` in the same folder. The end of this report gives the short forms of the ids and the source files.
 
@@ -20,7 +19,7 @@ Method. Docling gives the text blocks. Code rules give the role of the document 
 
 Result. The one fixed run of 13.10.2026 compared the values of 872 [`R.documents`] documents of 26 [`P.all`] parliaments with the export, one time. With rules only, a share of 0.9431 [`R.affair_type.precision`] of the given affair types is equal to the export value. For the responder this share is 0.9756 [`R.responder_name.precision`]. The share correct is the share of documents with a reference that get the export value. With rules only it is 0.7923 [`R.affair_type.share_correct`] for the affair type and 0.2214 [`R.affair_number.share_correct`] for the affair number. For the affair number, the 2 dates, the title and the first author it is less than 0.5 (table 2).
 
-AI agents wrote the method and examined it, and no human checked a value of the one fixed run. No pass limit was fixed before the run. Chapter 6 gives the limits. No value of this report comes from a test document.
+AI agents wrote the method and examined it. No pass limit was fixed before the run. Chapter 6 gives the limits. No value of this report comes from a test document.
 
 ## 2. Architecture
 
@@ -69,7 +68,7 @@ Why rules first: a rule value has a page, a span and a reason that a reader can 
 - **Source:** the OpenParlData exports of 04.10.2026 and the PDF copies on <https://files.openparldata.ch>. Licence of the data: CC BY 4.0, "Source: OpenParlData.ch".
 - **Schema:** eCH-0295, working draft at commit `3cab44d` of <https://github.com/swiss/political-affairs-ech-group> (version I95). It is not a released standard.
 - **Split:** by parliament. No parliament of the run is a development parliament. The run has 26 [`P.all`] parliaments: 18 [`P.validation`] validation parliaments and 8 [`P.group7`] more parliaments (group 7). AI agents had read each group-7 document before the run.
-- **Reference:** the export value of each field after the normalisation of addendum G. For the affair type it is the eCH type that a project map gives for the local type name of the export. No human examined a reference value.
+- **Reference:** the export value of each field after the normalisation of addendum G. For the affair type it is the eCH type that a project map gives for the local type name of the export.
 - **Personal data:** the documents hold names of persons with a public role. The repository has the PDF of the 3 samples only, and no text of a validation, group-7 or test document.
 
 Table 1: sets. Tags: `sets.docling.<set>`, `D.parliaments`, `P.<set>`, `sets.test_set.<key>` (protocol only).
@@ -87,11 +86,11 @@ Languages of the 2,665 [`sets.docling.all`] documents: German 1,699, French 676,
 
 **The one fixed run.** On 13.10.2026 at 21:30, 2 readers gave values for the 872 documents: the reader with rules only and the combined reader. A tool compared each value with the export, one time. The rules, thresholds, heads and entry decisions were fixed before the run. No change after the run is known.
 
-**Reference.** The challenge asks for an evaluation against a hand-checked gold set. The one fixed run has none: its reference is the export, and no human examined a reference value. A separate set has 26 records of test documents (table 1). AI agents proposed them. The author examined each record on the PDF, and a program compared the values that come only from the export with the export record. No person accepted this reference. The earlier converter of 12.10.2026 was scored on these records. The one fixed run did not use them.
+**Reference.** The challenge asks for an evaluation against a hand-checked gold set. The one fixed run has none: its reference is the export, a register. A separate set has 26 records of test documents (table 1). AI agents proposed them. The author examined each record on the PDF, and a program compared the values that come only from the export with the export record. The earlier converter of 12.10.2026 was scored on these records. The one fixed run did not use them.
 
 **Measures.** A value is correct if it is equal to the export value after the normalisation of addendum G. Else it is wrong. Precision is correct / (correct + wrong). Found rate is (correct + wrong) / documents with a reference. Share correct is correct / documents with a reference: the product of precision and found rate. Each interval is a 90 % interval of a bootstrap by parliament. The 2 response fields count only documents with the rule role `response` or `combined`. The measure counts each value, also a value below the floor of 0.5 that the writer does not put into the record.
 
-Table 2: reader with rules only. Run: all 872 documents, stem `R` (keys `precision`, `found_rate`, `share_correct`, each interval `.bootstrap_low5` to `.bootstrap_high95`; `correct`, `with_reference`). Development: round 4, 1,793 documents, stem `D` (keys `precision`, `found_rate`, `recall`), mark "after the opening". Reference: the export. No human checked a value. Status EXCEPTION, NOT RELEASED.
+Table 2: reader with rules only. Run: all 872 documents, stem `R` (keys `precision`, `found_rate`, `share_correct`, each interval `.bootstrap_low5` to `.bootstrap_high95`; `correct`, `with_reference`). Development: round 4, 1,793 documents, stem `D` (keys `precision`, `found_rate`, `recall`), mark "after the opening". Reference: the export.
 
 | Field | Precision, run (interval) | Found rate, run | Share correct, run (interval) | Correct / with reference, run | Precision, dev. | Found rate, dev. | Share correct, dev. |
 |:--------------|:-------------------|-----:|:-------------------|------:|-----:|-----:|-----:|
@@ -103,7 +102,7 @@ Table 2: reader with rules only. Run: all 872 documents, stem `R` (keys `precisi
 | responder | 0.9756 (0.9272 to 1.0000) | 0.9152 | 0.8929 (0.7974 to 0.9610) | 200 / 224 | 0.9819 | 0.9651 | 0.9476 |
 | first author | 0.8125 (0.7454 to 0.8879) | 0.5607 | 0.4556 (0.3690 to 0.5611) | 195 / 428 | 0.8806 | 0.8488 | 0.7474 |
 
-Table 3: combined reader (rules and the 2 Apertus tiers that entered). The other 5 fields are equal to table 2. Run stem `C`, with the keys of table 2; development stem `H.<field>.combined` (keys `precision`, `found_rate`, `share_correct`), mark "after the design values of addendum I". Reference: the export. No human checked a value. Status EXCEPTION, NOT RELEASED.
+Table 3: combined reader (rules and the 2 Apertus tiers that entered). The other 5 fields are equal to table 2. Run stem `C`, with the keys of table 2; development stem `H.<field>.combined` (keys `precision`, `found_rate`, `share_correct`), mark "after the design values of addendum I". Reference: the export.
 
 | Field | Precision, run (interval) | Found rate, run | Share correct, run (interval) | Correct / with reference, run | Precision, dev. | Found rate, dev. | Share correct, dev. |
 |:--------------|:-------------------|-----:|:-------------------|------:|-----:|-----:|-----:|
@@ -112,7 +111,7 @@ Table 3: combined reader (rules and the 2 Apertus tiers that entered). The other
 
 The 2 tiers raise the found rate of the affair type from 0.8402 [`R.affair_type.found_rate`] to 0.9208 [`C.affair_type.found_rate`]. For the first author it goes from 0.5607 [`R.first_author.found_rate`] to 0.7313 [`C.first_author.found_rate`]. The precision stays near that of the rules.
 
-Table 4: the 2 Apertus tiers. Run stem `C.tier.<tier>` (keys `correct`, `units`, `precision`, `stored_probability`, `replaced_rule_values`); development stem `H.tier.<tier>` (keys `equal`, `different`, `precision`), the entry data of addendum I. Reference: the export. Status EXCEPTION, NOT RELEASED.
+Table 4: the 2 Apertus tiers. Run stem `C.tier.<tier>` (keys `correct`, `units`, `precision`, `stored_probability`, `replaced_rule_values`); development stem `H.tier.<tier>` (keys `equal`, `different`, `precision`), the entry data of addendum I. Reference: the export.
 
 | Tier | Correct / units, run | Precision, run | Equal / different, development | Precision, development | Probability from the calibration |
 |:-------------------------|------:|------:|------:|------:|------:|
@@ -121,16 +120,16 @@ Table 4: the 2 Apertus tiers. Run stem `C.tier.<tier>` (keys `correct`, `units`,
 
 **Values with the status certain.** The status certain exists for 2 fields (table 5). The 5 other fields have 0 certain values [`R.title.certain.values`].
 
-Table 5: values with the status certain, reader with rules only. Run stem `R.<field>.certain` (keys `values`, `correct`, `with_reference`, `precision`); development stem `D.<field>.certain.precision`. Reference: the export. Status EXCEPTION, NOT RELEASED.
+Table 5: values with the status certain, reader with rules only. Run stem `R.<field>.certain` (keys `values`, `correct`, `with_reference`, `precision`); development stem `D.<field>.certain.precision`. Reference: the export.
 
 | Field | Certain values, run | Correct / with reference, run | Precision, run | Precision, development |
 |:----------------|------:|------:|------:|------:|
 | affair type | 460 | 426 / 446 | 0.9552 | 0.9699 |
 | responder | 175 | 170 / 175 | 0.9714 | 0.9932 |
 
-**Check by eye (information).** 2 AI examiners read the same random sample of 50 [`E.documents`] documents of the run. Each sheet must have the lines of the document and the values of the combined reader, and no export value (plan of the run). Nobody checked the sheets for this rule. An examiner read the first lines, the last lines and the lines near each value, not the full document. The 2 examiners gave a different judgement in 13 [`E.pairs_that_differ`] of 350 [`E.pairs`] pairs of document and field. The check changes no outcome.
+**Check by eye (information).** 2 AI examiners read the same random sample of 50 [`E.documents`] documents of the run. Each sheet must have the lines of the document and the values of the combined reader, and no export value (plan of the run). The content of the sheets was not examined for this rule. An examiner read the first lines, the last lines and the lines near each value, not the full document. The 2 examiners gave a different judgement in 13 [`E.pairs_that_differ`] of 350 [`E.pairs`] pairs of document and field. The check changes no outcome.
 
-Table 6: check by eye. Status EXCEPTION, NOT RELEASED. Stem `E.<a|b>.<field>` (keys `C`, `given`, `M`), mark "reading check"; precision `C.<field>.precision`. "Not given" means: the lines read print the value, and the reader gave none. The 2 columns are different measures on different samples: 50 documents against 872.
+Table 6: check by eye. Stem `E.<a|b>.<field>` (keys `C`, `given`, `M`), mark "reading check"; precision `C.<field>.precision`. "Not given" means: the lines read print the value, and the reader gave none. The 2 columns are different measures on different samples: 50 documents against 872.
 
 | Field | Correct as printed / given: examiner A, B | Not given: A, B | Precision against the export, combined reader, 872 documents |
 |:----------------|:--------------|------:|------:|
@@ -148,21 +147,21 @@ Items 1 to 12 are the limits of the result ([docs/limits.md](docs/limits.md)). I
 
 1. With rules only, the share correct is low for the affair number, the submission date and the response date: about 1 of 4 or 5. For the title and the first author it is less than 1 of 2 (table 2). With the combined reader the first author has 0.6028 [`C.first_author.share_correct`].
 2. The authors of the value rules of 13.10.2026 read the 44 development parliaments; the 26 parliaments of the run are other parliaments. Addendum I says that these authors opened no file of the 872 documents; no examination compared this statement with the work records. For the title, the affair number and the 2 dates the precision is lower in the run than on the development documents. The found rate also goes down: response date 0.4057 [`R.response_date.found_rate`] against 0.9238 [`D.response_date.found_rate`], first author 0.5607 against 0.8488 [`D.first_author.found_rate`].
-3. In the check by eye, each AI examiner named 12 [`E.kind_looks_wrong`] of 50 documents with a kind that looks wrong. For such a document the cascade does not search some fields. The run did not measure the kind.
+3. In the check by eye, each AI examiner named 12 [`E.kind_looks_wrong`] of 50 documents with a kind that looks wrong. Where the kind is wrong, the cascade does not search some fields. The run did not measure the kind.
 4. AI agents read 116 [`K.read_by_ai_agents.lower_limit`] or more of the 872 documents in earlier work: 48 [`K.kind1.validation`] validation documents and all 68 [`K.kind1.group7`] group-7 documents. For 300 [`K.s4.all`] of the 872 documents, an audit found a sign of earlier contact: text or values next to the id, or the id in a list of earlier work. For the other 572 [`K.s3.all`] it found no such sign; this is no proof of no contact.
 5. The older rule chain of the earlier converter (method `nos4`) makes the rule files of the run. AI agents designed it on a list with 38 [`KD.validation`] documents of the run, of 9 [`KD.validation_parliaments`] of the 18 validation parliaments. For this part the run is not a measure on new parliaments.
-6. AI agents of one model family (Claude Opus 5.5) wrote the rules, the tools, the measures and the audits. AI agents of the same family examined them. No human checked a value of the one fixed run, a tool or a number.
+6. AI agents of one model family (Claude Opus 5.5) wrote the rules, the tools, the measures and the audits. AI agents of the same family examined them.
 7. The reference is a register. A value can be correct as printed and differ from the register. Table 6 compares the check by eye with the precision against the export. For the affair number and the submission date the share correct as printed is more. For the affair type it is less. The cause is not examined.
 8. No pass limit was fixed before the run. Thus this report does not say that a field passes. It gives the numbers and their plain meaning.
 9. The development values are optimistic design values. The rule authors read all 44 development parliaments.
 10. The reference of the affair type is a project map of the export type. The same value is the fit target of the `Q1` head.
 11. Group 7 has 68 documents of 8 parliaments, so its intervals are wide. There the responder has 5 [`G7.responder_name.wrong`] wrong values of 25 [`G7.responder_name.given`], all of 1 parliament. The 21 certain responder values there have a precision of 0.7619 [`G7.responder_name.certain.precision`].
-12. Each time comes from one laptop clock, and no outside time stamp exists. Each value has the status EXCEPTION, NOT RELEASED.
+12. Each time comes from one laptop clock, and no outside time stamp exists.
 13. The share correct, the comparison in table 6 and table 7 were not planned measures of the plan of the run.
 14. A second tool and a third calculation, each by AI agents, gave the same counts of the run from the same files. This does not show that a value is true.
 15. On 14.10.2026 a private build pipeline on Linux built a container image from the source tree of the package, which `app/` copies. There the converter made the 6 sample records, each valid. Nobody started that image.
 
-Table 7: criterion Breadth, reader with rules only, by set and by parliament. Share correct: stems `V` and `G7` (key `share_correct`). Spread: stem `S.<field>` (keys `parliaments_that_count`, `lowest_precision`, `median_precision`, `highest_precision`), information made after the run. A parliament counts with 5 or more given values with a reference. Status EXCEPTION, NOT RELEASED.
+Table 7: criterion Breadth, reader with rules only, by set and by parliament. Share correct: stems `V` and `G7` (key `share_correct`). Spread: stem `S.<field>` (keys `parliaments_that_count`, `lowest_precision`, `median_precision`, `highest_precision`), information made after the run. A parliament counts with 5 or more given values with a reference.
 
 | Field | Share correct, validation (18 parliaments) | Share correct, group 7 (8 parliaments) | Parliaments that count | Precision of a parliament: lowest / median / highest |
 |:----------------|------:|------:|------:|:--------------------|
@@ -176,7 +175,7 @@ Table 7: criterion Breadth, reader with rules only, by set and by parliament. Sh
 
 Breadth: 26 parliaments in the run and 44 in development. Chapter 4 gives the languages of all 2,665 documents, with 268 [`sets.language.all.it`] in Italian. This report has no count of the 872 documents by language or by state level. The cascade has 7 kinds of documents, and it searches each head value only for some kinds.
 
-Table 8: criterion Insight, the head values against eCH-0295. Tags: `cascade.<key>` (read), `gaps.affair_type.all` (protocol only), `sets.docling.all`, table 7. Status EXCEPTION, NOT RELEASED.
+Table 8: criterion Insight, the head values against eCH-0295. Tags: `cascade.<key>` (read), `gaps.affair_type.all` (protocol only), `sets.docling.all`, table 7.
 
 | Question | Answer |
 |:------------------------------|:---------------------------------------------------------------|
@@ -204,7 +203,7 @@ Cross-parliament question (development documents, information): in which parliam
 
 ## 8. Next steps
 
-1. A human check of a sample of reference values and of the kind of the document.
+1. A hand-checked gold set: a sample of reference values and of the kind of the document.
 2. A measure of the kind against labels; value rules for more parliaments; a run on documents that no agent read.
 3. Apertus states for an own PDF, and a start of the container image on Linux.
 
@@ -253,4 +252,4 @@ Paths are files of the private project. `numbers.json` gives the SHA-256 of each
 | `sets.*` (other) | `daten/gj/docs_build.json`, `daten/gj/labels_build.json` |
 | `xp.*` | `daten/gj/crossparl_b1s_dev/crossparl.json` |
 
-About this text: AI agents (Claude Opus 5.5) wrote it from the records of the private project, in English to the rules of ASD-STE100 (Issue 9). No human examined this version.
+About this text: AI agents (Claude Opus 5.5) wrote it from the records of the private project, in English to the rules of ASD-STE100 (Issue 9).

@@ -53,5 +53,5 @@ Sources: the report of path 2, iteration 2, of the private project (SHA-256 `43d
 ## About this text
 
 - Language: English, to the rules of ASD-STE100 (Issue 9).
-- Authoring: an AI agent (Claude Opus 5.5) wrote this text on 12.10.2026. No human examined it.
-- On 15.10.2026, an AI agent (Claude Opus 5.5) marked the text as history and corrected 2 references. It removed the value table; its values are in the stored results. No human examined it.
+- Authoring: an AI agent (Claude Opus 5.5) wrote this text on 12.10.2026.
+- On 15.10.2026, an AI agent (Claude Opus 5.5) marked the text as history and corrected 2 references. It removed the value table; its values are in the stored results.

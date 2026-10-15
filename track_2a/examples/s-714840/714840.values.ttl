@@ -1,0 +1,44 @@
+# The values of 714840.ech.ttl with their probability, page and place in the text (form parlpdfech-values-ttl/2).
+# pvl:resource and pvl:property give the statement of the eCH-0295 record. pvl:entity is the actor whose name holds the value.
+# pvl:probability comes from the development documents in which the same rule tier gave a value: (equal to OpenParlData + 0.5) / (documents + 1). No person checked a value.
+# The prefix pvl is a vocabulary of this project. Its domain is a placeholder: the vocabulary is not published.
+@prefix aff: <https://ch.paf.link/schema/affairs/> .
+@prefix pvl: <https://schema.parlpdfech.example/values/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://parlpdfech.ansv.ch/id/gj/record/doc-714840> a pvl:ValueSet ;
+    pvl:document <https://api.openparldata.ch/v1/docs/714840> ;
+    pvl:form "parlpdfech-values-ttl/2" ;
+    pvl:reading <https://parlpdfech.ansv.ch/id/gj/record/doc-714840/value/affair_number>,
+        <https://parlpdfech.ansv.ch/id/gj/record/doc-714840/value/affair_type> .
+
+<https://parlpdfech.ansv.ch/id/gj/record/doc-714840/value/affair_number> a pvl:ValueReading ;
+    pvl:calibration <https://parlpdfech.ansv.ch/id/calibration/value.affair_number.number_letter_code_line> ;
+    pvl:charEnd 161 ;
+    pvl:charStart 154 ;
+    pvl:field "affair_number" ;
+    pvl:label <https://parlpdfech.ansv.ch/id/gj/record/doc-714840/label/pdf-affair_number> ;
+    pvl:page 1 ;
+    pvl:printed "P140393" ;
+    pvl:probability 0.9706 ;
+    pvl:property aff:affairNumber ;
+    pvl:resource <https://parlpdfech.ansv.ch/id/gj/record/doc-714840/affair> ;
+    pvl:status "unsure" ;
+    pvl:tier "number_letter_code_line" ;
+    pvl:value "P140393" .
+
+<https://parlpdfech.ansv.ch/id/gj/record/doc-714840/value/affair_type> a pvl:ValueReading ;
+    pvl:calibration <https://parlpdfech.ansv.ch/id/calibration/value.affair_type.type_government_head> ;
+    pvl:charEnd 62 ;
+    pvl:charStart 39 ;
+    pvl:field "affair_type" ;
+    pvl:label <https://parlpdfech.ansv.ch/id/gj/record/doc-714840/label/pdf-affair_type> ;
+    pvl:page 1 ;
+    pvl:printed "Regierungsratsbeschluss" ;
+    pvl:probability 0.9568 ;
+    pvl:property aff:affairType ;
+    pvl:resource <https://parlpdfech.ansv.ch/id/gj/record/doc-714840/affair> ;
+    pvl:status "certain" ;
+    pvl:tier "type_government_head" ;
+    pvl:value "draft_decree" .
+

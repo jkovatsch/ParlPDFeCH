@@ -1,9 +1,9 @@
 {
  "schema": "parlpdfech-dist-manifest/1",
  "status": "EXCEPTION, NOT RELEASED",
- "made_utc": "2026-10-15T16:25:16Z",
+ "made_utc": "2026-10-15T21:28:28Z",
  "git": {
-  "commit": "17451069e0259dfafe2a1cf4c89344b40f2bc275",
+  "commit": "5e38aa3b29ef8710253a54ec42ce15622e2b71d8",
   "package_files_changed_after_the_commit": 0
  },
  "layout_check": {
@@ -36,20 +36,20 @@
  "site": null,
  "total": {
   "files": 211,
-  "bytes": 21996488
+  "bytes": 21996361
  },
  "by_folder": {
   "(root)": {
    "files": 14,
-   "bytes": 531175
+   "bytes": 530935
   },
   "container": {
    "files": 8,
-   "bytes": 44724
+   "bytes": 44632
   },
   "contract": {
    "files": 15,
-   "bytes": 527247
+   "bytes": 527154
   },
   "data": {
    "files": 34,
@@ -65,19 +65,19 @@
   },
   "server": {
    "files": 12,
-   "bytes": 211473
+   "bytes": 211410
   },
   "ui": {
    "files": 20,
-   "bytes": 539316
+   "bytes": 539976
   },
   "view": {
    "files": 2,
-   "bytes": 80920
+   "bytes": 80816
   },
   "worker": {
    "files": 12,
-   "bytes": 244277
+   "bytes": 244082
   }
  },
  "files": [
@@ -113,8 +113,8 @@
   },
   {
    "path": "DIST.md",
-   "bytes": 6383,
-   "sha256": "8c20aa69476f09364ed57c8e911b982a51f0bb29a34043d1206afc6b73baa6fe"
+   "bytes": 6291,
+   "sha256": "1f454616bf4fcdfddc8171fc63f68c16d7d33a654585cb7e395e556ef51b829a"
   },
   {
    "path": "Dockerfile",
@@ -133,8 +133,8 @@
   },
   {
    "path": "README.md",
-   "bytes": 38018,
-   "sha256": "8ae6196b3f082377435a7bcb3901148ccc10972f1776708f7af5bc243815b096"
+   "bytes": 37870,
+   "sha256": "5787c6b9e4178ff228b9307d14c87819d46302915d6123a33289648ba0bab454"
   },
   {
    "path": "STATE.md",
@@ -148,8 +148,8 @@
   },
   {
    "path": "container/BUILD-NOTES.md",
-   "bytes": 27690,
-   "sha256": "23332eb22b4986efd52c53ed7799b7cc284fc6c0f7f5215a2f2e418e54c25b11"
+   "bytes": 27598,
+   "sha256": "b010692fbd1a5596c982627787bc96c9e1945a110805f56c9bf5f3d86acb17ec"
   },
   {
    "path": "container/check_dist.py",
@@ -243,8 +243,8 @@
   },
   {
    "path": "contract/strings.contract.json",
-   "bytes": 28563,
-   "sha256": "1b833030458f823f286e497ccd47e24bc9df45954d35df293f60e0e50baf6c4b"
+   "bytes": 28470,
+   "sha256": "f4c89cccdaced07c68a3c27289b13b0559212c50ea0c642bf43e512784ff1166"
   },
   {
    "path": "contract/tools/make_schema.py",
@@ -913,8 +913,8 @@
   },
   {
    "path": "server/README.md",
-   "bytes": 10731,
-   "sha256": "a1983bfc3d6fb621a821c33db5ecb81b07ffb5ef66fcc497a81fa603762c71e5"
+   "bytes": 10668,
+   "sha256": "e26f63ecc3e6bc930b0675eadcf518715c2511fbd1078267b6f224e7027e2f1d"
   },
   {
    "path": "server/src/errors.rs",
@@ -968,8 +968,8 @@
   },
   {
    "path": "ui/README.md",
-   "bytes": 41254,
-   "sha256": "6db6f745a965bf594c252cc79b784ef69998aa733c6b335b353ce16feff19e7b"
+   "bytes": 42113,
+   "sha256": "362d2318e9d2dfe32265c2cdd9b9a5b251c7167dbaee3d62fb4b4a9ef529519f"
   },
   {
    "path": "ui/app.css",
@@ -1053,8 +1053,8 @@
   },
   {
    "path": "ui/strings.json",
-   "bytes": 142935,
-   "sha256": "f224a147da528f1be2af5ca2897753799c9c1cdf30b8b8dc83fb6ac4a18ee0a8"
+   "bytes": 142736,
+   "sha256": "6c0f4c359840bc8e209adb4a693cbbb676dfece178c3f9b61d895fa62e9b2791"
   },
   {
    "path": "ui/tools/check_ui.mjs",
@@ -1068,8 +1068,8 @@
   },
   {
    "path": "view/README.md",
-   "bytes": 18303,
-   "sha256": "57a3a376c386f5ac5223056a0c4eccc8b874233c419bae79bf5b76ecaf845e9e"
+   "bytes": 18199,
+   "sha256": "cb5feab1824804c00d0b671613da0606075bedbbe8dcba4b79ea5339a64e51c0"
   },
   {
    "path": "view/site_view.py",
@@ -1078,8 +1078,8 @@
   },
   {
    "path": "worker/README.md",
-   "bytes": 51293,
-   "sha256": "f3cc705d3dca6adba9e88472dc26beb92554ae78719ee76c03762d0069817bc5"
+   "bytes": 51098,
+   "sha256": "4fb496986e435b40c7a7dd86c1e94efd4bdfe07120a6a0cdf7cace585324b730"
   },
   {
    "path": "worker/fresh.py",

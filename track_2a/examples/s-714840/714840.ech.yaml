@@ -1,0 +1,8 @@
+# eCH-0295 instance (I95, root class Container), src/m11_writer.py (m11-writer-6), document 714840
+# Head values read from the PDF by code rules; no value of the export. Status EXCEPTION, NOT RELEASED.
+# Side files: 714840.provenance.yaml, 714840.labels.yaml
+global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-714840/i95
+affairs:
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-714840/affair
+  affair_number: P140393
+  affair_type: draft_decree

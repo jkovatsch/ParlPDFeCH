@@ -1,0 +1,1249 @@
+# Label file (src/m11_label_schema.yaml version 0.2.0, class LabelRecord) of 879163.ech.yaml.
+global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label-record
+describes_record: https://parlpdfech.ansv.ch/id/gj/record/doc-879163
+ech_delivery: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/i95
+source_document: https://api.openparldata.ch/v1/docs/879163
+label_run:
+  global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  script_name: src/m11_writer.py
+  run_mode: cascade
+  process_status: EXCEPTION (process rule 10); NOT RELEASED
+  input_files:
+  - file_role: docs
+    file_path: daten/gj/docs/879163.json
+    file_digest: c64d09b42860b1c0a435184f2ffd97bd7f90c5ce69cd296b80faf73d21112d7e
+  - file_role: decisions
+    file_path: daten/gj/fullrun_b1s_dev/decisions/879163.json
+    file_digest: 0a527b72fb2f34db1e28d56de7769fc8cee1628b74af4ca7c7e3272210ac0a34
+  - file_role: atoms
+    file_path: daten/iso/atome/879163.json
+    file_digest: bec495c273a56baa05f32c1339db4902376475af3e3b3d8b14a69b7a5f2b32ce
+  - file_role: docling
+    file_path: daten/iso/docling/879163.json
+    file_digest: 4c1f7e5f288adcabaa4f6006ef363fbcd496e4aa0dc794acb6e9f25f21316c01
+  - file_role: calibrations
+    file_path: daten/gj/fullrun_b1s_dev/calibrations.json
+    file_digest: 90bf5386a0edb150fac4acb82cae222102c1900fa966f69712c5485421eca9a7
+  - file_role: value_calibration
+    file_path: daten/gj_values/round4/calibration_dev_all.json
+    file_digest: e48e7a8d8efdd1e10b68071df85275dc0c5b69e004bb8051b2aecd2a1d4229d7
+  - file_role: rules
+    file_path: daten/gj/rules/879163.json
+    file_digest: 71d995411724df66097cf4700d736dc4260887f77ba4d55f555b94f36b0ce192
+  - file_role: export
+    file_path: daten/gj/fullrun_b1s_dev/879163/export/879163.json
+    file_digest: 84273fd4142663bf7220dc5d8727ea28c5048d9099bfe96d06b6b2e634220765
+  ech_commit: 3cab44d6a07f60bd8211cccdcf948717ef8fba5c
+  linkml_version: linkml==1.11.1
+  datetime_generated: '2026-10-15T16:28:15Z'
+label_assertions:
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/d1
+  label_subject: https://api.openparldata.ch/v1/docs/879163
+  label_predicate: https://schema.parlpdfech.example/labels/documentTextParts
+  label_object: B
+  label_kind: document_text_parts
+  label_source: rule
+  label_probability: 0.9572
+  option_probabilities:
+  - option_value: A
+    label_probability: 0.007
+  - option_value: B
+    label_probability: 0.9572
+  - option_value: C
+    label_probability: 0.0278
+  - option_value: D
+    label_probability: 0.008
+  value_status: certain
+  calibration: https://parlpdfech.ansv.ch/id/calibration/gj1-d1-verifier-platt
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  rule_id: A2
+  page: 1
+  last_page: 1
+  span_start: 0
+  span_end: 2327
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/r2
+  label_subject: https://api.openparldata.ch/v1/docs/879163
+  label_predicate: https://schema.parlpdfech.example/labels/executiveResponse
+  label_object: 'yes'
+  label_kind: executive_response
+  label_source: apertus_head
+  label_probability: 0.8314
+  option_probabilities:
+  - option_value: 'yes'
+    label_probability: 0.8314
+  - option_value: 'no'
+    label_probability: 0.1686
+  value_status: certain
+  calibration: https://parlpdfech.ansv.ch/id/calibration/gj1-r2-platt-step0b
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  page: 1
+  last_page: 1
+  span_start: 0
+  span_end: 2327
+  label_note: 'final check R2 (frozen head H): the document holds a response of the executive; it agrees with the block path'
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B1-slot
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B1
+  label_predicate: https://ch.paf.link/schema/affairs/textType
+  label_object: none
+  label_kind: block_slot
+  label_source: rule
+  label_probability: 0.995
+  option_probabilities:
+  - option_value: submitted
+    label_probability: 0.005
+  - option_value: reasoning
+    label_probability: 0.005
+  - option_value: response
+    label_probability: 0.005
+  - option_value: recommendation
+    label_probability: 0.005
+  - option_value: title
+    label_probability: 0.005
+  - option_value: none
+    label_probability: 0.995
+  value_status: certain
+  calibration: https://parlpdfech.ansv.ch/id/calibration/gj1-tier-fixed-R3-none
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  page: 1
+  span_start: 0
+  span_end: 0
+  tier: fixed:R3
+  in_sample: true
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B2-slot
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B2
+  label_predicate: https://ch.paf.link/schema/affairs/textType
+  label_object: none
+  label_kind: block_slot
+  label_source: code_step
+  label_probability: 0.7527
+  option_probabilities:
+  - option_value: submitted
+    label_probability: 0.005
+  - option_value: reasoning
+    label_probability: 0.005
+  - option_value: response
+    label_probability: 0.0058
+  - option_value: recommendation
+    label_probability: 0.0144
+  - option_value: title
+    label_probability: 0.226
+  - option_value: none
+    label_probability: 0.7527
+  value_status: unsure
+  calibration: https://parlpdfech.ansv.ch/id/calibration/gj1-b1s-b2-marginal-temperature
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  page: 1
+  span_start: 0
+  span_end: 10
+  tier: s1_start:A2
+  in_sample: true
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B3-slot
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B3
+  label_predicate: https://ch.paf.link/schema/affairs/textType
+  label_object: none
+  label_kind: block_slot
+  label_source: code_step
+  label_probability: 0.7733
+  option_probabilities:
+  - option_value: submitted
+    label_probability: 0.005
+  - option_value: reasoning
+    label_probability: 0.005
+  - option_value: response
+    label_probability: 0.005
+  - option_value: recommendation
+    label_probability: 0.0115
+  - option_value: title
+    label_probability: 0.211
+  - option_value: none
+    label_probability: 0.7733
+  value_status: unsure
+  calibration: https://parlpdfech.ansv.ch/id/calibration/gj1-b1s-b2-marginal-temperature
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  page: 1
+  span_start: 12
+  span_end: 25
+  tier: s1_start:A2
+  in_sample: true
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B4-slot
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B4
+  label_predicate: https://ch.paf.link/schema/affairs/textType
+  label_object: none
+  label_kind: block_slot
+  label_source: code_step
+  label_probability: 0.7485
+  option_probabilities:
+  - option_value: submitted
+    label_probability: 0.005
+  - option_value: reasoning
+    label_probability: 0.005
+  - option_value: response
+    label_probability: 0.0082
+  - option_value: recommendation
+    label_probability: 0.0396
+  - option_value: title
+    label_probability: 0.2025
+  - option_value: none
+    label_probability: 0.7485
+  value_status: unsure
+  calibration: https://parlpdfech.ansv.ch/id/calibration/gj1-b1s-b2-marginal-temperature
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  page: 1
+  span_start: 27
+  span_end: 65
+  tier: s1_start:A2
+  in_sample: true
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B5-slot
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B5
+  label_predicate: https://ch.paf.link/schema/affairs/textType
+  label_object: title
+  label_kind: block_slot
+  label_source: code_step
+  label_probability: 0.8018
+  option_probabilities:
+  - option_value: submitted
+    label_probability: 0.005
+  - option_value: reasoning
+    label_probability: 0.005
+  - option_value: response
+    label_probability: 0.0068
+  - option_value: recommendation
+    label_probability: 0.0267
+  - option_value: title
+    label_probability: 0.8018
+  - option_value: none
+    label_probability: 0.1629
+  value_status: certain
+  calibration: https://parlpdfech.ansv.ch/id/calibration/gj1-b1s-b2-marginal-temperature
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  page: 1
+  span_start: 67
+  span_end: 111
+  tier: s1_start:A2
+  in_sample: true
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B6-slot
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B6
+  label_predicate: https://ch.paf.link/schema/affairs/textType
+  label_object: title
+  label_kind: block_slot
+  label_source: code_step
+  label_probability: 0.9229
+  option_probabilities:
+  - option_value: submitted
+    label_probability: 0.005
+  - option_value: reasoning
+    label_probability: 0.005
+  - option_value: response
+    label_probability: 0.005
+  - option_value: recommendation
+    label_probability: 0.0117
+  - option_value: title
+    label_probability: 0.9229
+  - option_value: none
+    label_probability: 0.0598
+  value_status: certain
+  calibration: https://parlpdfech.ansv.ch/id/calibration/gj1-b1s-b2-marginal-temperature
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  page: 1
+  span_start: 113
+  span_end: 155
+  tier: s1_start:A2
+  in_sample: true
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B7-slot
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B7
+  label_predicate: https://ch.paf.link/schema/affairs/textType
+  label_object: title
+  label_kind: block_slot
+  label_source: code_step
+  label_probability: 0.8741
+  option_probabilities:
+  - option_value: submitted
+    label_probability: 0.0083
+  - option_value: reasoning
+    label_probability: 0.005
+  - option_value: response
+    label_probability: 0.0449
+  - option_value: recommendation
+    label_probability: 0.0308
+  - option_value: title
+    label_probability: 0.8741
+  - option_value: none
+    label_probability: 0.0392
+  value_status: certain
+  calibration: https://parlpdfech.ansv.ch/id/calibration/gj1-b1s-b2-marginal-temperature
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  page: 1
+  span_start: 157
+  span_end: 235
+  tier: s1_start:A2
+  in_sample: true
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B8-slot
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B8
+  label_predicate: https://ch.paf.link/schema/affairs/textType
+  label_object: response
+  label_kind: block_slot
+  label_source: code_step
+  label_probability: 0.4416
+  option_probabilities:
+  - option_value: submitted
+    label_probability: 0.042
+  - option_value: reasoning
+    label_probability: 0.0324
+  - option_value: response
+    label_probability: 0.4416
+  - option_value: recommendation
+    label_probability: 0.0864
+  - option_value: title
+    label_probability: 0.1689
+  - option_value: none
+    label_probability: 0.2288
+  value_status: unsure
+  calibration: https://parlpdfech.ansv.ch/id/calibration/gj1-b1s-b2-marginal-temperature
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  page: 1
+  span_start: 237
+  span_end: 473
+  tier: s1_start:A2
+  in_sample: true
+  about_entity: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response
+  instance_path: affairs[0].response_steps[0].texts[0]
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B9-slot
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B9
+  label_predicate: https://ch.paf.link/schema/affairs/textType
+  label_object: response
+  label_kind: block_slot
+  label_source: code_step
+  label_probability: 0.6069
+  option_probabilities:
+  - option_value: submitted
+    label_probability: 0.0542
+  - option_value: reasoning
+    label_probability: 0.0659
+  - option_value: response
+    label_probability: 0.6069
+  - option_value: recommendation
+    label_probability: 0.0601
+  - option_value: title
+    label_probability: 0.0717
+  - option_value: none
+    label_probability: 0.1413
+  value_status: unsure
+  calibration: https://parlpdfech.ansv.ch/id/calibration/gj1-b1s-b2-marginal-temperature
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  page: 1
+  span_start: 475
+  span_end: 766
+  tier: s1_start:A2
+  in_sample: true
+  about_entity: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response
+  instance_path: affairs[0].response_steps[0].texts[0]
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B10-slot
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B10
+  label_predicate: https://ch.paf.link/schema/affairs/textType
+  label_object: response
+  label_kind: block_slot
+  label_source: code_step
+  label_probability: 0.67
+  option_probabilities:
+  - option_value: submitted
+    label_probability: 0.0518
+  - option_value: reasoning
+    label_probability: 0.0784
+  - option_value: response
+    label_probability: 0.67
+  - option_value: recommendation
+    label_probability: 0.0368
+  - option_value: title
+    label_probability: 0.0733
+  - option_value: none
+    label_probability: 0.0897
+  value_status: unsure
+  calibration: https://parlpdfech.ansv.ch/id/calibration/gj1-b1s-b2-marginal-temperature
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  page: 1
+  span_start: 768
+  span_end: 790
+  tier: s1_start:A2
+  in_sample: true
+  about_entity: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response
+  instance_path: affairs[0].response_steps[0].texts[0]
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B11-slot
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B11
+  label_predicate: https://ch.paf.link/schema/affairs/textType
+  label_object: response
+  label_kind: block_slot
+  label_source: code_step
+  label_probability: 0.7649
+  option_probabilities:
+  - option_value: submitted
+    label_probability: 0.0541
+  - option_value: reasoning
+    label_probability: 0.0921
+  - option_value: response
+    label_probability: 0.7649
+  - option_value: recommendation
+    label_probability: 0.0239
+  - option_value: title
+    label_probability: 0.0183
+  - option_value: none
+    label_probability: 0.0467
+  value_status: unsure
+  calibration: https://parlpdfech.ansv.ch/id/calibration/gj1-b1s-b2-marginal-temperature
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  page: 1
+  span_start: 792
+  span_end: 1039
+  tier: s1_start:A2
+  in_sample: true
+  about_entity: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response
+  instance_path: affairs[0].response_steps[0].texts[0]
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B12-slot
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B12
+  label_predicate: https://ch.paf.link/schema/affairs/textType
+  label_object: response
+  label_kind: block_slot
+  label_source: code_step
+  label_probability: 0.7244
+  option_probabilities:
+  - option_value: submitted
+    label_probability: 0.0503
+  - option_value: reasoning
+    label_probability: 0.0875
+  - option_value: response
+    label_probability: 0.7244
+  - option_value: recommendation
+    label_probability: 0.0453
+  - option_value: title
+    label_probability: 0.0199
+  - option_value: none
+    label_probability: 0.0725
+  value_status: unsure
+  calibration: https://parlpdfech.ansv.ch/id/calibration/gj1-b1s-b2-marginal-temperature
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  page: 1
+  span_start: 1041
+  span_end: 1054
+  tier: s1_start:A2
+  in_sample: true
+  about_entity: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response
+  instance_path: affairs[0].response_steps[0].texts[0]
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B13-slot
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B13
+  label_predicate: https://ch.paf.link/schema/affairs/textType
+  label_object: response
+  label_kind: block_slot
+  label_source: code_step
+  label_probability: 0.751
+  option_probabilities:
+  - option_value: submitted
+    label_probability: 0.0551
+  - option_value: reasoning
+    label_probability: 0.0897
+  - option_value: response
+    label_probability: 0.751
+  - option_value: recommendation
+    label_probability: 0.073
+  - option_value: title
+    label_probability: 0.0146
+  - option_value: none
+    label_probability: 0.0166
+  value_status: unsure
+  calibration: https://parlpdfech.ansv.ch/id/calibration/gj1-b1s-b2-marginal-temperature
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  page: 1
+  span_start: 1056
+  span_end: 1441
+  tier: s1_start:A2
+  in_sample: true
+  about_entity: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response
+  instance_path: affairs[0].response_steps[0].texts[0]
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B14-slot
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B14
+  label_predicate: https://ch.paf.link/schema/affairs/textType
+  label_object: response
+  label_kind: block_slot
+  label_source: code_step
+  label_probability: 0.5004
+  option_probabilities:
+  - option_value: submitted
+    label_probability: 0.0518
+  - option_value: reasoning
+    label_probability: 0.0562
+  - option_value: response
+    label_probability: 0.5004
+  - option_value: recommendation
+    label_probability: 0.2993
+  - option_value: title
+    label_probability: 0.0283
+  - option_value: none
+    label_probability: 0.0639
+  value_status: unsure
+  calibration: https://parlpdfech.ansv.ch/id/calibration/gj1-b1s-b2-marginal-temperature
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  page: 1
+  span_start: 1443
+  span_end: 1460
+  tier: s1_start:A2
+  in_sample: true
+  about_entity: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response
+  instance_path: affairs[0].response_steps[0].texts[0]
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B15-slot
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B15
+  label_predicate: https://ch.paf.link/schema/affairs/textType
+  label_object: response
+  label_kind: block_slot
+  label_source: code_step
+  label_probability: 0.4589
+  option_probabilities:
+  - option_value: submitted
+    label_probability: 0.0527
+  - option_value: reasoning
+    label_probability: 0.0506
+  - option_value: response
+    label_probability: 0.4589
+  - option_value: recommendation
+    label_probability: 0.3345
+  - option_value: title
+    label_probability: 0.0251
+  - option_value: none
+    label_probability: 0.0782
+  value_status: unsure
+  calibration: https://parlpdfech.ansv.ch/id/calibration/gj1-b1s-b2-marginal-temperature
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  page: 1
+  span_start: 1462
+  span_end: 1875
+  tier: s1_start:A2
+  in_sample: true
+  about_entity: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response
+  instance_path: affairs[0].response_steps[0].texts[0]
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B16-slot
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B16
+  label_predicate: https://ch.paf.link/schema/affairs/textType
+  label_object: recommendation
+  label_kind: block_slot
+  label_source: code_step
+  label_probability: 0.4136
+  option_probabilities:
+  - option_value: submitted
+    label_probability: 0.0395
+  - option_value: reasoning
+    label_probability: 0.0163
+  - option_value: response
+    label_probability: 0.2892
+  - option_value: recommendation
+    label_probability: 0.4136
+  - option_value: title
+    label_probability: 0.0189
+  - option_value: none
+    label_probability: 0.2225
+  value_status: unsure
+  calibration: https://parlpdfech.ansv.ch/id/calibration/gj1-b1s-b2-marginal-temperature
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  page: 1
+  span_start: 1877
+  span_end: 2023
+  tier: s1_start:A2
+  in_sample: true
+  about_entity: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response
+  instance_path: affairs[0].response_steps[0].texts[1]
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B17-slot
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B17
+  label_predicate: https://ch.paf.link/schema/affairs/textType
+  label_object: none
+  label_kind: block_slot
+  label_source: code_step
+  label_probability: 0.5445
+  option_probabilities:
+  - option_value: submitted
+    label_probability: 0.0054
+  - option_value: reasoning
+    label_probability: 0.005
+  - option_value: response
+    label_probability: 0.064
+  - option_value: recommendation
+    label_probability: 0.3587
+  - option_value: title
+    label_probability: 0.025
+  - option_value: none
+    label_probability: 0.5445
+  value_status: unsure
+  calibration: https://parlpdfech.ansv.ch/id/calibration/gj1-b1s-b2-marginal-temperature
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  page: 1
+  span_start: 2025
+  span_end: 2080
+  tier: s1_start:A2
+  in_sample: true
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B18-slot
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B18
+  label_predicate: https://ch.paf.link/schema/affairs/textType
+  label_object: none
+  label_kind: block_slot
+  label_source: code_step
+  label_probability: 0.7184
+  option_probabilities:
+  - option_value: submitted
+    label_probability: 0.005
+  - option_value: reasoning
+    label_probability: 0.005
+  - option_value: response
+    label_probability: 0.0169
+  - option_value: recommendation
+    label_probability: 0.2475
+  - option_value: title
+    label_probability: 0.0142
+  - option_value: none
+    label_probability: 0.7184
+  value_status: unsure
+  calibration: https://parlpdfech.ansv.ch/id/calibration/gj1-b1s-b2-marginal-temperature
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  page: 1
+  span_start: 2082
+  span_end: 2107
+  tier: s1_start:A2
+  in_sample: true
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B19-slot
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B19
+  label_predicate: https://ch.paf.link/schema/affairs/textType
+  label_object: none
+  label_kind: block_slot
+  label_source: rule
+  label_probability: 0.995
+  option_probabilities:
+  - option_value: submitted
+    label_probability: 0.005
+  - option_value: reasoning
+    label_probability: 0.005
+  - option_value: response
+    label_probability: 0.005
+  - option_value: recommendation
+    label_probability: 0.005
+  - option_value: title
+    label_probability: 0.005
+  - option_value: none
+    label_probability: 0.995
+  value_status: certain
+  calibration: https://parlpdfech.ansv.ch/id/calibration/gj1-tier-fixed-R3-none
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  page: 1
+  span_start: 2107
+  span_end: 2107
+  tier: fixed:R3
+  in_sample: true
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B20-slot
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B20
+  label_predicate: https://ch.paf.link/schema/affairs/textType
+  label_object: none
+  label_kind: block_slot
+  label_source: code_step
+  label_probability: 0.9515
+  option_probabilities:
+  - option_value: submitted
+    label_probability: 0.005
+  - option_value: reasoning
+    label_probability: 0.005
+  - option_value: response
+    label_probability: 0.0182
+  - option_value: recommendation
+    label_probability: 0.0184
+  - option_value: title
+    label_probability: 0.0089
+  - option_value: none
+    label_probability: 0.9515
+  value_status: certain
+  calibration: https://parlpdfech.ansv.ch/id/calibration/gj1-b1s-b2-marginal-temperature
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  page: 1
+  span_start: 2109
+  span_end: 2135
+  tier: s1_start:A2
+  in_sample: true
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B21-slot
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B21
+  label_predicate: https://ch.paf.link/schema/affairs/textType
+  label_object: none
+  label_kind: block_slot
+  label_source: rule
+  label_probability: 0.995
+  option_probabilities:
+  - option_value: submitted
+    label_probability: 0.005
+  - option_value: reasoning
+    label_probability: 0.005
+  - option_value: response
+    label_probability: 0.005
+  - option_value: recommendation
+    label_probability: 0.005
+  - option_value: title
+    label_probability: 0.005
+  - option_value: none
+    label_probability: 0.995
+  value_status: certain
+  calibration: https://parlpdfech.ansv.ch/id/calibration/gj1-tier-fixed-R3-none
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  page: 1
+  span_start: 2135
+  span_end: 2135
+  tier: fixed:R3
+  in_sample: true
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B22-slot
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B22
+  label_predicate: https://ch.paf.link/schema/affairs/textType
+  label_object: none
+  label_kind: block_slot
+  label_source: code_step
+  label_probability: 0.955
+  option_probabilities:
+  - option_value: submitted
+    label_probability: 0.005
+  - option_value: reasoning
+    label_probability: 0.005
+  - option_value: response
+    label_probability: 0.022
+  - option_value: recommendation
+    label_probability: 0.015
+  - option_value: title
+    label_probability: 0.005
+  - option_value: none
+    label_probability: 0.955
+  value_status: certain
+  calibration: https://parlpdfech.ansv.ch/id/calibration/gj1-b1s-b2-marginal-temperature
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  page: 1
+  span_start: 2137
+  span_end: 2176
+  tier: s1_start:A2
+  in_sample: true
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B23-slot
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B23
+  label_predicate: https://ch.paf.link/schema/affairs/textType
+  label_object: none
+  label_kind: block_slot
+  label_source: code_step
+  label_probability: 0.8965
+  option_probabilities:
+  - option_value: submitted
+    label_probability: 0.005
+  - option_value: reasoning
+    label_probability: 0.005
+  - option_value: response
+    label_probability: 0.0463
+  - option_value: recommendation
+    label_probability: 0.0378
+  - option_value: title
+    label_probability: 0.0137
+  - option_value: none
+    label_probability: 0.8965
+  value_status: certain
+  calibration: https://parlpdfech.ansv.ch/id/calibration/gj1-b1s-b2-marginal-temperature
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  page: 1
+  span_start: 2178
+  span_end: 2307
+  tier: s1_start:A2
+  in_sample: true
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/B24-slot
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/block/B24
+  label_predicate: https://ch.paf.link/schema/affairs/textType
+  label_object: none
+  label_kind: block_slot
+  label_source: code_step
+  label_probability: 0.8848
+  option_probabilities:
+  - option_value: submitted
+    label_probability: 0.0053
+  - option_value: reasoning
+    label_probability: 0.005
+  - option_value: response
+    label_probability: 0.0438
+  - option_value: recommendation
+    label_probability: 0.0421
+  - option_value: title
+    label_probability: 0.0199
+  - option_value: none
+    label_probability: 0.8848
+  value_status: certain
+  calibration: https://parlpdfech.ansv.ch/id/calibration/gj1-b1s-b2-marginal-temperature
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  page: 1
+  span_start: 2309
+  span_end: 2327
+  tier: s1_start:A2
+  in_sample: true
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/value-global_uri
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/i95
+  label_predicate: https://ld.ech.ch/schema/0292/meta-common/globalURI
+  label_object: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/i95
+  label_kind: constant_value
+  label_source: constant
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  about_entity: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/i95
+  instance_path: global_uri
+  label_note: derivation identifier_minted (ValueRecord of the provenance file)
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/value-affairs-0-global_uri
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair
+  label_predicate: https://ld.ech.ch/schema/0292/meta-common/globalURI
+  label_object: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair
+  label_kind: constant_value
+  label_source: constant
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  about_entity: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair
+  instance_path: affairs[0].global_uri
+  label_note: derivation identifier_minted (ValueRecord of the provenance file)
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/pdf-affair_type
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair
+  label_predicate: https://ch.paf.link/schema/affairs/affairType
+  label_object: postulate
+  label_kind: pdf_value
+  label_source: rule
+  label_probability: 0.6333
+  value_status: unsure
+  calibration: https://parlpdfech.ansv.ch/id/calibration/value.affair_type.type_head_inline_gov
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  rule_id: m11_values_type_number.read_affair_type
+  tier: type_head_inline_gov
+  page: 1
+  last_page: 1
+  span_start: 103
+  span_end: 111
+  about_entity: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair
+  instance_path: affairs[0].affair_type
+  value_wording: POSTULAT
+  normalisation_rule: type_word_to_list_value
+  export_check: equal_to_export
+  export_value: postulate
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/pdf-title
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair
+  label_predicate: https://ch.paf.link/schema/affairs/title
+  label_object: Fonds d'aide au maintien des petits commerces et cafés du villages
+  label_kind: pdf_value
+  label_source: rule
+  label_probability: 0.6333
+  value_status: unsure
+  calibration: https://parlpdfech.ansv.ch/id/calibration/value.title.after_kind_cue
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  rule_id: m11_values_title.read_title
+  tier: after_kind_cue
+  page: 1
+  last_page: 1
+  span_start: 168
+  span_end: 234
+  about_entity: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair
+  instance_path: affairs[0].title[0].text
+  value_wording: Fonds d'aide au maintien des petits commerces et cafés du villages
+  normalisation_rule: norm_text_one_line
+  export_check: equal_to_export
+  export_value: Fonds d'aide au maintien des petits commerces et cafés dans les villages
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/value-affairs-0-title-0-text_type
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair
+  label_predicate: https://ch.paf.link/schema/affairs/textType
+  label_object: title
+  label_kind: constant_value
+  label_source: constant
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  about_entity: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair
+  instance_path: affairs[0].title[0].text_type
+  label_note: derivation fixed_by_schema (ValueRecord of the provenance file)
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/value-affairs-0-submission-global_uri
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/submission
+  label_predicate: https://ld.ech.ch/schema/0292/meta-common/globalURI
+  label_object: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/submission
+  label_kind: constant_value
+  label_source: constant
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  about_entity: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/submission
+  instance_path: affairs[0].submission.global_uri
+  label_note: derivation identifier_minted (ValueRecord of the provenance file)
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/value-affairs-0-submission-sponsorship-0-actor-global_uri
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/actor/sponsor-1
+  label_predicate: https://ld.ech.ch/schema/0292/meta-common/globalURI
+  label_object: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/actor/sponsor-1
+  label_kind: constant_value
+  label_source: constant
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  about_entity: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/actor/sponsor-1
+  instance_path: affairs[0].submission.sponsorship[0].actor.global_uri
+  label_note: derivation identifier_minted (ValueRecord of the provenance file)
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/pdf-sponsor
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/submission
+  label_predicate: https://ch.paf.link/schema/affairs/sponsorship
+  label_object: Tristan
+  label_kind: pdf_value
+  label_source: rule
+  label_probability: 0.95
+  value_status: unsure
+  calibration: https://parlpdfech.ansv.ch/id/calibration/value.first_author.response_head_prep_name
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  rule_id: m11_values_sponsor.read_sponsor
+  tier: response_head_prep_name
+  page: 1
+  last_page: 1
+  span_start: 120
+  span_end: 127
+  about_entity: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/actor/sponsor-1
+  instance_path: affairs[0].submission.sponsorship[0].actor.name[0].text
+  value_wording: Tristan
+  normalisation_rule: printed_wording_one_line
+  export_check: not_compared
+  label_note: 'comparison value of the reader (for the cross-check and the calibration only; not a value of the record): tristan'
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/value-affairs-0-submission-sponsorship-0-sponsor_role
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/submission
+  label_predicate: https://ch.paf.link/schema/affairs/sponsorRole
+  label_object: sponsor
+  label_kind: constant_value
+  label_source: constant
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  about_entity: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/submission
+  instance_path: affairs[0].submission.sponsorship[0].sponsor_role
+  label_note: derivation fixed_by_schema (ValueRecord of the provenance file)
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/value-affairs-0-response_steps-0-global_uri
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response
+  label_predicate: https://ld.ech.ch/schema/0292/meta-common/globalURI
+  label_object: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response
+  label_kind: constant_value
+  label_source: constant
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  about_entity: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response
+  instance_path: affairs[0].response_steps[0].global_uri
+  label_note: derivation identifier_minted (ValueRecord of the provenance file)
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/value-affairs-0-response_steps-0-responder-global_uri
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/actor/responder
+  label_predicate: https://ld.ech.ch/schema/0292/meta-common/globalURI
+  label_object: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/actor/responder
+  label_kind: constant_value
+  label_source: constant
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  about_entity: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/actor/responder
+  instance_path: affairs[0].response_steps[0].responder.global_uri
+  label_note: derivation identifier_minted (ValueRecord of the provenance file)
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/pdf-responder
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response
+  label_predicate: https://ch.paf.link/schema/affairs/responder
+  label_object: Conseil municipal
+  label_kind: pdf_value
+  label_source: rule
+  label_probability: 0.9912
+  value_status: certain
+  calibration: https://parlpdfech.ansv.ch/id/calibration/value.responder_name.rsp_signature
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  rule_id: m11_values_dates_responder.read_responder
+  tier: rsp_signature
+  page: 1
+  last_page: 1
+  span_start: 2090
+  span_end: 2107
+  about_entity: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/actor/responder
+  instance_path: affairs[0].response_steps[0].responder.name[0].text
+  value_wording: Conseil municipal
+  normalisation_rule: printed_wording_one_line
+  export_check: no_export_value
+  label_note: 'comparison value of the reader (for the cross-check and the calibration only; not a value of the record): Conseil municipal'
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/textblock-1-text
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/textblock/1
+  label_predicate: https://ch.paf.link/schema/affairs/text
+  label_object: sha256:b75049e06b72304005e5fa3cd564fdc34242fdf826bcc3784fab94ba87b8b749
+  label_kind: text_wording
+  label_source: copy
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  page: 1
+  last_page: 1
+  span_start: 237
+  span_end: 1875
+  about_entity: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response
+  instance_path: affairs[0].response_steps[0].texts[0].text
+  label_note: verbatim copy of the lines of the author block (check E19); the text changes are in the TextBlockRecord
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/label/textblock-2-text
+  label_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/textblock/2
+  label_predicate: https://ch.paf.link/schema/affairs/text
+  label_object: sha256:c957bc36e146f7ecf4ca9e490d44780b224ce86323dfd5eab3709a389dd9be5e
+  label_kind: text_wording
+  label_source: copy
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  page: 1
+  last_page: 1
+  span_start: 1877
+  span_end: 2023
+  about_entity: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response
+  instance_path: affairs[0].response_steps[0].texts[1].text
+  label_note: verbatim copy of the lines of the author block (check E19); the text changes are in the TextBlockRecord
+pdf_value_gaps:
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/gap/affair_number
+  gap_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair
+  gap_slot: https://ch.paf.link/schema/affairs/affairNumber
+  slot_state: not_found_in_pdf
+  gap_reason: no_candidate
+  candidates_found: 0
+  rules_tried:
+  - m11_values_type_number.read_affair_number
+  searched_first_page: 1
+  searched_last_page: 1
+  export_has_value: true
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  label_note: 'reader reason no_pattern: no number form after a cue word or in a head line'
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/gap/submission_date
+  gap_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/submission
+  gap_slot: https://ch.paf.link/schema/affairs/submissionDate
+  slot_state: not_found_in_pdf
+  gap_reason: no_candidate
+  candidates_found: 0
+  rules_tried:
+  - m11_values_dates_responder.read_submission_date
+  searched_first_page: 1
+  searched_last_page: 1
+  export_has_value: true
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  label_note: 'reader reason no_cue: no cue word or layout form selects one of the dates'
+- global_uri: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/gap/response_date
+  gap_subject: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/affair/step/response
+  gap_slot: https://ld.ech.ch/schema/0292/meta-common/dateEndActual
+  slot_state: not_found_in_pdf
+  gap_reason: no_candidate
+  candidates_found: 0
+  rules_tried:
+  - m11_values_dates_responder.read_response_date
+  searched_first_page: 1
+  searched_last_page: 1
+  export_has_value: false
+  model_run: https://parlpdfech.ansv.ch/id/gj/record/doc-879163/run
+  label_note: 'reader reason no_cue: no cue word or layout form selects one of the dates'
+calibrations:
+- global_uri: https://parlpdfech.ansv.ch/id/calibration/gj1-b1s-b2-marginal-temperature
+  calibration_method: forward_backward_temperature
+  calibrated_kind: block_slot
+  fit_set_file: daten/gj/design_b1s/oof/b1s_oof.npz
+  fit_set_digest: b594d98493bde7e4f945c5aa07edcac8929bfd51d5734c12d5936ff58ac50073
+  fit_n: 9313
+  reference_source: AI reference E20 v4.1 (daten/iso/v4/ref41, daten/iso/v4/pool_ref41) with the 3 pilot overrides
+  in_sample: false
+  target_status: target_not_met
+  calibration_parameters:
+  - parameter_name: temperature_b1
+    parameter_value: 1.1050075502408903
+  - parameter_name: temperature_b2
+    parameter_value: 3.0309360099997904
+  - parameter_name: strength
+    parameter_value: 8.0
+  measure_sets:
+  - set_name: dev out-of-fold
+    set_n: 9313
+    ece: 0.0526
+    ece_equal_mass: 0.051726
+    classwise_ece: 0.046117
+    brier: 0.266646
+    nll: 0.601899
+    ece_low: 0.031093
+    ece_high: 0.077205
+    interval_method: document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles
+  - set_name: 'validation (44 documents): written block labels of the variant d1n_b1sy (GJ.13); ECE of p of the written option, Brier score and NLL of the 6 options'
+    set_n: 2715
+    ece: 0.0442
+    ece_equal_mass: 0.0481
+    classwise_ece: 0.0622
+    brier: 0.3125
+    nll: 0.5933
+    ece_low: 0.0324
+    ece_high: 0.1158
+    interval_method: document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles
+  calibration_note: 'B1-S (addendum D): the frozen B1 head with its frozen temperature; B2 block marginal of the form switch_soft (addendum C) after one B2 temperature. Variant b12_entered; threshold a by P17 on dev. GJ.13 on validation: NOT MET'
+  certain_threshold: 0.8
+- global_uri: https://parlpdfech.ansv.ch/id/calibration/gj1-d1-verifier-platt
+  calibration_method: verifier_platt
+  calibrated_kind: document_text_parts
+  fit_set_file: daten/gj/design/verifiers.json
+  fit_set_digest: 638a3b3cc0c5dbc2aa32d842baa57a529fd359a828d9849d45f44c1e78e8a527
+  fit_n: 48
+  reference_source: AI reference E20 v4.1 (daten/iso/v4/ref41, daten/iso/v4/pool_ref41) with the 3 pilot overrides
+  in_sample: false
+  target_status: not_measured
+  calibration_parameters:
+  - parameter_name: alpha
+    parameter_value: 0.8848284260225239
+  - parameter_name: beta
+    parameter_value: 1.040388982867347
+  measure_sets:
+  - set_name: dev_out_of_design, in-sample
+    set_n: 48
+    ece: 0.120887
+    ece_equal_mass: 0.117203
+    brier: 0.163694
+    nll: 0.287308
+  calibration_note: Platt map of the calibrated D1 probability of the S1 rule option; fit set dev_out_of_design. Variant d1_not_entered; threshold a by P17 on dev
+  certain_threshold: 0.9
+- global_uri: https://parlpdfech.ansv.ch/id/calibration/gj1-r2-platt-step0b
+  calibration_method: platt_scaling
+  calibrated_kind: executive_response
+  fit_set_file: daten/gj/r2/step0b_fitset.json
+  fit_set_digest: 2fc96be76182468209b5cd62aa24c8be2248dd796c79a206cbb474d10119e093
+  fit_n: 193
+  reference_source: AI reference E20 v4.1 (daten/iso/v4/ref41 and daten/iso/v4/pool_ref41) with the 3 pilot overrides; R2 yes = 1 or more atoms with the answer response or recommendation (criteria 2.6 item 1)
+  in_sample: true
+  target_status: not_measured
+  calibration_parameters:
+  - parameter_name: alpha
+    parameter_value: 1.082867
+  - parameter_name: beta
+    parameter_value: -1.283815
+  - parameter_name: layer
+    parameter_value: 16.0
+  - parameter_name: C
+    parameter_value: 0.001
+  measure_sets:
+  - set_name: dev AI-reference documents, out-of-fold map (5 folds of the dev design)
+    set_n: 193
+    ece: 0.029697
+    ece_equal_mass: 0.018335
+    classwise_ece: 0.039305
+    brier: 0.100316
+    nll: 0.16456
+    ece_low: 0.018867
+    ece_high: 0.061158
+    interval_method: document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)
+  - set_name: dev AI-reference documents, in-sample (fit set of the map)
+    set_n: 193
+    ece: 0.032938
+    ece_equal_mass: 0.023207
+    classwise_ece: 0.048366
+    brier: 0.096321
+    nll: 0.152964
+    ece_low: 0.021508
+    ece_high: 0.062637
+    interval_method: document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles (criteria 6.3)
+  calibration_note: 'R2 step 0b (criteria 8.4 item 2): Platt map of q(yes) of the frozen head H (layer 16) on the Docling text; fit on the 193 dev AI-reference documents; threshold a by P17 on the out-of-fold values of the map (criteria 8.6 item 4); GJ.14 on validation sets the target status'
+  certain_threshold: 0.6
+- global_uri: https://parlpdfech.ansv.ch/id/calibration/gj1-tier-fixed-R3-none
+  calibration_method: jeffreys_tier_precision
+  calibrated_kind: block_slot
+  fit_set_file: daten/gj/design/tier_table.json
+  fit_set_digest: 49ed195358bbf6b9e0627d6eaec47fc84051cd40240b98fc4722159c4dd545db
+  fit_n: 549
+  reference_source: AI reference E20 v4.1 (daten/iso/v4/ref41, daten/iso/v4/pool_ref41) with the 3 pilot overrides
+  in_sample: true
+  target_status: target_not_met
+  calibration_parameters:
+  - parameter_name: jeffreys_mean
+    parameter_value: 0.999091
+  - parameter_name: precision
+    parameter_value: 1.0
+  - parameter_name: blocks
+    parameter_value: 549.0
+  - parameter_name: documents
+    parameter_value: 163.0
+  calibration_note: 'rule tier fixed:R3 with the option none: Jeffreys posterior mean of the dev precision (criteria chapter 8.7). Variant b12_entered; threshold a by P17 on dev. GJ.13 on validation: NOT MET'
+  certain_threshold: 0.8
+  measure_sets:
+  - set_name: 'validation (44 documents): written block labels of the variant d1n_b1sy (GJ.13); ECE of p of the written option, Brier score and NLL of the 6 options'
+    set_n: 2715
+    ece: 0.0442
+    ece_equal_mass: 0.0481
+    classwise_ece: 0.0622
+    brier: 0.3125
+    nll: 0.5933
+    ece_low: 0.0324
+    ece_high: 0.1158
+    interval_method: document bootstrap, 2000 resamples, seed 20261013, 5 % and 95 % quantiles
+- global_uri: https://parlpdfech.ansv.ch/id/calibration/value.affair_type.type_head_inline_gov
+  calibration_method: jeffreys_tier_precision
+  calibrated_kind: pdf_value
+  calibrated_tier: type_head_inline_gov
+  fit_set_file: daten/gj_values/round4/values_dev_all.json
+  fit_set_digest: f428f57f09e58485040a878301271cca2e382ce4692bd3d20418f860f88b95e6
+  fit_n: 14
+  reference_source: OpenParlData export (official register value; no human of the project examined it; addendum G, rule G2)
+  in_sample: true
+  target_status: not_measured
+  calibration_parameters:
+  - parameter_name: jeffreys_mean_all_folds
+    parameter_value: 0.633333
+  - parameter_name: k
+    parameter_value: 9.0
+  - parameter_name: n
+    parameter_value: 14.0
+  measure_sets:
+  - set_name: dev, open part, fold values, all tiers of the field affair_type
+    set_n: 1429
+    ece: 0.013088
+    ece_equal_mass: null
+    brier: 0.042333
+    interval_method: no interval
+  calibration_note: 'Jeffreys mean of the pair (field, tier) against the export, clipped. The record shows the value of all folds for each document (decision D4). Tier: 14 units, certain tier: false. Entry of the field: written_with_status. Origin: Development documents of 44 parliaments that the rule authors read; the rule files of the reader are made from the PDF alone. The one fixed run of 13.10.2026 used 872 documents of 26 other parliaments. There the share correct (correct / documents with an export value) was 0.2214 for the affair number and 0.2729 for the submission date. Before the run, AI agents had read 116 or more of these documents in earlier work.'
+  calibrated_slot: https://ch.paf.link/schema/affairs/affairType
+- global_uri: https://parlpdfech.ansv.ch/id/calibration/value.first_author.response_head_prep_name
+  calibration_method: jeffreys_tier_precision
+  calibrated_kind: pdf_value
+  calibrated_tier: response_head_prep_name
+  fit_set_file: daten/gj_values/round4/values_dev_all.json
+  fit_set_digest: f428f57f09e58485040a878301271cca2e382ce4692bd3d20418f860f88b95e6
+  fit_n: 69
+  reference_source: OpenParlData export (official register value; no human of the project examined it; addendum G, rule G2)
+  in_sample: false
+  target_status: not_measured
+  calibration_parameters:
+  - parameter_name: jeffreys_mean_all_folds
+    parameter_value: 0.95
+  - parameter_name: k
+    parameter_value: 66.0
+  - parameter_name: n
+    parameter_value: 69.0
+  measure_sets:
+  - set_name: dev, open part, fold values, all tiers of the field first_author
+    set_n: 988
+    ece: 0.079149
+    ece_equal_mass: null
+    brier: 0.120307
+    interval_method: no interval
+  calibration_note: 'Jeffreys mean of the pair (field, tier) against the export, clipped. The record shows the value of all folds for each document (decision D4). Tier: 69 units, certain tier: true. Entry of the field: written_with_status. Origin: Development documents of 44 parliaments that the rule authors read; the rule files of the reader are made from the PDF alone. The one fixed run of 13.10.2026 used 872 documents of 26 other parliaments. There the share correct (correct / documents with an export value) was 0.2214 for the affair number and 0.2729 for the submission date. Before the run, AI agents had read 116 or more of these documents in earlier work.'
+  calibrated_slot: https://ch.paf.link/schema/affairs/sponsorship
+- global_uri: https://parlpdfech.ansv.ch/id/calibration/value.responder_name.rsp_signature
+  calibration_method: jeffreys_tier_precision
+  calibrated_kind: pdf_value
+  calibrated_tier: rsp_signature
+  fit_set_file: daten/gj_values/round4/values_dev_all.json
+  fit_set_digest: f428f57f09e58485040a878301271cca2e382ce4692bd3d20418f860f88b95e6
+  fit_n: 56
+  reference_source: OpenParlData export (official register value; no human of the project examined it; addendum G, rule G2)
+  in_sample: false
+  target_status: not_measured
+  calibration_parameters:
+  - parameter_name: jeffreys_mean_all_folds
+    parameter_value: 0.991228
+  - parameter_name: k
+    parameter_value: 56.0
+  - parameter_name: n
+    parameter_value: 56.0
+  measure_sets:
+  - set_name: dev, open part, fold values, all tiers of the field responder_name
+    set_n: 387
+    ece: 0.023114
+    ece_equal_mass: null
+    brier: 0.022672
+    interval_method: no interval
+  calibration_note: 'Jeffreys mean of the pair (field, tier) against the export, clipped. The record shows the value of all folds for each document (decision D4). Tier: 56 units, certain tier: true. Entry of the field: written_with_status. Origin: Development documents of 44 parliaments that the rule authors read; the rule files of the reader are made from the PDF alone. The one fixed run of 13.10.2026 used 872 documents of 26 other parliaments. There the share correct (correct / documents with an export value) was 0.2214 for the affair number and 0.2729 for the submission date. Before the run, AI agents had read 116 or more of these documents in earlier work.'
+  certain_threshold: 0.6
+  calibrated_slot: https://ch.paf.link/schema/affairs/responder
+- global_uri: https://parlpdfech.ansv.ch/id/calibration/value.title.after_kind_cue
+  calibration_method: jeffreys_tier_precision
+  calibrated_kind: pdf_value
+  calibrated_tier: after_kind_cue
+  fit_set_file: daten/gj_values/round4/values_dev_all.json
+  fit_set_digest: f428f57f09e58485040a878301271cca2e382ce4692bd3d20418f860f88b95e6
+  fit_n: 14
+  reference_source: OpenParlData export (official register value; no human of the project examined it; addendum G, rule G2)
+  in_sample: true
+  target_status: not_measured
+  calibration_parameters:
+  - parameter_name: jeffreys_mean_all_folds
+    parameter_value: 0.633333
+  - parameter_name: k
+    parameter_value: 9.0
+  - parameter_name: n
+    parameter_value: 14.0
+  measure_sets:
+  - set_name: dev, open part, fold values, all tiers of the field title
+    set_n: 1592
+    ece: 0.100299
+    ece_equal_mass: null
+    brier: 0.175553
+    interval_method: no interval
+  calibration_note: 'Jeffreys mean of the pair (field, tier) against the export, clipped. The record shows the value of all folds for each document (decision D4). Tier: 14 units, certain tier: false. Entry of the field: written_all_unsure. Origin: Development documents of 44 parliaments that the rule authors read; the rule files of the reader are made from the PDF alone. The one fixed run of 13.10.2026 used 872 documents of 26 other parliaments. There the share correct (correct / documents with an export value) was 0.2214 for the affair number and 0.2729 for the submission date. Before the run, AI agents had read 116 or more of these documents in earlier work.'
+  calibrated_slot: https://ch.paf.link/schema/affairs/title

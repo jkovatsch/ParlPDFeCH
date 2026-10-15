@@ -23,17 +23,23 @@ You see 3 places: the PDF page with a box on each value, the values with their p
 
 <img src="docs/img/result-view.png" width="560" alt="Screenshot of the app for sample 26171. Left: the PDF page with a coloured box on each value. Right: the values, each with a probability bar, the word certain or unsure, and the page. The RDF is below them, not in the screenshot.">
 
-### Your own PDF
+### Your own PDF files
 
-`make run` takes the 3 samples only. For your own PDF, run the app with no container. This needs uv, cargo, `wasm-bindgen` 0.2.127 and `pdftotext` ([all details](track_2a/docs/run-locally.md)). `make setup-pdf` downloads Docling and 2 models (about 0.8 GB). Stop the container first.
+`make run` takes the 3 samples only. Your own PDF gets the code rules only (no language model, no GPU). It needs a text layer, because `make setup-pdf` installs no text recognition (OCR). A PDF can have up to 25 pages and 20 MB. Tested on one Mac (Apple silicon) only, not on Windows or Linux.
+
+Run the commands in `track_2a/`. You need uv, jq, curl and `pdftotext`, and for `make view` also cargo and `wasm-bindgen` 0.2.127 ([all details](track_2a/docs/run-locally.md)). `make setup-pdf` downloads Docling and 2 models (about 0.8 GB).
 
 ```bash
-make setup
-make setup-pdf
-make run-native    # then open http://127.0.0.1:8080/app/
+make setup               # one time
+make setup-pdf           # one time
+make convert PDF=<file>  # or PDF=<URL>, DIR=<folder>, LIST=<file of paths and URLs>
+make list                # all IDs as a table
+make view ID=0001        # on request: opens result 0001 at http://127.0.0.1:8080/app/ (or the next free port)
 ```
 
-Click "Convert your own PDF" and drop your PDF. It gets the code rules only (no language model, no GPU). It needs a text layer.
+Each PDF gets an ID, and the same PDF keeps its ID. The terminal shows the values with their probability, and valid yes or no. On one Mac on 15.10.2026, 3 samples and 5 development PDFs of 5 parliaments gave 8 valid records. Valid means that the record passed the validator, not that each value is correct. The rule authors read the development documents, so these 5 PDFs are not new to the rules.
+
+With `make run-native`, the app page also converts a PDF (button "Convert your own PDF").
 
 ## How it works
 
@@ -75,7 +81,7 @@ Each value has a probability (the bar). A value from the rules also has its page
 
 ## Result
 
-The one fixed run of 13.10.2026 compared 872 documents of 26 parliaments with the OpenParlData register. No person checked a value of the run or accepted these numbers, and the register is not a hand-checked gold set ([all limits](track_2a/docs/limits.md)). By field, 0.2075 (response date) to 0.8929 (responding body) of the documents with a register value got the register value.
+The one fixed run of 13.10.2026 compared 872 documents of 26 parliaments with the OpenParlData register. The register is not a hand-checked gold set ([all limits](track_2a/docs/limits.md)). By field, 0.2075 (response date) to 0.8929 (responding body) of the documents with a register value got the register value.
 
 ## More
 

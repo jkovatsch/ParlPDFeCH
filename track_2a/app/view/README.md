@@ -1,7 +1,5 @@
 # view: the view function of the package
 
-Status of all results: EXCEPTION, NOT RELEASED. No human checked this file.
-
 `site_view.py` makes the view `parlpdfech-site-view/3` of one record folder of the converter. The pages read this
 view. The reference is `../CONTRACT.md` chapter 4.5 and chapter 6, and the schema `../contract/view.schema.json`.
 
@@ -163,7 +161,7 @@ The reference is `../CONTRACT.md` chapter 10.4.
   | `unsure_final_check_differs` | "unsure: the final check R2 does not agree with the block path" | none |
 
   Measured (labels with a code): `s-26171` 19 (`final_check` 1, `value_derivation` 17, `wording_copy` 1); `s-879163` 17 (1, 14, 2); `s-714840` 9 (1, 8, 0); `s-26171-rules` 18 (`value_derivation` 17, `wording_copy` 1); `s-879163-rules` 22 (17, 5); `s-714840-rules` 12 (11, 1); the upload record of the synthetic PDF, the two modes: 4 (`switch_between_blocks` 1, `value_derivation` 1, `wording_copy` 2). No note of these 8 records is unknown; `unsure_final_check_differs` does not occur in them.
-- `calibrations[].reference_code` replaces `calibrations[].reference_source`. The text of the calibration record names folders of the project and document numbers. Codes: `model_labels_not_human_checked` (reference labels of the development documents, made by a language model and not checked by a human), `other`, `null`. `calibrations[].note` is the text of the record, not changed; the pages do not show it.
+- `calibrations[].reference_code` replaces `calibrations[].reference_source`. The text of the calibration record names folders of the project and document numbers. Codes: `model_labels_not_human_checked` (reference labels of the development documents, made by a language model), `other`, `null`. `calibrations[].note` is the text of the record, not changed; the pages do not show it.
 - `origin: new`: `run.in_sample` and each `labels[].in_sample` are `null` (three states: true, false, null = not known). The notice code `outside_fit_population` is replaced by `not_a_sample`.
 - `check_view.py` has 2 new checks for each record (`notes`; `origin_new` for the floor record) and 1 check with no record (`note_filter`). It gives `export.json` of the sample folder to the function, so the view of `s-26171` equals the example in each key of the rule.
 - `contract/examples/view_26171.json` is made again by `contract/tools/make_example_view.py` (the tool has the new fields and the argument `--export`). The view function and the tool give equal data for `s-26171` under the rule of gate G4.

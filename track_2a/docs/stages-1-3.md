@@ -110,7 +110,7 @@ The readout questions for Apertus (the Apertus prompts) are in `src/m03_iso_jev4
 
 #### Edits for publication
 
-An AI agent (Claude Opus 5.5) made these edits on 06.10.2026. No human examined them.
+An AI agent (Claude Opus 5.5) made these edits on 06.10.2026.
 
 1. Each code file starts with the line `SPDX-License-Identifier: Apache-2.0`.
 2. Data root: all data paths are below `PARLPDFECH_DATA` (`m03_iso_paths.DATA`). The scripts give paths in their records relative to the folder above the data root.

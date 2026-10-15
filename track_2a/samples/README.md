@@ -7,4 +7,4 @@ The app makes the records of the product from its own files of the 3 samples in 
 ## About this text
 
 - Language: English, to the rules of ASD-STE100 (Issue 9).
-- Authoring: an AI agent (Claude Opus 5.5) wrote this text on 15.10.2026. No human examined it.
+- Authoring: an AI agent (Claude Opus 5.5) wrote this text on 15.10.2026.

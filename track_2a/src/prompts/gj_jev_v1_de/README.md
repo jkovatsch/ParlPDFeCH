@@ -1,7 +1,5 @@
 # Block-role questions for Apertus: template `gj_jev_v1_de`
 
-Status of each result: EXCEPTION, NOT RELEASED.
-
 This folder holds the exact text of the block-role questions D1 and B1 for Apertus-v1.5-8B (bf16). The prompt text is German. The job builder of the project holds the same text as constants (`m10_prompts.py`, module version `m10-prompts-1`).
 
 Use: 2 variants were measured on 44 validation documents against labels from an AI. B1-S has a frozen head and a sequence step. B1-L adds a LoRA adapter (chapter 8). They did not enter the one fixed run of 13.10.2026. The run used the block roles of the rule chain. The app uses the heads D1 and B1 only for the block labels of the 3 samples, from stored states. The value questions of the run are in [`../gj_values_v1_de/`](../gj_values_v1_de/README.txt). They use the prefix of this template.
@@ -151,5 +149,5 @@ The two SHA-256 values next to these paths are the values of the private files. 
 ## About this text
 
 - Language: English, to the rules of ASD-STE100 (Issue 9).
-- Authoring: an AI agent (Claude Opus 5.5) wrote this text on 13.10.2026. No human examined it.
-- On 15.10.2026, an AI agent (Claude Opus 5.5) replaced the name "new converter" and added the use of the questions (block labels, not in the run). No human examined it.
+- Authoring: an AI agent (Claude Opus 5.5) wrote this text on 13.10.2026.
+- On 15.10.2026, an AI agent (Claude Opus 5.5) replaced the name "new converter" and added the use of the questions (block labels, not in the run).

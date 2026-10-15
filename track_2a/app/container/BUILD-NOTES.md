@@ -1,7 +1,5 @@
 # Build notes of the container part
 
-Status of all results of the package: EXCEPTION, NOT RELEASED. No human checked this file.
-
 State of the container files on 13.10.2026: written and read. No image was built. No container was started. Each mark in this file is one of: measured, read, estimate.
 
 Later state (15.10.2026). On 14.10.2026 a private build pipeline on Linux built the image of the target `slim` from the source tree of the package; nobody started that image. On the same day, `make run` built an image of the target `slim` on one Mac and started the container. It used the copy of the source tree in a clone of GitHub at commit `10e07b4`. The 3 samples in the 2 modes gave 6 valid records. The target `full` and `make check-offline` were not run.

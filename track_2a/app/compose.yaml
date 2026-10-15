@@ -1,5 +1,6 @@
 # One service: the ParlPDFeCH web server with its worker.
-# STATE: written and read; 'docker compose config' and a build were not run. See container/BUILD-NOTES.md.
+# STATE (15.10.2026): 'make run' used the copy of this file in the source tree of the package one time on one Mac
+# (14.10.2026). See container/BUILD-NOTES.md.
 #
 # Variables (all optional; container/env.example lists them):
 #   PARLPDFECH_PORT           port on this computer (default 8080)

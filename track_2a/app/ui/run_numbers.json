@@ -4,8 +4,8 @@
  "note": "Display values of numbers.json of the project. Reader with rules only; reference: the OpenParlData export. No human checked a value.",
  "source": {
   "file": "public/track_2a/numbers.json",
-  "made": "14.10.2026 12:31 CEST",
-  "sha256": "d0f56230c99aaa3d0a344d95ef390c5ec3db161f7f073e02079760e37abcdbf9"
+  "made": "15.10.2026 17:01 CEST",
+  "sha256": "87e17376af77923e3b961991fca60836fd0482b6f7aee774d3d91898a2c53e65"
  },
  "run": {
   "date": "13.10.2026",

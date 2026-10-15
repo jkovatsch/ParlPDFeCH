@@ -1,6 +1,8 @@
 # Pipeline of the ParlPDFeCH package for a hosted sample site (profile slim).
 #
-# STATE: written and read. This pipeline never ran. No image was built.
+# STATE (15.10.2026): on 14.10.2026 this pipeline ran on a private GitLab server (pipeline 1645). The jobs tree,
+# rust-fmt, rust-clippy-test and python-worker passed. build-image built the image; the push to the registry
+# failed. image-health and image-digest did not run.
 # Place: the root of a GitLab project whose root is the self-contained source tree (dist-src/),
 # with the file name .gitlab-ci.yml. 'make dist-src' of the package writes it there.
 #
@@ -81,7 +83,7 @@ rust-clippy-test:
 # The Python checks that need no project data: the packages of the profile slim install and agree,
 # the example view is valid, and the real worker converts the 3 samples from the files of the tree.
 # check_seed.py compares the SHA-256 of each decisions file (mode auto) with the reference run.
-# This job is the first run of the worker on Linux. It was never run.
+# This job runs the worker on Linux. It passed in the pipelines 1643 and 1645 (14.10.2026).
 python-worker:
   stage: check
   image: python:3.12-slim-bookworm
@@ -112,8 +114,9 @@ python-worker:
 # --skip-unused-stages=true: the Dockerfile has the stages py-full and full before the stage slim. With
 # no such flag Kaniko builds each stage up to the target, also the ones that the target does not use
 # (torch, Docling, the download of the Docling models, the seed step of the profile full). The flag is
-# read in the Kaniko documentation. It was NOT RUN: it is not measured that the job builds only the
-# stages of the target slim. If the log of the job shows a stage py-full or full, stop the job.
+# read in the Kaniko documentation. In pipeline 1645 (14.10.2026) the log of this job names no stage
+# py-full or full and no download of torch or of a Docling model (read in the log, not measured).
+# If the log of the job shows a stage py-full or full, stop the job.
 build-image:
   stage: build
   image:

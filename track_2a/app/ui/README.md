@@ -6,7 +6,7 @@ This folder holds the page that the server shows below `/app/`. The page is plai
 
 The reference for all interfaces is `../CONTRACT.md` (chapters 5, 6, 7, 14 and 15).
 
-State of now (14.10.2026, after the step "start page and result view"): `strings.json` has 795 keys, `node ui/tools/check_ui.mjs` gives 0 errors; the chapter "Changes of 14.10.2026" at the end describes the new start page, the page "About" and the result view. State of 13.10.2026, after the step "one site": `strings.json` has 463 keys (20 of them with the ending `.hosted`), `rdfpanel.strings.json` has 83 keys, `node ui/tools/check_ui.mjs` gives 0 errors. The chapters "Changes of ..." below are the history of earlier steps; their key counts (424 and 81, 430 and 83) are the counts of those steps. The last chapter describes the page of a site that takes no file, of a hosted site and of a server with a static site.
+State of now (15.10.2026): `strings.json` has 808 keys, and `node ui/tools/check_ui.mjs` gives 0 errors. The 3 last chapters describe the new start page, the page "About", the result view and the text changes of 15.10.2026. State of 13.10.2026, after the step "one site": `strings.json` has 463 keys (20 of them with the ending `.hosted`), `rdfpanel.strings.json` has 83 keys, `node ui/tools/check_ui.mjs` gives 0 errors. The chapters "Changes of ..." below are the history of earlier steps; their key counts (424 and 81, 430 and 83) are the counts of those steps. The chapter "The page of a hosted site, of a site that takes no file, and the link to the static site" describes the page of a site that takes no file, of a hosted site and of a server with a static site.
 
 ## Files
 
@@ -16,7 +16,7 @@ State of now (14.10.2026, after the step "start page and result view"): `strings
 | `app.css` | the style sheet; colours are CSS variables; a light and a dark scheme |
 | `app.js` | the script (an ES module) |
 | `strings.json` | all texts of the page, form `{key: {en, de}}`. A key with the ending `.hosted` is the text of its base key on a hosted site. |
-| `run_numbers.json` | the numbers of the one fixed run of 13.10.2026 on the start page and in the result view. They are display values of `public/track_2a/numbers.json` of the project, with their ids. `tools/make_run_numbers.py` writes the file; `--check` compares it with the source. |
+| `run_numbers.json` | the numbers of the one fixed run of 13.10.2026 on the start page and in the result view. They are display values of `track_2a/numbers.json` of the public repository (`public/track_2a/numbers.json` in the private project), with their ids. In the private project, `tools/make_run_numbers.py` writes the file; `--check` compares it with the source. |
 | `favicon.svg` | the icon |
 | `fixtures/` | byte-equal copies of `../contract/examples/*` and of `../contract/errors.json`, for the fixture mode. The server of the package does not serve this folder. |
 | `tools/check_ui.mjs` | static checks (Node.js, no library). The server of the package does not serve this folder and not this README. |
@@ -27,7 +27,7 @@ The files `rdfpanel.js`, `rdfpanel.css`, `rdfpanel.strings.json` and the folder 
 
 | Route | Screen |
 |---|---|
-| `#/` | S0 start (14.10.2026): one sentence, the picture of the flow, the 3 samples as cards, the box "How often correct?" and the button for an own PDF. The box has 4 fields of `run_numbers.json`. Each topic has a link "more". A card with a ready result opens `#/view/<id>`. Else the card starts the conversion of its first mode, and the page opens the result view at the end. |
+| `#/` | S0 start (14.10.2026): one sentence, the picture of the flow, the 3 samples as cards, the box "How often correct?" and the button for an own PDF. The box has the 7 fields of `run_numbers.json`. Each topic has a link "more". A card with a ready result opens `#/view/<id>`. Else the card starts the conversion of its first mode, and the page opens the result view at the end. |
 | `#/about`, `#/about/<part>` | About, with 4 parts: `method`, `numbers` (the 7 fields of the fixed run), `limits` and `technical`. The part `technical` has the technical view, the modes, the mode line of `GET /api/health`, the notices and the list of the words. A route with a part sets the focus to the heading of that part. |
 | `#/view/<record_id>` | The result view: the PDF (page images with boxes), the values with their probability, the RDF (2 Turtle files). A finished job opens this route. |
 | `#/samples` | S1 samples from `GET /api/samples` |
@@ -310,3 +310,17 @@ Reason: the readers found that the page gave a probability of 0.97 next to "corr
 - The back link of the technical view: "Back to the result" (the double arrow is gone).
 - `ui/run_numbers.json`: new value `given` (correct + wrong) for each field; the key `start_fields` is gone (`make_run_numbers.py`).
 - `strings.json`: 808 keys (795 before). New: `start.card.label`, `view.source.auto`, `view.source.rules`, `view.source.own`, `view.title.weak`, `view.title.sample`, `view.values.certain`, `view.basis`, `view.basis.in`, `view.basis.few`, `view.run_precision`, `view.export`, `view.miss.addressee`, `view.role`, `view.pdf.full`, `view.ttl.aria`. Removed: `view.run_share`, `view.not_searched`, `s0.values`.
+
+## Texts of 15.10.2026
+
+Reason: an audit of 15.10.2026 found texts of the page that were older than the report and its limits, or wider than their sources. Only texts changed; `index.html`, `app.js` and `app.css` did not change.
+
+- `start.good.limits` and `about.limits.l6`: the short forms of limit L6 of `track_2a/docs/limits.md` (no person checked a value of the one fixed run). `about.limits.l2` and `about.limits.l3`: the short forms of the limits L2 and L5 of the same file (L5: the rule chain gives the rule role and the block roles).
+- `start.title`: "Each head value that the code rules read (up to 7)". `start.flow.text` and `start.flow.values`: "up to 7 head values". A sample record has fewer than 7 values.
+- `start.flow.rdf.note`: the labels of the text parts of the 3 samples can come from stored Apertus results. `start.samples.title`: the title and the affair type on the cards come from OpenParlData.
+- `s1.card.inputs`: the package holds the PDF of each sample, for the page image and the download.
+- `words.certain`: the rule for «certain» of a label (of a text block or of the document) and of a value read from the PDF. `words.states`: the state «Not found in the PDF» for an entry that no rule of this version searches.
+- `about.numbers.words`: the 2 response fields count the documents to which the rule chain gave the kind response or proposal with response.
+- `s2.doc_id` (also in `../contract/strings.contract.json`): leave the number empty for your own PDF; no value of the record comes from it.
+- `run_numbers.json`: made again with `tools/make_run_numbers.py` from `numbers.json` of 15.10.2026, 17:01. The values are equal; only the source time and the SHA-256 changed.
+- Checks: `node ui/tools/check_ui.mjs` 0 errors (808 keys). Google Chrome headless on one Mac, with the server of the package on port 8894: the start page in English and German at 1440 px and the page "About" in English show the new texts. Not run: a narrow width, Firefox, Safari, a screen reader.

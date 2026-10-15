@@ -25,7 +25,7 @@
  "s2.drop": {"en": "Drop one PDF here, or", "de": "Ein PDF hierher ziehen, oder"},
  "s2.choose": {"en": "Choose a PDF", "de": "PDF auswählen"},
  "s2.limits": {"en": "One file, up to {mb} MB and {p} pages.", "de": "Eine Datei, bis zu {mb} MB und {p} Seiten."},
- "s2.doc_id": {"en": "OpenParlData document number (optional). The package knows the numbers of its samples only: another number gives a message and no result.", "de": "OpenParlData-Dokumentnummer (optional). Das Paket kennt nur die Nummern seiner Beispiele: Eine andere Nummer ergibt eine Meldung und kein Ergebnis."},
+ "s2.doc_id": {"en": "OpenParlData document number (optional; leave it empty for your own PDF). The package knows the numbers of its 3 samples only. Another number, or a sample number with another PDF, gives a message and no result. No value of the record comes from the number.", "de": "OpenParlData-Dokumentnummer (optional; bei Ihrem eigenen PDF leer lassen). Das Paket kennt nur die Nummern seiner 3 Beispiele. Eine andere Nummer, oder eine Beispielnummer mit einem anderen PDF, ergibt eine Meldung und kein Ergebnis. Kein Wert des Datensatzes kommt aus der Nummer."},
  "s2.convert": {"en": "Convert", "de": "Umwandeln"},
  "s3.stage.read_pdf": {"en": "Read the PDF", "de": "PDF lesen"},
  "s3.stage.lines": {"en": "Cut the pages into lines", "de": "Seiten in Zeilen schneiden"},

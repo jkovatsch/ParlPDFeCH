@@ -14,7 +14,7 @@ This folder is made by `make dist-src` of the package (script `worker/make_dist.
 | `contract/` | the error catalog (the server includes it at compile time), the view schema, the examples |
 | `container/` | the requirements files, the start command of the image, the script that makes the sample records |
 | `layout/` | the code layout: byte-equal copies of the converter files as plain files, with `layout_manifest.json` (SHA-256 of each file). No compiled file. |
-| `data/samples/` | the stored inputs of the 3 sample documents |
+| `data/samples/` | the stored inputs of the 3 sample documents, and the PDF and the page image of each sample (`source.pdf`, `page-1.png`; not inputs of the conversion) |
 | `site/` (only if the tree was made with `make dist-src SITE_DIR=<folder>`) | a built static site: the pages about the project. The server gives it below `/`, the app stays below `/app/`. The Dockerfile of such a tree copies the folder to `/app/site` of the image; `make run-native` gives it too. A tree with no `site/` redirects `/` to `/app/`. The manifest key `site` has the count of its files. |
 | `Dockerfile`, `compose.yaml`, `Makefile`, `.dockerignore` | the build files of this tree. They differ from the files of the package: the layout comes from `./layout`, and no line names a folder outside this tree. |
 | `.gitlab-ci.yml` | the pipeline file of the deploy kit (if the package has one) |
@@ -24,17 +24,19 @@ This folder is made by `make dist-src` of the package (script `worker/make_dist.
 ## 2 What is not in this tree
 
 - The project: the converter sources outside the layout list, the document data, the reference run.
-- The tools that read the project folder: `worker/make_samples.py`, `worker/make_layout_list.py`, `worker/make_fresh_tables.py`, `worker/make_dist.py`, `worker/check_worker.py`, `worker/check_fresh.py`, `view/check_view.py`, `contract/tools/gate_compare.py`, `contract/tools/gate_api.sh`, `contract/tools/make_example_view.py`, `contract/tools/make_test_pdf.py`. Thus this tree has no target `gate`, `layout` or `native-data`.
+- The tools that read the project folder: `worker/make_samples.py`, `worker/make_layout_list.py`, `worker/make_fresh_tables.py`, `worker/make_dist.py`, `worker/check_worker.py`, `worker/check_fresh.py`, `worker/check_values.py`, `worker/layout_add.py`, `view/check_view.py`, `contract/tools/gate_compare.py`, `contract/tools/gate_api.sh`, `contract/tools/gate_values.py`, `contract/tools/make_example_view.py`, `contract/tools/make_test_pdf.py`. Thus this tree has no target `gate`, `layout` or `native-data`.
 - Build outputs: `target*/`, `ui/pkg/`, `work/`, compiled Python files.
-- PDF files, model weights, settings with values.
+- PDF files (except the PDF of each of the 3 samples), model weights, settings with values.
 
 ## 3 Build and run
 
-With a container (NOT RUN; no image was built from this tree or from the package):
+With a container:
 
 ```
 make run
 ```
+
+On 14.10.2026, `make run` (target `slim`) ran one time on one Mac, from the copy of this tree in a clone of GitHub (commit `10e07b4`). The 3 samples in the 2 modes gave 6 valid records. `make run-full` and `make check-offline` were not run.
 
 The image build needs a network: 2 base images, the Rust target for WebAssembly, the crates of `Cargo.lock`, the command `wasm-bindgen`, the Python packages of `container/requirements-slim.txt`.
 
@@ -74,4 +76,4 @@ The layout has no compiled Python file. The worker compiles the converter files 
 
 ## 5 Words in the layout files
 
-The files below `layout/` are byte-equal copies of converter code. The converter compares their SHA-256, so they are not changed. They hold working names and internal notes of the project. The layout also holds ids and block labels of 193 development documents: a list of the documents with the file names of their rule and label files (`layout/daten/gj/calibration/floor_v1_fitset.json`) and an array file with document ids, block ids and one label for each block (`layout/daten/gj/design_b1s/oof/b1s_oof.npz`); it holds no text of these documents and no PDF. The owner decides on their publication before the tree goes to a git server or into an image (STATE.md chapter 9, decision 1).
+The files below `layout/` are byte-equal copies of converter code. The converter compares their SHA-256, so they are not changed. They hold working names and internal notes of the project. The layout also holds ids and block labels of 193 development documents: a list of the documents with the file names of their rule and label files (`layout/daten/gj/calibration/floor_v1_fitset.json`) and an array file with document ids, block ids and one label for each block (`layout/daten/gj/design_b1s/oof/b1s_oof.npz`); it holds no text of these documents and no PDF. `STATE.md` (chapter 9, decision 1) gives the question of 13.10.2026 on their publication. Since 14.10.2026 the public repository holds this tree (folder `track_2a/app`).

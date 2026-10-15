@@ -1,6 +1,8 @@
 # Image of the ParlPDFeCH package (CONTRACT.md chapter 2.1; package plan chapters 3 and 8).
 #
-# STATE: this file was written and read. No build of it was run. See container/BUILD-NOTES.md.
+# STATE (15.10.2026): the image of the target slim was built from the source tree of the package ('make dist-src'):
+# on 14.10.2026 one time on one Mac with 'make run' (the container started), and by a private build pipeline
+# on Linux (nobody started that image). The target full was not built. See container/BUILD-NOTES.md.
 #
 # Targets:
 #   slim  converts the sample documents from their stored inputs. No Docling, no torch, no model.
@@ -142,7 +144,7 @@ ENV DOCLING_ARTIFACTS_PATH=/app/docling-models
 # The code layout: copies of the converter files (code, schemas, shared data), equal to the
 # originals byte for byte. They are in the folder layout/ of this source tree, with no compiled
 # file. This stage compares the SHA-256 of each copy with the layout manifest
-# and stops the build if one is different. STATE: written, not run.
+# and stops the build if one is different. STATE: it ran in the build of the target slim on one Mac (14.10.2026).
 # ---------------------------------------------------------------------------------------------
 FROM py-slim AS layout
 WORKDIR /project

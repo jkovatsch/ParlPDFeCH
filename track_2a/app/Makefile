@@ -18,7 +18,8 @@
 #   make check-dist     compares the SHA-256 of each file of this tree with DIST-MANIFEST.json
 #   make test           tests with no container (cargo tests, the view example, the layout check)
 #
-# STATE: the container targets (run, run-full, check-offline) were written and not run.
+# STATE (15.10.2026): 'make run' (target slim) ran one time on one Mac on 14.10.2026, in a clone of GitHub at
+# commit 10e07b4. The targets run-full and check-offline were not run.
 # Not in this tree: the gate tools and the build tools that read the project folder (DIST.md lists them).
 # Variables: PARLPDFECH_PORT (default 8080), PYTHON (default python3), CARGO_FLAGS (default --locked),
 # WORKER_CMD (a JSON array; default: PYTHON with worker/serve_convert.py).

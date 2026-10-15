@@ -1,9 +1,9 @@
 {
  "schema": "parlpdfech-dist-manifest/1",
  "status": "EXCEPTION, NOT RELEASED",
- "made_utc": "2026-10-14T11:04:43Z",
+ "made_utc": "2026-10-15T16:25:16Z",
  "git": {
-  "commit": "6c7fdeeaae173397afbd3e5028164c6b2af19463",
+  "commit": "17451069e0259dfafe2a1cf4c89344b40f2bc275",
   "package_files_changed_after_the_commit": 0
  },
  "layout_check": {
@@ -36,20 +36,20 @@
  "site": null,
  "total": {
   "files": 211,
-  "bytes": 21984776
+  "bytes": 21996488
  },
  "by_folder": {
   "(root)": {
    "files": 14,
-   "bytes": 524857
+   "bytes": 531175
   },
   "container": {
    "files": 8,
-   "bytes": 44246
+   "bytes": 44724
   },
   "contract": {
    "files": 15,
-   "bytes": 526994
+   "bytes": 527247
   },
   "data": {
    "files": 34,
@@ -69,7 +69,7 @@
   },
   "ui": {
    "files": 20,
-   "bytes": 534653
+   "bytes": 539316
   },
   "view": {
    "files": 2,
@@ -93,8 +93,8 @@
   },
   {
    "path": ".gitlab-ci.yml",
-   "bytes": 9169,
-   "sha256": "1101962d0bd8452af00634aa0855b19c94139ec9e20fea588f1ec9ae36f3dfd3"
+   "bytes": 9466,
+   "sha256": "fdec6a677d3f2842a7359b44246a611f35c91b03ccf10792641a9e95759e1be6"
   },
   {
    "path": "CONTRACT.md",
@@ -108,18 +108,18 @@
   },
   {
    "path": "Cargo.toml",
-   "bytes": 1413,
-   "sha256": "621d5208fd3ce2500679ee1e11d4f8e5801fddbf7db818884517b883080dc974"
+   "bytes": 1406,
+   "sha256": "b1ba2dacc4034771b4e5abef505adc5149737af899706bc98f046469f4bca1f7"
   },
   {
    "path": "DIST.md",
-   "bytes": 5932,
-   "sha256": "32abb2b026e4781beb8337fe3e033fb83e5679556ba9c7ab643e1aa0a628521c"
+   "bytes": 6383,
+   "sha256": "8c20aa69476f09364ed57c8e911b982a51f0bb29a34043d1206afc6b73baa6fe"
   },
   {
    "path": "Dockerfile",
-   "bytes": 10738,
-   "sha256": "ebbe05af00d2985ead124ea55b60001c6656e5847ae14e709a6d11f68ddf9036"
+   "bytes": 11015,
+   "sha256": "b82ed0fe1a7816e4ff5a7a96dea7b48d262647c2405fd83557a71b78807d9cbf"
   },
   {
    "path": "EXAMINATION.md",
@@ -128,13 +128,13 @@
   },
   {
    "path": "Makefile",
-   "bytes": 8094,
-   "sha256": "49530fb2062ee9533d979eda748f0847e30529e3b5b2fea9ab5995fb8812a690"
+   "bytes": 8187,
+   "sha256": "9c00a64941ec1d380dcd054f5c37d1029ff183557066f5f6ec01a462c68ef92d"
   },
   {
    "path": "README.md",
-   "bytes": 32864,
-   "sha256": "e9a9ad9ff40062b90099c0ac1470e9ea5dd9214603a3dfb7c111161d368e4209"
+   "bytes": 38018,
+   "sha256": "8ae6196b3f082377435a7bcb3901148ccc10972f1776708f7af5bc243815b096"
   },
   {
    "path": "STATE.md",
@@ -143,13 +143,13 @@
   },
   {
    "path": "compose.yaml",
-   "bytes": 1564,
-   "sha256": "19461d8c96c9d92b071fd7688c3fe5e1c34fa089a1dd1706324508ca7edcc29b"
+   "bytes": 1617,
+   "sha256": "a3f42b46bd0a06e0b341fd52832ee64b055737fb1cd238642bc0f965f40d07fa"
   },
   {
    "path": "container/BUILD-NOTES.md",
-   "bytes": 27212,
-   "sha256": "cc51b0c42e932bb9f5909d7fd5405055a87c0f757ad95d5aca25ce03e44a05d2"
+   "bytes": 27690,
+   "sha256": "23332eb22b4986efd52c53ed7799b7cc284fc6c0f7f5215a2f2e418e54c25b11"
   },
   {
    "path": "container/check_dist.py",
@@ -243,8 +243,8 @@
   },
   {
    "path": "contract/strings.contract.json",
-   "bytes": 28310,
-   "sha256": "d3585a4893b9b5132f0a0488d374103afa53268353159802c9cf9520f020affa"
+   "bytes": 28563,
+   "sha256": "1b833030458f823f286e497ccd47e24bc9df45954d35df293f60e0e50baf6c4b"
   },
   {
    "path": "contract/tools/make_schema.py",
@@ -968,8 +968,8 @@
   },
   {
    "path": "ui/README.md",
-   "bytes": 39114,
-   "sha256": "a75417b47a9855cffdf0307ddde62789b7566206c3e970e2ee53bdfd86ceb1bf"
+   "bytes": 41254,
+   "sha256": "6db6f745a965bf594c252cc79b784ef69998aa733c6b335b353ce16feff19e7b"
   },
   {
    "path": "ui/app.css",
@@ -1049,12 +1049,12 @@
   {
    "path": "ui/run_numbers.json",
    "bytes": 4393,
-   "sha256": "563e60643c2fa79d7c1d73b696678d5944999899892c93d6cb4d1bbec16887e5"
+   "sha256": "1f9a369104d5a144599927a5f7c91201ba0d72de8a9e1d5f8398fb96d3ccca9a"
   },
   {
    "path": "ui/strings.json",
-   "bytes": 140412,
-   "sha256": "60957eef95a86d80d8a8dff13f616971643e5242fb0a35e3533e1faecfb34e50"
+   "bytes": 142935,
+   "sha256": "f224a147da528f1be2af5ca2897753799c9c1cdf30b8b8dc83fb6ac4a18ee0a8"
   },
   {
    "path": "ui/tools/check_ui.mjs",
@@ -1151,10 +1151,7 @@
    "data/samples/714840/source.pdf",
    "data/samples/879163/source.pdf"
   ],
-  "changed_files": [
-   ".gitignore",
-   ".dockerignore"
-  ],
+  "changed_files": [],
   "reason": "The 3 sample PDF files (data/samples/<doc>/source.pdf), byte-equal to the package and to the entry with the role source_pdf of sample.json: the worker copies this file into each sample record. They are public documents of the parliaments; data/samples/index.json gives the source URL of each. .gitignore and .dockerignore have a comment line and the line '!data/samples/*/source.pdf' after their PDF rule."
  }
 }

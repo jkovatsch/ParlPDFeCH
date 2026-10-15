@@ -1,6 +1,6 @@
 # The reader of the values from the PDF
 
-This folder holds the code of the method that the technical report measures. A PDF of a Swiss parliament goes in. Each of the 7 head values of the record is read from the PDF and has a probability. A value from the rules also has a page and a text span. Identifiers and constants of the record have no probability. The export is the reference of the measurement. No export value goes into a record.
+This folder holds the code of the method that the technical report measures. A PDF of a Swiss parliament goes in. Each head value of the record (up to 7) is read from the PDF and has a probability. A value from the rules also has a page and a text span. Identifiers and constants of the record have no probability. The export is the reference of the measurement. No export value goes into a record.
 
 Status: EXCEPTION, NOT RELEASED. No human examined the code or this file.
 
@@ -42,4 +42,4 @@ Not in this folder: `m11_values_sponsor.py`, the rule for the first author. This
 ## About this text
 
 - Language: English, to the rules of ASD-STE100 (Issue 9).
-- Authoring: an AI agent (Claude Opus 5.5) wrote this text on 14.10.2026. No human examined it.
+- Authoring: an AI agent (Claude Opus 5.5) wrote this text on 14.10.2026. On 15.10.2026 an AI agent narrowed the sentence on the 7 head values after an audit. No human examined it.

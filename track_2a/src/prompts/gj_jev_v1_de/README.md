@@ -1,18 +1,20 @@
-# Prompts of the new converter: template `gj_jev_v1_de`
+# Block-role questions for Apertus: template `gj_jev_v1_de`
 
-Status of the new converter and of each of its results: EXCEPTION, NOT RELEASED.
+Status of each result: EXCEPTION, NOT RELEASED.
 
-This folder holds the exact text that the new converter gives to Apertus-v1.5-8B (bf16). The prompt text is German. The job builder of the project holds the same text as constants (`m10_prompts.py`, module version `m10-prompts-1`).
+This folder holds the exact text of the block-role questions D1 and B1 for Apertus-v1.5-8B (bf16). The prompt text is German. The job builder of the project holds the same text as constants (`m10_prompts.py`, module version `m10-prompts-1`).
 
-## 1. How the converter uses Apertus
+Use: 2 variants were measured on 44 validation documents against labels from an AI. B1-S has a frozen head and a sequence step. B1-L adds a LoRA adapter (chapter 8). They did not enter the one fixed run of 13.10.2026. The run used the block roles of the rule chain. The app uses the heads D1 and B1 only for the block labels of the 3 samples, from stored states. The value questions of the run are in [`../gj_values_v1_de/`](../gj_values_v1_de/README.txt). They use the prefix of this template.
 
-1. Apertus writes no text. The converter starts no text generation.
+## 1. How a question uses Apertus
+
+1. Apertus writes no text. No text generation starts.
 2. Each document gets one prefix. The prefix holds the system text and the whole document, block by block.
 3. Each decision gets one short question. The question is a suffix after the prefix.
-4. The model reads the prefix and one suffix. The converter then reads the hidden states at the last token.
+4. The model reads the prefix and one suffix. Code then reads the hidden states at the last token.
 5. This step has the name read-out. The last token is the end of the answer start `Antwort:`.
 6. A small classifier (a head) calculates one probability for each answer option from this state.
-7. Code makes each value of the output from these probabilities. The text of the output comes from the PDF.
+7. Code makes the block labels from these probabilities. The text of each block comes from the PDF.
 
 A document has two types of decision:
 
@@ -29,7 +31,7 @@ The state extraction stores the state after the decoder layers 8, 12, 16, 20, 24
 
 The heads D1 and B1 read layer 20 (read from the design record of the project, keys `d1.layer` and `b1.layer`). The project selected this layer on development documents. The head is a logistic regression on the standardized state.
 
-The letters of the options are a part of the question text only. The converter does not read a letter from the model. The classes of a head are the options in the order of the letters.
+The letters of the options are a part of the question text only. Code does not read a letter from the model. The classes of a head are the options in the order of the letters.
 
 ## 3. Files
 
@@ -104,7 +106,7 @@ Token ids: the tokenizer reads the prefix and the suffix one after the other, ea
 
 ## 8. The LoRA variant
 
-The candidate with a LoRA adapter (B1-L) uses the same template and the same B1 items. Its two job records hold the same template SHA-256 (read: key `template_sha256` of the two manifest files).
+The variant with a LoRA adapter (B1-L) uses the same template and the same B1 items. It was measured on 13.10.2026 on 44 validation documents. The adapter is not published, and B1-L did not enter the run or the app. Its two job records hold the same template SHA-256 (read: key `template_sha256` of the two manifest files).
 
 Its model call is the prefix and one B1 suffix. Its head reads the output of the final norm at the last token. The LoRA weights are active in this call.
 
@@ -150,3 +152,4 @@ The two SHA-256 values next to these paths are the values of the private files. 
 
 - Language: English, to the rules of ASD-STE100 (Issue 9).
 - Authoring: an AI agent (Claude Opus 5.5) wrote this text on 13.10.2026. No human examined it.
+- On 15.10.2026, an AI agent (Claude Opus 5.5) replaced the name "new converter" and added the use of the questions (block labels, not in the run). No human examined it.

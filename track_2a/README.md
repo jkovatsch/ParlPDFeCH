@@ -1,17 +1,17 @@
 # ParlPDFeCH, Track 2A: a parliament PDF goes in, an eCH-0295 record comes out
 
-What goes in: one PDF of a Swiss parliament. What comes out: one eCH-0295 record in Turtle and YAML, and the result of a validator. Each of the 7 head values of the record is read from the PDF and has a probability. A value from the rules also has a page and a text span. Identifiers and constants of the record have no probability. The OpenParlData export is the reference of the measurement; at run time no export value goes into a record.
+What goes in: one PDF of a Swiss parliament. What comes out: one eCH-0295 record in Turtle and YAML, a second RDF file `<doc>.values.ttl` with the probability of each value, and the result of a validator. Each head value of the record (up to 7) is read from the PDF and has a probability. A value from the rules also has a page and a text span. Identifiers and constants of the record have no probability. The OpenParlData export is the reference of the measurement; at run time no export value goes into a record.
 
-To start the app, use `make run-native` (chapter "Run it"), or `make run`, the Docker way that the template asks for. Both ran on one Mac on 14.10.2026. `make run` converts the 3 samples only.
+To start the app, use `make run`, the Docker way that the template asks for. It converts the 3 samples only. For your own PDF, run `make setup-pdf` one time, then `make run-native` (no container, chapter "Run it"). Both ways ran on one Mac on 14.10.2026.
 
-In the one fixed run, linear heads on stored hidden states of Apertus-v1.5-8B gave values for 2 of the 7 fields. These fields are the affair type and the first author. A head tier gave a value where the rules found none, or where the rule value had a probability below 0.5. The rules gave all other values. A dropped PDF gets values from the rules only. In the app, the 7 values of the record come from the rules in each mode. For its 3 samples, the app uses stored Apertus states for the block labels only.
+In the one fixed run, linear heads on stored hidden states of Apertus-v1.5-8B gave values for 2 of the 7 fields. These fields are the affair type and the first author. A head tier gave a value where the rules found none, or where the rule value had a probability below 0.5. The rules gave all other values. In the app, the rules give each value of the record, in each mode. For its 3 samples, the app uses stored Apertus states for the block labels only.
 
-No person has accepted the numbers of this text. They come from the one fixed run of 13.10.2026. AI agents made and examined them.
+No person has accepted the numbers of this text. The numbers of the run come from the one fixed run of 13.10.2026. The development numbers come from the documents that the rule authors read. AI agents made and examined them.
 
 Three limits come first. [docs/limits.md](docs/limits.md) gives all 12.
 
 1. Fewer than half of the documents with a reference get the export value. This applies to the affair number, the 2 dates, the title and the first author.
-2. AI agents had read some of the 872 documents before the run: 116 or more, that is 48 validation documents and all 68 group-7 documents. The older rule chain was designed on a list with 38 documents of the run.
+2. AI agents had read some of the 872 documents before the run: 116 or more, that is 48 validation documents and all 68 group-7 documents. The rule chain of the roles, from the earlier converter of 12.10.2026, was designed on a list with 38 documents of the run.
 3. AI agents of one model family wrote the rules, the tools and the measures, and examined them. No human checked a value of the one fixed run. The reference is a register, not a hand-checked gold set.
 
 Number ids: `values.last_run.contact.read_by_ai_agents.lower_limit` (116), `values.last_run.contact.kind1.validation` (48), `values.last_run.contact.kind1.group7` (68), `values.last_run.contact.rule_design_list.validation` (38).
@@ -52,7 +52,7 @@ Number ids (file [numbers.json](numbers.json)):
 ## What this is
 
 1. A PDF of a Swiss parliament goes in. An eCH-0295 record comes out.
-2. Each of the 7 head values of the record is read from the PDF and has a probability. A value from the rules also has a page and a text span. Identifiers and constants of the record have no probability.
+2. Each head value of the record (up to 7) is read from the PDF and has a probability. A value from the rules also has a page and a text span. Identifiers and constants of the record have no probability.
 3. The OpenParlData export is the reference of the measurement. On development documents it also gives the fit labels of the Apertus heads. At run time no export value goes into a record.
 4. The one fixed run of 13.10.2026 compared the values of 872 documents of 26 parliaments with the export, one time.
 5. No pass limit was fixed before the run. Thus this text gives the numbers and their plain meaning, and no statement that a field passes.
@@ -64,31 +64,34 @@ This folder is the project root for the judges of Hack Apertus. The front page o
 Run the commands in this folder (`track_2a/`). [docs/run-locally.md](docs/run-locally.md) gives the 2 ways to start the app in short form.
 
 ```bash
+make run          # needs Docker only, not make setup; ran on one Mac on 14.10.2026; then open http://127.0.0.1:8080/app/
 make setup        # one time, with network; for make run-native and make test
+make setup-pdf    # one time, with network; only for your own PDF with make run-native; needs pdftotext
 make run-native   # no container; needs cargo and Python 3.12; ran on one Mac; then open http://127.0.0.1:8080/app/
-make run          # needs Docker only, not make setup; ran on one Mac (port 8082); then open http://127.0.0.1:8080/app/
 make test         # checks with no network
 ```
 
 ### The commands and their state
 
-| Command | What it does | State on 14.10.2026 |
+| Command | What it does | State on 14.10.2026 (`make setup-pdf`: 15.10.2026) |
 |---|---|---|
 | `make setup` | One time, with network. It installs Python 3.12 with uv (uv can also put the command `python3.12` into `~/.local/bin`) and the Python packages of the app into `.venv/`. It downloads the Rust crates of `app/Cargo.lock` (only if cargo is on the computer; if not, it prints a note), the packages of the earlier converter and the 2 eCH-0295 schema files (pinned commit and SHA-256). `make run` does not need it. | Run on one Mac (Apple silicon, macOS) in a fresh clone. uv and cargo took the packages from the local caches of that Mac. The 2 schema files agreed with the pinned SHA-256. |
+| `make setup-pdf` | One time, with network, after `make setup`. Only for your own PDF with `make run-native`. It stops if the command `pdftotext` is absent and gives the install command. It installs the packages of `app/container/requirements-full.txt` (`docling` 2.133.0, `pypdfium2` 5.14.0, torch) into `.venv/`. It downloads the 2 Docling models into the Hugging Face cache if they are absent. It installs no text recognition (OCR). | Run on one Mac (Apple silicon, macOS) on 15.10.2026, in a fresh clone of GitHub at commit `3eff351`. The target `setup-pdf` was added to the clone as a patch. The packages came from the uv cache of that Mac. The 2 models came from its Hugging Face cache, and in 2 more runs with an empty cache from huggingface.co. Then `make run-native` converted 2 PDFs that are not in the sample index (copies of 2 samples with one added comment line), with 2 valid records. `make test` gave PASS. |
 | `make run` | Needs Docker. It builds the image (target `slim`) from `app/` and starts it on `127.0.0.1:8080`. It waits for `/healthz`. Then open `http://127.0.0.1:8080/app/`. The target `slim` converts the 3 samples only. | Run one time on one Mac (Apple silicon, Docker server 29.2.1), in a clone of GitHub at commit `10e07b4`. The command was `make run PARLPDFECH_PORT=8082`, because a second check used port 8080. The 3 samples in the modes auto and rules gave 6 valid records. Not run: `run-full` and `check-offline` of `app/Makefile`. On 14.10.2026 a private build pipeline on Linux built a container image from the source tree of the package. Nobody started this image. |
 | `make stop`, `make logs` | They stop the container of `make run`, or show its log. | Not run. |
 | `make run-native` | No container. It builds the Rust server and the WebAssembly bundle with cargo. Then it starts the app on `127.0.0.1:8080` (`PORT=` sets another port). Stop it with Ctrl-C. | Run on one Mac (Apple silicon, macOS), with the offline flags of cargo: in this folder (port 8899) and in a fresh clone (port 8898). Each time, the 3 samples in the modes auto and rules gave 6 valid records. The server gave the page, the result data, `<doc>.values.ttl`, `source.pdf` and `page-1.png` with the status 200. |
-| `make test` | Checks with no network and no Rust compiler. It compares each copied file with `SOURCES.json` and checks the prompt files of `gj_jev_v1_de`. It runs the validator on the 6 stored output files of the earlier converter and on `tests/invalid_instance.yaml`, which it must refuse. It checks the file list and the code layout of `app/`. | PASS on one Mac, in this folder and in a fresh clone. It has no check of the numbers: `check_numbers.py` does not exist. |
+| `make test` | Checks with no network and no Rust compiler. It compares each copied file with `SOURCES.json` and checks the prompt files of `gj_jev_v1_de`. It runs the validator on the 6 stored output files of the earlier converter and on `tests/invalid_instance.yaml`, which it must refuse. It checks the file list and the code layout of `app/`. | PASS on one Mac, in this folder and in a fresh clone. It does not compare the numbers of the texts with `numbers.json`. |
 | `make test-app` | The checks of `app/`: `cargo test` of the server and of the RDF module, the example view, and a start of the seed script. It needs cargo and the crates of `make setup`. | PASS on one Mac. |
 | `make clean` | It removes `build/` and the build outputs of `app/`. | in the `Makefile` |
 | `make run-earlier` | The earlier converter of 12.10.2026 on the 3 samples. Its metadata values come from the export record, not from the PDF. Before 14.10.2026 this command had the name `make run`. | PASS on one Mac. |
 | `make head-selftest` | A self-check of an earlier Apertus head code on synthetic data (no model). | in the `Makefile` |
 
-- The template asks that `make run` starts the project in Docker on a clean checkout. This text records one such run, on commit `10e07b4` (next item). For your own PDF, use `make run-native`.
+- The template asks that `make run` starts the project in Docker on a clean checkout. This text records one such run, on commit `10e07b4` (next item). For your own PDF, use `make setup-pdf` one time, then `make run-native`.
 - The 2 clones of GitHub: on 14.10.2026, 2 AI agents each made a `git clone` of commit `10e07b4` from GitHub, on one Mac. In clone 1, `make run PARLPDFECH_PORT=8082` ran. In clone 2, `make setup`, `make test` (PASS), `make run-earlier` (PASS) and `make run-native PORT=8080` ran. In each clone, the 3 samples in the modes auto and rules gave 6 valid records.
 - The fresh clone: on 14.10.2026 an AI examiner made a `git clone` of the local repository and added the files of this version. Then the examiner ran `make setup`, `make test` and `make run-native` in it, on one Mac. It was not a clone of GitHub.
 - The state lines in the files of `app/` (for example `DIST.md`, `README.md`, `STATE.md`, `Makefile` and `container/BUILD-NOTES.md`) are older than these runs. In this version, the files of `app/` are as in commit `10e07b4`. `make test` compares them with the list `DIST-MANIFEST.json`.
-- In an earlier run on a copy of the files, the conversion of an own PDF stopped with the note `pdf_reader_absent` (see below).
+- An own PDF: `app/README.md` (chapter "The modes") records runs with synthetic PDF files and with the 3 sample PDF files. These ran on one Mac, with no container. The row `make setup-pdf` records 2 changed copies of samples on 15.10.2026. No other parliament PDF is recorded.
+- In an earlier run on a copy of the files, the conversion of an own PDF stopped with the note `pdf_reader_absent`. `make setup-pdf` installs the absent packages (next chapter).
 
 ### What `make run-native` needs
 
@@ -96,7 +99,10 @@ make test         # checks with no network
 - A Python 3.12 with the packages of `app/container/requirements-slim.txt`. `make setup` makes `.venv/`. Without it, the target uses `python3`, or `APP_PYTHON=<command>`.
 - The 3 samples need nothing more.
 - The conversion of your own PDF needs more: the Python packages `docling` 2.133.0 and `pypdfium2` 5.14.0, the 2 Docling models in the local Hugging Face cache and the command `pdftotext`.
-- `make setup` does not install these packages. `app/container/requirements-full.txt` gives them with their dependencies. Without them, the app stops with the note `pdf_reader_absent`.
+- `make setup-pdf` installs these packages with their dependencies (`app/container/requirements-full.txt`) and downloads the 2 models. It does not install `pdftotext` (macOS with Homebrew: `brew install poppler`). Without the packages, the app stops with the note `pdf_reader_absent`.
+- Size on a Mac with Apple silicon: 283.5 MB of packages (sizes from the PyPI data) and 530.0 MB of models. `.venv/` grows by about 1 GB.
+- `make setup-pdf` installs no text recognition (OCR). A PDF with no text layer stops with the note `no_text_layer`. The page can say that the text recognition of macOS runs. It runs only if the Python package `ocrmac` is in `.venv/`.
+- An unchanged PDF of a sample gives the stored result of that sample. Docling does not run for it.
 - The server listens on `127.0.0.1`. Its API has no authentication.
 
 ## What you see
@@ -109,7 +115,7 @@ The page is `http://127.0.0.1:8080/app/` (`?lang=de` before the hash gives the G
 | `#/about/<part>` (page "About") | The long texts: `method`, `numbers` (the table of the 7 fields of the fixed run), `limits` (short forms of [docs/limits.md](docs/limits.md)) and `technical`. |
 | `#/samples`, `#/upload`, `#/job/<job_id>` | The sample cards with one button for each mode (stored Apertus states, or code rules only); the form for your own PDF (`make run-native` only, with the packages of the chapter "What `make run-native` needs"); the 6 steps of a running conversion. |
 | `#/view/<record_id>` (result view) | 3 places. The PDF: the image of each page (`page-<n>.png`) with a coloured box on each value and a grey box on each text block. The values: field, value as printed, probability (a bar and the stored decimal), the word certain or unsure, page. A line below each row gives the development documents behind the number and the precision of the field in the fixed run. For a sample, it also gives the comparison with OpenParlData. The RDF: the eCH-0295 record and the file of the values with probabilities (`<doc>.values.ttl`), as Turtle text. A click on a row, a box or a triple marks the same value in the other 2 places. A link opens the technical view. |
-| `#/record/<record_id>` (technical view) | The result page of the earlier steps. The part "What this document can state" gives the kind of the document, the source of the kind and the 7 head values. Then come the 3 tables of the affair and its 2 steps and the page of the PDF with its lines. Each label has a card. Then come the downloads, the checks and the RDF panel. |
+| `#/record/<record_id>` (technical view) | The full result page of the same record. Before the result view of 14.10.2026, it was the result page of the app. The part "What this document can state" gives the kind of the document, the source of the kind and the 7 head values. Then come the 3 tables of the affair and its 2 steps, and the page, drawn from the places of its lines. This is not an image of the PDF; the result view shows the image. Each label has a card. Then come the downloads, the checks and the RDF panel. |
 
 Downloads of each result: TriG, Turtle, RDF/XML, and a ZIP file with all files and their SHA-256 values. A record with values from the PDF also has `<doc>.values.ttl`, `source.pdf` (the download has the name `parlpdfech-<record_id>.pdf`) and `page-<n>.png`. `app/README.md`, chapter "What you see", gives the details.
 
@@ -119,11 +125,13 @@ A value can also have one of these states: the rules found no value; the kind of
 
 The 3 samples are development documents. The rule authors read them, and the heads were fitted on them. Thus the probability of a value of a sample counts the sample itself. Two AI agents examined each sample for personal data of third persons, with the result PASS: they found only persons with a public role. No human checked this.
 
-| Document | Parliament | Language | Content |
-|---|---|---|---|
-| 26171 | Grosser Rat Basel-Stadt (canton) | German | Text of an interpellation |
-| 879163 | Conseil général Val de Bagnes (municipality) | French | Statement of the executive on a postulate |
-| 714840 | Basel-Stadt (canton) | German | Resolution of the executive in its own competence |
+| Document | Parliament | Language | Content of the PDF | Affair type on the sample card (key) |
+|---|---|---|---|---|
+| 26171 | Grosser Rat Basel-Stadt (canton) | German | Text of an interpellation | `interpellation` |
+| 879163 | Conseil général Val de Bagnes (municipality) | French | Statement of the executive on a postulate | `postulate` |
+| 714840 | Basel-Stadt (canton) | German | Resolution of the executive in its own competence | `draft_decree` |
+
+The sample card gives the affair type of the OpenParlData export, in the map of the project.
 
 | Document | URL of the publisher | Copy of OpenParlData | SHA-256 of the PDF |
 |---|---|---|---|
@@ -144,13 +152,13 @@ Outputs:
 3. The cascade of eCH-0295 uses the kind of the document and the affair type. It selects the slots that a document can state. The cascade has 7 kinds of document.
 4. Rule V5 gives a kind where the rule chain gives none.
 5. Rule readers read 7 head values: affair type, title, affair number, submission date, response date, responder and first author. Each reader has tiers.
-6. A calibration on 1,793 development documents of 44 parliaments gives each tier a probability (Jeffreys mean). A tier gets the status certain if its precision on the development documents is 0.95 or more. Each other tier gets the status unsure.
+6. A calibration on 1,793 development documents of 44 parliaments gives each tier a probability (Jeffreys mean). A tier can give the status certain only with 30 or more values with a reference on the development documents. Its precision there must be 0.95 or more. A value of such a tier gets the status certain only if its probability is at or above the threshold a of its field. Only the affair type and the responder have a threshold a. Each other value gets the status unsure.
 7. A value of a tier with a probability below 0.5 goes into the label file only, not into a slot.
 8. Apertus-v1.5-8B generates no text. A linear head reads its hidden state at the last token of a question. In the run, these heads give values for the affair type and the first author: where the rules find none, or where the rule value has a probability below 0.5.
-9. A writer makes the record in Turtle and YAML with page and span. A validator checks it.
-10. The app shows the record in a browser page. It gives the 7 values with the rules. For the 3 samples, it can also give block labels from stored Apertus states. A dropped PDF gets the rules only, with no GPU. The result view shows the page image with a box on each value, the values with their probability and the RDF.
+9. A writer makes the record in Turtle and YAML, a label file and `<doc>.values.ttl`. The label file and `<doc>.values.ttl` give the probability, status, page and span of each value. A validator checks the 3 files.
+10. The app shows the record in a browser page. It gives each head value with the rules. For the 3 samples, it can also give block labels from stored Apertus states. A dropped PDF needs `make setup-pdf` and `make run-native`, and no GPU. The result view shows the page image with a box on each value, the values with their probability and the RDF.
 
-Number ids: `cascade.kinds` (7), `design.fixed.addendum_g.certain_tier_precision` (0.95), `design.fixed.writer_floor` (0.5). The report ([technical_report.md](technical_report.md), chapter 2) shows the stages as a figure.
+Number ids: `cascade.kinds` (7), `design.fixed.addendum_g.certain_tier_units` (30), `design.fixed.addendum_g.certain_tier_precision` (0.95), `values.round4.<field>.calibration.threshold_a` (0.60 for `affair_type` and `responder_name`; no value for the other fields), `design.fixed.writer_floor` (0.5). The report ([technical_report.md](technical_report.md), chapter 2) shows the stages as a figure.
 
 ## Where the parts are
 
@@ -239,7 +247,7 @@ Limits of these results (short form; [docs/limits.md](docs/limits.md) gives each
 2. The authors of the value rules of 13.10.2026 read the 44 development parliaments; the 26 parliaments of the run are other parliaments. Addendum I says that these authors opened no file of the 872 documents; no examination compared this statement with the work records. The precision of the title, the affair number and the 2 dates is lower in the run than on the development documents (L2).
 3. In the check by eye, each of the 2 AI examiners named 12 of the 50 documents with a kind that looks wrong. Then the cascade does not search some fields. The run did not measure the kind (L3).
 4. AI agents had read 116 or more of the 872 documents before the run: 48 validation documents and all 68 group-7 documents. An audit of the work records found a sign of earlier contact for 300 of them. For the other 572 it found none; this is no proof of no contact (L4).
-5. The older rule chain makes the rule files of the run. AI agents designed it on a list with 38 documents of the run, of 9 of the 18 validation parliaments (L5).
+5. The older rule chain, from the earlier converter of 12.10.2026, makes the rule files of the run. AI agents designed it on a list with 38 documents of the run, of 9 of the 18 validation parliaments (L5).
 6. AI agents of one model family (Claude Opus 5.5) wrote the rules, the tools, the measures and the audits. AI agents of the same family examined them. No human checked a value of the one fixed run, a tool or a number (L6).
 7. The reference is a register. A value can be correct as printed and differ from the register. The check by eye found differences in both directions (L7).
 8. No pass limit was fixed before the run. Thus this text does not say that a field passes (L8).
@@ -252,18 +260,19 @@ Ids of items 9 to 11: `values.round4.parliaments`, `values.last_run.rules_only.g
 
 ## One source of numbers
 
-1. Each number of the report, of the README files and of the website comes from [numbers.json](numbers.json). [numbers.md](numbers.md) has the same content as a table for a human reader.
+1. Each result number of the report, of this text and of the 2 texts of the root folder (`README.md`, `docs/about.md`) comes from [numbers.json](numbers.json). [numbers.md](numbers.md) has the same content as a table for a human reader. Other README files can have other numbers, for example `app/README.md`. The app reads the numbers of the fixed run from `app/ui/run_numbers.json`, a copy of display values of `numbers.json`. The app and its screenshots also show the probability of a value and its count of development documents. These come from the calibration file `app/layout/daten/gj_values/round4/calibration_dev_all.json`. Not all of them are in `numbers.json`.
 2. An entry has an id, the value as a string, a display form, the unit, the set and n. It also has the reference, the status, the mark and the source file with its SHA-256 and key.
 3. A value is a string, so that no tool rounds it again. The tables of this text use the display form.
 4. A tool of the private project makes the file from aggregate result files only. Paths that start with `daten/` or `crisp-dm/` are files of the private project. They are not in this repository.
-5. No script finds each number of a text in `numbers.json`. The planned script `check_numbers.py` does not exist.
+5. No script of this repository compares the numbers of the report or of the README files with `numbers.json`.
 
 ## Requirements
 
 | Item | Requirement |
 |---|---|
 | `make run` | Docker with Compose. The build of the image needs the network. It does not need `make setup`. |
-| `make run-native` | cargo with the target `wasm32-unknown-unknown`, `wasm-bindgen` 0.2.127, Python 3.12 with the packages of `app/container/requirements-slim.txt`. For your own PDF also: the Python packages `docling` 2.133.0 and `pypdfium2` 5.14.0 (not installed by `make setup`), the 2 Docling models in the local Hugging Face cache and `pdftotext`. |
+| `make run-native` | cargo with the target `wasm32-unknown-unknown`, `wasm-bindgen` 0.2.127, Python 3.12 with the packages of `app/container/requirements-slim.txt`. For your own PDF also: the Python packages `docling` 2.133.0 and `pypdfium2` 5.14.0 and the 2 Docling models in the local Hugging Face cache (`make setup-pdf` installs them), and `pdftotext`. |
+| `make setup-pdf` | `make setup` before, the command `pdftotext`, the network. |
 | `make test`, `make run-earlier` | uv 0.11 or later; Python 3.12 (uv installs it); PyYAML 6.0.3; linkml 1.11.1 (with `uvx`); a `python3` command for the checks of `app/`. |
 | `make test-app` | cargo and the Rust crates of `make setup`. |
 | Hardware | A normal computer. No GPU. |
@@ -277,7 +286,7 @@ Ids of items 9 to 11: `values.round4.parliaments`, `values.last_run.rules_only.g
 2. In the run, the Apertus heads give values for 2 of the 7 fields: the affair type and the first author. A head tier gives a value where the rules find none, or where the rule value has a probability below 0.5. In the run, the first-author tier replaced 6 such rule values (`values.last_run.combined.all.tier.apertus_q2_sponsor_hi.replaced_rule_values`). The rules give each other value.
 3. Value questions ([src/prompts/gj_values_v1_de/](src/prompts/gj_values_v1_de/README.txt)): `Q0` (the kind of the document) did not enter the reader. `Q1` (the affair type where the rules find none) entered. Of `Q2`, only the first author with a high head probability entered.
 4. In the run the 2 tiers gave 59 and 79 values with a reference, with precision 0.9322 and 0.8481. A type from `Q1` has no page and no span. Ids: `values.last_run.combined.all.tier.apertus_q1.*`, `values.last_run.combined.all.tier.apertus_q2_sponsor_hi.*`.
-5. Apertus can also give each text block a role, for example submitted text or response of the executive. 2 variants of this were measured on 44 validation documents against labels from an AI. The 2 variants (B1-S and B1-L) were the second and third runs on the same 44 documents. B1-S was designed after the result of the first run was known. Thus their values are information, not values of one planned run. The rules saw 42 of the 44 documents during their design. The run did not use the 2 variants; it used the block roles of the rule chain.
+5. Apertus can also give each text block a role, for example submitted text or response of the executive. 2 variants of this were measured on 44 validation documents of the run (`sets.reference.validation.documents`). Their reference is a set of block-role labels from an AI. The 2 variants (B1-S and B1-L) were the second and third runs on the same 44 documents. B1-S was designed after the result of the first run was known. Thus their values are information, not values of one planned run. The rules saw 42 of the 44 documents during their design. The run did not use the 2 variants; it used the block roles of the rule chain.
 6. One of these 2 variants adds a LoRA adapter to Apertus. The adapter is not published, and it did not enter the run. The value questions use the unchanged model with linear heads.
 7. The states were made on one H100 GPU before the run. The app runs no language model on your computer.
 8. The app does not apply the 2 tiers of item 4. Its 7 head values come from the rules ([app/README.md](app/README.md), chapter "The modes"). For the 3 samples, 2 linear heads and a sequence step give block labels from the stored states.
@@ -381,5 +390,5 @@ The text below is the text of the file `track_2a/README.md` of the Hack Apertus 
 ## About this text
 
 - Language: English, to the rules of ASD-STE100 (Issue 9).
-- AI agents (Claude Opus 5.5) wrote this text on 14.10.2026, from the records of the private project. An AI agent changed the chapter "Run it" in the afternoon of the same day. In the evening, an AI agent changed the states of `make run` and `make run-native`. The private project is the project folder of the author. It is not public.
+- AI agents (Claude Opus 5.5) wrote this text on 14.10.2026, from the records of the private project. An AI agent changed the chapter "Run it" in the afternoon of the same day. In the evening, an AI agent changed the states of `make run` and `make run-native`. On 15.10.2026 an AI agent added `make setup-pdf`. Later on 15.10.2026, an AI agent corrected sentences after an audit. The private project is the project folder of the author. It is not public.
 - No human examined this version of the text.

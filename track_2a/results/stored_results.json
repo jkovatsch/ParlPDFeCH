@@ -1,7 +1,7 @@
 {
  "schema": "parlpdfech-stored-results/1",
  "state_date": "12.10.2026",
- "note": "Values copied from the records of the private project. make run-earlier prints them; it does not calculate them. The private records are not public; each part names its record and the SHA-256 of the record file.",
+ "note": "History: stored results of the earlier converter (path 1) and of the earlier R2 head (path 2), state of 12.10.2026. Not the product of this version, and not results of the one fixed run of 13.10.2026; see ../numbers.json (ids values.last_run.*) and ../README.md, chapter Results. The gate states below are the states of 12.10.2026. Values copied from the records of the private project. make run-earlier prints them; it does not calculate them. The private records are not public; each part names its record and the SHA-256 of the record file.",
  "parts": [
   {
    "title": "Path 1: rule stage at isolation level L9 (method nos4), gate 3a version 4",

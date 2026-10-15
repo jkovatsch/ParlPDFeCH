@@ -1,6 +1,8 @@
 # Sources of the copied files
 
-State: 14.10.2026, 13:45 CEST. The files below come from the private project of the author, commit `6c7fdee`. The files of path 1 did not change after commit `7efdc54` of 12.10.2026. The private project is not public. `SOURCES.json` holds the same data in a machine form.
+State: 14.10.2026, 13:45 CEST. The files below come from the private project of the author, commit `6c7fdee`. The files of the earlier converter (path 1) did not change after commit `7efdc54` of 12.10.2026. The private project is not public. `SOURCES.json` holds the same data in a machine form.
+
+Product and history: the sections "Converter of the values read from the PDF", "Prompts of the values template" and "App tree" hold copies of the product. The other sections are history of 12.10.2026. "Converter (path 1)", "Method data of the converter" and "Sample input" are the earlier converter. "Apertus head (path 2)" is the earlier R2 head. "Prompts" holds the prompts S1 to S5 of the earlier converter and its studies, and the R2 prompt. The reader in `src/converter_gj/` imports 21 modules and the profile file of the earlier converter, and 5 modules of the earlier R2 head.
 
 ## How to examine the copies
 
@@ -9,13 +11,13 @@ State: 14.10.2026, 13:45 CEST. The files below come from the private project of 
 1. The file in this repository has the SHA-256 of the column "Copy".
 2. Code and prompt files without edits: the script removes line 1 (the line `SPDX-License-Identifier: Apache-2.0`). The result must have the SHA-256 of the column "Source".
 3. Code files with edits: the script removes line 1 and examines the new text on the recorded lines. Then it makes these lines empty in the copy. The result must have the SHA-256 of the source file with the same lines empty (`masked_source_sha256` in `SOURCES.json`). Each edit keeps the number of lines.
-4. The R2 template: the SHA-256 of its canonical JSON must be the template SHA-256 that the frozen head records (`2a48e04b…`).
+4. The R2 template: the SHA-256 of its canonical JSON must be the template SHA-256 that the frozen earlier R2 head records (`2a48e04b…`).
 
 Thus the published code is the code of the private project, with only the recorded edits. `SOURCES.json` does not repeat the old text of an edit. The old text held paths of the private computer or quotations of internal notes. Other old text held the internal role names of the AI agents, the first name of the author or the name of a person.
 
-## Same output as the private converter
+## Same output as the private earlier converter (12.10.2026)
 
-On 12.10.2026, an AI agent ran the copied converter (this repository, `make run`, now `make run-earlier`) and the private converter on the same 8 development documents: the 3 samples and the 5 development documents of the check script of the private writer. Results:
+On 12.10.2026, an AI agent ran the copied earlier converter (this repository, `make run`, now `make run-earlier`) and the private converter on the same 8 development documents: the 3 samples and the 5 development documents of the check script of the private writer. Results:
 
 | Item | Result |
 |---|---|
@@ -30,6 +32,8 @@ Differences and their causes:
 2. `decomposition_source` and `candidate_source`: the paths and the SHA-256 of the runner record and of the export record. The private run used other folders, and its runner records differ in the 2 keys of item 4.
 3. `file_sha256` (SHA-256 of the PDF): the writer calculates it from the PDF file. The folder `samples/` contains no PDF. The file `source.json` of each sample gives the SHA-256 of the PDF. The app has a copy of the 3 PDF files with the same SHA-256 (`app/data/samples/<doc>/source.pdf`).
 4. Runner record, key `admission`: `known` in the private run (development document), `selected` in this repository (sealed selection of `make run`, now `make run-earlier`). Key `inputs`: this repository has no prompt text file of the document (`atome_prompt`), so its SHA-256 is empty. The runner needs that file only for a question to Apertus (rule id R1).
+
+This file records no output comparison of `src/converter_gj/` or of the app with the private project. `make test` compares their copies by the SHA-256 of each file.
 
 ## Files
 
@@ -172,7 +176,7 @@ Differences and their causes:
 
 The full SHA-256 values are in `SOURCES.json`. The line numbers of an edit are the line numbers of the source file. In the copy, they are one higher, because of the added line 1.
 
-Frozen files of path 1: the freeze records of gate 3a version 4 give a SHA-256 for each source file of the runner and of the writer. The source files above have these values, for example `352ee843…` for `src/m05_iso_runner.py` and `c0b9a9d3…` for `src/m06_converter.py`.
+Frozen files of the earlier converter (path 1, gate 3a version 4, 12.10.2026): the freeze records give a SHA-256 for each source file of the runner and of the writer. The source files above have these values, for example `352ee843…` for `src/m05_iso_runner.py` and `c0b9a9d3…` for `src/m06_converter.py`.
 
 The other files of `app/` come from the package of the private project, commit `6c7fdee`: the command `make -C package dist-src` makes the source tree, and `src/m11_public_app.py` copies it to `app/`. `app/DIST-MANIFEST.json` gives the SHA-256 and the size of each of the 211 files. `make test` compares each file with this list. The list has 2 more keys:
 
@@ -182,4 +186,4 @@ The other files of `app/` come from the package of the private project, commit `
 ## About this text
 
 - Language: English, to the rules of ASD-STE100 (Issue 9).
-- Authoring: an AI agent (Claude Opus 5.5) made this file and `SOURCES.json` with a script, on 12.10.2026. An AI agent made them again on 14.10.2026 and wrote the paragraph on the other files of `app/`. No human examined it.
+- Authoring: an AI agent (Claude Opus 5.5) made this file and `SOURCES.json` with a script, on 12.10.2026. An AI agent made them again on 14.10.2026 and wrote the paragraph on the other files of `app/`. On 15.10.2026, an AI agent (Claude Opus 5.5) marked the earlier converter and the earlier R2 head as history, in the text outside the tables. No human examined it.

@@ -216,7 +216,8 @@ def compare(ids: list[str], write: bool) -> bool:
 def print_results() -> None:
     r = json.loads(RESULTS.read_text(encoding="utf-8"))
     say(f"\n== Stored results ({RESULTS.relative_to(TRACK)}, state of {r['state_date']})")
-    say("   No value below comes from this run. Both gates are OPEN.")
+    say(f"   History of {r['state_date']}, not the product of this version (see results/README.md). No value below")
+    say(f"   comes from this run. On {r['state_date']}, both gates were OPEN.")
     for part in r["parts"]:
         say(f"\n   {part['title']}  [gate: {part['gate_status']}]")
         w = max(len(x["item"]) for x in part["rows"])

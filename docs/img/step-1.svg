@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 240" width="360" height="240" role="img" aria-labelledby="t">
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+<title id="t">Step 1. A PDF page with three text blocks becomes a list of lines. Each line is in a frame.</title>
+<style>
+.dp { fill: #FBFAF6; stroke: #1B1D22; stroke-width: 1.3; }
+.dl { fill: none; stroke: #1B1D22; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
+.dg { fill: none; stroke: #5A5F6B; stroke-width: 1.6; stroke-linecap: round; }
+.dd { fill: none; stroke: #1B1D22; stroke-width: 1.1; stroke-dasharray: 3 2.5; }
+.dc { fill: #FBFAF6; stroke: #1B1D22; stroke-width: 1; }
+.dm { fill: #F2C14E; stroke: #1B1D22; stroke-width: 1; }
+.df { fill: #1B1D22; }
+.dw { fill: none; stroke: #F2C14E; stroke-width: 7; stroke-linecap: round; }
+</style>
+<rect x="0.75" y="0.75" width="358.5" height="238.5" rx="14" fill="#FBFAF6" stroke="#CFC9BC" stroke-width="1.5"/>
+<g transform="translate(17.5 17.5) scale(1.25)">
+<path class="dp" d="M18 12h72l14 14v124a2 2 0 0 1-2 2H18a2 2 0 0 1-2-2V14a2 2 0 0 1 2-2z"/><path class="dl" d="M90 12v14h14"/>
+<rect class="dd" x="26" y="32" width="54" height="16"/>
+<path class="dg" d="M32 40h38"/>
+<rect class="dd" x="26" y="56" width="68" height="52"/>
+<path class="dg" d="M32 68h56M32 82h56M32 96h36"/>
+<rect class="dd" x="26" y="118" width="44" height="20"/>
+<path class="dg" d="M32 128h26"/>
+<path class="dl" d="M114 82 144 82M137.5 76.5 144 82 137.5 87.5"/>
+<path class="dl" d="M160 28.5h-4v11h4M221 28.5h4v11h-4"/><path class="dg" d="M163 34h55"/>
+<path class="dl" d="M160 52.5h-4v11h4M247 52.5h4v11h-4"/><path class="dg" d="M163 58h81"/>
+<path class="dl" d="M160 76.5h-4v11h4M247 76.5h4v11h-4"/><path class="dg" d="M163 82h81"/>
+<path class="dl" d="M160 100.5h-4v11h4M218 100.5h4v11h-4"/><path class="dg" d="M163 106h52"/>
+<path class="dl" d="M160 124.5h-4v11h4M203 124.5h4v11h-4"/><path class="dg" d="M163 130h37"/>
+</g>
+</svg>

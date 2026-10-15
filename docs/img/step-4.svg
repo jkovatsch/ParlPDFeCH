@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 240" width="360" height="240" role="img" aria-labelledby="t">
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+<title id="t">Step 4. A record with three values. A marker joins one value to its line on the PDF page. Each value has a bar. One value has a dashed frame.</title>
+<style>
+.dp { fill: #FBFAF6; stroke: #1B1D22; stroke-width: 1.3; }
+.dl { fill: none; stroke: #1B1D22; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
+.dg { fill: none; stroke: #5A5F6B; stroke-width: 1.6; stroke-linecap: round; }
+.dd { fill: none; stroke: #1B1D22; stroke-width: 1.1; stroke-dasharray: 3 2.5; }
+.dc { fill: #FBFAF6; stroke: #1B1D22; stroke-width: 1; }
+.dm { fill: #F2C14E; stroke: #1B1D22; stroke-width: 1; }
+.df { fill: #1B1D22; }
+.dw { fill: none; stroke: #F2C14E; stroke-width: 7; stroke-linecap: round; }
+</style>
+<rect x="0.75" y="0.75" width="358.5" height="238.5" rx="14" fill="#FBFAF6" stroke="#CFC9BC" stroke-width="1.5"/>
+<g transform="translate(17.5 17.5) scale(1.25)">
+<rect class="dp" x="10" y="14" width="118" height="136" rx="3"/>
+<rect class="dm" x="20" y="30" width="98" height="26" rx="2"/>
+<path class="dg" d="M27 43h40"/>
+<rect class="df" x="80" y="39.5" width="29.1" height="7"/>
+<rect class="dc" x="20" y="68" width="98" height="26" rx="2"/>
+<path class="dg" d="M27 81h34"/>
+<rect class="df" x="80" y="77.5" width="27.9" height="7"/>
+<rect class="dd" x="20" y="106" width="98" height="26" rx="2"/>
+<path class="dg" d="M27 119h42"/>
+<rect class="df" x="80" y="115.5" width="18" height="7"/>
+<path class="dp" d="M172 14h66l12 12v122a2 2 0 0 1-2 2H172a2 2 0 0 1-2-2V16a2 2 0 0 1 2-2z"/><path class="dl" d="M238 14v12h12"/>
+<path class="dg" d="M179 32h58M179 44h62M179 68h62M179 80h46M179 92h62M179 104h62M179 116h54M179 128h34"/>
+<rect class="dm" x="176" y="50" width="68" height="12" rx="1.5"/>
+<path class="dg" d="M179 56h62"/>
+<path class="dw" d="M118 43c28 0 32 13 58 13"/>
+<path class="dl" d="M118 43c28 0 32 13 58 13"/>
+</g>
+</svg>

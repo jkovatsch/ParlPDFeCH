@@ -1,6 +1,8 @@
-# Apertus head of path 2 (task R2)
+# Earlier Apertus head of task R2 (path 2), 12.10.2026
 
-This folder holds the code of the trained head of path 2: code only. It holds no weights of Apertus, no weights of the head, no hidden states and no document text. The converter does not use this code.
+History: the Apertus head of task R2 (path 2), state of 12.10.2026. Not the product of this version; see [../../README.md](../../README.md), chapter "Use of Apertus and of other models", and [../prompts/](../prompts/README.md).
+
+This folder holds the code of the trained head of path 2: code only. It holds no weights of Apertus, no weights of the head, no hidden states and no document text. The earlier converter of 12.10.2026 does not use the R2 head. The reader copy in `../converter_gj/` imports 5 modules of this folder: `m02_dokumente_extrakt`, `m02_dokumente_profil`, `m04_kern`, `m05_cls_apertus` and `m05_cls_data`.
 
 ## What the head does
 
@@ -36,22 +38,15 @@ The code reads its files below the folder layout of the private project (`daten/
 
 `make head-selftest` (in `track_2a/`) runs the self-check on synthetic data. It needs numpy and scipy (`make setup` downloads them). A run on documents needs the weights of Apertus and of the head, and a Mac with MLX or a CUDA GPU.
 
-## Gate state and values
+## Gate state on 12.10.2026
 
-The gate of path 2 is OPEN. The final run of the head on the test parliaments (1,523 documents, 12.10.2026) is sealed. It has no measurement, because the blind check of the reference did not take place.
+On 12.10.2026, the gate of path 2 was OPEN. The final run of the head on the test parliaments was sealed on 12.10.2026. It has no measurement, because the blind check of the reference did not take place.
 
-Values on the validation set (information, balanced accuracy):
-
-| Set | Head | Zero-shot Apertus readout | Best rule (`s1_answer`) |
-|---|---|---|---|
-| All validation documents (920) | 0.919 | 0.899 | 0.932 |
-| Without the K7 categories (714) | 0.980 | 0.953 | 0.965 |
+The values of 12.10.2026 are in [`../../results/stored_results.json`](../../results/stored_results.json): the validation values and the K7 categories (part of task R2), and the equality check of the VM and the Mac (part "Infrastructure"). They are history, not results of the one fixed run of 13.10.2026.
 
 The K7 categories are local document categories that give only the name of an affair type. The source label of R2 comes from the local category, and these documents have label noise in the class `no`.
 
-Equality check of the two places: on 10 R2 rows, the VM and the Mac gave 10 of 10 equal decisions. The largest difference of q was 0.011279 (limit 0.02).
-
-Task R1 (the recommendation of the executive) stopped with a negative result. `../../README.md` gives the values and the causes.
+Task R1 (the recommendation of the executive) stopped with a negative result. The part "Path 2: task R1" of the same file gives the values and the causes.
 
 Sources: the report of path 2, iteration 2, of the private project (SHA-256 `43d4491084d57d8c3d5897bbd46b6ca4dcd925372916b61f3cd08d18b5fde7a2`), chapters 0, 3, 6.2 and 10; the equality check (`19d7eaf0…`).
 
@@ -59,3 +54,4 @@ Sources: the report of path 2, iteration 2, of the private project (SHA-256 `43d
 
 - Language: English, to the rules of ASD-STE100 (Issue 9).
 - Authoring: an AI agent (Claude Opus 5.5) wrote this text on 12.10.2026. No human examined it.
+- On 15.10.2026, an AI agent (Claude Opus 5.5) marked the text as history and corrected 2 references. It removed the value table; its values are in the stored results. No human examined it.

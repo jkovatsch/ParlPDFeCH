@@ -2,7 +2,7 @@
  "schema": "parlpdfech-report-numbers/1",
  "report": "track_2a/technical_report.md",
  "made": "12.10.2026 17:46 CEST",
- "state": "The numbers file of the report of 12.10.2026 (the earlier converter). numbers.json replaces it for each number of the texts of 14.10.2026. The website still reads its key numbers. Its key pdf gives the report PDF of 12.10.2026, not the PDF of the submission: numbers.json, key pdf, gives that PDF.",
+ "state": "History: the numbers file of the report of 12.10.2026 (the earlier converter). Not the source of the numbers of this version: numbers.json replaces it for each number of the texts of 14.10.2026 and later. On 15.10.2026 the build of the website preview of the private project (web/build.py, not in this repository) still read its key numbers. Its key pdf gives the report PDF of 12.10.2026, not the PDF of the submission: numbers.json, key pdf, gives that PDF.",
  "note": "Paths are files of the private project, except where the path names the public repository. The SHA-256 is the value of the whole source file at the time in 'made', except S7: its value is the version in the private commit of 'private_commit'. The values of chapter 5.5 are counts and rates on the records of 26 test documents, after the freeze; they are no gate measurement and give no value of a single document. No other score comes from a test document; the other values of test documents are counts (chapters 1, 4 and 5.4).",
  "private_commit": "7efdc54d60cc1d89691f8e2a0dc0434c5c8909a4",
  "sources": {

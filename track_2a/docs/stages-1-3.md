@@ -1,8 +1,10 @@
 # Stages 1 to 3 of the first public version
 
-This text describes the 40 scripts at the top of `src/`. They are the code of the first public version of 06.10.2026 (stages 1 to 3 of the pipeline: Docling, atoms, isolation with a LoRA adapter). The converter of the current version is in `src/converter/`. The [README](../README.md) describes it.
+History: the scripts of stages 1 to 3 of the first public version, 06.10.2026. Not the product of this version; see the [README](../README.md).
 
-The text below comes from the README of 06.10.2026: the chapters "Run it" (from its third paragraph), "Requirements", "Data" and "Code". Its content did not change. Only the headings are one step lower.
+This text describes the 40 stage scripts at the top of `src/` (`src/m0*`). They are the code of the first public version of 06.10.2026 (stages 1 to 3 of the pipeline: Docling, atoms, isolation with a LoRA adapter). The earlier converter of 12.10.2026 is in `src/converter/` (`make run-earlier`). The product reads the values from the PDF: `src/converter_gj/` and `app/` ([README](../README.md), chapters "The method" and "Where the parts are").
+
+The text below comes from the README of 06.10.2026: the chapters "Run it" (from its third paragraph), "Requirements", "Data" and "Code". Its content did not change, except the edits in "About this text". The headings are one step lower.
 
 ## Order of the scripts
 
@@ -38,7 +40,7 @@ Gaps in this order:
 | Item | Requirement |
 |---|---|
 | Runtime | Python 3.12 with uv; Docling 2.133.0; Poppler (`pdftotext`, `pdfinfo`, `pdftoppm`); on macOS MLX 0.32.3 and mlx-lm 0.32.0. For the GPU: PyTorch 2.8.0, transformers 5.18.0, peft 0.21.2 (recorded on 05.10.2026 for the first rented GPU). |
-| System | Two computers at this time. Docling with Apple Vision OCR (`ocrmac`), MLX in step 7 and the tokenizer of `mlx-lm` in step 8 need macOS. The training and the readout need Linux with a CUDA GPU. This repository has no container file. |
+| System | Two computers at this time. Docling with Apple Vision OCR (`ocrmac`), MLX in step 7 and the tokenizer of `mlx-lm` in step 8 need macOS. The training and the readout need Linux with a CUDA GPU. The version of 06.10.2026 had no container file. Since 14.10.2026 the app has one (`app/Dockerfile`, `make run`). |
 | Hardware | Development: Mac mini M4 with 32 GB memory. Training and readout: rented H100 GPUs with 80 GB memory, one for each run, in European data centers. |
 | API keys | `HF_TOKEN` for the download of Apertus with the Hugging Face tools. No script in this repository reads it. `RUNPOD_API_KEY` for `src/m04_runpod.py` (rented GPU), from the environment or from the file `.env.runpod` in this folder. The current pipeline does not use `LLM_BASE_URL` and `LLM_API_KEY`. `make run-earlier` does not read `LLM_NAME`, `LLM_BASE_URL` and `LLM_API_KEY`. |
 | Model weights | Apertus-v1.5-8B in bf16. Each user downloads the weights with an own account (see below). No weights are in this repository. |
@@ -89,7 +91,7 @@ The Apertus Acceptable Use Policy v1.5 has these duties for each user:
 
 ### Code
 
-`src/` contains 40 files. 39 of them come from the 109 files in `src/` of the private project at commit `a1db1fb` of 06.10.2026 (108 scripts and one profile file). The new module `m03_render.py` contains a part of one more private module. Many file names, identifiers and comments are German.
+The top of `src/` had 40 files on 06.10.2026: the stage scripts. 39 of them come from the 109 files in `src/` of the private project at commit `a1db1fb` of 06.10.2026 (108 scripts and one profile file). The new module `m03_render.py` contains a part of one more private module. Many file names, identifiers and comments are German. [repository-map.md](repository-map.md) describes the later files of `src/`.
 
 | Part | Scripts | Content |
 |---|---|---|
@@ -186,4 +188,4 @@ The code uses names of the private project. E15 to E32 are items of the decision
 ## About this text
 
 - Language: English, to the rules of ASD-STE100 (Issue 9).
-- Authoring: AI agents (Claude Opus 5.5) wrote the text on 06.10.2026 for the author, from the records and the code of the private project. On 12.10.2026, an AI agent moved it into this file. Later on 12.10.2026, an AI agent removed the open notes and changed the references to the technical report. On 14.10.2026, an AI agent changed the item on the PDF documents of the repository.
+- Authoring: AI agents (Claude Opus 5.5) wrote the text on 06.10.2026 for the author, from the records and the code of the private project. On 12.10.2026, an AI agent moved it into this file. Later on 12.10.2026, an AI agent removed the open notes and changed the references to the technical report. On 14.10.2026, an AI agent changed the item on the PDF documents of the repository. On 15.10.2026, an AI agent (Claude Opus 5.5) added the history line and named the earlier converter and the product. It also dated 2 statements: the container file and the files of `src/`.

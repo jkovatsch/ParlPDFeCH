@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 240" width="360" height="240" role="img" aria-labelledby="t">
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+<title id="t">Step 3. The whole document and one question go into Apertus. One cell of Apertus goes to a bar for each option, with a check mark and a cross. A speech bubble with lines is crossed out.</title>
+<style>
+.dp { fill: #FBFAF6; stroke: #1B1D22; stroke-width: 1.3; }
+.dl { fill: none; stroke: #1B1D22; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
+.dg { fill: none; stroke: #5A5F6B; stroke-width: 1.6; stroke-linecap: round; }
+.dd { fill: none; stroke: #1B1D22; stroke-width: 1.1; stroke-dasharray: 3 2.5; }
+.dc { fill: #FBFAF6; stroke: #1B1D22; stroke-width: 1; }
+.dm { fill: #F2C14E; stroke: #1B1D22; stroke-width: 1; }
+.df { fill: #1B1D22; }
+.dw { fill: none; stroke: #F2C14E; stroke-width: 7; stroke-linecap: round; }
+</style>
+<rect x="0.75" y="0.75" width="358.5" height="238.5" rx="14" fill="#FBFAF6" stroke="#CFC9BC" stroke-width="1.5"/>
+<g transform="translate(17.5 17.5) scale(1.25)">
+<path class="dp" d="M16 10h34l10 10v48a2 2 0 0 1-2 2H16a2 2 0 0 1-2-2V12a2 2 0 0 1 2-2z"/><path class="dl" d="M50 10v10h10"/>
+<path class="dg" d="M21 24h26M21 32h30M21 40h30M21 48h30M21 56h18"/>
+<path class="dp" d="M18 96h38a8 8 0 0 1 8 8v16a8 8 0 0 1-8 8H32l-8 8v-8h-6a8 8 0 0 1-8-8v-16a8 8 0 0 1 8-8z"/>
+<path class="dl" d="M32.5 107.5a4.5 4.5 0 1 1 6.3 4.1c-1.3.6-1.8 1.4-1.8 2.9"/>
+<circle class="df" cx="37" cy="118.6" r="1.2"/>
+<path class="dl" d="M64 46 96 64M93 56 96 64 87.6 65.6"/>
+<path class="dl" d="M68 110 96 96M87.7 94 96 96 92.6 103.8"/>
+<rect class="dp" x="98" y="44" width="64" height="72" rx="3"/>
+<rect class="dc" x="106" y="62.5" width="9" height="9" rx="1"/>
+<rect class="dc" x="119" y="62.5" width="9" height="9" rx="1"/>
+<rect class="dc" x="132" y="62.5" width="9" height="9" rx="1"/>
+<rect class="dc" x="145" y="62.5" width="9" height="9" rx="1"/>
+<rect class="dc" x="106" y="75.5" width="9" height="9" rx="1"/>
+<rect class="dc" x="119" y="75.5" width="9" height="9" rx="1"/>
+<rect class="dc" x="132" y="75.5" width="9" height="9" rx="1"/>
+<rect class="dm" x="145" y="75.5" width="9" height="9" rx="1"/>
+<rect class="dc" x="106" y="88.5" width="9" height="9" rx="1"/>
+<rect class="dc" x="119" y="88.5" width="9" height="9" rx="1"/>
+<rect class="dc" x="132" y="88.5" width="9" height="9" rx="1"/>
+<rect class="dc" x="145" y="88.5" width="9" height="9" rx="1"/>
+<path class="dl" d="M154 80h14"/>
+<path class="dp" d="M168 72.5 181 76.5v7l-13 4z"/>
+<path class="dl" d="M181 80 195 80M189.6 75.5 195 80 189.6 84.5"/>
+<path class="dg" d="M212 60v40"/>
+<path class="dl" d="M198.5 70.5l3.5 3.5 6-7.5"/>
+<rect class="df" x="212" y="65.5" width="40" height="9"/>
+<path class="dl" d="M199.5 86.5l7 7M206.5 86.5l-7 7"/>
+<rect class="df" x="212" y="85.5" width="8" height="9"/>
+<path class="dp" d="M206 112h36a8 8 0 0 1 8 8v12a8 8 0 0 1-8 8H220l-8 8v-8h-6a8 8 0 0 1-8-8v-12a8 8 0 0 1 8-8z"/>
+<path class="dg" d="M207 122h34M207 130h24"/>
+<path class="dl" d="M193 147 255 107"/>
+</g>
+</svg>

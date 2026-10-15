@@ -1,6 +1,6 @@
 # Numbers of ParlPDFeCH, track 2A
 
-Made: 14.10.2026 21:39 CEST (time from the clock). Tool: `src/m11_numbers.py` of the private project.
+Made: 15.10.2026 17:01 CEST (time from the clock). Tool: `src/m11_numbers.py` of the private project.
 
 Status of each value: EXCEPTION, NOT RELEASED. No human checked a value of this file.
 
@@ -9,7 +9,7 @@ Written in English to the STE rules (ASD-STE100, Issue 9). An AI agent (Claude O
 ## 1 How to read this file
 
 1. This file shows the content of `numbers.json` as tables. The two files hold the same values.
-2. The report, the README and the website must take each number from `numbers.json`. A later tool checks this.
+2. The report and the README must take each result number from `numbers.json`. No script of this version checks this. The numbers of a record in the app (for example a probability) come from the files of that record.
 3. The tool reads each value from its source file. No value is typed by hand.
 4. The column Value shows the display form. The stored text of each value is in `numbers.json`.
 5. In the groups 2.1 to 2.14, each accuracy compares a method with the AI reference E20 v4.1. It is not a comparison with a human label.
@@ -3309,7 +3309,7 @@ Entries with the status `not measured yet`: 0. Entries with the mark of a run af
 | `job_lorax` | `daten/gj/jobs/lora_b1x/manifest.json` | `0f6dce1a690e8b7c32420bdda85545bd61e160f780d05f279d77678f98345273` | 2026-10-13T05:48:49+02:00 | key made |
 | `crit` | `crisp-dm/04-modeling/gate-jev-cascade-criteria.md` | `6f6d15c0562cba2070995c302080a9aaedfe665f8d746ed5b0fdd9248bc20bfe` | 2026-10-12T20:26:40+02:00 | file modification time |
 | `addf` | `crisp-dm/04-modeling/gate-jev-cascade-criteria-addendum-f.md` | `bb04a27aa09641f88605803f30362ffbeaed63d2bcf76f9ce66ecdecc0307483` | 2026-10-13T10:34:01+02:00 | file modification time |
-| `prot` | `crisp-dm/00-cross-cutting/protocol.md` | `50c8f5fd49388370357e5e6a4f99254a021190fc23f695e594c4bf1a9501e1ec` | 2026-10-14T21:38:55+02:00 | file modification time |
+| `prot` | `crisp-dm/00-cross-cutting/protocol.md` | `197e293159b8b6f15afefdb06ce008b3b6b7296631de43a228d505e402e72b9c` | 2026-10-15T15:19:19+02:00 | file modification time |
 | `state` | `package/STATE.md` | `44eff4de8dc1ab0e422e452bec035d56455e2fa6c00f1c14fde0036b2553fcef` | 2026-10-14T12:55:07+02:00 | file modification time |
 | `vm_open` | `daten/gj_values/measures_open.json` | `cc03bf8a9d148f5eccfdd866c639040cc414abb398256e1f659d067bbc685294` | 2026-10-13T14:30:37+0200 | key made |
 | `vs_open` | `daten/gj_values/second_open.json` | `4ca5150a4dc6b1f2368dc6414ec5d0adf73b0bf7f7163840d9f62cc23d16b997` | 2026-10-13T14:30:45+02:00 | key made |
@@ -3353,7 +3353,7 @@ For a value from these files, `numbers.json` holds the SHA-256 of the one line w
 ## 4 Limits of this file
 
 1. The block-role candidates B1-S and B1-L have no run on group 7. The one last run (ids `values.last_run.*`) holds values of group 7.
-2. No record of the test set was scored with the new converter.
+2. No record of the test set was scored with the reader of the values from the PDF (`src/converter_gj/`, the app).
 3. The calibration target GJ.13 has the result NOT MET for each of the 3 variants.
 4. The validation values of B1-S and B1-L come from run 2 and run 3 on the same 44 documents.
 5. The tool knows no record of a second calculation for the head design of 12.10.
@@ -3379,12 +3379,12 @@ This file replaces `track_2a/technical_report_numbers.json` of 12.10.2026. The k
 |---|---|
 | File | track_2a/technical_report.pdf (the file of form field 12; git ignores *.pdf, so it is not in the repository) |
 | Pages | 6 |
-| SHA-256 of the PDF | `7d25be096acb2e189e5e7259ba1048e631beef5aa806888ad4ed693007ecc447` |
-| SHA-256 of the Markdown source | `a152aae3d269a1e1618f3e8501368be0fa17e72ba815193db0c86bdedb42b83d` |
+| SHA-256 of the PDF | `90b8f4c2184fecadf64b479a18a9a51d3a1558e2fc758b03af13f7c526c02d0f` |
+| SHA-256 of the Markdown source | `8e689d1cd4574a96b42cc6ccf7dcbed0c88a15c987b12b8f16202734288e23bc` |
 | Tool `pandoc` | `pandoc 3.8.1` |
 | Tool `xelatex` | `XeTeX 3.141592653-2.6-0.999997 (TeX Live 2025)` |
 | Tool `fonts` | `HelveticaNeue, HelveticaNeue-Bold, Menlo-Bold, Menlo-Regular, [none]` |
-| Build record (private project) | crisp-dm/06-deployment/report_pdf_build.json, `9067a96424aeca944d08316f20ce9cd8ad05dc30626a040410d592ed8f119805` |
-| SHA-256 of the earlier numbers file | `f29ae6cf3daca3e8618a6db92553c36e2b9eb80ab427c36552a938cf7a9cf5f6` |
+| Build record (private project) | crisp-dm/06-deployment/report_pdf_build.json, `574c8dff1b20b3d550ece63b3b5b5064a1657633973e59821ce307c1f82249a7` |
+| SHA-256 of the earlier numbers file | `84bb9865a5f05dbe57966a3a75914cddad3276e40d219994e130665fdf658b7b` |
 
 The build steps and the header file of the PDF are in the key `pdf` of `numbers.json`.

@@ -5,6 +5,10 @@
 #   make setup          downloads (network): Python 3.12 and the Python packages of the app into .venv/, the
 #                       Rust crates of app/Cargo.lock (only if cargo is on the computer), and the packages and
 #                       the 2 schema files of the earlier converter. 'make run' does not need 'make setup'
+#   make setup-pdf      for your own PDF with 'make run-native', after 'make setup'. Needs the command pdftotext.
+#                       Downloads (network): the packages of app/container/requirements-full.txt (docling 2.133.0,
+#                       pypdfium2 5.14.0, torch) into .venv/, and the 2 Docling models into the Hugging Face cache
+#                       (only if they are absent)
 #   make run            needs Docker: builds the image (target slim) from app/ (docker compose build), starts it
 #                       on 127.0.0.1:8080 and waits for /healthz. Then open http://127.0.0.1:8080/app/
 #   make stop           stops the container of 'make run'. 'make logs' shows its log
@@ -23,7 +27,8 @@
 # The earlier converter of 12.10.2026 (its metadata values come from the export record, not from the PDF):
 #   make run-earlier    converts the 3 samples from their stored input, validates the output, prints the stored
 #                       results (no network, no GPU, no model). Before 14.10.2026 this target had the name 'run'
-#   make head-selftest  synthetic self-test of the Apertus head code of path 2 (numpy, scipy; no network; no model)
+#   make head-selftest  synthetic self-test of the earlier Apertus head of task R2 (12.10.2026; numpy, scipy; no
+#                       network; no model)
 #
 # Requirement: uv (https://docs.astral.sh/uv/), version 0.11 or later. README.md gives the details.
 
@@ -36,7 +41,12 @@ APP_PYTHON ?= $(if $(wildcard $(APP_VENV)/bin/python),$(abspath $(APP_VENV)/bin/
 # The versions of app/Cargo.lock, with no network: 'make setup' downloads the crates before.
 APP_CARGO_FLAGS ?= --offline --locked
 
-.PHONY: setup run stop logs run-native test test-app clean run-earlier head-selftest
+# 'make setup-pdf': the 2 models that Docling loads for a PDF (layout model and table model), as <repository>@<revision>.
+# The worker (app/worker/fresh.py) looks for pdftotext with the search path, then in these 3 places.
+DOCLING_MODELS := docling-project/docling-layout-heron@main docling-project/docling-models@v2.3.0
+PDFTOTEXT_PLACES := /usr/bin/pdftotext /opt/homebrew/bin/pdftotext /usr/local/bin/pdftotext
+
+.PHONY: setup setup-pdf run stop logs run-native test test-app clean run-earlier head-selftest
 
 setup:
 	uv python install 3.12
@@ -47,6 +57,25 @@ setup:
 	uv run --no-project --python 3.12 --with pyyaml==6.0.3 --with numpy==2.5.3 --with scipy==1.18.1 python -c "import yaml, numpy, scipy"
 	uvx --from linkml==1.11.1 linkml-validate --version
 	uv run --no-project --python 3.12 python src/fetch_schema.py
+
+setup-pdf:
+	@[ -x $(APP_VENV)/bin/python ] || { echo "ERROR: $(APP_VENV)/ is absent. Run 'make setup' first."; exit 1; }
+	@found=$$(command -v pdftotext 2>/dev/null); \
+	for p in $(PDFTOTEXT_PLACES); do [ -n "$$found" ] || { [ -x "$$p" ] && found="$$p"; }; done; \
+	if [ -n "$$found" ]; then echo "pdftotext: $$found"; \
+	else echo "ERROR: the command pdftotext is absent. Install it, then run 'make setup-pdf' again:"; \
+	echo "  macOS (Homebrew):  brew install poppler"; \
+	echo "  Debian or Ubuntu:  sudo apt install poppler-utils"; exit 1; fi
+	uv pip install --python $(APP_VENV)/bin/python -r app/container/requirements-full.txt
+	uv pip check --python $(APP_VENV)/bin/python
+	@for m in $(DOCLING_MODELS); do repo=$${m%@*}; rev=$${m#*@}; \
+	if HF_HUB_OFFLINE=1 $(APP_VENV)/bin/hf download $$repo --revision $$rev --quiet >/dev/null 2>&1; then \
+	echo "model $$repo ($$rev): in the Hugging Face cache"; \
+	else echo "model $$repo ($$rev): not in the Hugging Face cache, download (network)"; \
+	HF_HUB_OFFLINE=0 HF_HUB_DISABLE_IMPLICIT_TOKEN=1 HF_HUB_DISABLE_TELEMETRY=1 \
+	$(APP_VENV)/bin/hf download $$repo --revision $$rev --quiet >/dev/null || exit 1; fi; done
+	$(APP_VENV)/bin/python -c "from importlib.metadata import version as v; import docling, pypdfium2; print('docling', v('docling'), '/ pypdfium2', v('pypdfium2'))"
+	@echo "PASS: make setup-pdf. Start the app with 'make run-native'. Then open http://127.0.0.1:$(PORT)/app/ and drop your PDF on the page."
 
 run:
 	$(MAKE) -C app run

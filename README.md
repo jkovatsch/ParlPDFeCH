@@ -6,44 +6,41 @@ Track 2A (OpenParlData) of the Hack Apertus online hack. The [technical report](
 
 ## Try it
 
-You need git, make and Docker with Compose (no GPU). Tested on one Mac (Apple silicon) only. Not tested on Windows or Linux.
+### Convert a PDF with Apertus (needs a GPU)
 
-1. Clone this repository (button "Code" on its GitHub page).
-
-2. Start the app in Docker. On one Mac, the first build and start took about 2 minutes.
-
-   ```bash
-   cd ParlPDFeCH/track_2a
-   make run
-   ```
-
-3. Open http://127.0.0.1:8080/app/ and click "Open the result" on a sample card.
-
-You see 3 places: the PDF page with a box on each value, the values with their probability, and the RDF below them. A click on a value marks it in all 3 places. `make stop` stops the app.
-
-<img src="docs/img/result-view.png" width="560" alt="Screenshot of the app for sample 26171. Left: the PDF page with a coloured box on each value. Right: the values, each with a probability bar, the word certain or unsure, and the page. The RDF is below them, not in the screenshot.">
-
-### Your own PDF files
-
-`make run` takes the 3 samples only. For your own PDF, run the commands below in `track_2a/`. A PDF can have up to 25 pages and 20 MB. You need uv, jq, curl and `pdftotext`, and for `make view` also cargo and `wasm-bindgen` 0.2.127 ([all details](track_2a/docs/run-locally.md)).
+Clone this repository (button "Code" on its GitHub page) and run the commands in `track_2a/`. You need make, uv, jq, curl and `pdftotext`, and for `make view` also cargo and `wasm-bindgen` 0.2.127 ([all details](track_2a/docs/run-locally.md)). The Apertus step needs a GPU: a Mac with Apple silicon and 32 GB or more, or an NVIDIA GPU with 24 GB or more. Before `make setup-apertus`, accept the conditions of the model on Hugging Face, then log in with `.venv/bin/hf auth login`. It downloads about 17.3 GB and needs about 40 GB of free disk.
 
 ```bash
+cd ParlPDFeCH/track_2a
 make setup               # one time
 make setup-pdf           # one time: Docling and 2 models (about 0.8 GB on a Mac); on macOS also text recognition (OCR)
-make setup-apertus       # one time, only for the Apertus step: needs a GPU and your own Hugging Face account
-make convert PDF=<file>  # or PDF=<URL>, DIR=<folder>, LIST=<file of paths and URLs>; APERTUS=0: code rules only
+make setup-apertus       # one time: Apertus-v1.5-8B and the value heads
+make convert PDF=<file>  # or PDF=<URL>, DIR=<folder>, LIST=<file of paths and URLs>
 make list                # all IDs as a table
 make view ID=0001        # on request: opens result 0001 at http://127.0.0.1:8080/app/ (or the next free port)
 ```
 
-- Each PDF gets an ID, and the same PDF keeps its ID. The terminal shows each value with its probability, and valid yes or no. With the Apertus step, it also shows the source of each value (rules or Apertus). Valid means that the record passed the validator, not that each value is correct.
-- A sample to try: `make convert PDF=app/data/samples/26171/source.pdf`. In the 3 samples, Apertus writes no value. With the Apertus step, the terminal still shows the head probabilities of Apertus.
-- The Apertus step needs a GPU: a Mac with Apple silicon and 32 GB or more, or an NVIDIA GPU with 24 GB or more. The GPU can also be on another computer, for example a rented GPU in the cloud. That computer runs `make serve-apertus`. Your computer runs `make setup-apertus APERTUS_MODEL=none` (the heads only) and `make convert APERTUS_URL=...` through an ssh tunnel ([the GPU for the Apertus step](track_2a/docs/apertus-gpu.md)). On the computer with the GPU, accept the conditions of the model on Hugging Face first, then log in with `.venv/bin/hf auth login`. `make setup-apertus` downloads about 17.3 GB and needs about 40 GB of free disk.
-- With no GPU, `make convert` writes a note and makes the record with the code rules only.
+- Each PDF gets an ID, and the same PDF keeps its ID. The terminal shows each value with its probability, its source (rules or Apertus), and valid yes or no. Valid means that the record passed the validator, not that each value is correct. A PDF can have up to 25 pages and 20 MB.
+- A sample to try: `make convert PDF=app/data/samples/26171/source.pdf`. In the 3 samples, Apertus writes no value. The terminal still shows the head probabilities of Apertus.
+- The GPU can also be on another computer, for example a rented GPU in the cloud. That computer runs `make serve-apertus`. Your computer runs `make setup-apertus APERTUS_MODEL=none` (the heads only) and `make convert APERTUS_URL=...` through an ssh tunnel ([the GPU for the Apertus step](track_2a/docs/apertus-gpu.md)).
+- With no GPU, `make convert` writes a note and makes the record with the code rules only. `APERTUS=0` gives the code rules only on purpose.
 - On macOS, `make setup-pdf` installs the text recognition (OCR) of Apple Vision. On Linux there is no OCR, so the PDF needs a text layer.
 - Tested only on one Mac. On 15.10.2026, with the code rules: 3 samples and 5 development PDFs of 5 parliaments gave 8 valid records. On 16.10.2026, with the Apertus step (Apple M4, 32 GB, MLX): 3 samples and 4 development PDFs gave valid records, in 30 to 115 s for each PDF. On the stored text blocks of 31 development documents, the read-out gave the same decisions as the stored states of one H100 GPU. Not tested: an NVIDIA GPU, Linux, Windows, a second computer, an ssh tunnel, the model download of `make setup-apertus`. The development documents are not new to the method: the rule authors read them, and the heads were fitted on development documents.
 
-With `make run-native`, the app page also converts a PDF with the code rules (button "Convert your own PDF").
+### Only look at 3 results (Docker, no GPU)
+
+`make run` starts the app in Docker. It converts only the 3 sample PDFs, from stored inputs. It does not run Apertus. You need git, make and Docker with Compose. On one Mac, the first build and start took about 2 minutes. Not tested on Windows or Linux.
+
+```bash
+cd ParlPDFeCH/track_2a
+make run
+```
+
+Open http://127.0.0.1:8080/app/ and click "Open the result" on a sample card. You see 3 places: the PDF page with a box on each value, the values with their probability, and the RDF below them. A click on a value marks it in all 3 places. `make stop` stops the app.
+
+<img src="docs/img/result-view.png" width="560" alt="Screenshot of the app for sample 26171. Left: the PDF page with a coloured box on each value. Right: the values, each with a probability bar, the word certain or unsure, and the page. The RDF is below them, not in the screenshot.">
+
+With `make run-native`, the app page also converts a PDF with the code rules only (button "Convert your own PDF").
 
 ## How it works
 

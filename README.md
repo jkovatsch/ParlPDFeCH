@@ -4,20 +4,21 @@ A PDF of a Swiss parliament goes in. An eCH-0295 record in RDF comes out.
 
 Code rules read the values from the PDF. Apertus-v1.5-8B reads the whole document on a GPU. Small linear heads on its hidden state then decide 2 values where the rules found none or only a weak one: the affair type and the first author. Each value has a probability, a page and a place in the PDF.
 
-Track 2A (OpenParlData) of the Hack Apertus online hack · [Technical report](track_2a/technical_report.md) · [Value heads on Hugging Face](https://huggingface.co/JonathanKovatsch/parlpdfech-heads)
+Track 2A (OpenParlData) of the Hack Apertus online hack · [Website](https://parlpdfech.ansv.ch) · [Technical report](track_2a/technical_report.md) · [Value heads on Hugging Face](https://huggingface.co/JonathanKovatsch/parlpdfech-heads)
 
 ## Try it
 
 ```bash
 cd ParlPDFeCH/track_2a
-make setup               # one time: the packages, the PDF reader and Apertus-v1.5-8B with the value heads
+make info                # the state: setup, GPU, results (also: make)
+make setup               # one time: packages, PDF reader, Apertus (with a GPU)
 make convert PDF=<file>  # or PDF=<URL>, DIR=<folder>, LIST=<file>
-make view ID=0001        # the result in the browser at http://127.0.0.1:8080/app/ (or the next free port)
+make view ID=0001        # the result at http://127.0.0.1:8080/app/
 ```
 
 You need make, uv, jq, curl and `pdftotext`, and for `make view` also cargo and `wasm-bindgen` 0.2.127. The Apertus step needs a GPU: a Mac with Apple silicon and 32 GB or more, or an NVIDIA GPU with 24 GB or more. The GPU can also be on another computer ([GPU page](track_2a/docs/apertus-gpu.md)). It also needs your own Hugging Face account: `make setup` gives the steps. With no GPU, `make convert` uses the code rules only.
 
-- `make` (or `make info`) shows the state: the setup, the GPU and the results. `make gpu` checks the GPU and shows the ways to one.
+- If `make info` finds no GPU, `make gpu` shows why and the ways to one (a driver, or a GPU of another computer).
 - Each PDF gets an ID, and the same PDF keeps its ID. `make list` shows all IDs. A sample: `make convert PDF=app/data/samples/26171/source.pdf`.
 - Tested only on one Mac (Apple M4, 32 GB) on 15 and 16.10.2026. Not tested: an NVIDIA GPU, Linux, Windows.
 - [All details](track_2a/docs/run-locally.md): the parts of `make setup`, OCR, the terminal table, the Apertus finds below the entry limit, and `make run` (Docker: 3 stored results only, no Apertus).

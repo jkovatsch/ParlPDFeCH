@@ -37,20 +37,20 @@
   }
  ],
  "totals": {
-  "files": 86,
-  "bytes": 14973556,
+  "files": 98,
+  "bytes": 15622279,
   "by_mode": {
    "1": {
     "files": 46,
     "bytes": 4995526
    },
    "2": {
-    "files": 73,
-    "bytes": 14381894
+    "files": 86,
+    "bytes": 15071206
    },
    "3": {
-    "files": 59,
-    "bytes": 5609071
+    "files": 71,
+    "bytes": 6257794
    }
   }
  },
@@ -277,9 +277,10 @@
    "sha256": "88a0207465bd6e6d704a82b138752a1e0caf0059cb7f8795040582fee1ebe4ae",
    "kind": "code",
    "modes": [
+    2,
     3
    ],
-   "why": "fresh branch: the language rule of the block file (function language)"
+   "why": "Apertus read-out of a new PDF (worker/apertus_states.py, subprocess): the frozen states engine of the fixed run (m10_vm_states.Engine), the prompt texts of the template gj_values_v1_de (m11_prompts_values.item, m10_prompts.prefix_of) and their imports"
   },
   {
    "path": "src/m05_iso_runner.py",
@@ -1006,6 +1007,138 @@
     3
    ],
    "why": "value calibration file of the product (round 4, cascade reader version 4): for each rule tier, the share of the 1,793 development documents in which the value was equal to the OpenParlData value. Development documents of 44 parliaments that the rule authors read; the rule files of the reader are made from the PDF alone. The one fixed run of 13.10.2026 used 872 documents of 26 other parliaments. There the share correct (correct / documents with an export value) was 0.2214 for the affair number and 0.2729 for the submission date. Before the run, AI agents had read 116 or more of these documents in earlier work."
+  },
+  {
+   "path": "src/m10_vm_states.py",
+   "bytes": 66060,
+   "sha256": "3cd1eb9f1b66034e8c8289ca292adb6663d8a6794a3c6d165656ff3ab5e8c53b",
+   "kind": "code",
+   "modes": [
+    2,
+    3
+   ],
+   "why": "Apertus read-out of a new PDF (worker/apertus_states.py, subprocess): the frozen states engine of the fixed run (m10_vm_states.Engine), the prompt texts of the template gj_values_v1_de (m11_prompts_values.item, m10_prompts.prefix_of) and their imports"
+  },
+  {
+   "path": "src/m10_prompts.py",
+   "bytes": 27317,
+   "sha256": "afa15e27806eb32dbf92f8e40886193f7cba598684de39e80229edae00c8b6e8",
+   "kind": "code",
+   "modes": [
+    2,
+    3
+   ],
+   "why": "Apertus read-out of a new PDF (worker/apertus_states.py, subprocess): the frozen states engine of the fixed run (m10_vm_states.Engine), the prompt texts of the template gj_values_v1_de (m11_prompts_values.item, m10_prompts.prefix_of) and their imports"
+  },
+  {
+   "path": "src/m11_prompts_values.py",
+   "bytes": 20690,
+   "sha256": "c32896531bb8ee6f361171201a33b8336338a16da3d01a20301cc790da5723e9",
+   "kind": "code",
+   "modes": [
+    2,
+    3
+   ],
+   "why": "Apertus read-out of a new PDF (worker/apertus_states.py, subprocess): the frozen states engine of the fixed run (m10_vm_states.Engine), the prompt texts of the template gj_values_v1_de (m11_prompts_values.item, m10_prompts.prefix_of) and their imports"
+  },
+  {
+   "path": "src/m05_cls_apertus.py",
+   "bytes": 51780,
+   "sha256": "f3677338ec95a2c53ad0254655cc4438d15ac722e3b446769f5ff3498191a8a2",
+   "kind": "code",
+   "modes": [
+    2,
+    3
+   ],
+   "why": "Apertus read-out of a new PDF (worker/apertus_states.py, subprocess): the frozen states engine of the fixed run (m10_vm_states.Engine), the prompt texts of the template gj_values_v1_de (m11_prompts_values.item, m10_prompts.prefix_of) and their imports"
+  },
+  {
+   "path": "src/m11_value_heads2.py",
+   "bytes": 90422,
+   "sha256": "aeecad3d80737f8f529aedcb0793e443b97a84b3534094099d79c41f4897575b",
+   "kind": "code",
+   "modes": [
+    2,
+    3
+   ],
+   "why": "Apertus values of a new PDF: the value heads (heads2, layer 20; the head files come from the heads folder at run time) and the combined reader of the fixed run (rule I5)"
+  },
+  {
+   "path": "src/m11_value_heads2_data.py",
+   "bytes": 31561,
+   "sha256": "f7cd8926728299863ba32acc7131dcb3d2319ce601ea4d23186a07462dacdec6",
+   "kind": "code",
+   "modes": [
+    2,
+    3
+   ],
+   "why": "Apertus values of a new PDF: the value heads (heads2, layer 20; the head files come from the heads folder at run time) and the combined reader of the fixed run (rule I5)"
+  },
+  {
+   "path": "src/m11_value_heads.py",
+   "bytes": 45316,
+   "sha256": "0b0d0eb137dd9ad6856195907c968d0c22e134c3899469063c93673ec63baa2c",
+   "kind": "code",
+   "modes": [
+    2,
+    3
+   ],
+   "why": "Apertus values of a new PDF: the value heads (heads2, layer 20; the head files come from the heads folder at run time) and the combined reader of the fixed run (rule I5)"
+  },
+  {
+   "path": "src/m11_value_heads_data.py",
+   "bytes": 14446,
+   "sha256": "5bde2e685ec41462043f2c92332d06c4a54fa98ffbe22177136daa5e7d97ece7",
+   "kind": "code",
+   "modes": [
+    2,
+    3
+   ],
+   "why": "Apertus values of a new PDF: the value heads (heads2, layer 20; the head files come from the heads folder at run time) and the combined reader of the fixed run (rule I5)"
+  },
+  {
+   "path": "src/m11_values_combined.py",
+   "bytes": 13266,
+   "sha256": "4de6deaa7fd9ac917be5d2a31a6c66344ece468c41d06aa1a36527b8ea9a0286",
+   "kind": "code",
+   "modes": [
+    2,
+    3
+   ],
+   "why": "Apertus values of a new PDF: the value heads (heads2, layer 20; the head files come from the heads folder at run time) and the combined reader of the fixed run (rule I5)"
+  },
+  {
+   "path": "src/m12_apertus_values.py",
+   "bytes": 29739,
+   "sha256": "0b3a5877bfc9d0434589d6123feb729cbbba1706cd5b420ae67355d2f2bb7761",
+   "kind": "code",
+   "modes": [
+    2,
+    3
+   ],
+   "why": "Apertus values of a new PDF and of a sample in the mode auto (worker/values_apertus.py): the place of the Apertus type, the near marks and the calibration file of the Apertus mode (m12_apertus_values), and the new writer and validator versions of the Apertus mode (m12_writer, m12_validate; the frozen m11_writer and m11_validate do not change)"
+  },
+  {
+   "path": "src/m12_writer.py",
+   "bytes": 122517,
+   "sha256": "f57f629d76bb9779ae5432fc22ff0b51ea830b2d0204f4a55ba7c3602a3ae7d8",
+   "kind": "code",
+   "modes": [
+    2,
+    3
+   ],
+   "why": "Apertus values of a new PDF and of a sample in the mode auto (worker/values_apertus.py): the place of the Apertus type, the near marks and the calibration file of the Apertus mode (m12_apertus_values), and the new writer and validator versions of the Apertus mode (m12_writer, m12_validate; the frozen m11_writer and m11_validate do not change)"
+  },
+  {
+   "path": "src/m12_validate.py",
+   "bytes": 135609,
+   "sha256": "a411ae60edafcef035049147d1a03f185b980446118b891bb66d2080a1729150",
+   "kind": "code",
+   "modes": [
+    2,
+    3
+   ],
+   "why": "Apertus values of a new PDF and of a sample in the mode auto (worker/values_apertus.py): the place of the Apertus type, the near marks and the calibration file of the Apertus mode (m12_apertus_values), and the new writer and validator versions of the Apertus mode (m12_writer, m12_validate; the frozen m11_writer and m11_validate do not change)"
   }
  ],
  "generated_for_each_run": [
@@ -1110,19 +1243,32 @@
   "note": "These paths are not from a trace file of worker/make_layout_list.py. A new run of that tool does not keep them: run worker/layout_add.py --values after it.",
   "paths": [
    "daten/gj_values/round4/calibration_dev_all.json",
+   "src/m05_cls_apertus.py",
+   "src/m05_cls_data.py",
+   "src/m10_prompts.py",
+   "src/m10_vm_states.py",
    "src/m11_cascade.py",
    "src/m11_cascade.yaml",
    "src/m11_label_schema.yaml",
+   "src/m11_prompts_values.py",
    "src/m11_validate.py",
+   "src/m11_value_heads.py",
+   "src/m11_value_heads2.py",
+   "src/m11_value_heads2_data.py",
+   "src/m11_value_heads_data.py",
    "src/m11_value_norm.py",
    "src/m11_value_reference.py",
    "src/m11_values_base.py",
    "src/m11_values_cascade.py",
+   "src/m11_values_combined.py",
    "src/m11_values_dates_responder.py",
    "src/m11_values_sponsor.py",
    "src/m11_values_title.py",
    "src/m11_values_type_number.py",
-   "src/m11_writer.py"
+   "src/m11_writer.py",
+   "src/m12_apertus_values.py",
+   "src/m12_validate.py",
+   "src/m12_writer.py"
   ]
  }
 }

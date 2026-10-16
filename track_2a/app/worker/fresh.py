@@ -3,8 +3,12 @@
 
 Status of all results: EXCEPTION, NOT RELEASED. No human checked this file.
 
-Code rules only. No Apertus state is read and no model of Apertus runs. serve_convert.py calls
-convert_fresh() of this file for a PDF whose SHA-256 is not in the sample index (contract chapter 4.3).
+Code rules; with PARLPDFECH_APERTUS=local (worker mode auto; 'make convert' with the Apertus step) also the
+Apertus value read-outs (worker/values_apertus.py and worker/apertus_provider.py: Apertus-v1.5-8B on a GPU of
+this computer or of another computer, the value heads, a new writer and validator version). With no
+PARLPDFECH_APERTUS (the app, 'make convert APERTUS=0') no Apertus state is read and no model of Apertus runs.
+serve_convert.py calls convert_fresh() of this file for a PDF whose SHA-256 is not in the sample index
+(contract chapter 4.3).
 
 Profiles
   slim    no Docling in the image: the PDF is refused with the code not_in_package.
@@ -440,25 +444,57 @@ def convert_fresh(host, pdf_path: Path, doc_id: str | None, mode: str, out: Path
             decisions_sha = host.sha256_file(dec_p)
             stages.done("rules", "new", {"blocks": len(rec["blocks"])})
 
-            # ---- stage 4: Apertus. The provider of stage P0b gives no states.
+            # ---- stage 4: Apertus. The provider of stage P0b gives no states. With PARLPDFECH_APERTUS (worker
+            # mode auto, values state pdf) the Apertus value read-outs run (worker/values_apertus.py).
             if str(Path(__file__).resolve().parent) not in sys.path:
                 sys.path.append(str(Path(__file__).resolve().parent))
             import states_provider  # noqa: PLC0415
-            prov = states_provider.provider("none")
-            if prov.states_for(docs_p, host.sha256_file(docs_p), root / "work") is not None:
-                raise host.stopped("states")
-            stages.skipped("apertus", "mode_rules" if mode == "rules" else "not_in_package")
+            vr = host.values_module()
+            values_state = vr.state(None, digest)                # pdf, off or held (worker/values_record.py)
+            va = None
+            ro = None                                            # the result of values_apertus.read_out
+            ap_res = None                                        # the result of the combined reader
+            if os.environ.get("PARLPDFECH_APERTUS"):
+                import values_apertus as va  # noqa: PLC0415
+            if va is not None and va.active(mode, values_state):
+                stages.start("apertus")
+                ro = va.read_out(root, docs_p, rules_p, log=host.log)
+                passes = int(((ro.get("run") or {}).get("record") or {}).get("n_passes") or 0)
+                if ro["ho"] is not None:
+                    stages.done("apertus", "new", {"passes": passes, "labels": 0})
+                else:
+                    host.log(f"apertus: not run ({ro['reason']}); the record gets the code rules only")
+                    stages.done("apertus", "new", {"passes": 0, "labels": 0}, note=f"failed_{ro['reason']}"[:64])
+                provider_kind = (ro.get("run") or {}).get("kind") or "local"
+            else:
+                prov = states_provider.provider("none")
+                if prov.states_for(docs_p, host.sha256_file(docs_p), root / "work") is not None:
+                    raise host.stopped("states")
+                stages.skipped("apertus", "mode_rules" if mode == "rules" else "not_in_package")
+                provider_kind = prov.kind
+            ap_on = ro is not None and ro["ho"] is not None
 
             # ---- stage 5: the record of a PDF with no export record, and the RDF files
             stages.start("write")
-            vr = host.values_module()
-            values_state = vr.state(None, digest)                # pdf, off or held (worker/values_record.py)
             hyphen = host.count_hyphen_decisions(m.gr)
             base = m.writer.check_base(os.environ.get("PARLPDFECH_CALIBRATION_BASE") or "https://parlpdfech.ansv.ch/id/")
             folder.mkdir(parents=True, exist_ok=True)
             measured = None
             signs = None
-            if values_state == "pdf":
+            ap_validation = None
+            if ap_on:
+                measured = vr.calibration_file(root)[1]
+                # the record with the Apertus values and its checks (m12); after an exception of either: the state
+                # failed (reason record_error), an empty record folder, and the record of the rules below
+                done5 = va.record_and_check(root, folder, docs_p, rules_p, dec_p, None, None, Path(floor.path), ro,
+                                            calibration_base=base, log=host.log)
+                if done5 is None:
+                    ap_on = False
+                else:
+                    rdf_result, ap_res, ap_validation = done5
+            if ap_on:
+                pass                             # the record of the Apertus mode is written and checked
+            elif values_state == "pdf":
                 measured = vr.calibration_file(root)[1]
                 _, rdf_result = vr.write(root, folder, docs_p, rules_p, dec_p, None, None, Path(floor.path), base)
             else:
@@ -472,7 +508,10 @@ def convert_fresh(host, pdf_path: Path, doc_id: str | None, mode: str, out: Path
 
             # ---- stage 6: checks, copy of the record, view function
             stages.start("check")
-            if values_state == "pdf":
+            if ap_on:
+                validation = ap_validation       # m12_validate ran in stage 5 (record_and_check)
+                check_ids = va.CHECK_IDS
+            elif values_state == "pdf":
                 validation = vr.validate(root, folder, None)
                 check_ids = vr.CHECK_IDS
             else:
@@ -544,7 +583,8 @@ def convert_fresh(host, pdf_path: Path, doc_id: str | None, mode: str, out: Path
             "schema": host.CONVERT_SCHEMA, "record_id": record_id, "doc_id": None, "pdf_sha256": digest,
             "input": {"kind": "upload", "file_name": pdf_path.name}, "mode": mode, "converter_mode": man.get("mode"),
             "apertus": "none", "origin": "new", "profile": profile, "status": host.STATUS, "valid": valid,
-            "valid_rule": "one or more checks failed" if not valid else vr.VALID_RULE if values_state == "pdf"
+            "valid_rule": "one or more checks failed" if not valid else va.VALID_RULE if ap_on
+                          else vr.VALID_RULE if values_state == "pdf"
                           else "the writer check of worker/pdf_only.py and the checks C1 to C9 passed",
             "exit_code": exit_code, "started_utc": started, "finished_utc": host.utc_now(),
             "seconds": {**sec, "setup": seconds_setup,
@@ -554,7 +594,9 @@ def convert_fresh(host, pdf_path: Path, doc_id: str | None, mode: str, out: Path
                                       "rdf": (man.get("rdf") or {}).get("seconds"),
                                       "validate": (man.get("seconds") or {}).get("validate")}},
             "stages": stages.table(),
-            "counts": {**counts, "triples": triples, "apertus_labels": 0,
+            "counts": {**counts, "triples": triples,
+                       "apertus_labels": int((man["counts"].get("label_assertions_by_source") or {}).get("apertus_head", 0))
+                       if ap_on else 0,
                        "certain_labels": man["counts"].get("certain_labels"),
                        "unsure_labels": man["counts"].get("unsure_labels"),
                        "label_assertions_by_source": man["counts"].get("label_assertions_by_source"),
@@ -575,7 +617,7 @@ def convert_fresh(host, pdf_path: Path, doc_id: str | None, mode: str, out: Path
                                 "identity_record_sha256": identity["sha256"]},
                       "reduced_tables": {"file": "worker/fresh_tables.json", "sha256": facts["tables_sha256"],
                                          "paths": facts["generated"]},
-                      "states_provider": {"kind": prov.kind},
+                      "states_provider": {"kind": provider_kind},
                       "search_path_entries_removed": LayoutFinder.removed,
                       "sample_of_the_package": False,
                       "development_document": None,
@@ -584,10 +626,18 @@ def convert_fresh(host, pdf_path: Path, doc_id: str | None, mode: str, out: Path
                                       "is one of the development documents (key development_document null = not "
                                       "known). No value of a report applies."},
             "resources": host.max_rss(), "tools": host.tool_versions(), "worker_version": host.WORKER_VERSION}
+        done = {"event": "done", "record_id": record_id, "doc_id": None, "valid": valid, "mode": mode,
+                "apertus": "none", "origin": "new", "pdf_sha256": digest, "seconds": sec, "counts": counts,
+                "files": names + ["convert.json"]}
+        if ro is not None:
+            # the Apertus value read-outs (worker/values_apertus.py); the key apertus keeps its meaning (block labels)
+            convert["apertus_values"] = va.convert_facts(ro, ap_res)
+            done["apertus_values"] = ro["state"]
+        elif va is not None:
+            convert["apertus_values"] = {"state": "off", "reason": f"worker_mode_{mode}" if mode != "auto"
+                                         else f"values_{values_state}"}
         host.write_out(out / "convert.json", convert)
-        host.emit({"event": "done", "record_id": record_id, "doc_id": None, "valid": valid, "mode": mode,
-                   "apertus": "none", "origin": "new", "pdf_sha256": digest, "seconds": sec, "counts": counts,
-                   "files": names + ["convert.json"]})
+        host.emit(done)
         return exit_code
     finally:
         with contextlib.suppress(OSError):

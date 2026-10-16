@@ -3,7 +3,7 @@
  "status": "EXCEPTION, NOT RELEASED",
  "list": {
   "file": "worker/layout_files.json",
-  "sha256": "b96f9efb3bbd75e4d5d7b71adaf42d27ecc4361503800566798a47c79b5f16f0"
+  "sha256": "34eee0cab4ac9061a22976269e2b5f38a2ee78531250a54351ccb6be6a9e1a7a"
  },
  "python_compiled": true,
  "compiled": [
@@ -218,6 +218,54 @@
   {
    "name": "m11_cascade.cpython-312.pyc",
    "sha256": "fa603f81b7b71eb08013a08ea76f382e1da35d3c5ed1de0059377a42319e86fd"
+  },
+  {
+   "name": "m10_vm_states.cpython-312.pyc",
+   "sha256": "52fa6d9347dcbc41e28ac8c5f182a7e079303d66fe39789350ba66a909e5ca16"
+  },
+  {
+   "name": "m10_prompts.cpython-312.pyc",
+   "sha256": "735cf08c3413e503cf0b94421a01c5c5cff6747f21c398d0174d27fb9c8b12a5"
+  },
+  {
+   "name": "m11_prompts_values.cpython-312.pyc",
+   "sha256": "503c7d30df6146da583b5a9d25d425e74f295fc328d05430aae1afc984785fb9"
+  },
+  {
+   "name": "m05_cls_apertus.cpython-312.pyc",
+   "sha256": "c70ed09c0eb626c8f480e4f3f469ce40fa8d7117649332881ed42ae8282c9bf0"
+  },
+  {
+   "name": "m11_value_heads2.cpython-312.pyc",
+   "sha256": "31bc8495b91f8911532c8c4781e8c57ed12abe007b5f0e401823c2031295edf6"
+  },
+  {
+   "name": "m11_value_heads2_data.cpython-312.pyc",
+   "sha256": "b32d08f3f6e3991c7b165b5aec76d6273caa533bdd452ae03b60e7051b72f81f"
+  },
+  {
+   "name": "m11_value_heads.cpython-312.pyc",
+   "sha256": "297323db1a935114a9aafb385f418bf72799dd1b8c97364f66351a8b088fc484"
+  },
+  {
+   "name": "m11_value_heads_data.cpython-312.pyc",
+   "sha256": "7297f26d22ce1239de1fc20b7b689d045e758918655b94c4f3e90a61be79323a"
+  },
+  {
+   "name": "m11_values_combined.cpython-312.pyc",
+   "sha256": "4c97c17fe7fcbce1424f4ac76a28e2a4dfe2ede918d06055569dd609376a5c16"
+  },
+  {
+   "name": "m12_apertus_values.cpython-312.pyc",
+   "sha256": "72991cb60bd19d1c6dd8f7a380cdfd45cce24c0f098c59673d8fc32bc575caf1"
+  },
+  {
+   "name": "m12_writer.cpython-312.pyc",
+   "sha256": "e998183fb62ac7082fb3f5dd2cdf609cbc7202a4f37ee4c3d0f200fe2951cb4e"
+  },
+  {
+   "name": "m12_validate.cpython-312.pyc",
+   "sha256": "63111625c4195f39dca3cdfda99da57b2f29e5250862fcb5b922523f40022dc3"
   }
  ],
  "files": [
@@ -424,6 +472,7 @@
    "sha256": "88a0207465bd6e6d704a82b138752a1e0caf0059cb7f8795040582fee1ebe4ae",
    "kind": "code",
    "modes": [
+    2,
     3
    ]
   },
@@ -1083,6 +1132,126 @@
    "kind": "data",
    "modes": [
     1,
+    2,
+    3
+   ]
+  },
+  {
+   "path": "src/m10_vm_states.py",
+   "bytes": 66060,
+   "sha256": "3cd1eb9f1b66034e8c8289ca292adb6663d8a6794a3c6d165656ff3ab5e8c53b",
+   "kind": "code",
+   "modes": [
+    2,
+    3
+   ]
+  },
+  {
+   "path": "src/m10_prompts.py",
+   "bytes": 27317,
+   "sha256": "afa15e27806eb32dbf92f8e40886193f7cba598684de39e80229edae00c8b6e8",
+   "kind": "code",
+   "modes": [
+    2,
+    3
+   ]
+  },
+  {
+   "path": "src/m11_prompts_values.py",
+   "bytes": 20690,
+   "sha256": "c32896531bb8ee6f361171201a33b8336338a16da3d01a20301cc790da5723e9",
+   "kind": "code",
+   "modes": [
+    2,
+    3
+   ]
+  },
+  {
+   "path": "src/m05_cls_apertus.py",
+   "bytes": 51780,
+   "sha256": "f3677338ec95a2c53ad0254655cc4438d15ac722e3b446769f5ff3498191a8a2",
+   "kind": "code",
+   "modes": [
+    2,
+    3
+   ]
+  },
+  {
+   "path": "src/m11_value_heads2.py",
+   "bytes": 90422,
+   "sha256": "aeecad3d80737f8f529aedcb0793e443b97a84b3534094099d79c41f4897575b",
+   "kind": "code",
+   "modes": [
+    2,
+    3
+   ]
+  },
+  {
+   "path": "src/m11_value_heads2_data.py",
+   "bytes": 31561,
+   "sha256": "f7cd8926728299863ba32acc7131dcb3d2319ce601ea4d23186a07462dacdec6",
+   "kind": "code",
+   "modes": [
+    2,
+    3
+   ]
+  },
+  {
+   "path": "src/m11_value_heads.py",
+   "bytes": 45316,
+   "sha256": "0b0d0eb137dd9ad6856195907c968d0c22e134c3899469063c93673ec63baa2c",
+   "kind": "code",
+   "modes": [
+    2,
+    3
+   ]
+  },
+  {
+   "path": "src/m11_value_heads_data.py",
+   "bytes": 14446,
+   "sha256": "5bde2e685ec41462043f2c92332d06c4a54fa98ffbe22177136daa5e7d97ece7",
+   "kind": "code",
+   "modes": [
+    2,
+    3
+   ]
+  },
+  {
+   "path": "src/m11_values_combined.py",
+   "bytes": 13266,
+   "sha256": "4de6deaa7fd9ac917be5d2a31a6c66344ece468c41d06aa1a36527b8ea9a0286",
+   "kind": "code",
+   "modes": [
+    2,
+    3
+   ]
+  },
+  {
+   "path": "src/m12_apertus_values.py",
+   "bytes": 29739,
+   "sha256": "0b3a5877bfc9d0434589d6123feb729cbbba1706cd5b420ae67355d2f2bb7761",
+   "kind": "code",
+   "modes": [
+    2,
+    3
+   ]
+  },
+  {
+   "path": "src/m12_writer.py",
+   "bytes": 122517,
+   "sha256": "f57f629d76bb9779ae5432fc22ff0b51ea830b2d0204f4a55ba7c3602a3ae7d8",
+   "kind": "code",
+   "modes": [
+    2,
+    3
+   ]
+  },
+  {
+   "path": "src/m12_validate.py",
+   "bytes": 135609,
+   "sha256": "a411ae60edafcef035049147d1a03f185b980446118b891bb66d2080a1729150",
+   "kind": "code",
+   "modes": [
     2,
     3
    ]

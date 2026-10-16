@@ -1,12 +1,12 @@
 # ParlPDFeCH
 
-A PDF of a Swiss parliament goes in. An eCH-0295 record in RDF comes out. Each value has a probability. A value from the code rules also has its page and its place in the PDF.
+A PDF of a Swiss parliament goes in. An eCH-0295 record in RDF comes out. Code rules read the values. On a GPU, Apertus-v1.5-8B decides 2 of them: the affair type if the rules found none, and the first author if the rule value is absent or weak. Each value has a probability, a page and a place in the PDF.
 
 Track 2A (OpenParlData) of the Hack Apertus online hack. The [technical report](track_2a/technical_report.md) gives the method and the result.
 
 ## Try it
 
-You need git, make and Docker with Compose. Tested on one Mac (Apple silicon) only. Not tested on Windows or Linux.
+You need git, make and Docker with Compose (no GPU). Tested on one Mac (Apple silicon) only. Not tested on Windows or Linux.
 
 1. Clone this repository (button "Code" on its GitHub page).
 
@@ -25,21 +25,25 @@ You see 3 places: the PDF page with a box on each value, the values with their p
 
 ### Your own PDF files
 
-`make run` takes the 3 samples only. Your own PDF gets the code rules only (no language model, no GPU). It needs a text layer, because `make setup-pdf` installs no text recognition (OCR). A PDF can have up to 25 pages and 20 MB. Tested on one Mac (Apple silicon) only, not on Windows or Linux.
-
-Run the commands in `track_2a/`. You need uv, jq, curl and `pdftotext`, and for `make view` also cargo and `wasm-bindgen` 0.2.127 ([all details](track_2a/docs/run-locally.md)). `make setup-pdf` downloads Docling and 2 models (about 0.8 GB).
+`make run` takes the 3 samples only. For your own PDF, run the commands below in `track_2a/`. A PDF can have up to 25 pages and 20 MB. You need uv, jq, curl and `pdftotext`, and for `make view` also cargo and `wasm-bindgen` 0.2.127 ([all details](track_2a/docs/run-locally.md)).
 
 ```bash
 make setup               # one time
-make setup-pdf           # one time
-make convert PDF=<file>  # or PDF=<URL>, DIR=<folder>, LIST=<file of paths and URLs>
+make setup-pdf           # one time: Docling and 2 models (about 0.8 GB on a Mac); on macOS also text recognition (OCR)
+make setup-apertus       # one time, only for the Apertus step: needs a GPU and your own Hugging Face account
+make convert PDF=<file>  # or PDF=<URL>, DIR=<folder>, LIST=<file of paths and URLs>; APERTUS=0: code rules only
 make list                # all IDs as a table
 make view ID=0001        # on request: opens result 0001 at http://127.0.0.1:8080/app/ (or the next free port)
 ```
 
-Each PDF gets an ID, and the same PDF keeps its ID. The terminal shows the values with their probability, and valid yes or no. On one Mac on 15.10.2026, 3 samples and 5 development PDFs of 5 parliaments gave 8 valid records. Valid means that the record passed the validator, not that each value is correct. The rule authors read the development documents, so these 5 PDFs are not new to the rules.
+- Each PDF gets an ID, and the same PDF keeps its ID. The terminal shows each value with its probability, and valid yes or no. With the Apertus step, it also shows the source of each value (rules or Apertus). Valid means that the record passed the validator, not that each value is correct.
+- A sample to try: `make convert PDF=app/data/samples/26171/source.pdf`. In the 3 samples, Apertus writes no value. With the Apertus step, the terminal still shows the head probabilities of Apertus.
+- The Apertus step needs a GPU: a Mac with Apple silicon and 32 GB or more, or an NVIDIA GPU with 24 GB or more. The GPU can also be on another computer, for example a rented GPU in the cloud. That computer runs `make serve-apertus`. Your computer runs `make setup-apertus APERTUS_MODEL=none` (the heads only) and `make convert APERTUS_URL=...` through an ssh tunnel ([the GPU for the Apertus step](track_2a/docs/apertus-gpu.md)). On the computer with the GPU, accept the conditions of the model on Hugging Face first, then log in with `.venv/bin/hf auth login`. `make setup-apertus` downloads about 17.3 GB and needs about 40 GB of free disk.
+- With no GPU, `make convert` writes a note and makes the record with the code rules only.
+- On macOS, `make setup-pdf` installs the text recognition (OCR) of Apple Vision. On Linux there is no OCR, so the PDF needs a text layer.
+- Tested only on one Mac. On 15.10.2026, with the code rules: 3 samples and 5 development PDFs of 5 parliaments gave 8 valid records. On 16.10.2026, with the Apertus step (Apple M4, 32 GB, MLX): 3 samples and 4 development PDFs gave valid records, in 30 to 115 s for each PDF. On the stored text blocks of 31 development documents, the read-out gave the same decisions as the stored states of one H100 GPU. Not tested: an NVIDIA GPU, Linux, Windows, a second computer, an ssh tunnel, the model download of `make setup-apertus`. The development documents are not new to the method: the rule authors read them, and the heads were fitted on development documents.
 
-With `make run-native`, the app page also converts a PDF (button "Convert your own PDF").
+With `make run-native`, the app page also converts a PDF with the code rules (button "Convert your own PDF").
 
 ## How it works
 
@@ -63,10 +67,11 @@ It marks the head and foot of each page (the small page) and the role of each bl
 <tr>
 <td width="340"><img src="docs/img/step-3.svg" width="320" alt="Drawing: a document and a speech bubble with a question mark go into a box with a grid of squares. One square is yellow. A small funnel gives a long bar for a check mark and a short bar for a cross. A speech bubble with lines is crossed out."></td>
 <td>
-<strong>3. Apertus writes no text.</strong><br>
+<strong>3. Apertus decides and writes no text.</strong><br>
 Apertus-v1.5-8B (the grid) gets the whole document and one question (the bubble).
-A linear head (the funnel) reads its hidden state and gives a probability for each option (the bars). No text comes out.
-The app does not run Apertus. For the 3 samples, it shows stored Apertus block labels.
+A linear head (the funnel) reads its hidden state after layer 20 (the yellow square) and gives a probability for each option (the bars). No text comes out.
+Apertus decides only 2 values: the affair type, if the rules found none, and the first author, if the rule value is absent or weak.
+<code>make convert</code> runs this step on a GPU. The app (<code>make run</code>) does not run Apertus. For the 3 samples, it shows stored Apertus block labels.
 </td>
 </tr>
 <tr>
@@ -74,7 +79,7 @@ The app does not run Apertus. For the 3 samples, it shows stored Apertus block l
 <td>
 <strong>4. Data with its source.</strong><br>
 A writer makes the record in Turtle and YAML, and a second RDF file with each value (the card).
-Each value has a probability (the bar). A value from the rules also has its page and line (the yellow marker). A dashed border means unsure.
+Each value has a probability (the bar), a page and a place in the PDF (the yellow marker). For the first author from Apertus, the place is the block that the head picked. For the affair type from Apertus, code finds the first type word of that type; with no such word, the type is not written. A dashed border means unsure.
 </td>
 </tr>
 </table>

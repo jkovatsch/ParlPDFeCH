@@ -166,7 +166,8 @@
        "addressee_candidate",
        "response_signs",
        "recorded_gaps",
-       "head_from_export"
+       "head_from_export",
+       "apertus_values"
       ]
      },
      "params": {
@@ -1838,11 +1839,12 @@
         "enum": [
          "rule",
          "apertus_readout",
+         "apertus_values",
          "export",
          "constant",
          "copy"
         ],
-        "description": "Group for the page. apertus_head gives apertus_readout. code_step gives apertus_readout if run.apertus is stored, else rule."
+        "description": "Group for the page. apertus_head gives apertus_readout; apertus_head with a value tier apertus_q1 or apertus_q2_<field> (make convert with the Apertus step) gives apertus_values. code_step gives apertus_readout if run.apertus is stored, else rule."
        },
        "tier": {
         "anyOf": [

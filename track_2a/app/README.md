@@ -16,7 +16,7 @@
 4. The probability of a head value is the share of development documents in which a value of the same rule tier was equal to the OpenParlData value. The page shows it as the stored decimal with the word certain or unsure. A value of a rule tier with a stored probability below 0.5 is not written to the record: the page shows it as a weak candidate (`STATE.md` chapter 12).
 5. The package has a Rust web server, a Python worker and a browser page.
 6. In the browser, a Rust module compiled to WebAssembly reads the RDF file a second time and counts its parts.
-7. This version converts 3 sample documents with stored inputs. With `make run-native` and more packages (next chapter), it also converts a PDF that is not a sample, with code rules only. It runs no language model on your computer.
+7. This version converts 3 sample documents with stored inputs. With `make run-native` and more packages (next chapter), it also converts a PDF that is not a sample, with code rules only. The page of the app runs no language model on your computer.
 
 ## Start with no container
 
@@ -94,11 +94,11 @@ The pages are in English and in German (`?lang=en`, `?lang=de`).
 | 1. Sample with stored Apertus results | yes (run) | The package holds the stored states of Apertus-v1.5-8B for the 3 samples. The states were made on an H100 GPU. On your computer, two read-out heads (linear models) and one sequence step calculate the block labels and the number of the document label from these states on the CPU. The label "response of the executive" is a stored value; the package does not calculate it. No language model runs. |
 | 2. Sample with code rules only | yes (run) | The same 3 samples. All labels come from code rules. The probabilities come from counts of the rule on the development documents. No Apertus state is used. No label of a block has the word "certain" in this mode; a value that is read from the PDF has its own limit in each mode. |
 | 3. Your own PDF with code rules only | `make run-native`: yes (run on one Mac with synthetic PDF files and with the 3 sample PDF files; on 15.10.2026 also after `make setup-pdf`, with 2 changed copies of sample PDFs). Image target `full`: prepared, not run. Image target `slim`: no | Docling reads the PDF on your computer; then the same code rules as in mode 2, and the value readers. The record has one affair with the values that the PDF prints, and the two steps with their text blocks. It has no comparison with a register (`CONTRACT.md` chapter 16). The kind of the document comes from the code rules and selects which values the rules search. A type or a number that the rules do not find in the PDF is a recorded gap. The record does not say if the PDF is a development document. The probabilities were not checked on such a document. |
-| 4. Apertus on a GPU | no | Not implemented in this version. |
+| 4. Your own PDF with the Apertus step | `make convert` of the public repository only, with a GPU (run on one Mac with MLX on 16.10.2026). The page of the app (`make run`, `make run-native`): no | The worker runs in the mode auto. Apertus-v1.5-8B reads the PDF on a GPU of this computer or of another computer. The value heads can decide the affair type and the first author. `track_2a/docs/apertus-gpu.md` of the public repository gives the steps and the limits. |
 
 ## Limits
 
-- The package does not run Apertus on your computer. The weights of Apertus-v1.5-8B (17.2 GB, read in the package plan) are not in the package.
+- The page of the app does not run Apertus. Only `make convert` of the public repository runs it, with a GPU (mode 4). The weights of Apertus-v1.5-8B (17.2 GB, read in the package plan) are not in the package.
 - The container path ran one time, on one Mac with Apple silicon (`make run`, target `slim`, 14.10.2026). The container ran in the Linux system (arm64) of the Docker server of that Mac. On 14.10.2026 a private build pipeline on Linux converted the 3 samples with the worker and built the image for x86_64. The push to the registry failed, and nobody started that image. Nothing else ran on Linux or on x86_64. Nothing ran on Windows.
 - The image target `slim` does not convert a PDF that is not one of the 3 samples; the answer is "not in this package".
 - The head values come from code rules. A rule can read a wrong value, and it can find no value where the PDF prints one.

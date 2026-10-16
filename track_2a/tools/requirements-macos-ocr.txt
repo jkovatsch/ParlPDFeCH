@@ -1,0 +1,11 @@
+# 'make setup-pdf' on macOS only: the OCR engine of Apple Vision for Docling (package ocrmac). The stored
+# Docling files of the project and the blocks of the Apertus heads were made with OCR auto and ocrmac 1.0.1.
+# Without it, Docling runs with no OCR and 4 of 13 development PDFs gave other blocks (15.10.2026).
+# Each line is an exact version of the project environment, read with importlib.metadata on 15.10.2026.
+# click and pillow come from app/container/requirements-slim.txt and requirements-full.txt.
+ocrmac==1.0.1
+pyobjc-core==12.2.2
+pyobjc-framework-Cocoa==12.2.2
+pyobjc-framework-Quartz==12.2.2
+pyobjc-framework-CoreML==12.2.2
+pyobjc-framework-Vision==12.2.2

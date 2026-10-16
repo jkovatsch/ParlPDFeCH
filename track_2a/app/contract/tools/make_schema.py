@@ -52,7 +52,7 @@ NOTICE_CODES = ["proposal", "no_human_check", "in_sample_heads", "in_sample_rule
                 "ocr_apple", "ocr_none", "shacl_not_run", "not_valid", "rdfxml_not_readable",
                 "values_from_pdf", "values_from_pdf_no_check", "values_measured", "weak_candidates",
                 "cascade_selection", "addressee_candidate", "response_signs",
-                "recorded_gaps", "head_from_export"]
+                "recorded_gaps", "head_from_export", "apertus_values"]
 FIELDS = ["affair_type", "title", "affair_number", "submission_date", "response_date", "responder", "sponsor"]
 SLOT_STATES = ["read_from_pdf", "not_found_in_pdf", "not_in_this_document_type", "register_only"]
 KINDS = ["proposal", "response", "combined", "executive_proposal", "committee_report", "minutes", "other"]
@@ -151,9 +151,10 @@ label = obj({
     "source": obj({
         "kind": enum("rule", "apertus_head", "code_step", "export", "constant", "copy",
                      desc="labels file key label_source, not changed."),
-        "group": enum("rule", "apertus_readout", "export", "constant", "copy",
-                      desc="Group for the page. apertus_head gives apertus_readout. code_step gives "
-                           "apertus_readout if run.apertus is stored, else rule."),
+        "group": enum("rule", "apertus_readout", "apertus_values", "export", "constant", "copy",
+                      desc="Group for the page. apertus_head gives apertus_readout; apertus_head with a value tier "
+                           "apertus_q1 or apertus_q2_<field> (make convert with the Apertus step) gives "
+                           "apertus_values. code_step gives apertus_readout if run.apertus is stored, else rule."),
         "tier": opt(S), "rule_id": opt(S),
         "head": opt(enum("D1", "B1", "R2", desc="Read-out head whose values the label uses, if known."))}),
     "calibration_id": opt(S),

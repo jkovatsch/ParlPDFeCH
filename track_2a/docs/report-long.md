@@ -1,7 +1,7 @@
 # Technical report, long version — ParlPDFeCH
 
 - **Track:** Track 2A — Extracting Parliamentary Affairs from PDFs into One Common Structure (OpenParlData)
-- **Version:** 15.10.2026. It replaces the texts of 13.10.2026 (block labels as the result) and 14.10.2026. The public report of 12.10.2026 was on the earlier converter.
+- **Version:** 16.10.2026. It replaces the texts of 13.10.2026 (block labels as the result) and 14.10.2026. The public report of 12.10.2026 was on the earlier converter.
 - **Short version:** [`../technical_report.md`](../technical_report.md) (6 pages as a PDF). This file has no page limit.
 - **Limits in one place:** [`limits.md`](limits.md). **Folders of the repository:** [`repository-map.md`](repository-map.md).
 
@@ -65,7 +65,7 @@ Words of this file:
 
 ### 1.1 Goal
 
-A PDF of a Swiss parliament goes in. An eCH-0295 record comes out. Each head value of the record (up to 7) is read from the PDF and has a probability. Each such value also has a page and a text span, except an affair type from an Apertus head. Identifiers and constants of the record have no probability. The OpenParlData export is the reference of the measurement. On development documents it also gives the fit labels of the Apertus heads. At run time no export value goes into a record.
+A PDF of a Swiss parliament goes in. An eCH-0295 record comes out. Each head value of the record (up to 7) is read from the PDF and has a probability. Each such value also has a page and a text span. In the one fixed run, an affair type from an Apertus head had none. Identifiers and constants of the record have no probability. The OpenParlData export is the reference of the measurement. On development documents it also gives the fit labels of the Apertus heads. At run time no export value goes into a record.
 
 ### 1.2 Method
 
@@ -96,7 +96,7 @@ Table 1: the reader with rules only, all documents of the run. Ids: `R.<field>.p
 
 The combined reader adds the 2 Apertus tiers. With them, the share correct of the affair type is 0.8675 [`C.affair_type.share_correct`], and that of the first author is 0.6028 [`C.first_author.share_correct`]. In the run the 2 tiers gave 59 [`C.tier.apertus_q1.units`] and 79 [`C.tier.apertus_q2_sponsor_hi.units`] values with a reference.
 
-The block roles of the Apertus candidates B1-S and B1-L did not enter the run. The run used the block roles of the rule chain. In the app, the rules give each value. An own PDF needs `make setup-pdf` and `make run-native` (chapter 7.1).
+The block roles of the Apertus candidates B1-S and B1-L did not enter the run. The run used the block roles of the rule chain. In the app, the rules give each value. `make convert` reads an own PDF in the terminal, and with a GPU it adds the 2 Apertus tiers (chapters 3.10 and 7.1).
 
 AI agents wrote the method and examined it. No pass limit was fixed before the run. The main limit concerns 5 fields: the affair number, the 2 dates, the title and the first author. For each of them, fewer than half of the documents with a reference get the export value (chapter 6, L1).
 
@@ -111,12 +111,12 @@ AI agents wrote the method and examined it. No pass limit was fixed before the r
 | Check by eye | 50 [`L.check_by_eye.documents`] documents of the run | information; 2 AI examiners (chapter 5.7) |
 | Subsets and spread between parliaments | the documents of the run | information, made after the run (chapters 5.8 and 5.9) |
 | Test set | 40 [`sets.test_set.selected`] selected documents; 26 [`sets.test_set.records`] records of them (protocol only). The author examined each record on the PDF. | not used in the one fixed run or in another value of this report; the earlier converter of 12.10.2026 was scored on the 26 records |
-| An own PDF | a PDF with a text layer | the rules only, no Apertus value. Only with `make setup-pdf` and `make run-native`. Recorded: synthetic PDFs and the 3 sample PDFs (`app/README.md`, chapter "The modes"), and on 15.10.2026 2 changed copies of samples (chapter 7.1) |
+| An own PDF | a PDF (on Linux: with a text layer) | the app (`make setup-pdf`, `make run-native`): the rules only, no Apertus value. `make convert`: the rules; with a GPU also the 2 Apertus tiers (chapter 3.10). Recorded: synthetic PDFs and the 3 sample PDFs (`app/README.md`, chapter "The modes"); on 15.10.2026 2 changed copies of samples, and with `make convert` 3 samples and 5 development PDFs; on 16.10.2026 the Apertus step on one Mac (chapters 3.10 and 7.1) |
 | `make run` in a container | the app | one run on one Mac (chapter 7.1). The image converts the 3 samples only |
 
 ## 2. Architecture
 
-![The pipeline from a PDF to a validated eCH-0295 record. The file type of each output is below its box.](fig1-pipeline.svg)
+![The pipeline of the one fixed run of 13.10.2026, from a PDF to a validated eCH-0295 record. The file type of each output is below its box.](fig1-pipeline.svg)
 
 ### 2.1 Input and output
 
@@ -124,20 +124,20 @@ Input: one PDF. Output: one eCH-0295 record in Turtle and YAML, a label file, `<
 
 `<doc>.values.ttl` is RDF. It has one node for each value of the record. A node links the eCH-0295 resource and its property to the value. It also gives the printed wording, the probability, the value status, the rule tier, the page and the character span. The writer of the app makes this file (since 14.10.2026).
 
-The label file gives, for each value, the probability, the value status, the page and the character span. It also keeps a value below the floor of 0.5, which the record does not get. A value with no printed wording has no page and no span. This is the case for an affair type from the `Q1` head (chapter 3.6).
+The label file gives, for each value, the probability, the value status, the page and the character span. It also keeps a value below the floor of 0.5, which the record does not get. A value with no printed wording has no page and no span. In the one fixed run, this was the case for an affair type from the `Q1` head (chapter 3.6).
 
 ### 2.2 The stages
 
 The numbers are the boxes of figure 1.
 
-1. **Text blocks.** Docling gives blocks with page, frame and text. For the stored Docling outputs, `ocrmac` read scanned pages (macOS only). `make setup-pdf` installs no OCR.
+1. **Text blocks.** Docling gives blocks with page, frame and text. For the stored Docling outputs, `ocrmac` read scanned pages (macOS only). `make setup-pdf` installs it on macOS; on Linux it installs no OCR, and a PDF needs a text layer.
 2. **Rule files.** The rule chain of the earlier converter (method `nos4`) gives the rule role of the document and the role of each block. It uses the rules S1, S2 and S5. In place of S3 it gives the answer "text", and it uses no S4. In the run, the rule files came from the PDF alone, with empty export fields.
 3. **Cascade.** The kind of the document and the affair type select the slots that a document can state (chapter 2.3). A field outside these slots is not searched.
 4. **Rule readers.** One reader for each group of fields gives a value, its tier, its page and its span (chapter 2.4).
 5. **Calibration.** Each pair of field and tier gets a probability from the development documents (chapter 2.5).
 6. **Apertus heads.** Two head tiers give a value where the rules find none, or where the rule value has a probability below 0.5 (chapter 3).
 7. **Writer and validator.** The writer makes the record, the label file and `<doc>.values.ttl`. The validator checks the record, its labels and the values file.
-8. **App.** A browser page shows the records. The result view (`/app/#/view/<record_id>`) shows the PDF page with a box on each value, the values with their probability and status, and the RDF. The app gives each head value from the rules only. For 3 [`pkg.samples.count`] samples (read) it gives block labels of B1-S from stored Apertus states. It does not apply the 2 Apertus value tiers of the run. An own PDF needs `make setup-pdf` and `make run-native`, and no GPU. `make run` converts the 3 samples only (chapter 7.1).
+8. **App.** A browser page shows the records. The result view (`/app/#/view/<record_id>`) shows the PDF page with a box on each value, the values with their probability and status, and the RDF. A PDF that the app converts gets each head value from the rules only. For 3 [`pkg.samples.count`] samples (read) it gives block labels of B1-S from stored Apertus states. The app does not apply the 2 Apertus value tiers of the run. An own PDF in the app needs `make setup-pdf` and `make run-native`, and no GPU. `make run` converts the 3 samples only (chapter 7.1). `make convert` applies the 2 tiers to an own PDF with a GPU (chapter 3.10).
 
 Why rules first: a rule value has a page, a span and a reason that a person can examine. A rule needs no GPU.
 
@@ -255,6 +255,7 @@ Limits of rule V5:
 - `swiss-ai/Apertus-v1.5-8B` (form value `8B v1.5`), bf16, no quantization.
 - Apertus generates no token. A linear head reads the hidden state at the last token of a question.
 - A virtual machine with one H100 GPU made the states of the development documents and of the documents of the run. A Mac applied the heads to the stored states.
+- `make convert` makes the states of an own PDF on a GPU of this computer or of another computer (chapter 3.10).
 - The value questions use the unchanged model. Only the block-role candidate B1-L adds a LoRA adapter (chapter 3.8).
 
 ### 3.2 Prompt and questions
@@ -277,7 +278,7 @@ The numbers of this chapter are fixed numbers of addendum I, table 1 (read). Add
 1. Each head is a logistic regression with an L2 penalty on the state of layer 20 [`design.fixed.addendum_i.layer_of_each_head`]. No other layer was fitted.
 2. The penalty grid is 0.001, 0.01, 0.1 [`design.fixed.addendum_i.penalty_grid`]. An inner fold selects the penalty. It uses the block labels only, not an outcome of a value.
 3. The folds keep the documents of one parliament together. A development document is read with the head of the other folds (out-of-fold).
-4. The final head is fitted on all development documents. It is the head of the run. The app of this repository has no file of the value heads (chapter 3.10).
+4. The final head is fitted on all development documents. It is the head of the run. The repository has no file of the value heads; `make setup-apertus` downloads the 3 files (chapter 3.10).
 5. `Q1`: one class for each affair type with 10 [`design.fixed.addendum_i.q1_lowest_documents_of_a_class`] or more development documents, and the class none. The target is the reference type of the export.
 6. `Q2`: one head for each field but the affair type. Its 2 classes: the block prints the reference value of the field, or it does not.
 7. A `Q2` label comes from the reference only, not from a rule value. Thus the head does not learn the errors of the rules.
@@ -347,7 +348,7 @@ Table 7: the entry of the `Q2` tiers. Ids: `H.entry.q2.<field>.<key>` and `H.ent
 4. Stage 3: for each field that the cascade searches, the rule reader runs first.
 5. The Apertus tier of a field is called only if the rules found no value or gave a value of a weak tier.
 6. A field that the cascade does not search gets no Apertus value.
-7. A type from the `Q1` head has no printed wording. Its record has no page and no span. Its evidence says: answer of the model to question `Q1` on the whole document.
+7. In the one fixed run, a type from the `Q1` head had no printed wording. Its record had no page and no span. Its evidence said: answer of the model to question `Q1` on the whole document. For `make convert`, see chapter 3.10, item 5.
 
 Table 8: the 2 readers on the development documents. Ids: `H.<field>.rules.<key>` and `H.<field>.combined.<key>`; `share_correct` is derived. Marks "after the opening" and "after the design values of addendum I". Reference: the export.
 
@@ -471,11 +472,12 @@ Limits of the candidates:
 
 ### 3.10 Limits of the use of Apertus
 
-1. Apertus values exist only for documents with stored states. The app gives each value from the rules, also for the 3 samples.
-2. The app of this repository uses Apertus states for the block labels of its 3 samples. It has no file of the value heads `Q0`, `Q1` and `Q2`. Its values come from the rule readers.
-3. The variables `LLM_NAME`, `LLM_BASE_URL` and `LLM_API_KEY` are not read: the method needs hidden states.
-4. The repository has no Apertus weights. The LoRA adapter is not published.
-5. A type from `Q1` has no page and no span.
+1. The app gives each value from the rules, also for the 3 samples. Only `make convert` with the Apertus step gives Apertus values for an own PDF. The step needs a GPU: a Mac with Apple silicon and 32 GB or more (MLX), or an NVIDIA GPU with 24 GB or more (torch CUDA). The GPU can be on this computer or on another computer, for example rented in the cloud: `make serve-apertus` there, an ssh tunnel and `make convert APERTUS_URL=...` here ([`apertus-gpu.md`](apertus-gpu.md)). With no GPU, `make convert` prints a note and gives the rules only; `APERTUS=0` gives the rules only.
+2. The app uses stored Apertus states for the block labels of its 3 samples. Its values come from the rule readers. `make setup-apertus` (network, one time) downloads `swiss-ai/Apertus-v1.5-8B` at a pinned revision with your own Hugging Face account (accept the conditions of the model there first; about 17.3 GB, about 40 GB of free disk), cuts its text branch from the download and checks it. It also downloads the 3 files of the value heads from Hugging Face at a pinned commit and checks their SHA-256.
+3. The variables `LLM_NAME`, `LLM_BASE_URL` and `LLM_API_KEY` are not read: the method needs hidden states. A chat service of Apertus gives text, not the hidden state, so it cannot do this step.
+4. The repository has no Apertus weights and no file of the value heads. The LoRA adapter is not published.
+5. In the run, a type from `Q1` had no page and no span. In `make convert`, code finds the first type word of that type in the text and gives its page and span: place found by code, decision by Apertus. With no type word in the text, the type is not written, and the terminal says why.
+6. The heads were fit on states of torch CUDA on one H100. On 16.10.2026 the Apertus step was tested only on one Mac (Apple M4, 32 GB) with MLX. On the stored text blocks of 31 development documents, its read-out gave the same decisions as the stored H100 states. Through `make serve-apertus`, with the service and the client on the same Mac, the values were equal to those of the local run. A value whose head probability is within 0.10 of a threshold gets the mark "near". The mark is a warning, not a guarantee. Not tested: an NVIDIA GPU with this code, Linux, WSL 2, a second computer, an ssh tunnel and the model download of `make setup-apertus`. The 3 head files came from Hugging Face at the pinned revision, and their SHA-256 agreed.
 
 ## 4. Data
 
@@ -787,7 +789,7 @@ Two more facts:
 3. The kind of the document comes from the rule chain and from rule V5. No kind of the run was compared with a label.
 4. The stored probability of an Apertus tier includes the own fold of a development document. It is optimistic.
 5. 2 design files and the result files of the run do not carry each mark that the addenda ask for (dossier, chapter 6.1).
-6. The app gives each value from the rules. It has no file of the value heads. On 15.10.2026, with `make setup-pdf`, it converted 2 changed copies of samples. Earlier runs used synthetic PDFs and the 3 sample PDFs (`app/README.md`, chapter "The modes"). No other PDF of a parliament is recorded.
+6. The app gives each value from the rules. On 15.10.2026, with `make setup-pdf`, it converted 2 changed copies of samples, and `make convert` converted 3 samples and 5 development PDFs with the rules. Earlier runs used synthetic PDFs and the 3 sample PDFs (`app/README.md`, chapter "The modes"). The Apertus step of `make convert` ran on one Mac only (chapter 3.10, item 6).
 7. `make run` ran one time, on one Mac, with the 3 samples only (target `slim`). The targets `run-full` and `check-offline` of `app/Makefile` did not run.
 8. The block-role candidates were measured against an AI reference on validation documents only, before the run. They did not enter the run.
 
@@ -822,15 +824,18 @@ Cross-parliament question (development documents, information): in which parliam
 
 ### 7.1 Commands
 
-The commands are in the folder `track_2a/`. The states are those of 14.10.2026 (`make setup-pdf`: 15.10.2026), on one Mac (Apple silicon, macOS).
+The commands are in the folder `track_2a/`. The states are those of 14.10.2026 (`make setup-pdf` and `make convert`: 15.10.2026; `make test`, `ocrmac` and the Apertus step: 16.10.2026), on one Mac (Apple silicon, macOS).
 
 | Command | What it does | State |
 |:---|:---|:---|
 | `make setup` | downloads Python 3.12, the Python packages of the app and the Rust crates (network) | ran on one Mac in a fresh clone; uv and cargo used the local caches |
 | `make run` | builds the image of `app/` with Docker and starts the app on 127.0.0.1:8080 | ran one time on one Mac (Docker server 29.2.1), in a clone of GitHub at commit `10e07b4`, as `make run PARLPDFECH_PORT=8082` (a second check used port 8080); the 3 samples in the modes auto and rules gave 6 valid records; a private build pipeline on Linux built a container image from the source tree of the package, and nobody started it |
 | `make run-native` | builds the Rust server and the browser bundle with cargo, then starts the app with no container | ran on one Mac, also in a fresh clone; the 3 samples in the modes auto and rules gave 6 valid records |
-| `make setup-pdf` | for an own PDF with `make run-native`, after `make setup`: installs Docling and its 2 models (network); needs the command `pdftotext` | ran on one Mac in a fresh clone; then `make run-native` converted 2 changed copies of samples, with 2 valid records. No other PDF of a parliament was converted |
-| `make test` | checks with no network: the copies against `SOURCES.json`, the prompt files, the file list and code layout of `app/`. Its YAML validator reads the 6 stored outputs of the earlier converter (`samples/*/expected/`) and `tests/invalid_instance.yaml` | PASS, also in a fresh clone |
+| `make setup-pdf` | for an own PDF with `make run-native` or `make convert`, after `make setup`: installs Docling and its 2 models (network), and on macOS `ocrmac` (on Linux no OCR); needs the command `pdftotext` | ran on one Mac in a fresh clone; then `make run-native` converted 2 changed copies of samples, with 2 valid records. With `ocrmac`: on 16.10.2026, in a clone, from the local package cache |
+| `make convert` | converts an own PDF in the terminal (`PDF=`, `DIR=`, `LIST=`) into `out/<ID>/`: the record, the label file, `<doc>.values.ttl` and the validation. With the Apertus step (after `make setup-apertus`, with a GPU), Apertus also decides 2 values (chapter 3.10). It decides the affair type where the rules find none, and the first author where the rule value is absent or weak. `APERTUS=0`, or no GPU: the rules only | 15.10.2026, with the rules: 3 samples and 5 development PDFs gave 8 valid records. 16.10.2026: the Apertus step with MLX on one Mac (Apple M4, 32 GB) |
+| `make setup-apertus` | one time, with network: the model and the 3 files of the value heads, each at a pinned version, with checks (chapter 3.10, item 2). Needs a GPU, or `APERTUS_MODEL=none` for the heads only | ran on one Mac on 16.10.2026: the 3 head files from Hugging Face at the pinned revision, the model from a local Hugging Face cache (the model download did not run) |
+| `make serve-apertus` | on a computer with a GPU, after `make setup-apertus` there: the read-out service of the Apertus step. Your own computer runs `make convert APERTUS_URL=...` through an ssh tunnel ([`apertus-gpu.md`](apertus-gpu.md)) | ran on one Mac on 16.10.2026, with the service and the client on this one computer (`127.0.0.1`) |
+| `make test` | checks with no network: the copies against `SOURCES.json`, the prompt files, and the file list and code layout of `app/`. It also checks the read-out service of the Apertus step with a backend that loads no model. Its YAML validator reads the 6 stored outputs of the earlier converter (`samples/*/expected/`) and `tests/invalid_instance.yaml` | PASS, also in a fresh clone |
 | `make test-app` | the checks of `app/`: the cargo checks of the 2 crates, the example view and a start of the seed script | PASS |
 | `make run-earlier` | the earlier converter of 12.10.2026. It takes its metadata from the export record, not from the PDF | PASS |
 | `make head-selftest` | a synthetic self-check of an earlier Apertus head code of 12.10.2026 | not run for this text |
@@ -840,13 +845,15 @@ The commands are in the folder `track_2a/`. The states are those of 14.10.2026 (
 ### 7.2 What a person can repeat
 
 1. The app gives the values of the 3 samples from the rules, and block labels from their stored Apertus states. These samples are development documents and were in the fit.
-2. The app converts an own PDF with the rules only. It needs `make setup-pdf` and `make run-native`; `make run` converts the 3 samples only. On 15.10.2026, with `make setup-pdf`, the app converted 2 changed copies of samples. Earlier runs used synthetic PDFs and the 3 sample PDFs (`app/README.md`, chapter "The modes"). No other PDF of a parliament is recorded.
-3. A person cannot repeat the values of chapter 5 from this repository alone. The states, the reference files and the ids of the run are not published.
+2. The app converts an own PDF with the rules only. It needs `make setup-pdf` and `make run-native`; `make run` converts the 3 samples only. On 15.10.2026, with `make setup-pdf`, the app converted 2 changed copies of samples. Earlier runs used synthetic PDFs and the 3 sample PDFs (`app/README.md`, chapter "The modes").
+3. `make convert` converts an own PDF in the terminal. With a GPU and `make setup-apertus`, it also gives Apertus values for the 2 tiers (chapter 3.10).
+4. A person cannot repeat the values of chapter 5 from this repository alone. The states, the reference files and the ids of the run are not published.
 
 ### 7.3 Hardware and software
 
 - An Apple M4: Docling, the readers, the measures and the validation.
 - A virtual machine with one H100 GPU: the states of Apertus and the training of B1-L.
+- One Apple M4 (32 GB) with MLX: the Apertus step of `make convert` on 16.10.2026.
 - LinkML 1.11.1 [`val.gj12.linkml_version`] and rdflib 7.6.0 [`val.gj12.rdflib_version`] (read).
 - Apertus in bf16 only.
 
@@ -854,7 +861,7 @@ The commands are in the folder `track_2a/`. The states are those of 14.10.2026 (
 
 1. A hand-checked gold set: a sample of reference values and of the kind of the document.
 2. A measure of the kind against labels, and value rules for more parliaments. Then a run on documents that no agent read.
-3. Apertus states for an own PDF, and the value heads in the app.
+3. A check of the Apertus step on an NVIDIA GPU, on Linux and on a second computer; the Apertus step in the app.
 4. A start of the container image on Linux, with an open OCR engine.
 
 ## 9. Evidence
@@ -913,8 +920,8 @@ Ids: `L.contact.<key>.<set>` (read; counts from id lists of the contact history)
 
 1. **The code.** `../src/converter_gj/` has copies of the code of the method with a licence line. `../SOURCES.json` gives, for each copy, the source file, its SHA-256, the SHA-256 of the copy and each edit of a line. `make test` compares each copy with `SOURCES.json`.
 2. **The code of the app.** `../app/layout/src/` has the files that the app runs. They are byte-equal to the files of the private project, except 3 files with a recorded edit. `../app/DIST-MANIFEST.json` lists each file with its SHA-256.
-3. **The code of the run.** The author of this text compared 2 lists of SHA-256 values: the source values of `SOURCES.json` and the values of the fix record of the run. For each fixed code file with a public copy, the 2 values are equal.
-4. Some fixed code files have no public copy. These are the design and apply tool of the heads (`m11_value_heads2.py`) and the span functions (`m11_value_heads.py`). Also: the 2 label modules of the heads and the converter of the head outputs. Also: the 2 measure tools of the run and the second calculation of addendum G. Also: the reference tool of the run and the tool of the review sheets.
+3. **The code of the run.** The author of this text compared 2 lists of SHA-256 values: the source values of `SOURCES.json` and the values of the fix record of the run. For each fixed code file with a copy in `SOURCES.json`, the 2 values are equal.
+4. Some fixed code files have no copy in `SOURCES.json`. These are the design and apply tool of the heads (`m11_value_heads2.py`) and the span functions (`m11_value_heads.py`). Also: the 2 label modules of the heads and the converter of the head outputs. Also: the 2 measure tools of the run and the second calculation of addendum G. Also: the reference tool of the run and the tool of the review sheets. Since 16.10.2026, `../app/layout/src/` has copies of the first 4 for the Apertus step of `make convert`; they are byte-equal to the fixed files.
 5. The rule of the first author (`m11_values_sponsor.py`) is not in `../src/converter_gj/`. `../app/layout/src/` has a copy that is byte-equal to the fixed file.
 6. A reader cannot repeat the comparison of items 3 to 5: the fix record is a file of the private project. The dossier gives its SHA-256: `f70322721f64f59ce291f8ccc983cec7ce5a35d9130a0e66ecf5f1f176dea468`.
 7. **The prompts.** `../src/prompts/gj_values_v1_de/` has the questions `Q0`, `Q1` and `Q2` of the value heads.
@@ -974,4 +981,4 @@ Copyright 2026 the author (see `NOTICE`). This report and the documentation: CC-
 ## About this text
 
 - Language: English, to the rules of ASD-STE100 (Issue 9).
-- AI agents (Claude Opus 5.5) wrote this text on 14.10.2026, from the evidence dossier of the run, the criteria, the cascade file and `numbers.json`. In the afternoon of the same day, an AI agent changed the states of chapter 7.1. In the evening, an AI agent changed the states of `make run` (chapters 1.4, 6.2 and 7.1). On 15.10.2026 an AI agent added `<doc>.values.ttl`, `make setup-pdf` and the full limits L1 and L2, and narrowed other sentences, after an audit of the submission. In the evening of 15.10.2026, an AI agent shortened some sentences.
+- AI agents (Claude Opus 5.5) wrote this text on 14.10.2026, from the evidence dossier of the run, the criteria, the cascade file and `numbers.json`. In the afternoon of the same day, an AI agent changed the states of chapter 7.1. In the evening, an AI agent changed the states of `make run` (chapters 1.4, 6.2 and 7.1). On 15.10.2026 an AI agent added `<doc>.values.ttl`, `make setup-pdf` and the full limits L1 and L2, and narrowed other sentences, after an audit of the submission. In the evening of 15.10.2026, an AI agent shortened some sentences. On 16.10.2026 an AI agent added the Apertus step of `make convert` and the OCR of `make setup-pdf` on macOS.

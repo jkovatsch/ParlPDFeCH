@@ -1,0 +1,9 @@
+# 'make setup-apertus' on macOS with Apple silicon (arm64) only: MLX for the Apertus read-out (backend mlx).
+# Each line is an exact version of the project environment, read with importlib.metadata on 15.10.2026 (the
+# versions of the measured MLX run of 15.10.2026). torch, transformers and tokenizers come from
+# app/container/requirements-full.txt ('make setup-pdf'). Linux and Windows need no line of this file.
+mlx==0.32.3
+mlx-metal==0.32.3
+mlx-lm==0.32.0
+sentencepiece==0.2.2
+protobuf==7.36.2

@@ -3,7 +3,8 @@
 # ParlPDFeCH, track_2a: the commands 'make convert', 'make list' and 'make view' (the Makefile calls this file).
 #
 # This file is orchestration only. It starts the worker of the app (app/worker/serve_convert.py) for an own PDF
-# in the mode rules. The arguments and the environment are the same as the server of the app gives them.
+# in the mode rules (code rules only), or in the mode auto with the Apertus step (APERTUS=auto or 1, after
+# 'make setup-apertus'). The arguments and the environment are the same as the server of the app gives them.
 # It checks the end of the worker and its output folder with the rules of the server (app/server/src/jobs.rs).
 # 'view' starts the server of the app (app/target-server/release/parlpdfech-server) with its own work folder.
 # The file changes no file below app/. All results go to out/ of track_2a (git ignores out/).
@@ -13,7 +14,13 @@
 #   convert.sh view-check --id <ID>
 #   convert.sh view --id <ID> [--port <port>] [--open no]
 #
-# Environment (the Makefile sets it): PYTHON (the Python of .venv/), DOCLING_MODELS, PDFTOTEXT_PLACES.
+# Environment (the Makefile sets it): PYTHON (the Python of .venv/), DOCLING_MODELS, PDFTOTEXT_PLACES, APERTUS
+# (auto: Apertus if 'make setup-apertus' is done and a GPU is there, else a NOTE and code rules only; 1: Apertus
+# or stop; 0: code rules only), APERTUS_BACKEND (auto, mlx, cuda, mps, cpu), APERTUS_TIMEOUT (seconds for one
+# PDF with Apertus), APERTUS_PYTHON (the Python of the read-out). The file data/apertus/setup.json of
+# 'make setup-apertus' gives the model folder and the heads folder. APERTUS_URL and APERTUS_TOKEN (a GPU of
+# another computer, docs/apertus-gpu.md) reach app/worker/apertus_states.py through the environment; this file
+# never reads the token.
 # Commands that this file needs: jq, shasum or sha256sum, readlink, uv, curl (for a URL and for 'view').
 #
 # Files of out/:
@@ -47,6 +54,21 @@ KILL_GRACE=3
 # The limit of a download (seconds).
 DOWNLOAD_TIMEOUT=120
 SERVER_BIN=$APP/target-server/release/parlpdfech-server
+# The Apertus step (tools/setup_apertus.sh writes SETUP_JSON). AP is local (Apertus reads out the PDF: worker
+# mode auto) or none (code rules only: worker mode rules, as before the Apertus step).
+APERTUS=${APERTUS:-auto}
+APERTUS_BACKEND=${APERTUS_BACKEND:-auto}
+APERTUS_TIMEOUT=${APERTUS_TIMEOUT:-1800}
+APY=${APERTUS_PYTHON:-$PY}
+SETUP_JSON=$TRACK/data/apertus/setup.json
+GPU_DOC=docs/apertus-gpu.md
+AP=none
+AP_BACKEND=
+# Seconds of the job after the end of the read-out at the latest: heads, record, checks and view of the worker.
+AP_TAIL=90
+AP_MODEL_DIR=
+AP_HEADS_DIR=
+AP_HEADS_SOURCE=
 RECORD_ID_RE='^(s-[0-9]{1,12}|u-[0-9a-f]{16})(-rules)?$'
 # The codes that the server accepts with the exit code 3 of the worker (app/server/src/jobs.rs, REFUSED).
 REFUSED_CODES='pdf_unreadable protected_pdf too_long no_text_layer not_in_package doc_id_unknown pdf_differs_from_doc_id sample_unknown bad_request'
@@ -279,6 +301,93 @@ def where: if .written then "in the record"
   (if $ns != "" then "  not searched in this kind of document: " + $ns else empty end)
 '
 
+# The jq program for the summary of a record of the Apertus mode: view.json, and convert.json of the record with
+# --slurpfile c (key apertus_values, made by the worker: app/worker/values_apertus.py). The column source gives the
+# origin of the choice of each value: "rules", "Apertus" (an Apertus head chose it; code read the value from the
+# wording at its span), "Apertus (remote GPU)" (the states came from a GPU of another computer), plus " near" if
+# the head probability is near a threshold (another runtime can give another decision). The column probability is
+# the calibrated probability of the tier of the value (the probability of the record); the lines of Q1 and Q2 give
+# the head probability (the output of the head), a different number. Then one line for the Apertus step, one for
+# the type (Q1) and one for the first author (Q2). A record with no Apertus step (APERTUS=0) uses SUMMARY_JQ above
+# with no change.
+SUMMARY_AP_JQ='
+def safe: '"$SAFE_JQ"';
+def name: ({"affair_type":"affair type","title":"title","affair_number":"affair number",
+  "submission_date":"submission date","sponsor":"first author","response_date":"response date",
+  "responder":"responder"}[.] // .) | tostring | safe;
+def rank: . as $f
+  | ["affair_type","title","affair_number","submission_date","sponsor","response_date","responder"]
+  | index($f) // 99;
+def flat: tostring | gsub("[[:space:]]+"; " ") | safe;
+def short($n): if length > $n then .[0:($n - 3)] + "..." else . end;
+def pad($n): if length < $n then . + (" " * ($n - length)) else . end;
+def where: if .written then "in the record"
+  elif .candidate == "addressee" then "not in the record (addressed body)"
+  else "not in the record (weak candidate)" end;
+def ap: ($c[0].apertus_values // {});
+def remote: (((ap.backend // "") | tostring | startswith("remote")) or ap.state == "remote");
+def near($f): if $f == "affair_type" then (ap.q1.near // false) else (ap.q2[$f].near // false) end;
+def source: . as $x
+  | if (($x.tier // "") | tostring | startswith("apertus_")) then
+      (if remote then "Apertus (remote GPU)" else "Apertus" end) + (if near($x.field) then " near" else "" end)
+    else "rules" end;
+def p2: if type != "number" then "-"
+  else (. * 100 | round) as $n | (($n / 100) | floor | tostring) + "."
+       + (($n % 100) | tostring | if length < 2 then "0" + . else . end) end;
+def band: if type != "number" then "-" elif . >= 0.8 then "hi" else "lo" end;
+def q1state: ({"used": ("used, place p." + ((ap.q1.page // "?") | tostring) + " " + ((ap.q1.block // "?") | flat)
+                        + " found by code"
+                        + (if ((ap.q1.place_option_types // []) | length) >= 2
+                           then " (in a list of " + ((ap.q1.place_option_types | length) | tostring)
+                                + " types, for example boxes to tick: the word is there, the choice is not shown)"
+                           else "" end)),
+               "no_evidence": "no evidence in the text (not written)",
+               "rules_gave_the_type": "rules gave the type (Apertus not used)",
+               "rules_gave_the_type_apertus_differs": "rules gave the type, Apertus differs (not used)",
+               "below_threshold": "below 0.80 (not used)", "class_none": "class none (not used)",
+               "not_used": "not used"}[ap.q1.state // "not_used"]) // ((ap.q1.state // "-") | flat);
+def q2state: ({"used": "used", "not_called_rule_value_not_weak": "not called: rule value not weak",
+               "not_searched_in_this_kind": "not searched in this kind of document",
+               "below_band_hi": "below band hi (not used)", "below_0_50": "below 0.50 (no cue)",
+               "no_value": "no value in the top block", "tier_not_entered": "tier not entered (not used)"}[.]) // flat;
+(.values // []) as $v
+| (ap.state // "none") as $st
+| (if remote then 27 else 14 end) as $w
+| ([.head_values.cascade.entries[]? | select(.state == "not_found_in_pdf") | .field | name] | join(", ")) as $nf
+| ([.head_values.cascade.entries[]? | select(.state == "not_searched") | .field | name] | join(", ")) as $ns
+| (if ($v | length) == 0 then "  values read from the PDF: none"
+   else "  values read from the PDF (value, calibrated probability of the tier, status, source):" end),
+  ($v | sort_by(.field | rank) | .[]
+   | "    " + (.field | name | pad(16)) + ((.value // .value_printed // "") | flat | short(46) | pad(48))
+     + ((.probability // "-") | flat | pad(8)) + ((.value_status // "-") | flat | pad(9)) + (source | pad($w))
+     + where),
+  (if $nf != "" then "  searched, no value found: " + $nf else empty end),
+  (if $ns != "" then "  not searched in this kind of document: " + $ns else empty end),
+  (if $st == "failed" then "  Apertus: not run (" + ((ap.reason // "unknown") | flat) + "). The values come from code rules."
+   else
+     (if $st == "stored" then "  Apertus-v1.5-8B (stored states of this block file, layer 20): no model ran for this record."
+      else "  Apertus-v1.5-8B ("
+        + (if remote then "remote GPU" + (if ap.remote_host then " " + (ap.remote_host | flat) else "" end)
+           else "on this computer" end)
+        + ", backend " + ((ap.backend // "-") | flat) + ", bf16, layer 20)"
+        + ([(if ap.passes then (ap.passes | flat) + " passes" else empty end),
+            ((ap.seconds.seconds // ap.seconds.total) as $s | if $s then ($s | flat) + " s" else empty end)]
+           | if length > 0 then ": " + join(", ") else "" end) + "." end),
+     ("  Apertus type (Q1): " + ((ap.q1.class // "-") | flat) + ", head probability " + (ap.q1.probability | p2)
+      + " - " + q1state + (if ap.q1.near then " [near]" else "" end)),
+     ("  Apertus first author (Q2): top block " + ((ap.q2.sponsor.top_block // "-") | flat) + ", head probability "
+      + (ap.q2.sponsor.head_probability | p2) + " " + (ap.q2.sponsor.head_probability | band) + " - "
+      + ((ap.q2.sponsor.state // "-") | q2state) + (if ap.q2.sponsor.near then " [near]" else "" end))
+   end)
+'
+
+# 0: the record of this ID has facts of an Apertus step (convert.json key apertus_values with the state local,
+# remote, stored or failed). Else 1: the summary of the rules (SUMMARY_JQ).
+has_apertus_facts() {
+  [ -f "$1" ] && jq -e '(.apertus_values.state // "none") as $s
+    | ($s == "local" or $s == "remote" or $s == "stored" or $s == "failed")' "$1" >/dev/null 2>&1
+}
+
 # Prints the summary of the stored record of one ID.
 print_summary() {
   sid=$1; snote=$2
@@ -289,7 +398,12 @@ print_summary() {
   say "ID $sid   valid: $(clean "${svalid:-?}")   record: $(clean "${srid:-?}")${snote:+   ($snote)}"
   say "  source: $(clean "$(info_value "$sinfo" source)")"
   say "  sha256: $(clean "$(info_value "$sinfo" sha256)")"
-  jq -r "$SUMMARY_JQ" "$sdir/record/view.json" 2>/dev/null || say "  (the values cannot be read from out/$sid/record/view.json)"
+  if has_apertus_facts "$sdir/record/convert.json"; then
+    jq -r --slurpfile c "$sdir/record/convert.json" "$SUMMARY_AP_JQ" "$sdir/record/view.json" 2>/dev/null \
+      || say "  (the values cannot be read from out/$sid/record/view.json and convert.json)"
+  else
+    jq -r "$SUMMARY_JQ" "$sdir/record/view.json" 2>/dev/null || say "  (the values cannot be read from out/$sid/record/view.json)"
+  fi
   say "  folder: out/$sid/ (record files in out/$sid/record/)"
   say "  open it in the browser: make view ID=$sid"
 }
@@ -307,6 +421,96 @@ reason_text() {
     timeout) printf 'the worker took more than %s seconds' "$JOB_TIMEOUT" ;;
     *) printf '%s' "$(clean "$1")" ;;
   esac
+}
+
+# ---------------------------------------------------------------------------------------------- the Apertus step
+# Without Apertus: APERTUS=1 stops here with the reason and the ways out; APERTUS=auto writes a NOTE and the
+# records are made with the code rules only.
+apertus_off() {
+  why=$1
+  case $why in
+    *APERTUS=0*) ways= ;;
+    *) ways=" Ways out: use a GPU in the cloud (see $GPU_DOC), or APERTUS=0 for code rules only." ;;
+  esac
+  if [ "$APERTUS" = 1 ]; then
+    err "$why$ways"
+    exit 1
+  fi
+  note "$why The records get the code rules only.$ways"
+  AP=none
+  AP_BACKEND=
+}
+
+# Sets AP (local or none) and AP_BACKEND. The check runs app/worker/apertus_states.py check (no model load): the
+# backend (a GPU), the model fingerprint and the free memory.
+apertus_mode() {
+  AP=none
+  AP_BACKEND=
+  AP_REMOTE_HOST=
+  AP_REMOTE_BACKEND=
+  case $APERTUS in
+    0) return 0 ;;
+    1|auto) ;;
+    *) err "APERTUS=$(clean "$APERTUS"): use auto, 1 or 0."; exit 1 ;;
+  esac
+  case $APERTUS_TIMEOUT in
+    ''|*[!0-9]*) err "APERTUS_TIMEOUT=$(clean "$APERTUS_TIMEOUT"): give a number of seconds (300 or more)."; exit 1 ;;
+  esac
+  if [ "$APERTUS_TIMEOUT" -lt 300 ]; then err "APERTUS_TIMEOUT=$APERTUS_TIMEOUT: give 300 seconds or more."; exit 1; fi
+  if [ ! -f "$SETUP_JSON" ]; then
+    if [ "$APERTUS" = 1 ]; then
+      err "Apertus is not set up on this computer: run 'make setup-apertus' (or APERTUS=0 for code rules only)."
+      exit 1
+    fi
+    note "Apertus is not set up on this computer ('make setup-apertus'): code rules only."
+    return 0
+  fi
+  AP_MODEL_DIR=$(jq -r '.model.text_branch_dir // ""' "$SETUP_JSON" 2>/dev/null)
+  AP_HEADS_DIR=$(jq -r '.heads.dir // ""' "$SETUP_JSON" 2>/dev/null)
+  AP_HEADS_SOURCE=$(jq -r '.heads.source // "" | split(":")[0]' "$SETUP_JSON" 2>/dev/null)
+  # The Python of the read-out: APERTUS_PYTHON if it is not the Python of the worker, else the Python that
+  # 'make setup-apertus' prepared (on macOS the one with MLX).
+  sp=$(jq -r '.python // ""' "$SETUP_JSON" 2>/dev/null)
+  if [ "$APY" = "$PY" ] && [ -n "$sp" ] && [ -x "$sp" ]; then APY=$sp; fi
+  for hf in heads2.npz entry.json calibration_dev_combined.json; do
+    if [ -z "$AP_HEADS_DIR" ] || [ ! -f "$AP_HEADS_DIR/$hf" ]; then
+      apertus_off "the head file $hf is absent: run 'make setup-apertus'."
+      return 0
+    fi
+  done
+  if ! { [ -x "$APY" ] || command -v "$APY" >/dev/null 2>&1; }; then
+    apertus_off "the Python $(clean "$APY") of the Apertus step is absent: run 'make setup-apertus'."
+    return 0
+  fi
+  if [ -n "$AP_MODEL_DIR" ]; then
+    chk=$(cd "$APP" && "$APY" -I -B worker/apertus_states.py check --root layout --backend "$APERTUS_BACKEND" \
+      --model-dir "$AP_MODEL_DIR" 2>/dev/null)
+  else
+    chk=$(cd "$APP" && "$APY" -I -B worker/apertus_states.py check --root layout --backend "$APERTUS_BACKEND" \
+      --no-model 2>/dev/null)
+  fi
+  AP_BACKEND=$(printf '%s' "$chk" | jq -r '.backend // ""' 2>/dev/null)
+  # The backend remote (APERTUS_URL, docs/apertus-gpu.md): the host of the URL and the backend of the service.
+  AP_REMOTE_HOST=$(printf '%s' "$chk" | jq -r '.tests.remote.host // ""' 2>/dev/null)
+  AP_REMOTE_BACKEND=$(printf '%s' "$chk" | jq -r '.tests.remote.server_backend // ""' 2>/dev/null)
+  creason=$(printf '%s' "$chk" | jq -r '.reason // ""' 2>/dev/null)
+  if [ -z "$AP_BACKEND" ] || [ -n "$creason" ]; then
+    cmsg=$(printf '%s' "$chk" | jq -r '.message // ""' 2>/dev/null)
+    apertus_off "${cmsg:-the check of the Apertus step failed (app/worker/apertus_states.py check).}"
+    return 0
+  fi
+  case $AP_BACKEND in
+    mlx|cuda|mps|cpu)
+      if [ -z "$AP_MODEL_DIR" ]; then
+        apertus_off "this computer has no model folder ('make setup-apertus APERTUS_MODEL=none'), and the read-out needs a GPU of another computer: set APERTUS_URL (see $GPU_DOC), or run 'make setup-apertus'."
+        return 0
+      fi ;;
+  esac
+  if [ "$AP_BACKEND" = cpu ]; then
+    note "APERTUS_BACKEND=cpu: torch on the CPU is very slow (many minutes for one page). Use it only for checks."
+  fi
+  AP=local
+  JOB_TIMEOUT=$APERTUS_TIMEOUT
 }
 
 # ---------------------------------------------------------------------------------------------------- convert
@@ -495,6 +699,22 @@ stop_dog() {
 # Runs the worker for one PDF. Sets WORKER_CODE (the exit code, or 'timeout').
 run_worker() {
   wjob=$1
+  if [ "$AP" = local ]; then
+    # The Apertus step: worker mode auto; the worker starts app/worker/apertus_states.py for the read-out. The
+    # read-out ends at the latest AP_TAIL seconds before the time limit of the job (PARLPDFECH_APERTUS_DEADLINE),
+    # so that the worker can still write the record (of the rules, if the read-out did not end in time).
+    ap_deadline=$(( $(date +%s) + JOB_TIMEOUT - AP_TAIL ))
+    (
+      cd "$APP" && exec env PARLPDFECH_PROFILE=native PARLPDFECH_MAX_PAGES="$MAX_PAGES" \
+        PARLPDFECH_DATA_DIR="$APP/data" PARLPDFECH_CODE_DIR="$APP/layout" PARLPDFECH_VIEW_DIR="$APP/view" \
+        PYTHONUNBUFFERED=1 PARLPDFECH_APERTUS=local PARLPDFECH_APERTUS_PYTHON="$APY" \
+        PARLPDFECH_APERTUS_MODEL_DIR="$AP_MODEL_DIR" PARLPDFECH_APERTUS_HEADS_DIR="$AP_HEADS_DIR" \
+        PARLPDFECH_APERTUS_HEADS_SOURCE="$AP_HEADS_SOURCE" PARLPDFECH_APERTUS_BACKEND="$AP_BACKEND" \
+        PARLPDFECH_APERTUS_TIMEOUT="$((JOB_TIMEOUT - 120))" PARLPDFECH_APERTUS_DEADLINE="$ap_deadline" \
+        "$PY" "$APP/worker/serve_convert.py" --pdf "$wjob/input.pdf" --mode auto --out "$wjob/out" \
+        --data-dir "$APP/data" < /dev/null > "$wjob/events.jsonl" 2> "$wjob/worker.log"
+    ) &
+  else
   (
     cd "$APP" && exec env PARLPDFECH_PROFILE=native PARLPDFECH_MAX_PAGES="$MAX_PAGES" \
       PARLPDFECH_DATA_DIR="$APP/data" PARLPDFECH_CODE_DIR="$APP/layout" PARLPDFECH_VIEW_DIR="$APP/view" \
@@ -502,6 +722,7 @@ run_worker() {
       "$PY" "$APP/worker/serve_convert.py" --pdf "$wjob/input.pdf" --mode rules --out "$wjob/out" \
       --data-dir "$APP/data" < /dev/null > "$wjob/events.jsonl" 2> "$wjob/worker.log"
   ) &
+  fi
   WORKER_PID=$!
   start_dog "$JOB_TIMEOUT" "$wjob/timeout"
   wait "$WORKER_PID"
@@ -689,7 +910,15 @@ convert_cmd() {
   if grep -Eiq '^https?://' "$inputs"; then need curl "Install curl to download a PDF."; fi
   # The catalog again from the files out/<ID>/source.txt (for example after a deletion of out/catalog.tsv).
   catalog_write || note "out/catalog.tsv was not written. The files out/<ID>/source.txt hold the data."
-  say "Inputs: $total. Code rules only (no GPU, no Apertus). Results: out/<ID>/."
+  apertus_mode
+  if [ "$AP" = local ] && [ "$AP_BACKEND" = remote ]; then
+    say "Inputs: $total. Code rules and Apertus-v1.5-8B on the GPU of another computer (APERTUS_URL, host $(clean "${AP_REMOTE_HOST:-?}"), backend $(clean "${AP_REMOTE_BACKEND:-?}"), bf16, layer 20). Results: out/<ID>/."
+    say "The text of each PDF goes to that computer for the read-out. The heads and the record stay on this computer."
+  elif [ "$AP" = local ]; then
+    say "Inputs: $total. Code rules and Apertus-v1.5-8B (backend $AP_BACKEND, bf16, layer 20). Results: out/<ID>/."
+  else
+    say "Inputs: $total. Code rules only (no GPU, no Apertus). Results: out/<ID>/."
+  fi
   n_valid=0; n_not_valid=0; n_stored=0; n_failed=0; i=0
   while IFS= read -r src; do
     i=$((i + 1))
@@ -723,7 +952,27 @@ convert_cmd() {
       say "  same PDF as ID $id (the SHA-256 is equal)"
     fi
     dest=$OUT/$id
-    if [ -f "$dest/record/view.json" ] && [ "$ARG_AGAIN" != 1 ]; then
+    # The record id that the server expects (app/server/src/jobs.rs, POST /api/jobs, mode rules).
+    doc=$(jq -r --arg s "$sha" 'first(.samples[] | select(.pdf_sha256 == $s) | .doc_id | tostring) // ""' \
+      "$APP/data/samples/index.json" 2>/dev/null)
+    if [ -n "$doc" ]; then want=s-$doc-rules; else want=u-$(printf '%s' "$sha" | cut -c1-16)-rules; fi
+    # The mode auto (Apertus step) has the record ids with no suffix -rules (app/server/src/jobs.rs).
+    if [ "$AP" = local ]; then want=${want%-rules}; fi
+    # A stored result of the other Apertus state (made with Apertus, asked without it, or the other way; or a
+    # record id of the other worker mode) is converted again (same ID; the record is replaced).
+    stored_ap=none
+    if [ -f "$dest/record/convert.json" ]; then
+      stored_ap=$(jq -r '.apertus_values.state // "none" | tostring' "$dest/record/convert.json" 2>/dev/null || echo none)
+    fi
+    case $stored_ap in local|remote|stored) stored_ap=local ;; *) stored_ap=none ;; esac
+    stored_rid=$(info_value "$dest/source.txt" record_id)
+    again=$ARG_AGAIN
+    if [ -f "$dest/record/view.json" ] && [ "$again" != 1 ] && { [ "$stored_ap" != "$AP" ] || [ "$stored_rid" != "$want" ]; }; then
+      if [ "$AP" = local ]; then say "  the stored result (record $(clean "${stored_rid:-?}")) was made without Apertus; it is converted again with Apertus"
+      else say "  the stored result (record $(clean "${stored_rid:-?}")) was made with the Apertus step; it is converted again with the code rules only"; fi
+      again=1
+    fi
+    if [ -f "$dest/record/view.json" ] && [ "$again" != 1 ]; then
       rm -rf "$JOB"; JOB=; WORK_OPEN=0
       # The stored record must be the record of this PDF: the SHA-256 in its convert.json is the SHA-256 of this PDF.
       rsha=$(jq -r '.pdf_sha256 // "" | tostring' "$dest/record/convert.json" 2>/dev/null)
@@ -737,10 +986,6 @@ convert_cmd() {
       fi
       continue
     fi
-    # The record id that the server expects (app/server/src/jobs.rs, POST /api/jobs, mode rules).
-    doc=$(jq -r --arg s "$sha" 'first(.samples[] | select(.pdf_sha256 == $s) | .doc_id | tostring) // ""' \
-      "$APP/data/samples/index.json" 2>/dev/null)
-    if [ -n "$doc" ]; then want=s-$doc-rules; else want=u-$(printf '%s' "$sha" | cut -c1-16)-rules; fi
     say "  conversion starts (record $want) ..."
     started=$(date +%s)
     run_worker "$JOB"
@@ -808,7 +1053,8 @@ convert_cmd() {
   say ""
   say "End. Inputs: $total. Valid: $n_valid. Not valid (record written, a check failed): $n_not_valid."
   say "Stored results shown again: $n_stored. Failed: $n_failed. All IDs: make list"
-  say "The values come from code rules. No human checked them."
+  if [ "$AP" = local ]; then say "The values come from code rules and Apertus read-outs. Each value can be wrong."
+  else say "The values come from code rules. Each value can be wrong."; fi
   [ "$n_failed" -eq 0 ]
 }
 

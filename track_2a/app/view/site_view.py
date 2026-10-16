@@ -226,8 +226,15 @@ def _media_type(name: str) -> str:
     return "application/octet-stream"
 
 
-def _group(source: str, apertus: str) -> str:
-    """Plain class of the source. A code step counts as a read-out only if Apertus states were used."""
+APERTUS_VALUE_TIER = re.compile(r"apertus_q[0-9a-z_]*\Z")    # the value tiers of the Apertus step (m12 writer)
+
+
+def _group(source: str, apertus: str, tier=None) -> str:
+    """Plain class of the source. A code step counts as a read-out only if Apertus states were used. A value of an
+    Apertus value head ('make convert' with the Apertus step: tier apertus_q1 or apertus_q2_<field>) has the group
+    apertus_values: its states were made for this PDF, not stored (fix step of 16.10.2026)."""
+    if source == "apertus_head" and APERTUS_VALUE_TIER.match(str(tier or "")):
+        return "apertus_values"
     if source == "apertus_head":
         return "apertus_readout"
     if source == "code_step":
@@ -423,7 +430,7 @@ def _labels(lab: dict, blocks_file: dict, text_blocks: dict, decisions: dict, ap
                        "about_entity": a.get("about_entity")},
             "value": value, "options": options, "probability": probability, "value_status": status,
             "chosen_is_top": is_top, "top_option": top_option,
-            "source": {"kind": source, "group": _group(source, apertus), "tier": a.get("tier"),
+            "source": {"kind": source, "group": _group(source, apertus, a.get("tier")), "tier": a.get("tier"),
                        "rule_id": a.get("rule_id"), "head": head},
             "calibration_id": _last(a.get("calibration")), "in_sample": in_sample,
             "note_code": note_code, "note_params": note_params, "note": note,
@@ -928,7 +935,15 @@ def _make_view(record: Path, inputs_dir: Path, run_info: dict) -> dict:
     notices = [notice("proposal"), notice("no_human_check")]
     if in_sample is True:
         notices.append(notice("in_sample_heads" if apertus == "stored" else "in_sample_rules"))
-    notices.append(notice("stored_apertus" if apertus == "stored" else "no_apertus"))
+    # the values of Apertus value heads ('make convert' with the Apertus step): their own notice, and the notice
+    # no_apertus only for a record with no label from Apertus (fix step of 16.10.2026)
+    n_values = sum(x["source"]["group"] == "apertus_values" for x in labels)
+    if apertus == "stored":
+        notices.append(notice("stored_apertus"))
+    elif not n_values:
+        notices.append(notice("no_apertus"))
+    if n_values:
+        notices.append(notice("apertus_values", n=n_values))
     if from_pdf:
         notices.append(notice("values_from_pdf" if has_export else "values_from_pdf_no_check"))
         notices.append(notice("values_measured"))

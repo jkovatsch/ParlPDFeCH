@@ -1,6 +1,6 @@
 # Contract of the ParlPDFeCH package (stages P0a and P0b)
 
-Version 1, with the corrections of 13.10.2026. Status of all results of the package: EXCEPTION, NOT RELEASED. No human checked this file.
+Version 1, with the corrections of 13.10.2026.
 
 How to read this file: the chapters 1 to 5 and 8 are the text of stage P0a; the chapters 9 and 11 correct them, and where they differ, the chapters 9 and 11 apply. The chapters 5.1, 5.2, 5.4, 6, 7 and 10 are edited in place and describe the package of now. Chapter 12 lists the changes of the correction round. Chapter 13 lists the changes after the second skeptic check. Chapter 14 has the two settings of a hosted sample site, chapter 15 the static site below `/`, the setting `PARLPDFECH_HOSTED` and the texts of a hosted site.
 
@@ -393,7 +393,8 @@ Top level: `schema`, `record_id`, `doc_id` (null for a PDF with no document numb
 | `in_sample_heads` | `run.in_sample` is true and `run.apertus` is `stored` |
 | `in_sample_rules` | `run.in_sample` is true and `run.apertus` is `none` |
 | `stored_apertus` | `run.apertus` is `stored` |
-| `no_apertus` | `run.apertus` is `none` |
+| `no_apertus` | `run.apertus` is `none` and no label has the group `apertus_values` |
+| `apertus_values` | one or more labels have the group `apertus_values` (`make convert` with the Apertus step; fix step of 16.10.2026); `params.n` (the key with the ending `.one` for 1) |
 | `chosen_not_top` | `counts.labels.chosen_not_top` is above 0; `params.n` |
 | `no_text_block` | `document.text_blocks` is empty |
 | `no_export` | `document.has_export` is false (stage P0b) |
@@ -433,7 +434,7 @@ Top level: `schema`, `record_id`, `doc_id` (null for a PDF with no document numb
 | `chosen_is_top` | optional; true if no option has a higher probability than the selected option; null if no probability |
 | `top_option` | optional; the option with the highest probability, only if `chosen_is_top` is false |
 | `source.kind` | `label_source`, not changed: `rule`, `apertus_head`, `code_step`, `export`, `constant`, `copy` |
-| `source.group` | `rule`, `apertus_readout`, `export`, `constant`, `copy`. `apertus_head` gives `apertus_readout`. `code_step` gives `apertus_readout` if `run.apertus` is `stored`, else `rule`. |
+| `source.group` | `rule`, `apertus_readout`, `apertus_values`, `export`, `constant`, `copy`. `apertus_head` gives `apertus_readout`; `apertus_head` with a value tier `apertus_q1` or `apertus_q2_<field>` (a value of an Apertus value head, `make convert` with the Apertus step) gives `apertus_values`, and the source line of such a `pdf_value` is `source.apertus_values`. `code_step` gives `apertus_readout` if `run.apertus` is `stored`, else `rule`. |
 | `source.tier`, `source.rule_id` | optional; `tier` (for example `s2_start_default`, `fixed:R3`), `rule_id` (for example `P1`) |
 | `source.head` | optional; `R2` for `executive_response` with the source `apertus_head`; `B1` for `block_slot` with the source `code_step` if the decisions file has the key `b1_s`; `D1` for `document_text_parts` with the source `apertus_head`; else null |
 | `calibration_id` | optional; last part of `calibration` |
@@ -505,7 +506,7 @@ An unknown route shows S0. A route `#/record/<id>` whose id has not the form of 
 The pages do NOT show the words `EXCEPTION` or `NOT RELEASED`, and no status banner. They do not print `run.status`, `run.record_status`, `run.candidate` and `run.converter_mode`, and no working name of the project (a name of a step, of a calibration record or of a variant of the converter). They show the notices of the view as plain sentences at the top of S4 (and the first two on S0):
 
 - `notice.proposal`: "Each label that a code rule or a read-out decided is a proposal with a probability. The probability is the calculated probability that the label agrees with the AI reference of the project. No stored value is below 0.005 or above 0.995: the converter cuts each value to this range."
-- `notice.no_human_check`: "No person checked these results."
+- `notice.no_human_check`: "Each label and each value of a result can be wrong."
 - `notice.in_sample_heads` (only if the data flag says so): "This sample is a development document. The project set the read-outs with it. Its probabilities are not a result on a new document."
 - `notice.not_a_sample` (an own PDF): "This PDF is not one of the samples of this package. The package cannot tell if it is one of the development documents. The probabilities were not checked on this PDF."
 
@@ -781,7 +782,7 @@ This chapter describes the record form of now. Where it differs from the chapter
 
 1. Code rules with tiers (the value readers) read 7 fields from the text of the PDF: the affair type, the title, the affair number, the submission date, the response date, the responder and the first author.
 2. Each value has the wording of the PDF, the value of the record, a rule tier and a probability. It also has a page and a span in the document text.
-3. The probability of a value is the share of the development documents in which a value of its rule tier was equal to the OpenParlData value (Jeffreys mean). The reference of that measurement is the OpenParlData export. No human checked a value.
+3. The probability of a value is the share of the development documents in which a value of its rule tier was equal to the OpenParlData value (Jeffreys mean). The reference of that measurement is the OpenParlData export.
 4. No value of the eCH-0295 part comes from the export. A value that the rules do not find is absent, and the record gives the slot the state `not_found_in_pdf` with a reason. No value is invented. Chapter 17 adds: the value as the document prints it, the floor, and the check that makes each value again.
 5. The export record of a sample is the cross-check only. A value of the export stands in the comparison of one value, in the provenance file and in the label of that value. It never stands in the eCH-0295 part.
 6. eCH-0295 (version I95) requires the affair type and the affair number. If the rules find none (or only a weak candidate, chapter 17), the slot is absent and the record states a recorded gap. The conformance name is `i95` with no gap, else `i95_with_recorded_gaps`.

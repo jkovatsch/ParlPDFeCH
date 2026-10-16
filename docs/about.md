@@ -4,17 +4,17 @@ This file holds the full description: challenge, results, deliverables, eCH-0295
 
 ![The start page of the app, in English](img/start-page.png)
 
-The start page of the app (screenshot of 14.10.2026, English). A record has only the head values that the rules find, up to 7.
+The start page of the app (screenshot of 14.10.2026, English). In the app, a record has only the head values that the rules find, up to 7.
 
 ## Summary
 
-A PDF of a Swiss parliament goes in. An eCH-0295 record comes out. Each head value of the record (up to 7) is read from the PDF and has a probability. A value from the rules also has a page and a text span. Identifiers and constants of the record have no probability. The OpenParlData export is the reference of the measurement. No export value goes into a record.
+A PDF of a Swiss parliament goes in. An eCH-0295 record comes out. Each head value of the record (up to 7) is read from the PDF and has a probability, a page and a text span. Identifiers and constants of the record have no probability. The OpenParlData export is the reference of the measurement. No export value goes into a record.
 
 - Author and copyright: see `NOTICE`.
 - Challenge: Track 2A (OpenParlData) of the Hack Apertus online hack, "Extracting Parliamentary Affairs from PDFs into One Common Structure". Challenge page: https://hackapertus.notion.site/track-2a-openparldata
 - Project folder for the judges: [track_2a/](../track_2a/README.md). It gives the commands, the samples, the method and all results.
 - Technical report: [track_2a/technical_report.md](../track_2a/technical_report.md). All limits: [track_2a/docs/limits.md](../track_2a/docs/limits.md).
-- State of this text: 15.10.2026. It is the long description that was on the front page until 14.10.2026.
+- State of this text: 16.10.2026. It is the long description that was on the front page until 14.10.2026.
 
 ## Result in short
 
@@ -35,7 +35,7 @@ Reader with rules only. Reference: the export.
 - Precision: correct / (correct + wrong). Found rate: (correct + wrong) / documents with a reference. Share correct: correct / documents with a reference.
 - Correct means equal to the export value after the normalisation of the project.
 - In the one fixed run, linear heads on stored hidden states of Apertus-v1.5-8B gave values for 2 of the 7 fields: where the rules found none, or where the rule value had a probability below 0.5. With them, the share correct was 0.8675 for the affair type and 0.6028 for the first author.
-- The app does not use these heads. In the app, the rules give all values, also for the 3 samples. For the 3 samples, stored Apertus states give the block labels only.
+- The app does not use these heads. In the app, the rules give all values, also for the 3 samples. For the 3 samples, stored Apertus states give the block labels only. `make convert` with the Apertus step uses these heads on your own PDF: Apertus-v1.5-8B reads the PDF on a GPU ([track_2a/docs/apertus-gpu.md](../track_2a/docs/apertus-gpu.md)).
 - No pass limit was fixed before the run. Thus this text does not say that a field passes.
 - Number ids in [track_2a/numbers.json](../track_2a/numbers.json): `values.last_run.rules_only.all.<field>.precision`, `.found_rate`, `.share_correct`; `values.last_run.combined.all.<field>.share_correct`; `values.last_run.parliaments.<all|validation|group7>`; `values.round4.documents`, `values.round4.parliaments`.
 
@@ -56,7 +56,7 @@ The bars with Apertus are of the fixed run only. The app uses the rules for all 
 | Deliverable | State on 14.10.2026 |
 |---|---|
 | 1 Representation model | eCH-0295, working draft I95 (commit `3cab44d`), and the cascade of the project. The project uses eCH-0295 because it is the working draft of the Swiss standard for political affairs. The project gives no mapping to Akoma Ntoso, Parla-CLARIN or Popolo. The cascade uses the kind of the document and the affair type to select the slots that a document can state. File: `track_2a/src/converter_gj/m11_cascade.yaml`. The earlier converter adds the LinkML profile `track_2a/src/converter/m06_ech_profil.yaml` 0.2.0 for its provenance. It changes no eCH-0295 class. |
-| 2 Converter: prompts and code | The code of the method of the report: `track_2a/src/converter_gj/`. These files are copies to read. The app runs the files of `track_2a/app/layout/src/`, which also has the rule for the first author. The prompts for Apertus: `track_2a/src/prompts/gj_values_v1_de/` (value questions) and `track_2a/src/prompts/gj_jev_v1_de/` (block roles). The app: `track_2a/app/`. `make run-native` and `make run` (Docker, 3 samples only) ran on one Mac. In the app, each head value of a record comes from the rules; for the 3 samples, stored Apertus states give the block labels. |
+| 2 Converter: prompts and code | The code of the method of the report: `track_2a/src/converter_gj/`. These files are copies to read. The app runs the files of `track_2a/app/layout/src/`, which also has the rule for the first author. The prompts for Apertus: `track_2a/src/prompts/gj_values_v1_de/` (value questions) and `track_2a/src/prompts/gj_jev_v1_de/` (block roles). The app: `track_2a/app/`. `make run-native` and `make run` (Docker, 3 samples only) ran on one Mac. In the app, each head value of a record comes from the rules; for the 3 samples, stored Apertus states give the block labels. `make convert` converts your own PDF in the terminal. With its Apertus step (a GPU), the Apertus heads also decide the affair type and the first author; this step ran on one Mac on 16.10.2026. |
 | 3 Evaluation | The one fixed run of 13.10.2026 against the export (see above). The one fixed run has no hand-checked gold set: its reference is the export, a register. The author examined 26 records of test documents for the earlier converter. The method of the report was not scored on them. The run has no count by language or by state level. |
 | 3 Cross-parliament question | In which parliaments does the PDF with the response of the executive also contain the submitted text? The report gives an answer on development documents (chapter 6). It uses block labels from an Apertus head, compared with AI labels only. The documents are a stratified sample of development parliaments; a share is not the share of all documents of a parliament. It is not a result of the one fixed run. |
 
@@ -69,7 +69,9 @@ The public text of 12.10.2026 (commit `2fd48e2`) described an earlier converter,
 | PDF documents and OpenParlData export files, except the PDF files and the export records of the 3 samples | OpenParlData publishes them. The license of the PDF copies is not clear. The app needs the PDF of each sample for its result view: `track_2a/app/data/samples/<doc>/source.pdf`, with the URL of the publisher in `track_2a/app/data/samples/index.json`. The export records of the samples are in `track_2a/samples/<doc>/input/export.json` and `track_2a/app/data/samples/<doc>/export.json`. |
 | Test documents and their records | They are not a part of the one fixed run. The repository gives counts only. |
 | Hidden states and fit data of documents other than the 3 samples | They are data of the private project. `track_2a/numbers.json` gives the aggregate values with their source files. |
-| Apertus weights, the weights of the value heads, the LoRA adapter | The Apertus use policy has duties for each redistribution. Each user downloads Apertus with an own account. |
+| Apertus weights | The Apertus use policy has duties for each redistribution. Each user downloads Apertus with an own account. |
+| The weights of the value heads | They are in the Hugging Face repository `JonathanKovatsch/parlpdfech-heads` (CC-BY-4.0). `make setup-apertus` downloads the 3 files at a pinned revision and checks them against the SHA-256 of `track_2a/tools/apertus/heads.sha256`. |
+| The LoRA adapter | It did not enter the run, and it is not published. |
 | Project notes and the protocol of the private project | They contain internal notes. The README files and the technical report give the facts from them. The work records of the app are in the repository as a part of its source tree: `track_2a/app/STATE.md`, `EXAMINATION.md` and `CONTRACT.md`. They also contain internal notes of the AI agents, for example process numbers and role names. |
 | Other copies of eCH-0295 files | The license version of the working draft is not clear. `make setup` downloads the two files from their pinned URLs for the earlier converter. Only `track_2a/app/layout/quellen/` has a copy (chapter "eCH-0295"). |
 
@@ -113,3 +115,4 @@ Text of the template:
 - Language: English, to the rules of ASD-STE100 (Issue 9).
 - Authors: AI agents (Claude Opus 5.5) wrote this text for the author on 14.10.2026, from the records of the private project. The private project is the project folder of the author. It is not public.
 - On 15.10.2026 an AI agent corrected sentences after an audit and moved the chart into "Result in short". In the evening, an AI agent shortened some sentences.
+- On 16.10.2026 an AI agent added the sentences on the Apertus step of `make convert`.

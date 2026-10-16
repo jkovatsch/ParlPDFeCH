@@ -8,7 +8,29 @@
 #   make setup-pdf      for your own PDF with 'make run-native', after 'make setup'. Needs the command pdftotext.
 #                       Downloads (network): the packages of app/container/requirements-full.txt (docling 2.133.0,
 #                       pypdfium2 5.14.0, torch) into .venv/, and the 2 Docling models into the Hugging Face cache
-#                       (only if they are absent)
+#                       (only if they are absent). On macOS also ocrmac 1.0.1 (OCR of Apple Vision for Docling,
+#                       tools/requirements-macos-ocr.txt), as for the stored Docling files of the project
+#   make setup-apertus  for the Apertus step of 'make convert', after 'make setup-pdf'. Needs a GPU: a Mac with Apple
+#                       silicon and 32 GB memory (MLX), or an NVIDIA GPU with 24 GB or more (torch CUDA). Downloads
+#                       (network): on macOS MLX 0.32.3; the model swiss-ai/Apertus-v1.5-8B at the revision
+#                       APERTUS_REVISION (about 17.3 GB; needs your own Hugging Face account: accept the conditions
+#                       of the model on its page, then 'hf auth login'); tools/text_branch.py cuts its text branch
+#                       (16.1 GB) into APERTUS_MODEL_DIR; the 3 head files from HEADS_REPO at HEADS_REVISION (or from
+#                       HEADS_DIR). Disk: about 40 GB free. With no GPU it stops and names the ways out (a GPU in the
+#                       cloud, docs/apertus-gpu.md; or APERTUS=0). APERTUS_MODEL=none sets up the heads only (and
+#                       on macOS ocrmac, no MLX). A text branch that is already there gets a full SHA-256 check
+#                       (APERTUS_VERIFY=0 skips it). HEADS_DIR=<folder> takes the 3 head files from a local
+#                       folder in place of the download.
+#                       Tested only on one Mac (Apple M4, 32 GB) on 16.10.2026; Linux and Windows are not tested
+#   make serve-apertus  on a computer with a GPU (this one, another one, or a rented GPU in the cloud), after
+#                       'make setup-apertus' there: the read-out service of the Apertus step (docs/apertus-gpu.md).
+#                       It loads the model one time and answers with the layer-20 states for the prompt texts of
+#                       one PDF at a time. HOST and PORT on the command line set the address (default
+#                       127.0.0.1:8090: this computer only; another address needs the environment variable
+#                       APERTUS_TOKEN, 32 characters or more). APERTUS_IDLE_EXIT=<s> and APERTUS_MAX_REQUESTS=<n>
+#                       end it by itself. Ctrl-C ends it. On your own computer: an ssh tunnel to it, then
+#                       'make convert APERTUS_URL=http://127.0.0.1:8090 PDF=...' (the text of the PDF goes to that
+#                       computer). Tested only on one Mac on 16.10.2026, service and client on this one computer
 #   make run            needs Docker: builds the image (target slim) from app/ (docker compose build), starts it
 #                       on 127.0.0.1:8080 and waits for /healthz. Then open http://127.0.0.1:8080/app/
 #   make stop           stops the container of 'make run'. 'make logs' shows its log
@@ -19,14 +41,24 @@
 #                       Ctrl-C. On 14.10.2026 'make run' and 'make run-native' ran on one Mac
 #   make test           checks with no network and no Rust compiler, after one 'make setup' (it needs the 2 schema
 #                       files of 'make setup'): the copied files against SOURCES.json, the prompt files, the
-#                       validator, the file list and the code layout of app/
+#                       validator, the file list and the code layout of app/, and the rules of the Apertus
+#                       read-out service and its client (app/worker/check_apertus.py: a test backend on 127.0.0.1,
+#                       no model)
 #   make test-app       the tests of app/ (cargo tests of the 2 crates, the example view, a start of the seed
 #                       script). Needs cargo and the crates of 'make setup'
 #   make clean          removes build/ and the build outputs of app/ (target-server/, target-wasm/, ui/pkg/, work/)
 #
-# Own PDFs in the terminal: code rules only (no GPU, no Apertus), as for an upload in the app. The targets need
-# 'make setup' and 'make setup-pdf' one time, and the commands jq and curl. The results go to out/ (git ignores it).
-# On 15.10.2026 the 3 targets ran on one Mac (Apple silicon), in a clone: 3 samples and 5 development PDFs.
+# Own PDFs in the terminal. The targets need 'make setup' and 'make setup-pdf' one time, and the commands jq and
+# curl. The results go to out/ (git ignores it). On 15.10.2026 the 3 targets ran on one Mac (Apple silicon), in a
+# clone, with code rules only: 3 samples and 5 development PDFs.
+#   The Apertus step: APERTUS=auto (default): Apertus-v1.5-8B reads out the PDF if 'make setup-apertus' is done
+#   and a GPU is there; else a NOTE, and the code rules only. APERTUS=1: Apertus or stop with a message.
+#   APERTUS=0: code rules only (no GPU, no Apertus), as for an upload in the app. APERTUS_BACKEND=auto|mlx|cuda|mps|cpu
+#   (auto never takes the CPU; cpu is very slow, for checks only). APERTUS_TIMEOUT: seconds for one PDF (1800).
+#   APERTUS_URL=http://127.0.0.1:8090: the read-out runs on the GPU of another computer ('make serve-apertus'
+#   there, an ssh tunnel here; the token of that service in the environment variable APERTUS_TOKEN). With
+#   APERTUS_URL, auto takes that GPU first. This computer then needs only the heads ('make setup-apertus
+#   APERTUS_MODEL=none'). docs/apertus-gpu.md gives the steps.
 #   make convert PDF=<file or URL>   converts one PDF. A relative path starts in track_2a/. A URL must be http or
 #                       https. A download has a limit of 20 MB and 120 s. As in the app, the first 1024 bytes
 #                       must have the mark %PDF-. Each PDF gets an ID (0001, 0002, ...). The same PDF (same
@@ -56,10 +88,35 @@
 
 UV_RUN  = uv run --offline --no-project --python 3.12 --with pyyaml==6.0.3 python
 UV_HEAD = uv run --offline --no-project --python 3.12 --with numpy==2.5.3 --with scipy==1.18.1 python -B
+UV_NUMPY = uv run --offline --no-project --python 3.12 --with numpy==2.5.3 python -I -B
 
 PORT ?= 8080
 APP_VENV := .venv
 APP_PYTHON ?= $(if $(wildcard $(APP_VENV)/bin/python),$(abspath $(APP_VENV)/bin/python),python3)
+
+# The Apertus step ('make setup-apertus', 'make convert'). The model and the heads are pinned: the revision of the
+# model repository, and the commit of the heads repository with the SHA-256 of tools/apertus/heads.sha256.
+APERTUS ?= auto
+APERTUS_BACKEND ?= auto
+APERTUS_TIMEOUT ?= 1800
+APERTUS_PYTHON ?= $(APP_PYTHON)
+APERTUS_REPO := swiss-ai/Apertus-v1.5-8B
+APERTUS_REVISION := ef4bbc54d6fe658bc782280ff9f3b53a10a9758f
+# The text branch folder.
+APERTUS_MODEL_DIR ?= data/apertus/apertus-v1.5-8b-text-bf16
+APERTUS_MODEL ?= auto
+APERTUS_SOURCE_DIR ?=
+HEADS_REPO ?= JonathanKovatsch/parlpdfech-heads
+# The commit of the heads repository (40 hex characters; upload of 16.10.2026).
+HEADS_REVISION ?= 64ba850a119f5b9dcee3761a60d25b4ad670cd1c
+# Optional: a local folder with the 3 head files, in place of the download.
+HEADS_DIR ?=
+APERTUS_VERIFY ?= 1
+# 'make serve-apertus': HOST and PORT count only on the command line (PORT of 'make run-native' is 8080).
+APERTUS_HOST := $(if $(filter command line,$(origin HOST)),$(HOST),127.0.0.1)
+APERTUS_PORT := $(if $(filter command line,$(origin PORT)),$(PORT),8090)
+APERTUS_IDLE_EXIT ?=
+APERTUS_MAX_REQUESTS ?=
 # The versions of app/Cargo.lock, with no network: 'make setup' downloads the crates before.
 APP_CARGO_FLAGS ?= --offline --locked
 
@@ -80,11 +137,13 @@ cmdline = $(if $(filter command line,$(origin $(1))),$(if $(findstring $(line_br
 	$(1) has a line break. Give a path or a URL with no line break),$(value $(1))))
 shq = '$(subst ','\'',$(1))'
 CONVERT_SH = PYTHON=$(call shq,$(APP_PYTHON)) DOCLING_MODELS='$(DOCLING_MODELS)' \
-	PDFTOTEXT_PLACES='$(PDFTOTEXT_PLACES)' sh tools/convert.sh
+	PDFTOTEXT_PLACES='$(PDFTOTEXT_PLACES)' APERTUS=$(call shq,$(APERTUS)) APERTUS_BACKEND=$(call shq,$(APERTUS_BACKEND)) \
+	APERTUS_TIMEOUT=$(call shq,$(APERTUS_TIMEOUT)) APERTUS_PYTHON=$(call shq,$(APERTUS_PYTHON)) sh tools/convert.sh
 WASM_BUNDLE := app/ui/pkg/parlpdfech_rdfcheck_bg.wasm
 WASM_SOURCES := app/rdfcheck app/Cargo.toml app/Cargo.lock app/rust-toolchain.toml
 
-.PHONY: setup setup-pdf run stop logs run-native test test-app clean run-earlier head-selftest convert list view
+.PHONY: setup setup-pdf setup-apertus serve-apertus run stop logs run-native test test-app clean run-earlier head-selftest \
+	convert list view
 
 setup:
 	uv python install 3.12
@@ -105,6 +164,8 @@ setup-pdf:
 	echo "  macOS (Homebrew):  brew install poppler"; \
 	echo "  Debian or Ubuntu:  sudo apt install poppler-utils"; exit 1; fi
 	uv pip install --python $(APP_VENV)/bin/python -r app/container/requirements-full.txt
+	@if [ "$$(uname -s)" = Darwin ]; then echo "macOS: ocrmac (OCR of Apple Vision for Docling, as for the stored Docling files)"; \
+	uv pip install --python $(APP_VENV)/bin/python -r tools/requirements-macos-ocr.txt || exit 1; fi
 	uv pip check --python $(APP_VENV)/bin/python
 	@for m in $(DOCLING_MODELS); do repo=$${m%@*}; rev=$${m#*@}; \
 	if HF_HUB_OFFLINE=1 $(APP_VENV)/bin/hf download $$repo --revision $$rev --quiet >/dev/null 2>&1; then \
@@ -114,6 +175,20 @@ setup-pdf:
 	$(APP_VENV)/bin/hf download $$repo --revision $$rev --quiet >/dev/null || exit 1; fi; done
 	$(APP_VENV)/bin/python -c "from importlib.metadata import version as v; import docling, pypdfium2; print('docling', v('docling'), '/ pypdfium2', v('pypdfium2'))"
 	@echo "PASS: make setup-pdf. Start the app with 'make run-native'. Then open http://127.0.0.1:$(PORT)/app/ and drop your PDF on the page."
+
+setup-apertus:
+	@PYTHON=$(call shq,$(APERTUS_PYTHON)) APERTUS_REPO='$(APERTUS_REPO)' APERTUS_REVISION='$(APERTUS_REVISION)' \
+	APERTUS_MODEL_DIR=$(call shq,$(APERTUS_MODEL_DIR)) APERTUS_MODEL=$(call shq,$(APERTUS_MODEL)) \
+	APERTUS_SOURCE_DIR=$(call shq,$(APERTUS_SOURCE_DIR)) APERTUS_BACKEND=$(call shq,$(APERTUS_BACKEND)) \
+	HEADS_REPO=$(call shq,$(HEADS_REPO)) HEADS_REVISION=$(call shq,$(HEADS_REVISION)) HEADS_DIR=$(call shq,$(HEADS_DIR)) \
+	APERTUS_VERIFY=$(call shq,$(APERTUS_VERIFY)) sh tools/setup_apertus.sh
+
+serve-apertus:
+	@PYTHON=$(call shq,$(APP_PYTHON)) APERTUS_PYTHON=$(call shq,$(APERTUS_PYTHON)) \
+	APERTUS_MODEL_DIR=$(call shq,$(APERTUS_MODEL_DIR)) APERTUS_BACKEND=$(call shq,$(APERTUS_BACKEND)) \
+	APERTUS_HOST=$(call shq,$(APERTUS_HOST)) APERTUS_PORT=$(call shq,$(APERTUS_PORT)) \
+	APERTUS_IDLE_EXIT=$(call shq,$(APERTUS_IDLE_EXIT)) APERTUS_MAX_REQUESTS=$(call shq,$(APERTUS_MAX_REQUESTS)) \
+	sh tools/serve_apertus.sh
 
 run:
 	$(MAKE) -C app run
@@ -156,6 +231,7 @@ test:
 	else echo "PASS: the validator rejected tests/invalid_instance.yaml"; fi
 	$(MAKE) -C app check-dist PYTHON=$(APP_PYTHON)
 	$(MAKE) -C app check-layout PYTHON=$(APP_PYTHON)
+	$(UV_NUMPY) app/worker/check_apertus.py
 	@echo "PASS: make test"
 
 test-app:

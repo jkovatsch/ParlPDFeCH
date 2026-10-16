@@ -1,6 +1,6 @@
 # Numbers of ParlPDFeCH, track 2A
 
-Made: 15.10.2026 22:21 CEST (time from the clock). Tool: `src/m11_numbers.py` of the private project.
+Made: 16.10.2026 04:28 CEST (time from the clock). Tool: `src/m11_numbers.py` of the private project.
 
 Written in English to the STE rules (ASD-STE100, Issue 9). An AI agent (Claude Opus 5.5) wrote the tool and this file.
 
@@ -3377,12 +3377,12 @@ This file replaces `track_2a/technical_report_numbers.json` of 12.10.2026. The k
 |---|---|
 | File | track_2a/technical_report.pdf (the file of form field 12; git ignores *.pdf, so it is not in the repository) |
 | Pages | 6 |
-| SHA-256 of the PDF | `01655b87a2aa28d061c3562c20cf735b2d4898c5a0e15fc395e6ed76c7e1079e` |
-| SHA-256 of the Markdown source | `f7f2820dc06336a1f9fa78a86adfb621d353beccbe79e885c6750efde8e2a2d9` |
+| SHA-256 of the PDF | `fab683c4bb121b8187db803982bcc89f3a086e5d4fd1612aeed2c5ff61e9c06d` |
+| SHA-256 of the Markdown source | `a1e92e7a4be9261be264160105a5cb7b6ac504b4c9ecdd6e616aa7eac6fee6b5` |
 | Tool `pandoc` | `pandoc 3.8.1` |
 | Tool `xelatex` | `XeTeX 3.141592653-2.6-0.999997 (TeX Live 2025)` |
 | Tool `fonts` | `HelveticaNeue, HelveticaNeue-Bold, Menlo-Bold, Menlo-Regular, [none]` |
-| Build record (private project) | crisp-dm/06-deployment/report_pdf_build.json, `9e69ffe5c92fcfa97c419476a3c9b67b0bcb7cfc418219fa1ef498e36fbc8303` |
+| Build record (private project) | crisp-dm/06-deployment/report_pdf_build.json, `44538ca361441710f8948c6e68525a07a762fe88bc4db7ab4a4707210bbe3615` |
 | SHA-256 of the earlier numbers file | `84bb9865a5f05dbe57966a3a75914cddad3276e40d219994e130665fdf658b7b` |
 
 The build steps and the header file of the PDF are in the key `pdf` of `numbers.json`.

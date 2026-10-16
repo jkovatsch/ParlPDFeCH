@@ -1,6 +1,6 @@
 # Run the app on your computer
 
-The app converts a PDF of a Swiss parliament into an eCH-0295 record. It runs on your computer and uses no GPU. Run the commands in the folder `track_2a/`. Ways 1 and 2 ran on one Mac on 14.10.2026, way 3 on 15.10.2026.
+The app converts a PDF of a Swiss parliament into an eCH-0295 record. It runs on your computer. The app (ways 1 and 2) uses no GPU. Run the commands in the folder `track_2a/`. Ways 1 and 2 ran on one Mac on 14.10.2026, way 3 on 15.10.2026. Way 3 can also run the Apertus step, which needs a GPU on your computer or on another computer ([apertus-gpu.md](apertus-gpu.md)). The Apertus step ran on one Mac on 16.10.2026.
 
 ## Way 1: container (`make run`)
 
@@ -29,7 +29,7 @@ make run-native
 - Open `http://127.0.0.1:8080/app/`.
 - The 3 samples need nothing more.
 - Your own PDF needs `make setup-pdf` one time, after `make setup`. It needs the command `pdftotext` (macOS with Homebrew: `brew install poppler`). If `pdftotext` is absent, it stops before the download and gives the install command.
-- `make setup-pdf` needs the network. It installs the packages of `app/container/requirements-full.txt` (`docling` 2.133.0, `pypdfium2` 5.14.0, torch) into `.venv/`. It downloads the 2 Docling models into the Hugging Face cache if they are absent.
+- `make setup-pdf` needs the network. It installs the packages of `app/container/requirements-full.txt` (`docling` 2.133.0, `pypdfium2` 5.14.0, torch) into `.venv/`. On macOS it also installs `ocrmac` 1.0.1 (text recognition of Apple Vision, as for the stored Docling files of the project; `tools/requirements-macos-ocr.txt`). It downloads the 2 Docling models into the Hugging Face cache if they are absent.
 - Size on a Mac with Apple silicon: 283.5 MB of packages (sizes from the PyPI data) and 530.0 MB of models. `.venv/` grows by about 1 GB.
 - Without these packages, the app stops with the note `pdf_reader_absent`.
 - State on 14.10.2026: `make setup` and `make run-native` ran on one Mac (Apple silicon, macOS), also in a fresh clone, with the offline flags of cargo. The 3 samples in the modes auto and rules gave 6 valid records.
@@ -44,6 +44,7 @@ make run-native
 ```bash
 make setup
 make setup-pdf                   # one time, as in way 2
+make setup-apertus               # one time, only for the Apertus step; needs a GPU and your own Hugging Face account
 make convert PDF=<file or URL>   # one PDF
 make convert DIR=<folder>        # each *.pdf of the folder, no subfolder
 make convert LIST=<file>         # one path or http(s) URL in each line; a line that starts with # is a comment
@@ -51,16 +52,16 @@ make list                        # the IDs as a table
 make view ID=0002                # on request: this one result in the browser; Ctrl-C stops it
 ```
 
-- Limits first. Your PDF gets the code rules only (no language model, no GPU). It needs a text layer. As in the app, the limits are 25 pages and 20 MB, and the first 1024 bytes must have the mark `%PDF-`.
+- Limits first. With `APERTUS=0`, or with no `make setup-apertus`, your PDF gets the code rules only (no language model, no GPU). The Apertus step needs `make setup-apertus` and a GPU. It runs with `APERTUS=auto` (the default) or `APERTUS=1`. Then Apertus-v1.5-8B also reads out the PDF on a GPU of this computer or of another computer. The Apertus heads can give the affair type and the first author ([apertus-gpu.md](apertus-gpu.md)). As in the app, the limits are 25 pages and 20 MB, and the first 1024 bytes must have the mark `%PDF-`. On Linux the PDF needs a text layer (no OCR); on macOS `make setup-pdf` installs `ocrmac`.
 - Not run: Windows, Linux, Ctrl-C typed in a terminal, the full time limit of 600 s and a PDF with a password. The downloads came only from GitHub and from servers on the same computer. No PDF gave a record with valid no.
 - You need `make setup` and `make setup-pdf` of way 2, the commands jq and `pdftotext`, and curl for a URL. `make view` also needs cargo and `wasm-bindgen` 0.2.127, as way 2.
 - A URL must be http or https. A download has a limit of 20 MB and 120 s. The result keeps the source (path or URL) and the SHA-256 of the PDF.
 - A relative path of `PDF=` or `DIR=` starts in `track_2a/`. A relative path in a `LIST` file starts in the folder of that file. `~/` is expanded.
-- The worker of the app converts each PDF in the mode rules, with the arguments and the environment of the server. Its time limit is 600 s for each PDF. No file below `app/` changes.
+- The worker of the app converts each PDF in the mode rules, with the arguments and the environment of the server. Its time limit is 600 s for each PDF. With the Apertus step it runs in the mode auto, and the time limit is `APERTUS_TIMEOUT` (1800 s). No file below `app/` changes.
 - Each PDF gets an ID: `0001`, `0002`, and so on. The same PDF (same SHA-256) keeps its ID.
 - A PDF that the app refuses also gets an ID, with valid `failed:<code>` (for example `failed:too_long` for more than 25 pages). A missing file, a file that is not a PDF, a file of more than 20 MB and a failed download get no ID.
-- A PDF with a stored result is not converted again. The terminal shows the stored result. `AGAIN=1` converts it again. If that conversion fails, the old result stays.
-- For each PDF the terminal shows the ID, valid yes or no, and each value with its probability and status (certain or unsure). It also gives the fields with no value and the folder `out/<ID>/`.
+- A PDF with a stored result is not converted again. The terminal shows the stored result. `AGAIN=1` converts it again. If that conversion fails, the old result stays. A stored result is also converted again if the Apertus step was on for it and is off now, or the other way.
+- For each PDF the terminal shows the ID, valid yes or no, and each value with its probability and status (certain or unsure). With the Apertus step, it also shows the source of each value (rules or Apertus) and the head probabilities of Apertus ([apertus-gpu.md](apertus-gpu.md), chapter "What the terminal shows"). It also gives the fields with no value and the folder `out/<ID>/`.
 - `make list` shows the IDs as a table: ID, valid, time, affair type, title, source and SHA-256. The file `out/catalog.tsv` has all columns.
 - `make view ID=0002` (also `ID=2` or `ID=ID-0002`) starts the server of the app for this one result. The server is read-only and listens on `127.0.0.1`.
 - The port is 8080 or the next free port up to 8179. `PORT=<n>` sets it. The command opens `http://127.0.0.1:<port>/app/#/view/<record_id>` in the browser. `OPEN=no` shows the address only.
@@ -75,16 +76,18 @@ make view ID=0002                # on request: this one result in the browser; C
 - A headless Chrome showed the values with the probabilities of the terminal. A signal from a script stopped the server. Not run: the start of the browser by the command.
 - Times on one Mac: a development PDF took 18 to 35 s. After a new setup, the first PDF that Docling read took 64 s or 67 s. A copy of a sample took 4 to 11 s.
 - The first `make view` built the server in about 23 s and the WebAssembly bundle in about 25 s.
+- The runs of 15.10.2026 had the code rules only and no `ocrmac`.
+- State on 16.10.2026: the Apertus step ran on one Mac (Apple M4, 32 GB), in clones. With MLX on this computer, 3 samples and 4 development PDFs gave valid records; in the 3 samples, Apertus wrote no value. Through `make serve-apertus` on the same computer, 3 of these development PDFs gave the same values as the local run. On the 3 samples, `APERTUS=0` gave the same records as before the Apertus step. [apertus-gpu.md](apertus-gpu.md), chapter "What was tested", gives the details.
+- Times with the Apertus step on that Mac, with MLX: a sample took 35 to 57 s, and a development PDF took 46 to 115 s (115 s: the first PDF in a new clone). Through the service on the same computer, a development PDF took 30 to 75 s.
 
 ## What the app does with your PDF
 
 - Way 2: on the start page, click "Convert your own PDF" (or "Own PDF" at the top). Drop the PDF on the box, or click "Choose a PDF". Then click "Convert".
-- Way 3: `make convert` gives the PDF to the same worker of the app, in the mode rules.
-- Your PDF gets the code rules only. The app runs no language model and uses no GPU.
+- Way 3: `make convert` gives the PDF to the same worker of the app, in the mode rules; with the Apertus step in the mode auto.
+- In the app (way 2), your PDF gets the code rules only. The app runs no language model and uses no GPU. Only `make convert` with the Apertus step runs Apertus.
 - Only the 3 samples have block labels from stored Apertus states.
 - The record has no comparison with a register.
-- Your PDF needs a text layer. `make setup-pdf` installs no text recognition (OCR). A PDF with no text layer stops with the note `no_text_layer`. Text that is only in a picture is not in the record.
-- The page can say that the text recognition of macOS (Apple OCR) runs. It runs only if the Python package `ocrmac` is in `.venv/`, and `make setup-pdf` does not install it. The record then has the notice `ocr_none`: no text recognition ran.
+- Text recognition (OCR): on macOS, `make setup-pdf` installs the Python package `ocrmac`, and Docling then runs the text recognition of Apple Vision (the record has the notice `ocr_apple`). Text in a picture can then be in the record, and a page with no text layer can give text (not tested with a scan). On Linux, `make setup-pdf` installs no OCR: your PDF needs a text layer, a PDF with no text layer stops with the note `no_text_layer`, and the record has the notice `ocr_none`.
 - An unchanged PDF of a sample gives the stored result of that sample. Docling does not run for it.
 - Docling loads its layout model at the revision `main`. A later change of that model can give other text blocks.
 
@@ -100,4 +103,4 @@ make view ID=0002                # on request: this one result in the browser; C
 ## About this text
 
 - Language: English, to the rules of ASD-STE100 (Issue 9).
-- Authoring: an AI agent (Claude Opus 5.5) wrote this text on 14.10.2026 and changed the state lines in the afternoon and evening of that day. On 15.10.2026 an AI agent added `make setup-pdf`, and later corrected sentences after an audit. In the evening of 15.10.2026, an AI agent added way 3 and shortened the start of the file.
+- Authoring: an AI agent (Claude Opus 5.5) wrote this text on 14.10.2026 and changed the state lines in the afternoon and evening of that day. On 15.10.2026 an AI agent added `make setup-pdf`, and later corrected sentences after an audit. In the evening of 15.10.2026, an AI agent added way 3 and shortened the start of the file. On 16.10.2026, AI agents added the Apertus step and the OCR of macOS, and an AI agent corrected the texts to the new state.

@@ -62,8 +62,10 @@ The function does not read the TriG file or an RDF/XML file. Each value of the v
   `top_option` holds the option with the highest probability.
 - `value_status` is `certain` or `unsure` from the record, or `none` for a label with no probability.
 - `source.kind` is the source of the record, not changed. `source.group` is the plain class: `rule`,
-  `apertus_readout`, `export`, `constant`, `copy`. A code step counts as `apertus_readout` only if
-  `run_info.apertus` is `stored`.
+  `apertus_readout`, `apertus_values`, `export`, `constant`, `copy`. A code step counts as `apertus_readout` only if
+  `run_info.apertus` is `stored`. A label of an Apertus value head (source `apertus_head`, tier `apertus_q1` or
+  `apertus_q2_<field>`: `make convert` with the Apertus step) has the group `apertus_values`, and the view then has
+  the notice `apertus_values` (params n) in place of `no_apertus` (fix step of 16.10.2026).
 - `source.tier`, `source.rule_id` and `calibration_id` come from the record. `source.head` is `R2`, `B1` or `D1`
   by the rule of the contract.
 - `in_sample` is the flag of the record. The function has no list of document numbers. `run.in_sample` is true if

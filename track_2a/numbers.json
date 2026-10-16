@@ -1,6 +1,6 @@
 {
  "schema": "parlpdfech-numbers/1",
- "made": "15.10.2026 22:21 CEST",
+ "made": "16.10.2026 04:28 CEST",
  "status": "EXCEPTION, NOT RELEASED",
  "tool": "src/m11_numbers.py (private project; command build)",
  "note": [
@@ -97279,8 +97279,8 @@
  ],
  "pdf": {
   "file": "track_2a/technical_report.pdf (the file of form field 12; git ignores *.pdf, so it is not in the repository)",
-  "sha256": "01655b87a2aa28d061c3562c20cf735b2d4898c5a0e15fc395e6ed76c7e1079e",
-  "md_sha256": "f7f2820dc06336a1f9fa78a86adfb621d353beccbe79e885c6750efde8e2a2d9",
+  "sha256": "fab683c4bb121b8187db803982bcc89f3a086e5d4fd1612aeed2c5ff61e9c06d",
+  "md_sha256": "a1e92e7a4be9261be264160105a5cb7b6ac504b4c9ecdd6e616aa7eac6fee6b5",
   "pages": 6,
   "tools": {
    "pandoc": "pandoc 3.8.1",
@@ -97290,7 +97290,7 @@
   "built_by": "src/m11_report_pdf.py of the private project, with the steps below",
   "build_record": {
    "file": "crisp-dm/06-deployment/report_pdf_build.json",
-   "sha256": "9e69ffe5c92fcfa97c419476a3c9b67b0bcb7cfc418219fa1ef498e36fbc8303"
+   "sha256": "44538ca361441710f8948c6e68525a07a762fe88bc4db7ab4a4707210bbe3615"
   },
   "steps": [
    "pandoc technical_report.md -s -o rep.tex --shift-heading-level-by=-1 -V geometry:a4paper,margin=15mm -V fontsize=10pt -V mainfont='Helvetica Neue' -V monofont=Menlo -V colorlinks=true -V linkcolor=black -V urlcolor=blue -H header.tex",

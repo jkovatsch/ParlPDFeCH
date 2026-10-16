@@ -16,6 +16,10 @@ Modes
   the value readers of m11_values_base, write_record and rdf_step of m11_writer, validate_record of
   m11_validate). The export record of the sample is the cross-check only. The worker imports these
   functions. It does not change a converter file.
+  With PARLPDFECH_APERTUS=local or stored (only in the mode auto; 'make convert' with the Apertus step) the
+  stage apertus also runs the Apertus value read-outs (worker/values_apertus.py): the states of the block file
+  (worker/apertus_provider.py), the value heads, the combined reader of the fixed run, and the record of the
+  new writer and validator versions (src/m12_writer.py, src/m12_validate.py). Without it nothing changes.
   The earlier record path (write_one of m10_writer, convert_record of m10_rdf, validate_record of
   m10_validate: head values from the export) runs with PARLPDFECH_VALUES=off and for a sample that
   worker/values_hold.json names.
@@ -528,6 +532,15 @@ def values_module():
     return values_record
 
 
+def apertus_values_module(mode: str, values_state: str):
+    """worker/values_apertus.py if PARLPDFECH_APERTUS is set (else None: the rules path runs with no change)."""
+    if not os.environ.get("PARLPDFECH_APERTUS"):
+        return None
+    values_module()                     # the folder of this file in the module search path
+    import values_apertus  # noqa: PLC0415
+    return values_apertus
+
+
 def convert_sample(sample_dir: Path, mode: str, out: Path, code_dir: Path, view_dir: Path, profile: str,
                    input_info: dict, scratch_base: Path) -> int:
     t_all = time.perf_counter()
@@ -545,6 +558,9 @@ def convert_sample(sample_dir: Path, mode: str, out: Path, code_dir: Path, view_
     keep = os.environ.get("PARLPDFECH_KEEP_SCRATCH") == "1"
     seconds_setup = 0.0
     folder: Path | None = None
+    va = apertus_values_module(mode, values_state)
+    ro = None                           # the result of values_apertus.read_out (the Apertus value read-outs)
+    ap_res = None
     try:
         try:
             # set-up: scratch root (not a stage of the contract; its time is in convert.json key seconds.setup)
@@ -606,6 +622,7 @@ def convert_sample(sample_dir: Path, mode: str, out: Path, code_dir: Path, view_
             if mode == "rules":
                 stages.skipped("apertus", "mode_rules")
                 n_apertus = 0
+                ap_on = False
             else:
                 stages.start("apertus")
                 import m10_fullrun2 as fr2  # noqa: PLC0415
@@ -632,14 +649,40 @@ def convert_sample(sample_dir: Path, mode: str, out: Path, code_dir: Path, view_
                 n_apertus = sum(b.get("source") in APERTUS_SOURCES for b in dec["blocks"]) \
                     + sum(x.get("source") in APERTUS_SOURCES for x in dec.get("boundaries") or []) \
                     + (dec["document"]["d1"].get("source") in APERTUS_SOURCES) + (dec.get("r2") is not None)
-                stages.done("apertus", "stored", {"labels": int(n_apertus)})
+                counts4 = {"labels": int(n_apertus)}
+                note4 = None
+                if va is not None and va.active(mode, values_state):
+                    # the Apertus value read-outs of the block file of the sample (worker/values_apertus.py)
+                    ro = va.read_out(root, root / facts["path_of"]["blocks.json"], root / facts["path_of"]["rules.json"],
+                                     log=log)
+                    counts4["value_passes"] = int(((ro.get("run") or {}).get("record") or {}).get("n_passes") or 0) \
+                        if ro["ho"] is not None else 0
+                    if ro["ho"] is None:
+                        log(f"apertus: value read-outs not run ({ro['reason']}); the values get the code rules only")
+                        note4 = f"values_failed_{ro['reason']}"[:64]
+                stages.done("apertus", "stored", counts4, note=note4)
+            ap_on = ro is not None and ro["ho"] is not None
 
             # stage 5: writer and RDF step
             stages.start("write")
             hyphen = count_hyphen_decisions(sys.modules["m03_gold_record"])
             measured = None
             signs = None
-            if values_state == "pdf":
+            if ap_on:
+                # the values of the rules and of the Apertus heads (m12_writer) and their checks (m12_validate); the
+                # export record is the cross-check. After an exception of either: the state failed (reason
+                # record_error), an empty record folder, and the record of the rules below
+                measured = vr.calibration_file(root)[1]
+                done5 = va.record_and_check(root, folder, root / facts["path_of"]["blocks.json"],
+                                            root / facts["path_of"]["rules.json"], out_dir / "decisions" / f"{d}.json",
+                                            export, base, Path(cal_path), ro, log=log)
+                if done5 is None:
+                    ap_on = False
+                else:
+                    ap_res = done5[1]
+            if ap_on:
+                pass                             # the record of the Apertus mode is written and checked
+            elif values_state == "pdf":
                 # the head values are read from the PDF; the export record is the cross-check only
                 measured = vr.calibration_file(root)[1]
                 vr.write(root, folder, root / facts["path_of"]["blocks.json"], root / facts["path_of"]["rules.json"],
@@ -655,7 +698,9 @@ def convert_sample(sample_dir: Path, mode: str, out: Path, code_dir: Path, view_
 
             # stage 6: validator, copy of the record, view function
             stages.start("check")
-            if values_state == "pdf":
+            if ap_on:
+                check_ids = va.CHECK_IDS         # m12_validate ran in stage 5 (record_and_check)
+            elif values_state == "pdf":
                 vr.validate(root, folder, export)
                 check_ids = vr.CHECK_IDS
             else:
@@ -670,7 +715,7 @@ def convert_sample(sample_dir: Path, mode: str, out: Path, code_dir: Path, view_
             validation = read_json(folder / "validation.json")
             if values_state == "pdf":
                 valid = man.get("check_passed") is True and validation.get("passed") is True
-                why = vr.VALID_RULE if valid else "one or more checks failed"
+                why = (va.VALID_RULE if ap_on else vr.VALID_RULE) if valid else "one or more checks failed"
             checks = {"writer_check": man.get("check_passed") is True}
             checks |= check_states(validation, check_ids)
             c10 = (validation.get("C10_shacl") or {}).get("status")
@@ -766,10 +811,19 @@ def convert_sample(sample_dir: Path, mode: str, out: Path, code_dir: Path, view_
                    "values": vr.summary(man, bool(measured), signs) if values_state == "pdf" else vr.earlier(values_state),
                    "validation_paths_made_relative": validation_paths,
                    "resources": max_rss(), "tools": tool_versions(), "worker_version": WORKER_VERSION}
+        done = {"event": "done", "record_id": record_id, "doc_id": d, "valid": bool(valid), "mode": mode,
+                "apertus": apertus, "origin": "stored", "pdf_sha256": sample["pdf_sha256"], "seconds": sec,
+                "counts": counts, "files": names + ["convert.json"]}
+        if ro is not None:
+            # the Apertus value read-outs (worker/values_apertus.py); the key apertus keeps its meaning (block labels)
+            convert["apertus_values"] = va.convert_facts(ro, ap_res)
+            convert["counts"]["apertus_value_labels"] = len(((ap_res or {}).get("apertus") or {}).get("values") or [])
+            done["apertus_values"] = ro["state"]
+        elif va is not None:
+            convert["apertus_values"] = {"state": "off", "reason": f"worker_mode_{mode}" if mode != "auto"
+                                         else f"values_{values_state}"}
         write_out(out / "convert.json", convert)
-        emit({"event": "done", "record_id": record_id, "doc_id": d, "valid": bool(valid), "mode": mode,
-              "apertus": apertus, "origin": "stored", "pdf_sha256": sample["pdf_sha256"], "seconds": sec,
-              "counts": counts, "files": names + ["convert.json"]})
+        emit(done)
         return exit_code
     finally:
         try:

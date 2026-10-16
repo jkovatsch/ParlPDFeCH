@@ -1073,6 +1073,8 @@ function labelName(l) {
 }
 function sourceLine(l, cal) {
   const g = l.source.group;
+  /* A value whose choice an Apertus value head made (make convert with the Apertus step): code read it at its place. */
+  if (l.kind === 'pdf_value' && g === 'apertus_values') { return t('source.apertus_values'); }
   if (l.kind === 'pdf_value') { return t('source.rule.value'); }
   /* A code rule selects the answer; the number is the value of a read-out for that answer. */
   if (g === 'rule' && cal && cal.method === 'verifier_platt') { return t('source.rule.readout_number'); }

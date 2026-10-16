@@ -1056,6 +1056,190 @@
    },
    "description": "One entry for each value that a code rule read from the PDF, in the sequence of the labels file: the values of the record (written true) and the weak candidates (written false). Empty if head_values.source is not pdf."
   },
+  "apertus_suggestions": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "properties": {
+     "field": {
+      "enum": [
+       "affair_type",
+       "title",
+       "affair_number",
+       "submission_date",
+       "response_date",
+       "responder",
+       "sponsor"
+      ],
+      "description": "A field with no written value in this record."
+     },
+     "value": {
+      "type": "string",
+      "description": "The value in the form of the eCH-0295 part (the wording on one line, a calendar day or the affair number of the reader): the value that the record would have if the tier had entered. It is NOT in the record."
+     },
+     "value_printed": {
+      "type": "string",
+      "description": "The wording of the PDF at the span, with no change."
+     },
+     "probability": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "(k + 0.5) / (n + 1) of the tier on the development documents of the entry design (limits 0.005 and 0.995, 4 decimals). The tier did not pass the entry test."
+     },
+     "k": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Units of the tier with a value equal to the OpenParlData value."
+     },
+     "n": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Units of the tier (development documents with a reference value)."
+     },
+     "tier": {
+      "type": "string",
+      "description": "The Q2 tier of the Apertus step: apertus_q2_<field>_<band>, or apertus_q2_<field> for a field with one tier."
+     },
+     "band": {
+      "anyOf": [
+       {
+        "enum": [
+         "hi",
+         "lo"
+        ],
+        "description": "hi: the head probability is 0.80 or more; lo: 0.50 to below 0.80."
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "head_probability": {
+      "anyOf": [
+       {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "The probability of the Apertus head for the top block (not the probability of the value)."
+     },
+     "near": {
+      "type": "boolean",
+      "description": "true: the head probability or the gap to the second block is near a threshold of the head; another computer can give another decision."
+     },
+     "page": {
+      "type": "integer"
+     },
+     "last_page": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "char_start": {
+      "type": "integer",
+      "description": "Start of the span in the document text."
+     },
+     "char_end": {
+      "type": "integer"
+     },
+     "block_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "atom_ids": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "spans": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "atom_id": {
+         "type": "string"
+        },
+        "start": {
+         "type": "integer"
+        },
+        "end": {
+         "type": "integer"
+        }
+       },
+       "required": [
+        "atom_id",
+        "start",
+        "end"
+       ],
+       "additionalProperties": false
+      },
+      "description": "The part of each line that holds the value: positions in the text of the line."
+     },
+     "status": {
+      "const": "below_entry_limit"
+     },
+     "in_record": {
+      "const": false
+     },
+     "called_because": {
+      "anyOf": [
+       {
+        "enum": [
+         "rules_found_no_value",
+         "weak_rule_tier"
+        ],
+        "description": "Why the combined reader asked the head: the rules found no value, or only a value of a weak rule tier."
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "required": [
+     "field",
+     "value",
+     "value_printed",
+     "probability",
+     "k",
+     "n",
+     "tier",
+     "band",
+     "head_probability",
+     "near",
+     "page",
+     "last_page",
+     "char_start",
+     "char_end",
+     "block_id",
+     "atom_ids",
+     "spans",
+     "status",
+     "in_record",
+     "called_because"
+    ],
+    "additionalProperties": false,
+    "description": "An Apertus value of a Q2 tier that did not enter. It is not in the eCH-0295 part. The values file has it as a node of the class pvl:Suggestion with pvl:inRecord false."
+   },
+   "description": "Optional (16.10.2026, CONTRACT.md chapter 25). Only a record of the Apertus step of make convert has this key: the Apertus suggestions below the entry limit, in the sequence of the manifest (empty if there is none). They are not values of the record. A record with no such manifest key has no key."
+  },
   "slots": {
    "type": "array",
    "items": {

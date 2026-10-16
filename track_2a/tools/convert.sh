@@ -11,6 +11,7 @@
 #
 #   convert.sh convert [--pdf <file or URL>] [--dir <folder>] [--list <file>] [--again 1]
 #   convert.sh list
+#   convert.sh show --id <ID>        (the table of a stored result again, as 'make convert' shows it; no worker)
 #   convert.sh view-check --id <ID>
 #   convert.sh view --id <ID> [--port <port>] [--open no]
 #
@@ -21,6 +22,12 @@
 # 'make setup-apertus' gives the model folder and the heads folder. APERTUS_URL and APERTUS_TOKEN (a GPU of
 # another computer, docs/apertus-gpu.md) reach app/worker/apertus_states.py through the environment; this file
 # never reads the token.
+# The terminal: VERBOSE=1 (only the value 1) also shows the full path or URL, the SHA-256, the record id, the
+# details of the read-out and each full value that the table cuts. Colours only if the standard output is a
+# terminal, NO_COLOR is not set or empty, and TERM is set and is not 'dumb' (https://no-color.org). The table needs
+# a terminal of 100 columns; a narrower terminal gets a grey line that says so.
+# APERTUS=auto with no Apertus step at this moment (a NOTE) keeps a stored Apertus result of the same PDF and shows
+# it again; AGAIN=1 or APERTUS=0 converts it again with the code rules only.
 # Commands that this file needs: jq, shasum or sha256sum, readlink, uv, curl (for a URL and for 'view').
 #
 # Files of out/:
@@ -64,6 +71,7 @@ SETUP_JSON=$TRACK/data/apertus/setup.json
 GPU_DOC=docs/apertus-gpu.md
 AP=none
 AP_BACKEND=
+AP_AUTO_OFF=0
 # Seconds of the job after the end of the read-out at the latest: heads, record, checks and view of the worker.
 AP_TAIL=90
 AP_MODEL_DIR=
@@ -273,139 +281,438 @@ drop_lock() {
   LOCKED=0
 }
 
-# ---------------------------------------------------------------------------------------------------- summary
-# The jq program for the summary of one record (view.json, schema parlpdfech-site-view/3).
-SUMMARY_JQ='
-def safe: '"$SAFE_JQ"';
-def name: ({"affair_type":"affair type","title":"title","affair_number":"affair number",
-  "submission_date":"submission date","sponsor":"first author","response_date":"response date",
-  "responder":"responder"}[.] // .) | tostring | safe;
-def rank: . as $f
-  | ["affair_type","title","affair_number","submission_date","sponsor","response_date","responder"]
-  | index($f) // 99;
-def flat: tostring | gsub("[[:space:]]+"; " ") | safe;
-def short($n): if length > $n then .[0:($n - 3)] + "..." else . end;
-def pad($n): if length < $n then . + (" " * ($n - length)) else . end;
-def where: if .written then "in the record"
-  elif .candidate == "addressee" then "not in the record (addressed body)"
-  else "not in the record (weak candidate)" end;
-(.values // []) as $v
-| ([.head_values.cascade.entries[]? | select(.state == "not_found_in_pdf") | .field | name] | join(", ")) as $nf
-| ([.head_values.cascade.entries[]? | select(.state == "not_searched") | .field | name] | join(", ")) as $ns
-| (if ($v | length) == 0 then "  values read from the PDF: none"
-   else "  values read from the PDF (value, probability, status):" end),
-  ($v | sort_by(.field | rank) | .[]
-   | "    " + (.field | name | pad(16)) + ((.value // .value_printed // "") | flat | short(46) | pad(48))
-     + ((.probability // "-") | flat | pad(8)) + ((.value_status // "-") | flat | pad(9)) + where),
-  (if $nf != "" then "  searched, no value found: " + $nf else empty end),
-  (if $ns != "" then "  not searched in this kind of document: " + $ns else empty end)
-'
+# ---------------------------------------------------------------------------------------------------- the terminal
+# The output of 'make convert' and of 'convert.sh show'. For each PDF: a head line, a status line, a table of the
+# values and the lines of the Apertus step. At the end: one line with the counts and the explanation of the marks.
+# The jq programs read view.json of the record (the values, the Apertus suggestions below the entry limit with their
+# wording, the entries of the cascade, valid) and its convert.json with --slurpfile c (the facts of the Apertus step,
+# the times, the checks; [] if the file is absent). The same programs show a new record, a stored record and a
+# record of an earlier version of the worker (it has no suggestion). jq counts the width in characters (sh counts
+# bytes), thus each width and each cut is made in jq. The function safe changes each control character of a text
+# before a colour code is added: no text of a PDF, a file name or a URL can put its own escape sequence on the
+# terminal.
+case ${VERBOSE:-0} in 1) VERBOSE=1 ;; *) VERBOSE=0 ;; esac
+ESC=$(printf '\033')
+# ERASE: the line 'converting ...' goes away after the worker (only on a terminal). COLOR: the rule of no-color.org.
+ERASE=0
+COLOR=0
+if [ -t 1 ] && [ "${TERM:-dumb}" != dumb ]; then
+  ERASE=1
+  if [ -z "${NO_COLOR:-}" ]; then COLOR=1; fi
+fi
+if [ "$COLOR" = 1 ]; then CJ=true; else CJ=false; fi
+if [ "$VERBOSE" = 1 ]; then VJ=true; else VJ=false; fi
+# The word for this computer in the run head line and in the read-out line of a block.
+if [ "$(uname -s 2>/dev/null)" = Darwin ]; then HERE_NAME="this Mac"; else HERE_NAME="this computer"; fi
+# The marks that the printed tables use (the words of the last line of BLOCK_JQ), the number of printed tables, and
+# the lines of the list 'Not valid or failed' at the end.
+MARKS=
+N_TABLES=0
+TROUBLE=
 
-# The jq program for the summary of a record of the Apertus mode: view.json, and convert.json of the record with
-# --slurpfile c (key apertus_values, made by the worker: app/worker/values_apertus.py). The column source gives the
-# origin of the choice of each value: "rules", "Apertus" (an Apertus head chose it; code read the value from the
-# wording at its span), "Apertus (remote GPU)" (the states came from a GPU of another computer), plus " near" if
-# the head probability is near a threshold (another runtime can give another decision). The column probability is
-# the calibrated probability of the tier of the value (the probability of the record); the lines of Q1 and Q2 give
-# the head probability (the output of the head), a different number. Then one line for the Apertus step, one for
-# the type (Q1) and one for the first author (Q2). A record with no Apertus step (APERTUS=0) uses SUMMARY_JQ above
-# with no change.
-SUMMARY_AP_JQ='
-def safe: '"$SAFE_JQ"';
-def name: ({"affair_type":"affair type","title":"title","affair_number":"affair number",
-  "submission_date":"submission date","sponsor":"first author","response_date":"response date",
-  "responder":"responder"}[.] // .) | tostring | safe;
-def rank: . as $f
-  | ["affair_type","title","affair_number","submission_date","sponsor","response_date","responder"]
-  | index($f) // 99;
-def flat: tostring | gsub("[[:space:]]+"; " ") | safe;
-def short($n): if length > $n then .[0:($n - 3)] + "..." else . end;
-def pad($n): if length < $n then . + (" " * ($n - length)) else . end;
-def where: if .written then "in the record"
-  elif .candidate == "addressee" then "not in the record (addressed body)"
-  else "not in the record (weak candidate)" end;
-def ap: ($c[0].apertus_values // {});
-def remote: (((ap.backend // "") | tostring | startswith("remote")) or ap.state == "remote");
-def near($f): if $f == "affair_type" then (ap.q1.near // false) else (ap.q2[$f].near // false) end;
-def source: . as $x
-  | if (($x.tier // "") | tostring | startswith("apertus_")) then
-      (if remote then "Apertus (remote GPU)" else "Apertus" end) + (if near($x.field) then " near" else "" end)
-    else "rules" end;
-def p2: if type != "number" then "-"
-  else (. * 100 | round) as $n | (($n / 100) | floor | tostring) + "."
-       + (($n % 100) | tostring | if length < 2 then "0" + . else . end) end;
-def band: if type != "number" then "-" elif . >= 0.8 then "hi" else "lo" end;
-def q1state: ({"used": ("used, place p." + ((ap.q1.page // "?") | tostring) + " " + ((ap.q1.block // "?") | flat)
-                        + " found by code"
-                        + (if ((ap.q1.place_option_types // []) | length) >= 2
-                           then " (in a list of " + ((ap.q1.place_option_types | length) | tostring)
-                                + " types, for example boxes to tick: the word is there, the choice is not shown)"
-                           else "" end)),
-               "no_evidence": "no evidence in the text (not written)",
-               "rules_gave_the_type": "rules gave the type (Apertus not used)",
-               "rules_gave_the_type_apertus_differs": "rules gave the type, Apertus differs (not used)",
-               "below_threshold": "below 0.80 (not used)", "class_none": "class none (not used)",
-               "not_used": "not used"}[ap.q1.state // "not_used"]) // ((ap.q1.state // "-") | flat);
-def q2state: ({"used": "used", "not_called_rule_value_not_weak": "not called: rule value not weak",
-               "not_searched_in_this_kind": "not searched in this kind of document",
-               "below_band_hi": "below band hi (not used)", "below_0_50": "below 0.50 (no cue)",
-               "no_value": "no value in the top block", "tier_not_entered": "tier not entered (not used)"}[.]) // flat;
-(.values // []) as $v
-| (ap.state // "none") as $st
-| (if remote then 27 else 14 end) as $w
-| ([.head_values.cascade.entries[]? | select(.state == "not_found_in_pdf") | .field | name] | join(", ")) as $nf
-| ([.head_values.cascade.entries[]? | select(.state == "not_searched") | .field | name] | join(", ")) as $ns
-| (if ($v | length) == 0 then "  values read from the PDF: none"
-   else "  values read from the PDF (value, calibrated probability of the tier, status, source):" end),
-  ($v | sort_by(.field | rank) | .[]
-   | "    " + (.field | name | pad(16)) + ((.value // .value_printed // "") | flat | short(46) | pad(48))
-     + ((.probability // "-") | flat | pad(8)) + ((.value_status // "-") | flat | pad(9)) + (source | pad($w))
-     + where),
-  (if $nf != "" then "  searched, no value found: " + $nf else empty end),
-  (if $ns != "" then "  not searched in this kind of document: " + $ns else empty end),
-  (if $st == "failed" then "  Apertus: not run (" + ((ap.reason // "unknown") | flat) + "). The values come from code rules."
-   else
-     (if $st == "stored" then "  Apertus-v1.5-8B (stored states of this block file, layer 20): no model ran for this record."
-      else "  Apertus-v1.5-8B ("
-        + (if remote then "remote GPU" + (if ap.remote_host then " " + (ap.remote_host | flat) else "" end)
-           else "on this computer" end)
-        + ", backend " + ((ap.backend // "-") | flat) + ", bf16, layer 20)"
-        + ([(if ap.passes then (ap.passes | flat) + " passes" else empty end),
-            ((ap.seconds.seconds // ap.seconds.total) as $s | if $s then ($s | flat) + " s" else empty end)]
-           | if length > 0 then ": " + join(", ") else "" end) + "." end),
-     ("  Apertus type (Q1): " + ((ap.q1.class // "-") | flat) + ", head probability " + (ap.q1.probability | p2)
-      + " - " + q1state + (if ap.q1.near then " [near]" else "" end)),
-     ("  Apertus first author (Q2): top block " + ((ap.q2.sponsor.top_block // "-") | flat) + ", head probability "
-      + (ap.q2.sponsor.head_probability | p2) + " " + (ap.q2.sponsor.head_probability | band) + " - "
-      + ((ap.q2.sponsor.state // "-") | q2state) + (if ap.q2.sponsor.near then " [near]" else "" end))
-   end)
-'
-
-# 0: the record of this ID has facts of an Apertus step (convert.json key apertus_values with the state local,
-# remote, stored or failed). Else 1: the summary of the rules (SUMMARY_JQ).
-has_apertus_facts() {
-  [ -f "$1" ] && jq -e '(.apertus_values.state // "none") as $s
-    | ($s == "local" or $s == "remote" or $s == "stored" or $s == "failed")' "$1" >/dev/null 2>&1
+# The colour code $1 around the text $2 (green 32, yellow 33, red 31, grey 90), for a line that sh prints.
+paint() {
+  if [ "$COLOR" = 1 ] && [ -n "$2" ]; then printf '%s[%sm%s%s[0m' "$ESC" "$1" "$2" "$ESC"; else printf '%s' "$2"; fi
 }
 
-# Prints the summary of the stored record of one ID.
-print_summary() {
-  sid=$1; snote=$2
-  sdir=$OUT/$sid
-  sinfo=$sdir/source.txt
-  svalid=$(info_value "$sinfo" valid)
-  srid=$(info_value "$sinfo" record_id)
-  say "ID $sid   valid: $(clean "${svalid:-?}")   record: $(clean "${srid:-?}")${snote:+   ($snote)}"
-  say "  source: $(clean "$(info_value "$sinfo" source)")"
-  say "  sha256: $(clean "$(info_value "$sinfo" sha256)")"
-  if has_apertus_facts "$sdir/record/convert.json"; then
-    jq -r --slurpfile c "$sdir/record/convert.json" "$SUMMARY_AP_JQ" "$sdir/record/view.json" 2>/dev/null \
-      || say "  (the values cannot be read from out/$sid/record/view.json and convert.json)"
+# jq with the argument color (true or false), which the function paint of LIB_JQ needs.
+jqt() { jq --argjson color "$CJ" "$@"; }
+
+# The jq functions of all programs of the terminal. The table has these columns after an indent of 6: field 15,
+# value 27, probability 5, status 7, source 8, page 4, with 2 spaces between them. A note of at most 16 characters
+# follows at column 84 (it ends at column 100). The right part of a head line ends at column 84. No line is longer
+# than 100 characters, except the full values of VERBOSE=1.
+LIB_JQ='
+def safe: '"$SAFE_JQ"';
+def flat: tostring | gsub("[[:space:]]+"; " ") | sub("^ "; "") | sub(" $"; "") | safe;
+def sp($n): if $n > 0 then " " * $n else "" end;
+def pad($n): . + sp($n - length);
+def cut($n): if length > $n then .[0:($n - 1)] + "…" else . end;
+def mid($n): if length <= $n then . elif $n < 3 then .[0:$n]
+  else (($n / 2) | floor) as $a | (($n - 1) - $a) as $b | .[0:$a] + "…" + .[(length - $b):] end;
+def wrap($w): reduce (split(" ")[]) as $t ([];
+  if length == 0 then [$t]
+  elif (.[length - 1] | length) + 1 + ($t | length) <= $w then (length - 1) as $l | .[$l] += " " + $t
+  else . + [$t] end);
+def paint($k): if $color and $k != "" and . != "" then "\u001b[" + $k + "m" + . + "\u001b[0m" else . end;
+def p2: if type != "number" then ""
+  else (. * 100 | round) as $n | (($n / 100) | floor | tostring) + "."
+       + (($n % 100) | tostring | if length < 2 then "0" + . else . end) end;
+def fname: {"affair_type": "affair type", "title": "title", "affair_number": "affair number",
+  "submission_date": "submission date", "sponsor": "first author", "response_date": "response date",
+  "responder": "responder"}[.] // (tostring | safe);
+def rank: . as $f | ["affair_type", "title", "affair_number", "submission_date", "sponsor", "response_date",
+  "responder"] | index($f) // 99;
+def dname: tostring
+  | if test("^[A-Za-z][A-Za-z0-9+.-]*://") then
+      sub("^[^:]*://"; "") | sub("[?#].*$"; "") | sub("/+$"; "") | split("/") as $p
+      | ($p[0] | sub("^.*@"; "")) as $h
+      | if ($p | length) <= 1 then $h elif ($p | length) == 2 then $h + "/" + $p[1] else $h + "/…/" + $p[-1] end
+    else sub("/+$"; "") | split("/") as $p | ($p[-1] // "") as $b
+      | if ($b | ascii_downcase) == "source.pdf" and ($p | length) >= 2
+           and ([".", "..", ""] | any(.[]; . == $p[-2]) | not) then $p[-2] + "/" + $b else $b end end
+  | safe;
+'
+
+# The head line of one input: "[i/N] <file name or host/.../last part of the URL>" and the right part at column 84.
+# The file name source.pdf (the name of the samples, app/data/samples/<doc>/source.pdf) keeps its folder:
+# "26171/source.pdf". A long name is cut in the middle.
+HEAD_JQ='
+($src | dname) as $n
+| ([84 - ($left | length) - 3 - ($right | length), 12] | max) as $room
+| ($n | mid($room)) as $m
+| $left + " " + $m + sp([84 - ($left | length) - 1 - ($m | length) - ($right | length), 2] | max) + $right
+'
+
+# The list "Not valid or failed" at the end. Input: the lines of TROUBLE ("[i/N]", source, text; a tab between).
+TROUBLE_JQ='
+[split("\n")[] | select(length > 0) | split("\t")
+ | {left: (.[0] // ""), name: ((.[1] // "") | dname | mid(40)), text: ((.[2] // "") | flat)}] as $t
+| ([$t[] | .left | length] | max) as $lw | ([$t[] | .name | length] | max) as $nw
+| $t[] | "  " + (.left | pad($lw)) + " " + (.name | pad($nw)) + "   " + (.text | cut([95 - $lw - $nw - 3, 20] | max))
+'
+
+# The line "✗ failed: <text>" (the mark in red), in lines of at most 100 characters.
+FAIL_JQ='
+("✗ failed: " + ($t | flat)) | wrap(92) as $w | range(0; $w | length) as $j
+| if $j == 0 then "      " + ($w[0] | sub("^✗ failed"; ("✗ failed" | paint("31")))) else "        " + $w[$j] end
+'
+
+# The block of one record. Input: view.json. Arguments: $c (convert.json, [] if absent), $state (new, again or
+# stored), $wall (seconds of the worker), $when and $rid (of out/<ID>/source.txt), $id, $verbose, and the optional
+# $here ("this Mac" or "this computer"). The last line of the output holds the words of the marks that the block
+# uses ("marks table below weak addr few head near cut"); print_block does not print it. The column Prob. is the
+# probability of the value in the record (or of the tier of a suggestion); the lines of the Apertus step give the
+# head probability, another number. A suggestion with fewer than 30 development documents gets "n=<n>": the same
+# limit as make view (FEW_DOCS of app/ui/app.js, rule G6 item 14).
+BLOCK_JQ='
+def ap: ($c[0].apertus_values // {});
+def here: ($ARGS.named.here // "this computer");
+def loopback($h): ["127.0.0.1", "localhost", "::1", "[::1]"] | any(.[]; . == $h);
+def apon: (ap.state // "none") as $s | ($s == "local" or $s == "remote" or $s == "stored");
+def near($f): if $f == "affair_type" then (ap.q1.near // false) else (ap.q2[$f].near // false) end;
+def pg($a; $b): if ($a | type) != "number" then ""
+  elif ($b | type) == "number" and $b != $a then
+    (($a | tostring) + "-" + ($b | tostring)) as $s | (if ($s | length) <= 4 then $s else ($a | tostring) + "+" end)
+  else ($a | tostring) end;
+def scol: {"certain": "32", "unsure": "33", "weak": "33", "below": "33"}[.] // "";
+def rows:
+  (.values // []) as $v | (.apertus_suggestions // []) as $s | (($v | map(.field)) + ($s | map(.field))) as $sf
+  | [ $v[] | {field, g: (if .written then 0 else 1 end), sub: 0,
+        value: ((.value // .value_printed // "") | flat), p: .probability,
+        status: (if .written then ((.value_status // "") | flat) elif .candidate == "addressee" then "–" else "weak" end),
+        source: (if ((.tier // "") | tostring | startswith("apertus_")) then "Apertus" + (if near(.field) then "*" else "" end)
+                 else "rules" end),
+        page: pg(.page; .last_page), few: false,
+        note: (if .written then "" elif .candidate == "addressee" then "addressed body" else "label file only" end)} ]
+  + [ $s[] | {field, g: 1, sub: 1, value: ((.value // .value_printed // "") | flat), p: .probability,
+        status: "below", source: ("Apertus" + (if .near then "*" else "" end)), page: pg(.page; .last_page),
+        few: ((.n | type) == "number" and .n < 30),
+        note: (if (.n | type) == "number" and .n < 30 then "values file n=" + (.n | tostring) else "values file only" end)} ]
+  + [ (.head_values.cascade.entries // [])[] | select(.state == "not_found_in_pdf" or .state == "reader_scope")
+        | select(.field as $f | ($sf | any(.[]; . == $f)) | not)
+        | {field, g: 2, sub: 0, mark: "–", text: "not found"} ]
+  + [ (.head_values.cascade.entries // [])[] | select(.state == "not_searched")
+        | select(.field as $f | ($sf | any(.[]; . == $f)) | not)
+        | {field, g: 3, sub: 0, mark: "·", text: "not in this kind of document"} ]
+  | sort_by(.g, (.field | rank), .sub);
+def table($r):
+  if ($r | length) == 0 then "      no values read from the PDF"
   else
-    jq -r "$SUMMARY_JQ" "$sdir/record/view.json" 2>/dev/null || say "  (the values cannot be read from out/$sid/record/view.json)"
+    ("      " + ("Field" | pad(15)) + "  " + ("Value" | pad(27)) + "  " + ("Prob." | pad(5)) + "  "
+     + ("Status" | pad(7)) + "  " + ("Source" | pad(8)) + "  " + "Page"),
+    ("      " + ([15, 27, 5, 7, 8, 4] | map("─" * .) | join("  ") | paint("90"))),
+    (range(0; $r | length) as $i | $r[$i] as $x
+     | (if $i > 0 and $r[$i - 1].field == $x.field then "" else ($x.field | fname | cut(15)) end) as $fn
+     | if $x.text then ("      " + ($fn | pad(15)) + "  " + ($x.mark | pad(45)) + $x.text) | paint("90")
+       else ("      " + ($fn | pad(15)) + "  " + ($x.value | cut(27) | pad(27)) + "  " + ($x.p | p2 | pad(5)) + "  "
+         + ($x.status | pad(7) | paint($x.status | scol)) + "  " + ($x.source | pad(8)) + "  "
+         + (if $x.note == "" then $x.page else ($x.page | pad(4)) + "  " + ($x.note | paint("90")) end))
+         | sub(" +$"; "")
+       end)
+  end;
+def secs: if type == "number" then (round | tostring) + " s" else "" end;
+def tsplit:
+  ($c[0] // {}) as $k | ($k.seconds // {}) as $t | ($k.stages // []) as $st
+  | (($st | map(select(.id == "read_pdf")) | .[0].origin) == "stored") as $pdfstored
+  | [ (if $pdfstored then "PDF stored" else "PDF " + ((($t.read_pdf // 0) + ($t.lines // 0) + ($t.rules // 0)) | secs) end),
+      (($st | map(select(.id == "apertus")) | .[0].state // "skipped") as $a
+       | if $a == "done" or $a == "failed" then "Apertus " + (($t.apertus // 0) | secs) else empty end),
+      ("RDF " + ((($t.write // 0) + ($t.check // 0)) | secs)) ]
+  | join(" · ");
+def check_id: ([splits("_")] | map(select(test("^C[0-9]+$")))) as $ids
+  | if ($ids | length) > 0 then ($ids | join("/")) else gsub("_"; " ") end;
+def failed_checks($v):
+  (if ($c | length) > 0 and ($c[0].checks | type) == "object" then
+     [$c[0].checks | to_entries[] | select(.value == false) | .key | check_id]
+   else [($v.checks // [])[] | select(.state == "failed") | .id | tostring | check_id] end) | join(", ");
+def status_line($v):
+  ($v.run.valid // false) as $ok
+  | failed_checks($v) as $fc
+  | (if $ok then ["✓ valid", "32", " eCH-0295 record"]
+     else ["✗ NOT valid", "31", ": record written, a check failed" + (if $fc != "" then " (" + $fc + ")" else "" end)]
+     end) as $h
+  | (if $state == "stored" then
+       "stored result" + (if $when != "" then " of " + ($when | flat | .[0:16] | sub("T"; " ")) else "" end)
+       + " · AGAIN=1 converts it again"
+     else (if $wall != "" then $wall + " s" else "" end)
+          + (if ($c | length) > 0 then (if $wall != "" then "  " else "" end) + "(" + tsplit + ")" else "" end) end) as $tail
+  | ("      " + ($h[0] | paint($h[1])) + $h[2]) as $first
+  | if $tail == "" then $first
+    elif 6 + (($h[0] + $h[2]) | length) + 3 + ($tail | length) <= 100 then $first + " · " + $tail
+    else $first, ("        " + $tail) end;
+def bname: {"mlx": "MLX", "cuda": "CUDA", "mps": "torch MPS", "cpu": "CPU"}[. // ""] // ((. // "-") | flat);
+def readout:
+  (ap.state // "none") as $s
+  | "read-out: "
+    + (if $s == "stored" then "stored states (no model ran)"
+       elif $s == "remote" then ((ap.remote_host // "?") | flat) as $h
+         | (if loopback($h) then "Apertus service at " + $h else "GPU of " + $h end)
+           + " (" + ((ap.backend // "-") | tostring | sub("^remote:"; "") | bname) + ")"
+       else (ap.backend | bname) + (if $verbose then "" else ", " + here end) end)
+    + (if $verbose then
+         ([ (if $s != "stored" then
+               ([(ap.device // empty | flat), (ap.dtype // empty | flat | sub("^bfloat16$"; "bf16"))] | join(", "))
+             else empty end),
+            ("layer " + ((ap.heads.layer // 20) | tostring)) ] | map(select(. != "")) | ", " + join(", "))
+         + ([ (if (ap.passes | type) == "number" then (ap.passes | tostring) + " passes" else empty end),
+              ((ap.seconds.seconds // ap.seconds.read_out) | if type == "number" then (round | tostring) + " s" else empty end),
+              (ap.peak_bytes | if type == "number" then "peak " + ((. / 1e9 * 10 | round) / 10 | tostring) + " GB"
+                               else empty end) ] | map(" · " + .) | join(""))
+       else "" end);
+def q1lines($v):
+  (ap.q1 // {}) as $q | (($q.class // "-") | flat) as $k
+  | (if ($q.probability | type) == "number" then " (head " + ($q.probability | p2) + ")" else "" end) as $h
+  | ($v.document.affair_type // null) as $rt
+  | ["type: " + $k + $h + ", "
+     + ({"used": ("used, place p." + (($q.page // "?") | tostring) + " " + (($q.block // "?") | flat) + " found by code"
+                  + (if (($q.place_option_types // []) | length) >= 2
+                     then " (in a list of types: the choice is not shown)" else "" end)),
+         "no_evidence": "no type word of this type in the text: not written",
+         "rules_gave_the_type": (if $k == $rt then "same as the rules" elif $k == "none" then "class none: the rules decide"
+                                 else "below 0.80: the rules decide" end),
+         "rules_gave_the_type_apertus_differs": ("differs from the rules (" + (($rt // "-") | flat) + "): the rules decide"),
+         "below_threshold": "below 0.80: not used (no measured tier)",
+         "class_none": "class none: not used (no measured tier)"}[$q.state // ""] // "not used")
+     + (if $q.near then " *" else "" end)];
+def q2lines($v):
+  ((ap.suggestions // []) + ($v.apertus_suggestions // [])) as $sg
+  | (ap.q2 // {}) | to_entries | map(select(.value.called_because != null)) | sort_by(.key | rank)
+  | if length == 0 then ["fields: not asked (the rules found each searched value)"]
+    else map(.key as $f | .value as $x
+      | ($f | fname) + ": block " + (($x.top_block // "-") | flat)
+        + (if ($x.head_probability | type) == "number" then " (head " + ($x.head_probability | p2) + ")" else "" end)
+        + ", "
+        + (if $x.state == "used" then "used"
+           elif $x.state == "below_band_hi" or $x.state == "tier_not_entered" then
+             (if any($sg[]; .field == $f) then "below the entry limit: values file only"
+              else "below the entry limit: not used" end)
+           elif $x.state == "below_0_50" then "below 0.50: no value"
+           elif $x.state == "no_value" then "no value in this block"
+           else (($x.state // "-") | flat) end)
+        + (if $x.near then " *" else "" end)) end;
+# A record of a worker of before the suggestions (16.10.2026): no key of the suggestions in view.json and in
+# convert.json, and a called field below the entry limit. AGAIN=1 converts it again with the suggestions.
+def older($v):
+  ($v | has("apertus_suggestions") | not) and ((ap | has("suggestions")) | not)
+  and ((ap.q2 // {}) | to_entries | any(.[]; .value.called_because != null
+       and (.value.state == "below_band_hi" or .value.state == "tier_not_entered")));
+def apblock($v):
+  (ap.state // "none") as $s
+  | (if $s == "failed" then
+       [((ap.message // ap.reason // "unknown") | flat | sub("[.;:, ]+$"; "") | cut(60)
+         | if endswith("…") then (.[0:(length - 1)] | sub("[.;:, ]+$"; "")) + "…" else . end) as $m
+        | "not run: " + $m + (if $m | endswith("…") then " " else ". " end) + "The values come from code rules."]
+     elif apon then
+       [ (if $state == "stored" or $s == "stored" or $s == "remote" or $verbose then readout else empty end) ]
+       + q1lines($v) + q2lines($v)
+       + (if older($v) then ["older result with no suggestions: AGAIN=1 converts it again with them" | paint("90")]
+          else [] end)
+     else [] end) as $l
+  | range(0; $l | length) as $i | ($l[$i] | wrap(83)) as $w | range(0; $w | length) as $j
+  | "      " + ((if $i == 0 and $j == 0 then "Apertus" else "" end) | pad(9)) + (if $j > 0 then "  " else "" end)
+    + (if $i == 0 and $j == 0 and $s == "failed" then ($w[0] | sub("^not run"; ("not run" | paint("33")))) else $w[$j] end);
+. as $v
+| rows as $r
+| ((ap.state // "none") as $s | apon or $s == "failed") as $apb
+| status_line($v),
+  (if $verbose then "      " + ("record" | pad(9)) + ($rid | flat) else empty end),
+  "",
+  table($r),
+  (if $verbose then
+     # each cut value one time; 2 different values of one field (a rule value and a suggestion) get their source
+     ($r | map(select(.text == null and (.value | length) > 27))) as $cv
+     | range(0; $cv | length) as $i | $cv[$i] as $x
+     | select(any($cv[0:$i][]; .field == $x.field and .value == $x.value) | not)
+     | ([$cv[] | select(.field == $x.field) | .value] | unique | length) as $nv
+     | "      " + ("full" | pad(9)) + ($x.field | fname)
+       + (if $nv > 1 then " (" + ($x.source | sub("[*]$"; "")) + ")" else "" end) + ": " + $x.value
+   else empty end),
+  (if $apb then "", apblock($v) else empty end),
+  "",
+  "      " + ("Result" | pad(9)) + "out/" + $id + "/record/    ·    look at it: make view ID=" + $id,
+  ("marks" + ([ (if ($r | length) > 0 then "table" else empty end),
+                (if any($r[]; .status == "below") then "below" else empty end),
+                (if any($r[]; .status == "weak") then "weak" else empty end),
+                (if any($r[]; .status == "–") then "addr" else empty end),
+                (if any($r[]; .few == true) then "few" else empty end),
+                (if $apb and ([apblock($v)] | any(.[]; test("[(]head [0-9]"))) then "head" else empty end),
+                (if any($r[]; ((.source // "") | endswith("*")))
+                    or ($apb and ([apblock($v)] | any(.[]; endswith(" *")))) then "near" else empty end),
+                (if any($r[]; .text == null and (.value | length) > 27) then "cut" else empty end) ]
+               | map(" " + .) | join("")))
+'
+
+# Prints the head line of one input: print_head <i> <N> <source> <right part>.
+print_head() {
+  jqt -nr --arg left "[$1/$2]" --arg src "$3" --arg right "$4" "$LIB_JQ$HEAD_JQ" 2>/dev/null \
+    || say "[$1/$2] $(clean "$3")   $4"
+}
+
+# Prints the line "✗ failed: <text>" of one input.
+fail_line() {
+  jqt -nr --arg t "$1" "$LIB_JQ$FAIL_JQ" 2>/dev/null || say "      ✗ failed: $(clean "$1")"
+}
+
+# Prints a grey information line of one input.
+info_line() { say "      $(paint 90 "$1")"; }
+
+# Adds one line to the list "Not valid or failed" of the end: add_trouble <i> <N> <source> <text>.
+add_trouble() { TROUBLE="$TROUBLE[$1/$2]$TAB$(cell "$3")$TAB$(cell "$4")$NL"; }
+
+# The output of BLOCK_JQ for one ID: block_out <ID> <state> <seconds> <convert.json or /dev/null>.
+block_out() {
+  jqt -r --slurpfile c "$4" --arg state "$2" --arg wall "$3" \
+    --arg when "$(info_value "$OUT/$1/source.txt" converted)" --arg rid "$(info_value "$OUT/$1/source.txt" record_id)" \
+    --arg id "$1" --argjson verbose "$VJ" --arg here "$HERE_NAME" "$LIB_JQ$BLOCK_JQ" "$OUT/$1/record/view.json" 2>/dev/null
+}
+
+# Prints the block of the stored record of one ID (status line, table, Apertus lines, result line), from
+# out/<ID>/record/view.json and convert.json: print_block <ID> <new, again or stored> <seconds of the worker>.
+# If convert.json is absent or cannot be read, the block has no times and no lines of the Apertus step.
+print_block() {
+  bc=$OUT/$1/record/convert.json
+  [ -f "$bc" ] || bc=/dev/null
+  bout=$(block_out "$1" "$2" "$3" "$bc") || bout=
+  if [ -z "$bout" ] && [ "$bc" != /dev/null ]; then bout=$(block_out "$1" "$2" "$3" /dev/null) || bout=; fi
+  case $bout in
+    *"$NL"marks*) ;;
+    *) say "      (the values cannot be read from out/$1/record/view.json)"; return 0 ;;
+  esac
+  bmarks=${bout##*"$NL"}
+  printf '%s\n' "${bout%"$NL"*}"
+  MARKS="$MARKS ${bmarks#marks}"
+  case "$bmarks " in *" table "*) N_TABLES=$((N_TABLES + 1)) ;; esac
+}
+
+# 0 if a printed block used the mark $1.
+has_mark() {
+  case " $MARKS " in *" $1 "*) return 0 ;; esac
+  return 1
+}
+
+# The explanation of the marks, after the last line (only if a table was printed).
+print_footer() {
+  [ "$N_TABLES" -gt 0 ] || return 0
+  say "Prob. = share of correct values of this kind on the development documents. Each value can be wrong."
+  if has_mark below; then
+    say "below = an Apertus suggestion below the entry limit: in the values file, not in the eCH-0295 record."
   fi
-  say "  folder: out/$sid/ (record files in out/$sid/record/)"
-  say "  open it in the browser: make view ID=$sid"
+  if has_mark weak; then say "weak = a rule value below 0.50: label file only, not in the eCH-0295 record."; fi
+  if has_mark addr; then
+    say "addressed body = the body that a proposal addresses: label file only, not in the eCH-0295 record."
+  fi
+  if has_mark few; then
+    say "n = the number of development documents of a suggestion; below 30 the number is not stable."
+  fi
+  if has_mark head; then
+    say "head = the probability that the Apertus head gives for this PDF. It is not the Prob. of a value."
+  fi
+  if has_mark near; then
+    say "* = near a threshold of the Apertus head, or a second block or class is near the first."
+    say "    Another computer can give another decision."
+  fi
+  if has_mark cut; then
+    say "… = the value is longer than the column: the record has the full value (VERBOSE=1 shows it)."
+  fi
+  return 0
+}
+
+# The first line of 'make convert': the number of inputs and the way of the read-out (after apertus_mode).
+run_head() {
+  np="$1 PDF"
+  [ "$1" = 1 ] || np="${np}s"
+  if [ "$AP" = local ] && [ "$AP_BACKEND" = remote ]; then
+    rh=$(clean "${AP_REMOTE_HOST:-?}")
+    rb=$(backend_name "${AP_REMOTE_BACKEND:-?}")
+    # 127.0.0.1 can be a service on this computer or the end of an ssh tunnel to another computer.
+    case $rh in
+      127.0.0.1|localhost|::1|'[::1]')
+        say "ParlPDFeCH · $np · code rules + Apertus-v1.5-8B (Apertus service at $rh, $rb)"
+        say "The text of each PDF goes to that service for the read-out."
+        say "With an ssh tunnel, the text goes to the computer at the other end of the tunnel." ;;
+      *)
+        say "ParlPDFeCH · $np · code rules + Apertus-v1.5-8B (GPU of $rh, $rb)"
+        say "The text of each PDF goes to that computer for the read-out." ;;
+    esac
+    say "The heads and the record stay on this computer."
+  elif [ "$AP" = local ]; then
+    say "ParlPDFeCH · $np · code rules + Apertus-v1.5-8B ($(backend_name "$AP_BACKEND"), $HERE_NAME)"
+  else
+    say "ParlPDFeCH · $np · code rules only (no Apertus)"
+  fi
+  # The table needs 100 columns. stty reads the size of the terminal (only on a terminal; no guess).
+  if [ "$ERASE" = 1 ]; then
+    tc=$(stty size 2>/dev/null < /dev/tty | awk '{ print $2 }')
+    case $tc in ''|*[!0-9]*) tc=0 ;; esac
+    if [ "$tc" -gt 0 ] && [ "$tc" -lt 100 ]; then
+      say "$(paint 90 "This terminal has $tc columns. The table needs 100: make the window wider.")"
+    fi
+  fi
+}
+
+# The name of a backend of the read-out: backend_name <mlx, cuda, mps, cpu or another word>.
+backend_name() {
+  case $1 in
+    mlx) printf 'MLX' ;; cuda) printf 'CUDA' ;; mps) printf 'torch MPS' ;; cpu) printf 'CPU' ;;
+    *) printf '%s' "$(clean "$1")" ;;
+  esac
+}
+
+# The last lines of 'make convert': the counts, the list "Not valid or failed" (more than one input), the marks.
+print_end() {
+  pl=PDFs
+  [ "$total" = 1 ] && pl=PDF
+  el="Done: $total $pl · $n_valid valid · $n_not_valid not valid · $n_failed failed"
+  [ "$n_stored" -gt 0 ] && el="$el · $n_stored shown again"
+  say ""
+  jqt -nr --arg l "$el" --arg r "All IDs: make list" "$LIB_JQ"'$l + sp([84 - ($l | length) - ($r | length), 2] | max) + $r' \
+    2>/dev/null || say "$el   All IDs: make list"
+  if [ "$total" -gt 1 ] && [ $((n_not_valid + n_failed)) -gt 0 ]; then
+    say "Not valid or failed:"
+    printf '%s' "$TROUBLE" | jqt -Rrs "$LIB_JQ$TROUBLE_JQ" 2>/dev/null || printf '%s' "$TROUBLE" | tr '\t' ' '
+  fi
+  print_footer
+}
+
+# 'convert.sh show --id <ID>': the block of a stored result, as 'make convert' shows it (only jq; no lock, no
+# worker, no change of a file).
+show_cmd() {
+  need jq "Install jq (macOS: brew install jq; Debian or Ubuntu: sudo apt install jq)."
+  pair=$(view_record_id "$ARG_ID") || exit 1
+  sid=${pair%% *}
+  ssrc=$(info_value "$OUT/$sid/source.txt" source)
+  print_head 1 1 "$ssrc" "ID $sid · stored result"
+  if [ "$VERBOSE" = 1 ]; then
+    say "      source   $(clean "$ssrc")"
+    say "      sha256   $(clean "$(info_value "$OUT/$sid/source.txt" sha256)")"
+  fi
+  print_block "$sid" stored ""
+  if [ "$N_TABLES" -gt 0 ]; then
+    say ""
+    print_footer
+  fi
+  exit 0
 }
 
 # Plain words for a code of the worker (app/CONTRACT.md chapter 4.2).
@@ -439,15 +746,18 @@ apertus_off() {
   note "$why The records get the code rules only.$ways"
   AP=none
   AP_BACKEND=
+  AP_AUTO_OFF=1
 }
 
 # Sets AP (local or none) and AP_BACKEND. The check runs app/worker/apertus_states.py check (no model load): the
-# backend (a GPU), the model fingerprint and the free memory.
+# backend (a GPU), the model fingerprint and the free memory. AP_AUTO_OFF is 1 if APERTUS=auto and the step cannot
+# run now (then a stored Apertus result stays and is shown again).
 apertus_mode() {
   AP=none
   AP_BACKEND=
   AP_REMOTE_HOST=
   AP_REMOTE_BACKEND=
+  AP_AUTO_OFF=0
   case $APERTUS in
     0) return 0 ;;
     1|auto) ;;
@@ -463,6 +773,7 @@ apertus_mode() {
       exit 1
     fi
     note "Apertus is not set up on this computer ('make setup-apertus'): code rules only."
+    AP_AUTO_OFF=1
     return 0
   fi
   AP_MODEL_DIR=$(jq -r '.model.text_branch_dir // ""' "$SETUP_JSON" 2>/dev/null)
@@ -911,26 +1222,20 @@ convert_cmd() {
   # The catalog again from the files out/<ID>/source.txt (for example after a deletion of out/catalog.tsv).
   catalog_write || note "out/catalog.tsv was not written. The files out/<ID>/source.txt hold the data."
   apertus_mode
-  if [ "$AP" = local ] && [ "$AP_BACKEND" = remote ]; then
-    say "Inputs: $total. Code rules and Apertus-v1.5-8B on the GPU of another computer (APERTUS_URL, host $(clean "${AP_REMOTE_HOST:-?}"), backend $(clean "${AP_REMOTE_BACKEND:-?}"), bf16, layer 20). Results: out/<ID>/."
-    say "The text of each PDF goes to that computer for the read-out. The heads and the record stay on this computer."
-  elif [ "$AP" = local ]; then
-    say "Inputs: $total. Code rules and Apertus-v1.5-8B (backend $AP_BACKEND, bf16, layer 20). Results: out/<ID>/."
-  else
-    say "Inputs: $total. Code rules only (no GPU, no Apertus). Results: out/<ID>/."
-  fi
+  run_head "$total"
   n_valid=0; n_not_valid=0; n_stored=0; n_failed=0; i=0
   while IFS= read -r src; do
     i=$((i + 1))
     say ""
-    say "[$i/$total] $(clean "$src")"
     WORK_OPEN=1
     JOB=$OUT/.jobs/job.$$
     NEW_DEST=
     rm -rf "$JOB"
     mkdir -p "$JOB"
     if ! get_input "$src" "$JOB/input.pdf"; then
-      say "  FAIL: $(clean "$GET_WHY"). No ID."
+      print_head "$i" "$total" "$src" "no ID"
+      fail_line "$GET_WHY."
+      add_trouble "$i" "$total" "$src" "failed: $GET_WHY"
       n_failed=$((n_failed + 1))
       rm -rf "$JOB"; JOB=; WORK_OPEN=0
       continue
@@ -941,15 +1246,14 @@ convert_cmd() {
     if [ -z "$id" ]; then
       id=$(next_id)
       if ! mkdir "$OUT/$id" 2>/dev/null; then
-        say "  FAIL: the folder out/$id/ cannot be made. No ID."
+        print_head "$i" "$total" "$src" "no ID"
+        fail_line "the folder out/$id/ cannot be made."
+        add_trouble "$i" "$total" "$src" "failed: the folder out/$id/ cannot be made"
         n_failed=$((n_failed + 1))
         rm -rf "$JOB"; JOB=; WORK_OPEN=0
         continue
       fi
       NEW_DEST=$OUT/$id
-      say "  new ID $id (SHA-256 $sha)"
-    else
-      say "  same PDF as ID $id (the SHA-256 is equal)"
     fi
     dest=$OUT/$id
     # The record id that the server expects (app/server/src/jobs.rs, POST /api/jobs, mode rules).
@@ -959,7 +1263,8 @@ convert_cmd() {
     # The mode auto (Apertus step) has the record ids with no suffix -rules (app/server/src/jobs.rs).
     if [ "$AP" = local ]; then want=${want%-rules}; fi
     # A stored result of the other Apertus state (made with Apertus, asked without it, or the other way; or a
-    # record id of the other worker mode) is converted again (same ID; the record is replaced).
+    # record id of the other worker mode) is converted again (same ID; the record is replaced). Not so with
+    # APERTUS=auto when the Apertus step cannot run now (AP_AUTO_OFF): a stored Apertus result stays.
     stored_ap=none
     if [ -f "$dest/record/convert.json" ]; then
       stored_ap=$(jq -r '.apertus_values.state // "none" | tostring' "$dest/record/convert.json" 2>/dev/null || echo none)
@@ -967,29 +1272,64 @@ convert_cmd() {
     case $stored_ap in local|remote|stored) stored_ap=local ;; *) stored_ap=none ;; esac
     stored_rid=$(info_value "$dest/source.txt" record_id)
     again=$ARG_AGAIN
+    changed=
     if [ -f "$dest/record/view.json" ] && [ "$again" != 1 ] && { [ "$stored_ap" != "$AP" ] || [ "$stored_rid" != "$want" ]; }; then
-      if [ "$AP" = local ]; then say "  the stored result (record $(clean "${stored_rid:-?}")) was made without Apertus; it is converted again with Apertus"
-      else say "  the stored result (record $(clean "${stored_rid:-?}")) was made with the Apertus step; it is converted again with the code rules only"; fi
-      again=1
+      if [ "$AP" = none ] && [ "$AP_AUTO_OFF" = 1 ] && [ "$stored_ap" = local ]; then
+        changed="Apertus is off now (see the NOTE): the stored Apertus result stays. AGAIN=1: code rules only."
+      elif [ "$AP" = local ]; then
+        changed="the stored result was made without Apertus: it is converted again with Apertus"
+        again=1
+      else
+        changed="the stored result was made with the Apertus step: it is converted again with code rules only"
+        again=1
+      fi
     fi
-    if [ -f "$dest/record/view.json" ] && [ "$again" != 1 ]; then
-      rm -rf "$JOB"; JOB=; WORK_OPEN=0
+    # The right part of the head line: a new ID, a stored result shown again, or a conversion of a known PDF again.
+    show_stored=0
+    rsha=
+    if [ -n "$NEW_DEST" ]; then
+      right="ID $id · new"; bstate=new
+    elif [ -f "$dest/record/view.json" ] && [ "$again" != 1 ]; then
+      show_stored=1
       # The stored record must be the record of this PDF: the SHA-256 in its convert.json is the SHA-256 of this PDF.
       rsha=$(jq -r '.pdf_sha256 // "" | tostring' "$dest/record/convert.json" 2>/dev/null)
+      if [ "$rsha" = "$sha" ]; then right="ID $id · stored result"; else right="ID $id"; fi
+    else
+      right="ID $id · converted again"; bstate=again
+    fi
+    print_head "$i" "$total" "$src" "$right"
+    if [ -n "$changed" ]; then info_line "$changed"; fi
+    if [ "$VERBOSE" = 1 ]; then
+      say "      source   $(clean "$src")"
+      say "      sha256   $sha"
+    fi
+    if [ "$show_stored" = 1 ]; then
+      rm -rf "$JOB"; JOB=; WORK_OPEN=0
       if [ "$rsha" = "$sha" ]; then
-        say ""
-        print_summary "$id" "stored result; AGAIN=1 converts it again"
+        print_block "$id" stored ""
         n_stored=$((n_stored + 1))
+        # A stored result counts as valid or not valid, as its status line says (view.json run.valid).
+        if [ "$(jq -r '.run.valid == true' "$dest/record/view.json" 2>/dev/null)" = true ]; then n_valid=$((n_valid + 1))
+        else
+          n_not_valid=$((n_not_valid + 1))
+          add_trouble "$i" "$total" "$src" "ID $id · not valid"
+        fi
       else
-        say "  FAIL: out/$id/record/ holds a record whose SHA-256 is not the SHA-256 of this PDF. AGAIN=1 replaces it."
+        fail_line "out/$id/record/ holds the record of another PDF (another SHA-256). AGAIN=1 replaces it."
+        add_trouble "$i" "$total" "$src" "failed: out/$id/record/ holds the record of another PDF"
         n_failed=$((n_failed + 1))
       fi
       continue
     fi
-    say "  conversion starts (record $want) ..."
+    # The line of the conversion, with its start time: on a terminal it goes away after the worker (a carriage
+    # return, 40 spaces, and a carriage return again: no escape sequence, also with NO_COLOR); else it stays (for
+    # example in a log file).
+    if [ "$ERASE" = 1 ]; then printf '      converting … (start %s)' "$(date '+%H:%M:%S')"
+    else say "      converting (start $(date '+%H:%M:%S')) ..."; fi
     started=$(date +%s)
     run_worker "$JOB"
     seconds=$(( $(date +%s) - started ))
+    if [ "$ERASE" = 1 ]; then printf '\r%40s\r' ''; fi
     judge_worker "$WORKER_CODE" "$JOB/events.jsonl" "$JOB/out" "$want"
     # All values for out/<ID>/source.txt are ready before the change of out/<ID>/ starts.
     c_src=$(cell "$src")
@@ -1032,12 +1372,16 @@ convert_cmd() {
     rm -rf "$JOB"; JOB=
     catalog_write || note "out/catalog.tsv was not written. The files out/<ID>/source.txt hold the data."
     if [ "$OK" = 1 ]; then
-      say ""
-      print_summary "$id" "converted in $seconds s"
-      if [ "$LVALID" = yes ]; then n_valid=$((n_valid + 1)); else n_not_valid=$((n_not_valid + 1)); fi
+      print_block "$id" "$bstate" "$seconds"
+      if [ "$LVALID" = yes ]; then n_valid=$((n_valid + 1))
+      else
+        n_not_valid=$((n_not_valid + 1))
+        add_trouble "$i" "$total" "$src" "ID $id · not valid"
+      fi
     else
-      say "  FAIL: $(reason_text "$word")$(clean "${WHY#"$word"}"). Log: out/$id/worker.log"
-      if [ -f "$dest/record/view.json" ]; then say "  The stored result of ID $id stays (out/$id/record/)."; fi
+      fail_line "$(reason_text "$word")$(clean "${WHY#"$word"}"). Log: out/$id/worker.log"
+      if [ -f "$dest/record/view.json" ]; then info_line "The stored result of ID $id stays (out/$id/record/)."; fi
+      add_trouble "$i" "$total" "$src" "failed: $(reason_text "$word")"
       n_failed=$((n_failed + 1))
     fi
     if [ "$STOP_ASKED" = 1 ]; then
@@ -1050,11 +1394,7 @@ convert_cmd() {
   rmdir "$OUT/.jobs" 2>/dev/null
   drop_lock
   trap - INT TERM HUP
-  say ""
-  say "End. Inputs: $total. Valid: $n_valid. Not valid (record written, a check failed): $n_not_valid."
-  say "Stored results shown again: $n_stored. Failed: $n_failed. All IDs: make list"
-  if [ "$AP" = local ]; then say "The values come from code rules and Apertus read-outs. Each value can be wrong."
-  else say "The values come from code rules. Each value can be wrong."; fi
+  print_end
   [ "$n_failed" -eq 0 ]
 }
 
@@ -1244,11 +1584,14 @@ done
 case $command in
   convert) convert_cmd ;;
   list) list_cmd ;;
+  show)
+    if [ -z "$ARG_ID" ]; then err "give the ID, for example 'convert.sh show --id 0001'. 'make list' shows the IDs."; exit 1; fi
+    show_cmd ;;
   view-check)
     if [ -z "$ARG_ID" ]; then err "give the ID, for example 'make view ID=0001'. 'make list' shows the IDs."; exit 1; fi
     view_record_id "$ARG_ID" > /dev/null ;;
   view)
     if [ -z "$ARG_ID" ]; then err "give the ID, for example 'make view ID=0001'. 'make list' shows the IDs."; exit 1; fi
     view_cmd ;;
-  *) err "usage: convert.sh convert|list|view-check|view [options]"; exit 2 ;;
+  *) err "usage: convert.sh convert|list|show|view-check|view [options]"; exit 2 ;;
 esac

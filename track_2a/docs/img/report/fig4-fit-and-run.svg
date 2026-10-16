@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 898 310" width="612" height="211.3" role="img" aria-labelledby="t d">
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+<title id="t">How the heads were fitted, and the one fixed run</title>
+<desc id="d">Two line drawings. Left: a row of boxes, each with small grey parliament buildings. A brace over all boxes points to a funnel with a lock. Under the row, arrows from the white boxes go into a further funnel. A yellow line goes from the yellow box through this funnel down to a row of check marks and crosses. A cycle arrow is next to the funnel. A double arrow joins the marks to a table. After the marks, a box split in half holds a check mark and a cross, and an arrow goes to a bar. Right: on the left, a frame with grey parliament buildings; on the right, a frame with other parliament buildings, in black. Between them, a box with braces and a funnel has a lock. Arrows go from the left frame to the box and from the box to the right frame. Under the right frame, a record and a table have a double arrow between them. Below, a tag and a person each have a pair of dark bars: the lower bar is longer by a yellow part.</desc>
+<style>
+.dp { fill: #FBFAF6; stroke: #1B1D22; stroke-width: 1.3; }
+.dl { fill: none; stroke: #1B1D22; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
+.dg { fill: none; stroke: #5A5F6B; stroke-width: 1.6; stroke-linecap: round; }
+.dd { fill: none; stroke: #1B1D22; stroke-width: 1.1; stroke-dasharray: 3 2.5; }
+.dc { fill: #FBFAF6; stroke: #1B1D22; stroke-width: 1; }
+.dm { fill: #F2C14E; stroke: #1B1D22; stroke-width: 1; }
+.df { fill: #1B1D22; }
+.dw { fill: none; stroke: #F2C14E; stroke-width: 7; stroke-linecap: round; }
+</style>
+<svg x="0" y="0" width="435" height="310" viewBox="0 0 435 310">
+<rect x="0.75" y="0.75" width="433.5" height="308.5" rx="14" fill="#FBFAF6" stroke="#CFC9BC" stroke-width="1.5"/>
+<g transform="translate(17.5 17.5) scale(1.25)">
+<path class="dp" d="M142 4 178 11v14L142 32z"/>
+<rect class="dc" x="184" y="13" width="12" height="9" rx="1.5"/><path class="dl" d="M186.5 13v-3a3.5 3.5 0 0 1 7 0v3"/>
+<path class="dl" d="M14 48c0-4 2-6 6-6h132c4 0 6-2 8-6 2 4 4 6 8 6h132c4 0 6 2 6 6"/>
+<rect class="dc" x="14" y="54" width="52" height="44" rx="3"/>
+<path class="dg" d="M19 77 28 70 37 77Z"/><path class="dg" d="M22 78v9M28 78v9M34 78v9M19 90h18"/>
+<path class="dg" d="M43 77 52 70 61 77Z"/><path class="dg" d="M46 78v9M52 78v9M58 78v9M43 90h18"/>
+<rect class="dc" x="74" y="54" width="52" height="44" rx="3"/>
+<path class="dg" d="M79 77 88 70 97 77Z"/><path class="dg" d="M82 78v9M88 78v9M94 78v9M79 90h18"/>
+<path class="dg" d="M103 77 112 70 121 77Z"/><path class="dg" d="M106 78v9M112 78v9M118 78v9M103 90h18"/>
+<rect class="dm" x="134" y="54" width="52" height="44" rx="3"/>
+<path class="dg" d="M139 77 148 70 157 77Z"/><path class="dg" d="M142 78v9M148 78v9M154 78v9M139 90h18"/>
+<path class="dg" d="M163 77 172 70 181 77Z"/><path class="dg" d="M166 78v9M172 78v9M178 78v9M163 90h18"/>
+<rect class="dc" x="194" y="54" width="52" height="44" rx="3"/>
+<path class="dg" d="M199 77 208 70 217 77Z"/><path class="dg" d="M202 78v9M208 78v9M214 78v9M199 90h18"/>
+<path class="dg" d="M223 77 232 70 241 77Z"/><path class="dg" d="M226 78v9M232 78v9M238 78v9M223 90h18"/>
+<rect class="dc" x="254" y="54" width="52" height="44" rx="3"/>
+<path class="dg" d="M259 77 268 70 277 77Z"/><path class="dg" d="M262 78v9M268 78v9M274 78v9M259 90h18"/>
+<path class="dg" d="M283 77 292 70 301 77Z"/><path class="dg" d="M286 78v9M292 78v9M298 78v9M283 90h18"/>
+<path class="dw" d="M160 100V168"/>
+<path class="dl" d="M160 100V117"/>
+<path class="dl" d="M40 100 141 116M136.4 110.7 141 116 135 119.6"/>
+<path class="dl" d="M100 100 151 115M147.1 109.2 151 115 144.6 117.8"/>
+<path class="dl" d="M220 100 169 115M175.4 117.8 169 115 172.9 109.2"/>
+<path class="dl" d="M280 100 179 116M185 119.6 179 116 183.6 110.7"/>
+<path class="dp" d="M140 118H180L170 140H150Z"/>
+<path class="dl" d="M160 140 160 168M164.5 162.6 160 168 155.5 162.6"/>
+<path class="dl" d="M221 129a9 9 0 1 1-2.6-6.4M219.5 117.8l-1.1 4.8-4.8-.6"/>
+<rect class="dc" x="20" y="174" width="40" height="26" rx="1.5"/><path class="dl" d="M20 182.7h40M20 191.3h40M34 174v26"/>
+<path class="dl" d="M66 187 93 187M88.4 183.1 93 187 88.4 190.9M70.6 190.9 66 187 70.6 183.1"/>
+<path class="dl" d="M100 187l3.5 3.5 6-7.5M114 187l3.5 3.5 6-7.5M128 187l3.5 3.5 6-7.5M156 187l3.5 3.5 6-7.5M170 187l3.5 3.5 6-7.5M142 183.5l7 7M149 183.5l-7 7M184 183.5l7 7M191 183.5l-7 7"/>
+<rect class="dc" x="198" y="177" width="28" height="20" rx="1.5"/>
+<path class="dl" d="M212 177v20M201.5 187.5l2.5 2.5 4.5-6M216 184l6 6M222 184l-6 6"/>
+<path class="dl" d="M230 187 244 187M239.4 183.1 244 187 239.4 190.9"/>
+<rect class="dc" x="248" y="182.5" width="54" height="9"/>
+<rect class="df" x="248" y="182.5" width="37.1" height="9"/>
+</g>
+</svg>
+<svg x="463" y="0" width="435" height="310" viewBox="0 0 435 310">
+<rect x="0.75" y="0.75" width="433.5" height="308.5" rx="14" fill="#FBFAF6" stroke="#CFC9BC" stroke-width="1.5"/>
+<g transform="translate(17.5 17.5) scale(1.25)">
+<rect class="dc" x="8" y="12" width="84" height="60" rx="3"/>
+<rect class="dc" x="228" y="12" width="84" height="60" rx="3"/>
+<path class="dg" d="M21 27 30 20 39 27Z"/><path class="dg" d="M24 28v9M30 28v9M36 28v9M21 40h18"/>
+<path class="dg" d="M21 53 30 46 39 53Z"/><path class="dg" d="M24 54v9M30 54v9M36 54v9M21 66h18"/>
+<path class="dg" d="M61 27 70 20 79 27Z"/><path class="dg" d="M64 28v9M70 28v9M76 28v9M61 40h18"/>
+<path class="dg" d="M61 53 70 46 79 53Z"/><path class="dg" d="M64 54v9M70 54v9M76 54v9M61 66h18"/>
+<path class="dp" d="M241 27 250 20 259 27Z"/><path class="dl" d="M244 28v9M250 28v9M256 28v9M241 40h18"/>
+<path class="dp" d="M241 53 250 46 259 53Z"/><path class="dl" d="M244 54v9M250 54v9M256 54v9M241 66h18"/>
+<path class="dp" d="M281 27 290 20 299 27Z"/><path class="dl" d="M284 28v9M290 28v9M296 28v9M281 40h18"/>
+<path class="dp" d="M281 53 290 46 299 53Z"/><path class="dl" d="M284 54v9M290 54v9M296 54v9M281 66h18"/>
+<rect class="dp" x="116" y="22" width="88" height="40" rx="3"/>
+<path class="dl" d="M134 30c-3 0-1 7-4 9 3 2 1 9 4 9M140 30c3 0 1 7 4 9-3 2-1 9-4 9"/>
+<path class="dp" d="M164 33.5 182 38v8L164 50.5z"/>
+<rect class="dc" x="154" y="14" width="12" height="9" rx="1.5"/><path class="dl" d="M156.5 14v-3a3.5 3.5 0 0 1 7 0v3"/>
+<path class="dl" d="M94 42 112 42M106.6 37.5 112 42 106.6 46.5"/>
+<path class="dl" d="M206 42 224 42M218.6 37.5 224 42 218.6 46.5"/>
+<path class="dl" d="M270 75 270 89M273.9 84.4 270 89 266.1 84.4"/>
+<rect class="dp" x="252" y="92" width="36" height="36" rx="2"/>
+<path class="dg" d="M258 102h24M258 110h24M258 118h16"/>
+<rect class="dc" x="176" y="92" width="40" height="36" rx="1.5"/><path class="dl" d="M176 101h40M176 110h40M176 119h40M190 92v36"/>
+<path class="dl" d="M220 110 248 110M243.4 106.1 248 110 243.4 113.9M224.6 113.9 220 110 224.6 106.1"/>
+<path class="dl" d="M200 132 186 147M192 146.3 186 147 186.3 141"/>
+<path class="dl" d="M10 152.5h14l7 7.5-7 7.5h-14z"/><circle class="dl" cx="24.5" cy="160" r="1.8"/>
+<circle class="dl" cx="21" cy="188" r="3.8"/><path class="dl" d="M14.5 202.5c0-5.5 2.8-8.5 6.5-8.5s6.5 3 6.5 8.5"/>
+<path class="dg" d="M40 146v64"/>
+<rect class="df" x="40" y="150" width="118.9" height="8"/>
+<rect class="df" x="40" y="162" width="118.9" height="8"/><rect class="dm" x="158.9" y="162" width="11.3" height="8"/>
+<rect class="df" x="40" y="184" width="68.3" height="8"/>
+<rect class="df" x="40" y="196" width="68.3" height="8"/><rect class="dm" x="108.3" y="196" width="22.1" height="8"/>
+</g>
+</svg>
+</svg>

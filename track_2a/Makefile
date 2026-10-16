@@ -2,10 +2,14 @@
 # ParlPDFeCH, track_2a. Run the targets from this folder (track_2a/, the project root of the template).
 #
 # The app (folder app/): a PDF of a Swiss parliament goes in, an eCH-0295 record comes out.
-#   make setup          downloads (network): Python 3.12 and the Python packages of the app into .venv/, the
+#   make info           (also 'make' with no target) an overview: the setup, the GPU, the results and the main
+#                       commands. It changes nothing and downloads nothing
+#   make setup          one command for all, one time: make setup-base, make setup-pdf and make setup-apertus. With
+#                       no GPU, the Apertus part writes a NOTE, and make convert uses the code rules only
+#   make setup-base     downloads (network): Python 3.12 and the Python packages of the app into .venv/, the
 #                       Rust crates of app/Cargo.lock (only if cargo is on the computer), and the packages and
-#                       the 2 schema files of the earlier converter. 'make run' does not need 'make setup'
-#   make setup-pdf      for your own PDF with 'make run-native', after 'make setup'. Needs the command pdftotext.
+#                       the 2 schema files of the earlier converter. 'make run' does not need it
+#   make setup-pdf      the PDF reader, after 'make setup-base'. Needs the command pdftotext.
 #                       Downloads (network): the packages of app/container/requirements-full.txt (docling 2.133.0,
 #                       pypdfium2 5.14.0, torch) into .venv/, and the 2 Docling models into the Hugging Face cache
 #                       (only if they are absent). On macOS also ocrmac 1.0.1 (OCR of Apple Vision for Docling,
@@ -31,6 +35,9 @@
 #                       end it by itself. Ctrl-C ends it. On your own computer: an ssh tunnel to it, then
 #                       'make convert APERTUS_URL=http://127.0.0.1:8090 PDF=...' (the text of the PDF goes to that
 #                       computer). Tested only on one Mac on 16.10.2026, service and client on this one computer
+#   make gpu            what this computer has for the Apertus step, the state of the step, and the ways to a GPU
+#                       (it changes nothing). BACKEND=mlx|cuda|mps sets up the step with this backend (cpu: only for
+#                       checks). URL=http://127.0.0.1:8090: the GPU of another computer, heads here (tools/gpu.sh)
 #   make run            needs Docker: builds the image (target slim) from app/ (docker compose build), starts it
 #                       on 127.0.0.1:8080 and waits for /healthz. Then open http://127.0.0.1:8080/app/
 #   make stop           stops the container of 'make run'. 'make logs' shows its log
@@ -39,16 +46,16 @@
 #                       (default 8080). Needs cargo with the target wasm32-unknown-unknown and the command
 #                       wasm-bindgen 0.2.127 (cargo install wasm-bindgen-cli --version 0.2.127). Stop it with
 #                       Ctrl-C. On 14.10.2026 'make run' and 'make run-native' ran on one Mac
-#   make test           checks with no network and no Rust compiler, after one 'make setup' (it needs the 2 schema
+#   make test           checks with no network and no Rust compiler, after one 'make setup-base' (it needs the 2 schema
 #                       files of 'make setup'): the copied files against SOURCES.json, the prompt files, the
 #                       validator, the file list and the code layout of app/, and the rules of the Apertus
 #                       read-out service and its client (app/worker/check_apertus.py: a test backend on 127.0.0.1,
-#                       no model)
-#   make test-app       the tests of app/ (cargo tests of the 2 crates, the example view, a start of the seed
+#                       no model), and the messages of 'make gpu' (tools/check_gpu.sh: fake commands, no GPU)
+#   make test-app      the tests of app/ (cargo tests of the 2 crates, the example view, a start of the seed
 #                       script). Needs cargo and the crates of 'make setup'
 #   make clean          removes build/ and the build outputs of app/ (target-server/, target-wasm/, ui/pkg/, work/)
 #
-# Own PDFs in the terminal. The targets need 'make setup' and 'make setup-pdf' one time, and the commands jq and
+# Own PDFs in the terminal. The targets need 'make setup' one time, and the commands jq and
 # curl. The results go to out/ (git ignores it). On 15.10.2026 the 3 targets ran on one Mac (Apple silicon), in a
 # clone, with code rules only: 3 samples and 5 development PDFs.
 #   The Apertus step: APERTUS=auto (default): Apertus-v1.5-8B reads out the PDF if 'make setup-apertus' is done
@@ -108,15 +115,19 @@ APERTUS_MODEL ?= auto
 APERTUS_SOURCE_DIR ?=
 HEADS_REPO ?= JonathanKovatsch/parlpdfech-heads
 # The commit of the heads repository (40 hex characters; upload of 16.10.2026).
-HEADS_REVISION ?= 64ba850a119f5b9dcee3761a60d25b4ad670cd1c
+HEADS_REVISION ?= 09a794393ed9dfc6c58c4350620454c9a9292081
 # Optional: a local folder with the 3 head files, in place of the download.
 HEADS_DIR ?=
 APERTUS_VERIFY ?= 1
+APERTUS_SETUP_OPTIONAL ?= 0
 # 'make serve-apertus': HOST and PORT count only on the command line (PORT of 'make run-native' is 8080).
 APERTUS_HOST := $(if $(filter command line,$(origin HOST)),$(HOST),127.0.0.1)
 APERTUS_PORT := $(if $(filter command line,$(origin PORT)),$(PORT),8090)
 APERTUS_IDLE_EXIT ?=
 APERTUS_MAX_REQUESTS ?=
+# 'make gpu' (tools/gpu.sh): the make command for its call of 'make setup-apertus'. Only BACKEND and URL of the
+# command line count.
+GPU_MAKE := $(MAKE)
 # The versions of app/Cargo.lock, with no network: 'make setup' downloads the crates before.
 APP_CARGO_FLAGS ?= --offline --locked
 
@@ -142,10 +153,25 @@ CONVERT_SH = PYTHON=$(call shq,$(APP_PYTHON)) DOCLING_MODELS='$(DOCLING_MODELS)'
 WASM_BUNDLE := app/ui/pkg/parlpdfech_rdfcheck_bg.wasm
 WASM_SOURCES := app/rdfcheck app/Cargo.toml app/Cargo.lock app/rust-toolchain.toml
 
-.PHONY: setup setup-pdf setup-apertus serve-apertus run stop logs run-native test test-app clean run-earlier head-selftest \
-	convert list view
+.PHONY: info setup setup-base setup-pdf setup-apertus serve-apertus run stop logs run-native test test-app clean \
+	run-earlier head-selftest convert list view gpu
 
-setup:
+# 'make' with no target shows the overview and downloads nothing.
+.DEFAULT_GOAL := info
+
+info:
+	@PYTHON=$(call shq,$(APP_PYTHON)) APERTUS_PYTHON=$(call shq,$(APERTUS_PYTHON)) \
+	APERTUS_MODEL_DIR=$(call shq,$(APERTUS_MODEL_DIR)) APERTUS_BACKEND=$(call shq,$(APERTUS_BACKEND)) \
+	GPU_MAKE=$(call shq,$(GPU_MAKE)) sh tools/info.sh
+
+# One command for all: the base, the PDF reader, and the Apertus step if this computer has a GPU (with no GPU,
+# setup-apertus writes a NOTE and make convert uses the code rules only).
+setup: setup-base
+	@$(MAKE) --no-print-directory setup-pdf
+	@$(MAKE) --no-print-directory setup-apertus APERTUS_SETUP_OPTIONAL=1
+	@echo "PASS: make setup. Next: make convert PDF=<file>, then make view ID=<ID>."
+
+setup-base:
 	uv python install 3.12
 	uv venv --allow-existing --python 3.12 $(APP_VENV)
 	uv pip install --python $(APP_VENV)/bin/python -r app/container/requirements-slim.txt
@@ -156,7 +182,7 @@ setup:
 	uv run --no-project --python 3.12 python src/fetch_schema.py
 
 setup-pdf:
-	@[ -x $(APP_VENV)/bin/python ] || { echo "ERROR: $(APP_VENV)/ is absent. Run 'make setup' first."; exit 1; }
+	@[ -x $(APP_VENV)/bin/python ] || { echo "ERROR: $(APP_VENV)/ is absent. Run 'make setup' (or 'make setup-base') first."; exit 1; }
 	@found=$$(command -v pdftotext 2>/dev/null); \
 	for p in $(PDFTOTEXT_PLACES); do [ -n "$$found" ] || { [ -x "$$p" ] && found="$$p"; }; done; \
 	if [ -n "$$found" ]; then echo "pdftotext: $$found"; \
@@ -174,14 +200,15 @@ setup-pdf:
 	HF_HUB_OFFLINE=0 HF_HUB_DISABLE_IMPLICIT_TOKEN=1 HF_HUB_DISABLE_TELEMETRY=1 \
 	$(APP_VENV)/bin/hf download $$repo --revision $$rev --quiet >/dev/null || exit 1; fi; done
 	$(APP_VENV)/bin/python -c "from importlib.metadata import version as v; import docling, pypdfium2; print('docling', v('docling'), '/ pypdfium2', v('pypdfium2'))"
-	@echo "PASS: make setup-pdf. Start the app with 'make run-native'. Then open http://127.0.0.1:$(PORT)/app/ and drop your PDF on the page."
+	@echo "PASS: make setup-pdf (the PDF reader)."
 
 setup-apertus:
 	@PYTHON=$(call shq,$(APERTUS_PYTHON)) APERTUS_REPO='$(APERTUS_REPO)' APERTUS_REVISION='$(APERTUS_REVISION)' \
 	APERTUS_MODEL_DIR=$(call shq,$(APERTUS_MODEL_DIR)) APERTUS_MODEL=$(call shq,$(APERTUS_MODEL)) \
 	APERTUS_SOURCE_DIR=$(call shq,$(APERTUS_SOURCE_DIR)) APERTUS_BACKEND=$(call shq,$(APERTUS_BACKEND)) \
 	HEADS_REPO=$(call shq,$(HEADS_REPO)) HEADS_REVISION=$(call shq,$(HEADS_REVISION)) HEADS_DIR=$(call shq,$(HEADS_DIR)) \
-	APERTUS_VERIFY=$(call shq,$(APERTUS_VERIFY)) sh tools/setup_apertus.sh
+	APERTUS_VERIFY=$(call shq,$(APERTUS_VERIFY)) APERTUS_SETUP_OPTIONAL=$(call shq,$(APERTUS_SETUP_OPTIONAL)) \
+	sh tools/setup_apertus.sh
 
 serve-apertus:
 	@PYTHON=$(call shq,$(APP_PYTHON)) APERTUS_PYTHON=$(call shq,$(APERTUS_PYTHON)) \
@@ -189,6 +216,12 @@ serve-apertus:
 	APERTUS_HOST=$(call shq,$(APERTUS_HOST)) APERTUS_PORT=$(call shq,$(APERTUS_PORT)) \
 	APERTUS_IDLE_EXIT=$(call shq,$(APERTUS_IDLE_EXIT)) APERTUS_MAX_REQUESTS=$(call shq,$(APERTUS_MAX_REQUESTS)) \
 	sh tools/serve_apertus.sh
+
+gpu:
+	@PYTHON=$(call shq,$(APP_PYTHON)) APERTUS_PYTHON=$(call shq,$(APERTUS_PYTHON)) \
+	APERTUS_MODEL_DIR=$(call shq,$(APERTUS_MODEL_DIR)) APERTUS_BACKEND=$(call shq,$(APERTUS_BACKEND)) \
+	GPU_MAKE=$(call shq,$(GPU_MAKE)) sh tools/gpu.sh --backend $(call shq,$(call cmdline,BACKEND)) \
+	--url $(call shq,$(call cmdline,URL))
 
 run:
 	$(MAKE) -C app run
@@ -232,6 +265,7 @@ test:
 	$(MAKE) -C app check-dist PYTHON=$(APP_PYTHON)
 	$(MAKE) -C app check-layout PYTHON=$(APP_PYTHON)
 	$(UV_NUMPY) app/worker/check_apertus.py
+	sh tools/check_gpu.sh
 	@echo "PASS: make test"
 
 test-app:

@@ -1,6 +1,6 @@
 # Numbers of ParlPDFeCH, track 2A
 
-Made: 16.10.2026 04:28 CEST (time from the clock). Tool: `src/m11_numbers.py` of the private project.
+Made: 16.10.2026 09:11 CEST (time from the clock). Tool: `src/m11_numbers.py` of the private project.
 
 Written in English to the STE rules (ASD-STE100, Issue 9). An AI agent (Claude Opus 5.5) wrote the tool and this file.
 
@@ -3307,7 +3307,7 @@ Entries with the status `not measured yet`: 0. Entries with the mark of a run af
 | `job_lorax` | `daten/gj/jobs/lora_b1x/manifest.json` | `0f6dce1a690e8b7c32420bdda85545bd61e160f780d05f279d77678f98345273` | 2026-10-13T05:48:49+02:00 | key made |
 | `crit` | `crisp-dm/04-modeling/gate-jev-cascade-criteria.md` | `6f6d15c0562cba2070995c302080a9aaedfe665f8d746ed5b0fdd9248bc20bfe` | 2026-10-12T20:26:40+02:00 | file modification time |
 | `addf` | `crisp-dm/04-modeling/gate-jev-cascade-criteria-addendum-f.md` | `bb04a27aa09641f88605803f30362ffbeaed63d2bcf76f9ce66ecdecc0307483` | 2026-10-13T10:34:01+02:00 | file modification time |
-| `prot` | `crisp-dm/00-cross-cutting/protocol.md` | `197e293159b8b6f15afefdb06ce008b3b6b7296631de43a228d505e402e72b9c` | 2026-10-15T15:19:19+02:00 | file modification time |
+| `prot` | `crisp-dm/00-cross-cutting/protocol.md` | `44b28f8b3fedbdd5ad8e642aadcf98107864d3a97165c18c3bbba31d2398e2fb` | 2026-10-16T05:58:16+02:00 | file modification time |
 | `state` | `package/STATE.md` | `44eff4de8dc1ab0e422e452bec035d56455e2fa6c00f1c14fde0036b2553fcef` | 2026-10-15T18:13:55+02:00 | file modification time |
 | `vm_open` | `daten/gj_values/measures_open.json` | `cc03bf8a9d148f5eccfdd866c639040cc414abb398256e1f659d067bbc685294` | 2026-10-13T14:30:37+0200 | key made |
 | `vs_open` | `daten/gj_values/second_open.json` | `4ca5150a4dc6b1f2368dc6414ec5d0adf73b0bf7f7163840d9f62cc23d16b997` | 2026-10-13T14:30:45+02:00 | key made |
@@ -3376,13 +3376,13 @@ This file replaces `track_2a/technical_report_numbers.json` of 12.10.2026. The k
 | Item | Value |
 |---|---|
 | File | track_2a/technical_report.pdf (the file of form field 12; git ignores *.pdf, so it is not in the repository) |
-| Pages | 6 |
-| SHA-256 of the PDF | `fab683c4bb121b8187db803982bcc89f3a086e5d4fd1612aeed2c5ff61e9c06d` |
-| SHA-256 of the Markdown source | `a1e92e7a4be9261be264160105a5cb7b6ac504b4c9ecdd6e616aa7eac6fee6b5` |
+| Pages | 5 |
+| SHA-256 of the PDF | `229d8a7dd3f13520b478ef4d2b16f494a12db30e3d357a0c44a53a2defe5ba7b` |
+| SHA-256 of the Markdown source | `fd645dde725340b74c9a2f737db3302761b63ecf29e5f212fdd5ded3f0989d1a` |
 | Tool `pandoc` | `pandoc 3.8.1` |
 | Tool `xelatex` | `XeTeX 3.141592653-2.6-0.999997 (TeX Live 2025)` |
-| Tool `fonts` | `HelveticaNeue, HelveticaNeue-Bold, Menlo-Bold, Menlo-Regular, [none]` |
-| Build record (private project) | crisp-dm/06-deployment/report_pdf_build.json, `44538ca361441710f8948c6e68525a07a762fe88bc4db7ab4a4707210bbe3615` |
+| Tool `fonts` | `HelveticaNeue, HelveticaNeue-Bold, Menlo-Regular` |
+| Build record (private project) | crisp-dm/06-deployment/report_pdf_build.json, `ae2ae178e8c437eeda1af313a8785eaa0389fca923f23c16fc65d78b7564c182` |
 | SHA-256 of the earlier numbers file | `84bb9865a5f05dbe57966a3a75914cddad3276e40d219994e130665fdf658b7b` |
 
 The build steps and the header file of the PDF are in the key `pdf` of `numbers.json`.

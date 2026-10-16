@@ -1,6 +1,6 @@
 {
  "schema": "parlpdfech-numbers/1",
- "made": "16.10.2026 04:28 CEST",
+ "made": "16.10.2026 09:11 CEST",
  "status": "EXCEPTION, NOT RELEASED",
  "tool": "src/m11_numbers.py (private project; command build)",
  "note": [
@@ -264,8 +264,8 @@
   },
   "prot": {
    "file": "crisp-dm/00-cross-cutting/protocol.md",
-   "sha256": "197e293159b8b6f15afefdb06ce008b3b6b7296631de43a228d505e402e72b9c",
-   "time": "2026-10-15T15:19:19+02:00",
+   "sha256": "44b28f8b3fedbdd5ad8e642aadcf98107864d3a97165c18c3bbba31d2398e2fb",
+   "time": "2026-10-16T05:58:16+02:00",
    "time_kind": "file modification time",
    "made_by": null,
    "state": "a log file or a code file that other work changes: this SHA-256 is the value at the time of the field made; each entry has the SHA-256 of its line"
@@ -2270,7 +2270,7 @@
     "sha256": "6435e91d3e3b51da5a9ce7b3c28e44a6e376963e85fc127c4032b3668a03b9fb",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 13.10., 03:36 | plan to the full conversion, sealed tool (command check, result); text pattern Counts: (\\d+) test documents",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "13.10., 03:36 | plan to the full conversion, sealed tool (command check, result)",
@@ -2300,7 +2300,7 @@
     "sha256": "6435e91d3e3b51da5a9ce7b3c28e44a6e376963e85fc127c4032b3668a03b9fb",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 13.10., 03:36 | plan to the full conversion, sealed tool (command check, result); text pattern (\\d+) documents claimed at L9",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "13.10., 03:36 | plan to the full conversion, sealed tool (command check, result)",
@@ -2330,7 +2330,7 @@
     "sha256": "6435e91d3e3b51da5a9ce7b3c28e44a6e376963e85fc127c4032b3668a03b9fb",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 13.10., 03:36 | plan to the full conversion, sealed tool (command check, result); text pattern 40 documents in list order, (\\d+) parliaments",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "13.10., 03:36 | plan to the full conversion, sealed tool (command check, result)",
@@ -5951,7 +5951,7 @@
     "sha256": "1bd0d9560f0a8f7b50df4ebf2879582447157b917ce3d3a83c6ee45ace5a1f40",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 13.10., 10:48 | B1-L: addendum F; text pattern true for B1-S at 0\\.8 \\(([\\d,]+) blocks",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "13.10., 10:48 | B1-L: addendum F",
@@ -5979,7 +5979,7 @@
     "sha256": "1bd0d9560f0a8f7b50df4ebf2879582447157b917ce3d3a83c6ee45ace5a1f40",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 13.10., 10:48 | B1-L: addendum F; text pattern true for B1-S at 0\\.8 \\([\\d,]+ blocks, ([0-9.]+)\\)",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "13.10., 10:48 | B1-L: addendum F",
@@ -8110,7 +8110,7 @@
     "sha256": "c881beb8d09caf8726938c9be9e06a2a723f7a3253a8f148ca389e2e93613736",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 13.10., 11:06 | B1-L: design and validation tools for addendum F; text pattern A comparison of ([\\d,]+) values with the record of 10:36",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "13.10., 11:06 | B1-L: design and validation tools for addendum F",
@@ -8138,7 +8138,7 @@
     "sha256": "dd8207bbbed50559e0deffa29bf5de0d73ab8d981212417cdda7d92f6fbe6372",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 13.10., 05:00 | B1-L: smoke run (result); text pattern ([\\d,]+) LoRA values",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "13.10., 05:00 | B1-L: smoke run (result)",
@@ -8168,7 +8168,7 @@
     "sha256": "dd8207bbbed50559e0deffa29bf5de0d73ab8d981212417cdda7d92f6fbe6372",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 13.10., 05:00 | B1-L: smoke run (result); text pattern ([\\d,]+) head values are trained",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "13.10., 05:00 | B1-L: smoke run (result)",
@@ -12853,7 +12853,7 @@
     "sha256": "b54111bf1e9b69e43fea0304f49a912578df32fa2246f24b36adf76f189b8374",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 13.10., 02:24 | plan to the full conversion, wave 4 (result); text pattern Second count from export metadata: (\\d+) of 2,665 documents",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "13.10., 02:24 | plan to the full conversion, wave 4 (result)",
@@ -12883,7 +12883,7 @@
     "sha256": "b54111bf1e9b69e43fea0304f49a912578df32fa2246f24b36adf76f189b8374",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 13.10., 02:24 | plan to the full conversion, wave 4 (result); text pattern gap `affair_type` \\(dev (\\d+),",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "13.10., 02:24 | plan to the full conversion, wave 4 (result)",
@@ -12911,7 +12911,7 @@
     "sha256": "b54111bf1e9b69e43fea0304f49a912578df32fa2246f24b36adf76f189b8374",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 13.10., 02:24 | plan to the full conversion, wave 4 (result); text pattern gap `affair_type` \\(dev \\d+, validation (\\d+),",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "13.10., 02:24 | plan to the full conversion, wave 4 (result)",
@@ -12939,7 +12939,7 @@
     "sha256": "b54111bf1e9b69e43fea0304f49a912578df32fa2246f24b36adf76f189b8374",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 13.10., 02:24 | plan to the full conversion, wave 4 (result); text pattern gap `affair_type` \\(dev \\d+, validation \\d+, group 7 (\\d+)\\)",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "13.10., 02:24 | plan to the full conversion, wave 4 (result)",
@@ -13351,7 +13351,7 @@
     "sha256": "f28970f562ab789d66e18048920eed61f891f97cc4379c0619ee08ad00e429ac",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 13.10., 02:07 | plan to the full conversion, R2 step 0b fit (second calculation; text pattern with its own code: (\\d+) of 21 checks pass",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "13.10., 02:07 | plan to the full conversion, R2 step 0b fit (second calculation",
@@ -15789,7 +15789,7 @@
     "sha256": "dff65a0701b826f6be31310c235c2d49b25cc3a81bd19457021140132e501922",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 13.10., 05:24 | more training labels by AI coders (result); text pattern \\(2,031 blocks\\): ([0-9.]+) for the 6 options",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "13.10., 05:24 | more training labels by AI coders (result)",
@@ -15817,7 +15817,7 @@
     "sha256": "dff65a0701b826f6be31310c235c2d49b25cc3a81bd19457021140132e501922",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 13.10., 05:24 | more training labels by AI coders (result); text pattern for the 6 options \\(kappa ([0-9.]+)\\)",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "13.10., 05:24 | more training labels by AI coders (result)",
@@ -15845,7 +15845,7 @@
     "sha256": "dff65a0701b826f6be31310c235c2d49b25cc3a81bd19457021140132e501922",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 13.10., 05:24 | more training labels by AI coders (result); text pattern (\\d+) AI coders coded the 160 selected",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "13.10., 05:24 | more training labels by AI coders (result)",
@@ -15983,7 +15983,7 @@
     "sha256": "da4d8b5797994d239cb07aa4f788f5280bedb379eff8e54c2faf4507d37df37d",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 13.10., 06:06 | round 2: tools (result); design of B1-S2; text pattern the accuracy is ([0-9.]+) with the selected form",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "13.10., 06:06 | round 2: tools (result); design of B1-S2",
@@ -16011,7 +16011,7 @@
     "sha256": "e9cbb4d86009e69743fde1b3ce26ab6f538f8f58a9adc9264e381c85e0210c4c",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 12.10., 20:30 | plan to the full conversion, GPU-0 smoke (result); text pattern p50 ([0-9.]+) ms",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "12.10., 20:30 | plan to the full conversion, GPU-0 smoke (result)",
@@ -16041,7 +16041,7 @@
     "sha256": "e9cbb4d86009e69743fde1b3ce26ab6f538f8f58a9adc9264e381c85e0210c4c",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 12.10., 20:30 | plan to the full conversion, GPU-0 smoke (result); text pattern p95 ([0-9.]+) ms",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "12.10., 20:30 | plan to the full conversion, GPU-0 smoke (result)",
@@ -16069,7 +16069,7 @@
     "sha256": "e9cbb4d86009e69743fde1b3ce26ab6f538f8f58a9adc9264e381c85e0210c4c",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 12.10., 20:30 | plan to the full conversion, GPU-0 smoke (result); text pattern prefill ([\\d,]+) tokens/s",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "12.10., 20:30 | plan to the full conversion, GPU-0 smoke (result)",
@@ -16097,7 +16097,7 @@
     "sha256": "e9cbb4d86009e69743fde1b3ce26ab6f538f8f58a9adc9264e381c85e0210c4c",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 12.10., 20:30 | plan to the full conversion, GPU-0 smoke (result); text pattern GPU peak ([0-9.]+) GB",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "12.10., 20:30 | plan to the full conversion, GPU-0 smoke (result)",
@@ -16125,7 +16125,7 @@
     "sha256": "e9cbb4d86009e69743fde1b3ce26ab6f538f8f58a9adc9264e381c85e0210c4c",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 12.10., 20:30 | plan to the full conversion, GPU-0 smoke (result); text pattern ([\\d,]+) suffix passes",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "12.10., 20:30 | plan to the full conversion, GPU-0 smoke (result)",
@@ -16153,7 +16153,7 @@
     "sha256": "133c3ea982a2dca2f8d6e24ba5cb61a12abcb1d90ef87f7c3cd6cba0f3b65e6b",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 12.10., 20:51 | plan to the full conversion, GPU-1 (result); text pattern p50 ([0-9.]+) ms",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "12.10., 20:51 | plan to the full conversion, GPU-1 (result)",
@@ -16183,7 +16183,7 @@
     "sha256": "133c3ea982a2dca2f8d6e24ba5cb61a12abcb1d90ef87f7c3cd6cba0f3b65e6b",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 12.10., 20:51 | plan to the full conversion, GPU-1 (result); text pattern p95 ([0-9.]+) ms",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "12.10., 20:51 | plan to the full conversion, GPU-1 (result)",
@@ -16211,7 +16211,7 @@
     "sha256": "133c3ea982a2dca2f8d6e24ba5cb61a12abcb1d90ef87f7c3cd6cba0f3b65e6b",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 12.10., 20:51 | plan to the full conversion, GPU-1 (result); text pattern prefill ([\\d,]+) tokens/s",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "12.10., 20:51 | plan to the full conversion, GPU-1 (result)",
@@ -16239,7 +16239,7 @@
     "sha256": "133c3ea982a2dca2f8d6e24ba5cb61a12abcb1d90ef87f7c3cd6cba0f3b65e6b",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 12.10., 20:51 | plan to the full conversion, GPU-1 (result); text pattern GPU peak ([0-9.]+) GB",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "12.10., 20:51 | plan to the full conversion, GPU-1 (result)",
@@ -16267,7 +16267,7 @@
     "sha256": "133c3ea982a2dca2f8d6e24ba5cb61a12abcb1d90ef87f7c3cd6cba0f3b65e6b",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 12.10., 20:51 | plan to the full conversion, GPU-1 (result); text pattern ([\\d,]+) suffix passes",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "12.10., 20:51 | plan to the full conversion, GPU-1 (result)",
@@ -16295,7 +16295,7 @@
     "sha256": "dd2b943daa3ed20948991f15014f9466330bb5b06a7d47a3cce67d2897445dc6",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 12.10., 22:24 | plan to the full conversion, GPU-2 (result); text pattern p50 ([0-9.]+) ms",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "12.10., 22:24 | plan to the full conversion, GPU-2 (result)",
@@ -16325,7 +16325,7 @@
     "sha256": "dd2b943daa3ed20948991f15014f9466330bb5b06a7d47a3cce67d2897445dc6",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 12.10., 22:24 | plan to the full conversion, GPU-2 (result); text pattern p95 ([0-9.]+) ms",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "12.10., 22:24 | plan to the full conversion, GPU-2 (result)",
@@ -16353,7 +16353,7 @@
     "sha256": "dd2b943daa3ed20948991f15014f9466330bb5b06a7d47a3cce67d2897445dc6",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 12.10., 22:24 | plan to the full conversion, GPU-2 (result); text pattern prefill ([\\d,]+) tokens/s",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "12.10., 22:24 | plan to the full conversion, GPU-2 (result)",
@@ -16381,7 +16381,7 @@
     "sha256": "dd2b943daa3ed20948991f15014f9466330bb5b06a7d47a3cce67d2897445dc6",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 12.10., 22:24 | plan to the full conversion, GPU-2 (result); text pattern GPU peak ([0-9.]+) GB",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "12.10., 22:24 | plan to the full conversion, GPU-2 (result)",
@@ -16409,7 +16409,7 @@
     "sha256": "dd2b943daa3ed20948991f15014f9466330bb5b06a7d47a3cce67d2897445dc6",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 12.10., 22:24 | plan to the full conversion, GPU-2 (result); text pattern ([\\d,]+) suffix passes",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "12.10., 22:24 | plan to the full conversion, GPU-2 (result)",
@@ -16437,7 +16437,7 @@
     "sha256": "e9cbb4d86009e69743fde1b3ce26ab6f538f8f58a9adc9264e381c85e0210c4c",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 12.10., 20:30 | plan to the full conversion, GPU-0 smoke (result); text pattern model load ([0-9.]+) s",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "12.10., 20:30 | plan to the full conversion, GPU-0 smoke (result)",
@@ -16465,7 +16465,7 @@
     "sha256": "dd8207bbbed50559e0deffa29bf5de0d73ab8d981212417cdda7d92f6fbe6372",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 13.10., 05:00 | B1-L: smoke run (result); text pattern training tokens at ([\\d,]+) tokens per second",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "13.10., 05:00 | B1-L: smoke run (result)",
@@ -16493,7 +16493,7 @@
     "sha256": "dd8207bbbed50559e0deffa29bf5de0d73ab8d981212417cdda7d92f6fbe6372",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 13.10., 05:00 | B1-L: smoke run (result); text pattern 145 suffixes at ([0-9.]+) ms for each pass",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "13.10., 05:00 | B1-L: smoke run (result)",
@@ -16521,7 +16521,7 @@
     "sha256": "dd8207bbbed50559e0deffa29bf5de0d73ab8d981212417cdda7d92f6fbe6372",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 13.10., 05:00 | B1-L: smoke run (result); text pattern GPU peak ([0-9.]+) GB of 85 GB",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "13.10., 05:00 | B1-L: smoke run (result)",
@@ -17082,7 +17082,7 @@
     "sha256": "7de5c2702fb62025cc3990525c95b53820d458256f36ab4b4973104fb881ae66",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 13.10., 09:59 | package for the jury: second examination and stage P0b (result); text pattern give valid records in ([0-9.]+) to [0-9.]+ s",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "13.10., 09:59 | package for the jury: second examination and stage P0b (result)",
@@ -17113,7 +17113,7 @@
     "sha256": "7de5c2702fb62025cc3990525c95b53820d458256f36ab4b4973104fb881ae66",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 13.10., 09:59 | package for the jury: second examination and stage P0b (result); text pattern give valid records in [0-9.]+ to ([0-9.]+) s",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "13.10., 09:59 | package for the jury: second examination and stage P0b (result)",
@@ -17144,7 +17144,7 @@
     "sha256": "0597e6bfa3ebc4cf25691dcd4c1574d2307c2e1681d29c8d02ce02a0e8c2987d",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 13.10., 08:26 | package for the jury: build of stage P0a (result); text pattern stored Apertus states in ([0-9.]+) to [0-9.]+ s",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "13.10., 08:26 | package for the jury: build of stage P0a (result)",
@@ -17172,7 +17172,7 @@
     "sha256": "0597e6bfa3ebc4cf25691dcd4c1574d2307c2e1681d29c8d02ce02a0e8c2987d",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 13.10., 08:26 | package for the jury: build of stage P0a (result); text pattern stored Apertus states in [0-9.]+ to ([0-9.]+) s",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "13.10., 08:26 | package for the jury: build of stage P0a (result)",
@@ -92996,7 +92996,7 @@
     "sha256": "88f8d9a40b576dd76e5360b3f53c7ccc7bc52d711b487181704f5e692e3b0ae4",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 13.10., 21:37 | the one last run: check by eye of 50 documents; text pattern read the same (\\d+) sheets",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "13.10., 21:37 | the one last run: check by eye of 50 documents",
@@ -93024,7 +93024,7 @@
     "sha256": "88f8d9a40b576dd76e5360b3f53c7ccc7bc52d711b487181704f5e692e3b0ae4",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 13.10., 21:37 | the one last run: check by eye of 50 documents; text pattern name the same (\\d+) of 50 documents whose kind looks wrong",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "13.10., 21:37 | the one last run: check by eye of 50 documents",
@@ -93052,7 +93052,7 @@
     "sha256": "88f8d9a40b576dd76e5360b3f53c7ccc7bc52d711b487181704f5e692e3b0ae4",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 13.10., 21:37 | the one last run: check by eye of 50 documents; text pattern (\\d+) with the kind `committee_report`",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "13.10., 21:37 | the one last run: check by eye of 50 documents",
@@ -93080,7 +93080,7 @@
     "sha256": "88f8d9a40b576dd76e5360b3f53c7ccc7bc52d711b487181704f5e692e3b0ae4",
     "sha256_of": "the one line of the file that holds the value (text with no space at its two ends, UTF-8)",
     "key": "row 13.10., 21:37 | the one last run: check by eye of 50 documents; text pattern (\\d+) with the kind `proposal`",
-    "time": "2026-10-15T15:19:19+02:00",
+    "time": "2026-10-16T05:58:16+02:00",
     "time_kind": "file modification time"
    },
    "protocol_row": "13.10., 21:37 | the one last run: check by eye of 50 documents",
@@ -97279,18 +97279,18 @@
  ],
  "pdf": {
   "file": "track_2a/technical_report.pdf (the file of form field 12; git ignores *.pdf, so it is not in the repository)",
-  "sha256": "fab683c4bb121b8187db803982bcc89f3a086e5d4fd1612aeed2c5ff61e9c06d",
-  "md_sha256": "a1e92e7a4be9261be264160105a5cb7b6ac504b4c9ecdd6e616aa7eac6fee6b5",
-  "pages": 6,
+  "sha256": "229d8a7dd3f13520b478ef4d2b16f494a12db30e3d357a0c44a53a2defe5ba7b",
+  "md_sha256": "fd645dde725340b74c9a2f737db3302761b63ecf29e5f212fdd5ded3f0989d1a",
+  "pages": 5,
   "tools": {
    "pandoc": "pandoc 3.8.1",
    "xelatex": "XeTeX 3.141592653-2.6-0.999997 (TeX Live 2025)",
-   "fonts": "HelveticaNeue, HelveticaNeue-Bold, Menlo-Bold, Menlo-Regular, [none]"
+   "fonts": "HelveticaNeue, HelveticaNeue-Bold, Menlo-Regular"
   },
   "built_by": "src/m11_report_pdf.py of the private project, with the steps below",
   "build_record": {
    "file": "crisp-dm/06-deployment/report_pdf_build.json",
-   "sha256": "44538ca361441710f8948c6e68525a07a762fe88bc4db7ab4a4707210bbe3615"
+   "sha256": "ae2ae178e8c437eeda1af313a8785eaa0389fca923f23c16fc65d78b7564c182"
   },
   "steps": [
    "pandoc technical_report.md -s -o rep.tex --shift-heading-level-by=-1 -V geometry:a4paper,margin=15mm -V fontsize=10pt -V mainfont='Helvetica Neue' -V monofont=Menlo -V colorlinks=true -V linkcolor=black -V urlcolor=blue -H header.tex",

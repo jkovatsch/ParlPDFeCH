@@ -2,7 +2,7 @@
 
 - **Track:** Track 2A — Extracting Parliamentary Affairs from PDFs into One Common Structure (OpenParlData)
 - **Version:** 16.10.2026. It replaces the texts of 13.10.2026 (block labels as the result) and 14.10.2026. The public report of 12.10.2026 was on the earlier converter.
-- **Short version:** [`../technical_report.md`](../technical_report.md) (6 pages as a PDF). This file has no page limit.
+- **Short version:** [`../technical_report.md`](../technical_report.md) (5 pages as a PDF; the form allows 6). This file has no page limit.
 - **Limits in one place:** [`limits.md`](limits.md). **Folders of the repository:** [`repository-map.md`](repository-map.md).
 
 ## How to read this file

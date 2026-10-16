@@ -1,8 +1,9 @@
 """The view function of the package: one record folder of the converter -> the view `parlpdfech-site-view/3`.
 
 Contract: CONTRACT.md chapter 4.5, chapter 6, chapter 16 (the values that are read from the PDF), chapter 17
-(the value as the document prints it, the weak candidate, the remake check), chapter 18 (the cascade) and
-chapter 19 (rule V5, the reason reader_scope, the signs of a response); schema: contract/view.schema.json.
+(the value as the document prints it, the weak candidate, the remake check), chapter 18 (the cascade),
+chapter 19 (rule V5, the reason reader_scope, the signs of a response) and chapter 25 (the Apertus suggestions
+below the entry limit, key apertus_suggestions); schema: contract/view.schema.json.
 
     import site_view
     view = site_view.make_view(record_dir, inputs_dir, run_info)
@@ -83,6 +84,13 @@ COMPARISON_NOTE = re.compile(r"comparison value of the reader \(for the cross-ch
                              r"of the record\): .*", re.S)
 SLOT_STATES = ("read_from_pdf", "not_found_in_pdf", "not_in_this_document_type", "register_only")
 EXPORT_CHECKS = ("equal_to_export", "differs_from_export", "no_export_value", "not_compared")
+# The Apertus suggestions below the entry limit (manifest key apertus_suggestions of src/m12_writer.py, edit W6 of
+# 16.10.2026; CONTRACT.md chapter 25): an Apertus value of a Q2 tier that did not enter. It is NOT in the eCH-0295
+# part; the values file (.values.ttl) has it as a pvl:Suggestion node. Its probability is the Jeffreys mean
+# (k + 0.5) / (n + 1) of its tier on the development documents, with the limits 0.005 and 0.995 and 4 decimals.
+SUGGESTION_STATUS = "below_entry_limit"
+SUGGESTION_FORM = "parlpdfech-apertus-suggestions/1"
+P_LOW, P_HIGH = 0.005, 0.995
 
 INPUT_FILES = {"docling": "docling.json", "atoms": "atoms.json", "blocks": "blocks.json"}
 DECISIONS_FILE = "decisions.json"
@@ -591,6 +599,67 @@ def _cascade(man: dict, values: list, slots: list, text_blocks: list) -> dict:
             "register_only": sum(1 for x in slots if x["state"] == "register_only")}
 
 
+def _is_int(x) -> bool:
+    return isinstance(x, int) and not isinstance(x, bool)
+
+
+def _is_number(x) -> bool:
+    return isinstance(x, (int, float)) and not isinstance(x, bool)
+
+
+def _suggestions(man: dict, inputs: dict, page_numbers: set, values: list) -> list:
+    """apertus_suggestions[] (CONTRACT.md chapter 25): one entry for each item of the manifest key
+    apertus_suggestions, in the sequence of the manifest. A suggestion is not a value of the record: the field has
+    no written value. spans: the parts of the lines that its span touches (as for a weak candidate)."""
+    ms = man.get("apertus_suggestions")
+    if not isinstance(ms, dict) or not isinstance(ms.get("items"), list) or ms.get("status") != SUGGESTION_STATUS \
+            or ms.get("form") != SUGGESTION_FORM:
+        raise ViewError("the manifest key apertus_suggestions has not the known form")
+    written = {x["field"] for x in values if x["written"]}
+    block_ids = {b["block"] for b in inputs["blocks"]["blocks"]}
+    out, seen = [], set()
+    for x in ms["items"]:
+        f = x.get("field") if isinstance(x, dict) else None
+        if f not in CASCADE_FIELDS:
+            raise ViewError("an Apertus suggestion has an unknown field")
+        if f in seen:
+            raise ViewError(f"suggestion {f}: the field occurs 2 times")
+        seen.add(f)
+        if f in written:
+            raise ViewError(f"suggestion {f}: the field has a value in the record")
+        if x.get("status") != SUGGESTION_STATUS or x.get("in_record") is not False:
+            raise ViewError(f"suggestion {f}: the status is not below the entry limit, or it is in the record")
+        page, last = x.get("page"), x.get("last_page")
+        if page not in page_numbers or (last is not None and last not in page_numbers):
+            raise ViewError(f"suggestion {f}: its page is not a page of the PDF")
+        p, k, n = x.get("probability"), x.get("k"), x.get("n")
+        if not (_is_number(p) and P_LOW <= p <= P_HIGH):
+            raise ViewError(f"suggestion {f}: the probability is not in the range 0.005 to 0.995")
+        if not (_is_int(k) and _is_int(n) and 0 <= k <= n):
+            raise ViewError(f"suggestion {f}: the counts of its tier are not 0 <= k <= n")
+        start, end = x.get("char_start"), x.get("char_end")
+        if not (_is_int(start) and _is_int(end) and 0 <= start < end):
+            raise ViewError(f"suggestion {f}: its span is not a range of the document text")
+        block_id = x.get("block")
+        if block_id is not None and block_id not in block_ids:
+            raise ViewError(f"suggestion {f}: its block is not in the block file")
+        tier, value, printed = x.get("tier"), x.get("value"), x.get("printed")
+        if not (isinstance(tier, str) and tier.startswith("apertus_q2_") and APERTUS_VALUE_TIER.match(tier)):
+            raise ViewError(f"suggestion {f}: its tier is not a Q2 tier of the Apertus step")
+        if not (isinstance(value, str) and isinstance(printed, str) and value.strip() and printed.strip()):
+            raise ViewError(f"suggestion {f}: it has no value or no wording")
+        hp = x.get("head_probability")
+        spans = _span_parts(inputs["atoms"], start, end)
+        out.append({
+            "field": f, "value": value, "value_printed": printed,
+            "probability": p, "k": k, "n": n, "tier": tier, "band": x.get("band"),
+            "head_probability": hp if _is_number(hp) else None, "near": x.get("near") is True,
+            "page": page, "last_page": last, "char_start": start, "char_end": end, "block_id": block_id,
+            "atom_ids": [e["atom_id"] for e in spans], "spans": spans,
+            "status": SUGGESTION_STATUS, "in_record": False, "called_because": x.get("called_because")})
+    return out
+
+
 def _checks(man: dict, val: dict) -> list:
     out = [{"id": "writer_check", "state": "passed" if man.get("check_passed") else "failed", "reason": None}]
     for cid in CHECKS + (VALUE_CHECKS if man.get("schema") == VALUES_RECORD else ()):
@@ -851,6 +920,14 @@ def _make_view(record: Path, inputs_dir: Path, run_info: dict) -> dict:
                           "export_has_value": has_value if isinstance(has_value, bool) else None,
                           "name_key": f"pslot.{x['slot']}"})
     cascade = _cascade(man, values, slots, text_blocks) if from_pdf else None
+    # the Apertus suggestions below the entry limit (CONTRACT.md chapter 25): only a record of the Apertus step of
+    # 'make convert' has the manifest key. A record with no such key gets no view key (its view does not change).
+    suggestions = None
+    if "apertus_suggestions" in man:
+        if not from_pdf:
+            raise ViewError("the manifest has Apertus suggestions, but the values of the record are not read from "
+                            "the PDF")
+        suggestions = _suggestions(man, inputs, {p["number"] for p in pages}, values)
     # finding S3-03: signs of a response in a document of the kind proposal or executive_proposal. The kind does not
     # change. responder_candidates: candidates of the responder rule with a tier that is not the tier of an addressed
     # body (run_info, from the worker; null if the worker gave none). text_blocks: text blocks with a label of a
@@ -978,11 +1055,14 @@ def _make_view(record: Path, inputs_dir: Path, run_info: dict) -> dict:
     if bad_xml:
         notices.append(notice("rdfxml_not_readable", n=len(bad_xml)))
 
-    return {"schema": SCHEMA, "record_id": record_id, "doc_id": prefix if str(prefix).isdigit() else None,
-            "run": run, "notices": notices, "head_values": head_values, "values": values, "slots": slots,
-            "document": document, "pages": pages, "blocks": blocks,
-            "labels": labels, "calibrations": _calibrations(lab, measured), "counts": counts, "checks": checks,
-            "files": files}
+    view = {"schema": SCHEMA, "record_id": record_id, "doc_id": prefix if str(prefix).isdigit() else None,
+            "run": run, "notices": notices, "head_values": head_values, "values": values}
+    if suggestions is not None:
+        view["apertus_suggestions"] = suggestions
+    view.update({"slots": slots, "document": document, "pages": pages, "blocks": blocks,
+                 "labels": labels, "calibrations": _calibrations(lab, measured), "counts": counts, "checks": checks,
+                 "files": files})
+    return view
 
 
 def make_view(record_dir, inputs_dir, run_info: dict) -> dict:

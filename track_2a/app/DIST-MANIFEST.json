@@ -1,9 +1,9 @@
 {
  "schema": "parlpdfech-dist-manifest/1",
  "status": "EXCEPTION, NOT RELEASED",
- "made_utc": "2026-10-16T02:39:03Z",
+ "made_utc": "2026-10-16T07:38:33Z",
  "git": {
-  "commit": "58a269b04fa3b5aa006b6b74c29a9158118e8077",
+  "commit": "992e027184507f99582bd41538a8277ddfa0716e",
   "package_files_changed_after_the_commit": 0
  },
  "layout_check": {
@@ -16,7 +16,7 @@
   "not_recorded_compiled_names": []
  },
  "layout_files": 98,
- "layout_manifest_sha256": "b9547266256e0fd3b704568d03af0032c80c1e49c8cb9a9d181c8157568640b6",
+ "layout_manifest_sha256": "96df51c00df79ec55c2b2239b6683d7e7c1d32669a99891d284a19a560f278d9",
  "left_out": {
   "worker/make_samples.py": "reads the project data",
   "worker/make_layout_list.py": "reads the project folder",
@@ -36,12 +36,12 @@
  "site": null,
  "total": {
   "files": 229,
-  "bytes": 22847125
+  "bytes": 22920412
  },
  "by_folder": {
   "(root)": {
    "files": 14,
-   "bytes": 531810
+   "bytes": 542341
   },
   "container": {
    "files": 8,
@@ -49,7 +49,7 @@
   },
   "contract": {
    "files": 15,
-   "bytes": 529231
+   "bytes": 538983
   },
   "data": {
    "files": 34,
@@ -57,7 +57,7 @@
   },
   "layout": {
    "files": 99,
-   "bytes": 15651170
+   "bytes": 15676147
   },
   "rdfcheck": {
    "files": 7,
@@ -69,15 +69,15 @@
   },
   "ui": {
    "files": 20,
-   "bytes": 542034
+   "bytes": 563794
   },
   "view": {
    "files": 2,
-   "bytes": 82006
+   "bytes": 87100
   },
   "worker": {
    "files": 18,
-   "bytes": 435914
+   "bytes": 437087
   }
  },
  "files": [
@@ -98,8 +98,8 @@
   },
   {
    "path": "CONTRACT.md",
-   "bytes": 147384,
-   "sha256": "33d29fe4ce982107c9529b27de063592d936dfc2ef40391c0a0cf21ea3060b12"
+   "bytes": 157915,
+   "sha256": "67585e1a6dc5672cda520721a0997b496bea8f95fc84bcee4cf83af6a989317e"
   },
   {
    "path": "Cargo.lock",
@@ -248,18 +248,18 @@
   },
   {
    "path": "contract/tools/make_schema.py",
-   "bytes": 28952,
-   "sha256": "658c1eea8f23bcf539ade88d3d1c52cc2f5fe3ed9757fc0e9c759b1dcc9ee3a5"
+   "bytes": 32071,
+   "sha256": "41e4a36837677ace8c738ccd9905cf09de2d057ef464b3c51a1a198e0bf31986"
   },
   {
    "path": "contract/tools/validate_view.py",
-   "bytes": 19161,
-   "sha256": "05fe6dca6d48523fb294b3914352fb5c6549afc60b833e68154d362059ba3bba"
+   "bytes": 21028,
+   "sha256": "642934b9d67525763037dac928a1f1f7c08a934a351c9807bc2e15aba3175c91"
   },
   {
    "path": "contract/view.schema.json",
-   "bytes": 54278,
-   "sha256": "a5bfe978d75ff2aca8a95ff647f9b483c469e35225af7604de08d72e6412c716"
+   "bytes": 59044,
+   "sha256": "c3083b79efeb5649dc0ba01268dfe8bfde5b2e45507ffa941d2c8d3d9279118c"
   },
   {
    "path": "data/samples/26171/atoms.json",
@@ -559,7 +559,7 @@
   {
    "path": "layout/layout_manifest.json",
    "bytes": 28863,
-   "sha256": "b9547266256e0fd3b704568d03af0032c80c1e49c8cb9a9d181c8157568640b6"
+   "sha256": "96df51c00df79ec55c2b2239b6683d7e7c1d32669a99891d284a19a560f278d9"
   },
   {
    "path": "layout/quellen/political-affairs-ech-group/ech-0292_meta/input/schema_common.yaml",
@@ -908,18 +908,18 @@
   },
   {
    "path": "layout/src/m12_apertus_values.py",
-   "bytes": 29739,
-   "sha256": "0b3a5877bfc9d0434589d6123feb729cbbba1706cd5b420ae67355d2f2bb7761"
+   "bytes": 38696,
+   "sha256": "b515a74822c2da686fc4ac88a8a8bd96be3ec3a3266e56cd32f4e0158c83e519"
   },
   {
    "path": "layout/src/m12_validate.py",
-   "bytes": 135609,
-   "sha256": "a411ae60edafcef035049147d1a03f185b980446118b891bb66d2080a1729150"
+   "bytes": 146050,
+   "sha256": "7c941f8ec05b6e1b9b270f885212260e87bfb573653c80e4b4cb77a31fa82c34"
   },
   {
    "path": "layout/src/m12_writer.py",
-   "bytes": 122517,
-   "sha256": "f57f629d76bb9779ae5432fc22ff0b51ea830b2d0204f4a55ba7c3602a3ae7d8"
+   "bytes": 128096,
+   "sha256": "aeadc91125d4cfc4e28826f3d0a68cd38996f684b3daef1e0ddf7e2d31ee1086"
   },
   {
    "path": "layout/src/prompts/s1_role.txt",
@@ -1028,18 +1028,18 @@
   },
   {
    "path": "ui/README.md",
-   "bytes": 42113,
-   "sha256": "362d2318e9d2dfe32265c2cdd9b9a5b251c7167dbaee3d62fb4b4a9ef529519f"
+   "bytes": 42911,
+   "sha256": "462afb31122fe76d33e48704e487d43ffce2572bf332ee90a9f0a78c04c6d999"
   },
   {
    "path": "ui/app.css",
-   "bytes": 41302,
-   "sha256": "3efe37662642f1a4d535f4775f777cf7ce9d38e4d98e6b54f98ab8dbd0bf8acb"
+   "bytes": 43257,
+   "sha256": "fe6fac3a5e0780aef6c64ca6ebe562a7b13520353a2bf01e31af544cbf7e97dd"
   },
   {
    "path": "ui/app.js",
-   "bytes": 132168,
-   "sha256": "aa4efd83fbaa8649c85a10e83ef5fb1960217b35eff2aa89efa76d48f74b4d90"
+   "bytes": 141249,
+   "sha256": "af9f24db657343f769fb67d54dbce6924b718a90ae9f3b1461e551b27a1891ea"
   },
   {
    "path": "ui/favicon.svg",
@@ -1088,8 +1088,8 @@
   },
   {
    "path": "ui/index.html",
-   "bytes": 19375,
-   "sha256": "dd12ced66110820082820bb7bd85b30155c895eea8ef6b469f7b9d98af9945ee"
+   "bytes": 20759,
+   "sha256": "0e48ec3ac6268962f5fed4981355c9cd6c6dd150fb7a25180fc750d78c3d25fe"
   },
   {
    "path": "ui/rdfpanel.css",
@@ -1113,8 +1113,8 @@
   },
   {
    "path": "ui/strings.json",
-   "bytes": 144578,
-   "sha256": "9b2ca87cd0b52d22c184fa0d23cfafc5dfa8e5d71a7b95d7835eb352030fdf11"
+   "bytes": 153120,
+   "sha256": "29f1634a0beac21274f80a58d3c6af76f453fc2eb27cf67275c5f39659c8bcb4"
   },
   {
    "path": "ui/tools/check_ui.mjs",
@@ -1133,8 +1133,8 @@
   },
   {
    "path": "view/site_view.py",
-   "bytes": 63503,
-   "sha256": "437e4cbcf78ed7ee67e69c8ffe455e1d7c0113fda6099601d11c794187fe8ee2"
+   "bytes": 68597,
+   "sha256": "86f40f3568c65966167320e1fba732cee9c285dc68de364648ae3bc24ffa0a32"
   },
   {
    "path": "worker/README.md",
@@ -1189,7 +1189,7 @@
   {
    "path": "worker/layout_files.json",
    "bytes": 36287,
-   "sha256": "34eee0cab4ac9061a22976269e2b5f38a2ee78531250a54351ccb6be6a9e1a7a"
+   "sha256": "b0cf84a6fa1aa3d4f263b7b72cdb3422f5f6aa9870006113e7d40541b2e5b014"
   },
   {
    "path": "worker/pdf_only.py",
@@ -1213,8 +1213,8 @@
   },
   {
    "path": "worker/values_apertus.py",
-   "bytes": 26245,
-   "sha256": "c3623309762df3959ebc86ee4508594863b0283bae574d4a8a709c6664039212"
+   "bytes": 27418,
+   "sha256": "f360741195c9d287f4db16435c1983b82002882eabc96c840d3fa608834fe3c8"
   },
   {
    "path": "worker/values_hold.json",

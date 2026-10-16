@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1524 240" width="1524" height="240" role="img" aria-labelledby="t d">
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+<title id="t">The four steps of make convert, from left to right</title>
+<desc id="d">Four line drawings in a row, from left to right. First: a PDF page with dashed text blocks, an arrow, and a list of lines, each line in a frame. Second: lines go into a box with braces for the code rules. Marks come out: a page with a marked top and bottom, a tag, and a person who changes to another person. Third: a document and a question go into Apertus, a grid with one yellow cell. A long bar has a check mark, a short bar has a cross. A speech bubble is crossed out: no text comes out. Fourth: a record with values, each with a dark bar. A yellow marker joins one value to its line on a PDF page. One value has a dashed frame.</desc>
+<style>
+.dp { fill: #FBFAF6; stroke: #1B1D22; stroke-width: 1.3; }
+.dl { fill: none; stroke: #1B1D22; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
+.dg { fill: none; stroke: #5A5F6B; stroke-width: 1.6; stroke-linecap: round; }
+.dd { fill: none; stroke: #1B1D22; stroke-width: 1.1; stroke-dasharray: 3 2.5; }
+.dc { fill: #FBFAF6; stroke: #1B1D22; stroke-width: 1; }
+.dm { fill: #F2C14E; stroke: #1B1D22; stroke-width: 1; }
+.df { fill: #1B1D22; }
+.dw { fill: none; stroke: #F2C14E; stroke-width: 7; stroke-linecap: round; }
+</style>
+<svg x="0" y="0" width="360" height="240" viewBox="0 0 360 240">
+<rect x="0.75" y="0.75" width="358.5" height="238.5" rx="14" fill="#FBFAF6" stroke="#CFC9BC" stroke-width="1.5"/>
+<g transform="translate(17.5 17.5) scale(1.25)">
+<path class="dp" d="M18 12h72l14 14v124a2 2 0 0 1-2 2H18a2 2 0 0 1-2-2V14a2 2 0 0 1 2-2z"/><path class="dl" d="M90 12v14h14"/>
+<rect class="dd" x="26" y="32" width="54" height="16"/>
+<path class="dg" d="M32 40h38"/>
+<rect class="dd" x="26" y="56" width="68" height="52"/>
+<path class="dg" d="M32 68h56M32 82h56M32 96h36"/>
+<rect class="dd" x="26" y="118" width="44" height="20"/>
+<path class="dg" d="M32 128h26"/>
+<path class="dl" d="M114 82 144 82M137.5 76.5 144 82 137.5 87.5"/>
+<path class="dl" d="M160 28.5h-4v11h4M221 28.5h4v11h-4"/><path class="dg" d="M163 34h55"/>
+<path class="dl" d="M160 52.5h-4v11h4M247 52.5h4v11h-4"/><path class="dg" d="M163 58h81"/>
+<path class="dl" d="M160 76.5h-4v11h4M247 76.5h4v11h-4"/><path class="dg" d="M163 82h81"/>
+<path class="dl" d="M160 100.5h-4v11h4M218 100.5h4v11h-4"/><path class="dg" d="M163 106h52"/>
+<path class="dl" d="M160 124.5h-4v11h4M203 124.5h4v11h-4"/><path class="dg" d="M163 130h37"/>
+</g>
+</svg>
+<path d="M369 110 L379 120 L369 130" fill="none" stroke="#5A5F6B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<svg x="388" y="0" width="360" height="240" viewBox="0 0 360 240">
+<rect x="0.75" y="0.75" width="358.5" height="238.5" rx="14" fill="#FBFAF6" stroke="#CFC9BC" stroke-width="1.5"/>
+<g transform="translate(17.5 17.5) scale(1.25)">
+<path class="dl" d="M16 48.5h-4v11h4M72 48.5h4v11h-4"/><path class="dg" d="M19 54h50"/>
+<path class="dl" d="M16 76.5h-4v11h4M72 76.5h4v11h-4"/><path class="dg" d="M19 82h50"/>
+<path class="dl" d="M16 104.5h-4v11h4M72 104.5h4v11h-4"/><path class="dg" d="M19 110h34"/>
+<path class="dl" d="M84 82 100 82M94.3 77.2 100 82 94.3 86.8"/>
+<rect class="dp" x="102" y="54" width="56" height="56" rx="3"/>
+<path class="dl" d="M124 68c-5 0-1 12-7 14 6 2 2 14 7 14M136 68c5 0 1 12 7 14-6 2-2 14-7 14"/>
+<path class="dl" d="M158 70 176 44M158 82h18M158 94 176 120"/>
+<rect class="dc" x="176" y="28" width="76" height="32" rx="16"/>
+<rect class="dc" x="176" y="66" width="76" height="32" rx="16"/>
+<rect class="dc" x="176" y="104" width="76" height="32" rx="16"/>
+<rect class="dc" x="206" y="32" width="16" height="24" rx="1.5"/>
+<rect class="dm" x="208.5" y="34.5" width="11" height="4"/>
+<rect class="dm" x="208.5" y="49.5" width="11" height="4"/>
+<path class="dg" d="M210.5 44h7"/>
+<path class="dl" d="M200 73.5h18l9 8.5-9 8.5h-18z"/>
+<circle class="dl" cx="219" cy="82" r="2.2"/>
+<circle class="dl" cx="199" cy="115" r="3.8"/><path class="dl" d="M192.5 129.5c0-5.5 2.8-8.5 6.5-8.5s6.5 3 6.5 8.5"/>
+<path class="dl" d="M208 121 220 121M215.8 117.5 220 121 215.8 124.5"/>
+<circle class="dl" cx="229" cy="115" r="3.8"/><path class="dl" d="M222.5 129.5c0-5.5 2.8-8.5 6.5-8.5s6.5 3 6.5 8.5"/>
+</g>
+</svg>
+<path d="M757 110 L767 120 L757 130" fill="none" stroke="#5A5F6B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<svg x="776" y="0" width="360" height="240" viewBox="0 0 360 240">
+<rect x="0.75" y="0.75" width="358.5" height="238.5" rx="14" fill="#FBFAF6" stroke="#CFC9BC" stroke-width="1.5"/>
+<g transform="translate(17.5 17.5) scale(1.25)">
+<path class="dp" d="M16 10h34l10 10v48a2 2 0 0 1-2 2H16a2 2 0 0 1-2-2V12a2 2 0 0 1 2-2z"/><path class="dl" d="M50 10v10h10"/>
+<path class="dg" d="M21 24h26M21 32h30M21 40h30M21 48h30M21 56h18"/>
+<path class="dp" d="M18 96h38a8 8 0 0 1 8 8v16a8 8 0 0 1-8 8H32l-8 8v-8h-6a8 8 0 0 1-8-8v-16a8 8 0 0 1 8-8z"/>
+<path class="dl" d="M32.5 107.5a4.5 4.5 0 1 1 6.3 4.1c-1.3.6-1.8 1.4-1.8 2.9"/>
+<circle class="df" cx="37" cy="118.6" r="1.2"/>
+<path class="dl" d="M64 46 96 64M93 56 96 64 87.6 65.6"/>
+<path class="dl" d="M68 110 96 96M87.7 94 96 96 92.6 103.8"/>
+<rect class="dp" x="98" y="44" width="64" height="72" rx="3"/>
+<rect class="dc" x="106" y="62.5" width="9" height="9" rx="1"/>
+<rect class="dc" x="119" y="62.5" width="9" height="9" rx="1"/>
+<rect class="dc" x="132" y="62.5" width="9" height="9" rx="1"/>
+<rect class="dc" x="145" y="62.5" width="9" height="9" rx="1"/>
+<rect class="dc" x="106" y="75.5" width="9" height="9" rx="1"/>
+<rect class="dc" x="119" y="75.5" width="9" height="9" rx="1"/>
+<rect class="dc" x="132" y="75.5" width="9" height="9" rx="1"/>
+<rect class="dm" x="145" y="75.5" width="9" height="9" rx="1"/>
+<rect class="dc" x="106" y="88.5" width="9" height="9" rx="1"/>
+<rect class="dc" x="119" y="88.5" width="9" height="9" rx="1"/>
+<rect class="dc" x="132" y="88.5" width="9" height="9" rx="1"/>
+<rect class="dc" x="145" y="88.5" width="9" height="9" rx="1"/>
+<path class="dl" d="M154 80h14"/>
+<path class="dp" d="M168 72.5 181 76.5v7l-13 4z"/>
+<path class="dl" d="M181 80 195 80M189.6 75.5 195 80 189.6 84.5"/>
+<path class="dg" d="M212 60v40"/>
+<path class="dl" d="M198.5 70.5l3.5 3.5 6-7.5"/>
+<rect class="df" x="212" y="65.5" width="40" height="9"/>
+<path class="dl" d="M199.5 86.5l7 7M206.5 86.5l-7 7"/>
+<rect class="df" x="212" y="85.5" width="8" height="9"/>
+<path class="dp" d="M206 112h36a8 8 0 0 1 8 8v12a8 8 0 0 1-8 8H220l-8 8v-8h-6a8 8 0 0 1-8-8v-12a8 8 0 0 1 8-8z"/>
+<path class="dg" d="M207 122h34M207 130h24"/>
+<path class="dl" d="M193 147 255 107"/>
+</g>
+</svg>
+<path d="M1145 110 L1155 120 L1145 130" fill="none" stroke="#5A5F6B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<svg x="1164" y="0" width="360" height="240" viewBox="0 0 360 240">
+<rect x="0.75" y="0.75" width="358.5" height="238.5" rx="14" fill="#FBFAF6" stroke="#CFC9BC" stroke-width="1.5"/>
+<g transform="translate(17.5 17.5) scale(1.25)">
+<rect class="dp" x="10" y="14" width="118" height="136" rx="3"/>
+<rect class="dm" x="20" y="30" width="98" height="26" rx="2"/>
+<path class="dg" d="M27 43h40"/>
+<rect class="df" x="80" y="39.5" width="29.1" height="7"/>
+<rect class="dc" x="20" y="68" width="98" height="26" rx="2"/>
+<path class="dg" d="M27 81h34"/>
+<rect class="df" x="80" y="77.5" width="27.9" height="7"/>
+<rect class="dd" x="20" y="106" width="98" height="26" rx="2"/>
+<path class="dg" d="M27 119h42"/>
+<rect class="df" x="80" y="115.5" width="18" height="7"/>
+<path class="dp" d="M172 14h66l12 12v122a2 2 0 0 1-2 2H172a2 2 0 0 1-2-2V16a2 2 0 0 1 2-2z"/><path class="dl" d="M238 14v12h12"/>
+<path class="dg" d="M179 32h58M179 44h62M179 68h62M179 80h46M179 92h62M179 104h62M179 116h54M179 128h34"/>
+<rect class="dm" x="176" y="50" width="68" height="12" rx="1.5"/>
+<path class="dg" d="M179 56h62"/>
+<path class="dw" d="M118 43c28 0 32 13 58 13"/>
+<path class="dl" d="M118 43c28 0 32 13 58 13"/>
+</g>
+</svg>
+</svg>

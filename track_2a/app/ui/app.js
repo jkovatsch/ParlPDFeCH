@@ -362,7 +362,8 @@ function renderCase() {
     start: function () { go('#/'); },
     retry: function () { const r = S.retry; if (r) { r(); } else { route(); } }
   };
-  let exits = (e.exits || []).filter(function (x) { return acts[x]; });
+  /* A server that converts no PDF of the reader: no exit to a file field (function noUpload). */
+  let exits = (e.exits || []).filter(function (x) { return acts[x] && !(x === 'other_pdf' && noUpload()); });
   if (!exits.length) { exits = ['start']; }
   exits.forEach(function (x, i) {
     const li = el('li');
@@ -394,6 +395,11 @@ function loadHealth() {
 /* A public site (modes.read_only of /api/health): the server takes no file and refuses each DELETE.
    The page then shows no upload form, no delete button and no stop button. */
 function readOnly() { return !!(S.health && S.health.modes && S.health.modes.read_only === true); }
+/* True: the server converts no PDF of the reader. modes.upload is not true (the profile slim of make run, a
+   read-only server; also before the answer of /api/health), or modes.read_only is true. The page then offers
+   no file: no form, no drop zone, no file field, no exit «Choose another PDF». S2 shows the commands of the
+   terminal (a local server) or the text of a hosted site (keys .hosted). */
+function noUpload() { return readOnly() || !(S.health && S.health.modes && S.health.modes.upload === true); }
 /* False (modes.sample_runs): the server starts no run for a sample whose result is ready. */
 function sampleRunsOff() { return !!(S.health && S.health.modes && S.health.modes.sample_runs === false); }
 /* True (key hosted): the server is not on the computer of the reader. The function t then takes the keys
@@ -427,13 +433,15 @@ function renderHealth() {
   fv.textContent = h ? t('foot.version', { version: h.version }) : '';
   fv.hidden = !h;
   const ro = readOnly();
-  $('start-line').textContent = t(ro ? 's0.line.read_only' : 's0.line');
-  /* A site that takes no file promises no upload: the second way of the start page, the navigation entry
-     and the headline of S2 name the run on the own computer. */
-  $('start-upload').textContent = t(ro ? 's0.button.local' : 's0.button.upload');
-  $('start-upload-note').textContent = t(ro ? 's0.local.note' : 's0.upload.note');
-  $('nav-upload').textContent = t(ro ? 'nav.local' : 'nav.upload');
-  $('h-upload').textContent = t(ro ? 's2.title.read_only' : 's2.title');
+  const no = noUpload();
+  $('start-line').textContent = t(no ? 's0.line.read_only' : 's0.line');
+  /* A server that converts no PDF of the reader promises no upload: the second way of the start page, the
+     navigation entry and the headline of S2 name the terminal (a local server) or the own computer (a hosted
+     site: the keys with the ending .hosted). */
+  $('start-upload').textContent = t(no ? 's0.button.local' : 's0.button.upload');
+  $('start-upload-note').textContent = t(no ? 's0.local.note' : 's0.upload.note');
+  $('nav-upload').textContent = t(no ? 'nav.local' : 'nav.upload');
+  $('h-upload').textContent = t(no ? 's2.title.read_only' : 's2.title');
   const off = sampleRunsOff();
   $('samples-lead').textContent = t(off ? 's1.lead.ready' : 's1.lead');
   /* The pages about the project: the German pages are below /de/. */
@@ -444,9 +452,12 @@ function renderHealth() {
   $('upload-off-site').hidden = !site;
   $('upload-off-site-link').setAttribute('href', siteUrl);
   if (S.screen === 'upload' || S.screen === 'start') { setTitle(S.screen); }
-  $('upload-form').hidden = ro;
-  $('upload-off').hidden = !ro;
-  up.hidden = !h || ro;
+  $('upload-form').hidden = no;
+  $('upload-off').hidden = !no;
+  /* The commands of the terminal are true on the computer of the reader only. */
+  $('upload-terminal').hidden = !no || hosted();
+  $('upload-needs').hidden = !no || hosted();
+  up.hidden = !h || no;
   $('job-stop').hidden = ro;
   $('rec-delete-part').hidden = ro;
   /* The cards of the samples have other buttons on such a site. */
@@ -529,9 +540,10 @@ function renderStartSamples() {
     act.appendChild(title);
     const facts = [nameId(s.parliament_name, s.parliament), affairType(s.kind), langName(s.language)].filter(Boolean);
     act.appendChild(el('span', 'start-card-facts', facts.join(' · ')));
-    act.appendChild(el('span', 'start-card-go', ready ? t('start.card.open') : t('start.card.run')));
-    act.setAttribute('aria-label', t('start.card.label', { title: s.title || '', facts: facts.join(', '),
-      go: ready ? t('start.card.open') : t('start.card.run') }));
+    /* A link to S1 (no run from this card) names the next step there: a mode and its button. */
+    const goWords = ready ? t('start.card.open') : (sampleRunsOff() ? t('start.card.pick') : t('start.card.run'));
+    act.appendChild(el('span', 'start-card-go', goWords));
+    act.setAttribute('aria-label', t('start.card.label', { title: s.title || '', facts: facts.join(', '), go: goWords }));
     li.appendChild(act);
     list.appendChild(li);
   });
@@ -716,7 +728,7 @@ function showUpload(opts) {
   renderHealth();
   renderFileLine();
   if (!opts.rerender) { uploadError('', null); }
-  if (S.focusFile) { S.focusFile = false; $('file').focus(); }
+  if (S.focusFile) { S.focusFile = false; if (!noUpload()) { $('file').focus(); } }
   loadHealth().catch(function () { /* the limits line stays empty; the server still checks the limits */ });
 }
 function chosenFile() {
@@ -759,12 +771,28 @@ function bindUpload() {
     renderFileLine();
     say($('file-line').textContent);
   });
-  /* A file that misses the drop zone must not replace the page. */
+  /* A file that misses the drop zone must not replace the page. On a server that converts no PDF of the reader
+     (function noUpload), a file dropped on any screen opens S2: it says that the page takes no file and gives the
+     commands of the terminal. The page sends no file. A drag of text in the page is not a file and stays as it is. */
+  const hasFile = function (ev) {
+    const types = ev.dataTransfer && ev.dataTransfer.types ? Array.prototype.slice.call(ev.dataTransfer.types) : [];
+    return types.indexOf('Files') !== -1;
+  };
   ['dragover', 'drop'].forEach(function (name) {
-    window.addEventListener(name, function (ev) { if (S.screen === 'upload') { ev.preventDefault(); } });
+    window.addEventListener(name, function (ev) {
+      const no = noUpload() && hasFile(ev);
+      if (S.screen !== 'upload' && !no) { return; }
+      ev.preventDefault();
+      if (name === 'drop' && no) {
+        if (S.screen !== 'upload') { go('#/upload'); }
+        say(t('s2.read_only'));
+      }
+    });
   });
   $('upload-form').addEventListener('submit', function (ev) {
     ev.preventDefault();
+    /* The form is hidden on such a server; the page sends no file to it. */
+    if (noUpload()) { return; }
     const f = chosenFile();
     const doc = $('doc-id').value.trim();
     if (!f) { uploadError(t('s2.need_file'), input); return; }
@@ -1202,7 +1230,7 @@ function renderRecord() {
   }
   if (v.doc_id) { doc.appendChild(el('span', 'rec-docid mono', t('s1.card.doc', { doc: v.doc_id }))); }
   $('rec-headline').textContent = tk('s4.headline.', v.run.origin === 'stored' ? 'stored' : 'new',
-    { mode: tk('mode.inline.', v.run.apertus === 'stored' ? 'auto' : 'rules') });
+    { mode: tk('mode.inline.', viewMode(v)) });
 
   /* the notices in plain words */
   const notices = clear($('rec-notices'));
@@ -2130,8 +2158,34 @@ function unmountPanel() {
 
 /* ---------- the result view: the PDF, the values with their probability, the RDF (route #/view/<record_id>) ---------- */
 function fileOf(v, role) { return (v.files || []).find(function (f) { return f.role === role; }) || null; }
+/* The count of the labels whose value an Apertus value head chose (make convert with the Apertus step;
+   CONTRACT.md chapter 6: source.group apertus_values). */
+function apertusValues(v) {
+  return (v.labels || []).filter(function (l) { return !!(l.source && l.source.group === 'apertus_values'); }).length;
+}
+/* True: an Apertus value head chose this value (its label has source.group apertus_values). */
+function chosenByApertus(v, x) {
+  return (v.labels || []).some(function (l) {
+    return l.id === x.label_id && !!(l.source && l.source.group === 'apertus_values');
+  });
+}
+/* The mode of a result for its texts (keys mode.name.<mode>, mode.inline.<mode>): auto (stored Apertus results
+   of a sample), apertus_values (values of the Apertus step of make convert) or rules (code rules only). */
+function viewMode(v) {
+  if (v.run.apertus === 'stored') { return 'auto'; }
+  /* the Apertus step ran: a head chose a value, or the page shows Apertus suggestions below the entry limit */
+  return apertusValues(v) > 0 || suggestionsOf(v).length > 0 ? 'apertus_values' : 'rules';
+}
 function writtenValues(v) {
   return (v.values || []).filter(function (x) { return x.written; }).sort(function (a, b) {
+    return FIELD_ORDER.indexOf(a.field) - FIELD_ORDER.indexOf(b.field);
+  });
+}
+/* The Apertus suggestions below the entry limit (CONTRACT.md chapter 25; view key apertus_suggestions): Apertus
+   values of a tier that did not pass the entry test. They are NOT in the record; the values file has them. A field
+   with a suggestion has no written value, so its data-f is unique on the page. */
+function suggestionsOf(v) {
+  return (v.apertus_suggestions || []).slice().sort(function (a, b) {
     return FIELD_ORDER.indexOf(a.field) - FIELD_ORDER.indexOf(b.field);
   });
 }
@@ -2184,16 +2238,28 @@ function renderView() {
   const v = S.view;
   const d = v.document;
   const id = v.record_id;
-  $('view-kicker').textContent = t('view.kicker', { mode: t(v.run.apertus === 'stored' ? 'mode.name.auto' : 'mode.name.rules') });
+  $('view-kicker').textContent = t('view.kicker', { mode: tk('mode.name.', viewMode(v)) });
   renderViewHead(v);
   const facts = [nameId(d.parliament_name, d.parliament), affairType(d.affair_type), langName(d.language),
     v.doc_id ? t('s1.card.doc', { doc: v.doc_id }) : null].filter(Boolean);
   $('view-facts').textContent = facts.join(' · ');
-  /* where the values come from: code rules; Apertus gives only the labels of the text blocks of a sample */
+  /* where the values come from: code rules; Apertus gives only the labels of the text blocks of a sample;
+     the Apertus step of make convert can choose values of an own PDF (code finds each at its place) */
   const own = v.run.origin === 'new';
+  const chosen = apertusValues(v);
   let source = t('view.source.rules');
-  if (v.run.apertus === 'stored') { source = t('view.source.auto'); } else if (own) { source = t('view.source.own'); }
+  if (v.run.apertus === 'stored') { source = t('view.source.auto'); }
+  else if (chosen > 0) { source = tn('view.source.apertus_values', chosen, { n: chosen }); }
+  /* the Apertus step gave no value of the record, only suggestions below the entry limit: the texts own and rules
+     say that no value of the page comes from Apertus, which is not true for this page */
+  else if (suggestionsOf(v).length > 0) { source = t('view.source.apertus_suggestions'); }
+  else if (own) { source = t('view.source.own'); }
+  /* a value of the Apertus step and suggestions below the entry limit: one more sentence names the suggestions */
+  if (chosen > 0 && v.run.apertus !== 'stored' && suggestionsOf(v).length > 0) { source += ' ' + t('view.source.sugg_more'); }
   $('view-source').textContent = source;
+  /* The basis of the probability: a rule, or for a value of the Apertus step a read-out head. */
+  const withHeads = chosen > 0;
+  $('view-values-lead').textContent = t(withHeads ? 'view.values.lead.apertus_values' : 'view.values.lead');
   $('view-tech').href = '#/record/' + encodeURIComponent(id);
   $('view-pdf-more').href = '#/record/' + encodeURIComponent(id);
   $('view-rdf-more').href = '#/record/' + encodeURIComponent(id);
@@ -2213,6 +2279,7 @@ function renderView() {
   if (pdf) { $('view-pdf-dl').href = pdf.url + '?download=1'; }
   renderViewPages(v);
   renderViewRows(v);
+  renderViewSugg(v);
   renderTtl();
   applyViewSel(null);
 }
@@ -2243,7 +2310,9 @@ function valueRects(v, x) {
 function renderViewPages(v) {
   const host = clear($('view-pages'));
   const images = v.pages.length > 0 && v.pages.every(function (p) { return Boolean(p.image); });
-  $('view-pdf-note').textContent = t(images ? 'view.pdf.image' : 'view.pdf.drawn');
+  const sugg = suggestionsOf(v);
+  /* a suggestion has a dashed box: the note of the page says what it means */
+  $('view-pdf-note').textContent = t(images ? 'view.pdf.image' : 'view.pdf.drawn') + (sugg.length ? ' ' + t('view.sugg.legend') : '');
   const lang = v.document.language || '';
   const blocks = new Map();
   v.pages.forEach(function (p) {
@@ -2295,6 +2364,17 @@ function renderViewPages(v) {
       });
       s.appendChild(g);
     });
+    /* the Apertus suggestions below the entry limit: a dashed box in the colour of the field (not in the record) */
+    sugg.forEach(function (x) {
+      const rects = valueRects(v, x).filter(function (r) { return r.page === p.number; });
+      if (!rects.length) { return; }
+      const g = svg('g', { class: 'vbox is-sugg ' + colourOf(x.field), 'data-f': x.field, role: 'button', tabindex: 0,
+        'aria-label': t('view.sugg.box.aria', { name: fieldName(x.field), value: x.value_printed, page: p.number }) });
+      rects.forEach(function (r) {
+        g.appendChild(svg('rect', { x: r.x.toFixed(2), y: r.y.toFixed(2), width: r.w.toFixed(2), height: r.h.toFixed(2), rx: 2 }));
+      });
+      s.appendChild(g);
+    });
     fig.appendChild(s);
     const cap = el('figcaption', '', caption);
     if (p.image) {
@@ -2318,12 +2398,14 @@ function calibrationOf(v, id) {
 function rowFacts(v, x, run) {
   const td = el('td', 'vrow-facts small');
   td.colSpan = 4;
+  /* A value of the Apertus step says so first: the facts below are about its head, the fixed run about the rules. */
+  if (chosenByApertus(v, x)) { td.appendChild(el('span', 'vf vf-apertus', t('view.row.apertus'))); }
   const cal = calibrationOf(v, x.calibration_id);
   const basis = cal && cal.basis && cal.basis.n !== null && cal.basis.n !== undefined ? cal.basis : null;
   if (basis) {
     const few = Number(basis.n) < FEW_DOCS;
     let words = x.in_sample ? t('view.basis.in', { k: basis.agreed, n: basis.n }) : t('view.basis', { k: basis.agreed, n: basis.n });
-    if (few) { words += ' ' + t('view.basis.few'); }
+    if (few) { words += '. ' + t('view.basis.few'); }
     td.appendChild(el('span', 'vf' + (few ? ' vf-few' : ''), words));
   }
   if (run && run.given) {
@@ -2404,6 +2486,8 @@ function renderViewRows(v) {
     if (cand && e.state === 'weak_candidate') { words = t('view.miss.weak', { value: cand.value_printed, p: num(cand.probability) }); }
     if (cand && e.state === 'addressee_candidate') { words = t('view.miss.addressee', { value: cand.value_printed, p: num(cand.probability) }); }
     if (!cand && e.state === 'addressee_candidate') { return; }
+    /* the field has an Apertus suggestion below the entry limit: the row says where it is (not in the record) */
+    if (suggestionsOf(v).some(function (s) { return s.field === e.field; })) { words += ' ' + t('view.miss.sugg'); }
     const td = el('td', 'small', words);
     td.colSpan = 3;
     tr.appendChild(td);
@@ -2413,6 +2497,56 @@ function renderViewRows(v) {
   $('view-not').textContent = not.length ? t('view.role', { kind: kindName(cascade.kind),
     fields: not.map(function (e) { return fieldName(e.field); }).join(', ') }) : '';
   $('view-not').hidden = !not.length;
+}
+/* The section of the Apertus suggestions below the entry limit: one row for each (the same columns as the values),
+   the number of its tier with the words "below the entry limit", and a line with the documents behind the number.
+   The section is hidden for a result with no suggestion. In the values table, the row of a field with no value
+   only gets one sentence that names the suggestion (view.miss.sugg). */
+function renderViewSugg(v) {
+  const body = clear($('view-sugg-rows'));
+  const rows = suggestionsOf(v);
+  $('view-sugg').hidden = !rows.length;
+  rows.forEach(function (x) {
+    const name = fieldName(x.field);
+    const tr = el('tr', 'vrow is-sugg ' + colourOf(x.field));
+    tr.setAttribute('data-f', x.field);
+    tr.tabIndex = 0;
+    tr.setAttribute('aria-label', t('view.row.aria', { name: name, value: x.value_printed }));
+    const th = el('th', 'vrow-name');
+    th.setAttribute('scope', 'row');
+    th.appendChild(el('span', 'swatch', ''));
+    th.lastChild.setAttribute('aria-hidden', 'true');
+    th.appendChild(document.createTextNode(name));
+    tr.appendChild(th);
+    const val = el('td', 'vrow-value');
+    const shown = el('span', 'vrow-printed', x.value_printed);
+    if (v.document.language) { shown.lang = v.document.language; }
+    val.appendChild(shown);
+    tr.appendChild(val);
+    const few = Number(x.n) < FEW_DOCS;
+    const prob = el('td', 'vrow-prob');
+    const line = el('span', 'vrow-pline');
+    line.appendChild(bar(x.probability, 'prob-bar' + (few ? ' is-few' : '')));
+    const num1 = el('span', 'n', num(x.probability));
+    num1.setAttribute('translate', 'no');
+    line.appendChild(num1);
+    line.appendChild(el('span', 'st st-sugg', t('view.sugg.status')));
+    prob.appendChild(line);
+    tr.appendChild(prob);
+    tr.appendChild(el('td', 'vrow-page n', x.page === null || x.page === undefined ? '' : String(x.page)));
+    body.appendChild(tr);
+    /* the documents behind the number of the tier (few: the number is not stable), and the mark near */
+    const sub = el('tr', 'vrow-sub is-sugg ' + colourOf(x.field));
+    sub.setAttribute('data-f', x.field);
+    const td = el('td', 'vrow-facts small');
+    td.colSpan = 4;
+    let words = t('view.basis', { k: Number(x.k), n: Number(x.n) });
+    if (few) { words += '. ' + t('view.basis.few'); }
+    td.appendChild(el('span', 'vf' + (few ? ' vf-few' : ''), words));
+    if (x.near) { td.appendChild(el('span', 'vf', t('view.sugg.near'))); }
+    sub.appendChild(td);
+    body.appendChild(sub);
+  });
 }
 
 /* ---------- the RDF place: the two Turtle files as text with colours ---------- */
@@ -2497,6 +2631,17 @@ function ttlMarks(v, tab, lines) {
     }
     if (at.length) { marks.set(x.field, at); }
   });
+  /* values file: the lines of the node <record>/suggestion/<field> of an Apertus suggestion below the entry limit */
+  if (tab !== 'ech') {
+    suggestionsOf(v).forEach(function (x) {
+      const head = '<' + v.document.record_iri + '/suggestion/' + x.field + '>';
+      const i0 = lines.findIndex(function (l) { return l.indexOf(head) === 0; });
+      if (i0 === -1 || marks.has(x.field)) { return; }
+      const at = [];
+      for (let i = i0; i < lines.length; i += 1) { at.push(i); if (/\s\.\s*$/.test(lines[i])) { break; } }
+      marks.set(x.field, at);
+    });
+  }
   return marks;
 }
 function renderTtl() {
@@ -2546,7 +2691,7 @@ function renderTtl() {
 /* ---------- one value selected: its row, its box and its triples ---------- */
 function applyViewSel(scroll) {
   const f = S.vsel;
-  document.querySelectorAll('#view-rows tr[data-f], #view-pages .vbox, #rdf-text .tm').forEach(function (n) {
+  document.querySelectorAll('#view-rows tr[data-f], #view-sugg-rows tr[data-f], #view-pages .vbox, #rdf-text .tm').forEach(function (n) {
     const on = !!f && n.getAttribute('data-f') === f;
     n.classList.toggle('is-sel', on);
     if (n.classList.contains('vrow') || n.classList.contains('vbox') || n.getAttribute('role') === 'button') { n.setAttribute('aria-pressed', on ? 'true' : 'false'); }
@@ -2555,7 +2700,7 @@ function applyViewSel(scroll) {
   if (!f || !scroll) { return; }
   const box = document.querySelector('#view-pages .vbox[data-f="' + f + '"]');
   if (box && scroll !== 'box') { intoView(box, 'center'); }
-  const row = document.querySelector('#view-rows tr[data-f="' + f + '"]');
+  const row = document.querySelector('#view-rows tr[data-f="' + f + '"], #view-sugg-rows tr[data-f="' + f + '"]');
   if (row && scroll !== 'row') { intoView(row, 'nearest'); }
   const line = document.querySelector('#rdf-text .tm[data-f="' + f + '"]');
   const pre = $('rdf-text');
@@ -2568,14 +2713,17 @@ function selectValue(field, from) {
 }
 function bindView() {
   function pickFrom(ev, sel) { return ev.target.closest ? ev.target.closest(sel) : null; }
-  $('view-rows').addEventListener('click', function (ev) {
-    if (pickFrom(ev, 'a')) { return; }
-    const tr = pickFrom(ev, 'tr[data-f]');
-    if (tr) { selectValue(tr.getAttribute('data-f'), 'row'); }
-  });
-  $('view-rows').addEventListener('keydown', function (ev) {
-    const tr = pickFrom(ev, 'tr[data-f]');
-    if (tr && ev.target === tr && (ev.key === 'Enter' || ev.key === ' ')) { ev.preventDefault(); selectValue(tr.getAttribute('data-f'), 'row'); }
+  /* the rows of the values and the rows of the Apertus suggestions: the same click and key handlers */
+  ['view-rows', 'view-sugg-rows'].forEach(function (rowsId) {
+    $(rowsId).addEventListener('click', function (ev) {
+      if (pickFrom(ev, 'a')) { return; }
+      const tr = pickFrom(ev, 'tr[data-f]');
+      if (tr) { selectValue(tr.getAttribute('data-f'), 'row'); }
+    });
+    $(rowsId).addEventListener('keydown', function (ev) {
+      const tr = pickFrom(ev, 'tr[data-f]');
+      if (tr && ev.target === tr && (ev.key === 'Enter' || ev.key === ' ')) { ev.preventDefault(); selectValue(tr.getAttribute('data-f'), 'row'); }
+    });
   });
   $('view-pages').addEventListener('click', function (ev) {
     const g = pickFrom(ev, '.vbox');

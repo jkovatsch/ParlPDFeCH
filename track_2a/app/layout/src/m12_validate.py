@@ -16,6 +16,11 @@ of the package). The frozen file src/m11_validate.py does not change; the rules-
   V4  check C12: a value label with an Apertus tier has the label source apertus_head and the rule id of
       m12_apertus_values.rule_id_of; each other value label keeps the old rule (source rule, rule id
       m11_values_<module>.read_<field>)
+  V5  (16.10.2026, step of the terminal table) check C3 gets the key values_ttl_suggestions_from_the_heads
+      (function suggestion_problems, rules S1 to S7) if the values file has a node of the class pvl:Suggestion, the
+      manifest key apertus_suggestions has an item, or the reading of V3 gives a suggestion below the entry limit
+      (m12_apertus_values.suggestions). A wrong suggestion fails C3. The text of the table CHECKS and all other
+      checks do not change
 Status of the copy: EXCEPTION, NOT RELEASED. No human checked it.
 
 Written in English to the STE rules (ASD-STE100, Issue 9). Actor: workflow sub-agent (Claude Opus 5.5), task T16
@@ -1933,6 +1938,148 @@ def values_ttl_problems(g, labels: dict, man: dict, ech=None) -> list[str]:
     return problems
 
 
+# V5: the predicates of a node of the class pvl:Suggestion (m12_writer, edit W6): (key of the item, local name, kind)
+SUGGESTION_PREDICATES = (("field", "field", "text"), ("status", "status", "text"), ("value", "value", "text"),
+                         ("printed", "printed", "text"), ("tier", "tier", "text"), ("band", "band", "text"),
+                         ("called_because", "calledBecause", "text"), ("block", "block", "text"),
+                         ("probability", "probability", "decimal"), ("head_probability", "headProbability", "decimal"),
+                         ("k", "tierEqual", "int"), ("n", "tierUnits", "int"), ("page", "page", "int"),
+                         ("char_start", "charStart", "int"), ("char_end", "charEnd", "int"),
+                         ("near", "near", "bool"), ("in_record", "inRecord", "bool"))
+NOT_ON_SUGGESTION = ("resource", "property", "entity", "label", "calibration", "reading")
+
+
+def _same_item(a: dict, b: dict) -> bool:
+    """Two suggestion items with the same keys and values (numbers after round(x, 4))."""
+    def norm(x: dict) -> dict:
+        return {k: (round(float(v), 4) if isinstance(v, float) else v) for k, v in x.items()}
+    return norm(a) == norm(b)
+
+
+def suggestion_problems(g, man: dict, labels: dict, reading: dict | None, doc, entry: dict | None) -> list[str] | None:
+    """V5, part of C3: the Apertus suggestions below the entry limit of the values file (rules S1 to S7). None (not
+    applied): the file has no node of the class pvl:Suggestion, the manifest has no item and the reading gives no
+    suggestion. `reading`: the reading of V3 (None for a record with no Apertus step: then no node is permitted).
+      S1  the fields of the nodes are the fields of the reading; one node for each field, the node
+          <record>/suggestion/<field>; each node is the object of <record> pvl:suggestion and of no pvl:reading
+      S2  the items of the manifest key apertus_suggestions are the items of the reading; its key entry_sha256 is
+          the SHA-256 of the manifest input apertus_entry
+      S3  each node has exactly one value of each predicate of m12_writer (W6), equal to the item of the reading
+          (pvl:lastPage only if the last page is another page)
+      S4  pvl:printed is the document text at the span; pvl:value is m12_writer.record_value of that wording
+      S5  the tier is the tier of the entry file for the field and the band (m12_apertus_values.entry_tier), the tier
+          did not enter, pvl:tierEqual and pvl:tierUnits are its units, and pvl:probability is
+          m12_apertus_values.suggestion_probability of these units
+      S6  no pvl:resource, pvl:property, pvl:entity, pvl:label, pvl:calibration on the node; pvl:status is
+          below_entry_limit and pvl:inRecord is false
+      S7  the field has no written value label and no node of the class pvl:ValueReading"""
+    import rdflib
+    from decimal import Decimal
+    from rdflib.namespace import RDF
+    pv = rdflib.Namespace(VALUES_NS)
+    nodes = set(g.subjects(RDF.type, pv.Suggestion))
+    key = man.get("apertus_suggestions")
+    items_man = list((key or {}).get("items") or [])
+    items_read = list(((reading or {}).get("apertus") or {}).get("suggestions") or [])
+    if not nodes and not items_man and not items_read:
+        return None
+    problems = []
+    record = rdflib.URIRef(man["record_iri"])
+    want = {x["field"]: x for x in items_read}
+    # S1
+    if reading is None and nodes:
+        problems.append("the values file has suggestion nodes, but the record has no reading of the Apertus heads")
+    by_field = {}
+    for nd in nodes:
+        fs = [str(o) for o in g.objects(nd, pv.field)]
+        if len(fs) != 1:
+            problems.append(f"the suggestion node {nd} has {len(fs)} values of pvl:field")
+            continue
+        if fs[0] in by_field:
+            problems.append(f"{fs[0]}: two suggestion nodes")
+        by_field[fs[0]] = nd
+    if sorted(by_field) != sorted(want):
+        problems.append(f"the suggestion nodes name the fields {sorted(by_field)}; the combined reader gives "
+                        f"{sorted(want)}")
+    linked = set(g.objects(record, pv.suggestion))
+    if linked != nodes:
+        problems.append("the objects of pvl:suggestion of the record are not the suggestion nodes")
+    for f, nd in sorted(by_field.items()):
+        if nd != rdflib.URIRef(f"{man['record_iri']}/suggestion/{f}"):
+            problems.append(f"{f}: the suggestion node is not <record>/suggestion/{f}")
+        if set(g.subjects(pv.suggestion, nd)) != {record}:
+            problems.append(f"{f}: the suggestion node is not linked from the record only")
+        if any(g.subjects(pv.reading, nd)) or (nd, RDF.type, pv.ValueReading) in g:
+            problems.append(f"{f}: the suggestion node is also a reading")
+    # S2
+    if len(items_man) != len(items_read) or not all(_same_item(a, b) for a, b in zip(items_man, items_read)):
+        problems.append("the items of the manifest key apertus_suggestions are not the suggestions of the combined "
+                        "reader")
+    if key is not None:
+        entry_sha = ((man.get("inputs") or {}).get("apertus_entry") or {}).get("sha256")
+        if key.get("entry_sha256") != entry_sha:
+            problems.append("the key entry_sha256 of apertus_suggestions is not the SHA-256 of the input apertus_entry")
+        if key.get("form") != av.SUGGESTION_FORM or key.get("status") != av.SUGGESTION_STATUS:
+            problems.append("the manifest key apertus_suggestions has another form or status")
+    elif items_read:
+        problems.append("the manifest has no key apertus_suggestions, but the combined reader gives suggestions")
+    written = {str(x["global_uri"]).rsplit("/", 1)[-1].removeprefix("pdf-")
+               for x in labels.get("label_assertions") or []
+               if x.get("label_kind") == "pdf_value" and x.get("instance_path")}
+    import m12_writer as w12  # noqa: PLC0415  (record_value: the rule of the value of the eCH-0295 part)
+    for f, nd in sorted(by_field.items()):
+        def vals(name, nd=nd):
+            return list(g.objects(nd, pv[name]))
+        # S6
+        for name in NOT_ON_SUGGESTION:
+            if vals(name):
+                problems.append(f"{f}: the suggestion node has pvl:{name}")
+        if [str(o) for o in vals("status")] != [av.SUGGESTION_STATUS] or \
+                [o.toPython() for o in vals("inRecord")] != [False]:
+            problems.append(f"{f}: pvl:status or pvl:inRecord of the suggestion node is wrong")
+        # S7
+        if f in written or (rdflib.URIRef(f"{man['record_iri']}/value/{f}"), RDF.type, pv.ValueReading) in g:
+            problems.append(f"{f}: a suggestion below the entry limit for a field with a written value")
+        x = want.get(f)
+        if x is None:
+            continue                                  # S1 gave the problem
+        # S3
+        for k, name, kind in SUGGESTION_PREDICATES:
+            got = vals(name)
+            if len(got) != 1:
+                problems.append(f"{f}: the suggestion node has {len(got)} values of pvl:{name}")
+                continue
+            o = got[0]
+            ok = (str(o) == str(x[k]) if kind == "text" else
+                  Decimal(str(o)) == Decimal(str(x[k])) if kind == "decimal" else
+                  int(o) == int(x[k]) if kind == "int" else o.toPython() is bool(x[k]))
+            if not ok:
+                problems.append(f"{f}: pvl:{name} of the suggestion node differs from the combined reader")
+        last = vals("lastPage")
+        if (x.get("last_page") == x.get("page") and last) or (x.get("last_page") != x.get("page") and
+                                                             [int(o) for o in last] != [int(x["last_page"])]):
+            problems.append(f"{f}: pvl:lastPage of the suggestion node differs from the combined reader")
+        # S4
+        s, e = x.get("char_start"), x.get("char_end")
+        printed = doc.text[s:e] if isinstance(s, int) and isinstance(e, int) and 0 <= s < e <= len(doc.text) else None
+        if printed is None or [str(o) for o in vals("printed")] != [printed]:
+            problems.append(f"{f}: pvl:printed is not the document text at the span")
+        elif [str(o) for o in vals("value")] != [w12.record_value(f, printed, x.get("normalised"))]:
+            problems.append(f"{f}: pvl:value is not the value of the wording at the span (m12_writer.record_value)")
+        # S5
+        et = av.entry_tier(entry or {}, f, x.get("band"))
+        if et is None or et[0] != x.get("tier") or et[1].get("entered") is not False:
+            problems.append(f"{f}: the tier {x.get('tier')!r} is not a tier of the entry file that did not enter")
+        else:
+            equal, units = int(et[1]["equal"]), int(et[1]["equal"]) + int(et[1]["different"])
+            if [int(o) for o in vals("tierEqual")] != [equal] or [int(o) for o in vals("tierUnits")] != [units]:
+                problems.append(f"{f}: pvl:tierEqual or pvl:tierUnits are not the units of the tier in the entry file")
+            p = vals("probability")
+            if len(p) != 1 or Decimal(str(p[0])) != Decimal(str(av.suggestion_probability(equal, units))):
+                problems.append(f"{f}: pvl:probability is not (equal + 0.5) / (units + 1) of the tier")
+    return problems
+
+
 def product_rules_file(root: Path) -> Path | None:
     """V3: the product file of the rules (weak tiers of the combined reader) below the code root, else below the
     root of the caller. Its SHA-256 must be the pinned value of m12_apertus_values (the file of the fixed run)."""
@@ -2067,13 +2214,21 @@ def validate_record(out_dir, *, root=None, calibration=None, export_record=None,
         c3 = {"union_equals_gesamt_rdfxml": mv.same_graph(union, parsed["gesamt_rdfxml"]),
               "ech_ttl_equals_ech_rdfxml": mv.same_graph(parsed["ech_ttl"], parsed["ech_rdfxml"]),
               "ech_ttl_equals_trig_graph": trig["ech-0295"] is not None and mv.same_graph(parsed["ech_ttl"], trig["ech-0295"])}
-        values_problems = None
+        values_problems = sugg_problems = None
         if "values_ttl" in parsed:
             values_problems = values_ttl_problems(parsed["values_ttl"], labels, man, ech=parsed.get("ech_ttl"))
             c3["values_ttl_equals_label_file"] = not values_problems
+            # V5: the suggestions below the entry limit (only if the record has one or the reading gives one)
+            entry_p = input_path(man, "apertus_entry", root, folder) if reading is not None else None
+            sugg_problems = suggestion_problems(parsed["values_ttl"], man, labels, reading, vdoc,
+                                                read_json(entry_p) if entry_p else None)
+            if sugg_problems is not None:
+                c3["values_ttl_suggestions_from_the_heads"] = not sugg_problems
         res["C3_isomorphism"] = {"passed": all(c3.values()), "description": CHECKS["C3"][2], **c3}
         if values_problems:
             res["C3_isomorphism"]["problems"] = values_problems[:20]
+        if sugg_problems:
+            res["C3_isomorphism"]["suggestion_problems"] = sugg_problems[:20]
         # C4
         c4 = {name: trig[name] is not None and mv.same_graph(trig[name], parts[name]) for name in rdf.GRAPHS}
         extra = sorted(set(named) - {f"{record}/{n}" for n in rdf.GRAPHS})

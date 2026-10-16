@@ -19,6 +19,14 @@ src/m11_writer.py does not change; the rules-only path of the package uses it.
       only the choice is by Apertus
   W5  write_record(..., apertus=...): the input apertus_heads (the heads output of the document), the manifest
       key apertus_values, and the note of the manifest key apertus_note
+  W6  (16.10.2026, step of the terminal table) the Apertus suggestions below the entry limit
+      (m12_apertus_values.suggestions, chapter 4 of that file): the manifest key apertus_suggestions (form
+      m12_apertus_values.SUGGESTION_FORM, with the value and the wording of each suggestion), and in
+      <prefix>.values.ttl one node of the class pvl:Suggestion (pvl:inRecord false) for each suggestion, linked
+      from the record with pvl:suggestion. A suggestion is not a statement of the eCH-0295 part: the node has no
+      pvl:resource, pvl:property, pvl:entity, pvl:label or pvl:calibration. The eCH-0295 part, the label file and
+      the provenance file do not change. A values file with no suggestion keeps the same bytes (the header line of
+      the suggestions is written only if there is one)
 Status of the copy: EXCEPTION, NOT RELEASED. No human checked it.
 
 Written in English to the STE rules (ASD-STE100, Issue 9). Actor: workflow sub-agent (Claude Opus 5.5) for the main
@@ -1539,10 +1547,13 @@ def write_record(block_file, rule_file, decisions, values, calibration, export_r
            "slots": b["slots"], "check_passed": b["check_passed"], "problems": b["problems"], "notes": b["notes"],
            "counts": b["counts"]}
     if apertus is not None:                            # W5: the facts of the Apertus step (no path of the user)
-        man["apertus_values"] = {k: v for k, v in apertus.items() if k not in ("heads_json", "entry_json")} | {
+        man["apertus_values"] = {k: v for k, v in apertus.items()
+                                 if k not in ("heads_json", "entry_json", "suggestion_items")} | {
             "values_from_apertus": sorted(f for f in FIELDS if isinstance(values[f], dict) and values[f].get("found")
                                           and av.is_apertus_tier(values[f].get("tier"))),
             "module": {"path": av.SCRIPT, "version": av.VERSION, "sha256": sha256(Path(av.__file__))}}
+        man["apertus_suggestions"] = suggestion_key(apertus.get("suggestion_items"), b["labels"],
+                                                    files["apertus_entry"]["sha256"])        # W6
     if not known:
         if apertus is not None:
             fields_ap = man["apertus_values"]["values_from_apertus"]
@@ -1620,6 +1631,16 @@ def part_graphs(out_dir, *, root=None) -> tuple[dict, dict]:
 
 VALUES_NS = "https://schema.parlpdfech.example/values/"
 VALUES_SCHEMA = "parlpdfech-values-ttl/2"
+# W6: the predicates of a node of the class pvl:Suggestion (key of the manifest item, local name)
+SUGGESTION_TEXT = (("field", "field"), ("status", "status"), ("value", "value"), ("printed", "printed"),
+                   ("tier", "tier"), ("band", "band"), ("called_because", "calledBecause"), ("block", "block"))
+SUGGESTION_DECIMAL = (("probability", "probability"), ("head_probability", "headProbability"))
+SUGGESTION_INT = (("k", "tierEqual"), ("n", "tierUnits"), ("page", "page"), ("last_page", "lastPage"),
+                  ("char_start", "charStart"), ("char_end", "charEnd"))
+SUGGESTION_HEADER = ("# pvl:Suggestion nodes (pvl:inRecord false) are Apertus suggestions below the entry limit. They "
+                     "are NOT statements of {prefix}.ech.ttl. pvl:probability of a suggestion is (equal + 0.5) / "
+                     "(units + 1) of its tier on the development documents of the entry design, where the rules found "
+                     "no value or a weak value.\n")
 
 
 def written_value_labels(labels: dict) -> list[dict]:
@@ -1627,6 +1648,64 @@ def written_value_labels(labels: dict) -> list[dict]:
     has none), in the sequence of the label file."""
     return [x for x in labels.get("label_assertions") or []
             if x.get("label_kind") == "pdf_value" and x.get("instance_path")]
+
+
+def label_field(x: dict) -> str:
+    """The field of a value label (its id ends with pdf-<field>)."""
+    return str(x["global_uri"]).rsplit("/", 1)[-1].removeprefix("pdf-")
+
+
+def suggestion_key(items, labels: dict, entry_sha256: str) -> dict:
+    """W6: the manifest key apertus_suggestions of a record of the Apertus mode (also with no item). `items`: the
+    list of m12_apertus_values.suggestions. A suggestion is never a value of the eCH-0295 part: the writer stops if
+    an item has another status, or if its field has a written value."""
+    items = [dict(x) for x in items or []]
+    written = {label_field(x) for x in written_value_labels(labels)}
+    seen = set()
+    for x in items:
+        f = x.get("field")
+        if f not in av.cmb.Q2_FIELDS or f in seen:
+            raise WriterStop(f"a suggestion has the field {f!r}: not a Q2 field, or a second suggestion of the field")
+        seen.add(f)
+        if x.get("status") != av.SUGGESTION_STATUS or x.get("in_record") is not False:
+            raise WriterStop(f"{f}: a suggestion has the status {x.get('status')!r} (in_record {x.get('in_record')!r})")
+        if f in written:
+            raise WriterStop(f"{f}: a suggestion below the entry limit for a field with a value of the eCH-0295 part")
+    return {"form": av.SUGGESTION_FORM, "status": av.SUGGESTION_STATUS, "rule": av.SUGGESTION_RULE,
+            "probability_rule": av.PROBABILITY_RULE, "entry_sha256": entry_sha256, "items": items}
+
+
+def suggestion_items(man: dict) -> list[dict]:
+    """W6: the items of the manifest key apertus_suggestions (empty for a record with no such key)."""
+    return list((man.get("apertus_suggestions") or {}).get("items") or [])
+
+
+def add_suggestions(g, man: dict) -> int:
+    """W6: one node <record IRI>/suggestion/<field> of the class pvl:Suggestion for each item of the manifest key
+    apertus_suggestions, linked from the record with pvl:suggestion. The node is not a statement of the eCH-0295
+    part: no pvl:resource, pvl:property, pvl:entity, pvl:label or pvl:calibration. Returns the count of nodes."""
+    import rdflib  # noqa: PLC0415
+    from decimal import Decimal  # noqa: PLC0415
+    from rdflib.namespace import RDF, XSD  # noqa: PLC0415
+    pv = rdflib.Namespace(VALUES_NS)
+    record = rdflib.URIRef(man["record_iri"])
+    items = suggestion_items(man)
+    for x in items:
+        node = rdflib.URIRef(f"{man['record_iri']}/suggestion/{x['field']}")
+        g.add((record, pv.suggestion, node))
+        g.add((node, RDF.type, pv.Suggestion))
+        for key, pred in SUGGESTION_TEXT:
+            if x.get(key) is not None:
+                g.add((node, pv[pred], rdflib.Literal(str(x[key]))))
+        g.add((node, pv.inRecord, rdflib.Literal(False)))
+        g.add((node, pv.near, rdflib.Literal(bool(x.get("near")))))
+        for key, pred in SUGGESTION_DECIMAL:
+            if x.get(key) is not None:
+                g.add((node, pv[pred], rdflib.Literal(Decimal(str(x[key])), datatype=XSD.decimal)))
+        for key, pred in SUGGESTION_INT:
+            if x.get(key) is not None and not (key == "last_page" and x.get("last_page") == x.get("page")):
+                g.add((node, pv[pred], rdflib.Literal(int(x[key]))))
+    return len(items)
 
 
 def values_graph(labels: dict, man: dict):
@@ -1672,6 +1751,7 @@ def values_graph(labels: dict, man: dict):
         g.add((node, pv.label, rdflib.URIRef(x["global_uri"])))
         if x.get("calibration"):
             g.add((node, pv.calibration, rdflib.URIRef(x["calibration"])))
+    add_suggestions(g, man)                            # W6: after the readings; no reading changes
     return g
 
 
@@ -1708,6 +1788,7 @@ def rdf_step(out_dir, *, root=None) -> dict:
         f"(equal to OpenParlData + 0.5) / (documents + 1). Each value can be wrong.\n"
         f"# The prefix pvl is a vocabulary of this project. Its domain is a placeholder: the vocabulary is not "
         f"published.\n"
+        + (SUGGESTION_HEADER.format(prefix=man["doc_id"]) if suggestion_items(man) else "")      # W6
         + values.serialize(format="turtle"), encoding="utf-8")
     out = {k: {"path": paths[k].name, "sha256": sha256(paths[k]), "bytes": paths[k].stat().st_size}
            for k in ("gesamt_trig", "gesamt_rdfxml", "ech_ttl", "ech_rdfxml", "values_ttl")}
@@ -1719,7 +1800,8 @@ def rdf_step(out_dir, *, root=None) -> dict:
               "named_graphs": {name: f"{record_iri}/{name}" for name in GRAPHS},
               "triples": {name: len(graphs[name]) for name in GRAPHS} | {"union": len(union)},
               "values_ttl": {"form": VALUES_SCHEMA, "namespace": VALUES_NS, "triples": len(values),
-                             "readings": len(written_value_labels(rdf.load_yaml(paths["labels_yaml"])))},
+                             "readings": len(written_value_labels(rdf.load_yaml(paths["labels_yaml"]))),
+                             "suggestions": len(suggestion_items(man))},                        # W6
               "files": out, "seconds": round(time.perf_counter() - t0, 3)}
     man["rdf"] = result
     man["outputs"] |= out

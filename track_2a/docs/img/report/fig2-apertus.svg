@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 898 310" width="612" height="211.3" role="img" aria-labelledby="t d">
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+<title id="t">How Apertus is read out, and how a linear head gives a probability</title>
+<desc id="d">Two line drawings. Left: a page has an arrow into a large box with a grid of small cells, and a long arrow goes up at the left side of the grid. A stack of speech bubbles with a question mark has an arrow into the box below the right columns; a grey line parts these columns from the others. In the right column, one cell above the middle is yellow. An arrow takes it out to a column of yellow cells, and a further arrow goes down to a storage drum. Right: Top part: a column of yellow cells, the state, goes through many lines into a funnel, the head. An arrow leads to one dark bar for each option; one bar is long and has a check mark. Bottom part: a page with blocks. Each block leads to its own yellow cell and to a copy of the same small funnel, and each copy gives one bar. The yellow block has the long bar with a check mark.</desc>
+<style>
+.dp { fill: #FBFAF6; stroke: #1B1D22; stroke-width: 1.3; }
+.dl { fill: none; stroke: #1B1D22; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
+.dg { fill: none; stroke: #5A5F6B; stroke-width: 1.6; stroke-linecap: round; }
+.dd { fill: none; stroke: #1B1D22; stroke-width: 1.1; stroke-dasharray: 3 2.5; }
+.dc { fill: #FBFAF6; stroke: #1B1D22; stroke-width: 1; }
+.dm { fill: #F2C14E; stroke: #1B1D22; stroke-width: 1; }
+.df { fill: #1B1D22; }
+.dw { fill: none; stroke: #F2C14E; stroke-width: 7; stroke-linecap: round; }
+</style>
+<svg x="0" y="0" width="435" height="310" viewBox="0 0 435 310">
+<rect x="0.75" y="0.75" width="433.5" height="308.5" rx="14" fill="#FBFAF6" stroke="#CFC9BC" stroke-width="1.5"/>
+<g transform="translate(17.5 17.5) scale(1.25)">
+<path class="dp" d="M12 50h38l10 10v52a2 2 0 0 1-2 2H12a2 2 0 0 1-2-2V52a2 2 0 0 1 2-2z"/><path class="dl" d="M50 50v10h10"/>
+<path class="dg" d="M17 66h28M17 75h34M17 84h34M17 93h34M17 102h20"/>
+<path class="dl" d="M62 82 76 82M70.6 77.5 76 82 70.6 86.5"/>
+<rect class="dp" x="78" y="10" width="146" height="150" rx="3"/>
+<path class="dl" d="M92 150 92 22M87.5 27.4 92 22 96.5 27.4"/>
+<path class="dg" d="M191.5 16v138"/>
+<rect class="dc" x="104" y="22" width="10" height="10" rx="1"/>
+<rect class="dc" x="119" y="22" width="10" height="10" rx="1"/>
+<rect class="dc" x="134" y="22" width="10" height="10" rx="1"/>
+<rect class="dc" x="149" y="22" width="10" height="10" rx="1"/>
+<rect class="dc" x="164" y="22" width="10" height="10" rx="1"/>
+<rect class="dc" x="179" y="22" width="10" height="10" rx="1"/>
+<rect class="dc" x="194" y="22" width="10" height="10" rx="1"/>
+<rect class="dc" x="209" y="22" width="10" height="10" rx="1"/>
+<rect class="dc" x="104" y="37" width="10" height="10" rx="1"/>
+<rect class="dc" x="119" y="37" width="10" height="10" rx="1"/>
+<rect class="dc" x="134" y="37" width="10" height="10" rx="1"/>
+<rect class="dc" x="149" y="37" width="10" height="10" rx="1"/>
+<rect class="dc" x="164" y="37" width="10" height="10" rx="1"/>
+<rect class="dc" x="179" y="37" width="10" height="10" rx="1"/>
+<rect class="dc" x="194" y="37" width="10" height="10" rx="1"/>
+<rect class="dc" x="209" y="37" width="10" height="10" rx="1"/>
+<rect class="dc" x="104" y="52" width="10" height="10" rx="1"/>
+<rect class="dc" x="119" y="52" width="10" height="10" rx="1"/>
+<rect class="dc" x="134" y="52" width="10" height="10" rx="1"/>
+<rect class="dc" x="149" y="52" width="10" height="10" rx="1"/>
+<rect class="dc" x="164" y="52" width="10" height="10" rx="1"/>
+<rect class="dc" x="179" y="52" width="10" height="10" rx="1"/>
+<rect class="dc" x="194" y="52" width="10" height="10" rx="1"/>
+<rect class="dc" x="209" y="52" width="10" height="10" rx="1"/>
+<rect class="dc" x="104" y="67" width="10" height="10" rx="1"/>
+<rect class="dc" x="119" y="67" width="10" height="10" rx="1"/>
+<rect class="dc" x="134" y="67" width="10" height="10" rx="1"/>
+<rect class="dc" x="149" y="67" width="10" height="10" rx="1"/>
+<rect class="dc" x="164" y="67" width="10" height="10" rx="1"/>
+<rect class="dc" x="179" y="67" width="10" height="10" rx="1"/>
+<rect class="dc" x="194" y="67" width="10" height="10" rx="1"/>
+<rect class="dm" x="209" y="67" width="10" height="10" rx="1"/>
+<rect class="dc" x="104" y="82" width="10" height="10" rx="1"/>
+<rect class="dc" x="119" y="82" width="10" height="10" rx="1"/>
+<rect class="dc" x="134" y="82" width="10" height="10" rx="1"/>
+<rect class="dc" x="149" y="82" width="10" height="10" rx="1"/>
+<rect class="dc" x="164" y="82" width="10" height="10" rx="1"/>
+<rect class="dc" x="179" y="82" width="10" height="10" rx="1"/>
+<rect class="dc" x="194" y="82" width="10" height="10" rx="1"/>
+<rect class="dc" x="209" y="82" width="10" height="10" rx="1"/>
+<rect class="dc" x="104" y="97" width="10" height="10" rx="1"/>
+<rect class="dc" x="119" y="97" width="10" height="10" rx="1"/>
+<rect class="dc" x="134" y="97" width="10" height="10" rx="1"/>
+<rect class="dc" x="149" y="97" width="10" height="10" rx="1"/>
+<rect class="dc" x="164" y="97" width="10" height="10" rx="1"/>
+<rect class="dc" x="179" y="97" width="10" height="10" rx="1"/>
+<rect class="dc" x="194" y="97" width="10" height="10" rx="1"/>
+<rect class="dc" x="209" y="97" width="10" height="10" rx="1"/>
+<rect class="dc" x="104" y="112" width="10" height="10" rx="1"/>
+<rect class="dc" x="119" y="112" width="10" height="10" rx="1"/>
+<rect class="dc" x="134" y="112" width="10" height="10" rx="1"/>
+<rect class="dc" x="149" y="112" width="10" height="10" rx="1"/>
+<rect class="dc" x="164" y="112" width="10" height="10" rx="1"/>
+<rect class="dc" x="179" y="112" width="10" height="10" rx="1"/>
+<rect class="dc" x="194" y="112" width="10" height="10" rx="1"/>
+<rect class="dc" x="209" y="112" width="10" height="10" rx="1"/>
+<rect class="dc" x="104" y="127" width="10" height="10" rx="1"/>
+<rect class="dc" x="119" y="127" width="10" height="10" rx="1"/>
+<rect class="dc" x="134" y="127" width="10" height="10" rx="1"/>
+<rect class="dc" x="149" y="127" width="10" height="10" rx="1"/>
+<rect class="dc" x="164" y="127" width="10" height="10" rx="1"/>
+<rect class="dc" x="179" y="127" width="10" height="10" rx="1"/>
+<rect class="dc" x="194" y="127" width="10" height="10" rx="1"/>
+<rect class="dc" x="209" y="127" width="10" height="10" rx="1"/>
+<rect class="dc" x="174" y="184" width="42" height="26" rx="8"/>
+<rect class="dc" x="179" y="180" width="42" height="26" rx="8"/>
+<path class="dp" d="M192 176h26a8 8 0 0 1 8 8v10a8 8 0 0 1-8 8H206l-8 8v-8h-6a8 8 0 0 1-8-8v-10a8 8 0 0 1 8-8z"/>
+<path class="dl" d="M200.5 185.5a4.5 4.5 0 1 1 6.3 4.1c-1.3.6-1.8 1.4-1.8 2.9"/><circle class="df" cx="205" cy="196.6" r="1.2"/>
+<path class="dl" d="M205 174 205 162M201.1 166.6 205 162 208.9 166.6"/>
+<path class="dl" d="M219 72 247 72M241.6 67.5 247 72 241.6 76.5"/>
+<rect class="dm" x="252" y="33.5" width="8" height="7"/>
+<rect class="dm" x="252" y="43.5" width="8" height="7"/>
+<rect class="dm" x="252" y="53.5" width="8" height="7"/>
+<rect class="dm" x="252" y="63.5" width="8" height="7"/>
+<rect class="dm" x="252" y="73.5" width="8" height="7"/>
+<rect class="dm" x="252" y="83.5" width="8" height="7"/>
+<rect class="dm" x="252" y="93.5" width="8" height="7"/>
+<rect class="dm" x="252" y="103.5" width="8" height="7"/>
+<path class="dl" d="M256 114 256 146M260.5 140.6 256 146 251.5 140.6"/>
+<path class="dp" d="M238 153v34a18 5 0 0 0 36 0v-34"/>
+<ellipse class="dp" cx="256" cy="153" rx="18" ry="5"/>
+<path class="dl" d="M238 170a18 5 0 0 0 36 0"/>
+</g>
+</svg>
+<path d="M445 147 L453 155 L445 163" fill="none" stroke="#5A5F6B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<svg x="463" y="0" width="435" height="310" viewBox="0 0 435 310">
+<rect x="0.75" y="0.75" width="433.5" height="308.5" rx="14" fill="#FBFAF6" stroke="#CFC9BC" stroke-width="1.5"/>
+<g transform="translate(17.5 17.5) scale(1.25)">
+<rect class="dm" x="14" y="16" width="8" height="7"/>
+<rect class="dm" x="14" y="26" width="8" height="7"/>
+<rect class="dm" x="14" y="36" width="8" height="7"/>
+<rect class="dm" x="14" y="46" width="8" height="7"/>
+<rect class="dm" x="14" y="56" width="8" height="7"/>
+<rect class="dm" x="14" y="66" width="8" height="7"/>
+<rect class="dm" x="14" y="76" width="8" height="7"/>
+<rect class="dm" x="14" y="86" width="8" height="7"/>
+<path class="dg" d="M24 19.5 58 28M24 29.5 58 36M24 39.5 58 44M24 49.5 58 52M24 59.5 58 60M24 69.5 58 68M24 79.5 58 76M24 89.5 58 84"/>
+<path class="dp" d="M58 24 90 44v24L58 88z"/>
+<path class="dl" d="M90 56 110 56M104.6 51.5 110 56 104.6 60.5"/>
+<path class="dg" d="M126 12v88"/>
+<rect class="df" x="126" y="15" width="8" height="8"/>
+<rect class="df" x="126" y="27" width="5" height="8"/>
+<rect class="df" x="126" y="39" width="146" height="8"/>
+<rect class="df" x="126" y="51" width="12" height="8"/>
+<rect class="df" x="126" y="63" width="4" height="8"/>
+<rect class="df" x="126" y="75" width="7" height="8"/>
+<rect class="df" x="126" y="87" width="16" height="8"/>
+<path class="dl" d="M279 43l3.5 3.5 6-7.5"/>
+<path class="dp" d="M16 116h54l12 12v82a2 2 0 0 1-2 2H16a2 2 0 0 1-2-2V118a2 2 0 0 1 2-2z"/><path class="dl" d="M70 116v12h12"/>
+<rect class="dc" x="20" y="126" width="46" height="12"/><path class="dg" d="M24 132h30"/>
+<rect class="dm" x="20" y="144" width="56" height="26" rx="1.5"/><path class="dg" d="M24 151h46M24 158h46M24 165h30"/>
+<rect class="dc" x="20" y="176" width="56" height="14"/><path class="dg" d="M24 183h40"/>
+<rect class="dc" x="20" y="196" width="40" height="10"/><path class="dg" d="M24 201h24"/>
+<path class="dg" d="M68 132H92M78 157H92M78 183H92M62 201H92"/>
+<rect class="dm" x="93" y="128.5" width="7" height="7"/>
+<rect class="dm" x="93" y="153.5" width="7" height="7"/>
+<rect class="dm" x="93" y="179.5" width="7" height="7"/>
+<rect class="dm" x="93" y="197.5" width="7" height="7"/>
+<path class="dl" d="M100 132h4M100 157h4M100 183h4M100 201h4"/>
+<path class="dp" d="M104 127 115 130v4L104 137z"/>
+<path class="dp" d="M104 152 115 155v4L104 162z"/>
+<path class="dp" d="M104 178 115 181v4L104 188z"/>
+<path class="dp" d="M104 196 115 199v4L104 206z"/>
+<path class="dl" d="M115 132h11M115 157h11M115 183h11M115 201h11"/>
+<path class="dg" d="M126 122v88"/>
+<rect class="df" x="126" y="128" width="9" height="8"/>
+<rect class="df" x="126" y="153" width="139" height="8"/>
+<rect class="df" x="126" y="179" width="18" height="8"/>
+<rect class="df" x="126" y="197" width="5" height="8"/>
+<path class="dl" d="M272 157l3.5 3.5 6-7.5"/>
+</g>
+</svg>
+</svg>

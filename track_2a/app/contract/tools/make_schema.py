@@ -247,6 +247,37 @@ value = obj({
     "label_id": S, "calibration_id": opt(S),
     "instance_path": {**opt(S), "description": "The path in the eCH-0295 file; null for a weak candidate."},
 })
+# 16.10.2026 (CONTRACT.md chapter 25): an Apertus suggestion below the entry limit (manifest key apertus_suggestions)
+suggestion = obj({
+    "field": enum(*FIELDS, desc="A field with no written value in this record."),
+    "value": {**S, "description": "The value in the form of the eCH-0295 part (the wording on one line, a calendar "
+                                  "day or the affair number of the reader): the value that the record would have "
+                                  "if the tier had entered. It is NOT in the record."},
+    "value_printed": {**S, "description": "The wording of the PDF at the span, with no change."},
+    "probability": {**P, "description": "(k + 0.5) / (n + 1) of the tier on the development documents of the entry "
+                    "design (limits 0.005 and 0.995, 4 decimals). The tier did not pass the entry test."},
+    "k": {**I, "minimum": 0, "description": "Units of the tier with a value equal to the OpenParlData value."},
+    "n": {**I, "minimum": 0, "description": "Units of the tier (development documents with a reference value)."},
+    "tier": {**S, "description": "The Q2 tier of the Apertus step: apertus_q2_<field>_<band>, or apertus_q2_<field> "
+                                 "for a field with one tier."},
+    "band": opt(enum("hi", "lo", desc="hi: the head probability is 0.80 or more; lo: 0.50 to below 0.80.")),
+    "head_probability": {**opt(P), "description": "The probability of the Apertus head for the top block (not the "
+                         "probability of the value)."},
+    "near": {**B, "description": "true: the head probability or the gap to the second block is near a threshold "
+                                 "of the head; another computer can give another decision."},
+    "page": I, "last_page": opt(I),
+    "char_start": {**I, "description": "Start of the span in the document text."}, "char_end": I,
+    "block_id": opt(S), "atom_ids": IDS,
+    "spans": arr(obj({"atom_id": S, "start": I, "end": I}),
+                 "The part of each line that holds the value: positions in the text of the line."),
+    "status": {"const": "below_entry_limit"},
+    "in_record": {"const": False},
+    "called_because": opt(enum("rules_found_no_value", "weak_rule_tier",
+                               desc="Why the combined reader asked the head: the rules found no value, or only a "
+                                    "value of a weak rule tier.")),
+}, desc="An Apertus value of a Q2 tier that did not enter. It is not in the eCH-0295 part. The values file has it "
+        "as a node of the class pvl:Suggestion with pvl:inRecord false.")
+
 slot = obj({
     "slot": S, "state": enum(*SLOT_STATES), "reason": {**S, "description": "The string key slot_reason.<reason>. "
                "weak_candidate_only: the rules found only a value of a tier below the floor; label_id names the "
@@ -372,12 +403,16 @@ schema = {
         "values": arr(value, "One entry for each value that a code rule read from the PDF, in the sequence of the "
                              "labels file: the values of the record (written true) and the weak candidates "
                              "(written false). Empty if head_values.source is not pdf."),
+        "apertus_suggestions": arr(suggestion, "Optional (16.10.2026, CONTRACT.md chapter 25). Only a record of the "
+                                   "Apertus step of make convert has this key: the Apertus suggestions below the "
+                                   "entry limit, in the sequence of the manifest (empty if there is none). They are "
+                                   "not values of the record. A record with no such manifest key has no key."),
         "slots": arr(slot, "One entry for each slot of the classes Affair, Submission and ResponseStep of eCH-0295 "
                            "with one of 4 states. Empty if head_values.source is not pdf."),
         "document": document, "pages": arr(page), "blocks": arr(block),
         "labels": arr(label), "calibrations": arr(calibration), "counts": counts, "checks": arr(check),
         "files": arr(file_),
-    }),
+    }, optional=("apertus_suggestions",)),
 }
 with open(sys.argv[1], "w", encoding="utf-8") as f:
     json.dump(schema, f, ensure_ascii=False, indent=1)

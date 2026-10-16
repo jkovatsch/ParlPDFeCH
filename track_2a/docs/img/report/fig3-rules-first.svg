@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 898 310" width="612" height="211.3" role="img" aria-labelledby="t d">
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+<title id="t">Rules first, then a head; and what make convert adds</title>
+<desc id="d">Two line drawings. Left: a box with braces for the code rules has arrows to a long bar, a short bar and an empty frame. Each has a mark at its middle. The long bar passes the mark: a check mark and an arrow join it to a record. The short bar, for the first author only, and the empty frame get a cross. Their arrows go to a yellow cell and a funnel. The bar of the funnel passes its own mark, and an arrow joins it to a further place in the record. Right: a record has a yellow row. A yellow marker joins this row to a yellow line on a PDF page, under a magnifier. Another record has a crossed-out row. Below, a long bar and a shorter bar run across a hatched band around a mark. The long bar ends after the band and has an arrow to a plain oval. The shorter bar ends inside the band, after the mark, and has an arrow to a hatched oval.</desc>
+<style>
+.dp { fill: #FBFAF6; stroke: #1B1D22; stroke-width: 1.3; }
+.dl { fill: none; stroke: #1B1D22; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
+.dg { fill: none; stroke: #5A5F6B; stroke-width: 1.6; stroke-linecap: round; }
+.dd { fill: none; stroke: #1B1D22; stroke-width: 1.1; stroke-dasharray: 3 2.5; }
+.dc { fill: #FBFAF6; stroke: #1B1D22; stroke-width: 1; }
+.dm { fill: #F2C14E; stroke: #1B1D22; stroke-width: 1; }
+.df { fill: #1B1D22; }
+.dw { fill: none; stroke: #F2C14E; stroke-width: 7; stroke-linecap: round; }
+</style>
+<svg x="0" y="0" width="435" height="310" viewBox="0 0 435 310">
+<rect x="0.75" y="0.75" width="433.5" height="308.5" rx="14" fill="#FBFAF6" stroke="#CFC9BC" stroke-width="1.5"/>
+<g transform="translate(17.5 17.5) scale(1.25)">
+<rect class="dp" x="10" y="88" width="40" height="40" rx="3"/>
+<path class="dl" d="M26 96c-4 0-1 10-6 12 5 2 2 12 6 12M34 96c4 0 1 10 6 12-5 2-2 12-6 12"/>
+<path class="dl" d="M52 98 70 46M64 49.6 70 46 72.5 52.5"/>
+<path class="dl" d="M52 108 70 108M64.6 103.5 70 108 64.6 112.5"/>
+<path class="dl" d="M52 118 70 170M72.5 163.5 70 170 64 166.4"/>
+<rect class="dc" x="74" y="36" width="64" height="9"/><rect class="df" x="74" y="36" width="54" height="9"/>
+<rect class="dc" x="74" y="103.5" width="64" height="9"/><rect class="df" x="74" y="103.5" width="19" height="9"/>
+<rect class="dc" x="74" y="171" width="64" height="9"/>
+<path class="dl" d="M106 31v19M106 98.5v19M106 166v19"/>
+<path class="dl" d="M146 41l3.5 3.5 6-7.5"/>
+<path class="dl" d="M160 40.5 272 40.5M266.6 36 272 40.5 266.6 45"/>
+<path class="dl" d="M146 104.5l7 7M153 104.5l-7 7M146 172l7 7M153 172l-7 7"/>
+<path class="dl" d="M158 110 172 128M172.2 122 172 128 166.1 126.8"/>
+<path class="dl" d="M158 176 172 148M166.5 150.4 172 148 173.4 153.8"/>
+<rect class="dm" x="174" y="134" width="9" height="9" rx="1"/>
+<path class="dl" d="M183 138.5h5"/>
+<path class="dp" d="M188 130.5 203 134.5v8L188 146.5z"/>
+<rect class="dc" x="207" y="134" width="44" height="9"/><rect class="df" x="207" y="134" width="40" height="9"/>
+<path class="dl" d="M242.2 129v19"/>
+<path class="dl" d="M256 138.5 272 138.5M267.4 134.6 272 138.5 267.4 142.4"/>
+<rect class="dp" x="276" y="24" width="36" height="172" rx="3"/>
+<rect class="dc" x="281" y="33" width="26" height="15" rx="1.5"/>
+<rect class="dc" x="281" y="131" width="26" height="15" rx="1.5"/>
+<path class="dg" d="M285 40.5h18M285 138.5h18M283 64h22M283 80h22M283 96h22M283 112h22M283 162h22M283 178h22"/>
+</g>
+</svg>
+<svg x="463" y="0" width="435" height="310" viewBox="0 0 435 310">
+<rect x="0.75" y="0.75" width="433.5" height="308.5" rx="14" fill="#FBFAF6" stroke="#CFC9BC" stroke-width="1.5"/>
+<g transform="translate(17.5 17.5) scale(1.25)">
+<g transform="translate(0 -98)">
+<rect class="dp" x="14" y="110" width="90" height="44" rx="3"/>
+<rect class="dm" x="22" y="122" width="74" height="20" rx="2"/><path class="dg" d="M30 132h40"/>
+<rect class="dp" x="14" y="164" width="90" height="44" rx="3"/>
+<rect class="dc" x="22" y="176" width="74" height="20" rx="2"/><path class="dg" d="M30 186h34"/>
+<path class="dl" d="M18 172 100 200"/>
+<path class="dp" d="M198 110h62l12 12v86a2 2 0 0 1-2 2H198a2 2 0 0 1-2-2V112a2 2 0 0 1 2-2z"/><path class="dl" d="M260 110v12h12"/>
+<path class="dg" d="M204 124h46M204 152h58M204 164h58M204 176h44M204 188h58M204 200h30"/>
+<rect class="dm" x="201" y="131" width="62" height="12" rx="1.5"/><path class="dg" d="M204 137h52"/>
+<path class="dw" d="M96 132c50 0 60 5 105 5"/>
+<path class="dl" d="M96 132c50 0 60 5 105 5"/>
+<circle class="dl" cx="246" cy="137" r="12"/><path class="dl" d="M254.5 145.5l9 9"/>
+</g>
+<g transform="translate(0 122)">
+<path class="dg" d="M105 19.5 108.5 16M105 26.5 115.5 16M105 33.5 122.5 16M105 40.5 129.5 16M105 47.5 131 21.5M105 54.5 131 28.5M105 61.5 131 35.5M105 68.5 131 42.5M105 75.5 131 49.5M105.5 82 131 56.5M112.5 82 131 63.5M119.5 82 131 70.5M126.5 82 131 77.5"/>
+<rect class="dc" x="14" y="28" width="130" height="9"/><rect class="df" x="14" y="28" width="124.8" height="9"/>
+<rect class="dc" x="14" y="60" width="130" height="9"/><rect class="df" x="14" y="60" width="109.2" height="9"/>
+<path class="dl" d="M118 12v74"/>
+<path class="dl" d="M152 32.5 168 32.5M163.4 28.6 168 32.5 163.4 36.4"/>
+<path class="dl" d="M152 64.5 168 64.5M163.4 60.6 168 64.5 163.4 68.4"/>
+<rect class="dc" x="174" y="24" width="50" height="17" rx="8"/><path class="dl" d="M184 32.5h30"/>
+<rect class="dc" x="174" y="56" width="50" height="17" rx="8"/>
+<path class="dg" d="M182 62 186 58M182 70 194 58M189 71 202 58M197 71 210 58M205 71 216 60M213 71 216 68"/>
+<path class="dl" d="M184 64.5h30"/>
+</g>
+</g>
+</svg>
+</svg>

@@ -22,7 +22,8 @@
 #
 # Environment (the Makefile sets it): PYTHON, APERTUS_REPO, APERTUS_REVISION, APERTUS_MODEL_DIR, APERTUS_MODEL
 # (auto: set up the model; none: the heads only, for a GPU of another computer), APERTUS_SOURCE_DIR (optional: a
-# folder with a download of the omni model), APERTUS_BACKEND, HEADS_REPO, HEADS_REVISION, HEADS_DIR.
+# folder with a download of the omni model), APERTUS_BACKEND, HEADS_REPO, HEADS_REVISION, HEADS_DIR,
+# APERTUS_SETUP_OPTIONAL (1 from 'make setup': with no GPU, a NOTE and exit code 0 in place of a stop).
 # Tested only on one Mac (Apple M4, 32 GB) on 16.10.2026, with HF_HUB_OFFLINE=1 against a local Hugging Face
 # cache. Linux and Windows are NOT tested.
 
@@ -43,6 +44,7 @@ HEADS_REPO=${HEADS_REPO:-JonathanKovatsch/parlpdfech-heads}
 HEADS_REVISION=${HEADS_REVISION:-}
 HEADS_DIR=${HEADS_DIR:-}
 VERIFY=${APERTUS_VERIFY:-1}
+OPTIONAL=${APERTUS_SETUP_OPTIONAL:-0}
 OUT=$TRACK/data/apertus
 HEADS_DEST=$OUT/heads
 LAYOUT=$HERE/apertus/text_branch_layout.json
@@ -97,7 +99,7 @@ if command -v nvidia-smi >/dev/null 2>&1; then
   GPU=$(nvidia-smi --query-gpu=name,memory.total --format=csv,noheader 2>/dev/null | head -n 1 || true)
   [ -n "$GPU" ] || GPU=none
 fi
-say "computer: $OS $ARCH, $(awk -v b="$RAM" 'BEGIN { printf "%.0f", b / 1e9 }') GB memory; NVIDIA GPU: $GPU"
+say "computer: $OS $ARCH, $(awk -v b="$RAM" 'BEGIN { printf "%.0f", b / 1073741824 }') GiB memory; NVIDIA GPU: $GPU"
 
 # ---------------------------------------------------------------------------------------- 2. packages
 if [ "$OS" = Darwin ] && [ "$ARCH" = arm64 ] && [ "$MODEL_MODE" = none ]; then
@@ -126,11 +128,18 @@ if [ "$rc" -ne 0 ] && [ "$REASON" != memory_low ]; then
   if [ "$MODEL_MODE" = none ]; then
     note "$MSG"
     note "APERTUS_MODEL=none: only the heads are set up. A GPU of another computer can make the read-out ($GPU_DOC)."
+  elif [ "$OPTIONAL" = 1 ]; then
+    note "$MSG"
+    note "The Apertus step is not set up on this computer: no model is downloaded. make convert uses the code rules only."
+    note "A GPU of another computer can make the read-out ($GPU_DOC); 'make setup-apertus APERTUS_MODEL=none' then sets up the heads here."
+    note "After a change (a new driver, a GPU of another computer): 'make gpu' shows the state and the ways."
+    exit 0
   else
     err "$MSG"
     err "No model is downloaded. Ways out: (1) use a GPU in the cloud or on another computer ($GPU_DOC);"
     err "    'make setup-apertus APERTUS_MODEL=none' then sets up only the heads on this computer;"
     err "    (2) APERTUS=0 for code rules only (make convert APERTUS=0 ...)."
+    err "After a change (a new driver, a GPU of another computer): 'make gpu' shows the state and the ways."
     exit 1
   fi
 fi
@@ -178,7 +187,7 @@ else
         exit 1
       fi
       if ! "$HF" auth whoami >/dev/null 2>&1; then
-        err "the model $REPO needs a Hugging Face account. Do these steps yourself, then run 'make setup-apertus' again:"
+        err "the model $REPO needs a Hugging Face account. Do these steps yourself, then run 'make setup' again:"
         err "  1. make an account on https://huggingface.co and open https://huggingface.co/$REPO"
         err "  2. read and accept the conditions of the model on that page"
         err "  3. run: $HF auth login   (with your own access token; nobody else types it)"

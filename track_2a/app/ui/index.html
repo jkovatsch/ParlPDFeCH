@@ -179,7 +179,7 @@
 </section>
 <section class="view-place" aria-labelledby="h-view-values">
 <div class="place-head"><h2 id="h-view-values" data-i18n="view.values.title"></h2></div>
-<p class="small" data-i18n="view.values.lead"></p>
+<p class="small" id="view-values-lead"></p>
 <p class="small" data-i18n="view.values.certain"></p>
 <table class="vt">
 <caption class="vh" data-i18n="view.values.title"></caption>
@@ -187,6 +187,15 @@
 <tbody id="view-rows"></tbody>
 </table>
 <p class="small view-not" id="view-not" hidden></p>
+<section class="view-sugg" id="view-sugg" hidden aria-labelledby="h-view-sugg">
+<h3 id="h-view-sugg" data-i18n="view.sugg.title"></h3>
+<p class="small" data-i18n="view.sugg.lead"></p>
+<table class="vt vt-sugg">
+<caption class="vh" data-i18n="view.sugg.title"></caption>
+<thead><tr><th scope="col" data-i18n="view.col.field"></th><th scope="col" data-i18n="view.col.value"></th><th scope="col" data-i18n="view.col.probability"></th><th scope="col" data-i18n="view.col.page"></th></tr></thead>
+<tbody id="view-sugg-rows"></tbody>
+</table>
+</section>
 <p class="small"><a class="more" href="#/about/numbers" data-i18n="view.more.numbers"></a></p>
 </section>
 <section class="view-place" aria-labelledby="h-view-rdf">
@@ -219,12 +228,21 @@
 <section class="screen" id="screen-upload" aria-labelledby="h-upload" hidden>
 <h1 id="h-upload" tabindex="-1" data-i18n="s2.title"></h1>
 <p class="mode-line" id="upload-mode" hidden></p>
-<div id="upload-off" hidden>
+<!-- A server that converts no PDF of the reader (modes.upload not true, or modes.read_only): no file field.
+     A local server shows the commands of the terminal; a hosted site shows its own text (keys .hosted). -->
+<div class="upload-off" id="upload-off" hidden>
 <p data-i18n="s2.read_only"></p>
+<!-- The sequence of the README: make setup (with the Apertus step if there is a GPU), make convert, make view. -->
+<ol class="cmd-list" id="upload-terminal" role="list" hidden>
+<li><code class="cmd" data-i18n="s2.terminal.setup.cmd"></code><span data-i18n="s2.terminal.setup"></span></li>
+<li><code class="cmd" data-i18n="s2.terminal.convert.cmd"></code><span data-i18n="s2.terminal.convert"></span></li>
+<li><code class="cmd" data-i18n="s2.terminal.view.cmd"></code><span data-i18n="s2.terminal.view"></span></li>
+</ol>
+<p class="small" id="upload-needs" data-i18n="s2.terminal.needs" hidden></p>
 <p><a class="btn btn-primary" href="#/samples" data-i18n="s0.button.sample"></a></p>
 <p id="upload-off-site" hidden><a href="/" id="upload-off-site-link" data-i18n="nav.site"></a></p>
 </div>
-<form id="upload-form" class="upload" novalidate>
+<form id="upload-form" class="upload" novalidate hidden>
 <div class="drop" id="drop">
 <p class="drop-text" data-i18n="s2.drop"></p>
 <p class="file-pick">

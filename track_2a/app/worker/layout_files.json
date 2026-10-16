@@ -38,7 +38,7 @@
  ],
  "totals": {
   "files": 98,
-  "bytes": 15622279,
+  "bytes": 15647256,
   "by_mode": {
    "1": {
     "files": 46,
@@ -46,11 +46,11 @@
    },
    "2": {
     "files": 86,
-    "bytes": 15071206
+    "bytes": 15096183
    },
    "3": {
     "files": 71,
-    "bytes": 6257794
+    "bytes": 6282771
    }
   }
  },
@@ -1109,8 +1109,8 @@
   },
   {
    "path": "src/m12_apertus_values.py",
-   "bytes": 29739,
-   "sha256": "0b3a5877bfc9d0434589d6123feb729cbbba1706cd5b420ae67355d2f2bb7761",
+   "bytes": 38696,
+   "sha256": "b515a74822c2da686fc4ac88a8a8bd96be3ec3a3266e56cd32f4e0158c83e519",
    "kind": "code",
    "modes": [
     2,
@@ -1120,8 +1120,8 @@
   },
   {
    "path": "src/m12_writer.py",
-   "bytes": 122517,
-   "sha256": "f57f629d76bb9779ae5432fc22ff0b51ea830b2d0204f4a55ba7c3602a3ae7d8",
+   "bytes": 128096,
+   "sha256": "aeadc91125d4cfc4e28826f3d0a68cd38996f684b3daef1e0ddf7e2d31ee1086",
    "kind": "code",
    "modes": [
     2,
@@ -1131,8 +1131,8 @@
   },
   {
    "path": "src/m12_validate.py",
-   "bytes": 135609,
-   "sha256": "a411ae60edafcef035049147d1a03f185b980446118b891bb66d2080a1729150",
+   "bytes": 146050,
+   "sha256": "7c941f8ec05b6e1b9b270f885212260e87bfb573653c80e4b4cb77a31fa82c34",
    "kind": "code",
    "modes": [
     2,

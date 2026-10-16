@@ -1,46 +1,30 @@
 # ParlPDFeCH
 
-A PDF of a Swiss parliament goes in. An eCH-0295 record in RDF comes out. Code rules read the values. On a GPU, Apertus-v1.5-8B decides 2 of them: the affair type if the rules found none, and the first author if the rule value is absent or weak. Each value has a probability, a page and a place in the PDF.
+A PDF of a Swiss parliament goes in. An eCH-0295 record in RDF comes out.
 
-Track 2A (OpenParlData) of the Hack Apertus online hack. The [technical report](track_2a/technical_report.md) gives the method and the result.
+Code rules read the values from the PDF. Apertus-v1.5-8B reads the whole document on a GPU. Small linear heads on its hidden state then decide 2 values where the rules found none or only a weak one: the affair type and the first author. Each value has a probability, a page and a place in the PDF.
+
+Track 2A (OpenParlData) of the Hack Apertus online hack · [Technical report](track_2a/technical_report.md) · [Value heads on Hugging Face](https://huggingface.co/JonathanKovatsch/parlpdfech-heads)
 
 ## Try it
 
-### Convert a PDF with Apertus (needs a GPU)
-
-Clone this repository (button "Code" on its GitHub page) and run the commands in `track_2a/`. You need make, uv, jq, curl and `pdftotext`, and for `make view` also cargo and `wasm-bindgen` 0.2.127 ([all details](track_2a/docs/run-locally.md)). The Apertus step needs a GPU: a Mac with Apple silicon and 32 GB or more, or an NVIDIA GPU with 24 GB or more. Before `make setup-apertus`, accept the conditions of the model on Hugging Face, then log in with `.venv/bin/hf auth login`. It downloads about 17.3 GB and needs about 40 GB of free disk.
-
 ```bash
 cd ParlPDFeCH/track_2a
-make setup               # one time
-make setup-pdf           # one time: Docling and 2 models (about 0.8 GB on a Mac); on macOS also text recognition (OCR)
-make setup-apertus       # one time: Apertus-v1.5-8B and the value heads
-make convert PDF=<file>  # or PDF=<URL>, DIR=<folder>, LIST=<file of paths and URLs>
-make list                # all IDs as a table
-make view ID=0001        # on request: opens result 0001 at http://127.0.0.1:8080/app/ (or the next free port)
+make setup               # one time: the packages, the PDF reader and Apertus-v1.5-8B with the value heads
+make convert PDF=<file>  # or PDF=<URL>, DIR=<folder>, LIST=<file>
+make view ID=0001        # the result in the browser at http://127.0.0.1:8080/app/ (or the next free port)
 ```
 
-- Each PDF gets an ID, and the same PDF keeps its ID. The terminal shows each value with its probability, its source (rules or Apertus), and valid yes or no. Valid means that the record passed the validator, not that each value is correct. A PDF can have up to 25 pages and 20 MB.
-- A sample to try: `make convert PDF=app/data/samples/26171/source.pdf`. In the 3 samples, Apertus writes no value. The terminal still shows the head probabilities of Apertus.
-- The GPU can also be on another computer, for example a rented GPU in the cloud. That computer runs `make serve-apertus`. Your computer runs `make setup-apertus APERTUS_MODEL=none` (the heads only) and `make convert APERTUS_URL=...` through an ssh tunnel ([the GPU for the Apertus step](track_2a/docs/apertus-gpu.md)).
-- With no GPU, `make convert` writes a note and makes the record with the code rules only. `APERTUS=0` gives the code rules only on purpose.
-- On macOS, `make setup-pdf` installs the text recognition (OCR) of Apple Vision. On Linux there is no OCR, so the PDF needs a text layer.
-- Tested only on one Mac. On 15.10.2026, with the code rules: 3 samples and 5 development PDFs of 5 parliaments gave 8 valid records. On 16.10.2026, with the Apertus step (Apple M4, 32 GB, MLX): 3 samples and 4 development PDFs gave valid records, in 30 to 115 s for each PDF. On the stored text blocks of 31 development documents, the read-out gave the same decisions as the stored states of one H100 GPU. Not tested: an NVIDIA GPU, Linux, Windows, a second computer, an ssh tunnel, the model download of `make setup-apertus`. The development documents are not new to the method: the rule authors read them, and the heads were fitted on development documents.
+You need make, uv, jq, curl and `pdftotext`, and for `make view` also cargo and `wasm-bindgen` 0.2.127. The Apertus step needs a GPU: a Mac with Apple silicon and 32 GB or more, or an NVIDIA GPU with 24 GB or more. The GPU can also be on another computer ([GPU page](track_2a/docs/apertus-gpu.md)). It also needs your own Hugging Face account: `make setup` gives the steps. With no GPU, `make convert` uses the code rules only.
 
-### Only look at 3 results (Docker, no GPU)
+- `make` (or `make info`) shows the state: the setup, the GPU and the results. `make gpu` checks the GPU and shows the ways to one.
+- Each PDF gets an ID, and the same PDF keeps its ID. `make list` shows all IDs. A sample: `make convert PDF=app/data/samples/26171/source.pdf`.
+- Tested only on one Mac (Apple M4, 32 GB) on 15 and 16.10.2026. Not tested: an NVIDIA GPU, Linux, Windows.
+- [All details](track_2a/docs/run-locally.md): the parts of `make setup`, OCR, the terminal table, the Apertus finds below the entry limit, and `make run` (Docker: 3 stored results only, no Apertus).
 
-`make run` starts the app in Docker. It converts only the 3 sample PDFs, from stored inputs. It does not run Apertus. You need git, make and Docker with Compose. On one Mac, the first build and start took about 2 minutes. Not tested on Windows or Linux.
+`make view` shows a result in 3 places: the PDF page with a box on each value, the values with their probability, and the RDF below them. A click on a value marks it in all 3 places.
 
-```bash
-cd ParlPDFeCH/track_2a
-make run
-```
-
-Open http://127.0.0.1:8080/app/ and click "Open the result" on a sample card. You see 3 places: the PDF page with a box on each value, the values with their probability, and the RDF below them. A click on a value marks it in all 3 places. `make stop` stops the app.
-
-<img src="docs/img/result-view.png" width="560" alt="Screenshot of the app for sample 26171. Left: the PDF page with a coloured box on each value. Right: the values, each with a probability bar, the word certain or unsure, and the page. The RDF is below them, not in the screenshot.">
-
-With `make run-native`, the app page also converts a PDF with the code rules only (button "Convert your own PDF").
+<img src="docs/img/result-view.png" width="640" alt="Screenshot of make view for sample 714840. Left: the PDF page with a coloured box on each value, and a dashed box on a suggestion of Apertus below the entry limit. Right: the values, each with a probability bar, the word certain or unsure, and the page.">
 
 ## How it works
 
@@ -68,7 +52,7 @@ It marks the head and foot of each page (the small page) and the role of each bl
 Apertus-v1.5-8B (the grid) gets the whole document and one question (the bubble).
 A linear head (the funnel) reads its hidden state after layer 20 (the yellow square) and gives a probability for each option (the bars). No text comes out.
 Apertus decides only 2 values: the affair type, if the rules found none, and the first author, if the rule value is absent or weak.
-<code>make convert</code> runs this step on a GPU. The app (<code>make run</code>) does not run Apertus. For the 3 samples, it shows stored Apertus block labels.
+<code>make convert</code> runs this step on a GPU.
 </td>
 </tr>
 <tr>
@@ -83,7 +67,19 @@ Each value has a probability (the bar), a page and a place in the PDF (the yello
 
 ## Result
 
-The one fixed run of 13.10.2026 compared 872 documents of 26 parliaments with the OpenParlData register. The register is not a hand-checked gold set ([all limits](track_2a/docs/limits.md)). By field, 0.2075 (response date) to 0.8929 (responding body) of the documents with a register value got the register value.
+The one fixed run of 13.10.2026 compared 872 documents of 26 parliaments with the OpenParlData register. None of these parliaments was a development parliament. The register is not a hand-checked gold set ([all limits](track_2a/docs/limits.md)). The table gives the share of the documents with a register value that got the register value:
+
+| Field | Code rules only | Code rules and Apertus |
+|---|---|---|
+| affair type | 0.7923 | **0.8675** |
+| first author | 0.4556 | **0.6028** |
+| responder | 0.8929 | 0.8929 |
+| title | 0.4688 | 0.4688 |
+| submission date | 0.2729 | 0.2729 |
+| affair number | 0.2214 | 0.2214 |
+| response date | 0.2075 | 0.2075 |
+
+Apertus decides only the affair type and the first author. The other fields come from the code rules.
 
 ## More
 

@@ -26,7 +26,15 @@ Functions (the order of one conversion)
   validate(root, folder, export)           the checks (m12_validate); stops if the calibration file is not the
                                            calibration file of the Apertus mode
   record_facts(...), facts_for_convert(...)  the facts of the manifest key apertus_values and of convert.json
+                                           (with the key suggestions: the Apertus suggestions below the entry
+                                           limit as facts only, no wording; edit of 16.10.2026)
   state_of(provider_result)                local, remote, stored or failed (key apertus_values.state)
+  The suggestions below the entry limit (chapter 4 of m12_apertus_values; edit of 16.10.2026, step of the terminal
+  table): write gives them to m12_writer, which puts them into the manifest key apertus_suggestions (with the value
+  and the wording) and into the values file (<prefix>.values.ttl, class pvl:Suggestion). They are not in the
+  eCH-0295 part. convert.json gets apertus_values.suggestions (field, tier, band, probability, k, n, head
+  probability, near, page, block). The terminal also reads the time split of convert.json (key seconds: read_pdf,
+  lines, rules, apertus, write, check) and the page of each value of view.json (keys page and last_page).
 
 Use in the worker (stage 4 to 6 of fresh.py or serve_convert.py, worker mode auto, values state pdf; a sketch):
   s = apertus_provider.settings()
@@ -267,7 +275,10 @@ def write(root: Path, folder: Path, block_file: Path, rule_file: Path | None, de
     if w12.CALIBRATION_REL != MERGED_REL:
         raise RuntimeError("the calibration file of m12_writer is not the file of the Apertus mode")
     folder.mkdir(parents=True, exist_ok=True)
-    apertus = dict(facts, heads_json=root / WORK_REL / "heads.json", entry_json=root / HEADS_REL / "entry.json")
+    # the suggestions below the entry limit (m12_apertus_values.suggestions) go to the manifest key
+    # apertus_suggestions and to the values file only (m12_writer, edit W6), never to the eCH-0295 part
+    apertus = dict(facts, heads_json=root / WORK_REL / "heads.json", entry_json=root / HEADS_REL / "entry.json",
+                   suggestion_items=list(((res.get("apertus") or {}).get("suggestions")) or []))
     w12.write_record(block_file, rule_file, decisions, res["fields"], calibration, export, folder, base,
                      block_calibrations=block_calibrations, root=root, calibration_base=calibration_base,
                      kind=KIND, apertus=apertus)

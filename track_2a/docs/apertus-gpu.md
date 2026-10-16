@@ -4,16 +4,16 @@ The Apertus step of `make convert` runs Apertus-v1.5-8B (bf16) on each PDF. Line
 
 ## What you need
 
-- A GPU: a Mac with Apple silicon and 32 GB memory or more (backend `mlx`), or an NVIDIA GPU with 24 GB memory or more (backend `cuda`). The model needs 16.1 GB. A Mac with less than 32 GB or an NVIDIA GPU with less than 20 GiB gets the reason `memory_too_small`. Then `make setup-apertus` stops before the download. `memory_low` means that too little memory is free now: close other programs and try again.
+- A GPU: a Mac with Apple silicon and 32 GB memory or more (backend `mlx`), or an NVIDIA GPU with 24 GB memory or more (backend `cuda`). The model needs 16.1 GB. A Mac with less than 32 GB or an NVIDIA GPU with less than 20 GiB gets the reason `memory_too_small`. Then `make setup-apertus` stops before the download (in `make setup`: a note, no stop). `memory_low` means that too little memory is free now: close other programs and try again.
 - macOS or Linux. On Windows, use WSL 2 (Ubuntu) with the NVIDIA driver for WSL, and do the Linux steps in WSL. The make targets need a POSIX shell.
 - About 40 GB of free disk on the computer with the GPU: the download (17.3 GB) and the text branch of the model (16.1 GB).
-- Your own Hugging Face account on the computer with the GPU. Accept the conditions of the model on https://huggingface.co/swiss-ai/Apertus-v1.5-8B yourself. Then, in `track_2a/` after `make setup-pdf`, run `.venv/bin/hf auth login` with your own token. No code of this repository prints or stores your Hugging Face token. The `hf` command and the Hugging Face library read it for the download. The head files are public and need no token.
+- Your own Hugging Face account on the computer with the GPU. Accept the conditions of the model on https://huggingface.co/swiss-ai/Apertus-v1.5-8B yourself. If you are not logged in, `make setup` stops before the download of the model and gives the steps. Run `.venv/bin/hf auth login` in `track_2a/` with your own token, then run `make setup` again. No code of this repository prints or stores your Hugging Face token. The `hf` command and the Hugging Face library read it for the download. The head files are public and need no token.
 
 A normal chat service of Apertus (for example Public AI, Swisscom or a Hugging Face inference endpoint) does not work for this step. Such a service gives text. The heads need the hidden state after layer 20 at the last token of each question. Only a run of the model with the code of this project gives this state.
 
-## What `make setup-apertus` does (one time)
+## What `make setup-apertus` does (one time, part 3 of `make setup`)
 
-1. It checks the computer: the Python of `make setup-pdf`, the memory, the GPU and the free disk. With no GPU, it stops and names the ways out.
+1. It checks the computer: the Python of `make setup-pdf`, the memory, the GPU and the free disk. With no GPU, it stops and names the ways out. In `make setup`, it writes a note in place of the stop and downloads no model.
 2. On a Mac with Apple silicon, it installs MLX 0.32.3.
 3. It downloads `swiss-ai/Apertus-v1.5-8B` at a pinned revision (about 17.3 GB). `tools/text_branch.py` cuts out the text branch (16.1 GB) and checks it. A text branch that is already there gets a full SHA-256 check (`APERTUS_VERIFY=0` skips it).
 4. It downloads the 3 head files from the Hugging Face repository `JonathanKovatsch/parlpdfech-heads` at a pinned revision and checks their SHA-256 (`tools/apertus/heads.sha256`).
@@ -21,14 +21,21 @@ A normal chat service of Apertus (for example Public AI, Swisscom or a Hugging F
 
 The download stays in the Hugging Face cache (about 17 GB). `hf cache` can remove it; the tool deletes nothing.
 
+## If `make setup` found no GPU: `make gpu`
+
+`make gpu` shows what this computer has (system, memory, Apple silicon, NVIDIA GPU), the check of the backend, the state of the Apertus step and the next command. It changes nothing and downloads nothing. With no GPU, it names 3 ways: install the driver of the GPU (NVIDIA: the driver and torch with CUDA), then `make gpu` again; a GPU of another computer (way 2); or `APERTUS=0` for the code rules only. If the GPU has too little memory or no bf16, way 1 says that it is not possible with this GPU.
+
+- `make gpu BACKEND=mlx` (or `cuda`, `mps`) sets up the Apertus step with this backend, for example after you installed a driver. First it checks the backend. If the check fails, it stops with a message, and nothing is downloaded. Else it runs `make setup-apertus APERTUS_BACKEND=<backend>`. One exception: on a Mac with Apple silicon and 32 GB, `BACKEND=mlx` continues when only the MLX packages are absent, because `make setup-apertus` installs them. `BACKEND=cpu` is very slow: use it only for checks.
+- `make gpu URL=http://127.0.0.1:8090` checks a read-out service of way 2: its health and its model fingerprint. If the heads are absent on this computer, it runs `make setup-apertus APERTUS_MODEL=none`. Then it gives the command `make convert APERTUS_URL=...`. The token stays in the environment variable `APERTUS_TOKEN`. `make gpu` does not show it and stores no address.
+
+Tested on 16.10.2026, only on one Mac (Apple M4, 32 GB): the report with no setup, with the heads only and with MLX; `BACKEND=cuda` with no NVIDIA GPU (a message, no download); `URL=` with no service and with `make serve-apertus` on this one computer (only the health request). For Linux and an NVIDIA GPU, `make test` checks the messages only with fake commands (`tools/check_gpu.sh`).
+
 ## Way 1: all on the computer with the GPU
 
 ```bash
 git clone https://github.com/jkovatsch/ParlPDFeCH.git
 cd ParlPDFeCH/track_2a
-make setup
-make setup-pdf        # needs the command pdftotext
-make setup-apertus    # the model (your Hugging Face account) and the heads
+make setup            # one time; needs pdftotext and jq; the model (your Hugging Face account) and the heads
 make convert PDF=<file or URL>
 ```
 
@@ -43,9 +50,7 @@ On the GPU computer (Linux with an NVIDIA GPU, or a Mac):
 ```bash
 git clone https://github.com/jkovatsch/ParlPDFeCH.git
 cd ParlPDFeCH/track_2a
-make setup
-make setup-pdf        # needs the command pdftotext
-make setup-apertus
+make setup            # one time; needs pdftotext and jq; the model (your Hugging Face account) and the heads
 make serve-apertus    # listens on 127.0.0.1:8090 (this computer only); Ctrl-C ends it
 ```
 
@@ -53,8 +58,7 @@ On your own computer (no GPU needed):
 
 ```bash
 cd ParlPDFeCH/track_2a
-make setup
-make setup-pdf
+make setup                                            # with no GPU here: a note, and no model download
 make setup-apertus APERTUS_MODEL=none                 # the heads only, no model download
 ssh -N -L 8090:127.0.0.1:8090 <user>@<GPU computer>   # the tunnel; keep it open in a second terminal
 make convert APERTUS_URL=http://127.0.0.1:8090 PDF=<file or URL>
@@ -106,12 +110,18 @@ White space at the start and at the end of the token is removed. A token with an
 
 ## What the terminal shows
 
-- Each value row gives the source: `rules`, `Apertus` or `Apertus (remote GPU)`. The number is the calibrated probability of the tier, from the development documents.
-- The lines "Apertus type (Q1)" and "Apertus first author (Q2)" give the head probability: the output of the head for this PDF. This is a different number.
-- A head probability within 0.10 of a threshold gets the mark `near`. A gap of less than 0.10 to the second class (`Q1`) or to the second block (`Q2`) also gets it. Then another computer can give another decision.
+- The table has one row for each field, also for a field with no value. The columns are Field, Value, Prob., Status, Source and Page.
+- Each value row gives the source: `rules` or `Apertus`. With a GPU of another computer, the first line of the run names that computer. If `APERTUS_URL` has the host `127.0.0.1` (a service on this computer, or the end of an ssh tunnel), it names the service at that address. The number in the column Prob. is the calibrated probability of the tier, from the development documents.
+- The table needs a terminal of 100 columns. In a narrower terminal, a grey line says so.
+- The lines below the table start with `Apertus`. The line `type:` gives the class of the type head. Each other line gives the block that a head picked for one field, with the head probability: the output of the head for this PDF. This is a different number.
+- A head probability within 0.10 of a threshold gets the mark `*`. A gap of less than 0.10 to the second class (`Q1`) or to the second block (`Q2`) also gets it. Then another computer can give another decision.
+- A row with the status `below` is an Apertus suggestion below the entry limit. The rules found no value or a weak value, and the head picked a block with a head probability of 0.50 or more. On the development documents, values of this kind were too few or too often different from OpenParlData. The row gives the value, the probability of its tier and the page. The value is not in the eCH-0295 record. Of the RDF files, only the values file has it (`values.ttl`, class `pvl:Suggestion`). With fewer than 30 development documents (the same limit as `make view`), the row also gives `n` (for example `values file n=5`): the number is not stable. `make view` shows these suggestions in a separate table, with dashed boxes on the page.
+- A row with the status `weak` (a rule value below 0.50) or `–` (the note `addressed body`: the body that a proposal addresses) is only in the label file, not in the eCH-0295 record.
+- A stored result of an earlier version has no suggestion. If such a result has a field below the entry limit, a grey line says that `AGAIN=1` converts it again with the suggestions.
+- `VERBOSE=1` also shows the full path or URL, the SHA-256 and the record id. It also shows the details of the read-out and each full value that the table cuts. Colours are only for a terminal. `NO_COLOR=1` gives no colours.
 - The first author from Apertus: the head picks the block, and code reads the name from that block.
 - The affair type from Apertus: code finds the first type word of that type in reading order and gives its page and span ("place found by code, decision by Apertus"). If that word is in a list of 2 or more type words (for example boxes to tick on a form), the terminal says so: the place shows the word, not the choice.
-- With no type word in the text, the type is not written. The terminal gives the reason "no evidence in the text (not written)".
+- With no type word in the text, the type is not written. The terminal gives the reason "no type word of this type in the text: not written".
 
 ## Same decisions as on the H100 GPU?
 
@@ -119,28 +129,31 @@ The heads were fitted on states of torch CUDA bf16 from one H100 GPU. Other kern
 
 - The read-out with MLX on one Mac used the stored text blocks of 31 development documents. It gave the same 21 Apertus decisions as the stored H100 states. No field differed.
 - The largest change of a head probability was 0.097 for the type (one document: 0.7988 on the H100, 0.7021 on MLX, both below the threshold 0.80) and 0.055 for a first-author block.
-- The margin of the mark `near` is 0.10 for each backend that runs the model. It covers the largest change measured on MLX and on torch MPS (0.073 on 14 documents). CUDA was not measured with this code. The mark is a warning, not a guarantee.
+- The margin of the mark `*` (near a threshold) is 0.10 for each backend that runs the model. It covers the largest change measured on MLX and on torch MPS (0.073 on 14 documents). CUDA was not measured with this code. The mark is a warning, not a guarantee.
 
 ## What was tested
 
 Tested on 16.10.2026, only on one Mac (Apple M4, 32 GB):
 
 - The read-out with MLX on 31 development documents: the same decisions as the stored H100 states (previous chapter). torch with MPS and on the CPU on one sample: the same decisions.
-- `make convert` with the Apertus step (MLX) on 3 samples and 4 development PDFs: all records valid. In the 3 samples, Apertus wrote no value.
+- `make convert` with the Apertus step (MLX) on 3 samples and 4 development PDFs: all records valid. In the 3 samples, Apertus wrote no value into the eCH-0295 record.
 - `make serve-apertus` and `make convert APERTUS_URL=...`, both on this one computer (`127.0.0.1`), on 3 development PDFs, 2 of them with a token: the values were equal to the local run. A wrong token gave HTTP 401. The log had no text and no token. `HOST=0.0.0.0` with no token did not start.
 - `make convert APERTUS=0` on the 3 samples: the same records as before the Apertus step.
 - `make test` runs 29 checks of the service and of the client, with a backend that loads no model. They include the token rules, 401, 503 and the fingerprint. In these checks, the client refused a service with another model fingerprint before it sent text.
 - `make setup-apertus`: the 3 head files came from Hugging Face at the pinned revision, and their SHA-256 agreed. The model came from the local Hugging Face cache.
+- `make setup` in a clone: with MLX, PASS. With `APERTUS_BACKEND=cuda`, as on a computer with no GPU: a note, no stop, then PASS.
+- The suggestions below the entry limit, with MLX in a clone: 3 samples and 5 development PDFs gave 8 valid records, 5 of them with suggestions. The files `ech.ttl` and `ech.yaml` were byte-equal to a run of the same PDFs before this change. The values file, the manifest and the view gave the same suggestions. `make view` showed them in a headless browser, in English and in German.
+- After the changes of the terminal texts: 3 samples and 2 development PDFs again with MLX. `ech.ttl`, `ech.yaml` and `values.ttl` were byte-equal to the run before. With `APERTUS=auto` and `APERTUS_BACKEND=cuda` (no such GPU on the Mac), 4 stored Apertus results stayed and the terminal showed them.
 
-Not tested: an NVIDIA GPU with this code; Linux and Windows (WSL 2); a second computer, the ssh tunnel and `https`; a scan with OCR; the model download of `make setup-apertus` (17.3 GB). The states of the fixed run came from torch CUDA on one H100 in the cloud. On an NVIDIA GPU, the read-out uses the engine of the fixed run (`app/layout/src/m10_vm_states.py`).
+Not tested: an NVIDIA GPU with this code; Linux and Windows (WSL 2); a second computer, the ssh tunnel and `https`; a scan with OCR; the model download of `make setup-apertus` (17.3 GB); `make setup` on a computer with no GPU, and its stop with no Hugging Face login. The states of the fixed run came from torch CUDA on one H100 in the cloud. On an NVIDIA GPU, the read-out uses the engine of the fixed run (`app/layout/src/m10_vm_states.py`).
 
 ## Limits
 
-- `make view` of a record with Apertus values shows a notice that Apertus read-out heads chose these values. Each such value has the source text "Chosen by: an Apertus read-out head for values". The view data were checked against the schema of the view. The page of such a record was not opened in a browser.
+- `make view` of a record with Apertus values shows a notice that Apertus read-out heads chose these values. Each such value has the source text "Chosen by: an Apertus read-out head for values". The view data were checked against the schema of the view. The page of such a record was opened only in a headless browser.
 - An Apertus type with no type word in the text is not written. On the development documents, this was so for 33 of 128 types from `Q1`.
 - Each PDF loads the model again (about 8 to 11 s with MLX). The service of way 2 loads it one time.
 
 ## About this text
 
 - Language: English, to the rules of ASD-STE100 (Issue 9).
-- AI agents (Claude Opus 5.5) wrote this text on 16.10.2026, and an AI agent made it shorter on the same day.
+- AI agents (Claude Opus 5.5) wrote this text on 16.10.2026, and an AI agent made it shorter on the same day. After that, an AI agent changed the steps to the one command `make setup`. Then an AI agent added the suggestions below the entry limit, and an AI agent changed the terminal texts after a check by AI agents.

@@ -164,6 +164,12 @@ details > summary { cursor: pointer; padding: .5rem 0; min-height: 2.25rem; colo
 .drop.is-over { border-color: var(--ink); border-style: solid; box-shadow: inset 0 0 0 3px var(--marker); }
 .drop-text { font-size: 1.05rem; }
 .file-line { font-size: .92rem; }
+/* S2 on a server that converts no PDF of the reader: a text and the commands of the terminal, no file field */
+.upload-off { display: grid; gap: .9rem; margin-top: 1rem; max-width: 52rem; grid-template-columns: minmax(0, 1fr); }
+.cmd-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .7rem; counter-reset: cmd; }
+.cmd-list li { display: grid; gap: .25rem; padding: .7rem .9rem; background: var(--paper); border: 1px solid var(--hair); counter-increment: cmd; }
+.cmd-list li::before { content: counter(cmd); content: counter(cmd) / ""; font: 600 .8rem/1 var(--mono); color: var(--ink2); }
+.cmd { justify-self: start; max-width: 100%; padding: .3rem .55rem; background: var(--desk); border: 1px solid var(--hair); font: .95rem/1.4 var(--mono); overflow-wrap: anywhere; user-select: all; }
 
 /* S3 stages: the state is a word and a shape */
 .stages { margin-top: 1.25rem; display: grid; gap: .4rem; max-width: 46rem; counter-reset: stage; }
@@ -497,6 +503,10 @@ details > summary { cursor: pointer; padding: .5rem 0; min-height: 2.25rem; colo
 .vbox:hover rect, .vbox:focus-visible rect { stroke-width: 2.6; }
 .vbox.is-sel rect { fill: color-mix(in srgb, var(--c) 30%, transparent); stroke-width: 3.2; }
 .vbox.is-dim rect { opacity: .35; }
+/* an Apertus suggestion below the entry limit: a dashed outline in the colour of the field and no fill (it is not
+   in the record); the inside of the box takes the click too */
+.vbox.is-sugg rect { fill: none; stroke-dasharray: 5 3; pointer-events: visible; }
+.vbox.is-sugg.is-sel rect { fill: color-mix(in srgb, var(--c) 12%, transparent); stroke-width: 3.2; }
 
 .vt { width: 100%; border-collapse: collapse; margin-top: .5rem; table-layout: fixed; font-size: .92rem; }
 .vt thead th { font-size: .74rem; color: var(--ink2); font-weight: 650; text-align: left; padding: .2rem .4rem .3rem 0; border-bottom: 1px solid var(--ink2); }
@@ -531,6 +541,7 @@ details > summary { cursor: pointer; padding: .5rem 0; min-height: 2.25rem; colo
 .vf { display: inline; }
 .vf + .vf::before { content: " · "; content: " · " / ""; }
 .vf-few { font-style: italic; }
+.vf-apertus { color: var(--ink); font-weight: 600; }
 .vf-differs_from_export { color: var(--ink); font-weight: 600; }
 .st { font-size: .76rem; font-weight: 700; padding: .05rem .4rem; border-radius: 3px; border: 1.5px solid; }
 .st-certain { color: var(--paper); background: var(--certain); border-color: var(--certain); }
@@ -539,6 +550,16 @@ details > summary { cursor: pointer; padding: .5rem 0; min-height: 2.25rem; colo
 .vrow-miss th, .vrow-miss td { color: var(--ink2); }
 .vrow-miss > th:first-child { box-shadow: inset 4px 0 0 var(--hair); padding-left: .55rem; }
 .view-not { margin-top: .5rem; }
+/* the section of the Apertus suggestions below the entry limit (not in the record): a grey bar at the left of
+   a row, the colour of the field only when it is selected */
+.view-sugg { margin-top: 1rem; padding-top: .6rem; border-top: 1px dashed var(--ink2); }
+.view-sugg h3 { font-size: 1.02rem; }
+.view-sugg > .small { margin-top: .25rem; }
+.vrow.is-sugg > th:first-child { box-shadow: inset 4px 0 0 var(--hair); }
+.vrow.is-sugg.is-sel > th:first-child { box-shadow: inset 8px 0 0 var(--c); }
+.vrow-sub.is-sugg > td { box-shadow: inset 4px 0 0 var(--hair); }
+.vrow-sub.is-sugg.is-sel > td { box-shadow: inset 8px 0 0 var(--c); }
+.st-sugg { color: var(--ink2); border-color: var(--ink2); border-style: dashed; font-weight: 600; }
 
 .rdf-tabs { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .5rem; border-bottom: 1px solid var(--ink2); }
 .rdf-tab { min-height: 2.25rem; padding: .3rem .7rem; background: transparent; border: 1px solid transparent; border-bottom: 0; border-radius: 3px 3px 0 0; color: var(--petrol); font-weight: 600; font-size: .88rem; cursor: pointer; margin-bottom: -1px; }

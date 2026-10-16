@@ -1,6 +1,6 @@
 # Run the app on your computer
 
-The app converts a PDF of a Swiss parliament into an eCH-0295 record. It runs on your computer. The app (ways 1 and 2) uses no GPU. Run the commands in the folder `track_2a/`. Ways 1 and 2 ran on one Mac on 14.10.2026, way 3 on 15.10.2026. Way 3 can also run the Apertus step, which needs a GPU on your computer or on another computer ([apertus-gpu.md](apertus-gpu.md)). The Apertus step ran on one Mac on 16.10.2026.
+The app converts a PDF of a Swiss parliament into an eCH-0295 record. It runs on your computer. The app (ways 1 and 2) uses no GPU. Run the commands in the folder `track_2a/`. For your own PDF, use way 3 (`make convert` in the terminal). Ways 1 and 2 ran on one Mac on 14.10.2026, way 3 on 15.10.2026. Way 3 can also run the Apertus step, which needs a GPU on your computer or on another computer ([apertus-gpu.md](apertus-gpu.md)). The Apertus step ran on one Mac on 16.10.2026.
 
 ## Way 1: container (`make run`)
 
@@ -8,31 +8,31 @@ The app converts a PDF of a Swiss parliament into an eCH-0295 record. It runs on
 make run
 ```
 
+- `make run` shows the 3 stored sample results in Docker. It takes no own PDF and runs no Apertus. For your own PDF, use way 3.
 - You need Docker with Compose. The build of the image needs the network one time. You do not need `make setup`.
 - The command builds the image (target `slim`) from `app/` and starts it on `127.0.0.1:8080`.
 - Open `http://127.0.0.1:8080/app/`. `make stop` stops the container. `make logs` shows its log.
-- This image converts the 3 samples only. It does not convert your own PDF.
 - State on 14.10.2026: run one time on one Mac (Apple silicon, Docker server 29.2.1), in a clone of GitHub at commit `10e07b4`. A second check used port 8080, so the command was `make run PARLPDFECH_PORT=8082`. The 3 samples in the modes auto and rules gave 6 valid records. Not run: `make stop`, `make logs`, and the targets `run-full` and `check-offline` of `app/Makefile`. On the same day a private build pipeline on Linux built a container image from the source tree of the package. Nobody started this image.
 
 ## Way 2: no container (`make run-native`)
 
 ```bash
-make setup
-make setup-pdf    # only for your own PDF
+make setup        # one time; way 2 needs only the parts make setup-base and make setup-pdf
 make run-native
 ```
 
-- You need [uv](https://docs.astral.sh/uv/) 0.11 or later, git, make, and cargo with `wasm-bindgen` (see below). For your own PDF, you also need the command `pdftotext`.
-- `make setup` needs the network one time. It installs Python 3.12 with uv, and uv can also put the command `python3.12` into `~/.local/bin`. It installs the Python packages of `app/container/requirements-slim.txt` into `.venv/`. If cargo is on the computer, it downloads the Rust crates; if not, it prints a note.
+- You need [uv](https://docs.astral.sh/uv/) 0.11 or later, git, make, and cargo with `wasm-bindgen` (see below). `make setup` also needs the commands `pdftotext` and jq.
+- `make setup` needs the network one time. It runs 3 parts: `make setup-base`, `make setup-pdf` and `make setup-apertus`. Way 2 needs only `make setup-base` (the 3 samples) and `make setup-pdf` (your own PDF). `make setup-apertus` is for way 3. With a GPU, it downloads the model (17.3 GB) if it is absent.
+- `make setup-base` installs Python 3.12 with uv, and uv can also put the command `python3.12` into `~/.local/bin`. It installs the Python packages of `app/container/requirements-slim.txt` into `.venv/`. If cargo is on the computer, it downloads the Rust crates; if not, it prints a note.
 - You need cargo with the target `wasm32-unknown-unknown`, and the command `wasm-bindgen` 0.2.127. With rustup, the file `app/rust-toolchain.toml` adds the target. To install the command: `cargo install wasm-bindgen-cli --version 0.2.127` (network).
 - The command builds the server and the WebAssembly bundle, then starts the app on `127.0.0.1:8080`. `make run-native PORT=9090` sets another port. Stop it with Ctrl-C.
 - Open `http://127.0.0.1:8080/app/`.
 - The 3 samples need nothing more.
-- Your own PDF needs `make setup-pdf` one time, after `make setup`. It needs the command `pdftotext` (macOS with Homebrew: `brew install poppler`). If `pdftotext` is absent, it stops before the download and gives the install command.
+- Your own PDF needs the part `make setup-pdf`. It needs the command `pdftotext` (macOS with Homebrew: `brew install poppler`). If `pdftotext` is absent, it stops before the download and gives the install command.
 - `make setup-pdf` needs the network. It installs the packages of `app/container/requirements-full.txt` (`docling` 2.133.0, `pypdfium2` 5.14.0, torch) into `.venv/`. On macOS it also installs `ocrmac` 1.0.1 (text recognition of Apple Vision, as for the stored Docling files of the project; `tools/requirements-macos-ocr.txt`). It downloads the 2 Docling models into the Hugging Face cache if they are absent.
 - Size on a Mac with Apple silicon: 283.5 MB of packages (sizes from the PyPI data) and 530.0 MB of models. `.venv/` grows by about 1 GB.
 - Without these packages, the app stops with the note `pdf_reader_absent`.
-- State on 14.10.2026: `make setup` and `make run-native` ran on one Mac (Apple silicon, macOS), also in a fresh clone, with the offline flags of cargo. The 3 samples in the modes auto and rules gave 6 valid records.
+- State on 14.10.2026: `make setup` and `make run-native` ran on one Mac (Apple silicon, macOS), also in a fresh clone, with the offline flags of cargo. On that day, `make setup` was only the part that has the name `make setup-base` now. The 3 samples in the modes auto and rules gave 6 valid records.
 - State on 15.10.2026: `make setup-pdf` ran on one Mac (Apple silicon, macOS), in a fresh clone of GitHub at commit `3eff351`, with the target `setup-pdf` added as a patch. The packages came from the uv cache of that Mac. The 2 models came from its Hugging Face cache, and in 2 more runs with an empty cache from huggingface.co.
 - Then `make run-native` converted 2 PDFs that are not in the sample index (copies of 2 samples with one added comment line). Both records were valid. `make test` gave PASS.
 - Earlier checks of an own PDF used synthetic PDF files and the 3 sample PDF files (`app/README.md`, chapter "The modes"). No other parliament PDF is recorded.
@@ -42,9 +42,7 @@ make run-native
 ## Way 3: own PDFs in the terminal (`make convert`)
 
 ```bash
-make setup
-make setup-pdf                   # one time, as in way 2
-make setup-apertus               # one time, only for the Apertus step; needs a GPU and your own Hugging Face account
+make setup                       # one time; the Apertus part needs a GPU and your own Hugging Face account
 make convert PDF=<file or URL>   # one PDF
 make convert DIR=<folder>        # each *.pdf of the folder, no subfolder
 make convert LIST=<file>         # one path or http(s) URL in each line; a line that starts with # is a comment
@@ -52,16 +50,16 @@ make list                        # the IDs as a table
 make view ID=0002                # on request: this one result in the browser; Ctrl-C stops it
 ```
 
-- Limits first. With `APERTUS=0`, or with no `make setup-apertus`, your PDF gets the code rules only (no language model, no GPU). The Apertus step needs `make setup-apertus` and a GPU. It runs with `APERTUS=auto` (the default) or `APERTUS=1`. Then Apertus-v1.5-8B also reads out the PDF on a GPU of this computer or of another computer. The Apertus heads can give the affair type and the first author ([apertus-gpu.md](apertus-gpu.md)). As in the app, the limits are 25 pages and 20 MB, and the first 1024 bytes must have the mark `%PDF-`. On Linux the PDF needs a text layer (no OCR); on macOS `make setup-pdf` installs `ocrmac`.
+- Limits first. With `APERTUS=0`, or if the Apertus step is not set up, your PDF gets the code rules only (no language model, no GPU). The Apertus step needs a GPU. With no GPU on this computer, `make setup` writes a note and does not set up the Apertus step. The step runs with `APERTUS=auto` (the default) or `APERTUS=1`. Then Apertus-v1.5-8B also reads out the PDF on a GPU of this computer or of another computer. The Apertus heads can give the affair type and the first author ([apertus-gpu.md](apertus-gpu.md)). As in the app, the limits are 25 pages and 20 MB, and the first 1024 bytes must have the mark `%PDF-`. On Linux the PDF needs a text layer (no OCR); on macOS `make setup-pdf` installs `ocrmac`.
 - Not run: Windows, Linux, Ctrl-C typed in a terminal, the full time limit of 600 s and a PDF with a password. The downloads came only from GitHub and from servers on the same computer. No PDF gave a record with valid no.
-- You need `make setup` and `make setup-pdf` of way 2, the commands jq and `pdftotext`, and curl for a URL. `make view` also needs cargo and `wasm-bindgen` 0.2.127, as way 2.
+- You need `make setup`, the commands jq and `pdftotext`, and curl for a URL. `make view` also needs cargo and `wasm-bindgen` 0.2.127, as way 2.
 - A URL must be http or https. A download has a limit of 20 MB and 120 s. The result keeps the source (path or URL) and the SHA-256 of the PDF.
 - A relative path of `PDF=` or `DIR=` starts in `track_2a/`. A relative path in a `LIST` file starts in the folder of that file. `~/` is expanded.
 - The worker of the app converts each PDF in the mode rules, with the arguments and the environment of the server. Its time limit is 600 s for each PDF. With the Apertus step it runs in the mode auto, and the time limit is `APERTUS_TIMEOUT` (1800 s). No file below `app/` changes.
 - Each PDF gets an ID: `0001`, `0002`, and so on. The same PDF (same SHA-256) keeps its ID.
 - A PDF that the app refuses also gets an ID, with valid `failed:<code>` (for example `failed:too_long` for more than 25 pages). A missing file, a file that is not a PDF, a file of more than 20 MB and a failed download get no ID.
-- A PDF with a stored result is not converted again. The terminal shows the stored result. `AGAIN=1` converts it again. If that conversion fails, the old result stays. A stored result is also converted again if the Apertus step was on for it and is off now, or the other way.
-- For each PDF the terminal shows the ID, valid yes or no, and each value with its probability and status (certain or unsure). With the Apertus step, it also shows the source of each value (rules or Apertus) and the head probabilities of Apertus ([apertus-gpu.md](apertus-gpu.md), chapter "What the terminal shows"). It also gives the fields with no value and the folder `out/<ID>/`.
+- A PDF with a stored result is not converted again. The terminal shows the stored result. `AGAIN=1` converts it again. If that conversion fails, the old result stays. A stored result is also converted again if the Apertus step was on for it and is off now (`APERTUS=0`), or the other way. With `APERTUS=auto`, a stored Apertus result stays if the Apertus step cannot run at this moment. The terminal then shows the stored result, and a note gives the reason (for example too little free memory).
+- For each PDF the terminal shows the ID, valid yes or no, and each value with its probability and status. In the record, the status is certain or unsure; `weak`, `–` (an addressed body) and `below` are not in the record. With the Apertus step, it also shows the source of each value (rules or Apertus) and the head probabilities of Apertus ([apertus-gpu.md](apertus-gpu.md), chapter "What the terminal shows"). It also gives the fields with no value and the folder `out/<ID>/`. With the Apertus step, the terminal also shows Apertus suggestions below the entry limit, each with its probability and the status `below`. These are not in the eCH-0295 record. Of the RDF files, only the values file has them, and `make view` shows them (`VERBOSE=1`: more details; `NO_COLOR=1`: no colours). The table needs a terminal of 100 columns.
 - `make list` shows the IDs as a table: ID, valid, time, affair type, title, source and SHA-256. The file `out/catalog.tsv` has all columns.
 - `make view ID=0002` (also `ID=2` or `ID=ID-0002`) starts the server of the app for this one result. The server is read-only and listens on `127.0.0.1`.
 - The port is 8080 or the next free port up to 8179. `PORT=<n>` sets it. The command opens `http://127.0.0.1:<port>/app/#/view/<record_id>` in the browser. `OPEN=no` shows the address only.
@@ -103,4 +101,4 @@ make view ID=0002                # on request: this one result in the browser; C
 ## About this text
 
 - Language: English, to the rules of ASD-STE100 (Issue 9).
-- Authoring: an AI agent (Claude Opus 5.5) wrote this text on 14.10.2026 and changed the state lines in the afternoon and evening of that day. On 15.10.2026 an AI agent added `make setup-pdf`, and later corrected sentences after an audit. In the evening of 15.10.2026, an AI agent added way 3 and shortened the start of the file. On 16.10.2026, AI agents added the Apertus step and the OCR of macOS, and an AI agent corrected the texts to the new state.
+- Authoring: an AI agent (Claude Opus 5.5) wrote this text on 14.10.2026 and changed the state lines in the afternoon and evening of that day. On 15.10.2026 an AI agent added `make setup-pdf`, and later corrected sentences after an audit. In the evening of 15.10.2026, an AI agent added way 3 and shortened the start of the file. On 16.10.2026, AI agents added the Apertus step and the OCR of macOS, and an AI agent corrected the texts to the new state. Later on 16.10.2026, an AI agent gave `make run` one clear line and named way 3 for your own PDF. After that, an AI agent changed the texts to the one command `make setup`.

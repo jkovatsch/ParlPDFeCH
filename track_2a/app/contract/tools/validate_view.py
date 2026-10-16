@@ -55,6 +55,7 @@ def links(v: dict) -> list[str]:
     if any("/" in t and re.search(r"[\w.\-]+/[\w.\-]+/", t) for t in texts):
         bad.append("a note holds a path")
     bad += value_links(v, atoms, blocks, cals)
+    bad += suggestion_links(v, atoms, blocks)
     c = v["counts"]["labels"]
     if c["total"] != len(v["labels"]) or c["certain"] + c["unsure"] + c["none"] != c["total"]:
         bad.append("counts.labels does not agree with labels")
@@ -128,6 +129,40 @@ def cascade_links(hv: dict, values: list, of_slot: dict) -> list[str]:
             bad.append("head_values.response_signs.text_blocks is not the count of the cascade")
         if (rs["responder_candidates"] or 0) != len(rs["responder_tiers"]) or "rsp_addressee_cue" in rs["responder_tiers"]:
             bad.append("head_values.response_signs: the candidates and their tiers do not agree")
+    return bad
+
+
+def suggestion_links(v: dict, atoms: set, blocks: set) -> list[str]:
+    """The links of the optional key apertus_suggestions (CONTRACT.md chapter 25): a suggestion is not a value of
+    the record, its lines and its page are in the view, and its probability is (k + 0.5) / (n + 1) of its tier."""
+    rows = v.get("apertus_suggestions")
+    if rows is None:
+        return []
+    bad = []
+    if v["head_values"]["source"] != "pdf":
+        bad.append("apertus_suggestions in a view whose values are not read from the PDF")
+    written = {x["field"] for x in v["values"] if x["written"]}
+    pages = {p["number"] for p in v["pages"]}
+    fields = [x["field"] for x in rows]
+    if len(set(fields)) != len(fields):
+        bad.append("apertus_suggestions: a field occurs 2 times")
+    for x in rows:
+        f = x["field"]
+        if f in written:
+            bad.append(f"suggestion {f}: the field has a written value")
+        if x["page"] not in pages or (x["last_page"] is not None and x["last_page"] not in pages):
+            bad.append(f"suggestion {f}: its page is not a page of the view")
+        if not 0 <= x["k"] <= x["n"]:
+            bad.append(f"suggestion {f}: k is not in the range 0 to n")
+        want = min(max((x["k"] + 0.5) / (x["n"] + 1), 0.005), 0.995)
+        if abs(x["probability"] - want) > 0.00005 + 1e-9:
+            bad.append(f"suggestion {f}: the probability is not (k + 0.5) / (n + 1) of its tier")
+        if not x["char_start"] < x["char_end"]:
+            bad.append(f"suggestion {f}: its span is empty")
+        bad += [f"suggestion {f}: unknown atom {a}" for a in x["atom_ids"] + [p["atom_id"] for p in x["spans"]]
+                if a not in atoms]
+        if x["block_id"] and x["block_id"] not in blocks:
+            bad.append(f"suggestion {f}: unknown block")
     return bad
 
 

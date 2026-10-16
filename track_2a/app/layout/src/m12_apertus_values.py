@@ -4,6 +4,9 @@ Written in English to the STE rules (ASD-STE100, Issue 9). Actor: workflow sub-a
 of the Apertus build of 15./16.10.2026, for the main agent. Status: EXCEPTION, NOT RELEASED. No human checked this
 file. This file changes no existing file. It imports the frozen readers and does not change them.
 Spec: scratchpad apertus-build/SPEC.md, chapter 4 (with the order G1 to G3 of the owner of 15.10.2026, 23:41).
+Edit of 16.10.2026 (step of the terminal table, owner 06:20): chapter 4 and the functions
+entry_tier, suggestion_probability and suggestions (the Apertus suggestions below the entry limit); the key
+suggestions of summary_facts. No result of the other functions changes.
 
 1 Task
   The Apertus step gives the layer-20 states of the questions Q0, Q1 and Q2.B<n> (template gj_values_v1_de) of one
@@ -17,6 +20,7 @@ Spec: scratchpad apertus-build/SPEC.md, chapter 4 (with the order G1 to G3 of th
                       tiers of heads2/calibration_dev_combined.json
   reading_for_validator  the reading of check C22 of src/m12_validate.py (the same calls as the writer path)
   summary_facts       the facts of the terminal summary and of convert.json (numbers, classes and block ids only)
+  suggestions         the Apertus suggestions below the entry limit (chapter 4; the last step of combined_values)
 
 2 The place of an Apertus type (owner point 3 of 15.10.2026: "wieso können wir keine seitangabe geben")
   Apertus decides the type (head Q1 on the whole document). Code then searches the type words of the rule reader
@@ -53,6 +57,30 @@ Spec: scratchpad apertus-build/SPEC.md, chapter 4 (with the order G1 to G3 of th
   no CUDA run of this code was measured. CPU: not measured: 0.10. stored (the H100 states of the fixed run, a test
   aid): 0.05. A remote backend "remote:<b>" gets the margin of <b>. A backend that this table does not name gets
   the largest margin. The near mark is a warning, not a guarantee.
+
+4 Suggestions below the entry limit (owner, 16.10.2026: completeness first, then a filter of what is sure)
+  Of the 9 Q2 tiers of entry.json, only apertus_q2_sponsor_hi entered: only its values go into the eCH-0295 part.
+  The other Q2 heads can also give a value. Such a value is a "suggestion below the entry limit" (status
+  below_entry_limit). It is not a statement of the eCH-0295 record: the writer puts it only into the values file
+  (<prefix>.values.ttl, class pvl:Suggestion, pvl:inRecord false) and into the manifest key apertus_suggestions.
+  Condition (the condition of the entry design: cmd_table of src/m11_value_heads2.py, stage 3 of
+  src/m11_values_combined.py), for each Q2 field of the final result of combined_values:
+    1 the cascade searches the field for the kind of the document (else the head is not called, rule I5, item 14);
+    2 the combined reader called the head: the rules found no value, or only a value of a weak tier (rule I5,
+      item 7: a rule value of a tier that is not weak stays, and the head is not called);
+    3 the head gave a value: the top block has a head probability of 0.50 or more, and the span function of the
+      field gives a value in the top block (else the reason no_cue, no_pattern or reader_error: no value);
+    4 the tier of the value did not enter (entry.json). Tier id: mode bands gives apertus_q2_<field>_<band>
+      (band hi at 0.80 or more, else lo); mode one gives apertus_q2_<field>.
+  Probability: (equal + 0.5) / (equal + different + 1) of the tier in entry.json, then m10_calibrate.as_written
+  (0.005 to 0.995, 4 decimals; the function of each label probability). The units are the development documents
+  of the design set under the same condition, with the out-of-fold heads; the reference is the OpenParlData export.
+  The converter uses the final head (this is also true for the 2 tiers that entered).
+  No suggestion comes from Q0 (the head did not enter and gives no field value), from Q1 (a class below 0.80 or the
+  class none has no measured tier; a class that differs from the type of the rules has no measured tier for this
+  condition; a Q1 type with no type word in the text is not below the entry limit and has no page or span), or from
+  a Q2 head below 0.50, with no value in the top block or with a reader error (the design gave no value: no
+  measured tier).
 """
 
 from __future__ import annotations
@@ -94,6 +122,20 @@ Q2_BAND_HI = 0.80                                        # m11_value_heads2.P_BA
 NEAR_MARGIN = {"mlx": 0.10, "cuda": 0.10, "mps": 0.10, "cpu": 0.10, "stored": 0.05}
 PLACE_KINDS = ("instrument", "word", "government")
 APERTUS_RX = re.compile(r"apertus_[a-z0-9_]+\Z")
+# chapter 4: the suggestions below the entry limit
+SUGGESTION_STATUS = "below_entry_limit"
+SUGGESTION_FORM = "parlpdfech-apertus-suggestions/1"
+SUGGESTION_RULE = ("an Apertus value of a Q2 tier that did not enter (entry.json), under the condition of the entry "
+                   "design: the rules found no value or only a value of a weak tier, the head probability of the top "
+                   "block is 0.50 or more, and the span function of the field gives a value in the top block; not in "
+                   "the eCH-0295 part")
+PROBABILITY_RULE = ("(equal + 0.5) / (equal + different + 1) of the tier in entry.json (out-of-fold heads on the "
+                    "development design set), then m10_calibrate.as_written (0.005 to 0.995, 4 decimals)")
+CALLED_BECAUSE = ("rules_found_no_value", "weak_rule_tier")          # the 2 reasons of stage 3 of the combined reader
+SUGGESTION_KEYS = ("field", "status", "in_record", "tier", "band", "called_because", "value", "printed", "normalised",
+                   "k", "n", "probability", "head_probability", "top_two_gap", "near", "page", "last_page", "block",
+                   "char_start", "char_end", "span_function", "option")
+SUGGESTION_FACT_KEYS = ("field", "tier", "band", "probability", "k", "n", "head_probability", "near", "page", "block")
 
 
 class PlaceError(Exception):
@@ -318,7 +360,8 @@ def _q1_value_record(doc: vb.Doc, rec: dict, place: tuple[int, int, str], ho: di
 def combined_values(doc: vb.Doc, ho: dict | None, entry: dict, weak: dict, rule_result: dict | None = None,
                     strict: bool = False, backend: str | None = None) -> dict:
     """The result of the combined reader (the rules of the fixed run) with the place of an Apertus type. Extra key
-    apertus: {q1: {...}, values: [fields with an Apertus tier], near: {...} if a backend is given}."""
+    apertus: {q1: {...}, values: [fields with an Apertus tier], near: {...} if a backend is given, suggestions:
+    [...] (chapter 4; empty with no heads output)}."""
     if rule_result is None:
         rule_result = cvc.read_document(doc, strict=strict)
     res = cmb.read_document_combined(doc, ho, entry, weak, strict, None, rule_result)
@@ -346,6 +389,8 @@ def combined_values(doc: vb.Doc, ho: dict | None, entry: dict, weak: dict, rule_
     res["apertus"] = info
     if backend is not None:
         res["apertus"]["near"] = near_marks(ho, res, backend)
+    # chapter 4: the last step, on the final result (after the Q1 step and the near marks): no value changes
+    res["apertus"]["suggestions"] = suggestions(doc, ho, res, entry) if ho else []
     return res
 
 
@@ -395,6 +440,78 @@ def apertus_note(field: str, rec: dict, backend: str | None = None) -> str:
     return (f"decision by {MODEL_NAME} (head Q2 {field}, layer {LAYER}, final head{where}; top block "
             f"{d.get('top_block')}, head probability {float(p):.2f}, band {d.get('band')}); value read by code "
             f"from the top block (span function {d.get('span_function')}){near}")
+
+
+# ------------------------------------------------------------------ suggestions below the entry limit (chapter 4)
+def entry_tier(entry: dict, field: str, band: str | None) -> tuple[str, dict] | None:
+    """The tier id and the tier record of entry.json for a Q2 value of a band (chapter 4, item 4): the rule of
+    m11_values_combined.read_document_combined with the key entered ignored. Mode bands: apertus_q2_<field>_<band>;
+    mode one: apertus_q2_<field> (no band in the id). None: the field has no such tier record."""
+    e = (entry.get("q2") or {}).get(field) or {}
+    if e.get("mode") == "bands":
+        if band not in cmb.BANDS:
+            return None
+        tier = cmb.q2_tier(field, band)
+    elif e.get("mode") == "one":
+        tier = cmb.q2_tier(field)
+    else:
+        return None
+    rec = (e.get("tiers") or {}).get(tier)
+    return (tier, rec) if isinstance(rec, dict) else None
+
+
+def suggestion_probability(k: int, n: int) -> float:
+    """(k + 0.5) / (n + 1) (the Jeffreys mean of k equal of n units), written as each label probability:
+    m10_calibrate.as_written (the clip to 0.005 ... 0.995, then 4 decimals)."""
+    import m10_calibrate as cal  # noqa: PLC0415  (frozen: as_written)
+    return cal.as_written((int(k) + 0.5) / (int(n) + 1))
+
+
+def suggestions(doc: vb.Doc, ho: dict | None, res: dict, entry: dict) -> list[dict]:
+    """The Apertus suggestions below the entry limit of one document (chapter 4), in the order of
+    m11_values_combined.Q2_FIELDS. `res`: the final result of combined_values (the cascade selection of the record).
+    Each item has the keys SUGGESTION_KEYS. The value is the value that the eCH-0295 part would have if the tier had
+    entered (m12_writer.record_value of the wording at the span). No value of `res` changes."""
+    if not ho:
+        return []
+    import m12_writer as w12  # noqa: PLC0415  (record_value; m12_writer imports this file at module level)
+    called = (res.get("heads") or {}).get("q2") or {}
+    near = ((res.get("apertus") or {}).get("near") or {}).get("q2") or {}
+    top = ho.get("q2_top") or {}
+    heads_q2 = ho.get("q2") or {}
+    out = []
+    for f in cmb.Q2_FIELDS:
+        rec = res["fields"].get(f) or {}
+        if not (rec.get("cascade") or {}).get("searched"):
+            continue                                  # item 1: the cascade does not search the field
+        call = called.get(f)
+        if not call or call.get("called_because") not in CALLED_BECAUSE:
+            continue                                  # item 2: the head was not called
+        gave = call.get("gave") or {}
+        if not gave.get("found") or gave.get("tier") is not None or f not in heads_q2:
+            continue                                  # item 3 (no value) or item 4 (the tier entered: a written value)
+        band = gave.get("band")
+        et = entry_tier(entry, f, band)
+        if et is None or et[1].get("entered"):
+            continue                                  # no tier record, or a tier that entered
+        tier, trec = et
+        cand = cmb.as_json(heads_q2[f])
+        s, e = int(cand["char_start"]), int(cand["char_end"])
+        printed = doc.text[s:e]
+        if printed != cand["value"]:
+            raise PlaceError(f"{doc.doc_id}: {f}: the wording at the span of the heads output is not its value")
+        detail = cand.get("detail") or {}
+        k, n = int(trec["equal"]), int(trec["equal"]) + int(trec["different"])
+        out.append({"field": f, "status": SUGGESTION_STATUS, "in_record": False, "tier": tier, "band": band,
+                    "called_because": call["called_because"],
+                    "value": w12.record_value(f, printed, cand["normalised"]), "printed": printed,
+                    "normalised": cand["normalised"], "k": k, "n": n, "probability": suggestion_probability(k, n),
+                    "head_probability": _round(detail.get("head_probability", gave.get("head_probability"))),
+                    "top_two_gap": _round((top.get(f) or {}).get("top_two_gap")), "near": bool(near.get(f)),
+                    "page": doc.locate(s).page, "last_page": doc.locate(e - 1).page, "block": cand["block"],
+                    "char_start": s, "char_end": e, "span_function": detail.get("span_function"),
+                    "option": detail.get("option")})
+    return out
 
 
 # ------------------------------------------------------------------ calibration of the Apertus mode
@@ -456,8 +573,8 @@ def reading_for_validator(doc: vb.Doc, ho: dict, entry: dict, weak: dict, backen
 
 # ------------------------------------------------------------------ facts (terminal summary, convert.json)
 def summary_facts(ho: dict | None, res: dict) -> dict:
-    """{q1: {...}, q2: {field: {...}}, values_from_apertus: [...], near_margin} of one document. Numbers, classes,
-    tiers, page numbers and block ids only: no wording of the PDF."""
+    """{q1: {...}, q2: {field: {...}}, values_from_apertus: [...], near_margin, suggestions: [...]} of one document.
+    Numbers, classes, tiers, page numbers and block ids only: no wording of the PDF."""
     near = (res.get("apertus") or {}).get("near") or {}
     info = (res.get("apertus") or {}).get("q1") or {}
     heads = res.get("heads") or {}
@@ -504,5 +621,8 @@ def summary_facts(ho: dict | None, res: dict) -> dict:
                  "top_page": tp.get("page"), "head_probability": _round(tp.get("probability")),
                  "top_two_gap": _round(tp.get("top_two_gap")), "band": g.get("band"), "tier": g.get("tier"),
                  "state": state, "used": state == "used", "near": bool((near.get("q2") or {}).get(f))}
+    # chapter 4: the suggestions below the entry limit, facts only (no wording; the manifest key
+    # apertus_suggestions of m12_writer holds the value and the wording)
+    sugg = [{k: x.get(k) for k in SUGGESTION_FACT_KEYS} for x in (res.get("apertus") or {}).get("suggestions") or []]
     return {"q1": out_q1, "q2": q2, "values_from_apertus": list((res.get("apertus") or {}).get("values") or []),
-            "near_margin": near.get("margin")}
+            "near_margin": near.get("margin"), "suggestions": sugg}
